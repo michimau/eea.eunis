@@ -1,0 +1,1444 @@
+<?xml version="1.0"?>
+<!--
+     This dataset has a lot of species that contains the letters 'lyn' in the scientific name.
+-->
+<dataset>
+  <chm62edt_language ID_LANGUAGE="19" CODE="cs" NAME_EN="Czech" SELECTION="1" NAME_FR="tchèque" NAME_DE="Tschechisch" FAMILY="Slavic"/>
+  <chm62edt_language ID_LANGUAGE="21" CODE="da" NAME_EN="Danish" SELECTION="1" NAME_FR="danois" NAME_DE="Dänisch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="22" CODE="de" NAME_EN="German" SELECTION="1" NAME_FR="allemand" NAME_DE="Deutsch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="24" CODE="el" NAME_EN="Greek" SELECTION="1" NAME_FR="grec" NAME_DE="Griechisch" FAMILY="Latin/Greek"/>
+  <chm62edt_language ID_LANGUAGE="25" CODE="en" NAME_EN="English" SELECTION="1" NAME_FR="anglais" NAME_DE="Englisch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="27" CODE="es" NAME_EN="Spanish" SELECTION="1" NAME_FR="espagnol" NAME_DE="Spanisch" FAMILY="Romance"/>
+  <chm62edt_language ID_LANGUAGE="28" CODE="et" NAME_EN="Estonian" SELECTION="1" NAME_FR="estonien" NAME_DE="Estnisch" FAMILY="Finno-ugric"/>
+  <chm62edt_language ID_LANGUAGE="31" CODE="fi" NAME_EN="Finnish" SELECTION="1" NAME_FR="finnois" NAME_DE="Finnisch" FAMILY="Finno-ugric"/>
+  <chm62edt_language ID_LANGUAGE="34" CODE="fr" NAME_EN="French" SELECTION="1" NAME_FR="français" NAME_DE="Französisch" FAMILY="Romance"/>
+  <chm62edt_language ID_LANGUAGE="45" CODE="hr" NAME_EN="Croatian" SELECTION="1" NAME_FR="croate" NAME_DE="Kroatisch" FAMILY="Slavic"/>
+  <chm62edt_language ID_LANGUAGE="46" CODE="hu" NAME_EN="Hungarian" SELECTION="1" NAME_FR="hongrois" NAME_DE="Ungarisch" FAMILY="Finno-ugric"/>
+  <chm62edt_language ID_LANGUAGE="52" CODE="is" NAME_EN="Icelandic" SELECTION="1" NAME_FR="islandais" NAME_DE="Isländisch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="53" CODE="it" NAME_EN="Italian" SELECTION="1" NAME_FR="italien" NAME_DE="Italienisch" FAMILY="Romance"/>
+  <chm62edt_language ID_LANGUAGE="68" CODE="lb" NAME_EN="Luxemburgish" SELECTION="1" NAME_FR="luxembourgeois" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="85" CODE="nl" NAME_EN="Dutch" SELECTION="1" NAME_FR="néerlandais" NAME_DE="Holländisch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="86" CODE="no" NAME_EN="Norwegian" SELECTION="1" NAME_FR="norvégien" NAME_DE="Norwegisch" FAMILY="Germanic"/>
+  <chm62edt_language ID_LANGUAGE="91" CODE="pl" NAME_EN="Polish" SELECTION="1" NAME_FR="polonais" NAME_DE="Polnisch" FAMILY="Slavic"/>
+  <chm62edt_language ID_LANGUAGE="93" CODE="pt" NAME_EN="Portuguese" SELECTION="1" NAME_FR="portugais" NAME_DE="Portugiesisch" FAMILY="Romance"/>
+  <chm62edt_language ID_LANGUAGE="97" CODE="ro" NAME_EN="Romanian" SELECTION="1" NAME_FR="roumain" NAME_DE="Rumänisch" FAMILY="Romance"/>
+  <chm62edt_language ID_LANGUAGE="106" CODE="sk" NAME_EN="Slovak" SELECTION="1" NAME_FR="slovaque" NAME_DE="Slowakisch" FAMILY="Slavic"/>
+  <chm62edt_language ID_LANGUAGE="107" CODE="sl" NAME_EN="Slovenian" SELECTION="1" NAME_FR="slovène" NAME_DE="Slowenisch" FAMILY="Slavic"/>
+  <chm62edt_language ID_LANGUAGE="111" CODE="sq" NAME_EN="Albanian" SELECTION="1" NAME_FR="albanais" NAME_DE="Albanisch" FAMILY="Indo-european (other)"/>
+  <chm62edt_language ID_LANGUAGE="116" CODE="sv" NAME_EN="Swedish" SELECTION="1" NAME_FR="suédois" NAME_DE="Schwedisch" FAMILY="Germanic"/>
+
+  <chm62edt_group_species ID_GROUP_SPECIES="1" COMMON_NAME="Invertebrates"
+    SCIENTIFIC_NAME="Invertebrata (Urochordata included)" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="2" COMMON_NAME="Fishes"
+    SCIENTIFIC_NAME="Pisces" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="3" COMMON_NAME="Amphibians"
+    SCIENTIFIC_NAME="Amphibia" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="4" COMMON_NAME="Reptiles"
+    SCIENTIFIC_NAME="Reptilia" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="5" COMMON_NAME="Birds"
+    SCIENTIFIC_NAME="Aves" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="6" COMMON_NAME="Mammals"
+    SCIENTIFIC_NAME="Mammalia" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="7" COMMON_NAME="Algae"
+    SCIENTIFIC_NAME="Algae" SELECTION="0" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="8" COMMON_NAME="Fungi"
+    SCIENTIFIC_NAME="Fungi" SELECTION="0" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="9" COMMON_NAME="Mosses &amp; Liverworts"
+    SCIENTIFIC_NAME="Bryophyta" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="10" COMMON_NAME="Ferns"
+    SCIENTIFIC_NAME="Pteridophyta" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="11" COMMON_NAME="Conifers"
+    SCIENTIFIC_NAME="Gymnospermae" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="12" COMMON_NAME="Flowering Plants"
+    SCIENTIFIC_NAME="Angiospermae" SELECTION="1" ID_DC="-1"/>
+  <chm62edt_group_species ID_GROUP_SPECIES="13" COMMON_NAME="Protists"
+    SCIENTIFIC_NAME="Protosticta" SELECTION="0" ID_DC="-1"/>
+
+  <chm62edt_taxonomy ID_TAXONOMY="15" LEVEL="Order" NAME="Salmoniformes"
+    ID_TAXONOMY_LINK="824" ID_TAXONOMY_PARENT="824" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,15*Order*Salmoniformes"/>
+  <chm62edt_taxonomy ID_TAXONOMY="17" LEVEL="Order" NAME="Stomiiformes"
+    ID_TAXONOMY_LINK="824" ID_TAXONOMY_PARENT="824" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,17*Order*Stomiiformes"/>
+  <chm62edt_taxonomy ID_TAXONOMY="383" LEVEL="Order" NAME="Rhabdocoela"
+    ID_TAXONOMY_LINK="254141" ID_TAXONOMY_PARENT="254141" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254141*Class*Rhabditophora,383*Order*Rhabdocoela"/>
+  <chm62edt_taxonomy ID_TAXONOMY="474" LEVEL="Order" NAME="Chromadorida"
+    ID_TAXONOMY_LINK="5132" ID_TAXONOMY_PARENT="5132" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5132*Class*Adenophorea,474*Order*Chromadorida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="683" LEVEL="Order" NAME="Geophilomorpha"
+    ID_TAXONOMY_LINK="681" ID_TAXONOMY_PARENT="681" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,681*Class*Chilopoda,683*Order*Geophilomorpha"/>
+  <chm62edt_taxonomy ID_TAXONOMY="781" LEVEL="Order" NAME="Hemiptera"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,781*Order*Hemiptera"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1024" LEVEL="Order" NAME="Bryopsidales"
+    ID_TAXONOMY_LINK="254156" ID_TAXONOMY_PARENT="254156" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,1003*Division*Chlorophyta,254156*Class*Bryopsidophyceae,1024*Order*Bryopsidales"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1411" LEVEL="Order" NAME="Lophiiformes"
+    ID_TAXONOMY_LINK="824" ID_TAXONOMY_PARENT="824" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,1411*Order*Lophiiformes"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1517" LEVEL="Order" NAME="Araneae"
+    ID_TAXONOMY_LINK="1493" ID_TAXONOMY_PARENT="1493" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,1517*Order*Araneae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1749" LEVEL="Order" NAME="Perciformes"
+    ID_TAXONOMY_LINK="824" ID_TAXONOMY_PARENT="824" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,1749*Order*Perciformes"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1867" LEVEL="Order" NAME="Phyllodocida"
+    ID_TAXONOMY_LINK="1866" ID_TAXONOMY_PARENT="1866" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,1865*Phylum*Annelida,1866*Class*Polychaeta,1867*Order*Phyllodocida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1914" LEVEL="Order" NAME="Lepidoptera"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1914*Order*Lepidoptera"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1955" LEVEL="Order" NAME="Coleoptera"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1955*Order*Coleoptera"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2018" LEVEL="Order" NAME="Hymenoptera"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2045" LEVEL="Order" NAME="Diptera"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2218" LEVEL="Order" NAME="Harpacticoida"
+    ID_TAXONOMY_LINK="4070" ID_TAXONOMY_PARENT="4070" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,4070*Class*Maxillopoda,2218*Order*Harpacticoida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2309" LEVEL="Order" NAME="Amphipoda"
+    ID_TAXONOMY_LINK="2252" ID_TAXONOMY_PARENT="2252" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,2252*Class*Malacostraca,2309*Order*Amphipoda"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2403" LEVEL="Order" NAME="Rodentia"
+    ID_TAXONOMY_LINK="2377" ID_TAXONOMY_PARENT="2377" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,2377*Class*Mammalia,2403*Order*Rodentia"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2424" LEVEL="Order" NAME="Carnivora"
+    ID_TAXONOMY_LINK="2377" ID_TAXONOMY_PARENT="2377" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,2377*Class*Mammalia,2424*Order*Carnivora"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2967" LEVEL="Order" NAME="Clathrinida"
+    ID_TAXONOMY_LINK="2965" ID_TAXONOMY_PARENT="2965" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2964*Phylum*Porifera,2965*Class*Calcarea,2967*Order*Clathrinida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="4103" LEVEL="Order" NAME="Poecilostomatoida"
+    ID_TAXONOMY_LINK="4070" ID_TAXONOMY_PARENT="4070" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,4070*Class*Maxillopoda,4103*Order*Poecilostomatoida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="5139" LEVEL="Order" NAME="Monhysterida"
+    ID_TAXONOMY_LINK="5132" ID_TAXONOMY_PARENT="5132" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5132*Class*Adenophorea,5139*Order*Monhysterida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="20904" LEVEL="Order" NAME="Ploima"
+    ID_TAXONOMY_LINK="187012" ID_TAXONOMY_PARENT="187012" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254121*Phylum*Rotifera,187012*Class*Eurotatoria,20904*Order*Ploima"/>
+  <chm62edt_taxonomy ID_TAXONOMY="22960" LEVEL="Order" NAME="Ascaridida"
+    ID_TAXONOMY_LINK="5133" ID_TAXONOMY_PARENT="5133" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5133*Class*Secernentea,22960*Order*Ascaridida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="25747" LEVEL="Order" NAME="Seriata"
+    ID_TAXONOMY_LINK="254141" ID_TAXONOMY_PARENT="254141" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254141*Class*Rhabditophora,25747*Order*Seriata"/>
+  <chm62edt_taxonomy ID_TAXONOMY="134605" LEVEL="Order" NAME="Lithistida"
+    ID_TAXONOMY_LINK="1134" ID_TAXONOMY_PARENT="1134" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2964*Phylum*Porifera,1134*Class*Demospongiae,134605*Order*Lithistida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184411" LEVEL="Order" NAME="Diplostraca"
+    ID_TAXONOMY_LINK="1197" ID_TAXONOMY_PARENT="1197" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1197*Class*Branchiopoda,184411*Order*Diplostraca"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185400" LEVEL="Order" NAME="Phasmatodea"
+    ID_TAXONOMY_LINK="699" ID_TAXONOMY_PARENT="699" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,185400*Order*Phasmatodea"/>
+  <chm62edt_taxonomy ID_TAXONOMY="186825" LEVEL="Order" NAME="Gyrodactylidea"
+    ID_TAXONOMY_LINK="254139" ID_TAXONOMY_PARENT="254139" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254139*Class*Monogenea,186825*Order*Gyrodactylidea"/>
+  <chm62edt_taxonomy ID_TAXONOMY="187057" LEVEL="Order" NAME="Parachela"
+    ID_TAXONOMY_LINK="254146" ID_TAXONOMY_PARENT="254146" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254129*Phylum*Tardigrada,254146*Class*Eutardigrada,187057*Order*Parachela"/>
+  <chm62edt_taxonomy ID_TAXONOMY="188155" LEVEL="Order" NAME="Pseudoscorpionida"
+    ID_TAXONOMY_LINK="1493" ID_TAXONOMY_PARENT="1493" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,188155*Order*Pseudoscorpionida"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254193" LEVEL="Order" NAME="Prostigmata"
+    ID_TAXONOMY_LINK="1493" ID_TAXONOMY_PARENT="1493" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,254193*Order*Prostigmata"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254195" LEVEL="Order" NAME="Pulmonata"
+    ID_TAXONOMY_LINK="2514" ID_TAXONOMY_PARENT="2514" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2501*Phylum*Mollusca,2514*Class*Gastropoda,254195*Order*Pulmonata"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254199" LEVEL="Order" NAME="Siphonophorae"
+    ID_TAXONOMY_LINK="299" ID_TAXONOMY_PARENT="299" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,298*Phylum*Cnidaria,299*Class*Hydrozoa,254199*Order*Siphonophorae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254204" LEVEL="Order" NAME="Caryophyllales"
+    ID_TAXONOMY_LINK="2803" ID_TAXONOMY_PARENT="2803" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,2788*Division*Spermatophyta,2803*Class*Dicotyledones,254204*Order*Caryophyllales"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254212" LEVEL="Order" NAME="Poales"
+    ID_TAXONOMY_LINK="2885" ID_TAXONOMY_PARENT="2885" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,2788*Division*Spermatophyta,2885*Class*Monocotyledones,254212*Order*Poales"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254341" LEVEL="Order" NAME="Myzostomida"
+    ID_TAXONOMY_LINK="1866" ID_TAXONOMY_PARENT="1866" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,1865*Phylum*Annelida,1866*Class*Polychaeta,254341*Order*Myzostomida"/>
+
+  <chm62edt_taxonomy ID_TAXONOMY="16" LEVEL="Family" NAME="Salmonidae"
+    ID_TAXONOMY_LINK="15" ID_TAXONOMY_PARENT="15" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,15*Order*Salmoniformes,16*Family*Salmonidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="19" LEVEL="Family" NAME="Sternoptychidae"
+    ID_TAXONOMY_LINK="17" ID_TAXONOMY_PARENT="17" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,17*Order*Stomiiformes,19*Family*Sternoptychidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="388" LEVEL="Family" NAME="Dendrocoelidae"
+    ID_TAXONOMY_LINK="25747" ID_TAXONOMY_PARENT="25747" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254141*Class*Rhabditophora,25747*Order*Seriata,388*Family*Dendrocoelidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="452" LEVEL="Family" NAME="Synchaetidae"
+    ID_TAXONOMY_LINK="20904" ID_TAXONOMY_PARENT="20904" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254121*Phylum*Rotifera,187012*Class*Eurotatoria,20904*Order*Ploima,452*Family*Synchaetidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="477" LEVEL="Family" NAME="Caryophyllaceae"
+    ID_TAXONOMY_LINK="254204" ID_TAXONOMY_PARENT="254204" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,2788*Division*Spermatophyta,2803*Class*Dicotyledones,254204*Order*Caryophyllales,477*Family*Caryophyllaceae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="790" LEVEL="Family" NAME="Lygaeidae"
+    ID_TAXONOMY_LINK="781" ID_TAXONOMY_PARENT="781" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,781*Order*Hemiptera,790*Family*Lygaeidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1170" LEVEL="Family" NAME="Asilidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,1170*Family*Asilidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1174" LEVEL="Family" NAME="Phoridae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,1174*Family*Phoridae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1175" LEVEL="Family" NAME="Pipunculidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,1175*Family*Pipunculidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1176" LEVEL="Family" NAME="Syrphidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,1176*Family*Syrphidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1193" LEVEL="Family" NAME="Muscidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,1193*Family*Muscidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1212" LEVEL="Family" NAME="Lynceidae"
+    ID_TAXONOMY_LINK="184411" ID_TAXONOMY_PARENT="184411" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1197*Class*Branchiopoda,184411*Order*Diplostraca,1212*Family*Lynceidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1417" LEVEL="Family" NAME="Caulophrynidae"
+    ID_TAXONOMY_LINK="1411" ID_TAXONOMY_PARENT="1411" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,1411*Order*Lophiiformes,1417*Family*Caulophrynidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1427" LEVEL="Family" NAME="Linophrynidae"
+    ID_TAXONOMY_LINK="1411" ID_TAXONOMY_PARENT="1411" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,1411*Order*Lophiiformes,1427*Family*Linophrynidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1502" LEVEL="Family" NAME="Chthoniidae"
+    ID_TAXONOMY_LINK="188155" ID_TAXONOMY_PARENT="188155" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,188155*Order*Pseudoscorpionida,1502*Family*Chthoniidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1521" LEVEL="Family" NAME="Dictynidae"
+    ID_TAXONOMY_LINK="1517" ID_TAXONOMY_PARENT="1517" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,1517*Order*Araneae,1521*Family*Dictynidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1524" LEVEL="Family" NAME="Dysderidae"
+    ID_TAXONOMY_LINK="1517" ID_TAXONOMY_PARENT="1517" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,1517*Order*Araneae,1524*Family*Dysderidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1917" LEVEL="Family" NAME="Zygaenidae"
+    ID_TAXONOMY_LINK="1914" ID_TAXONOMY_PARENT="1914" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1914*Order*Lepidoptera,1917*Family*Zygaenidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1953" LEVEL="Family" NAME="Noctuidae"
+    ID_TAXONOMY_LINK="1914" ID_TAXONOMY_PARENT="1914" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1914*Order*Lepidoptera,1953*Family*Noctuidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1983" LEVEL="Family" NAME="Dermestidae"
+    ID_TAXONOMY_LINK="1955" ID_TAXONOMY_PARENT="1955" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1955*Order*Coleoptera,1983*Family*Dermestidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="1998" LEVEL="Family" NAME="Coccinellidae"
+    ID_TAXONOMY_LINK="1955" ID_TAXONOMY_PARENT="1955" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1955*Order*Coleoptera,1998*Family*Coccinellidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2015" LEVEL="Family" NAME="Curculionidae"
+    ID_TAXONOMY_LINK="1955" ID_TAXONOMY_PARENT="1955" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,1955*Order*Coleoptera,2015*Family*Curculionidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2041" LEVEL="Family" NAME="Apidae"
+    ID_TAXONOMY_LINK="2018" ID_TAXONOMY_PARENT="2018" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera,2041*Family*Apidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2185" LEVEL="Family" NAME="Gobiidae"
+    ID_TAXONOMY_LINK="1749" ID_TAXONOMY_PARENT="1749" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,824*Class*Actinopterygii,1749*Order*Perciformes,2185*Family*Gobiidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2331" LEVEL="Family" NAME="Oedicerotidae"
+    ID_TAXONOMY_LINK="2309" ID_TAXONOMY_PARENT="2309" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,2252*Class*Malacostraca,2309*Order*Amphipoda,2331*Family*Oedicerotidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2408" LEVEL="Family" NAME="Muridae"
+    ID_TAXONOMY_LINK="2403" ID_TAXONOMY_PARENT="2403" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,2377*Class*Mammalia,2403*Order*Rodentia,2408*Family*Muridae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2431" LEVEL="Family" NAME="Felidae"
+    ID_TAXONOMY_LINK="2424" ID_TAXONOMY_PARENT="2424" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,4821*Phylum*Chordata,2377*Class*Mammalia,2424*Order*Carnivora,2431*Family*Felidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2595" LEVEL="Family" NAME="Clausiliidae"
+    ID_TAXONOMY_LINK="254195" ID_TAXONOMY_PARENT="254195" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2501*Phylum*Mollusca,2514*Class*Gastropoda,254195*Order*Pulmonata,2595*Family*Clausiliidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2921" LEVEL="Family" NAME="Cyperaceae"
+    ID_TAXONOMY_LINK="254212" ID_TAXONOMY_PARENT="254212" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,2788*Division*Spermatophyta,2885*Class*Monocotyledones,254212*Order*Poales,2921*Family*Cyperaceae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="2968" LEVEL="Family" NAME="Clathrinidae"
+    ID_TAXONOMY_LINK="2967" ID_TAXONOMY_PARENT="2967" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2964*Phylum*Porifera,2965*Class*Calcarea,2967*Order*Clathrinida,2968*Family*Clathrinidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="3939" LEVEL="Family" NAME="Polynoidae"
+    ID_TAXONOMY_LINK="1867" ID_TAXONOMY_PARENT="1867" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,1865*Phylum*Annelida,1866*Class*Polychaeta,1867*Order*Phyllodocida,3939*Family*Polynoidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="5163" LEVEL="Family" NAME="Cyatholaimidae"
+    ID_TAXONOMY_LINK="474" ID_TAXONOMY_PARENT="474" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5132*Class*Adenophorea,474*Order*Chromadorida,5163*Family*Cyatholaimidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="5190" LEVEL="Family" NAME="Xyalidae"
+    ID_TAXONOMY_LINK="5139" ID_TAXONOMY_PARENT="5139" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5132*Class*Adenophorea,5139*Order*Monhysterida,5190*Family*Xyalidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="25609" LEVEL="Family" NAME="Myzostomidae"
+    ID_TAXONOMY_LINK="254341" ID_TAXONOMY_PARENT="254341" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,1865*Phylum*Annelida,1866*Class*Polychaeta,254341*Order*Myzostomida,25609*Family*Myzostomidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="25859" LEVEL="Family" NAME="Cucullanidae"
+    ID_TAXONOMY_LINK="22960" ID_TAXONOMY_PARENT="22960" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254120*Phylum*Nematoda,5133*Class*Secernentea,22960*Order*Ascaridida,25859*Family*Cucullanidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="108474" LEVEL="Family" NAME="Dignathodontidae"
+    ID_TAXONOMY_LINK="683" ID_TAXONOMY_PARENT="683" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,681*Class*Chilopoda,683*Order*Geophilomorpha,108474*Family*Dignathodontidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="118168" LEVEL="Family" NAME="Paramesochridae"
+    ID_TAXONOMY_LINK="2218" ID_TAXONOMY_PARENT="2218" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,4070*Class*Maxillopoda,2218*Order*Harpacticoida,118168*Family*Paramesochridae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="122229" LEVEL="Family" NAME="Gyrodactylidae"
+    ID_TAXONOMY_LINK="186825" ID_TAXONOMY_PARENT="186825" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254139*Class*Monogenea,186825*Order*Gyrodactylidea,122229*Family*Gyrodactylidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="131574" LEVEL="Family" NAME="Herpyllobiidae"
+    ID_TAXONOMY_LINK="4103" ID_TAXONOMY_PARENT="4103" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,4070*Class*Maxillopoda,4103*Order*Poecilostomatoida,131574*Family*Herpyllobiidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="138344" LEVEL="Family" NAME="Agalmatidae"
+    ID_TAXONOMY_LINK="254199" ID_TAXONOMY_PARENT="254199" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,298*Phylum*Cnidaria,299*Class*Hydrozoa,254199*Order*Siphonophorae,138344*Family*Agalmatidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="139621" LEVEL="Family" NAME="Hypsibiidae"
+    ID_TAXONOMY_LINK="187057" ID_TAXONOMY_PARENT="187057" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,254129*Phylum*Tardigrada,254146*Class*Eutardigrada,187057*Order*Parachela,139621*Family*Hypsibiidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="145081" LEVEL="Family" NAME="Dalyelliidae"
+    ID_TAXONOMY_LINK="383" ID_TAXONOMY_PARENT="383" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,380*Phylum*Platyhelminthes,254141*Class*Rhabditophora,383*Order*Rhabdocoela,145081*Family*Dalyelliidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="146666" LEVEL="Family" NAME="Bryopsidaceae"
+    ID_TAXONOMY_LINK="1024" ID_TAXONOMY_PARENT="1024" ID_DC="2414"
+    TAXONOMY_TREE="47*Kingdom*Plantae,1003*Division*Chlorophyta,254156*Class*Bryopsidophyceae,1024*Order*Bryopsidales,146666*Family*Bryopsidaceae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184200" LEVEL="Family" NAME="Eriophyidae"
+    ID_TAXONOMY_LINK="254193" ID_TAXONOMY_PARENT="254193" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,1493*Class*Arachnida,254193*Order*Prostigmata,184200*Family*Eriophyidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184807" LEVEL="Family" NAME="Agromyzidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184807*Family*Agromyzidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184808" LEVEL="Family" NAME="Anthomyiidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184808*Family*Anthomyiidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184839" LEVEL="Family" NAME="Empididae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184839*Family*Empididae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184846" LEVEL="Family" NAME="Hippoboscidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184846*Family*Hippoboscidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184847" LEVEL="Family" NAME="Hybotidae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184847*Family*Hybotidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="184895" LEVEL="Family" NAME="Trixoscelididae"
+    ID_TAXONOMY_LINK="2045" ID_TAXONOMY_PARENT="2045" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2045*Order*Diptera,184895*Family*Trixoscelididae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185018" LEVEL="Family" NAME="Tettigometridae"
+    ID_TAXONOMY_LINK="781" ID_TAXONOMY_PARENT="781" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,781*Order*Hemiptera,185018*Family*Tettigometridae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185141" LEVEL="Family" NAME="Encyrtidae"
+    ID_TAXONOMY_LINK="2018" ID_TAXONOMY_PARENT="2018" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera,185141*Family*Encyrtidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185143" LEVEL="Family" NAME="Eulophidae"
+    ID_TAXONOMY_LINK="2018" ID_TAXONOMY_PARENT="2018" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera,185143*Family*Eulophidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185163" LEVEL="Family" NAME="Figitidae"
+    ID_TAXONOMY_LINK="2018" ID_TAXONOMY_PARENT="2018" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera,185163*Family*Figitidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185175" LEVEL="Family" NAME="Platygastridae"
+    ID_TAXONOMY_LINK="2018" ID_TAXONOMY_PARENT="2018" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,2018*Order*Hymenoptera,185175*Family*Platygastridae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="185401" LEVEL="Family" NAME="Bacillidae"
+    ID_TAXONOMY_LINK="185400" ID_TAXONOMY_PARENT="185400" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,648*Phylum*Arthropoda,699*Class*Insecta,185400*Order*Phasmatodea,185401*Family*Bacillidae"/>
+  <chm62edt_taxonomy ID_TAXONOMY="254617" LEVEL="Family" NAME="Azoricidae"
+    ID_TAXONOMY_LINK="134605" ID_TAXONOMY_PARENT="134605" ID_DC="2414"
+    TAXONOMY_TREE="46*Kingdom*Animalia,2964*Phylum*Porifera,1134*Class*Demospongiae,134605*Order*Lithistida,254617*Family*Azoricidae"/>
+
+  <chm62edt_nature_object ID_NATURE_OBJECT="100003" ID_DC="1785" ORIGINAL_CODE="126236" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="101117" ID_DC="1785" ORIGINAL_CODE="127496" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="101513" ID_DC="1785" ORIGINAL_CODE="128199" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="107676" ID_DC="1835" ORIGINAL_CODE="135510" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="108004" ID_DC="1835" ORIGINAL_CODE="135838" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="108358" ID_DC="1835" ORIGINAL_CODE="136192" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="108575" ID_DC="1835" ORIGINAL_CODE="136409" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="112479" ID_DC="1835" ORIGINAL_CODE="140313" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="112874" ID_DC="1835" ORIGINAL_CODE="140708" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="113521" ID_DC="1835" ORIGINAL_CODE="141356" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="114132" ID_DC="1835" ORIGINAL_CODE="141967" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="116107" ID_DC="1835" ORIGINAL_CODE="143942" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="12097" ID_DC="1834" ORIGINAL_CODE="22911" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="136771" ID_DC="1780" ORIGINAL_CODE="166410" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1389" ID_DC="1751" ORIGINAL_CODE="1402" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1392" ID_DC="-1" ORIGINAL_CODE="1405" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1425" ID_DC="1751" ORIGINAL_CODE="1438" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1426" ID_DC="-1" ORIGINAL_CODE="1439" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1427" ID_DC="-1" ORIGINAL_CODE="1440" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1428" ID_DC="1751" ORIGINAL_CODE="1441" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1429" ID_DC="-1" ORIGINAL_CODE="1442" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="1534" ID_DC="-1" ORIGINAL_CODE="1547" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155118" ID_DC="1780" ORIGINAL_CODE="187152" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155119" ID_DC="1780" ORIGINAL_CODE="187153" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155285" ID_DC="1780" ORIGINAL_CODE="187329" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155478" ID_DC="1780" ORIGINAL_CODE="187568" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155479" ID_DC="1780" ORIGINAL_CODE="187569" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="155655" ID_DC="1780" ORIGINAL_CODE="187767" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166958" ID_DC="1835" ORIGINAL_CODE="202036" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166972" ID_DC="1835" ORIGINAL_CODE="202051" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166973" ID_DC="1835" ORIGINAL_CODE="202052" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166974" ID_DC="1835" ORIGINAL_CODE="202053" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166976" ID_DC="1835" ORIGINAL_CODE="202055" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166977" ID_DC="1835" ORIGINAL_CODE="202056" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166978" ID_DC="1835" ORIGINAL_CODE="202057" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166979" ID_DC="1835" ORIGINAL_CODE="202058" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166980" ID_DC="1835" ORIGINAL_CODE="202059" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166981" ID_DC="1835" ORIGINAL_CODE="202060" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166982" ID_DC="1835" ORIGINAL_CODE="202061" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="166983" ID_DC="1835" ORIGINAL_CODE="202062" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="167570" ID_DC="1835" ORIGINAL_CODE="202656" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189163" ID_DC="1835" ORIGINAL_CODE="224380" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189164" ID_DC="1835" ORIGINAL_CODE="224381" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189165" ID_DC="1835" ORIGINAL_CODE="224382" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189166" ID_DC="1835" ORIGINAL_CODE="224383" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189167" ID_DC="1835" ORIGINAL_CODE="224384" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189182" ID_DC="1835" ORIGINAL_CODE="224399" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189183" ID_DC="1835" ORIGINAL_CODE="224400" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="189412" ID_DC="1835" ORIGINAL_CODE="224629" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="205774" ID_DC="1835" ORIGINAL_CODE="241135" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="20814" ID_DC="1834" ORIGINAL_CODE="36410" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="210986" ID_DC="1835" ORIGINAL_CODE="246674" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="216963" ID_DC="1835" ORIGINAL_CODE="252721" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="216964" ID_DC="1835" ORIGINAL_CODE="252722" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="216965" ID_DC="1835" ORIGINAL_CODE="252723" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="219798" ID_DC="1835" ORIGINAL_CODE="255556" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="224573" ID_DC="1835" ORIGINAL_CODE="260557" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="231279" ID_DC="1835" ORIGINAL_CODE="267336" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24161" ID_DC="1834" ORIGINAL_CODE="40833" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24162" ID_DC="1834" ORIGINAL_CODE="40834" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24163" ID_DC="1834" ORIGINAL_CODE="40835" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24164" ID_DC="1834" ORIGINAL_CODE="40836" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24165" ID_DC="1834" ORIGINAL_CODE="40837" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="24920" ID_DC="1834" ORIGINAL_CODE="41592" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="251823" ID_DC="1835" ORIGINAL_CODE="288036" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26172" ID_DC="1834" ORIGINAL_CODE="42995" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26173" ID_DC="1834" ORIGINAL_CODE="42996" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26174" ID_DC="1834" ORIGINAL_CODE="42997" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26175" ID_DC="1834" ORIGINAL_CODE="42998" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26176" ID_DC="1835" ORIGINAL_CODE="42999" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26177" ID_DC="1834" ORIGINAL_CODE="43000" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="26178" ID_DC="1834" ORIGINAL_CODE="43001" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="267121" ID_DC="1835" ORIGINAL_CODE="303472" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="273263" ID_DC="1835" ORIGINAL_CODE="309630" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="273264" ID_DC="1835" ORIGINAL_CODE="309631" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="273265" ID_DC="1835" ORIGINAL_CODE="309632" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="275580" ID_DC="1835" ORIGINAL_CODE="311983" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="278013" ID_DC="1835" ORIGINAL_CODE="314835" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="278014" ID_DC="1835" ORIGINAL_CODE="314836" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="278054" ID_DC="1835" ORIGINAL_CODE="314948" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="278055" ID_DC="1835" ORIGINAL_CODE="314949" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="29052" ID_DC="1834" ORIGINAL_CODE="48842" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="29928" ID_DC="1834" ORIGINAL_CODE="50342" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="30337" ID_DC="1834" ORIGINAL_CODE="50751" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="30373" ID_DC="1834" ORIGINAL_CODE="50787" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="30408" ID_DC="1834" ORIGINAL_CODE="50822" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="31297" ID_DC="1834" ORIGINAL_CODE="52280" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="3167" ID_DC="1792" ORIGINAL_CODE="7627" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="33217" ID_DC="1834" ORIGINAL_CODE="54344" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="34013" ID_DC="1834" ORIGINAL_CODE="55492" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="39848" ID_DC="1834" ORIGINAL_CODE="64453" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="4256" ID_DC="1835" ORIGINAL_CODE="9970" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="4381" ID_DC="1785" ORIGINAL_CODE="10103" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="446137" ID_DC="2383" ORIGINAL_CODE="316534" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="46056" ID_DC="1835" ORIGINAL_CODE="70926" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="47945" ID_DC="1835" ORIGINAL_CODE="72815" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="47946" ID_DC="1835" ORIGINAL_CODE="72816" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="49500" ID_DC="1835" ORIGINAL_CODE="74370" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="51084" ID_DC="1835" ORIGINAL_CODE="75954" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="51728" ID_DC="1835" ORIGINAL_CODE="76598" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="53906" ID_DC="1835" ORIGINAL_CODE="78776" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="53909" ID_DC="1835" ORIGINAL_CODE="78779" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="54323" ID_DC="1835" ORIGINAL_CODE="79193" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="55547" ID_DC="1835" ORIGINAL_CODE="80417" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="5930" ID_DC="-1" ORIGINAL_CODE="11910" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="62137" ID_DC="1835" ORIGINAL_CODE="87007" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="62138" ID_DC="1835" ORIGINAL_CODE="87008" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="64412" ID_DC="1835" ORIGINAL_CODE="89328" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="66900" ID_DC="1835" ORIGINAL_CODE="91865" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="67736" ID_DC="1835" ORIGINAL_CODE="92702" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="67737" ID_DC="1835" ORIGINAL_CODE="92703" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="67738" ID_DC="1835" ORIGINAL_CODE="92704" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="67739" ID_DC="1835" ORIGINAL_CODE="92705" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="67740" ID_DC="1835" ORIGINAL_CODE="92706" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="71184" ID_DC="1835" ORIGINAL_CODE="96178" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="71581" ID_DC="1835" ORIGINAL_CODE="96590" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="73583" ID_DC="1835" ORIGINAL_CODE="98602" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="73584" ID_DC="1835" ORIGINAL_CODE="98603" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="73585" ID_DC="1835" ORIGINAL_CODE="98604" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="73586" ID_DC="1835" ORIGINAL_CODE="98605" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="73587" ID_DC="1835" ORIGINAL_CODE="98606" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="7482" ID_DC="-1" ORIGINAL_CODE="14322" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="7486" ID_DC="1663" ORIGINAL_CODE="14327" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="7797" ID_DC="1785" ORIGINAL_CODE="14653" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="91523" ID_DC="1835" ORIGINAL_CODE="117130" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="97030" ID_DC="1785" ORIGINAL_CODE="122886" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="98109" ID_DC="1785" ORIGINAL_CODE="124006" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="98318" ID_DC="1785" ORIGINAL_CODE="124252" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="98342" ID_DC="1785" ORIGINAL_CODE="124278" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="98495" ID_DC="1785" ORIGINAL_CODE="124447" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="98835" ID_DC="1785" ORIGINAL_CODE="124864" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="99029" ID_DC="1785" ORIGINAL_CODE="125082" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="99747" ID_DC="1785" ORIGINAL_CODE="125980" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="99924" ID_DC="1785" ORIGINAL_CODE="126157" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="99925" ID_DC="1785" ORIGINAL_CODE="126158" TYPE="SPECIES"/>
+
+  <chm62edt_species ID_SPECIES="78776" ID_NATURE_OBJECT="53906"
+      SCIENTIFIC_NAME="Cerchysiella laeviscuta"
+      VALID_NAME="1"
+      ID_SPECIES_LINK="78776"
+      TYPE_RELATED_SPECIES="Species"
+      TEMPORARY_SELECT="0"
+      GENUS="Cerchysiella"
+      ID_GROUP_SPECIES="1"
+      ID_TAXONOMY="185141"
+      AUTHOR="(Thomson, 1876)"
+      IGNORE_ON_MATCH="0"
+  />
+  <chm62edt_species ID_SPECIES="78779" ID_NATURE_OBJECT="53909"
+      SCIENTIFIC_NAME="Cerchysiella laeviscuta"
+      VALID_NAME="0"
+      ID_SPECIES_LINK="78778"
+      TYPE_RELATED_SPECIES="Synonym"
+      TEMPORARY_SELECT="0"
+      GENUS="Cerchysiella"
+      ID_GROUP_SPECIES="1"
+      ID_TAXONOMY="185141"
+      AUTHOR="Erd&#195;&#402;&#194;&#182;s, 1946"
+      IGNORE_ON_MATCH="1"
+  />
+  <chm62edt_species ID_SPECIES="9970" ID_NATURE_OBJECT="4256"
+      SCIENTIFIC_NAME="Salmo trutta"
+      VALID_NAME="1"
+      ID_SPECIES_LINK="9970"
+      TYPE_RELATED_SPECIES="Species"
+      TEMPORARY_SELECT="1"
+      GENUS="Salmo"
+      ID_GROUP_SPECIES="2"
+      ID_TAXONOMY="16"
+      AUTHOR="Linnaeus, 1758"
+      IGNORE_ON_MATCH="0"
+  />
+  <chm62edt_species ID_SPECIES="127496" ID_NATURE_OBJECT="101117"
+      SCIENTIFIC_NAME="Salmo trutta"
+      VALID_NAME="0"
+      ID_SPECIES_LINK="15671"
+      TYPE_RELATED_SPECIES="Synonym"
+      TEMPORARY_SELECT="1"
+      GENUS="Salmo"
+      ID_GROUP_SPECIES="2"
+      ID_TAXONOMY="16"
+      AUTHOR="(non Linnaeus, 1758)"
+      IGNORE_ON_MATCH="1"
+  />
+  <chm62edt_species ID_SPECIES="1547" ID_NATURE_OBJECT="1534"
+    SCIENTIFIC_NAME="Rhinolophus mehelyi" VALID_NAME="1" ID_SPECIES_LINK="1547"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Rhinolophus"
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2393"
+    AUTHOR="Matschie, 1901" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="10103" ID_NATURE_OBJECT="4381"
+    SCIENTIFIC_NAME="Platichthys flesus" VALID_NAME="1" ID_SPECIES_LINK="10103"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Platichthys"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="14653" ID_NATURE_OBJECT="7797"
+    SCIENTIFIC_NAME="Pleuronectes platessa" VALID_NAME="1" ID_SPECIES_LINK="14653"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Pleuronectes"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="Linnaeus, 1758" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="122886" ID_NATURE_OBJECT="97030"
+    SCIENTIFIC_NAME="Limanda limanda" VALID_NAME="1" ID_SPECIES_LINK="122886"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Limanda"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="124006" ID_NATURE_OBJECT="98109"
+    SCIENTIFIC_NAME="Glyptocephalus cynoglossus" VALID_NAME="1" ID_SPECIES_LINK="124006"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Glyptocephalus"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="124252" ID_NATURE_OBJECT="98318"
+    SCIENTIFIC_NAME="Hippoglossus hippoglossus" VALID_NAME="1" ID_SPECIES_LINK="124252"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Hippoglossus"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="124278" ID_NATURE_OBJECT="98342"
+    SCIENTIFIC_NAME="Microstomus kitt" VALID_NAME="1" ID_SPECIES_LINK="124278"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Microstomus"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Walbaum, 1792)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="124447" ID_NATURE_OBJECT="98495"
+    SCIENTIFIC_NAME="Hippoglossoides platessoides" VALID_NAME="1" ID_SPECIES_LINK="124447"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Hippoglossoides"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="(Fabricius, 1780)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="124864" ID_NATURE_OBJECT="98835"
+    SCIENTIFIC_NAME="Hippoglossus stenolepis" VALID_NAME="1" ID_SPECIES_LINK="124864"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Hippoglossus"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1644"
+    AUTHOR="Schmidt, 1904" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="125082" ID_NATURE_OBJECT="99029"
+    SCIENTIFIC_NAME="Raja montagui" VALID_NAME="1" ID_SPECIES_LINK="125082"
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Raja"
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="803"
+    AUTHOR="Fowler, 1910" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1402" ID_NATURE_OBJECT="1389"   
+    SCIENTIFIC_NAME="Felis lynx" VALID_NAME="0" ID_SPECIES_LINK="1438"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Felis"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1405" ID_NATURE_OBJECT="1392"   
+    SCIENTIFIC_NAME="Felix lynx" VALID_NAME="0" ID_SPECIES_LINK="1438"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Felix"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Linnaeus, 1758" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1438" ID_NATURE_OBJECT="1425"   
+    SCIENTIFIC_NAME="Lynx lynx" VALID_NAME="1" ID_SPECIES_LINK="1438"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1439" ID_NATURE_OBJECT="1426"   
+    SCIENTIFIC_NAME="Lynx pardella" VALID_NAME="0" ID_SPECIES_LINK="1442"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Miller, 1910" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1440" ID_NATURE_OBJECT="1427"   
+    SCIENTIFIC_NAME="Lynx pardellus" VALID_NAME="0" ID_SPECIES_LINK="1442"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Miller, 1912" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1441" ID_NATURE_OBJECT="1428"   
+    SCIENTIFIC_NAME="Lynx pardina" VALID_NAME="0" ID_SPECIES_LINK="1442"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Temminck, 1827)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="1442" ID_NATURE_OBJECT="1429"   
+    SCIENTIFIC_NAME="Lynx pardinus" VALID_NAME="1" ID_SPECIES_LINK="1442"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Temminck, 1827)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="7627" ID_NATURE_OBJECT="3167"   
+    SCIENTIFIC_NAME="Lynx sp." VALID_NAME="1" ID_SPECIES_LINK="7627"   
+    TYPE_RELATED_SPECIES="Genus" TEMPORARY_SELECT="0" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="11910" ID_NATURE_OBJECT="5930"   
+    SCIENTIFIC_NAME="Mus spicilegus lynesi" VALID_NAME="0" ID_SPECIES_LINK="11304"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Mus"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2408"   
+    AUTHOR="Cabrera, 1923" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="14322" ID_NATURE_OBJECT="7482"   
+    SCIENTIFIC_NAME="Felis lyncula" VALID_NAME="0" ID_SPECIES_LINK="1438"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Felis"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Nilsson, 1820" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="14327" ID_NATURE_OBJECT="7486"   
+    SCIENTIFIC_NAME="Felis lynx pardina" VALID_NAME="0" ID_SPECIES_LINK="1442"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Felis"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Temminck, 1824" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="22911" ID_NATURE_OBJECT="12097"   
+    SCIENTIFIC_NAME="Paroediceros lynceus" VALID_NAME="1" ID_SPECIES_LINK="22911"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Paroediceros"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="2331"   
+    AUTHOR="(Sars,  1858)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="36410" ID_NATURE_OBJECT="20814"   
+    SCIENTIFIC_NAME="Apodopsyllus lynceorum" VALID_NAME="1" ID_SPECIES_LINK="36410"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Apodopsyllus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="118168"   
+    AUTHOR="Cottarelli, 1973b" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="40833" ID_NATURE_OBJECT="24161"   
+    SCIENTIFIC_NAME="Marylynnia bellula" VALID_NAME="1" ID_SPECIES_LINK="40833"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Marylynnia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5163"   
+    AUTHOR="(Vitiello, 1970)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="40834" ID_NATURE_OBJECT="24162"   
+    SCIENTIFIC_NAME="Marylynnia choanolaimoides" VALID_NAME="1" ID_SPECIES_LINK="40834"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Marylynnia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5163"   
+    AUTHOR="(Schuurmans Stekhoven, 1942)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="40835" ID_NATURE_OBJECT="24163"   
+    SCIENTIFIC_NAME="Marylynnia complexa" VALID_NAME="1" ID_SPECIES_LINK="40835"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Marylynnia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5163"   
+    AUTHOR="(Warwick, 1971)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="40836" ID_NATURE_OBJECT="24164"   
+    SCIENTIFIC_NAME="Marylynnia effilata" VALID_NAME="1" ID_SPECIES_LINK="40836"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Marylynnia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5163"   
+    AUTHOR="(Schuurmans Stekhoven, 1946)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="40837" ID_NATURE_OBJECT="24165"   
+    SCIENTIFIC_NAME="Marylynnia stekhoveni" VALID_NAME="1" ID_SPECIES_LINK="40837"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Marylynnia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5163"   
+    AUTHOR="(Wieser, 1954)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="41592" ID_NATURE_OBJECT="24920"   
+    SCIENTIFIC_NAME="Rhynchonema lyngei" VALID_NAME="1" ID_SPECIES_LINK="41592"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Rhynchonema"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="5190"   
+    AUTHOR="(Allg&#xE9;n, 1940)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="42995" ID_NATURE_OBJECT="26172"   
+    SCIENTIFIC_NAME="Dichelyne abbreviatus" VALID_NAME="1" ID_SPECIES_LINK="42995"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Rudolphi, 1819)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="42996" ID_NATURE_OBJECT="26173"   
+    SCIENTIFIC_NAME="Dichelyne adriaticus" VALID_NAME="1" ID_SPECIES_LINK="42996"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Tornquist, 1931)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="42997" ID_NATURE_OBJECT="26174"   
+    SCIENTIFIC_NAME="Dichelyne elongatus" VALID_NAME="1" ID_SPECIES_LINK="42997"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Tornquist, 1931)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="42998" ID_NATURE_OBJECT="26175"   
+    SCIENTIFIC_NAME="Dichelyne mauritanicus" VALID_NAME="1" ID_SPECIES_LINK="42998"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Gendre, 1928)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="42999" ID_NATURE_OBJECT="26176"   
+    SCIENTIFIC_NAME="Dichelyne minutus" VALID_NAME="1" ID_SPECIES_LINK="42999"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Rudolphi, 1819)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="43000" ID_NATURE_OBJECT="26177"   
+    SCIENTIFIC_NAME="Dichelyne pomadasysi" VALID_NAME="1" ID_SPECIES_LINK="43000"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="Vassilaides &amp; Petter, 1981" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="43001" ID_NATURE_OBJECT="26178"   
+    SCIENTIFIC_NAME="Dichelyne tripapillatus" VALID_NAME="1" ID_SPECIES_LINK="43001"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Dichelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25859"   
+    AUTHOR="(Gendre, 1927)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="48842" ID_NATURE_OBJECT="29052"   
+    SCIENTIFIC_NAME="Herpyllobius polynoes" VALID_NAME="1" ID_SPECIES_LINK="48842"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Herpyllobius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="131574"   
+    AUTHOR="(Kr&#xF8;yer, 1863)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="50342" ID_NATURE_OBJECT="29928"   
+    SCIENTIFIC_NAME="Protomyszostomum polynephris" VALID_NAME="1" ID_SPECIES_LINK="50342"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Protomyszostomum"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="25609"   
+    AUTHOR="Fedotov, 1912" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="50751" ID_NATURE_OBJECT="30337"   
+    SCIENTIFIC_NAME="Gorgoniapolynoe caeciliae" VALID_NAME="1" ID_SPECIES_LINK="50751"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Gorgoniapolynoe"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="3939"   
+    AUTHOR="(Fauvel, 1913)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="50787" ID_NATURE_OBJECT="30373"   
+    SCIENTIFIC_NAME="Heteropolynoe nordgaardi" VALID_NAME="1" ID_SPECIES_LINK="50787"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Heteropolynoe"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="3939"   
+    AUTHOR="Bidenkap, 1907" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="50822" ID_NATURE_OBJECT="30408"   
+    SCIENTIFIC_NAME="Neopolynoe paradoxa" VALID_NAME="1" ID_SPECIES_LINK="50822"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Neopolynoe"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="3939"   
+    AUTHOR="(Storm, 1888)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="52280" ID_NATURE_OBJECT="31297"   
+    SCIENTIFIC_NAME="Clathrina olynthus" VALID_NAME="1" ID_SPECIES_LINK="52280"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Clathrina"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="2968"   
+    AUTHOR="Borojevic &amp; Boury-Esnault, 1987" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="54344" ID_NATURE_OBJECT="33217"   
+    SCIENTIFIC_NAME="Leiodermatium lynceus" VALID_NAME="1" ID_SPECIES_LINK="54344"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Leiodermatium"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="254617"   
+    AUTHOR="Schmidt,1870" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="55492" ID_NATURE_OBJECT="34013"   
+    SCIENTIFIC_NAME="Lynchagalma utricularia" VALID_NAME="1" ID_SPECIES_LINK="55492"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Lynchagalma"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="138344"   
+    AUTHOR="(Claus, 1879)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="64453" ID_NATURE_OBJECT="39848"   
+    SCIENTIFIC_NAME="Bryopsis lyngbyei" VALID_NAME="1" ID_SPECIES_LINK="64453"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Bryopsis"   
+    ID_GROUP_SPECIES="7" ID_TAXONOMY="146666"   
+    AUTHOR="Hornemann, 1818" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="70926" ID_NATURE_OBJECT="46056"   
+    SCIENTIFIC_NAME="Yksdarhus lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="70926"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Yksdarhus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1170"   
+    AUTHOR="Hradsk&#xFD; &amp; H&#xFC;ttinger, 1983" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="72815" ID_NATURE_OBJECT="47945"   
+    SCIENTIFIC_NAME="Pseudolynchia canariensis" VALID_NAME="1" ID_SPECIES_LINK="72815"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Pseudolynchia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184846"   
+    AUTHOR="(Macquart in Webb &amp; Berthelot, 1839)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="72816" ID_NATURE_OBJECT="47946"   
+    SCIENTIFIC_NAME="Pseudolynchia garzettae" VALID_NAME="1" ID_SPECIES_LINK="72816"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Pseudolynchia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184846"   
+    AUTHOR="(Rondani, 1879)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="74370" ID_NATURE_OBJECT="49500"   
+    SCIENTIFIC_NAME="Spiniphora lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="74370"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spiniphora"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1174"   
+    AUTHOR="Colyer, 1969" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="75954" ID_NATURE_OBJECT="51084"   
+    SCIENTIFIC_NAME="Pipizella lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="75954"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Pipizella"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1176"   
+    AUTHOR="Torp Pedersen, 1971" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="76598" ID_NATURE_OBJECT="51728"   
+    SCIENTIFIC_NAME="Trixoscelis lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="76598"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Trixoscelis"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184895"   
+    AUTHOR="Hackman, 1970" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="79193" ID_NATURE_OBJECT="54323"   
+    SCIENTIFIC_NAME="Tetrastichus chvalynicus" VALID_NAME="1" ID_SPECIES_LINK="79193"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Tetrastichus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185143"   
+    AUTHOR="Kostjukov, 1978" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="80417" ID_NATURE_OBJECT="55547"   
+    SCIENTIFIC_NAME="Cirrospilus lyncus" VALID_NAME="1" ID_SPECIES_LINK="80417"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Cirrospilus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185143"   
+    AUTHOR="Walker, 1838" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="87007" ID_NATURE_OBJECT="62137"   
+    SCIENTIFIC_NAME="Amblynotus longitarsus" VALID_NAME="0" ID_SPECIES_LINK="87006"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Amblynotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185163"   
+    AUTHOR="Reinhard, 1860" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="87008" ID_NATURE_OBJECT="62138"   
+    SCIENTIFIC_NAME="Amblynotus microcerus" VALID_NAME="0" ID_SPECIES_LINK="87006"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Amblynotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185163"   
+    AUTHOR="Kieffer, 1903" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="89328" ID_NATURE_OBJECT="64412"   
+    SCIENTIFIC_NAME="Platygaster lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="89328"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Platygaster"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185175"   
+    AUTHOR="Buhl, 1998" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="91865" ID_NATURE_OBJECT="66900"   
+    SCIENTIFIC_NAME="Bacillus lynceorum" VALID_NAME="1" ID_SPECIES_LINK="91865"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Bacillus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185401"   
+    AUTHOR="Bullini, Nascetti &amp; Bianchi Bullini, 1984" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="92702" ID_NATURE_OBJECT="67736"   
+    SCIENTIFIC_NAME="Spelyngochthonius beieri" VALID_NAME="1" ID_SPECIES_LINK="92702"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spelyngochthonius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1502"   
+    AUTHOR="Gardini, 1994" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="92703" ID_NATURE_OBJECT="67737"   
+    SCIENTIFIC_NAME="Spelyngochthonius grafittii" VALID_NAME="1" ID_SPECIES_LINK="92703"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spelyngochthonius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1502"   
+    AUTHOR="Gardini, 1994" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="92704" ID_NATURE_OBJECT="67738"   
+    SCIENTIFIC_NAME="Spelyngochthonius heurtaultae" VALID_NAME="1" ID_SPECIES_LINK="92704"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spelyngochthonius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1502"   
+    AUTHOR="Vachon, 1967" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="92705" ID_NATURE_OBJECT="67739"   
+    SCIENTIFIC_NAME="Spelyngochthonius provincialis" VALID_NAME="1" ID_SPECIES_LINK="92705"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spelyngochthonius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1502"   
+    AUTHOR="Vachon &amp; Heurtault-Rossi, 1964" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="92706" ID_NATURE_OBJECT="67740"   
+    SCIENTIFIC_NAME="Spelyngochthonius sardous" VALID_NAME="1" ID_SPECIES_LINK="92706"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Spelyngochthonius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1502"   
+    AUTHOR="Beier, 1955" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="96178" ID_NATURE_OBJECT="71184"   
+    SCIENTIFIC_NAME="Dendrocoelum lynchnidicum" VALID_NAME="1" ID_SPECIES_LINK="96178"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Dendrocoelum"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="388"   
+    AUTHOR="(Stankovic, 1969)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="96590" ID_NATURE_OBJECT="71581"   
+    SCIENTIFIC_NAME="Gieysztoria chlynovica" VALID_NAME="1" ID_SPECIES_LINK="96590"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Gieysztoria"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="145081"   
+    AUTHOR="(Nasonov, 1919)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="98602" ID_NATURE_OBJECT="73583"   
+    SCIENTIFIC_NAME="Callyntrotus granulatus" VALID_NAME="1" ID_SPECIES_LINK="98602"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Callyntrotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184200"   
+    AUTHOR="(Frauenfeld, 1865)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="98603" ID_NATURE_OBJECT="73584"   
+    SCIENTIFIC_NAME="Callyntrotus lonicerae" VALID_NAME="1" ID_SPECIES_LINK="98603"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Callyntrotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184200"   
+    AUTHOR="Roivainen, 1951" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="98604" ID_NATURE_OBJECT="73585"   
+    SCIENTIFIC_NAME="Callyntrotus polygoni" VALID_NAME="1" ID_SPECIES_LINK="98604"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Callyntrotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184200"   
+    AUTHOR="(Liro, 1941)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="98605" ID_NATURE_OBJECT="73586"   
+    SCIENTIFIC_NAME="Callyntrotus schlechtendali" VALID_NAME="1" ID_SPECIES_LINK="98605"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Callyntrotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184200"   
+    AUTHOR="Nalepa, 1894" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="98606" ID_NATURE_OBJECT="73587"   
+    SCIENTIFIC_NAME="Callyntrotus trilobus" VALID_NAME="1" ID_SPECIES_LINK="98606"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Callyntrotus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184200"   
+    AUTHOR="Nalepa, 1923" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="117130" ID_NATURE_OBJECT="91523"   
+    SCIENTIFIC_NAME="Attagenus lynx" VALID_NAME="1" ID_SPECIES_LINK="117130"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Attagenus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1983"   
+    AUTHOR="(Mulsant &amp; Rey, 1868)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="125980" ID_NATURE_OBJECT="99747"   
+    SCIENTIFIC_NAME="Argyropelecus lynchus" VALID_NAME="0" ID_SPECIES_LINK="124585"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Argyropelecus"   
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="19"   
+    AUTHOR="(non Garman, 1899)" IGNORE_ON_MATCH="1"/>
+  <chm62edt_species ID_SPECIES="126157" ID_NATURE_OBJECT="99924"   
+    SCIENTIFIC_NAME="Caulophryne polynema" VALID_NAME="1" ID_SPECIES_LINK="126157"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Caulophryne"   
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1417"   
+    AUTHOR="Regan, 1930" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="126158" ID_NATURE_OBJECT="99925"   
+    SCIENTIFIC_NAME="Caulophryne jordani polynema" VALID_NAME="0" ID_SPECIES_LINK="126157"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Caulophryne"   
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1417"   
+    AUTHOR="Regan, 1930" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="126236" ID_NATURE_OBJECT="100003"   
+    SCIENTIFIC_NAME="Edriolynchnus macracanthus" VALID_NAME="0" ID_SPECIES_LINK="126233"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Edriolynchnus"   
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="1427"   
+    AUTHOR="Regan &amp; Trewavas, 1932" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="128199" ID_NATURE_OBJECT="101513"   
+    SCIENTIFIC_NAME="Gobius lynx" VALID_NAME="0" ID_SPECIES_LINK="128198"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Gobius"   
+    ID_GROUP_SPECIES="2" ID_TAXONOMY="2185"   
+    AUTHOR="Kessler, 1874" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="135510" ID_NATURE_OBJECT="107676"   
+    SCIENTIFIC_NAME="Cerodontha lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="135510"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Cerodontha"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184807"   
+    AUTHOR="Spencer, 1972" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="135838" ID_NATURE_OBJECT="108004"   
+    SCIENTIFIC_NAME="Agromyza lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="135838"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Agromyza"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184807"   
+    AUTHOR="Spencer, 1976" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="136192" ID_NATURE_OBJECT="108358"   
+    SCIENTIFIC_NAME="Egle lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="136192"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Egle"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184808"   
+    AUTHOR="Ackland &amp; Griffiths in Griffiths, 2003" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="136409" ID_NATURE_OBJECT="108575"   
+    SCIENTIFIC_NAME="Pegomya lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="136409"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Pegomya"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184808"   
+    AUTHOR="Ackland, 1977" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="140313" ID_NATURE_OBJECT="112479"   
+    SCIENTIFIC_NAME="Empis lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="140313"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Empis"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184839"   
+    AUTHOR="Chv&#xE1;la, 1981" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="140708" ID_NATURE_OBJECT="112874"   
+    SCIENTIFIC_NAME="Phaeobalia lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="140708"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Phaeobalia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184839"   
+    AUTHOR="(Vaillant &amp; Chv&#xE1;la, 1973)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="141356" ID_NATURE_OBJECT="113521"   
+    SCIENTIFIC_NAME="Platypalpus lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="141356"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Platypalpus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="184847"   
+    AUTHOR="Chv&#xE1;la, 1981" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="141967" ID_NATURE_OBJECT="114132"   
+    SCIENTIFIC_NAME="Coenosia lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="141967"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Coenosia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1193"   
+    AUTHOR="Pont, 1972" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="143942" ID_NATURE_OBJECT="116107"   
+    SCIENTIFIC_NAME="Tomosvaryella lyneborgi" VALID_NAME="1" ID_SPECIES_LINK="143942"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Tomosvaryella"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1175"   
+    AUTHOR="(Coe, 1969)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="166410" ID_NATURE_OBJECT="136771"   
+    SCIENTIFIC_NAME="Cerastium bialynickii" VALID_NAME="0" ID_SPECIES_LINK="165671"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Cerastium"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="477"   
+    AUTHOR="Tolm." IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187152" ID_NATURE_OBJECT="155118"   
+    SCIENTIFIC_NAME="Elyna scirpina" VALID_NAME="0" ID_SPECIES_LINK="187150"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Elyna"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="(Willd.) Pax" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187153" ID_NATURE_OBJECT="155119"   
+    SCIENTIFIC_NAME="Elyna spicata" VALID_NAME="0" ID_SPECIES_LINK="187150"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Elyna"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="Schrad." IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187329" ID_NATURE_OBJECT="155285"   
+    SCIENTIFIC_NAME="Carex maritima ssp. lyngbyei" VALID_NAME="0" ID_SPECIES_LINK="187767"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Carex"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="(Hornem.) Nyman" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187568" ID_NATURE_OBJECT="155478"   
+    SCIENTIFIC_NAME="Elyna bellardii" VALID_NAME="0" ID_SPECIES_LINK="187150"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Elyna"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="(All.) K.Koch" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187569" ID_NATURE_OBJECT="155479"   
+    SCIENTIFIC_NAME="Elyna myosuroides" VALID_NAME="0" ID_SPECIES_LINK="187150"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Elyna"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="(Vill.) Fritsch" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="187767" ID_NATURE_OBJECT="155655"   
+    SCIENTIFIC_NAME="Carex lyngbyei" VALID_NAME="1" ID_SPECIES_LINK="187767"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="1" GENUS="Carex"   
+    ID_GROUP_SPECIES="12" ID_TAXONOMY="2921"   
+    AUTHOR="Hornem." IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202036" ID_NATURE_OBJECT="166958"   
+    SCIENTIFIC_NAME="Chaetechelyne herzegowinensis" VALID_NAME="0" ID_SPECIES_LINK="202033"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1938" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202051" ID_NATURE_OBJECT="166972"   
+    SCIENTIFIC_NAME="Chaetechelyne pharyngealis" VALID_NAME="0" ID_SPECIES_LINK="202049"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1928" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202052" ID_NATURE_OBJECT="166973"   
+    SCIENTIFIC_NAME="Chaetechelyne helvetica" VALID_NAME="0" ID_SPECIES_LINK="202049"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1935" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202053" ID_NATURE_OBJECT="166974"   
+    SCIENTIFIC_NAME="Chaetechelyne sorattina" VALID_NAME="0" ID_SPECIES_LINK="202049"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1951" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202055" ID_NATURE_OBJECT="166976"   
+    SCIENTIFIC_NAME="Chaetechelyne vittata" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1943" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202056" ID_NATURE_OBJECT="166977"   
+    SCIENTIFIC_NAME="Chaetechelyne grisea" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1942" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202057" ID_NATURE_OBJECT="166978"   
+    SCIENTIFIC_NAME="Chaetechelyne flavescens" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Attems, 1927" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202058" ID_NATURE_OBJECT="166979"   
+    SCIENTIFIC_NAME="Chaetechelyne valida" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Attems, 1927" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202059" ID_NATURE_OBJECT="166980"   
+    SCIENTIFIC_NAME="Chaetechelyne duboscqui" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1943" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202060" ID_NATURE_OBJECT="166981"   
+    SCIENTIFIC_NAME="Chaetechelyne corsica" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Verhoeff, 1943" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202061" ID_NATURE_OBJECT="166982"   
+    SCIENTIFIC_NAME="Chaetechelyne osellai" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Matic &amp; Darabantu, 1968" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202062" ID_NATURE_OBJECT="166983"   
+    SCIENTIFIC_NAME="Chaetechelyne ruffoi" VALID_NAME="0" ID_SPECIES_LINK="202054"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Chaetechelyne"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="108474"   
+    AUTHOR="Matic &amp; Darabantu, 1968" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="202656" ID_NATURE_OBJECT="167570"   
+    SCIENTIFIC_NAME="Tettigometra lyncea" VALID_NAME="1" ID_SPECIES_LINK="202656"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Tettigometra"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="185018"   
+    AUTHOR="Horv&#xE1;th, 1903" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224380" ID_NATURE_OBJECT="189163"   
+    SCIENTIFIC_NAME="Emblyna acoreensis" VALID_NAME="1" ID_SPECIES_LINK="224380"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Emblyna"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="Wunderlich, 1992" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224381" ID_NATURE_OBJECT="189164"   
+    SCIENTIFIC_NAME="Emblyna annulipes" VALID_NAME="1" ID_SPECIES_LINK="224381"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Emblyna"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="(Blackwall, 1846)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224382" ID_NATURE_OBJECT="189165"   
+    SCIENTIFIC_NAME="Emblyna brevidens" VALID_NAME="1" ID_SPECIES_LINK="224382"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Emblyna"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="(Kulczynski, 1897)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224383" ID_NATURE_OBJECT="189166"   
+    SCIENTIFIC_NAME="Emblyna mitis" VALID_NAME="1" ID_SPECIES_LINK="224383"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Emblyna"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="(Thorell, 1875)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224384" ID_NATURE_OBJECT="189167"   
+    SCIENTIFIC_NAME="Emblyna teideensis" VALID_NAME="1" ID_SPECIES_LINK="224384"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Emblyna"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="Wunderlich, 1992" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224399" ID_NATURE_OBJECT="189182"   
+    SCIENTIFIC_NAME="Marilynia bicolor" VALID_NAME="1" ID_SPECIES_LINK="224399"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Marilynia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="(Simon, 1870)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224400" ID_NATURE_OBJECT="189183"   
+    SCIENTIFIC_NAME="Marilynia bicolor littoralis" VALID_NAME="1" ID_SPECIES_LINK="224400"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Marilynia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1521"   
+    AUTHOR="(Denis, 1959)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="224629" ID_NATURE_OBJECT="189412"   
+    SCIENTIFIC_NAME="Harpactea lynx" VALID_NAME="0" ID_SPECIES_LINK="224628"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Harpactea"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1524"   
+    AUTHOR="Brignoli, 1978" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="241135" ID_NATURE_OBJECT="205774"   
+    SCIENTIFIC_NAME="Gyrodactylus llewellyni" VALID_NAME="1" ID_SPECIES_LINK="241135"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Gyrodactylus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="122229"   
+    AUTHOR="Ergens &amp; Dulmaa, 1967" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="246674" ID_NATURE_OBJECT="210986"   
+    SCIENTIFIC_NAME="Graptopeltus lynceus" VALID_NAME="1" ID_SPECIES_LINK="246674"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Graptopeltus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="790"   
+    AUTHOR="(Fabricius, 1775)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="252721" ID_NATURE_OBJECT="216963"   
+    SCIENTIFIC_NAME="Oenopia lyncea" VALID_NAME="1" ID_SPECIES_LINK="252721"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Oenopia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1998"   
+    AUTHOR="(Olivier, 1808)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="252722" ID_NATURE_OBJECT="216964"   
+    SCIENTIFIC_NAME="Oenopia lyncea agnata" VALID_NAME="1" ID_SPECIES_LINK="252722"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Oenopia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1998"   
+    AUTHOR="(Rosenhauer, 1847)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="252723" ID_NATURE_OBJECT="216965"   
+    SCIENTIFIC_NAME="Oenopia lyncea lyncea" VALID_NAME="1" ID_SPECIES_LINK="252723"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Oenopia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1998"   
+    AUTHOR="(Olivier, 1808)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="255556" ID_NATURE_OBJECT="219798"   
+    SCIENTIFIC_NAME="Tetralonia lyncea" VALID_NAME="1" ID_SPECIES_LINK="255556"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Tetralonia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="2041"   
+    AUTHOR="Mocsary, 1879" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="260557" ID_NATURE_OBJECT="224573"   
+    SCIENTIFIC_NAME="Doryphoribius polynettae" VALID_NAME="1" ID_SPECIES_LINK="260557"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Doryphoribius"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="139621"   
+    AUTHOR="Biserov, 1988" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="267336" ID_NATURE_OBJECT="231279"   
+    SCIENTIFIC_NAME="Larinus lynx" VALID_NAME="0" ID_SPECIES_LINK="267332"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Larinus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="2015"   
+    AUTHOR="K&#xFC;ster, 1847" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="288036" ID_NATURE_OBJECT="251823"   
+    SCIENTIFIC_NAME="Albinaria evelynae" VALID_NAME="1" ID_SPECIES_LINK="288036"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Albinaria"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="2595"   
+    AUTHOR="E. Gittenberger, 1998" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="303472" ID_NATURE_OBJECT="267121"   
+    SCIENTIFIC_NAME="Zygaena lonicerae jocelynae" VALID_NAME="1" ID_SPECIES_LINK="303472"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Zygaena"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1917"   
+    AUTHOR="Tremewan, 1962" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="309630" ID_NATURE_OBJECT="273263"   
+    SCIENTIFIC_NAME="Xestia lyngei" VALID_NAME="1" ID_SPECIES_LINK="309630"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Xestia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1953"   
+    AUTHOR="(Rebel, 1923)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="309631" ID_NATURE_OBJECT="273264"   
+    SCIENTIFIC_NAME="Xestia lyngei lyngei" VALID_NAME="1" ID_SPECIES_LINK="309631"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Xestia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1953"   
+    AUTHOR="(Rebel, 1923)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="309632" ID_NATURE_OBJECT="273265"   
+    SCIENTIFIC_NAME="Xestia lyngei lankialai" VALID_NAME="1" ID_SPECIES_LINK="309632"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Xestia"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1953"   
+    AUTHOR="(Gr&#xF6;nblom, 1962)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="311983" ID_NATURE_OBJECT="275580"   
+    SCIENTIFIC_NAME="Bipalpus lynceus" VALID_NAME="0" ID_SPECIES_LINK="311979"   
+    TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Bipalpus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="452"   
+    AUTHOR="Wierzejski &amp; Zacharias, 1893" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="314835" ID_NATURE_OBJECT="278013"   
+    SCIENTIFIC_NAME="Lynceus andronachensis" VALID_NAME="1" ID_SPECIES_LINK="314835"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Lynceus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1212"   
+    AUTHOR="Botnariuc, 1947" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="314836" ID_NATURE_OBJECT="278014"   
+    SCIENTIFIC_NAME="Lynceus brachyurus" VALID_NAME="1" ID_SPECIES_LINK="314836"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Lynceus"   
+    ID_GROUP_SPECIES="1" ID_TAXONOMY="1212"   
+    AUTHOR="M&#xFC;ller, 1776" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="314948" ID_NATURE_OBJECT="278054"   
+    SCIENTIFIC_NAME="Lynx lynx lynx" VALID_NAME="1" ID_SPECIES_LINK="314948"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Linnaeus, 1758)" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="314949" ID_NATURE_OBJECT="278055"   
+    SCIENTIFIC_NAME="Lynx lynx melinus" VALID_NAME="1" ID_SPECIES_LINK="314949"   
+    TYPE_RELATED_SPECIES="Subspecies" TEMPORARY_SELECT="0" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="Kerr, 1792" IGNORE_ON_MATCH="0"/>
+  <chm62edt_species ID_SPECIES="316534" ID_NATURE_OBJECT="446137"   
+    SCIENTIFIC_NAME="Lynx lynx ssp. isabellinus" VALID_NAME="1" ID_SPECIES_LINK="316534"   
+    TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Lynx"   
+    ID_GROUP_SPECIES="6" ID_TAXONOMY="2431"   
+    AUTHOR="(Blyth, 1847)" IGNORE_ON_MATCH="0"/>
+
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="105"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425013" ID_REPORT_ATTRIBUTES="125673"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="136"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425014" ID_REPORT_ATTRIBUTES="125674"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425015" ID_REPORT_ATTRIBUTES="125675"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="75"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425016" ID_REPORT_ATTRIBUTES="125676"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="81"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425017" ID_REPORT_ATTRIBUTES="125677"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="107"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425018" ID_REPORT_ATTRIBUTES="125678"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="137"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425019" ID_REPORT_ATTRIBUTES="125679"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="78"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425020" ID_REPORT_ATTRIBUTES="125680"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="197"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425021" ID_REPORT_ATTRIBUTES="125681"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="215"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425022" ID_REPORT_ATTRIBUTES="125682"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1579" ID_GEOSCOPE="215"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425023" ID_REPORT_ATTRIBUTES="125683"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="49"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425024" ID_REPORT_ATTRIBUTES="125684"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="184"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425025" ID_REPORT_ATTRIBUTES="125685"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="47"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425026" ID_REPORT_ATTRIBUTES="125686"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="159"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425027" ID_REPORT_ATTRIBUTES="125687"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="184"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425028" ID_REPORT_ATTRIBUTES="125688"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425029" ID_REPORT_ATTRIBUTES="125689"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="86"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425030" ID_REPORT_ATTRIBUTES="125690"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="217"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425031" ID_REPORT_ATTRIBUTES="125691"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="206"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425032" ID_REPORT_ATTRIBUTES="125692"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="5"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425033" ID_REPORT_ATTRIBUTES="125693"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1782" ID_GEOSCOPE="196"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425034" ID_REPORT_ATTRIBUTES="125694"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="46"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425035" ID_REPORT_ATTRIBUTES="125695"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="219"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425036" ID_REPORT_ATTRIBUTES="125696"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1425" ID_DC="1599" ID_GEOSCOPE="75"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425037" ID_REPORT_ATTRIBUTES="125697"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1428" ID_DC="1579" ID_GEOSCOPE="197"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425038" ID_REPORT_ATTRIBUTES="125698"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1428" ID_DC="1579" ID_GEOSCOPE="184"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425039" ID_REPORT_ATTRIBUTES="125699"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425040" ID_REPORT_ATTRIBUTES="125700"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="217"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425041" ID_REPORT_ATTRIBUTES="125701"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="105"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425042" ID_REPORT_ATTRIBUTES="125702"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="197"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425043" ID_REPORT_ATTRIBUTES="125703"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="78"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425044" ID_REPORT_ATTRIBUTES="125704"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="137"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425045" ID_REPORT_ATTRIBUTES="125705"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="197"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425046" ID_REPORT_ATTRIBUTES="125706"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="86"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425047" ID_REPORT_ATTRIBUTES="125707"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425048" ID_REPORT_ATTRIBUTES="125708"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="215"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425049" ID_REPORT_ATTRIBUTES="125709"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="81"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425050" ID_REPORT_ATTRIBUTES="125710"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425051" ID_REPORT_ATTRIBUTES="125711"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="49"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425052" ID_REPORT_ATTRIBUTES="125712"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="47"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425053" ID_REPORT_ATTRIBUTES="125713"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="184"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425054" ID_REPORT_ATTRIBUTES="125714"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="107"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425055" ID_REPORT_ATTRIBUTES="125715"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="75"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425056" ID_REPORT_ATTRIBUTES="125716"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="46"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425057" ID_REPORT_ATTRIBUTES="125717"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="219"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425058" ID_REPORT_ATTRIBUTES="125718"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1429" ID_DC="1599" ID_GEOSCOPE="136"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425059" ID_REPORT_ATTRIBUTES="125719"/>
+  <chm62edt_reports ID_NATURE_OBJECT="1534" ID_DC="1599" ID_GEOSCOPE="81"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1425841" ID_REPORT_ATTRIBUTES="126501"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="4381" ID_DC="1785" ID_GEOSCOPE="49"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1428960" ID_REPORT_ATTRIBUTES="129620"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="7797" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1431608" ID_REPORT_ATTRIBUTES="132268"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="97030" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1434164" ID_REPORT_ATTRIBUTES="134824"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="98109" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1434426" ID_REPORT_ATTRIBUTES="135086"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="98109" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1434435" ID_REPORT_ATTRIBUTES="135095"/>
+  <chm62edt_reports ID_NATURE_OBJECT="98318" ID_DC="1785" ID_GEOSCOPE="49"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1438007" ID_REPORT_ATTRIBUTES="138667"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="98342" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1438213" ID_REPORT_ATTRIBUTES="138873"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="98495" ID_DC="1785" ID_GEOSCOPE="185"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1439910" ID_REPORT_ATTRIBUTES="140570"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="98835" ID_DC="1785" ID_GEOSCOPE="49"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1441648" ID_REPORT_ATTRIBUTES="142308"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="99029" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1443346" ID_REPORT_ATTRIBUTES="144006"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="99029" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1443363" ID_REPORT_ATTRIBUTES="144023"/>
+  <chm62edt_reports ID_NATURE_OBJECT="99064" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1443547" ID_REPORT_ATTRIBUTES="144207"/> <!-- -->
+  <chm62edt_reports ID_NATURE_OBJECT="99064" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1443548" ID_REPORT_ATTRIBUTES="144208"/>
+  <chm62edt_reports ID_NATURE_OBJECT="99064" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1443549" ID_REPORT_ATTRIBUTES="144209"/>
+  <chm62edt_reports ID_NATURE_OBJECT="99924" ID_DC="1785" ID_GEOSCOPE="136"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1444522" ID_REPORT_ATTRIBUTES="145182"/>
+  <chm62edt_reports ID_NATURE_OBJECT="100106" ID_DC="1785" ID_GEOSCOPE="244"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1444566" ID_REPORT_ATTRIBUTES="145226"/>
+  <chm62edt_reports ID_NATURE_OBJECT="155479" ID_DC="1796" ID_GEOSCOPE="47"
+    ID_GEOSCOPE_LINK="-1" ID_REPORT_TYPE="1448902" ID_REPORT_ATTRIBUTES="149562"/>
+
+  <chm62edt_report_type ID_REPORT_TYPE="1425013" ID_LOOKUP="45" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425014" ID_LOOKUP="52" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425015" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425016" ID_LOOKUP="28" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425017" ID_LOOKUP="31" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425018" ID_LOOKUP="46" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425019" ID_LOOKUP="53" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425020" ID_LOOKUP="27" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425021" ID_LOOKUP="93" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425022" ID_LOOKUP="116" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425023" ID_LOOKUP="116" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425024" ID_LOOKUP="21" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425025" ID_LOOKUP="85" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425026" ID_LOOKUP="22" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425027" ID_LOOKUP="68" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425028" ID_LOOKUP="85" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425029" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425030" ID_LOOKUP="34" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425031" ID_LOOKUP="107" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425032" ID_LOOKUP="97" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425033" ID_LOOKUP="111" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425034" ID_LOOKUP="91" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425035" ID_LOOKUP="19" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425036" ID_LOOKUP="106" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425037" ID_LOOKUP="28" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425038" ID_LOOKUP="93" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425039" ID_LOOKUP="85" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425040" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425041" ID_LOOKUP="107" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425042" ID_LOOKUP="45" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425043" ID_LOOKUP="93" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425044" ID_LOOKUP="27" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425045" ID_LOOKUP="53" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425046" ID_LOOKUP="93" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425047" ID_LOOKUP="34" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425048" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425049" ID_LOOKUP="116" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425050" ID_LOOKUP="31" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425051" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425052" ID_LOOKUP="21" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425053" ID_LOOKUP="22" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425054" ID_LOOKUP="85" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425055" ID_LOOKUP="46" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425056" ID_LOOKUP="28" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425057" ID_LOOKUP="19" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425058" ID_LOOKUP="106" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425059" ID_LOOKUP="52" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1425841" ID_LOOKUP="31" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1428960" ID_LOOKUP="21" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1431608" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1434164" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1434426" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1434435" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1438007" ID_LOOKUP="21" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1438213" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1439910" ID_LOOKUP="86" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1441648" ID_LOOKUP="21" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1443346" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1443363" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1443547" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1443548" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1443549" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1444522" ID_LOOKUP="52" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1444566" ID_LOOKUP="25" LOOKUP_TYPE="LANGUAGE"/>
+  <chm62edt_report_type ID_REPORT_TYPE="1448902" ID_LOOKUP="22" LOOKUP_TYPE="LANGUAGE"/>
+
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125673" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Europski ris"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125674" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Gaupa"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125675" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Gaupe"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125676" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Ilves"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125677" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Ilves"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125678" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Közönséges hiúz"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125679" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125680" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince europeo"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125681" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince-europeu"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125682" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lo"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125683" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lodjur"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125684" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Los"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125685" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Los"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125686" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Luchs"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125687" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Luuss"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125688" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lynx"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125689" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lynx"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125690" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lynx boréal"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125691" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Navadni ris"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125692" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Râs"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125693" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Rreqebulli"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125694" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="rys"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125695" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Rys ostrovid"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125696" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Rys ostrovid"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125697" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Tava-ilves"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125698" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince ibérico"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125699" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Spaanse lyns"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125700" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Iberian lynx"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125701" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Iberijski ris"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125702" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Iberski ris"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125703" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Liberne"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125704" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince ibérico"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125705" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince pardina"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125706" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lince-ibérico"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125707" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Lynx pardelle"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125708" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pantergaupe"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125709" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Panterlo"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125710" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pantteri-ilves"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125711" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pardel lynx"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125712" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pardellos"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125713" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pardelluchs"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125714" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pardellynx"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125715" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Párduchiúz"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125716" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Pürenee ilves"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125717" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Rys pardálový"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125718" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Rys škvnitý"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="125719" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Spánargaupa"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="126501" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Mehelynhevosenkenkäyökkö"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="129620" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Flynder"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="132268" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Gullflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="134824" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Sandflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="135086" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Mareflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="135095" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Smørflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="138667" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Helleflynder"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="138873" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Bergflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="140570" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Gapeflyndre"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="142308" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Helleflynder"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="144006" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Homelyn ray"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="144023" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Spotted homelyn ray"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="144207" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Homelyn cuckoo ray"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="144208" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Homelyn mirror ray"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="144209" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Homelyn sandy ray"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="145182" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Frenja"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="145226" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Jellynose"/>
+  <chm62edt_report_attributes ID_REPORT_ATTRIBUTES="149562" NAME="VERNACULAR_NAME" TYPE="TEXT" VALUE="Nacktried"/>
+
+</dataset>

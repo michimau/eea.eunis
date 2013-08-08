@@ -1,0 +1,22 @@
+
+How to create test data:
+========================
+
+You can use mysqldump -X to get a selection of the data. It will return an MySQL
+specific format that you'll have to transform DBUnit's flat XML format.
+
+$ mysqldump -X -w 'SCIENTIFIC_NAME LIKE "lyn%"' eunis chm62edt_species >lyn-species.xml
+$ xsltproc mysql2dbunit.xsl lyn-species.xml | xmllint --format - >seed-lyn-species.xml
+
+Or plain mysql for more complex queries:
+
+$ mysql -X -e 'SELECT chm62edt_nature_object.* FROM chm62edt_species \
+  JOIN chm62edt_nature_object USING(ID_NATURE_OBJECT) WHERE SCIENTIFIC_NAME LIKE "lyn%"' \
+  eunis >lyn-nature_object.xml
+
+But then you have to provide table name as an argument:
+
+$ xsltproc --stringparam tablename chm62edt_nature_object mysql2dbunit.xsl \
+  lyn-nature_object.xml | xmllint --format - >seed-lyn-nature_object.xml
+
+Xsltproc is the stylesheet processor. You can substitute any other. Xmllint is a XML reformatter.

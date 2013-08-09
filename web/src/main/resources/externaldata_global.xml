@@ -129,13 +129,16 @@ WHERE {
 
   <entry key="euringcodes.querytype">SQL</entry>
   <entry key="euringcodes.title">EURING species that are known in EUNIS</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="euringcodes.summary"><![CDATA[This is a list of EURING codes
 for the species that are known in EUNIS - <em>It is not a complete EURING list.</em>
 To get the EURING code list visit <a href="http://blx1.bto.org/euringcodes/species.jsp">http://blx1.bto.org/euringcodes/species.jsp</a> or
 <a href="http://www.euring.org/">the Euring home page</a>.
 ]]></entry>
+  <entry key="euringcodes.column.SCIENTIFIC_NAME">EUNIS name</entry>
+  <entry key="euringcodes.link.SCIENTIFIC_NAME">URL</entry>
   <entry key="euringcodes.query"><![CDATA[
-SELECT OBJECT AS code, SCIENTIFIC_NAME AS eunis_name, CONCAT('[CONTEXT_PATH]/species/',ID_SPECIES) AS eunis_url
+SELECT OBJECT AS code, SCIENTIFIC_NAME, CONCAT('[CONTEXT_PATH]/species/', ID_SPECIES) AS URL
 FROM chm62edt_nature_object_attributes
 JOIN chm62edt_species USING(ID_NATURE_OBJECT)
 WHERE NAME="sameSynonymEURING"

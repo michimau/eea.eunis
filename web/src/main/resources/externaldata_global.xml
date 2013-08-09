@@ -6,7 +6,7 @@
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
   <entry key="queries">n2000habitats n2000birds n2000other
-   nutscodes estatcodes habides
+   nutscodes estatcodes euringcodes habides
    art17delv2012s
   </entry>
 
@@ -104,8 +104,8 @@ WHERE {
 
   <entry key="estatcodes.querytype">SPARQL</entry>
   <entry key="estatcodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-  <entry key="estatcodes.title">Eurostat species code list with EUNIS species matches</entry>
-  <entry key="estatcodes.summary">The Eurostat species code list is primarily used for fishery statistics.
+  <entry key="estatcodes.title">Eurostat fishes code list with EUNIS species matches</entry>
+  <entry key="estatcodes.summary">The Eurostat code list is primarily used for fishery statistics.
 The 3-alpha identifier is a unique code made of three letters that is widely used for the exchange of data with national correspondents and among fishery agencies.</entry>
   <entry key="estatcodes.query"><![CDATA[
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -114,19 +114,33 @@ PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
 
-SELECT DISTINCT ?identifier ?label ?scientific_name ?eunisurl
+SELECT ?identifier ?label ?eunis_name ?eunis_url
 WHERE {
   ?estatspecies skos:inScheme <http://rdfdata.eionet.europa.eu/eurostat/dic/species>;
           a skos:Concept;
             rdfs:label ?label;
             skos:notation ?identifier .
   OPTIONAL {
-    ?eunisurl e:sameSynonym ?estatspecies ;
-              dwc:scientificName ?scientific_name
+    ?eunis_url e:sameSynonymFIFAO ?identifier ;
+              dwc:scientificName ?eunis_name
   }
 } ORDER BY ?identifier
 ]]></entry>
 
+  <entry key="euringcodes.querytype">SQL</entry>
+  <entry key="euringcodes.title">EURING species that are known in EUNIS</entry>
+  <entry key="euringcodes.summary"><![CDATA[This is a list of EURING codes
+for the species that are known in EUNIS - <em>It is not a complete EURING list.</em>
+To get the EURING code list visit <a href="http://blx1.bto.org/euringcodes/species.jsp">http://blx1.bto.org/euringcodes/species.jsp</a> or
+<a href="http://www.euring.org/">the Euring home page</a>.
+]]></entry>
+  <entry key="euringcodes.query"><![CDATA[
+SELECT OBJECT AS code, SCIENTIFIC_NAME AS eunis_name, CONCAT('[CONTEXT_PATH]/species/',ID_SPECIES) AS eunis_url
+FROM chm62edt_nature_object_attributes
+JOIN chm62edt_species USING(ID_NATURE_OBJECT)
+WHERE NAME="sameSynonymEURING"
+ORDER BY OBJECT
+]]></entry>
 
   <entry key="habides.querytype">SPARQL</entry>
   <entry key="habides.endpoint">http://cr.eionet.europa.eu/sparql</entry>

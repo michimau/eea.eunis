@@ -122,4 +122,27 @@ public class ScientificNameDomainTest {
         List result = instance.getResults(0, 1000, sortCriteria);
         assertEquals(9, result.size());
     }
+
+    /**
+     * Search on name Contains "lynx" and species group is "Mammals".
+     */
+    @Test
+    public void searchNameContainsLynAndMammalsGroup() throws Exception {
+        NameSearchCriteria criteria1 = new NameSearchCriteria("Lynx", Utilities.OPERATOR_CONTAINS);
+        NameSearchCriteria criteria2 = new NameSearchCriteria("Mammals",
+                NameSearchCriteria.CRITERIA_GROUP, Utilities.OPERATOR_IS);
+        NameSearchCriteria[] searchCriteria = { criteria1, criteria2 };
+        AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
+        boolean searchSynonyms = true;
+        boolean showEUNISInvalidatedSpecies = true;
+        Boolean searchVernacular = Boolean.valueOf(true);
+
+        ScientificNameDomain instance = new ScientificNameDomain(searchCriteria, sortCriteria,
+                searchSynonyms, showEUNISInvalidatedSpecies, searchVernacular);
+        assertNotNull("Instantiation failed", instance);
+        // Known issue: If we search for vernacular names, then the page size must be > 0
+        // If not, then pagesize=0 is the same as no limit.
+        List result = instance.getResults(0, 1000, sortCriteria);
+        assertEquals(12, result.size());
+    }
 }

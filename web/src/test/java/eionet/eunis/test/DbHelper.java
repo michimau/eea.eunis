@@ -60,7 +60,7 @@ public class DbHelper {
     }
 
     private static IDatabaseConnection getConnection() throws ClassNotFoundException, SQLException, DatabaseUnitException {
-        Class.forName("org.gjt.mm.mysql.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         Connection jdbcConnection = DriverManager.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
         IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
         DatabaseConfig config = connection.getConfig();
@@ -115,7 +115,9 @@ public class DbHelper {
     }
 
     public static IDataSet getXmlDataSet(String fileName) throws DataSetException, IOException {
-        return new FlatXmlDataSetBuilder().build(DbHelper.class.getClassLoader().getResourceAsStream(fileName));
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        builder.setColumnSensing(true);
+        return builder.build(DbHelper.class.getClassLoader().getResourceAsStream(fileName));
     }
 
     /**

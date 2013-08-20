@@ -121,7 +121,7 @@ public class DesignationsImportParser extends DefaultHandler {
                 remark = buf.toString().trim();
             }
 
-            if (qName.equalsIgnoreCase("CDDA_v8_designations")) {
+            if (qName.equalsIgnoreCase("CDDA_designations")) {
 
                 Integer geoscopeId = 0;
 

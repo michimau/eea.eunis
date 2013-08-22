@@ -7,7 +7,7 @@
 <!-- -->
   <entry key="queries">n2000habitats n2000birds n2000other
    nutscodes estatcodes euringcodes habides
-   art17delv2012s
+   art17delv2012s annex2 annex4 annex5
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -207,5 +207,92 @@ WHERE {
 } GROUP BY ?speciesurl ?name
 ORDER BY ?name
 ]]></entry>
+
+<!--
+  List of Habitats Directive, Annex II species
+-->
+  <entry key="annex2.querytype">SQL</entry>
+  <entry key="annex2.title">Habitats Directive, Annex II species</entry>
+  <entry key="annex2.summary"><![CDATA[
+  Annex II: animal and plant species of community interest whose conservation requires the designation of special areas of conservation.
+]]></entry>
+  <entry key="annex2.column.SPECIES_GROUP">Group</entry>
+  <entry key="annex2.column.SCIENTIFIC_NAME">Name in Annex</entry>
+  <entry key="annex2.link.SCIENTIFIC_NAME">URL</entry>
+  <entry key="annex2.column.VALID_NAME">Valid name</entry>
+  <entry key="annex2.link.VALID_NAME">VALID_URL</entry>
+  <entry key="annex2.query"><![CDATA[
+SELECT g.COMMON_NAME AS SPECIES_GROUP,
+CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES) AS URL,
+s.SCIENTIFIC_NAME,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES_LINK), NULL ) AS VALID_URL,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, p.SCIENTIFIC_NAME, NULL) AS VALID_NAME
+FROM chm62edt_reports AS r
+JOIN chm62edt_report_type USING (ID_REPORT_TYPE)
+JOIN chm62edt_species AS s USING (ID_NATURE_OBJECT)
+JOIN chm62edt_group_species AS g USING(ID_GROUP_SPECIES)
+JOIN chm62edt_species AS p ON s.ID_SPECIES_LINK=p.ID_SPECIES
+WHERE LOOKUP_TYPE='LEGAL_STATUS' AND r.ID_DC IN (1554, 1823, 2325)
+ORDER BY g.COMMON_NAME, s.SCIENTIFIC_NAME
+]]></entry>
+
+
+<!--
+  List of Habitats Directive, Annex IV species
+-->
+  <entry key="annex4.querytype">SQL</entry>
+  <entry key="annex4.title">Habitats Directive, Annex IV species</entry>
+  <entry key="annex4.summary"><![CDATA[
+  Annex IV: animal and plant species of community interest in need of strict protection.
+]]></entry>
+  <entry key="annex4.column.SPECIES_GROUP">Group</entry>
+  <entry key="annex4.column.SCIENTIFIC_NAME">Name in Annex</entry>
+  <entry key="annex4.link.SCIENTIFIC_NAME">URL</entry>
+  <entry key="annex4.column.VALID_NAME">Valid name</entry>
+  <entry key="annex4.link.VALID_NAME">VALID_URL</entry>
+  <entry key="annex4.query"><![CDATA[
+SELECT g.COMMON_NAME AS SPECIES_GROUP,
+CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES) AS URL,
+s.SCIENTIFIC_NAME,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES_LINK), NULL ) AS VALID_URL,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, p.SCIENTIFIC_NAME, NULL) AS VALID_NAME
+FROM chm62edt_reports AS r
+JOIN chm62edt_report_type USING (ID_REPORT_TYPE)
+JOIN chm62edt_species AS s USING (ID_NATURE_OBJECT)
+JOIN chm62edt_group_species AS g USING(ID_GROUP_SPECIES)
+JOIN chm62edt_species AS p ON s.ID_SPECIES_LINK=p.ID_SPECIES
+WHERE LOOKUP_TYPE='LEGAL_STATUS' AND r.ID_DC IN (1555, 1824, 2326)
+ORDER BY g.COMMON_NAME, s.SCIENTIFIC_NAME
+]]></entry>
+
+
+<!--
+  List of Habitats Directive, Annex V species
+-->
+  <entry key="annex5.querytype">SQL</entry>
+  <entry key="annex5.title">Habitats Directive, Annex V species</entry>
+  <entry key="annex5.summary"><![CDATA[
+Annex V: animal and plant species of community interest whose taking in the wild and exploitation may be subject to management measures.
+]]></entry>
+  <entry key="annex5.column.SPECIES_GROUP">Group</entry>
+  <entry key="annex5.column.SCIENTIFIC_NAME">Name in Annex</entry>
+  <entry key="annex5.link.SCIENTIFIC_NAME">URL</entry>
+  <entry key="annex5.column.VALID_NAME">Valid name</entry>
+  <entry key="annex5.link.VALID_NAME">VALID_URL</entry>
+  <entry key="annex5.query"><![CDATA[
+SELECT g.COMMON_NAME AS SPECIES_GROUP,
+CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES) AS URL,
+s.SCIENTIFIC_NAME,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES_LINK), NULL ) AS VALID_URL,
+IF(s.ID_SPECIES_LINK != s.ID_SPECIES, p.SCIENTIFIC_NAME, NULL) AS VALID_NAME
+FROM chm62edt_reports AS r
+JOIN chm62edt_report_type USING (ID_REPORT_TYPE)
+JOIN chm62edt_species AS s USING (ID_NATURE_OBJECT)
+JOIN chm62edt_group_species AS g USING(ID_GROUP_SPECIES)
+JOIN chm62edt_species AS p ON s.ID_SPECIES_LINK=p.ID_SPECIES
+WHERE LOOKUP_TYPE='LEGAL_STATUS' AND r.ID_DC IN (1556, 1825, 2327)
+ORDER BY g.COMMON_NAME, s.SCIENTIFIC_NAME
+]]></entry>
+
 
 </properties>

@@ -5,7 +5,6 @@ package eionet.eunis.rdf;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -53,7 +52,7 @@ public class RdfExporter {
                 Connection con = ConnectionUtil.getSimpleConnection();
                 Properties properties = new Properties();
                 properties.load(RdfExporter.class.getClassLoader().getResourceAsStream("rdfexport.properties"));
-                RDFExportService rdfExportService = new RDFExportServiceImpl(new PrintStream(fos), con, properties);
+                RDFExportService rdfExportService = new RDFExportServiceImpl(fos, con, properties);
                 rdfExportService.exportTable(table, identifier);
 
                 con.close();

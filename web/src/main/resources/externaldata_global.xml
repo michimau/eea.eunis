@@ -7,7 +7,7 @@
 <!-- -->
   <entry key="queries">n2000habitats n2000birds n2000other
    estatcodes euringcodes habides
-   art17delv2012s annex2 annex4 annex5
+   art17delv2012s annex2 annex4 annex5 gisd
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -281,7 +281,7 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 Annex V: animal and plant species of community interest whose taking in the wild and exploitation may be subject to management measures.
 ]]></entry>
   <entry key="annex5.column.SPECIES_GROUP">Group</entry>
-  <entry key="annex2.column.FAMILY">Family</entry>
+  <entry key="annex5.column.FAMILY">Family</entry>
   <entry key="annex5.column.SCIENTIFIC_NAME">Name in Annex</entry>
   <entry key="annex5.link.SCIENTIFIC_NAME">URL</entry>
   <entry key="annex5.column.VALID_NAME">Valid name</entry>
@@ -303,5 +303,31 @@ WHERE LOOKUP_TYPE='LEGAL_STATUS' AND r.ID_DC IN (1556, 1825, 2327)
 ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 ]]></entry>
 
+<!--
+  Invasive species from ISSG
+-->
+  <entry key="gisd.querytype">SQL</entry>
+  <entry key="gisd.title">Invasive species according to the Global Invasive Species Database</entry>
+  <entry key="gisd.summary"><![CDATA[
+Some of the species in EUNIS are registered as invasive in the Global Invasive Species Database (GISD). This is a list of them.
+Note that EUNIS does not have information on all the invasive species.
+]]></entry>
+  <entry key="gisd.column.SPECIES_GROUP">Group</entry>
+  <entry key="gisd.column.FAMILY">Family</entry>
+  <entry key="gisd.column.SCIENTIFIC_NAME">Name</entry>
+  <entry key="gisd.link.SCIENTIFIC_NAME">URL</entry>
+  <entry key="annex5.query"><![CDATA[
+SELECT
+  g.COMMON_NAME AS SPECIES_GROUP,
+  t.NAME AS FAMILY,
+  CONCAT('[CONTEXT_PATH]/species/', s.ID_SPECIES) AS URL,
+  s.SCIENTIFIC_NAME
+FROM chm62edt_nature_object_attributes AS a
+JOIN chm62edt_species AS s USING(ID_NATURE_OBJECT)
+JOIN chm62edt_group_species AS g USING(ID_GROUP_SPECIES)
+LEFT JOIN chm62edt_taxonomy AS t ON s.ID_TAXONOMY=t.ID_TAXONOMY AND t.LEVEL='Family'
+WHERE a.NAME="sameSynonymISSG"
+ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
+]]></entry>
 
 </properties>

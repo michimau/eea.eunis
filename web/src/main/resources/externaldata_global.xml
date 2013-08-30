@@ -316,7 +316,7 @@ Note that EUNIS does not have information on all the invasive species.
   <entry key="gisd.column.FAMILY">Family</entry>
   <entry key="gisd.column.SCIENTIFIC_NAME">Name</entry>
   <entry key="gisd.link.SCIENTIFIC_NAME">URL</entry>
-  <entry key="annex5.query"><![CDATA[
+  <entry key="gisd.query"><![CDATA[
 SELECT
   g.COMMON_NAME AS SPECIES_GROUP,
   t.NAME AS FAMILY,

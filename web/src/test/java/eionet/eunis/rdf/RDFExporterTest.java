@@ -1,7 +1,6 @@
 package eionet.eunis.rdf;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStreamWriter;
 import java.sql.Connection;
 import java.util.Properties;
 
@@ -9,9 +8,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
-import org.junit.BeforeClass;
 
-import eionet.eunis.test.DbHelper;
 import eionet.eunis.util.sql.ConnectionUtil;
 import eionet.rdfexport.RDFExportService;
 import eionet.rdfexport.RDFExportServiceImpl;
@@ -19,7 +16,7 @@ import eionet.rdfexport.RDFExportServiceImpl;
 
 
 /**
- * Test the RDF Exporter script
+ * Test the RDF Exporter script.
  */
 public class RDFExporterTest {
 

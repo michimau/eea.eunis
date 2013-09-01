@@ -132,4 +132,29 @@ public class LinkedDataTest {
             assertEquals(expected, row.toString());
         }
     }
+
+    /**
+     * Test correctness when the output type is binary.
+     */
+    @Test
+    public void castToBinary() throws Exception {
+        Properties props = new Properties();
+        props.setProperty("queries", "species");
+        props.setProperty("species.title", "Simple query");
+        props.setProperty("species.summary", "");
+        props.setProperty("species.querytype", "SQL");
+        props.setProperty("species.query", "SELECT CAST('plain string' AS BINARY) AS name");
+
+        Integer natureObjId = null;
+        LinkedData qObj = new LinkedData(props, natureObjId, "species");
+        qObj.executeSQLQuery("species", sqlUtils);
+        ArrayList<HashMap<String, ResultValue>> rows = qObj.getRows();
+
+        assertEquals(1, rows.size());
+        String expected = "{name=plain string}";
+        for (HashMap<String, ResultValue> row : rows) {
+            assertEquals(expected, row.toString());
+        }
+    }
+
 }

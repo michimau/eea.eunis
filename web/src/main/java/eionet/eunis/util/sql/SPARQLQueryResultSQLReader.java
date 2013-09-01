@@ -49,8 +49,8 @@ public class SPARQLQueryResultSQLReader extends ResultSetBaseReader<HashMap<Stri
         for (Map<String, Object> colMap : cols) {
 
             String colIdentifier = colMap.get(COLUMN_IDENTIFIER_PROPERTY).toString();
-            Object colValue = rs.getObject(colIndex++);
-            String colStringValue = colValue == null ? StringUtils.EMPTY : colValue.toString();
+            String colValue = rs.getString(colIndex++);
+            String colStringValue = (colValue == null) ? StringUtils.EMPTY : colValue;
             boolean isLiteral = !isURL(colStringValue);
 
             ResultValue resultValue = new ResultValue(colStringValue, isLiteral);

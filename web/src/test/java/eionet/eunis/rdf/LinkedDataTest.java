@@ -67,7 +67,7 @@ public class LinkedDataTest {
      * @throws Exception when something fails.
      */
     @Test
-    public void concatWithIntNoDb() throws Exception {
+    public void concatWithIntNoSeed() throws Exception {
         Properties props = new Properties();
         props.setProperty("queries", "species");
         props.setProperty("species.title", "Simple query");
@@ -82,6 +82,52 @@ public class LinkedDataTest {
 
         assertEquals(1, rows.size());
         String expected = "{ID=3456, URL=3456/general}";
+        for (HashMap<String, ResultValue> row : rows) {
+            assertEquals(expected, row.toString());
+        }
+    }
+
+    @Test
+    public void valueWithNull() throws Exception {
+        Properties props = new Properties();
+        props.setProperty("queries", "species");
+        props.setProperty("species.title", "Simple query");
+        props.setProperty("species.summary", "");
+        props.setProperty("species.querytype", "SQL");
+        props.setProperty("species.query", "SELECT 3456 AS ID, CONCAT(CONVERT(3456 USING utf8), '/general') AS URL, NULL AS name");
+
+        Integer natureObjId = null;
+        LinkedData qObj = new LinkedData(props, natureObjId, "species");
+        qObj.executeSQLQuery("species", sqlUtils);
+        ArrayList<HashMap<String, ResultValue>> rows = qObj.getRows();
+
+        assertEquals(1, rows.size());
+        String expected = "{name=, ID=3456, URL=3456/general}";
+        for (HashMap<String, ResultValue> row : rows) {
+            assertEquals(expected, row.toString());
+        }
+    }
+
+    /**
+     * Test how datetime is shown. There is no expectation of a particular representation,
+     * just that it is readable.
+     */
+    @Test
+    public void handleDateTime() throws Exception {
+        Properties props = new Properties();
+        props.setProperty("queries", "species");
+        props.setProperty("species.title", "Simple query");
+        props.setProperty("species.summary", "");
+        props.setProperty("species.querytype", "SQL");
+        props.setProperty("species.query", "SELECT CAST('2013-08-31 10:20:30' AS DATETIME) AS issued");
+
+        Integer natureObjId = null;
+        LinkedData qObj = new LinkedData(props, natureObjId, "species");
+        qObj.executeSQLQuery("species", sqlUtils);
+        ArrayList<HashMap<String, ResultValue>> rows = qObj.getRows();
+
+        assertEquals(1, rows.size());
+        String expected = "{issued=2013-08-31 10:20:30.0}";
         for (HashMap<String, ResultValue> row : rows) {
             assertEquals(expected, row.toString());
         }

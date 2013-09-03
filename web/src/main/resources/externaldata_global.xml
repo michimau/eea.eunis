@@ -123,8 +123,10 @@ WHERE {
             rdfs:label ?label;
             skos:notation ?identifier .
   OPTIONAL {
-    ?eunis_url e:sameSynonymFIFAO ?identifier ;
-              dwc:scientificName ?eunis_name
+    GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+      ?eunis_url e:sameSynonymFIFAO ?identifier ;
+                dwc:scientificName ?eunis_name
+    }
   }
 } ORDER BY ?identifier
 ]]></entry>

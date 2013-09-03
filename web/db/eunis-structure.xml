@@ -1837,7 +1837,7 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8,
     </changeSet>
 
     <changeSet author="roug" id="rev-122" runOnChange="true">
-        <preConditions onFail="CONTINUE">
+        <preConditions onFail="MARK_RAN">
             <dbms type="mysql"/>
             <sqlCheck expectedResult="1"><![CDATA[
     SELECT (SUBSTRING_INDEX(version(),'.',1) * 10000
@@ -1898,5 +1898,14 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
     <changeSet author="roug" id="rev-123">
         <comment>Size of CONTENT_LENGTH has been too little since ever.</comment>
         <sql>ALTER TABLE eunis_web_content MODIFY CONTENT_LENGTH INT DEFAULT 0</sql>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-124">
+        <comment>Ensure that there are no duplicate filenames for the same object in the table</comment>
+        <addUniqueConstraint
+            tableName="chm62edt_nature_object_picture"
+            constraintName="OBJECT_FILENAME"
+            columnNames="ID_OBJECT, NATURE_OBJECT_TYPE, FILE_NAME"
+        />
     </changeSet>
 </databaseChangeLog>

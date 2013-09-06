@@ -79,7 +79,7 @@
                     <input type="hidden" name="showCoordinates" value="true" />
                     <input type="hidden" name="showSize" value="true" />
                     <input type="hidden" name="showDesignationYear" value="true" />
-                    <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_NAME%>" />
+                    <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_RELEVANCE%>" />
                     <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
                     <input type="hidden" name="DB_NATURA2000" value="ON" />
                     <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />

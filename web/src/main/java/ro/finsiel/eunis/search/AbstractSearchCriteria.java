@@ -58,4 +58,5 @@ public abstract class AbstractSearchCriteria {
      * @return A human readable representation of an object.
      */
     public abstract String toHumanString();
+    
 }

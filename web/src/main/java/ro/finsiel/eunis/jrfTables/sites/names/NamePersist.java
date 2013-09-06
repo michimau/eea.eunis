@@ -75,6 +75,7 @@ public class NamePersist extends PersistentObject implements CoordinatesProvider
 
     private String areaNameEn = null;
     private String iso2L = null;
+    private Integer matchRelevance = null;
 
     public NamePersist() {
         super();
@@ -504,5 +505,13 @@ public class NamePersist extends PersistentObject implements CoordinatesProvider
     @Override
     public int compareTo(NamePersist other) {
         return getName().compareTo(other.getName());
+    }
+
+    public Integer getMatchRelevance() {
+        return matchRelevance;
+    }
+
+    public void setMatchRelevance(Integer matchRelevance) {
+        this.matchRelevance = matchRelevance;
     }
 }

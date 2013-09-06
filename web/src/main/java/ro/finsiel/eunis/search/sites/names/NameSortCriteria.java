@@ -48,6 +48,11 @@ public class NameSortCriteria extends AbstractSortCriteria {
      * Sort by year.
      */
     public static final Integer SORT_YEAR = new Integer(8);
+    
+    /**
+     * Sort by relevance
+     */
+    public static final Integer SORT_RELEVANCE = new Integer(9);
 
     /**
      * Ctor.
@@ -80,5 +85,6 @@ public class NameSortCriteria extends AbstractSortCriteria {
                 + "IF(A.source_db='NATURA2000',right(designation_date,4),''),"
                 + "IF(A.source_db='CORINE',right(designation_date,4),''),"
                 + "IF(A.source_db='NATURENET',right(designation_date,4),'')" + ") AS SIGNED)");
+        possibleSorts.put(SORT_RELEVANCE, "MATCH_RELEVANCE, A.NAME");
     }
 }

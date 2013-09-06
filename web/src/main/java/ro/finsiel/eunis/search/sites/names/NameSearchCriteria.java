@@ -291,4 +291,5 @@ public class NameSearchCriteria extends SitesSearchCriteria {
     public String getEnglishName() {
         return englishName;
     }
+    
 }

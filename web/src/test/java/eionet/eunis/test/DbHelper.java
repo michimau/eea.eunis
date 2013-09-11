@@ -59,9 +59,18 @@ public class DbHelper {
         }
     }
 
-    private static IDatabaseConnection getConnection() throws ClassNotFoundException, SQLException, DatabaseUnitException {
+    protected static IDatabaseConnection getConnection() throws ClassNotFoundException, SQLException, DatabaseUnitException {
+        return getConnection(false);
+    }
+    
+    protected static IDatabaseConnection getConnection(boolean liveBase) throws ClassNotFoundException, SQLException, DatabaseUnitException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection jdbcConnection = DriverManager.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+        Connection jdbcConnection = null; 
+        if (liveBase){
+            jdbcConnection = DriverManager.getConnection(getJdbcUrlLive(), getJdbcUserLive(), getJdbcPasswordLive());
+        } else {
+            jdbcConnection = DriverManager.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+        }
         IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
         DatabaseConfig config = connection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
@@ -107,6 +116,23 @@ public class DbHelper {
     public static String getJdbcDriver() {
         return getAppProperty("db.unitest.drv");
     }
+    
+    public static String getJdbcUserLive() {
+        return getAppProperty("mysql.user");
+    }
+
+    public static String getJdbcPasswordLive() {
+        return getAppProperty("mysql.password");
+    }
+
+    public static String getJdbcUrlLive() {
+        return getAppProperty("mysql.url");
+    }
+
+    public static String getJdbcDriverLive() {
+        return getAppProperty("mysql.driver");
+    }
+    
 
     private static void validateTestDbConnection() {
         if (!getJdbcUrl().toLowerCase().contains("test")) {
@@ -119,53 +145,5 @@ public class DbHelper {
         builder.setColumnSensing(true);
         return builder.build(DbHelper.class.getClassLoader().getResourceAsStream(fileName));
     }
-
-    /**
-     * exctract data from DB and create xml files.
-     *
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-        IDatabaseConnection dbConnection = null;
-        // database connection
-        try {
-            dbConnection = getConnection();
-            // partial database export
-            QueryDataSet partialDataSet = new QueryDataSet(dbConnection);
-            partialDataSet.addTable("dc_index");
-            partialDataSet.addTable("chm62edt_country");
-            partialDataSet.addTable("chm62edt_species",
-            "select * from  chm62edt_species where scientific_name IN ('Salmo trutta', 'Cerchysiella laeviscuta');");
-            partialDataSet
-            .addTable(
-                    "chm62edt_nature_object",
-                    "select * from chm62edt_nature_object where id_nature_object in "
-                    + "(select id_nature_object from chm62edt_species where scientific_name  IN ('Salmo trutta', 'Cerchysiella laeviscuta'))");
-            partialDataSet
-            .addTable(
-                    "chm62edt_nature_object_attributes",
-                    "select * from chm62edt_nature_object_attributes where id_nature_object in "
-                    + "(select id_nature_object from chm62edt_species where scientific_name  IN ('Salmo trutta', 'Cerchysiella laeviscuta'))");
-
-            FlatXmlDataSet.write(partialDataSet, new FileOutputStream("seed-redlist-species.xml"));
-
-            // full database export
-            /*
-             * IDataSet fullDataSet = connection.createDataSet(); FlatXmlDataSet.write(fullDataSet, new
-             * FileOutputStream("c:/Projects/EEA/EUNIS2/full.xml"));
-             */
-
-            // dependent tables database export: export table X and all tables that
-            // have a PK which is a FK on X, in the right order for insertion
-            /*
-             * String[] depTableNames = TablesDependencyHelper.getAllDependentTables( connection, "X" ); IDataSet depDataset =
-             * connection.createDataSet( depTableNames ); FlatXmlDataSet.write(depDataset, new FileOutputStream("dependents.xml"));
-             */
-        } finally {
-            dbConnection.close();
-        }
-
-    }
-
+    
 }

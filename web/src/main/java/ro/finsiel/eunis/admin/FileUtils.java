@@ -75,5 +75,16 @@ public class FileUtils {
         }
         return ret;
     }
+    
+    /**
+     * Check if the file exists
+     * 
+     * @param filename
+     * @return boolean value representing the existance of file
+     */
+    public static boolean exists(String filename){
+        File file = new File(filename);
+        return file.exists();
+    }
 
 }

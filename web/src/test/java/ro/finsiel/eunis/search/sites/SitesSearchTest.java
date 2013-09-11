@@ -171,11 +171,11 @@ public class SitesSearchTest {
     private String replaceNationalLetters(String source) {
         String result = source;
 
-        result = result.replace("õ", "o");
-        result = result.replace("ä", "a");
-        result = result.replace("ö", "o");
-        result = result.replace("ü", "u");
-        result = result.replace("å", "a");
+        result = result.replace("Ãµ", "o");
+        result = result.replace("Ã¤", "a");
+        result = result.replace("Ã¶", "o");
+        result = result.replace("Ã¼", "u");
+        result = result.replace("Ã¥", "a");
 
         return result;
     }

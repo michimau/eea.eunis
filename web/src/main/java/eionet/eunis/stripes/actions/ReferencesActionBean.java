@@ -22,6 +22,8 @@ import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.DcIndexDTO;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.ReferenceDTO;
+import eionet.eunis.dto.ReferenceSpeciesDTO;
+import eionet.eunis.dto.ReferenceSpeciesGroupDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
 import eionet.eunis.util.Pair;
@@ -48,7 +50,9 @@ public class ReferencesActionBean extends AbstractStripesAction {
     /** tabs to display */
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
-    List<PairDTO> species = new ArrayList<PairDTO>();
+    List<ReferenceSpeciesGroupDTO> speciesGrouped = new ArrayList<ReferenceSpeciesGroupDTO>();
+    List<ReferenceSpeciesDTO> speciesByName = new ArrayList<ReferenceSpeciesDTO>();
+    
     List<PairDTO> habitats = new ArrayList<PairDTO>();
 
     private int page = 1;
@@ -57,6 +61,9 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     /** References tab filter input and it's default phrase. */
     private String filterPhrase = DEFAULT_FILTER_VALUE;
+    
+    /** The value is assigned from the sorting selector form */
+    private int listing = 1;
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
@@ -72,6 +79,8 @@ public class ReferencesActionBean extends AbstractStripesAction {
         IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
 
         String defaultPageSize = getContext().getApplicationProperty("default.page.size");
+        
+        System.out.println("Listing: "+listing);
 
         if (!StringUtils.isBlank(idref) && EunisUtil.isNumber(idref)) {
             forwardPage = "/stripes/reference.jsp";
@@ -88,10 +97,18 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 return new ErrorResolution(404);
             }
             try {
-                species = ReferencesDomain.getSpeciesForAReference(idref,
-                        getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                        getContext().getJdbcUser(),
-                        getContext().getJdbcPassword());
+                if (listing == 1){
+                    speciesGrouped = ReferencesDomain.getSpeciesForAReferenceByGroup(idref,
+                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
+                            getContext().getJdbcUser(),
+                            getContext().getJdbcPassword());
+                }
+                if (listing == 2){
+                    speciesByName = ReferencesDomain.getSpeciesForAReference(idref,
+                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
+                            getContext().getJdbcUser(),
+                            getContext().getJdbcPassword());    
+                }
 
                 habitats = ReferencesDomain.getHabitatsForAReferences(idref,
                         getContext().getJdbcDriver(), getContext().getJdbcUrl(),
@@ -102,7 +119,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 e.printStackTrace();
             }
             tabsWithData.add(new Pair<String, String>("general", getContentManagement().cmsPhrase("General information")));
-            if (species != null && species.size() > 0) {
+            if ((speciesGrouped != null && speciesGrouped.size() > 0) || (speciesByName != null && speciesByName.size() > 0)) {
                 tabsWithData.add(new Pair<String, String>("species", getContentManagement().cmsPhrase("Species")));
             }
             if (habitats != null && habitats.size() > 0) {
@@ -163,12 +180,12 @@ public class ReferencesActionBean extends AbstractStripesAction {
         this.tabsWithData = tabsWithData;
     }
 
-    public List<PairDTO> getSpecies() {
-        return species;
+    public List<ReferenceSpeciesGroupDTO> getSpeciesGrouped() {
+        return speciesGrouped;
     }
 
-    public void setSpecies(List<PairDTO> species) {
-        this.species = species;
+    public void setSpeciesGrouped(List<ReferenceSpeciesGroupDTO> speciesGrouped) {
+        this.speciesGrouped = speciesGrouped;
     }
 
     public List<PairDTO> getHabitats() {
@@ -217,6 +234,22 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     public String getDefaultFilterValue() {
         return DEFAULT_FILTER_VALUE;
+    }
+
+    public int getListing() {
+        return listing;
+    }
+
+    public void setListing(int listing) {
+        this.listing = listing;
+    }
+
+    public List<ReferenceSpeciesDTO> getSpeciesByName() {
+        return speciesByName;
+    }
+
+    public void setSpeciesByName(List<ReferenceSpeciesDTO> speciesByName) {
+        this.speciesByName = speciesByName;
     }
 
 }

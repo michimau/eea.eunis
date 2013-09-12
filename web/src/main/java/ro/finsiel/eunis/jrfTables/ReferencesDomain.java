@@ -20,6 +20,8 @@ import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.ReferencesWrapper;
 import eionet.eunis.dto.PairDTO;
+import eionet.eunis.dto.ReferenceSpeciesDTO;
+import eionet.eunis.dto.ReferenceSpeciesGroupDTO;
 
 
 /**
@@ -185,11 +187,39 @@ public class ReferencesDomain implements Paginable {
         }
         return results;
     }
+    
+    public static List<ReferenceSpeciesGroupDTO> getSpeciesForAReferenceByGroup(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD)
+            throws CriteriaMissingException {
+        
+        List<ReferenceSpeciesGroupDTO> grouped = new ArrayList<ReferenceSpeciesGroupDTO>();
+        List<ReferenceSpeciesDTO> ungrouped = getSpeciesForAReference(idDc, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        
+        int currentGroupId = 0;
+        // splitting ungrouped data into groups.
+        ReferenceSpeciesGroupDTO activeGroup = null;
+        
+        for (ReferenceSpeciesDTO referenceSpeciesDTO : ungrouped){
+            if (referenceSpeciesDTO.getGroupSpeciesId() != currentGroupId){
+                currentGroupId = referenceSpeciesDTO.getGroupSpeciesId();
+                activeGroup = new ReferenceSpeciesGroupDTO();
+                activeGroup.setGroupSpeciesId(referenceSpeciesDTO.getGroupSpeciesId());
+                activeGroup.setGroupCommonName(referenceSpeciesDTO.getGroupCommonName());
+                activeGroup.setGroupScientificName(referenceSpeciesDTO.getGroupScientificName());
+                activeGroup.setReferenceSpecies(new ArrayList<ReferenceSpeciesDTO>());
+                grouped.add(activeGroup);
+            }
+            
+            activeGroup.getReferenceSpecies().add(referenceSpeciesDTO);
+        }
+        
+        return grouped;
+        
+    }
 
-    public static List<PairDTO>
+    public static List<ReferenceSpeciesDTO>
             getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD)
                     throws CriteriaMissingException {
-        List<PairDTO> results = new ArrayList<PairDTO>();
+        List<ReferenceSpeciesDTO> results = new ArrayList<ReferenceSpeciesDTO>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -202,16 +232,17 @@ public class ReferencesDomain implements Paginable {
 
             // SQL = "(SELECT DISTINCT H.SCIENTIFIC_NAME  " +
             SQL =
-                    "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR   "
+                    "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME   "
                             + "FROM CHM62EDT_SPECIES H "
                             + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
                             + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
                             + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                            + "INNER JOIN CHM62EDT_GROUP_SPECIES CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
                             + "WHERE 1=1 "
                             + condition
                             + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
                             " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                            + " GROUP BY H.SCIENTIFIC_NAME " + " ORDER BY SCIENTIFIC_NAME";
+                            + " GROUP BY H.SCIENTIFIC_NAME " + " ORDER BY CS.ID_GROUP_SPECIES, H.SCIENTIFIC_NAME";
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery(SQL);
@@ -223,17 +254,19 @@ public class ReferencesDomain implements Paginable {
                     String speciesId = rs.getString(1);
                     String speciesName = rs.getString(2);
                     String speciesAuthor = rs.getString(3);
+                    String groupId = rs.getString(4);
+                    String groupCommonName = rs.getString(5);
+                    String groupScientificName = rs.getString(6);
 
-                    String pairKey = speciesId;
-                    StringBuilder pairValue = new StringBuilder(speciesName);
-                    if (StringUtils.isNotBlank(speciesAuthor)) {
-                        pairValue.append(COMMA_AND_SPACE).append(speciesAuthor);
-                    }
-
-                    PairDTO pair = new PairDTO();
-                    pair.setKey(pairKey);
-                    pair.setValue(pairValue.toString());
-                    results.add(pair);
+                    ReferenceSpeciesDTO specie = new ReferenceSpeciesDTO();
+                    specie.setId(speciesId);
+                    specie.setName(speciesName);
+                    specie.setAuthor(speciesAuthor);
+                    specie.setGroupSpeciesId(Integer.parseInt(groupId));
+                    specie.setGroupCommonName(groupCommonName);
+                    specie.setGroupScientificName(groupScientificName);
+                    
+                    results.add(specie);
                 }
             }
 

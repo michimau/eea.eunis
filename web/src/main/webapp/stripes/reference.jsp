@@ -111,23 +111,48 @@
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'species'}">
 	            	<h2>List of species scientific names related to this reference:</h2>
-					<ol>
-	            	<c:forEach items="${actionBean.species}" var="spe" varStatus="loop">
-	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
-                            <a href="species/${spe.key}">${spe.value}</a>
-                        </li>
-	            	</c:forEach>
-					</ol>
+	            	
+	            	<form name="eunis" method="post" action="">
+	            	<b>Species are listed: </b> 
+	            	<input type="radio" name="listing" value="1" ${actionBean.listing eq 1 ? "checked " : "" }>by species group
+	            	<input type="radio" name="listing" value="2" ${actionBean.listing eq 2 ? "checked " : "" }>ascending by name
+	            	<input type="submit" name="listingform" value="Update">
+	            	</form>
+	            	
+	            	<c:if test="${actionBean.listing eq 1 }">
+		            	<c:forEach items="${actionBean.speciesGrouped}" var="speciesgroup" varStatus="outerloop">
+		            		<h3>${speciesgroup.groupCommonName} - ${speciesgroup.groupScientificName}</h3>
+							<ol>
+			            	<c:forEach items="${speciesgroup.referenceSpecies}" var="spe" varStatus="loop">
+			            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+		                            <a href="species/${spe.id}">${spe.name}<c:if test="${not empty spe.author}">, ${spe.author}</c:if></a>
+		                        </li>
+			            	</c:forEach>
+							</ol>
+						</c:forEach>
+					</c:if>
+
+					<c:if test="${actionBean.listing eq 2 }">
+						<ol>
+						<c:forEach items="${actionBean.speciesByName}" var="spe" varStatus="loop">
+		            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+	                            <a href="species/${spe.id}">${spe.name}<c:if test="${not empty spe.author}">, ${spe.author}</c:if></a>
+	                        </li>
+		            	</c:forEach>
+                        </ol>
+					</c:if>					
+					
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'habitats'}">
 	            	<h2>List of habitats related to this reference:</h2>
 					<ol>
-	            	<c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
-	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
-                            <a href="habitats/${habitat.key}">${habitat.value}</a>
-                        </li>
-	            	</c:forEach>
+		            	<c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
+			            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+		                            <a href="habitats/${habitat.key}">${habitat.value}</a>
+		                        </li>
+		            	</c:forEach>
 	            	</ol>
+	            	
 	            </c:if>
 
 		<!-- END MAIN CONTENT -->

@@ -28,7 +28,7 @@
                                     </stripes:link>
                                 </dt>
                                 <dd>
-                                    <c:out value="${query.summary}"/>
+                                    ${query.summary}
                                 </dd>
                             </c:forEach>
                         </dl>
@@ -57,6 +57,7 @@
                         <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
 							<div style="overflow-x:auto ">
 							    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="100" sort="list" requestURI="${actionBean.urlBinding}">
+							    <display:setProperty name="paging.banner.placement" value="both" />
 							        <c:forEach var="cl" items="${actionBean.queryResultCols}">
 							            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
 							              </c:forEach>

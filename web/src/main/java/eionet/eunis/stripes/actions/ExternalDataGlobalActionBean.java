@@ -87,7 +87,6 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                     queryResultCols = linkedDataHelper.getCols();
                     queryResultRows = linkedDataHelper.getRows();
                     attribution = linkedDataHelper.getAttribution();
-                    showMessage("Query \"" + query + "\" successfully executed, see results below.");
                 } catch (Exception e) {
                     String msg = "The execution of query \"" + query + "\" failed with technical error: ";
                     showWarning(msg + e.getMessage());

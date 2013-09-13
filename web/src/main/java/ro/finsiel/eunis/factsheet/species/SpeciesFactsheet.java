@@ -663,6 +663,34 @@ public class SpeciesFactsheet {
         }
         return result;
     }
+    
+    /**
+     * List of SpeciesNatureObjectPersist's. 
+     *
+     * @return A list of SpeciesNatureObjectPersist with all parent species of this species.
+     */
+    public List getParentSpecies(){
+        List result = new Vector();
+        String sql;
+
+        sql = " (ID_SPECIES = '" + getSpeciesNatureObject().getIdSpeciesLink() + "'";
+        sql += " AND TYPE_RELATED_SPECIES LIKE 'Species' AND ID_SPECIES <> ID_SPECIES_LINK)";
+        sql +=
+                " OR (TYPE_RELATED_SPECIES = 'Species' AND '"
+                        + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + "' LIKE CONCAT(SCIENTIFIC_NAME, '%')"
+                        + " AND '" + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + "' NOT LIKE SCIENTIFIC_NAME "
+                        + " )";
+        try {
+            // System.out.println("sql = " + sql);
+            result = new SpeciesNatureObjectDomain().findWhere(sql);
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        if (null == result) {
+            return result;
+        }
+        return result;
+    }
 
     /**
      * Threat status at european level.

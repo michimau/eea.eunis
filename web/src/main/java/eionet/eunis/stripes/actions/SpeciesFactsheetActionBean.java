@@ -139,6 +139,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private ArrayList<LinkDTO> links;
     private List<NationalThreatWrapper> consStatus;
     private List<SpeciesNatureObjectPersist> subSpecies;
+    private List<SpeciesNatureObjectPersist> parentSpecies;
     private String domainName;
     private Hashtable<String, AttributeDto> natObjectAttributes;
 
@@ -411,6 +412,22 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     newList.add(species);
                 }
                 subSpecies = newList;
+            }
+            
+            parentSpecies = factsheet.getParentSpecies();
+            if (!parentSpecies.isEmpty()) {
+                List<SpeciesNatureObjectPersist> newList = new ArrayList<SpeciesNatureObjectPersist>();
+
+                for (int i = 0; i < parentSpecies.size(); i++) {
+                    SpeciesNatureObjectPersist species = parentSpecies.get(i);
+                    String bad = SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore());
+
+                    if (bad != null) {
+                        species.setBookAuthorDate(bad);
+                    }
+                    newList.add(species);
+                }
+                parentSpecies = newList;
             }
 
         } catch (Exception ex) {
@@ -1180,5 +1197,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
         }
         return natureObjectAttributesMap;
+    }
+
+    public List<SpeciesNatureObjectPersist> getParentSpecies() {
+        return parentSpecies;
+    }
+
+    public void setParentSpecies(List<SpeciesNatureObjectPersist> parentSpecies) {
+        this.parentSpecies = parentSpecies;
     }
 }

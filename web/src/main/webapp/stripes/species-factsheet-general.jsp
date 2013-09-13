@@ -358,5 +358,41 @@
     		</tbody>
   		</table>
   	</c:if>
+  	
+  	<c:if test="${!empty actionBean.parentSpecies}">
+  		<h2 style="clear: both">
+    		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid parent species in Europe')}
+  		</h2>
+  		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of parent species')}" class="listing fullwidth">
+    		<col style="width:40%"/>
+    		<col style="width:60%"/>
+    		<thead>
+      			<tr>
+        			<th>
+          				${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')}
+	          			${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+        			</th>
+        			<th>
+        				${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}
+	          			${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+        			</th>
+      			</tr>
+    		</thead>
+    		<tbody>
+	    		<c:forEach items="${actionBean.parentSpecies}" var="parentspecie" varStatus="loop">
+	    			<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+	    				<td>
+	        				<a style="font-style : italic;" href="species/${parentspecie.idSpecies}">${eunis:treatURLSpecialCharacters(parentspecie.scientificName)}</a>
+          					${eunis:treatURLSpecialCharacters(parentspecie.author)}
+	      				</td>
+	      				<td>
+	          				${eunis:treatURLSpecialCharacters(parentspecie.bookAuthorDate)}
+	      				</td>
+	    			</tr>
+	    		</c:forEach>
+    		</tbody>
+  		</table>
+  	</c:if>
+  	
   	<br />
 </stripes:layout-definition>

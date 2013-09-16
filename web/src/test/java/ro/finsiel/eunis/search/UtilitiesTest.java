@@ -1,9 +1,18 @@
 package ro.finsiel.eunis.search;
 
 import static junit.framework.Assert.assertEquals;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import eionet.eunis.test.DbHelper;
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
 public class UtilitiesTest {
+
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        DbHelper.handleSetUpOperation("seed-four-species.xml");
+    }
 
     /**
      * To <em>not</em> encode the ampersand in the value is probably not a good idea.
@@ -72,6 +81,7 @@ public class UtilitiesTest {
         int result = Utilities.checkedStringToInt("3456", 123);
         assertEquals(3456, result);
     }
+
     @Test
     public void testHighlightTerm() {
         String test = "my test for replacement. replaces patterns within text";
@@ -79,4 +89,19 @@ public class UtilitiesTest {
         String expected = "my test for <strong>replace</strong>ment. <strong>replace</strong>s patterns within text";
         assertEquals(expected, test);
     }
+
+    @Test
+    public void getReferencesByIdDc() {
+        SQLUtilities sqlUtils = DbHelper.getSqlUtilities();
+        // The created date isn't set in the seed. We set it manually.
+        //sqlUtils.UpdateSQL("UPDATE DC_INDEX SET CREATED='2004' WHERE ID_DC = 2414");
+
+        // Create a reference that has a source. The seed in setUpBeforeClass is not used.
+        sqlUtils.UpdateSQL("INSERT INTO DC_INDEX (ID_DC, TITLE, SOURCE, CREATED) VALUES (2500, 'atitle','source','2004')");
+
+        String result = Utilities.getReferencesByIdDc("2500");
+        String expected = "&lt;ul&gt;&lt;li&gt;Author : source&lt;/li&gt; &lt;li&gt;Title : atitle&lt;/li&gt; &lt;li&gt;Editor : &lt;/li&gt; &lt;li&gt;Publisher : &lt;/li&gt; &lt;li&gt;Date : 2004&lt;/li&gt; &lt;li&gt;Url : &lt;/li&gt;&lt;/ul&gt;";
+        assertEquals(expected, result);
+    }
+
 }

@@ -1,6 +1,9 @@
 package ro.finsiel.eunis.search;
 
 import static junit.framework.Assert.assertEquals;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -88,6 +91,32 @@ public class UtilitiesTest {
         test = Utilities.highlightTerm(test, "replace");
         String expected = "my test for <strong>replace</strong>ment. <strong>replace</strong>s patterns within text";
         assertEquals(expected, test);
+    }
+
+    @Test
+    public void formatReferencesDate() {
+        String result;
+        Calendar cal = new GregorianCalendar(2001, 7, 20);
+        Date date = cal.getTime();
+        result = Utilities.formatReferencesDate(date);
+        assertEquals("2001", result);
+    }
+
+    @Test
+    public void formatReferencesYear() {
+        String result;
+        result = Utilities.formatReferencesYear("2001");
+        assertEquals("2001", result);
+
+        result = Utilities.formatReferencesYear("2001-12-31");
+        assertEquals("2001", result);
+
+        result = Utilities.formatReferencesYear("2001-Dec-31");
+        assertEquals("2001", result);
+
+        // Why is there an exception for "0001"?
+        result = Utilities.formatReferencesYear("0001");
+        assertEquals("", result);
     }
 
     @Test

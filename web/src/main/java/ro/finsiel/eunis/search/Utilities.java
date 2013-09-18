@@ -1978,7 +1978,7 @@ public final class Utilities {
             String date = "";
 
             if (((ReferencesJoinPersist) references.get(0)).getCreated() != null) {
-                date = new SimpleDateFormat("yyyy").format(new Date(((ReferencesJoinPersist) references.get(0)).getCreated().getTime())).toString();
+                date = ((ReferencesJoinPersist) references.get(0)).getCreated();
             }
             result += " <li>Date : " + date;
             result += "</li>";

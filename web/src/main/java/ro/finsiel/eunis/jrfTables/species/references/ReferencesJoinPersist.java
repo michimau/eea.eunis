@@ -15,7 +15,7 @@ public class ReferencesJoinPersist extends PersistentObject {
 
     private String Source = null;
     private String Editor = null;
-    private Date created = null;
+    private String created = null;
     private String Title = null;
     private String Publisher = null;
     private String url = null;
@@ -107,12 +107,15 @@ public class ReferencesJoinPersist extends PersistentObject {
         return url;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date ts) {
-        created = ts;
+    public void setCreated(String created) {
+        if(created != null && created.length() > 4) {
+            created = created.substring(0, 4);
+        }
+        this.created = created;
     }
 
     public void setUrl(String ts) {

@@ -41,7 +41,7 @@ public class ReferencesJoinDomain extends AbstractDomain {
         this.addColumnSpec(new StringColumnSpec("SOURCE", "getSource", "setSource", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("EDITOR", "getEditor", "setEditor", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("URL", "getUrl", "setUrl", DEFAULT_TO_NULL));
-        this.addColumnSpec(new DateColumnSpec("CREATED", new NullableColumnOption(), "getCreated", "setCreated", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("CREATED", "getCreated", "setCreated", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("TITLE", "getTitle", "setTitle", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher", DEFAULT_TO_NULL));
 

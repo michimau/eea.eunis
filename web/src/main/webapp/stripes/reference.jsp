@@ -98,10 +98,15 @@
 									<th scope="row">${attr.label}</th>
 									<c:choose>
 				              			<c:when test="${attr.type == 'reference'}">
-					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.value)}</a></td>
+					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.objectLabel)}</a></td>
 				              			</c:when>
+				              			
+				              			<c:when test="${attr.type == 'localref'}">
+					              			<td><a href="references/${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.objectLabel)}</a></td>
+				              			</c:when>
+				              			
 				              			<c:otherwise>
-				              				<td>${eunis:replaceTags(attr.value)}</td>
+				              				<td>${eunis:replaceTags(attr.objectLabel)}</td>
 				              			</c:otherwise>
 				              		</c:choose>
 								</tr>

@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.displaytag.properties.SortOrderEnum;
@@ -163,9 +165,17 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         try {
             con = getConnection();
             preparedStatement =
-                    con.prepareStatement("SELECT a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE from dc_attributes AS a LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME WHERE ID_DC = ?");
+                    con.prepareStatement(
+                            "SELECT " +
+                            "a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE " +
+                            "from dc_attributes AS a " +
+                            "LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME " +
+                            "WHERE ID_DC = ?");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
+            
+            //List<String> localReferenceIds = new ArrayList<String>();
+            
             while (rs.next()) {
                 String name = rs.getString("NAME");
                 String object = rs.getString("OBJECT");
@@ -178,6 +188,50 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 AttributeDto attr = new AttributeDto(name, type, object, lang, label);
                 ret.add(attr);
             }
+            
+            // Retrieving reference labels for objects of type "localref"
+            preparedStatement =
+                    con.prepareStatement(
+                            "SELECT ID_DC, TITLE FROM DC_INDEX WHERE ID_DC IN (" +
+                            "SELECT OBJECT FROM dc_attributes WHERE type LIKE 'localref' AND ID_DC = ?)");
+            preparedStatement.setString(1, idDc);
+            rs = preparedStatement.executeQuery();
+            
+            Map<String, String> localrefTitles = new HashMap<String, String>();
+            
+            while (rs.next()) {
+                String id = rs.getString("ID_DC");
+                String title = rs.getString("TITLE");
+                localrefTitles.put(id, title);
+            }
+            
+            // Connecting labels to localref attributes.
+            for(int i=0; i < ret.size(); i++){
+                if (ret.get(i).getType().equals("localref")){
+                    ret.get(i).setObjectLabel(localrefTitles.get(ret.get(i).getValue()));
+                    
+                    if (ret.get(i).getObjectLabel() == null){
+                        ret.get(i).setObjectLabel("references/"+ret.get(i).getValue());
+                    }
+                } else {
+                    String objectLabel = ret.get(i).getValue();
+                    
+                    if (objectLabel!= null && objectLabel.length() > 0){
+                        if (objectLabel.split("#").length > 1){
+                            String[] splitted = objectLabel.split("#"); 
+                            ret.get(i).setObjectLabel(splitted[splitted.length - 1]);
+                        } else if (objectLabel.split("/").length > 1){
+                            String[] splitted = objectLabel.split("/"); 
+                            ret.get(i).setObjectLabel(splitted[splitted.length - 1]);
+                        } else {
+                            ret.get(i).setObjectLabel(objectLabel);
+                        }
+                    }
+                }
+                
+                
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

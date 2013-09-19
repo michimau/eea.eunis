@@ -1908,4 +1908,12 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
             columnNames="ID_OBJECT, NATURE_OBJECT_TYPE, FILE_NAME"
         />
     </changeSet>
+    
+    <changeSet author="kaptejaa" id="rev-125">
+    	<comment>Add 'localref' value to dc_attributes type enum.</comment>
+		<sql>
+		ALTER TABLE `dc_attributes` CHANGE COLUMN `TYPE` `TYPE` ENUM('reference','','string','integer','decimal','boolean','dateTime','date', 'localref')
+		</sql>
+	</changeSet>
+    
 </databaseChangeLog>

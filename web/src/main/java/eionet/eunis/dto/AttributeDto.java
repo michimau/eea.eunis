@@ -23,6 +23,7 @@ public class AttributeDto implements Serializable {
     private String lang;
     private String type;
     private String label;
+    private String objectLabel;
 
     public AttributeDto() {// blank
     }
@@ -32,6 +33,7 @@ public class AttributeDto implements Serializable {
         this.type = type;
         this.value = value;
         this.label = label;
+        this.objectLabel = label;
     }
 
     public AttributeDto(String name, String type, String value, String lang, String label) {
@@ -40,6 +42,7 @@ public class AttributeDto implements Serializable {
         this.value = value;
         this.lang = lang;
         this.label = label;
+        this.objectLabel = label;
     }
 
     public String getName() {
@@ -80,6 +83,14 @@ public class AttributeDto implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getObjectLabel() {
+        return objectLabel;
+    }
+
+    public void setObjectLabel(String objectLabel) {
+        this.objectLabel = objectLabel;
     }
 
 

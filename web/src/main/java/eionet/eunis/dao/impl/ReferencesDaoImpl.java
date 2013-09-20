@@ -190,10 +190,10 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
             
             // Retrieving reference labels for objects of type "localref"
-            preparedStatement =
-                    con.prepareStatement(
-                            "SELECT ID_DC, TITLE FROM DC_INDEX WHERE ID_DC IN (" +
-                            "SELECT OBJECT FROM dc_attributes WHERE type LIKE 'localref' AND ID_DC = ?)");
+            preparedStatement = con.prepareStatement(
+                    "SELECT OBJECT AS ID_DC, COALESCE(TITLE, OBJECT) AS TITLE FROM DC_ATTRIBUTES"
+                    + " LEFT JOIN DC_INDEX ON DC_INDEX.ID_DC=DC_ATTRIBUTES.OBJECT"
+                    + " WHERE TYPE='localref' AND DC_ATTRIBUTES.ID_DC = ? ORDER BY TITLE");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             
@@ -206,21 +206,21 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
             
             // Connecting labels to localref attributes.
-            for(int i=0; i < ret.size(); i++){
-                if (ret.get(i).getType().equals("localref")){
+            for(int i = 0; i < ret.size(); i++) {
+                if (ret.get(i).getType().equals("localref")) {
                     ret.get(i).setObjectLabel(localrefTitles.get(ret.get(i).getValue()));
                     
-                    if (ret.get(i).getObjectLabel() == null){
+                    if (ret.get(i).getObjectLabel() == null) {
                         ret.get(i).setObjectLabel("references/"+ret.get(i).getValue());
                     }
                 } else {
                     String objectLabel = ret.get(i).getValue();
                     
-                    if (objectLabel!= null && objectLabel.length() > 0){
-                        if (objectLabel.split("#").length > 1){
+                    if (objectLabel != null && objectLabel.length() > 0) {
+                        if (objectLabel.split("#").length > 1) {
                             String[] splitted = objectLabel.split("#"); 
                             ret.get(i).setObjectLabel(splitted[splitted.length - 1]);
-                        } else if (objectLabel.split("/").length > 1){
+                        } else if (objectLabel.split("/").length > 1) {
                             String[] splitted = objectLabel.split("/"); 
                             ret.get(i).setObjectLabel(splitted[splitted.length - 1]);
                         } else {

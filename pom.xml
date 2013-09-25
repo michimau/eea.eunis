@@ -254,16 +254,6 @@
             <version>1.6.4</version>
         </dependency>
         <dependency>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-            <version>ver.unknown</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-impl</artifactId>
-            <version>ver.unknown</version>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.4</version>
@@ -272,11 +262,6 @@
         <dependency>
             <groupId>smtp</groupId>
             <artifactId>smtp</artifactId>
-            <version>ver.unknown</version>
-        </dependency>
-        <dependency>
-            <groupId>soap</groupId>
-            <artifactId>soap</artifactId>
             <version>ver.unknown</version>
         </dependency>
         <dependency>

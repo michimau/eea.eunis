@@ -326,7 +326,7 @@
   	</c:if>
   	<c:if test="${!empty actionBean.subSpecies}">
   		<h2 style="clear: both">
-    		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid subspecies in Europe')}
+    		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid subspecies')}
   		</h2>
   		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of subspecies')}" class="listing fullwidth">
     		<col style="width:40%"/>
@@ -361,7 +361,7 @@
   	
   	<c:if test="${!empty actionBean.parentSpecies}">
   		<h2 style="clear: both">
-    		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid parent species in Europe')}
+    		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid parent species')}
   		</h2>
   		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of parent species')}" class="listing fullwidth">
     		<col style="width:40%"/>

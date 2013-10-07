@@ -55,8 +55,7 @@
 							title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
 						<h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.factsheet.siteObject.name)}</h1>
 						<div class="documentActions">
-							<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
-							${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
+							<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
 							<ul>
 								<li>
 									<a href="javascript:this.print();">

@@ -44,9 +44,10 @@ public class JstlFunctions {
     }
 
     /**
+     * Get the text for a token in the content table.
      *
-     * @param cms
-     * @param key
+     * @param cms - The class for web content
+     * @param key - The token to look up
      * @return String
      */
     public static String cms(WebContentManagement cms, String key) {
@@ -57,8 +58,24 @@ public class JstlFunctions {
     }
 
     /**
-     * @param cms
-     * @param key
+     * Get the text for a token in the content table. Tokens can't contain apostrophes
+     * Not to be used inside HTML attribute values. If we're in edit mode, then show an edit-icon.
+     *
+     * @param cms - The class for web content
+     * @param key - The token to look up
+     * @return String
+     */
+    public static String cmsText(WebContentManagement cms, String key) {
+        if (key == null) {
+            throw new NullPointerException("key cannot be null");
+        }
+        return cms != null ? cms.cms(key) : key;
+    }
+
+
+    /**
+     * @param cms - The class for web content
+     * @param key - The token to look up
      * @return String
      */
     public static String cmsTitle(WebContentManagement cms, String key) {
@@ -69,8 +86,8 @@ public class JstlFunctions {
     }
 
     /**
-     * @param cms
-     * @param key
+     * @param cms - The class for web content
+     * @param key - The token to look up
      * @return String
      */
     public static String cmsInput(WebContentManagement cms, String key) {
@@ -93,9 +110,16 @@ public class JstlFunctions {
     }
 
     /**
-     * @param cms
-     * @param key
-     * @return String
+     * Look up a short phrase (potentially HTML) in the content table.
+     *
+     * The cmsPhrase() is used for short strings - typically one liners. The argument is the phrase.
+     * When the argument is looked up in the database, it is MD5 encoded first. This ensures that the
+     * key kan fit in the ID_PAGE column in wiki:eunis_web_content.  In order to save resource we
+     * bypass the database lookup when the language is English.
+     *
+     * @param cms - The class for web content
+     * @param key - phrase to look up.
+     * @return String - phrase to display on webpage.
      */
     public static String cmsPhrase(WebContentManagement cms, String key) {
         if (key == null) {
@@ -105,8 +129,8 @@ public class JstlFunctions {
     }
 
     /**
-     * @param cms
-     * @param key
+     * @param cms - The class for web content
+     * @param key - The token to look up
      * @return String
      */
     public static String cmsMsg(WebContentManagement cms, String key) {
@@ -117,8 +141,8 @@ public class JstlFunctions {
     }
 
     /**
-     * @param cms
-     * @param key
+     * @param cms - The class for web content
+     * @param key - The token to look up
      * @return String
      */
     public static String cmsAlt(WebContentManagement cms, String key) {

@@ -5,14 +5,15 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">n2000habitats n2000birds n2000other
-   estatcodes euringcodes habides
-   art17delv2012s annex2 annex4 annex5 gisd
+  <entry key="queries">art17delv2012s euringcodes estatcodes annex2 annex4 annex5 gisd n2000birds n2000other n2000habitats habides
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
   <entry key="n2000habitats.title">Natura 2000 codelist of Annex I habitats (SDF field: 3.1)</entry>
   <entry key="n2000habitats.summary"><![CDATA[Codelist for habitat types under Directive 2009/147/EC.
+These are the codes used in the Natura 2000 standard data form (SDF) and in the Article 17 reporting.
+Please note there is a table in the <a href="http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal">Natura 2000 reference portal</a>
+that includes the Annex I habitat types codes and the names in several languages.
 ]]></entry>
   <entry key="n2000habitats.column.CODE_2000">N2000 Code</entry>
   <entry key="n2000habitats.link.CODE_2000">FACTSHEET</entry>
@@ -30,8 +31,10 @@ WHERE CODE_2000 IS NOT NULL ORDER BY CODE_2000
 <!-- -->
   <entry key="n2000birds.querytype">SQL</entry>
   <entry key="n2000birds.title">Natura 2000 codelist for bird species (SDF fields 3.2, 3.3)</entry>
-  <entry key="n2000birds.summary"><![CDATA[Codelist for bird species under Directive 2009/147/EC.
-In connection with the work on the checklist for reporting under Article 12 of the Birds Directive, the coding for Bird species has been extended. The Habitats Committee has been informed on the extended list (Meeting 25. Sept. 2011). This extended codelist is also available as reference table in the Natura 2000 database.
+  <entry key="n2000birds.summary"><![CDATA[Code list for bird species under Directive 2009/147/EC (codified version of Directive 79/409/EEC).
+These are the codes used in the Natura 2000 standard data form (SDF) and in the Article 12 reporting.
+Please note there is a table in the <a href="http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal">Natura 2000 reference portal</a>
+that includes the code lists for birds and e.g. more information about presence/absence in the annexes.
 ]]></entry>
 
 <!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
@@ -60,7 +63,9 @@ WHERE ID_GROUP_SPECIES=5 ORDER BY a.OBJECT
 <!-- -->
   <entry key="n2000other.querytype">SQL</entry>
   <entry key="n2000other.title">Natura 2000 codelist for species (Annex II,IV,V) (SDF fields 3.2, 3.3)</entry>
-  <entry key="n2000other.summary"><![CDATA[In connection with the work on the checklist for reporting under Article 17 Habitats Directive, the coding for species has been extended. The Habitats Committee has been informed on the extended list (Meeting 26. April 2012). This codelist is also available as reference table in the Natura 2000 database.
+  <entry key="n2000other.summary"><![CDATA[
+Code list for species under Directive 92/42/EEC. These are the codes used in the Natura 2000 standard data form (SDF) and in the Article 17 reporting. Please note there is a table in the <a href="http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal">Natura 2000 reference portal</a>
+that includes the code lists for species and e.g. more information about alternative names and presence/absence in the annexes.
 ]]></entry>
 
   <entry key="n2000other.column.N2000CODE">N2000 Code</entry>
@@ -132,10 +137,10 @@ WHERE {
 ]]></entry>
 
   <entry key="euringcodes.querytype">SQL</entry>
-  <entry key="euringcodes.title">EURING species that are known in EUNIS</entry>
+  <entry key="euringcodes.title">EURING bird species list (subset) with EUNIS species match</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="euringcodes.summary"><![CDATA[This is a list of EURING codes
-for the species that are known in EUNIS - <em>It is not a complete EURING list.</em>
+for the bird species that are known in EUNIS - <em>It is not the complete EURING list.</em>
 To get the EURING code list visit <a href="http://blx1.bto.org/euringcodes/species.jsp">http://blx1.bto.org/euringcodes/species.jsp</a> or
 <a href="http://www.euring.org/">the Euring home page</a>.
 ]]></entry>
@@ -151,8 +156,11 @@ ORDER BY OBJECT
 
   <entry key="habides.querytype">SPARQL</entry>
   <entry key="habides.endpoint">http://cr.eionet.europa.eu/sparql</entry>
-  <entry key="habides.title">Species with Habitats or Birds directive derogations</entry>
-  <entry key="habides.summary"><![CDATA[Any species mentioned on a derogation form]]></entry>
+  <entry key="habides.title">Species object of derogations under the Birds and the Habitats Directives</entry>
+  <entry key="habides.summary"><![CDATA[Species object of derogations under the Birds Directive Article 9 and the Habitats Directive Article 16.
+The Member States mentioned are only those which used the electronic reporting of derogations (HABIDES).
+Derogations may have been granted by other Member States.
+]]></entry>
   <entry key="habides.link.species">speciesurl</entry>
   <entry key="habides.query"><![CDATA[
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
@@ -177,7 +185,7 @@ ORDER BY ?species
 
   <entry key="art17delv2012s.querytype">SPARQL</entry>
   <entry key="art17delv2012s.endpoint">http://cr.eionet.europa.eu/sparql</entry>
-  <entry key="art17delv2012s.title">Species with 2013 deliveries on Habitats directive Art. 17</entry>
+  <entry key="art17delv2012s.title">Conservation status reports (2007-2012) of species and habitat types (Habitats Directive, Article 17)</entry>
   <entry key="art17delv2012s.summary"><![CDATA[Assessments on the conservation status of the habitat types 
    and species of Community interest have been carried out in EU 27 for the period 2007-2012, 
    compiled as part of the Habitats Directive - Article 17 reporting process. 

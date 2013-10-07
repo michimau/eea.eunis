@@ -32,6 +32,16 @@
 	</function>
 
 	<function>
+		<description>Wrapper to call WebContentManagement.cmsText</description>
+		<name>cmsText</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsText(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsText(actionBean.webContent, key)}
+		</example>
+	</function>
+
+	<function>
 		<description>Wrapper to call WebContentManagement.cmsTitle</description>
 		<name>cmsTitle</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>

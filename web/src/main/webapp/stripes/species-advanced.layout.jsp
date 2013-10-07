@@ -95,8 +95,7 @@
 
 		<h1>${eunis:cmsPhrase(actionBean.contentManagement, 'Species advanced search')}</h1>
 		<div class="documentActions">
-			<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
-			${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
+			<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
 			<ul>
 				<li>
 					<a href="javascript:this.print();">

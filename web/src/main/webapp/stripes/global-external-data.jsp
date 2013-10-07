@@ -13,9 +13,7 @@
             <c:choose>
                 <c:when test="${!actionBean.querySelected}">
                     <p>
-                        This page contains reports that query foreign systems for structured data that <em>links</em> to the species, sites and other entities in EUNIS.<br/>
-                        It is possible that there might be no relevant data in the foreign systems at a particular moment. In that case the submitted query shows nothing.<br/>
-                        More queries will be added to this page as more relevant data at foreign sites becomes available. 
+                        ${eunis:cmsText(actionBean.contentManagement, 'globalqueries')}
                     </p>
                     <h3>Select a query:</h3>
                     <c:if test="${not empty actionBean.queries}">

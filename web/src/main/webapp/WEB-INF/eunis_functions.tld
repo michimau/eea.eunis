@@ -113,6 +113,19 @@
 
 	<function>
 		<description>
+			Replace [ with &lt;i&gt; and ] with &lt;/i&gt;. Used for habitat names
+                        and descriptions, where there is a convention to display species names in italics.
+	 	</description>
+		<name>bracketsToItalics</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String bracketsToItalics(java.lang.String)</function-signature>
+		<example>
+			${bracketsToItalics("text")}
+		</example>
+	</function>
+
+	<function>
+		<description>
 			Encodes the string
 	 	</description>
 		<name>replaceTags</name>

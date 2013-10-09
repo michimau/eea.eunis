@@ -11,9 +11,10 @@ import eionet.eunis.dto.TaxonomyTreeDTO;
 public class EunisUtil {
 
     /**
-     * @param in
-     * @param inTextarea
-     * @return
+     * Encode a string for XML or HTML.
+     *
+     * @param in - input string
+     * @return encoded string.
      */
     public static String replaceTagsExport(String in) {
 
@@ -82,6 +83,12 @@ public class EunisUtil {
         return in.trim();
     }
 
+    /**
+     * Replace { with [ and } with ]. It is actually replacing braces with brackets.
+     *
+     * @param in - input string
+     * @returns - string with replacements.
+     */
     public static String replaceBrackets(String in) {
 
         in = (in != null ? in : "");
@@ -241,7 +248,7 @@ public class EunisUtil {
 
     /**
      * Finds all urls in a given string and replaces them with HTML anchors. If boolean newWindow==true then target will be a new
-     * window, else no. If boolean cutLink>0 then cut the displayed link lenght cutLink.
+     * window, else no. If boolean cutLink &gt; 0 then cut the displayed link length cutLink.
      */
     public static String setAnchors(String s, boolean newWindow, int cutLink) {
 
@@ -308,6 +315,14 @@ public class EunisUtil {
         return true;
     }
 
+    /**
+     * Cut a string to given length and add three dots. If length is negative,
+     * then return the full string. If string is already shorter, then don't cut.
+     *
+     * @param s - string to cut
+     * @param len - location to cut in
+     * @return new string
+     */
     public static String threeDots(String s, int len) {
 
         if (len <= 0) {

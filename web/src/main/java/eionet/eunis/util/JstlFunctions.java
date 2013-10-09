@@ -161,6 +161,21 @@ public class JstlFunctions {
     }
 
     /**
+     * Replace [ with &lt;i&gt; and ] with &lt;/i&gt;. Used for habitat names
+     * and descriptions, where there is a convention to display species names
+     * in italics.
+     *
+     * @param inStr - input string
+     * @returns - string with replacements.
+     */
+    public static String bracketsToItalics(String inStr) {
+        if (inStr.contains("[") || inStr.contains("]")) {
+            inStr = inStr.replaceAll("\\[","<i>").replaceAll("]","</i>");
+        }
+        return inStr;
+    }
+
+    /**
      *
      * @param in
      * @return String

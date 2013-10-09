@@ -177,7 +177,7 @@
     				${eunis:cmsPhrase(actionBean.contentManagement, 'Description')} ( ${desc.language} )
   				</h2>
   				<p>
-    				${eunis:treatURLSpecialCharacters(desc.description)}
+    				${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(desc.description))}
   				</p>
   				<c:if test="${!empty desc.ownerText && !fn:toLowerCase(desc.ownerText) == 'n/a'}">
   					<h3>

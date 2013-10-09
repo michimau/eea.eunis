@@ -117,7 +117,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
                 // Author
                 aRow.addElement(Utilities.formatString(book.getName()));
                 // Date
-                aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
+                aRow.addElement(Utilities.formatString(book.getDate()));
                 // Title
                 aRow.addElement(Utilities.formatString(book.getTitle()));
                 // Editor
@@ -150,7 +150,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
             // Author
             aRow.addElement(Utilities.formatString(book.getName()));
             // Date
-            aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
+            aRow.addElement(Utilities.formatString(book.getDate()));
             // Title
             aRow.addElement(Utilities.formatString(book.getTitle()));
             // Editor
@@ -166,7 +166,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
           // Author
           aRow.addElement(Utilities.formatString(book.getName()));
           // Date
-          aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
+          aRow.addElement(Utilities.formatString(book.getDate()));
           // Title
           aRow.addElement(Utilities.formatString(book.getTitle()));
           // Editor

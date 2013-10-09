@@ -92,9 +92,9 @@ public class SortListOfPersistentObject {
 
                 if (byWhat.equalsIgnoreCase("date")) {
                     Integer int1 = new Integer(
-                            ((SpeciesBooksPersist) element1).getDate().getYear());
+                            ((SpeciesBooksPersist) element1).getDate());
                     Integer int2 = new Integer(
-                            ((SpeciesBooksPersist) element2).getDate().getYear());
+                            ((SpeciesBooksPersist) element2).getDate());
 
                     res = int1.compareTo(int2);
                 }

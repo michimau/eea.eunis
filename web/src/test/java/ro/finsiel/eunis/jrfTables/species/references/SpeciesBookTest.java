@@ -37,7 +37,8 @@ public class SpeciesBookTest {
         SpeciesBooksDomain instance = new SpeciesBooksDomain(searchCriteria, true);
         assertNotNull("Instantiation failed", instance);
         Long result = instance.countResults();
-        assertEquals(Long.valueOf(2), result);
+        // results are grouped by DC_INDEX.* and both species in seed-four-species.xml are linked to the same DC_INDEX
+        assertEquals(Long.valueOf(1), result);
     }
 
 }

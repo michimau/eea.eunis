@@ -44,7 +44,7 @@
         			</td>
         			<td>
           				<strong>
-          					${eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription)}
+          					${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription))}
           				</strong>
         			</td>
         			<%-- Link to key navigation, taxonomic tree and diagram --%>

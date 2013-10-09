@@ -454,11 +454,6 @@
 
     <servlet-mapping>
         <servlet-name>StatisticalResultRedirectServlet</servlet-name>
-        <url-pattern>/sites-statistical-result.jsp</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>StatisticalResultRedirectServlet</servlet-name>
         <url-pattern>/species-country-result.jsp</url-pattern>
     </servlet-mapping>
 

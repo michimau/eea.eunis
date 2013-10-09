@@ -59,7 +59,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new IntegerColumnSpec("ID_LINK", "getIdLink", "setIdLink", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("NAME", "getName", "setName", DEFAULT_TO_EMPTY_STRING));
         this.addColumnSpec(new StringColumnSpec("EDITOR", "getEditor", "setEditor", DEFAULT_TO_EMPTY_STRING));
-        this.addColumnSpec(new DateColumnSpec("DATE", new NullableColumnOption(), "getDate", "setDate", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("DATE", "getDate", "setDate", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("TITLE", "getTitle", "setTitle", DEFAULT_TO_EMPTY_STRING));
         this.addColumnSpec(new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher", DEFAULT_TO_EMPTY_STRING));
         this.addColumnSpec(new StringColumnSpec("URL", "getUrl", "setUrl", DEFAULT_TO_EMPTY_STRING));

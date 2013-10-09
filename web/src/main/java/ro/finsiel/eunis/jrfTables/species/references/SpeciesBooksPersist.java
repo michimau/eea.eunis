@@ -9,7 +9,7 @@ public class SpeciesBooksPersist extends PersistentObject {
     private Integer idLink = null;
     private String name = null;
     private String editor = null;
-    private java.util.Date date = null;
+    private String date = null;
     private String title = null;
     private String publisher = null;
     private String url = null;
@@ -42,11 +42,11 @@ public class SpeciesBooksPersist extends PersistentObject {
         this.editor = editor;
     }
 
-    public java.util.Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(java.util.Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -47,6 +47,9 @@ public class SpeciesBooksPersist extends PersistentObject {
     }
 
     public void setDate(String date) {
+        if(date != null && date.length() > 4) {
+            this.date = date.substring(0, 4);
+        }
         this.date = date;
     }
 

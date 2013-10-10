@@ -326,7 +326,7 @@
                         <a target="_blank" href="references/<%=dc_id%>"><%=Utilities.treatURLSpecialCharacters(author)%></a>
                       </td>
                       <td>
-                        <%=Utilities.formatString(Utilities.formatReferencesDate(book.getDate()), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.formatString(book.getDate()), "&nbsp;")%>
                       </td>
                       <td>
                         <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getTitle()), "&nbsp;")%>

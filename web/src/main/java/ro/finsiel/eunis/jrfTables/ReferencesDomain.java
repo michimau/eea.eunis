@@ -315,6 +315,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
 
     @Override
     protected void setup() {
+        // This is just a silly implementation to make JRF happy, since the entire results are handled directly 
         this.setTableName("DC_INDEX");
         this.setReadOnly(true);
         this.addColumnSpec(new IntegerColumnSpec("ID", "getId", "setId", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
@@ -322,7 +323,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
 
     @Override
     public PersistentObject newPersistentObject() {
-        // TODO Auto-generated method stub
+        // this is not actually used, see ReferencesWrapper instead 
         return null;
     }
 

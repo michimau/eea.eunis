@@ -26,7 +26,11 @@ public class ReferencesWrapper {
      */
     public ReferencesWrapper(String Author, String Year, String Title, String Editor, String Publisher, String URL, String IdDc) {
         this.Author = Author;
-        this.Year = Year;
+        if ( Year != null && Year.length() > 4 ) {
+            this.Year = Year.substring(0, 4);
+        } else {
+            this.Year = Year;
+        }
         this.Editor = Editor;
         this.Publisher = Publisher;
         this.Editor = Editor;

@@ -7,14 +7,14 @@ package ro.finsiel.eunis.jrfTables.species.speciesByReferences;
  */
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
+import net.sf.jrf.domain.AbstractDomain;
+import net.sf.jrf.domain.PersistentObject;
+import net.sf.jrf.sql.JRFResultSet;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -26,7 +26,7 @@ import ro.finsiel.eunis.search.species.speciesByReferences.ReferencesSortCriteri
 import ro.finsiel.eunis.search.species.speciesByReferences.SpeciesRefWrapper;
 
 
-public class RefDomain implements Paginable {
+public class RefDomain extends AbstractDomain implements Paginable {
 
     /** Criterias applied for searching */
     private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
@@ -37,20 +37,26 @@ public class RefDomain implements Paginable {
     /** Cache the results of a count to avoid overhead queries for counting */
     private Long _resultCount = new Long(-1);
     private boolean showInvalidatedSpecies = false;
-    String SQL_DRV = "";
-    String SQL_URL = "";
-    String SQL_USR = "";
-    String SQL_PWD = "";
     Vector ListOfIdSpecies = new Vector();
 
-    public RefDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean showInvalidatedSpecies, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public RefDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean showInvalidatedSpecies) {
         this.searchCriteria = searchCriteria;
-        this.showInvalidatedSpecies = showInvalidatedSpecies;
         this.sortCriteria = sortCriteria;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_PWD = SQL_PWD;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
+        this.showInvalidatedSpecies = showInvalidatedSpecies;
+    }
+    
+	@Override
+    public PersistentObject newPersistentObject() {
+	    // this is not actually used, see SpeciesRefWrapper instead 
+        return new ro.finsiel.eunis.jrfTables.species.speciesByReferences.RefPersist();
+    }    
+
+	@Override
+    public void setup() {
+        // This is just a silly implementation to make JRF happy, since the entire results are handled directly 
+        this.setTableName("DUMMY");
+        this.setReadOnly(true);
+        this.addColumnSpec(new IntegerColumnSpec("ID_SPECIES", "getIdSpecies", "setIdSpecies", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
     }
 
     /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
@@ -81,181 +87,121 @@ public class RefDomain implements Paginable {
             sortOrderAndLimit.append(" LIMIT " + offsetStart + ", " + pageSize);
         }
 
-        Vector results = new Vector();
-
-        try {
-            results = getResultsByIdSpecies(filterSQL, sortOrderAndLimit,
-                    ListOfIdSpecies);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        List tempList = results;
+        List tempList = getResultsByIdSpecies(filterSQL, sortOrderAndLimit, ListOfIdSpecies);
 
         _resultCount = new Long(-1); // After each query, reset the _resultCount, so countResults do correct numbering.
         return tempList;
     }
 
     private Vector getIdSpeciesList(StringBuffer SQLfilter) {
-        Vector results = new Vector();
+        final Vector results = new Vector();
         String SQL = "";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
 
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL = "SELECT DISTINCT H.ID_SPECIES "
-                + "FROM DC_INDEX A "
-                + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
-                + "WHERE 1=1 " + condition + " UNION "
-                + "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
-                + "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
-                + "WHERE 1=1 " + condition
-                + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                + "UNION "
-                + "SELECT DISTINCT H.ID_SPECIES "
-                + "FROM DC_INDEX A "
-                + "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
-                + "WHERE  1=1 " + condition;
-            // System.out.println("id list="+SQL);
-            ps = con.prepareStatement(SQL);
-            rs = ps.executeQuery(SQL);
-
-            if (rs.isBeforeFirst()) {
-
-                while (!rs.isLast()) {
-                    rs.next();
-                    results.addElement(new Integer(rs.getInt(1)));
-                }
+        SQL = "SELECT DISTINCT H.ID_SPECIES "
+            + "FROM DC_INDEX A "
+            + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+            + "WHERE 1=1 " + condition + " UNION "
+            + "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
+            + "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+            + "WHERE 1=1 " + condition
+            + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+            + "UNION "
+            + "SELECT DISTINCT H.ID_SPECIES "
+            + "FROM DC_INDEX A "
+            + "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
+            + "WHERE  1=1 " + condition;
+        this.executeSQLQuery(SQL, new RowHandler() {
+            public void handleRow(JRFResultSet rs) throws Exception {
+                results.addElement(new Integer(rs.getint(1)));
             }
+        });
 
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return results;
     }
 
     private Vector getResultsByIdSpecies(StringBuffer SQLfilter, StringBuffer sortOrderAndLimit, Vector idSpeciesList) {
-        Vector results = new Vector();
+        final Vector results = new Vector();
         String SQL = "";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
 
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
         String conditionIn = "";
 
-        try {
-            if (idSpeciesList.size() > 0) {
-                conditionIn += " AND H.ID_SPECIES IN (";
-                for (int i = 0; i < idSpeciesList.size(); i++) {
-                    if (i < idSpeciesList.size() - 1) {
-                        conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                        + ",";
-                    } else {
-                        conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                        + ")";
-                    }
+        if (idSpeciesList.size() > 0) {
+            conditionIn += " AND H.ID_SPECIES IN (";
+            for (int i = 0; i < idSpeciesList.size(); i++) {
+                if (i < idSpeciesList.size() - 1) {
+                    conditionIn += ((Integer) idSpeciesList.get(i)).toString()
+                    + ",";
+                } else {
+                    conditionIn += ((Integer) idSpeciesList.get(i)).toString()
+                    + ")";
                 }
-
-                Class.forName(SQL_DRV);
-                con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-                SQL = "SELECT H.ID_SPECIES,H.ID_SPECIES_LINK,H.ID_NATURE_OBJECT,H.SCIENTIFIC_NAME,A.COMMON_NAME,B.NAME,B.LEVEL,B.TAXONOMY_TREE "
-                    + "FROM CHM62EDT_SPECIES H "
-                    + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-                    + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
-                    + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
-                    "WHERE 1=1 " + conditionIn + condition
-                    + sortOrderAndLimit;
-
-                ps = con.prepareStatement(SQL);
-                rs = ps.executeQuery(SQL);
-                if (rs.isBeforeFirst()) {
-                    while (!rs.isLast()) {
-                        rs.next();
-
-                        results.addElement(
-                                new SpeciesRefWrapper(new Integer(rs.getInt(1)),
-                                        new Integer(rs.getInt(2)),
-                                        new Integer(rs.getInt(3)), rs.getString(4),
-                                        rs.getString(5),
-                                        getTaxonomicName(rs.getString(7),
-                                                rs.getString(6), rs.getString(8), "order_column"),
-                                                getTaxonomicName(rs.getString(7),
-                                                        rs.getString(6), rs.getString(8), "family")));
-                    }
-                }
-                ps.close();
-                con.close();
-            } else {
-                results = new Vector();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            SQL = "SELECT H.ID_SPECIES,H.ID_SPECIES_LINK,H.ID_NATURE_OBJECT,H.SCIENTIFIC_NAME,A.COMMON_NAME,B.NAME,B.LEVEL,B.TAXONOMY_TREE "
+                + "FROM CHM62EDT_SPECIES H "
+                + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+                + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+                + "WHERE 1=1 " + conditionIn + condition + sortOrderAndLimit;
+            this.executeSQLQuery(SQL, new RowHandler() {
+                public void handleRow(JRFResultSet rs) throws Exception {
+                    results.addElement(
+                            new SpeciesRefWrapper(new Integer(rs.getint(1)),
+                                    new Integer(rs.getint(2)),
+                                    new Integer(rs.getint(3)), 
+                                    rs.getString(4),
+                                    rs.getString(5),
+                                    getTaxonomicName(rs.getString(7), rs.getString(6), rs.getString(8), "order_column"),
+                                    getTaxonomicName(rs.getString(7), rs.getString(6), rs.getString(8), "family")
+                                    )
+                            );
+                }
+            });
         }
         return results;
     }
 
     private Long getCountResultsByIdSpecies(StringBuffer SQLfilter, Vector idSpeciesList) {
-        Long results = new Long(-1);
-        String SQL = "";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        Long results = new Long(0);
+        // workaround to get the count from the inner RowHandler
+        final List<Long> resultsList = new java.util.ArrayList<Long>();
 
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
         String conditionIn = "";
 
-        try {
-            if (idSpeciesList.size() > 0) {
-                conditionIn += " AND H.ID_SPECIES IN (";
-                for (int i = 0; i < idSpeciesList.size(); i++) {
-                    if (i < idSpeciesList.size() - 1) {
-                        conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                        + ",";
-                    } else {
-                        conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                        + ")";
-                    }
+        if (idSpeciesList.size() > 0) {
+            conditionIn += " AND H.ID_SPECIES IN (";
+            for (int i = 0; i < idSpeciesList.size(); i++) {
+                if (i < idSpeciesList.size() - 1) {
+                    conditionIn += ((Integer) idSpeciesList.get(i)).toString()
+                    + ",";
+                } else {
+                    conditionIn += ((Integer) idSpeciesList.get(i)).toString()
+                    + ")";
                 }
-
-                Class.forName(SQL_DRV);
-                con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-
-                SQL = "SELECT count(ID_SPECIES) " + "FROM CHM62EDT_SPECIES H "
-                + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-                + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
-                + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
-                "WHERE 1=1 " + conditionIn + condition;
-                // System.out.println("sql1="+SQL);
-                ps = con.prepareStatement(SQL);
-                rs = ps.executeQuery(SQL);
-                if (rs.isBeforeFirst()) {
-                    while (!rs.isLast()) {
-                        rs.next();
-                        results = new Long(rs.getInt(1));
-                    }
-                }
-
-                ps.close();
-                con.close();
-            } else {
-                results = new Long(0);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+
+            String SQL = "SELECT count(ID_SPECIES) " + "FROM CHM62EDT_SPECIES H "
+            + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+            + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+            + "WHERE 1=1 " + conditionIn + condition;
+            this.executeSQLQuery(SQL, new RowHandler() {
+                public void handleRow(JRFResultSet rs) throws Exception {
+                    resultsList.add(new Long(rs.getint(1)));
+                }
+            });
+            if ( resultsList.size() > 0 ) {
+                results = resultsList.get(resultsList.size()-1);
+            }
         }
         return results;
     }
@@ -378,6 +324,9 @@ public class RefDomain implements Paginable {
         if (level != null && level.equalsIgnoreCase(what)) {
             return taxonomyName;
         } else {
+            if ( taxonomyTree == null ) {
+                return null;
+            }
             String result = "";
             String str = taxonomyTree;
 
@@ -399,5 +348,4 @@ public class RefDomain implements Paginable {
             return result;
         }
     }
-
 }

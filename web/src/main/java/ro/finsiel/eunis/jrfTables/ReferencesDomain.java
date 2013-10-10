@@ -1,15 +1,14 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.lang.StringUtils;
+import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
+import net.sf.jrf.domain.AbstractDomain;
+import net.sf.jrf.domain.PersistentObject;
+import net.sf.jrf.sql.JRFResultSet;
 
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
@@ -27,10 +26,7 @@ import eionet.eunis.dto.ReferenceSpeciesGroupDTO;
 /**
  * @author finsiel
  **/
-public class ReferencesDomain implements Paginable {
-
-    /** Just to avoid constant re-creation of comma-and-space delimiter in below code. */
-    private static final String COMMA_AND_SPACE = ", ";
+public class ReferencesDomain extends AbstractDomain implements Paginable {
 
     /** Criterias applied for searching */
     private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
@@ -40,19 +36,12 @@ public class ReferencesDomain implements Paginable {
 
     /** Cache the results of a count to avoid overhead queries for counting */
     private Long _resultCount = new Long(-1);
-    String SQL_DRV = "";
-    String SQL_URL = "";
-    String SQL_USR = "";
-    String SQL_PWD = "";
+
     Vector ListOfReferences = new Vector();
 
-    public ReferencesDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public ReferencesDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria) {
         this.searchCriteria = searchCriteria;
         this.sortCriteria = sortCriteria;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_PWD = SQL_PWD;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
     }
 
     /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
@@ -99,100 +88,62 @@ public class ReferencesDomain implements Paginable {
     }
 
     private Vector getReferencesList(StringBuffer SQLfilter, String sortOrderAndLimit) {
-        Vector results = new Vector();
-        String SQL = "";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        final Vector results = new Vector();
 
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL += " SELECT DISTINCT `DC_INDEX`.`SOURCE`,";
-            SQL += " `DC_INDEX`.`CREATED`,";
-            SQL += " `DC_INDEX`.`TITLE`,";
-            SQL += " `DC_INDEX`.`EDITOR`,";
-            SQL += " `DC_INDEX`.`PUBLISHER`,";
-            SQL += " `DC_INDEX`.`URL`, DC_INDEX.ID_DC ";
-            SQL += "  FROM  `DC_INDEX`";
-            // !!added to get only references with species and habitats
-            SQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
-            SQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
-            SQL += condition;
-            SQL += sortOrderAndLimit;
+        String SQL = " SELECT DISTINCT `DC_INDEX`.`SOURCE`,";
+        SQL += " `DC_INDEX`.`CREATED`,";
+        SQL += " `DC_INDEX`.`TITLE`,";
+        SQL += " `DC_INDEX`.`EDITOR`,";
+        SQL += " `DC_INDEX`.`PUBLISHER`,";
+        SQL += " `DC_INDEX`.`URL`, DC_INDEX.ID_DC ";
+        SQL += "  FROM  `DC_INDEX`";
+        // !!added to get only references with species and habitats
+        SQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
+        SQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
+        SQL += condition;
+        SQL += sortOrderAndLimit;
 
-            // System.out.println("SQL=" + SQL);
+        this.executeSQLQuery(SQL, new RowHandler() {
+            public void handleRow(JRFResultSet rs) throws Exception {
+                ReferencesWrapper rw = new ReferencesWrapper(rs.getString(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6), rs.getString(7));
 
-            ps = con.prepareStatement(SQL);
-            rs = ps.executeQuery(SQL);
-
-            if (rs.isBeforeFirst()) {
-                while (!rs.isLast()) {
-                    rs.next();
-                    ReferencesWrapper rw = new ReferencesWrapper(rs.getString(1),
-                            rs.getString(2), rs.getString(3), rs.getString(4),
-                            rs.getString(5), rs.getString(6), rs.getString(7));
-
-                    results.addElement(rw);
-                }
+                results.addElement(rw);
             }
-
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
         return results;
     }
 
-    public static List<PairDTO> getHabitatsForAReferences(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
-        List<PairDTO> results = new ArrayList<PairDTO>();
-        String SQL = "";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+    public List<PairDTO> getHabitatsForAReferences(String idDc) {
+        final List<PairDTO> results = new ArrayList<PairDTO>();
+        String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            // SQL += " SELECT DISTINCT H.SCIENTIFIC_NAME  ";
-            String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
+        String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME  ";
+        SQL += " FROM  DC_INDEX A ";
+        SQL += " INNER JOIN CHM62EDT_HABITAT_REFERENCES B ON (A.ID_DC = B.ID_DC) ";
+        SQL += " INNER JOIN CHM62EDT_HABITAT H ON (B.ID_HABITAT = H.ID_HABITAT) ";
+        SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = " + idDc;
 
-            SQL += " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME  ";
-            SQL += " FROM  DC_INDEX A ";
-            SQL += " INNER JOIN CHM62EDT_HABITAT_REFERENCES B ON (A.ID_DC = B.ID_DC) ";
-            SQL += " INNER JOIN CHM62EDT_HABITAT H ON (B.ID_HABITAT = H.ID_HABITAT) ";
-            SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = " + idDc;
+        this.executeSQLQuery(SQL, new RowHandler() {
+            public void handleRow(JRFResultSet rs) throws Exception {
+                PairDTO dto = new PairDTO();
 
-            ps = con.prepareStatement(SQL);
-            rs = ps.executeQuery(SQL);
-
-            if (rs.isBeforeFirst()) {
-                while (!rs.isLast()) {
-                    rs.next();
-                    PairDTO dto = new PairDTO();
-
-                    dto.setKey(rs.getString(1));
-                    dto.setValue(rs.getString(2));
-                    results.add(dto);
-                }
+                dto.setKey(rs.getString(1));
+                dto.setValue(rs.getString(2));
+                results.add(dto);
             }
-
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
         return results;
     }
     
-    public static List<ReferenceSpeciesGroupDTO> getSpeciesForAReferenceByGroup(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD)
+    public List<ReferenceSpeciesGroupDTO> getSpeciesForAReferenceByGroup(String idDc)
             throws CriteriaMissingException {
         
         List<ReferenceSpeciesGroupDTO> grouped = new ArrayList<ReferenceSpeciesGroupDTO>();
-        List<ReferenceSpeciesDTO> ungrouped = getSpeciesForAReference(idDc, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        List<ReferenceSpeciesDTO> ungrouped = getSpeciesForAReference(idDc);
         
         int currentGroupId = 0;
         // splitting ungrouped data into groups.
@@ -216,66 +167,44 @@ public class ReferencesDomain implements Paginable {
         
     }
 
-    public static List<ReferenceSpeciesDTO>
-            getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD)
+    public List<ReferenceSpeciesDTO> getSpeciesForAReference(String idDc)
                     throws CriteriaMissingException {
-        List<ReferenceSpeciesDTO> results = new ArrayList<ReferenceSpeciesDTO>();
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        final List<ReferenceSpeciesDTO> results = new ArrayList<ReferenceSpeciesDTO>();
         String SQL = "";
         String condition = " AND A.ID_DC = " + idDc;
 
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+        SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME   "
+                        + "FROM CHM62EDT_SPECIES H "
+                        + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                        + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                        + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                        + "INNER JOIN CHM62EDT_GROUP_SPECIES CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
+                        + "WHERE 1=1 "
+                        + condition
+                        + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
+                        " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+                        + " GROUP BY H.SCIENTIFIC_NAME " + " ORDER BY CS.ID_GROUP_SPECIES, H.SCIENTIFIC_NAME";
 
-            // SQL = "(SELECT DISTINCT H.SCIENTIFIC_NAME  " +
-            SQL =
-                    "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME   "
-                            + "FROM CHM62EDT_SPECIES H "
-                            + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                            + "INNER JOIN CHM62EDT_GROUP_SPECIES CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
-                            + "WHERE 1=1 "
-                            + condition
-                            + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
-                            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                            + " GROUP BY H.SCIENTIFIC_NAME " + " ORDER BY CS.ID_GROUP_SPECIES, H.SCIENTIFIC_NAME";
+        this.executeSQLQuery(SQL, new RowHandler() {
+            public void handleRow(JRFResultSet rs) throws Exception {
+                String speciesId = rs.getString(1);
+                String speciesName = rs.getString(2);
+                String speciesAuthor = rs.getString(3);
+                String groupId = rs.getString(4);
+                String groupCommonName = rs.getString(5);
+                String groupScientificName = rs.getString(6);
 
-            ps = con.prepareStatement(SQL);
-            rs = ps.executeQuery(SQL);
-
-            if (rs.isBeforeFirst()) {
-                while (!rs.isLast()) {
-
-                    rs.next();
-                    String speciesId = rs.getString(1);
-                    String speciesName = rs.getString(2);
-                    String speciesAuthor = rs.getString(3);
-                    String groupId = rs.getString(4);
-                    String groupCommonName = rs.getString(5);
-                    String groupScientificName = rs.getString(6);
-
-                    ReferenceSpeciesDTO specie = new ReferenceSpeciesDTO();
-                    specie.setId(speciesId);
-                    specie.setName(speciesName);
-                    specie.setAuthor(speciesAuthor);
-                    specie.setGroupSpeciesId(Integer.parseInt(groupId));
-                    specie.setGroupCommonName(groupCommonName);
-                    specie.setGroupScientificName(groupScientificName);
-                    
-                    results.add(specie);
-                }
+                ReferenceSpeciesDTO specie = new ReferenceSpeciesDTO();
+                specie.setId(speciesId);
+                specie.setName(speciesName);
+                specie.setAuthor(speciesAuthor);
+                specie.setGroupSpeciesId(Integer.parseInt(groupId));
+                specie.setGroupCommonName(groupCommonName);
+                specie.setGroupScientificName(groupScientificName);
+                
+                results.add(specie);
             }
-
-            ps.close();
-            con.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
         return results;
     }
 
@@ -382,6 +311,19 @@ public class ReferencesDomain implements Paginable {
         } finally {
             return filterSQL;
         }
+    }
+
+    @Override
+    protected void setup() {
+        this.setTableName("DC_INDEX");
+        this.setReadOnly(true);
+        this.addColumnSpec(new IntegerColumnSpec("ID", "getId", "setId", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
+    }
+
+    @Override
+    public PersistentObject newPersistentObject() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

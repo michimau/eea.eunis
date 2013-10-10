@@ -25,18 +25,12 @@
   <body>
     <img alt="In progress" src="../../images/progress/top.jpg" width="400" height="178" />
 <%
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
   try
   {
     AbstractTSVReport report = new TSVSpeciesReferencesReport(
         request.getSession().getId(),
         formBean,
-        SessionManager.getShowEUNISInvalidatedSpecies(),
-        SQL_DRV, SQL_URL, SQL_USR, SQL_PWD
-        );
+        SessionManager.getShowEUNISInvalidatedSpecies());
     int resultsCount = report.countResults();
     int maxReportResults = Utilities.checkedStringToInt( application.getInitParameter( "TSV_REPORT_RESULTS_LIMIT_WARNING" ), 4000 );
     boolean skip_check = Utilities.checkedStringToBoolean( request.getParameter( "skip_check" ), false );

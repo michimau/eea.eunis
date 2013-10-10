@@ -17,7 +17,7 @@ public class SpeciesRefJRFClassesTest {
         AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
 
-        RefDomain instance = new RefDomain(searchCriteria, sortCriteria, true, "SQL_DRV", "", "", "");
+        RefDomain instance = new RefDomain(searchCriteria, sortCriteria, true);
         assertNotNull("Instantiation failed", instance);
     }
 

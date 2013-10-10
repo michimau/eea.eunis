@@ -37,19 +37,14 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * @param SQL_USR SQL Driver user
    * @param SQL_PWD SQL Driver password
    */
-  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies,
-                                     String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies) {
     super("species-references_" + sessionID + ".tsv");
     this.formBean = (ReferencesBean) formBean;
     this.filename = "species-references_" + sessionID + ".tsv";
     xmlreport = new XMLReport("species-references_" + sessionID + ".xml");
     this.dataFactory = new ReferencesPaginator(new RefDomain(formBean.toSearchCriteria(),
                                                                           formBean.toSortCriteria(),
-                                                                          showEUNISInvalidatedSpecies,
-                                                                          SQL_DRV,
-                                                                          SQL_URL,
-                                                                          SQL_USR,
-                                                                          SQL_PWD));
+                                                                          showEUNISInvalidatedSpecies));
     dataFactory.setSortCriteria(formBean.toSortCriteria());
   }
 

@@ -15,6 +15,8 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IReferencesDao;
@@ -97,23 +99,15 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 return new ErrorResolution(404);
             }
             try {
+                ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
                 if (listing == 1){
-                    speciesGrouped = ReferencesDomain.getSpeciesForAReferenceByGroup(idref,
-                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                            getContext().getJdbcUser(),
-                            getContext().getJdbcPassword());
+                    speciesGrouped = refDomain.getSpeciesForAReferenceByGroup(idref);
                 }
                 if (listing == 2){
-                    speciesByName = ReferencesDomain.getSpeciesForAReference(idref,
-                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                            getContext().getJdbcUser(),
-                            getContext().getJdbcPassword());    
+                    speciesByName = refDomain.getSpeciesForAReference(idref);    
                 }
 
-                habitats = ReferencesDomain.getHabitatsForAReferences(idref,
-                        getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                        getContext().getJdbcUser(),
-                        getContext().getJdbcPassword());
+                habitats = refDomain.getHabitatsForAReferences(idref);
 
             } catch (CriteriaMissingException e) {
                 e.printStackTrace();

@@ -22,17 +22,6 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-  //System.out.println("author="+formBean.getAuthor());
-  // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
@@ -47,11 +36,7 @@
   // The main paginator
   ReferencesPaginator paginator = new ReferencesPaginator(new RefDomain(formBean.toSearchCriteria(),
                                                                         formBean.toSortCriteria(),
-                                                                        SessionManager.getShowEUNISInvalidatedSpecies(),
-                                                                        SQL_DRV,
-                                                                        SQL_URL,
-                                                                        SQL_USR,
-                                                                        SQL_PWD));
+                                                                        SessionManager.getShowEUNISInvalidatedSpecies()));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)

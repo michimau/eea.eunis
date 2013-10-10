@@ -1,217 +1,80 @@
 package ro.finsiel.eunis.jrfTables.species.speciesByReferences;
 
-
 /**
  * Date: Aug 19, 2003
  * Time: 3:52:53 PM
  */
 
-import java.util.Date;
-
 import net.sf.jrf.domain.PersistentObject;
-
 
 public class RefPersist extends PersistentObject {
 
-    /**
-     * This is a database field.
-     **/
-    private Integer i_idDc = null;
-
-    private String i_comment = null;
-
-    private String i_source = null;
-
-    private String i_editor = null;
-
-    private String i_url = null;
-
-    private String idHabitat = null;
-    private String title = null;
-    private String alternative = null;
-    private String publisher = null;
-    private Date created = null;
-    private Short haveSource = null;
-    private Short haveOtherReferences = null;
-    private String scName = null;
-    private String eunisCode = null;
-    private String annex1Code = null;
-    private Integer level = null;
-    private String description = null;
+    private Integer idSpecies = null;
+    private Integer idSpeciesLink = null;
+    private Integer idNatureObject = null;
+    private String scientificName = null;
+    private String groupName = null;
+    private String orderName = null;
+    private String familyName = null;
 
     public RefPersist() {
         super();
     }
 
-    public Short getHaveSource() {
-        return haveSource;
+    public Integer getIdSpecies() {
+        return idSpecies;
     }
 
-    public void setHaveSource(Short haveSource) {
-        this.haveSource = haveSource;
+    public void setIdSpecies(Integer idSpecies) {
+        this.idSpecies = idSpecies;
     }
 
-    public String getEunisCode() {
-        return eunisCode;
+    public Integer getIdSpeciesLink() {
+        return idSpeciesLink;
     }
 
-    public void setEunisCode(String haveSource) {
-        this.eunisCode = haveSource;
+    public void setIdSpeciesLink(Integer idSpeciesLink) {
+        this.idSpeciesLink = idSpeciesLink;
     }
 
-    public String getAnnex1Code() {
-        return annex1Code;
+    public Integer getIdNatureObject() {
+        return idNatureObject;
     }
 
-    public void setAnnex1Code(String haveSource) {
-        this.annex1Code = haveSource;
+    public void setIdNatureObject(Integer idNatureObject) {
+        this.idNatureObject = idNatureObject;
     }
 
-    public String getDescription() {
-        return description;
+    public String getScientificName() {
+        return scientificName;
     }
 
-    public void setDescription(String haveSource) {
-        this.description = haveSource;
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
     }
 
-    public Integer getLevel() {
-        return level;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setLevel(Integer haveSource) {
-        this.level = haveSource;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public Short getHaveOtherReferences() {
-        return haveOtherReferences;
+    public String getOrderName() {
+        return orderName;
     }
 
-    public void setHaveOtherReferences(Short haveOtherReferences) {
-        this.haveOtherReferences = haveOtherReferences;
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
     }
 
-    public String getScName() {
-        return scName;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public void setScName(String scName) {
-        this.scName = scName;
-    }
-
-    public String getIdHabitat() {
-        return idHabitat;
-    }
-
-    public void setIdHabitat(String idHabitat) {
-        this.idHabitat = idHabitat;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAlternative() {
-        return alternative;
-    }
-
-    public void setAlternative(String alternative) {
-        this.alternative = alternative;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public String getComment() {
-        return i_comment;
-    }
-
-    public void setComment(String comment) {
-        i_comment = comment;
-        this.markModifiedPersistentState();
-    }
-
-    /**
-     * Getter for a database field.
-     **/
-    public String getEditor() {
-        return i_editor;
-    }
-
-    /**
-     * Getter for a database field.
-     **/
-    public Integer getIdDc() {
-        return i_idDc;
-    }
-
-    /**
-     * Getter for a database field.
-     **/
-    public String getSource() {
-        return i_source;
-    }
-
-    /**
-     * Getter for a database field.
-     **/
-    public String getUrl() {
-        return i_url;
-    }
-
-    /**
-     * Setter for a database field.
-     * @param editor
-     **/
-    public void setEditor(String editor) {
-        this.i_editor = editor;
-
-    }
-
-    /**
-     * Setter for a database field.
-     * @param idDc
-     **/
-    public void setIdDc(Integer idDc) {
-        i_idDc = idDc;
-        // Changing a primary key so we force this to new.
-        this.forceNewPersistentState();
-    }
-
-    /**
-     * Setter for a database field.
-     * @param source
-     **/
-    public void setSource(String source) {
-        this.i_source = source;
-
-    }
-
-    /**
-     * Setter for a database field.
-     * @param url
-     **/
-    public void setUrl(String url) {
-        this.i_url = url;
-
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
 }
-

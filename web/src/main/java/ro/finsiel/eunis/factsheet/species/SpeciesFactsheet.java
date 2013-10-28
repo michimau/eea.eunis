@@ -498,7 +498,7 @@ public class SpeciesFactsheet {
                                 if (consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")) {
                                     IntThrCode = consS2.getCode();
                                     idConsStatus = consS2.getIdConsStatus();
-                                    author = consS2.getSource();
+                                    // author = consS2.getSource(); // fix for #17069
                                 } else if (consS2.getSource() != null && !consS2.getSource().toUpperCase().contains("IUCN")) {
                                     // author = "";
                                     IntThrCode = "";

@@ -19,6 +19,10 @@
 		<rdfs:label>Document</rdfs:label>
 	</rdfs:Class>
 
+	<rdfs:Class rdf:ID="Designation">
+		<rdfs:label>Designation</rdfs:label>
+	</rdfs:Class>
+
 	<rdf:Property rdf:ID="taxonname">
 		<rdfs:label>Name</rdfs:label>
 		<rdfs:domain rdf:resource="#Taxonomy"/>

@@ -134,7 +134,7 @@ public class EunisUtil {
      * A method for creating a unique Hexa-Decimal digest of a String message.
      *
      * @param src String to be digested.
-     * @param algosrithm Digesting algorithm (please see Java documentation for allowable values).
+     * @param algorithm Digesting algorithm (please see Java documentation for allowable values).
      * @return A unique String-typed Hexa-Decimal digest of the input message.
      */
     public static String digestHexDec(String src, String algorithm) {
@@ -185,7 +185,8 @@ public class EunisUtil {
 
     /**
      * @param in
-     * @param inTextarea
+     * @param dontCreateHTMLAnchors
+     * @param dontCreateHTMLLineBreaks
      * @return
      */
     public static String replaceTags(

@@ -87,12 +87,10 @@ public class NameBean extends SitesFormBean {
      * @return A list of AbstractSearchCriteria objects used to do the sorting
      */
     public AbstractSortCriteria[] toSortCriteria() {
-        
-        AbstractSortCriteria criterias[] = new AbstractSortCriteria[sort.length];
-        
         if (null == sort || null == ascendency) {
             return new AbstractSortCriteria[0];
         }
+        AbstractSortCriteria criterias[] = new AbstractSortCriteria[sort.length];
 
         for (int i = 0; i < sort.length; i++) {
             NameSortCriteria criteria =

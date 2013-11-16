@@ -1428,6 +1428,70 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return natureObjectAttributesMap;
     }
 
+    public int getSynonymsCount() {
+        return synonymsCount;
+    }
+
+    public void setSynonymsCount(int synonymsCount) {
+        this.synonymsCount = synonymsCount;
+    }
+
+    public List getSynonyms() {
+        return synonyms;
+    }
+
+    public void setSynonyms(List synonyms) {
+        this.synonyms = synonyms;
+    }
+
+    public int getVernNamesCount() {
+        return vernNamesCount;
+    }
+
+    public void setVernNamesCount(int vernNamesCount) {
+        this.vernNamesCount = vernNamesCount;
+    }
+
+    public int getSpeciesSitesCount() {
+        return speciesSitesCount;
+    }
+
+    public void setSpeciesSitesCount(int speciesSitesCount) {
+        this.speciesSitesCount = speciesSitesCount;
+    }
+
+    public Vector getLegalInstruments() {
+        return legalInstruments;
+    }
+
+    public void setLegalInstruments(Vector legalInstruments) {
+        this.legalInstruments = legalInstruments;
+    }
+
+    public int getLegalInstrumentCount() {
+        return legalInstrumentCount;
+    }
+
+    public void setLegalInstrumentCount(int legalInstrumentCount) {
+        this.legalInstrumentCount = legalInstrumentCount;
+    }
+
+    public int getHabitatsCount() {
+        return habitatsCount;
+    }
+
+    public void setHabitatsCount(int habitatsCount) {
+        this.habitatsCount = habitatsCount;
+    }
+
+    public String getAuthorYear() {
+        return authorYear;
+    }
+
+    public void setAuthorYear(String authorYear) {
+        this.authorYear = authorYear;
+    }
+
     public List<SpeciesNatureObjectPersist> getParentSpecies() {
         return parentSpecies;
     }

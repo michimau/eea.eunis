@@ -1978,7 +1978,7 @@ public final class Utilities {
             String date = "";
 
             if (((ReferencesJoinPersist) references.get(0)).getCreated() != null) {
-                date = ((ReferencesJoinPersist) references.get(0)).getCreated();
+                date = ((ReferencesJoinPersist) references.get(0)).getCreated();          // todo rebase: fromatted as yyyy
             }
             result += " <li>Date : " + date;
             result += "</li>";

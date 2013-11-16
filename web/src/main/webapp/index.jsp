@@ -114,46 +114,21 @@
 			    margin-right: 0 ! important;
 			}
 		</style>
-  	</head>
-  	<body>
-    	<div id="visual-portal-wrapper">
-      		<jsp:include page="header.jsp" />
-      		<!-- The wrapper div. It contains the three columns. -->
-  			<div id="portal-columns">
-    			<!-- start of the main and left columns -->
-    			<div id="visual-column-wrapper">
-      				<!-- start of main content block -->
-      				<div id="portal-column-content">
-        				<div id="content" class="">
-	        				<div class="documentContent panels" id="region-content">
+    </stripes:layout-component>
+
+    <stripes:layout-component name="contents">
 							<jsp:include page="header-dynamic.jsp">
 	              						<jsp:param name="location" value="<%=btrail%>"/>
 	            					</jsp:include>
 	          					<a name="documentContent"></a>
-	          					<div>
 		          					<h1 class="documentFirstHeading">
 		              					<%=cm.cmsPhrase( "Welcome to EUNIS biodiversity database - find species, habitats and sites across Europe" )%>
 		          					</h1>
-		          					<div class="documentActions">
-		            					<h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-						                <ul>	
-		              						<li>
-		                						<a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-		                      					alt="<%=cm.cmsPhrase("Print this page")%>"
-		                      					title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-		              						</li>
-		              						<li>
-		                						<a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-		                       					alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-		                       					title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-		              						</li>
-		            					</ul>
-		          					</div>
 		          					<div class="visualClear"><!--&nbsp; --></div>
-		          					<div style="position: relative;">
+                                      <div style="position: relative;height: 380px;">
 			          					<div class="figure-right" style="display:inline; position: absolute; right:0; top:0;">
 				         					<div class="figure">
-					         					<img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
+                                                 <img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="<%=request.getContextPath()%>/images/intros/<%=Utilities.getIntroImage( application )%>" />
 					     					</div>
 					  				</div>
 			          					<div style="float:left; position: absolute; left:0; top:0; padding-right: 250px;">
@@ -168,7 +143,7 @@
 			              						<input type="hidden" name="showVernacularNames" value="true" />
 			              						<input type="hidden" name="showValidName" value="true" />
 			              						<input type="hidden" name="showOtherInfo" value="true" />
-			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
+                                                  <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_IS%>" />
 			              						<input type="hidden" name="searchVernacular" value="true" />
 			              						<input type="hidden" name="searchSynonyms" value="true" />
 			              						<input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
@@ -217,7 +192,7 @@
 			              						<input type="hidden" name="showCoordinates" value="true" />
 			              						<input type="hidden" name="showSize" value="true" />
 			              						<input type="hidden" name="showDesignationYear" value="true" />
-			              						<input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_RELEVANCE%>" />
+                                                  <input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_NAME%>" />
 			              						<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 			              						<input type="hidden" name="DB_NATURA2000" value="ON" />
 			              						<input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />

@@ -5,6 +5,7 @@
   - Description : 'statistics species module'.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -15,85 +16,57 @@
 <%@ page import="ro.finsiel.eunis.search.CountryUtil"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript">
-    //<![CDATA[
-       function MM_jumpMenuCountry(targ,selObj,restore){ //v3.0
-         eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-         if (restore) selObj.selectedIndex=0;
-}
-    //]]>
-    </script>
+
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
-  String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_statistics";
+    WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_statistics";
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
+    String SQL_DRV = application.getInitParameter("JDBC_DRV");
+    String SQL_URL = application.getInitParameter("JDBC_URL");
+    String SQL_USR = application.getInitParameter("JDBC_USR");
+    String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-  SQLUtilities sqlc = new SQLUtilities();
-  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+    SQLUtilities sqlc = new SQLUtilities();
+    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-  String countryName = (request.getParameter("countryName") == null ? "" : request.getParameter("countryName"));
+    String countryName = (request.getParameter("countryName") == null ? "" : request.getParameter("countryName"));
 %>
-    <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("statistics_species_module")%>
-    </title>
-  </head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
-                <a name="documentContent"></a>
+
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("statistics_species_module") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
+
+        <script language="JavaScript" type="text/javascript">
+           function MM_jumpMenuCountry(targ,selObj,restore){ //v3.0
+             eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+             if (restore) selObj.selectedIndex=0;
+           }
+        </script>
+
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
+            <a name="documentContent"></a>
+            <img id="loading" alt="" title="<%=cm.cmsPhrase("Loading progress")%>" src="images/loading.gif" />
 <!-- MAIN CONTENT -->
-                <img alt="Loading" id="loading" src="images/loading.gif" />
-            <%
-              out.flush();
-            %>
-            <h1>
+
+            <h1 class="documentFirstHeading">
             <%=cm.cmsPhrase("Species Statistics")%>
             </h1>
-            <%
-              out.flush();
-            %>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="species-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
-                <br />
+                <%--TODO: show the help action somewhere --%>
+                <%--<div class="documentActions">--%>
+                  <%--<h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>--%>
+                  <%--<ul>--%>
+                    <%--<li>--%>
+                      <%--<a href="species-help.jsp"><img src="images/help_icon.gif"--%>
+                             <%--alt="<%=cm.cmsPhrase("Help information")%>"--%>
+                             <%--title="<%=cm.cmsPhrase("Help information")%>" /></a>--%>
+                    <%--</li>--%>
+                  <%--</ul>--%>
+                <%--</div>--%>
+                <%--<br />--%>
                 <strong>
                 <%=cm.cmsPhrase("Statistical data at EUNIS Database level:")%>
                 </strong>
@@ -219,13 +192,12 @@
                 <div class="advice-msg"><%=cm.cmsPhrase("No data was found at Eunis Database level!")%></div>
             <%
                 }
-              out.flush();
             %>
-                    <%
-                        List allCountries = CountryUtil.findAllCountries();
-                        if (allCountries != null && allCountries.size()>0)
-                        {
-                    %>
+                <%
+                    List allCountries = CountryUtil.findAllCountries();
+                    if (allCountries != null && allCountries.size()>0)
+                    {
+                %>
 
                 <br /><br />
                 <strong>
@@ -356,19 +328,9 @@
                    <div class="advice-msg"><%=cm.cmsPhrase("No data was found for")%> <%=countryName%>!</div>
                <%
                        }
-                   }
-               %>
-                <%
+                     }
                     }
                 %>
-
-
-                <script language="JavaScript" type="text/javascript">
-                 //<![CDATA[
-                  var load = document.getElementById( "loading" );
-                  load.style.display="none";
-                 //]]>
-                </script>
 
                 <%=cm.br()%>
                 <%=cm.cmsMsg("statistics_species_module")%>
@@ -377,26 +339,18 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("statistical_data_country")%>
                 <%=cm.br()%>
+
+
+
+            <script language="JavaScript" type="text/javascript">
+                try
+                {
+                    var load = document.getElementById( "loading" );
+                    load.style.display="none";
+                }
+                catch(e) { }
+            </script>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="species-statistics-module.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+
+    </stripes:layout-component>
+</stripes:layout-render>

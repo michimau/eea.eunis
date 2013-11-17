@@ -116,6 +116,7 @@
                                             </a>
                                         </li>
                                         <li>
+                                            <%--todo: toggleFullScreenMode not defined --%>
                                             <a href="javascript:toggleFullScreenMode();"><img src="http://www.eea.europa.eu/templates/fullscreenexpand_icon.gif"
                                                 alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
                                                 title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>

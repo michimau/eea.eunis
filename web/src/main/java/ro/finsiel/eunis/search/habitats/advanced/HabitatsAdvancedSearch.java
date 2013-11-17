@@ -30,7 +30,7 @@ public class HabitatsAdvancedSearch {
     /**
      * Ctor.
      */
-    public void HabitatsAdvancedSearch() {}
+    public HabitatsAdvancedSearch() {}
 
     /**
      * Initializations.

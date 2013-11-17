@@ -18,7 +18,7 @@ public class CombinedSearch {
     /**
      * Ctor.
      */
-    public void CombinedSearch() {// SQL_DRV="org.gjt.mm.mysql.Driver";
+    public CombinedSearch() {// SQL_DRV="org.gjt.mm.mysql.Driver";
         // SQL_URL="jdbc:mysql://localhost/eunis2";
         // SQL_USR="root";
         // SQL_PWD="";

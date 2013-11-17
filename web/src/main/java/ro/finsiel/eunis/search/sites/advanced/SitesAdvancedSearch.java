@@ -32,7 +32,7 @@ public class SitesAdvancedSearch {
     /**
      * Ctor.
      */
-    public void SitesAdvancedSearch() {}
+    public SitesAdvancedSearch() {}
 
     /**
      * Setter for sourcedb property.

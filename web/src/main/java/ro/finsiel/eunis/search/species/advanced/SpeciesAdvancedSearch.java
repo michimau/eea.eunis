@@ -31,7 +31,7 @@ public class SpeciesAdvancedSearch {
     /**
      * Creates new SpeciesAdvancedSearch.
      */
-    public void SpeciesAdvancedSearch() {}
+    public SpeciesAdvancedSearch() {}
 
     /**
      * Initialization method.

@@ -24,8 +24,8 @@ public class EunisUtilTest {
     // Test HTML tags
     @Test
     public void test_replaceTags() {
-        assertEquals(EunisUtil.replaceTagsExport("<div class='Apostrophs'>"),"&lt;div class=&#039;Apostrophs&#039;&gt;");
-        assertEquals(EunisUtil.replaceTagsExport("<div class=\"Quotes\">"),"&lt;div class=&quot;Quotes&quot;&gt;");
+        assertEquals("&lt;div class=&#039;Apostrophs&#039;&gt;",EunisUtil.replaceTagsExport("<div class='Apostrophs'>"));
+        assertEquals("&lt;div class=&quot;Quotes&quot;&gt;",EunisUtil.replaceTagsExport("<div class=\"Quotes\">"));
     }
 
     @Test

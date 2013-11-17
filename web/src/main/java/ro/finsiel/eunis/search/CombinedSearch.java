@@ -25,7 +25,7 @@ public class CombinedSearch {
     /**
      * Creates a new CombinedSearch object.
      */
-    public void CombinedSearch() {}
+    public CombinedSearch() {}
 
     /**
      * Setter for sourcedb property.

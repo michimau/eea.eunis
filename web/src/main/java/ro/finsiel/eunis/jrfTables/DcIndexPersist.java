@@ -57,7 +57,7 @@ public class DcIndexPersist extends PersistentObject {
      * @param comment
      **/
     public void setComment(String comment) {
-        comment = comment;
+        this.comment = comment;
         this.markModifiedPersistentState();
     }
 
@@ -75,7 +75,7 @@ public class DcIndexPersist extends PersistentObject {
      * @param idDc
      **/
     public void setIdDc(Integer idDc) {
-        idDc = idDc;
+        this.idDc = idDc;
         // Changing a primary key so we force this to new.
         this.forceNewPersistentState();
     }

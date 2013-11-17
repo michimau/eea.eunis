@@ -26,7 +26,7 @@ public class AdvancedSearch {
     /**
      * Ctor.
      */
-    public void AdvancedSearch() {}
+    public AdvancedSearch() {}
 
     /**
      * Setter for sourcedb property.

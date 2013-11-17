@@ -15,7 +15,7 @@ public class ReferencesJoinPersist extends PersistentObject {
 
     private String Source = null;
     private String Editor = null;
-    private String created = null;        // todo rebase: branch had Date field
+    private String created = null;
     private String Title = null;
     private String Publisher = null;
     private String url = null;

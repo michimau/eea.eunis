@@ -35,7 +35,7 @@
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("statistics_species_module") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
 
         <script language="JavaScript" type="text/javascript">
@@ -55,18 +55,6 @@
             <h1 class="documentFirstHeading">
             <%=cm.cmsPhrase("Species Statistics")%>
             </h1>
-                <%--TODO: show the help action somewhere --%>
-                <%--<div class="documentActions">--%>
-                  <%--<h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>--%>
-                  <%--<ul>--%>
-                    <%--<li>--%>
-                      <%--<a href="species-help.jsp"><img src="images/help_icon.gif"--%>
-                             <%--alt="<%=cm.cmsPhrase("Help information")%>"--%>
-                             <%--title="<%=cm.cmsPhrase("Help information")%>" /></a>--%>
-                    <%--</li>--%>
-                  <%--</ul>--%>
-                <%--</div>--%>
-                <%--<br />--%>
                 <strong>
                 <%=cm.cmsPhrase("Statistical data at EUNIS Database level:")%>
                 </strong>
@@ -343,12 +331,10 @@
 
 
             <script language="JavaScript" type="text/javascript">
-                try
-                {
+                try {
                     var load = document.getElementById( "loading" );
                     load.style.display="none";
-                }
-                catch(e) { }
+                } catch(e) { }
             </script>
 <!-- END MAIN CONTENT -->
 

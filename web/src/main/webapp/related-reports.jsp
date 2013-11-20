@@ -5,6 +5,7 @@
   - Description : 'Related reports' function - search page.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -25,6 +26,7 @@
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   String uploadDir = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
@@ -37,110 +39,78 @@
     RelatedReportsUtil.deleteFiles(deleteFile, uploadDir);
   }
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
-<%
-  WebContentManagement cm = SessionManager.getWebContent();
-%>
-  <title>
-    <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("related_reports_page_title")%>
-  </title>
-  <script language="JavaScript" type="text/JavaScript">
-  //<![CDATA[
-    function MM_callJS(jsStr) { //v2.0
-      return eval(jsStr)
-    }
 
-    function ReloadPage() {
-      self.location.href="related-reports.jsp";
-    }
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("related_reports_page_title") %>'></c:set>
 
-    function count_selFiles() {
-      list=document.upload.filenames;
-      if (!isArray(list)) {
-        if (list.checked == true) {
-          return 1;
-        } else {
-          return 0;
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-component name="head">
+
+      <script language="JavaScript" type="text/JavaScript">
+      //<![CDATA[
+        function MM_callJS(jsStr) { //v2.0
+          return eval(jsStr)
         }
-      }
-      nr=0;
-      for (i = 0; i < list.length; i++) {
-         if (list[i].checked == true) nr++;
-      }
-      return nr;
-    }
 
-    function isArray(obj) {
-      var nr = parseInt(obj.length);
-      if(isNaN(nr)) {
-        return false;
-      }
-      return true;
-    }
+        function ReloadPage() {
+          self.location.href="related-reports.jsp";
+        }
 
-    function del_files() {
-       nr=count_selFiles();
-       if (!nr) {
-          alert('<%=cm.cms("related_reports_approval_nothing")%>!');
-          return false;
-       } else {
-          var ok = false;
-          if (nr == 1) {
-            return confirm('<%=cm.cms("related_reports_approval_delete1file")%> ?');
-          } else {
-            return confirm('<%=cm.cms("related_reports_approval_deletefiles")%> ' + nr +' <%=cm.cms("related_reports_approval_files")%> ?');
+        function count_selFiles() {
+          list=document.upload.filenames;
+          if (!isArray(list)) {
+            if (list.checked == true) {
+              return 1;
+            } else {
+              return 0;
+            }
           }
-       }
-    }
+          nr=0;
+          for (i = 0; i < list.length; i++) {
+             if (list[i].checked == true) nr++;
+          }
+          return nr;
+        }
 
-   function openUpload()
-   {
-      var width = 550, height = 400;
-      var horizPos = centerHoriz(width);
-      var vertPos = centerVert(height);
-      window.open("related-reports-upload.jsp", "", "left=" + horizPos + ", top=" + vertPos + ", width=" + width + ", height=" + height + ", status=0, scrollbars=0, toolbar=0, resizable=1, location=0");
-    }
-  //]]>
-  </script>
-</head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                </jsp:include>
-                <a name="documentContent"></a>
+        function isArray(obj) {
+          var nr = parseInt(obj.length);
+          if(isNaN(nr)) {
+            return false;
+          }
+          return true;
+        }
+
+        function del_files() {
+           nr=count_selFiles();
+           if (!nr) {
+              alert('<%=cm.cms("related_reports_approval_nothing")%>!');
+              return false;
+           } else {
+              var ok = false;
+              if (nr == 1) {
+                return confirm('<%=cm.cms("related_reports_approval_delete1file")%> ?');
+              } else {
+                return confirm('<%=cm.cms("related_reports_approval_deletefiles")%> ' + nr +' <%=cm.cms("related_reports_approval_files")%> ?');
+              }
+           }
+        }
+
+       function openUpload()
+       {
+          var width = 550, height = 400;
+          var horizPos = centerHoriz(width);
+          var vertPos = centerVert(height);
+          window.open("related-reports-upload.jsp", "", "left=" + horizPos + ", top=" + vertPos + ", width=" + width + ", height=" + height + ", status=0, scrollbars=0, toolbar=0, resizable=1, location=0");
+        }
+      //]]>
+      </script>
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+        <a name="documentContent"></a>
 <!-- MAIN CONTENT -->
-              <h1>
-                <%=cm.cmsPhrase("Downloads and links")%>
-              </h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+          <h1>
+            <%=cm.cmsPhrase("Downloads and links")%>
+          </h1>
+
 		<p class="documentDescription">
               <%=cm.cmsPhrase("From this page you can download additional reports related to biodiversity")%>.
 		</p>
@@ -346,25 +316,6 @@
                 <%=cm.cmsText("related_reports_links")%>
                 <%=cm.br()%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="related-reports.jsp"/>
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+
+    </stripes:layout-component>
+</stripes:layout-render>

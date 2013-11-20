@@ -5,6 +5,7 @@
   - Description : Species advanced search.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -13,21 +14,30 @@
                  java.sql.DriverManager,
                  java.sql.ResultSet,
                  ro.finsiel.eunis.search.advanced.SaveAdvancedSearchCriteria"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-  <jsp:include page="header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,advanced_search";
 %>
-<title>
-  <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=request.getParameter("natureobject")!=null?request.getParameter("natureobject"):""%> <%=cm.cms("advanced_search")%>
-</title>
+
+
+<%
+    String IdSession = request.getParameter("idsession");
+    String NatureObject = request.getParameter("natureobject");
+    if(IdSession == null || IdSession.length()==0 || IdSession.equalsIgnoreCase("undefined")) {
+        IdSession=request.getSession().getId();
+    }
+    if(NatureObject == null || NatureObject.length()==0 || NatureObject.equalsIgnoreCase("undefined")) {
+        NatureObject="Species";
+    }
+
+%>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + (request.getParameter("natureobject")!=null?request.getParameter("natureobject"):"") + cm.cms("advanced_search") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
   var current_selected="";
@@ -234,22 +244,13 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
    }
 //]]>
 </script>
-
 <%
-  String IdSession = request.getParameter("idsession");
-  String NatureObject = request.getParameter("natureobject");
-  if(IdSession == null || IdSession.length()==0 || IdSession.equalsIgnoreCase("undefined")) {
-    IdSession=request.getSession().getId();
-  }
-  if(NatureObject == null || NatureObject.length()==0 || NatureObject.equalsIgnoreCase("undefined")) {
-    NatureObject="Species";
-  }
-  // Load saved search
-  if(request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes"))
-  {
-	  String rfw = (String)request.getParameter("fromWhere");
-	  String rcn = (String)request.getParameter("criterianame");
-	  String rsn = (String)request.getParameter("siteName");
+// Load saved search
+if(request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes"))
+{
+String rfw = (String)request.getParameter("fromWhere");
+String rcn = (String)request.getParameter("criterianame");
+String rsn = (String)request.getParameter("siteName");
 %>
      <jsp:include page="load-save-criteria.jsp">
        <jsp:param name="fromWhere" value="<%=rfw%>"/>
@@ -261,34 +262,10 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 <%
   }
 %>
-  </head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                </jsp:include>
-                <a name="documentContent"></a>
-                <h1><%=cm.cmsPhrase("Species advanced search")%></h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+        <a name="documentContent"></a>
+        <h1><%=cm.cmsPhrase("Species advanced search")%></h1>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsPhrase("Search species information using multiple characteristics")%>
                 <br />
@@ -689,7 +666,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
               out.println("<br />");
               out.println("<br />");
-              out.flush();
 
               if(request.getParameter("Search")!=null) {
                 String finalwhere="";
@@ -712,14 +688,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     //add criteria to the list of criteria passed to the results page
                     listcriteria+=node+": "+interpretedcriteria+"<br />";
                     out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
-                    out.flush();
                     intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
                     out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                     if(tsas.getResultCount()>=SQL_LIMIT) {
                       out.println("<br />&nbsp;&nbsp;(" + cm.cmsPhrase("Only first") + " "+SQL_LIMIT + " " + cm.cmsPhrase("results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria") + ")");
                     }
                     out.println("<br />");
-                    out.flush();
 
                     finalwhere="";
                     finalwhere+=criteria.substring(0,pos_start);
@@ -747,7 +721,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_"+NatureObject.toUpperCase()+" WHERE ("+str+")";
                 String query = tsas.ExecuteFilterSQL(str,"");
                 out.println("<br /><strong>" + cm.cmsPhrase("Total species matching your combined criteria found in database:") + "  " + tsas.getResultCount() + "</strong><br />");
-                out.flush();
 
                 if (tsas.getResultCount() > 0) {
                   tsas.AddResult(IdSession,NatureObject,query);
@@ -867,25 +840,5 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
             <%=cm.br()%>
             <%=cm.cmsMsg("of_following_criteria_are_met")%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="species-advanced.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

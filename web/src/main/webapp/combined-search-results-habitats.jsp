@@ -5,6 +5,7 @@
   - Description : Results page for 'Combined search' function when starting nature object was Habitats.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -26,75 +27,56 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,results";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
-  <title>
-    <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("generic_combined-search-results-habitats_title")%>
-  </title>
-</head>
-<%
-  // Database where to search. Possible values are: Species, Habitats or Sites
-  String searchedDatabase = formBean.getSearchedNatureObject();
-  AbstractPaginator paginator = new CombinedSearchPaginator(new HabitatsCombinedDomain(request.getSession().getId()));
-  int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  paginator.setSortCriteria(formBean.toSortCriteria());
-  paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
-  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
-  int resultsCount = paginator.countResults();
-  final String pageName = "combined-search-results-habitats.jsp";
-  int pagesCount = paginator.countPages();// This is used in @page include...
-  int guid = 0;// This is used in @page include...
-  // Now extract the results for the current page.
-  List results = paginator.getPage(currentPage);
-  Iterator it = (null != results) ? results.iterator() : new Vector().iterator();
 
-  Vector columnsDisplayed = formBean.parseShowColumns();
-  boolean showLevel = (columnsDisplayed.contains("showLevel")) ? true : false;
-  boolean showEUNISCode = (columnsDisplayed.contains("showEUNISCode")) ? true : false;
-  boolean showANNEXCode = (columnsDisplayed.contains("showANNEXCode")) ? true : false;
-  boolean showScientificName = (columnsDisplayed.contains("showScientificName")) ? true : false;
-  boolean showEnglishName = (columnsDisplayed.contains("showEnglishName")) ? true : false;
-  boolean showLegalInstruments = (columnsDisplayed.contains("showLegalInstruments")) ? true : false;
-  boolean showCountry = (columnsDisplayed.contains("showCountry")) ? true : false;
-  boolean showRegion = (columnsDisplayed.contains("showRegion")) ? true : false;
-  boolean showReferences = (columnsDisplayed.contains("showReferences")) ? true : false;
-  boolean showDiagram = (columnsDisplayed.contains("showDiagram")) ? true : false;
+<%
+    // Database where to search. Possible values are: Species, Habitats or Sites
+    String searchedDatabase = formBean.getSearchedNatureObject();
+    AbstractPaginator paginator = new CombinedSearchPaginator(new HabitatsCombinedDomain(request.getSession().getId()));
+    int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
+    paginator.setSortCriteria(formBean.toSortCriteria());
+    paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
+    currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
+    int resultsCount = paginator.countResults();
+    final String pageName = "combined-search-results-habitats.jsp";
+    int pagesCount = paginator.countPages();// This is used in @page include...
+    int guid = 0;// This is used in @page include...
+    // Now extract the results for the current page.
+    List results = paginator.getPage(currentPage);
+    Iterator it = (null != results) ? results.iterator() : new Vector().iterator();
+
+    Vector columnsDisplayed = formBean.parseShowColumns();
+    boolean showLevel = (columnsDisplayed.contains("showLevel")) ? true : false;
+    boolean showEUNISCode = (columnsDisplayed.contains("showEUNISCode")) ? true : false;
+    boolean showANNEXCode = (columnsDisplayed.contains("showANNEXCode")) ? true : false;
+    boolean showScientificName = (columnsDisplayed.contains("showScientificName")) ? true : false;
+    boolean showEnglishName = (columnsDisplayed.contains("showEnglishName")) ? true : false;
+    boolean showLegalInstruments = (columnsDisplayed.contains("showLegalInstruments")) ? true : false;
+    boolean showCountry = (columnsDisplayed.contains("showCountry")) ? true : false;
+    boolean showRegion = (columnsDisplayed.contains("showRegion")) ? true : false;
+    boolean showReferences = (columnsDisplayed.contains("showReferences")) ? true : false;
+    boolean showDiagram = (columnsDisplayed.contains("showDiagram")) ? true : false;
+    if(results.isEmpty())
+    {
 %>
-<body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                </jsp:include>
-                <a name="documentContent"></a>
+<jsp:forward page="emptyresults.jsp">
+    <jsp:param name="location" value="<%=btrail%>" />
+</jsp:forward>
+<%
+    }
+%>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("generic_combined-search-results-habitats_title") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
+        <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
+
+
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
+        <a name="documentContent"></a>
 		<h1><%=cm.cmsPhrase("Habitat types combined search results")%></h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+
 <!-- MAIN CONTENT -->
                 <table summary="layout" width="100%" border=0 cellspacing="0" cellpadding="0">
                   <tr>
@@ -486,25 +468,5 @@
                 <%=cm.cmsMsg("generic_combined-search-results-habitats_title")%>
                 <%=cm.br()%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="combined-search-results-habitats.jsp"/>
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

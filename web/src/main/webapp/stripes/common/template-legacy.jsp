@@ -3,6 +3,10 @@
   - Date :
   - Copyright : (c) 2002-2010 EEA - European Environment Agency.
   - Description : Template
+    Parameters:
+      pageTitle: the page title
+      btrail: breadcrumbs trail (not displayed now)
+      downloadLink: link for downloads, displayed in the header
 --%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
@@ -44,12 +48,13 @@
                 <div id="content" class="column-area">
                         <!--  TODO check if this is really needed.
                             It seems that it does not build btrail.
-                            Some old jsps (search results) uses downloadLinks to build TSV downloads
+                            Added download link to the call
                             Needs refactoring.
                         -->
                         <c:if test="${not empty btrail}">
                             <jsp:include page="/header-dynamic.jsp">
                                 <jsp:param name="location" value="${btrail}" />
+                                <jsp:param name="downloadLink" value="${downloadLink}"/>
                             </jsp:include>
                         </c:if>
 
@@ -121,7 +126,11 @@
                                                 alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
                                                 title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                                         </li>
-
+                                        <c:if test="${not empty helpLink}">
+                                            <a href="<c:out value="${helpLink}"/>"><img src="images/help_icon.gif"
+                                                alt="<%=cm.cmsPhrase("Help information")%>"
+                                                title="<%=cm.cmsPhrase("Help information")%>" /></a>
+                                        </c:if>
                                         <!-- component for adding page specific actions -->
                                         <stripes:layout-component name="documentActions"/>
                                     </ul>

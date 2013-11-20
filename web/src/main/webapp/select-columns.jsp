@@ -5,23 +5,69 @@
   - Description : Select displayed columns in results of advances/combined search
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.Vector"%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-    <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("select_columns_page_title")%>
-    </title>
+<jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
+    <jsp:setProperty name="formBean" property="*"/>
+</jsp:useBean>
+<%
+    String searchedDatabase = formBean.getSearchedNatureObject();
+    String origin = formBean.getOrigin();
+    //System.out.println("no = " + searchedDatabase);
+    //System.out.println("origin = " + origin);
+    Vector searchCriteria = new Vector();
+    searchCriteria.addElement("searchCriteria");
+
+    // Prepare the strings for the seader-dynamic2.jsp
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String location = "";
+    String resultsPage = "";
+    if (null != searchedDatabase) {
+        if (searchedDatabase.equalsIgnoreCase("species")) {
+            if (null != origin && origin.equalsIgnoreCase("Advanced")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,advanced_search#species-advanced.jsp,select_columns_location";
+                resultsPage = "species-advanced-results.jsp";
+            }
+            if (null != origin && origin.equalsIgnoreCase("Combined")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
+                resultsPage = "combined-search-results-species.jsp";
+            }
+        }
+        if (searchedDatabase.equalsIgnoreCase("habitats")) {
+            if (null != origin && origin.equalsIgnoreCase("Advanced")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_advanced_search#habitats-advanced.jsp,select_columns_location";
+                resultsPage = "habitats-advanced-results.jsp";
+            }
+            if (null != origin && origin.equalsIgnoreCase("Combined")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
+                resultsPage = "combined-search-results-habitats.jsp";
+            }
+        }
+        if (searchedDatabase.equalsIgnoreCase("sites")) {
+            if (null != origin && origin.equalsIgnoreCase("Advanced")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,advanced_search#sites-advanced.jsp,select_columns_location";
+                resultsPage = "sites-advanced-results.jsp";
+            }
+            if (null != origin && origin.equalsIgnoreCase("Combined")) {
+                location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
+                resultsPage = "combined-search-results-sites.jsp";
+            }
+        }
+    }
+%>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("select_columns_page_title") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= location%>">
+    <stripes:layout-component name="head">
+
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
         function move(fbox,tbox) {
@@ -83,70 +129,11 @@
         }
       //]]>
     </script>
-    <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
-      <jsp:setProperty name="formBean" property="*"/>
-    </jsp:useBean>
-<%
-      String searchedDatabase = formBean.getSearchedNatureObject();
-      String origin = formBean.getOrigin();
-      //System.out.println("no = " + searchedDatabase);
-      //System.out.println("origin = " + origin);
-      Vector searchCriteria = new Vector();
-      searchCriteria.addElement("searchCriteria");
 
-      // Prepare the strings for the seader-dynamic2.jsp
-      String eeaHome = application.getInitParameter( "EEA_HOME" );
-      String location = "";
-      String resultsPage = "";
-      if (null != searchedDatabase) {
-        if (searchedDatabase.equalsIgnoreCase("species")) {
-          if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,advanced_search#species-advanced.jsp,select_columns_location";
-            resultsPage = "species-advanced-results.jsp";
-          }
-          if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
-            resultsPage = "combined-search-results-species.jsp";
-          }
-        }
-        if (searchedDatabase.equalsIgnoreCase("habitats")) {
-          if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_advanced_search#habitats-advanced.jsp,select_columns_location";
-            resultsPage = "habitats-advanced-results.jsp";
-          }
-          if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
-            resultsPage = "combined-search-results-habitats.jsp";
-          }
-        }
-        if (searchedDatabase.equalsIgnoreCase("sites")) {
-          if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,advanced_search#sites-advanced.jsp,select_columns_location";
-            resultsPage = "sites-advanced-results.jsp";
-          }
-          if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
-            resultsPage = "combined-search-results-sites.jsp";
-          }
-        }
-      }
-    %>
-  </head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=location%>"/>
-                </jsp:include>
-                <a name="documentContent"></a>
+
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+        <a name="documentContent"></a>
 <!-- MAIN CONTENT -->
             <%
               SessionManager.setExplainedcriteria(request.getParameter("explainedcriteria"));
@@ -176,21 +163,7 @@
                     <h1>
                       <%=cm.cms("select_columns_description")%>
                     </h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+
                     <br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="layout">
                       <tr>
@@ -320,25 +293,5 @@
 
                   <%=cm.cmsMsg("select_columns_page_title")%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="select-columns.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

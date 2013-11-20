@@ -5,6 +5,7 @@
   - Description : 'Species names' function - results page.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -99,7 +100,7 @@
   	// Set number criteria for the search result
   	int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
 
-	String downloadLink = "javascript:openTSVDownload('reports/species/tsv-species-names.jsp?" + formBean.toURLParam(reportFields) + "')";
+	String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-names.jsp?" + formBean.toURLParam(reportFields) + "')";
 	if( results.isEmpty() && !newName){
 		String sname;
     	if(NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
@@ -130,30 +131,16 @@
 <%
   	}
 %>
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  	<head>
-	    <jsp:include page="header-page.jsp" />
+
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("species_names-result_pageTitle") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
+    <stripes:layout-component name="head">
     	<script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
-    	<title>
-      		<%=application.getInitParameter("PAGE_TITLE")%>
-      		<%=cm.cms("species_names-result_pageTitle")%>
-    	</title>
-  	</head>
-  	<body>
-    	<div id="visual-portal-wrapper">
-      		<jsp:include page="header.jsp" />
-      		<!-- The wrapper div. It contains the three columns. -->
-      		<div id="portal-columns" class="visualColumnHideTwo">
-        		<!-- start of the main and left columns -->
-        		<div id="visual-column-wrapper">
-          			<!-- start of main content block -->
-          			<div id="portal-column-content">
-            			<div id="content">
-              				<div class="documentContent" id="region-content">
-              					<jsp:include page="header-dynamic.jsp">
-                  					<jsp:param name="location" value="<%=location%>" />
-                  					<jsp:param name="downloadLink" value="<%=downloadLink%>" />
-                				</jsp:include>
+
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
                 				<a name="documentContent"></a>
 								<!-- MAIN CONTENT -->
                 				<h1>
@@ -177,26 +164,6 @@
                       				}
                       				%>
                 				</h1>
-                				<div class="documentActions">
-                  					<h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  					<ul>
-                    					<li>
-                      						<a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            					alt="<%=cm.cmsPhrase("Print this page")%>"
-                            					title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    					</li>
-                    					<li>
-                      						<a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             					alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             					title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    					</li>
-					                    <li>
-					                      	<a href="species-help.jsp"><img src="images/help_icon.gif"
-					                       	alt="<%=cm.cmsPhrase("Help information")%>"
-					                        title="<%=cm.cmsPhrase("Help information")%>" /></a>
-					                    </li>
-                  					</ul>
-                				</div>
                 				<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   					<tr>
                     					<td>
@@ -917,26 +884,7 @@
             					<%=cm.cmsMsg("species_names-result_pageTitle")%>
             					<%=cm.br()%>
 							<!-- END MAIN CONTENT -->
-              				</div>
-            			</div>
-          			</div>
-          			<!-- end of main content block -->
-          			<!-- start of the left (by default at least) column -->
-          			<div id="portal-column-one">
-            			<div class="visualPadding">
-              				<jsp:include page="inc_column_left.jsp">
-                				<jsp:param name="page_name" value="<%=pageName%>" />
-              				</jsp:include>
-            			</div>
-          			</div>
-          			<!-- end of the left (by default at least) column -->
-        		</div>
-        		<!-- end of the main and left columns -->
-        		<div class="visualClear"><!-- --></div>
-      		</div>
-      		<!-- end column wrapper -->
-      		<jsp:include page="footer-static.jsp" />
-    	</div>
+
     	<script type="text/javascript">
 	    	//<![CDATA[
 	        // Writes a warning if the page is called as a popup. Works only in IE
@@ -949,5 +897,7 @@
 	        }
       		//]]>
     	</script>
-  	</body>
-</html>
+
+    </stripes:layout-component>
+</stripes:layout-render>
+

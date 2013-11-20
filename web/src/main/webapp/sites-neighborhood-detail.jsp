@@ -5,6 +5,7 @@
   - Description : "Sites neighborhood" function - Display sites which are in specified range of a selected site.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -90,10 +91,45 @@
 <%
   }
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
+
+<%
+    if (sites.size() > 0)
+    {
+        String ids = "";
+        int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
+        NeighborhoodPaginator mapPaginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
+        try
+        {
+            mapPaginator.setPageSize( mapPaginator.countResults() );
+            List mapSites = mapPaginator.getPage(0);
+            if ( mapSites.size() < maxSitesPerMap )
+            {
+                int i;
+                for (i = 0; i < mapSites.size(); i++)
+                {
+                    Chm62edtSitesPersist site = (Chm62edtSitesPersist)mapSites.get(i);
+                    ids += "'" + site.getIdSite() + "'";
+                    if ( i < mapSites.size() - 1 ) ids += ",";
+                }
+            }
+        }
+        catch( Exception ex )
+        {
+            ex.printStackTrace();
+        }
+        Vector reportFields = new Vector();
+        reportFields.addElement("sort");
+        reportFields.addElement("ascendency");
+        reportFields.addElement("criteriaSearch");
+        reportFields.addElement("criteriaSearch");
+        reportFields.addElement("oper");
+        reportFields.addElement("criteriaType");
+        String tsvLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
+%>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("sites_neighborhood-detail_title") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>"  btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
     <script type="text/javascript" language="javascript">
       //<![CDATA[
       function openlink( URL )
@@ -102,85 +138,13 @@
       }
       //]]>
     </script>
-    <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_neighborhood-detail_title")%>
-    </title>
-  </head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                        <jsp:param name="location" value="<%=location%>"/>
-                        <jsp:param name="mapLink" value="show"/>
-                </jsp:include>
-                <a name="documentContent"></a>
-                      <h1>
-                        <%=cm.cmsPhrase("Site neighborhood")%>
-                      </h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="sites-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+        <a name="documentContent"></a>
+          <h1>
+            <%=cm.cmsPhrase("Site neighborhood")%>
+          </h1>
 <!-- MAIN CONTENT -->
-                <%
-                  if (sites.size() > 0)
-                  {
-                    String ids = "";
-                    int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
-                    NeighborhoodPaginator mapPaginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
-                    try
-                    {
-                      mapPaginator.setPageSize( mapPaginator.countResults() );
-                      List mapSites = mapPaginator.getPage(0);
-                      if ( mapSites.size() < maxSitesPerMap )
-                      {
-                        int i;
-                        for (i = 0; i < mapSites.size(); i++)
-                        {
-                          Chm62edtSitesPersist site = (Chm62edtSitesPersist)mapSites.get(i);
-                          ids += "'" + site.getIdSite() + "'";
-                          if ( i < mapSites.size() - 1 ) ids += ",";
-                        }
-                      }
-                    }
-                    catch( Exception ex )
-                    {
-                      ex.printStackTrace();
-                    }
-                    Vector reportFields = new Vector();
-                    reportFields.addElement("sort");
-                    reportFields.addElement("ascendency");
-                    reportFields.addElement("criteriaSearch");
-                    reportFields.addElement("criteriaSearch");
-                    reportFields.addElement("oper");
-                    reportFields.addElement("criteriaType");
-                    String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
-                %>
                       <br />
                       <%=cm.cmsPhrase("Found")%>
                       <strong>
@@ -344,25 +308,5 @@
 
                       <%=cm.cmsMsg("sites_neighborhood-detail_title")%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="sites-neighborhood-detail.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

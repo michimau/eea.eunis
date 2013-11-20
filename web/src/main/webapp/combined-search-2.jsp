@@ -10,6 +10,7 @@
       * nextnatureobject -
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -21,15 +22,11 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,combined_search_location_2";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
-    <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : ""%>
-      <%=cm.cms("combined_search")%>
-    </title>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + (request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : "") + cm.cms("combined_search") %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="combined-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-component name="head">
+
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
       var current_selected = "";
@@ -237,43 +234,10 @@
 //]]>
 </script>
 
-  </head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
+</stripes:layout-component>
+<stripes:layout-component name="contents">
                 <a name="documentContent"></a>
                 <h1><%=cm.cmsPhrase("Combined search")%></h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="combined-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsPhrase("Search information using multiple characteristics")%>
                 <br />
@@ -871,7 +835,6 @@
 
                   out.println("<br />");
                   out.println("<br />");
-                  out.flush();
 
                   if(request.getParameter("Search") != null) {
                     String finalwhere = "";
@@ -894,7 +857,6 @@
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
                         out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
-                        out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
                         out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
@@ -905,7 +867,6 @@
                           }
                         }
                         out.println("<br />");
-                        out.flush();
 
                         finalwhere = "";
                         finalwhere += criteria.substring(0, pos_start);
@@ -934,7 +895,6 @@
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
                         out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
-                        out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
                         out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
@@ -945,7 +905,6 @@
                           }
                         }
                         out.println("<br />");
-                        out.flush();
 
                         finalwhere = "";
                         finalwhere += criteria.substring(0, pos_start);
@@ -975,7 +934,6 @@
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
                         out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
-                        out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
                         out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
@@ -986,7 +944,6 @@
                           }
                         }
                         out.println("<br />");
-                        out.flush();
 
                         finalwhere = "";
                         finalwhere += criteria.substring(0, pos_start);
@@ -1024,7 +981,6 @@
                     }
                     String query = tsas.ExecuteFilterSQL(str, "");
                     out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
-                    out.flush();
 
                     if(tsas.getResultCount() > 0) {
                       tsas.AddResult(IdSession, NatureObject, query);
@@ -1182,25 +1138,5 @@
                 <%=cm.cmsMsg("error_deleting_branch")%>
                 <%=cm.br()%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="combined-search-2.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

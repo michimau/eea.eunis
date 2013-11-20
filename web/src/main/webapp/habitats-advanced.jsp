@@ -5,6 +5,7 @@
   - Description : 'Habitats advanced search' function - results page.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -15,25 +16,46 @@
                  java.sql.PreparedStatement,
                  java.sql.ResultSet" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-<jsp:include page="header-page.jsp" />
-<script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
-  String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,advanced_search";
+    WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,advanced_search";
 %>
-<title>
-  <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=request.getParameter("natureobject") != null ? request.getParameter("natureobject") : ""%><%=cm.cms("advanced_search")%>
-</title>
-<script language="JavaScript" type="text/javascript">
-//<![CDATA[
-  var current_selected="";
-//]]>
-</script>
+<%
+    String IdSession = request.getParameter("idsession");
+    String NatureObject = request.getParameter("natureobject");
+    if (IdSession == null || IdSession.length() == 0 || IdSession.equalsIgnoreCase("undefined")) {
+        IdSession = request.getSession().getId();
+    }
+    if (NatureObject == null || NatureObject.length() == 0 || NatureObject.equalsIgnoreCase("undefined")) {
+        NatureObject = "Habitat";
+    }
+    // Load saved search
+    if (request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes")) {
+        String rfw = (String)request.getParameter("fromWhere");
+        String rcn = (String)request.getParameter("criterianame");
+        String rsn = (String)request.getParameter("siteName");
+%>
+<jsp:include page="load-save-criteria.jsp">
+    <jsp:param name="fromWhere" value="<%=rfw%>"/>
+    <jsp:param name="criterianame" value="<%=rcn%>"/>
+    <jsp:param name="siteName" value="<%=rsn%>"/>
+    <jsp:param name="natureobject" value="<%=NatureObject%>"/>
+    <jsp:param name="idsession" value="<%=IdSession%>"/>
+</jsp:include>
+<%
+    }
+%>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") +(request.getParameter("natureobject") != null ? request.getParameter("natureobject") : "") + cm.cms("advanced_search")%>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
+        <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
+        <script language="JavaScript" type="text/javascript">
+        //<![CDATA[
+          var current_selected="";
+        //]]>
+        </script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -239,69 +261,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 //]]>
 </script>
 
-<%
-  String IdSession = request.getParameter("idsession");
-  String NatureObject = request.getParameter("natureobject");
-  if (IdSession == null || IdSession.length() == 0 || IdSession.equalsIgnoreCase("undefined")) {
-    IdSession = request.getSession().getId();
-  }
-  if (NatureObject == null || NatureObject.length() == 0 || NatureObject.equalsIgnoreCase("undefined")) {
-    NatureObject = "Habitat";
-  }
-  // Load saved search
-  if (request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes")) {
-	  String rfw = (String)request.getParameter("fromWhere");
-	  String rcn = (String)request.getParameter("criterianame");
-	  String rsn = (String)request.getParameter("siteName");
-%>
-<jsp:include page="load-save-criteria.jsp">
-  <jsp:param name="fromWhere" value="<%=rfw%>"/>
-  <jsp:param name="criterianame" value="<%=rcn%>"/>
-  <jsp:param name="siteName" value="<%=rsn%>"/>
-  <jsp:param name="natureobject" value="<%=NatureObject%>"/>
-  <jsp:param name="idsession" value="<%=IdSession%>"/>
-</jsp:include>
-<%
-  }
-%>
-</head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
-                <a name="documentContent"></a>
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
+        <a name="documentContent"></a>
 <!-- MAIN CONTENT -->
-                <h1><%=cm.cmsPhrase("Habitat types advanced search")%></h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+        <h1><%=cm.cmsPhrase("Habitat types advanced search")%></h1>
                 <br />
                 <%=cm.cmsPhrase("Search habitat types information using multiple characteristics<br />")%>
                 <table summary="layout" border="0">
@@ -757,7 +722,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
                   out.println("<br />");
                   out.println("<br />");
-                  out.flush();
 
                   if (request.getParameter("Search") != null) {
                     String finalwhere = "";
@@ -779,14 +743,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         listcriteria += node + ": " + interpretedcriteria + "<br />";
                         out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
-                        out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
                         out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if (tsas.getResultCount() >= SQL_LIMIT) {
                           out.println("<br />&nbsp;&nbsp;(" + cm.cmsPhrase("Only first") + " "+SQL_LIMIT + " " + cm.cmsPhrase("results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria") + ")");
                         }
                         out.println("<br />");
-                        out.flush();
 
                         finalwhere = "";
                         finalwhere += criteria.substring(0, pos_start);
@@ -819,7 +781,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 </strong>
                 <br />
                 <%
-                  out.flush();
 
                   if (tsas.getResultCount() > 0) {
                     tsas.AddResult(IdSession, NatureObject, query);
@@ -945,25 +906,5 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <%=cm.cmsMsg("error_deleting_branch")%>
                 <%=cm.br()%>
 <!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="habitats-advanced.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

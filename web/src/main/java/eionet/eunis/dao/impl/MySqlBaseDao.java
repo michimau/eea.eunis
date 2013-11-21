@@ -43,32 +43,35 @@ public abstract class MySqlBaseDao {
         return conn;
     }
 
+    /**
+     * Cleanup resources ignoring SQL Exceptions.
+     * @param conn  DB Connection
+     * @param pstmt The prepared statement
+     * @param rs The result set
+     */
     public static void closeAllResources(Connection conn, Statement pstmt, ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
-                rs = null;
             }
+        } catch (SQLException ignored) {
+        }
+        try {
             if (pstmt != null) {
                 pstmt.close();
-                pstmt = null;
             }
-            if ((conn != null) && (!conn.isClosed())) {
-                conn.close();
-                conn = null;
-            }
-        } catch (SQLException sqle) {}
-    }
-
-    public static void closeConnection(Connection conn) {
+        } catch (SQLException ignored) {
+        }
         try {
             if ((conn != null) && (!conn.isClosed())) {
                 conn.close();
-                conn = null;
             }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+        } catch (SQLException ignored) {
         }
+    }
+
+    public static void closeConnection(Connection conn) {
+        closeAllResources(conn, null, null);
     }
 
     public static void commit(Connection conn) {
@@ -94,13 +97,12 @@ public abstract class MySqlBaseDao {
             return null;
         }
         return new java.sql.Date(date.getTime());
-
     }
 
     /**
      *
      * @param parameterizedSQL
-     * @param valueMap
+     * @param values
      * @param conn
      * @return
      * @throws SQLException
@@ -130,7 +132,6 @@ public abstract class MySqlBaseDao {
      * @param parameterizedSQL
      * @param values
      * @param rsReader
-     * @param conn
      * @throws SQLException
      */
     public <T> void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader<T> rsReader)
@@ -158,17 +159,7 @@ public abstract class MySqlBaseDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException e) {}
+            closeAllResources(con, pstmt, rs);
         }
     }
 

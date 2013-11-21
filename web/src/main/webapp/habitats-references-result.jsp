@@ -7,7 +7,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
- <%--todo: error message "net.sf.jrf.exceptions.DatabaseException: java.sql.SQLException: Cannot convert value '2001' from column 6 to TIMESTAMP" when directly called--%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>

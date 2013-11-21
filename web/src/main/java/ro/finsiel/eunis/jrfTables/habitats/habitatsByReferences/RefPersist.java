@@ -30,7 +30,7 @@ public class RefPersist extends PersistentObject {
     private String title = null;
     private String alternative = null;
     private String publisher = null;
-    private Date created = null;
+    private String created = null;
     private Short haveSource = null;
     private Short haveOtherReferences = null;
     private String scName = null;
@@ -136,11 +136,14 @@ public class RefPersist extends PersistentObject {
         this.publisher = publisher;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
+        if(created != null && created.length() > 4) {
+            created = created.substring(0, 4);
+        }
         this.created = created;
     }
 

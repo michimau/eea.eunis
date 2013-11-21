@@ -189,12 +189,12 @@
   <%
     }
     if(request.getParameter("fromWhere").equalsIgnoreCase("date") &&
-      !Utilities.formatReferencesDate(n.getCreated()).equalsIgnoreCase("")) {
+      !Utilities.formatString(n.getCreated()).equalsIgnoreCase("")) {
       wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getCreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getCreated())%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(n.getCreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(n.getCreated())%></a>
     </td>
   </tr>
   <%

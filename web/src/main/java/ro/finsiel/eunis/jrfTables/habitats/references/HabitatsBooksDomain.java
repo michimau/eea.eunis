@@ -95,7 +95,7 @@ public class HabitatsBooksDomain extends AbstractDomain implements Paginable {
         dc_index = new JoinTable("DC_INDEX J", "ID_DC", "ID_DC");
         dc_index.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         dc_index.addJoinColumn(new StringJoinColumn("EDITOR", "editor", "setEditor"));
-        dc_index.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));
+        dc_index.addJoinColumn(new StringJoinColumn("CREATED", "created", "setCreated"));
         dc_index.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
         dc_index.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
         dc_index.addJoinColumn(new StringJoinColumn("PUBLISHER", "publisher", "setPublisher"));

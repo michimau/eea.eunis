@@ -58,7 +58,7 @@ public class HabitatsBooksPersist extends PersistentObject {
     private String alternative = null;
     private Integer idDC = null;
     private String publisher = null;
-    private java.util.Date created = null;
+    private String created = null;
     private Short haveSource = null;
     private Short haveOtherReferences = null;
     private String url = null;
@@ -139,14 +139,16 @@ public class HabitatsBooksPersist extends PersistentObject {
         this.publisher = publisher;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(java.util.Date created) {
+    public void setCreated(String created) {
+        if(created != null && created.length() > 4) {
+            created = created.substring(0, 4);
+        }
         this.created = created;
     }
-
 
     /**
      * Getter for a database field.

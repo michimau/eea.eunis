@@ -280,7 +280,7 @@
                         <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getSource()), "&nbsp;")%>
                       </td>
                       <td style="text-align : center;">
-                        <%=Utilities.formatString(Utilities.formatReferencesDate(book.getCreated() ), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.formatString(book.getCreated() ), "&nbsp;")%>
                       </td>
                       <td>
                         <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getTitle()), "&nbsp;")%>

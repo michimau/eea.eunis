@@ -42,8 +42,7 @@
                 <%-- Species breadcrumb --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>
 
-                <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) ?-->
-                <h1>Species: ${actionBean.speciesTitle}
+                <h1>Species: <c:if test="${not empty actionBean.englishName}">${actionBean.englishName} -</c:if> <span class="italics">${actionBean.scientificName}</span> ${actionBean.author}
                     <c:if test="${actionBean.seniorSpecies != null}">
                         <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
                     </c:if>

@@ -266,6 +266,6 @@
                     </div>
                 </div>
 
-                <div class="visualClear"></div>
+
                 <!-- END quick facts -->
 </stripes:layout-definition>

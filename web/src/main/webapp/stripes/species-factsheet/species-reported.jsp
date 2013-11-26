@@ -2,6 +2,11 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
 
+<script type="text/javascript">djConfig = { parseOnLoad:true };</script>
+<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.2"></script>
+
+
+
 
 <script type="text/javascript">
 		//<![CDATA[
@@ -266,7 +271,7 @@
                 <!-- species reported -->
                 <div class="reported-areas">
 		    <a name="species-reported"></a>
-                    <h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Where can the species be found?')}</h2>
+                    <h2 class="visualClear">${eunis:cmsPhrase(actionBean.contentManagement, 'Where can the species be found?')}</h2>
                     <div class="left-area reported-areas-fieldset">
                         <fieldset>
                             <legend><strong>Select layer</strong></legend>

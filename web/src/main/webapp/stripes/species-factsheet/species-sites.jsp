@@ -60,7 +60,7 @@
                     	<c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">
 	                    <h3>Sites for subtaxa of this taxon</h3>
 	                    <div class="scroll-auto" style="height: 200px">
-	                    <table id="listItem" summary="List of sites" class="sortable listing">
+	                    <table id="listItem2" summary="List of sites" class="sortable listing">
 	                        <thead>
 	                        <tr>
 	                        	<th class="dt_sortable">Sitecode</th>
@@ -101,11 +101,8 @@
                 </div>
 
 
-				<script type="text/javascript">djConfig = { parseOnLoad:true };</script>
-		        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.2"></script>
-		
 		        <script type="text/javascript">
-		           		            
+
 		            function setMapSiteId(sitecode){
 		            	document.getElementById('protectionMap').src='http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SiteCode='+sitecode+'&SpiecesName=${actionBean.scientificNameUrlEncoded}';
 		            }

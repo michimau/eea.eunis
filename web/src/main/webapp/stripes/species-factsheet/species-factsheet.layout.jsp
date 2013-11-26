@@ -51,6 +51,9 @@
                 <%-- Quick facts --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-quickfacts.jsp"/>
 
+                <%-- Areas where this species has been reported --%>
+                <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+
                 <%-- Threat status and conservation status --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
 
@@ -60,8 +63,6 @@
                 <%-- Species is mentioned by the following legal instruments --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
 
-                <%-- Areas where this species has been reported --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
 
             </c:when>
             <c:otherwise>

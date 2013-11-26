@@ -7,7 +7,7 @@
 
                 <div class="left-area">
                     <div class="threat-status-indicator width-12">
-                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status (Red list)')}</h3>
+                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red list status of threatened species')}</h3>
                         <p>The Threat Status' concept in IUCN Red lists assess the distance from extinction.</p>
                         <c:if test="${not empty actionBean.consStatus}">
 

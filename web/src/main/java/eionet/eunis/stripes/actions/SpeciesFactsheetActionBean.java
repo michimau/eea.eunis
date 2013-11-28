@@ -324,32 +324,30 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (tab != null && tab.equals("conservation_status")) {
                 setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
             }
+
+            // Sets all actionBean values for quickfactsheet
+            setQuickFactSheetValues();
+            // Sets all actionBean values for legals listing.
+            setLegalInstruments();
+            // Sets all actionBean values for sites
+            setSites();
+            // Sets all reported area values
+            setGeoValues();
+
+            setPictures();
+
+            // Sets data about international threat status
+            setConservationStatusData();
+
+            // Sets country level and biogeo conservation status
+            // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
+            setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
         }
+
         String eeaHome = getContext().getInitParameter("EEA_HOME");
         String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 
         setBtrail(btrail);
-
-        // Set's all actionBean values for quickfactsheet
-        setQuickFactSheetValues();
-        // Set's all actionBean values for legals listing.
-        setLegalInstruments();
-        // Set's all actionBean values for sites
-        setSites();
-        // Set all reported area values
-        setGeoValues();
-        
-        
-
-
-        setPictures();
-
-        // Sets data about international threat status
-        setConservationStatusData();
-
-        // Sets country level and biogeo conservation status
-        // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
-        setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
 
         return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
     }

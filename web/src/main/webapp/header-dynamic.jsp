@@ -48,7 +48,7 @@ Input parameters  on REQUEST:
 %>
   <div style="margin: 0px; padding: 0px; float:right;">
 <%
-    if (null != dynHeaderPrintLink)
+    if (null != dynHeaderPrintLink && dynHeaderPrintLink.length()!=0)
     {
 %>
       <a href="<%=dynHeaderPrintLink%>">
@@ -59,7 +59,7 @@ Input parameters  on REQUEST:
       </a>
 <%
     }
-    if (null != dynHeaderDownloadLink)
+    if (null != dynHeaderDownloadLink && dynHeaderDownloadLink.length()!=0)
     {
 %>
             <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cmsPhrase( "Create Excel compatible file with search results" )%>"><img alt="" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>

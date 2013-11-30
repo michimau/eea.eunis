@@ -21,6 +21,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
     String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,combined_search_location_1";
+    boolean isReturnWorkaround = false;      // show/hide part of the page
   %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("combined_search") %>'></c:set>
 
@@ -458,31 +459,13 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       <%=cm.cmsMsg("generic_combined-search-step1_09")%>
                       <%=cm.br()%>
                 <!-- END MAIN CONTENT -->
-                              </div>
-                            </div>
-                          </div>
-                          <!-- end of main content block -->
-                          <!-- start of the left (by default at least) column -->
-                          <div id="portal-column-one">
-                            <div class="visualPadding">
-                              <jsp:include page="/stripes/common/sitemap.jsp" />
-                            </div>
-                          </div>
-                          <!-- end of the left (by default at least) column -->
-                        </div>
-                        <!-- end of the main and left columns -->
-                        <div class="visualClear"><!-- --></div>
-                      </div>
-                      <!-- end column wrapper -->
-                      <jsp:include page="footer-static.jsp" />
-                    </div>
-                  </body>
-                </html>
 <%
-                      return;
+                      isReturnWorkaround = true;   // there was a return here (the rest was ignored); the logic is too complicated to continue with it so it was replaced by this flag
                     }
                   }
                 }
+
+            if(!isReturnWorkaround){
 %>
               <form method="post" action="combined-search.jsp" name="criteria">
               <strong>
@@ -1398,6 +1381,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               <%=cm.br()%>
               <%=cm.cmsMsg("error_deleting_branch")%>
               <%=cm.br()%>
+           <% } //end isReturnWorkaround %>
 <!-- END MAIN CONTENT -->
     </stripes:layout-component>
 </stripes:layout-render>

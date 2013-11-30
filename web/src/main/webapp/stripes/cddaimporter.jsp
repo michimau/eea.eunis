@@ -72,7 +72,7 @@ Code rural L. 236-12 et R. 236-84 et R. 236-95.&lt;/Law&gt;
 		<!-- start of the left (by default at least) column -->
 			<div id="portal-column-one">
             	<div class="visualPadding">
-              		<jsp:include page="/inc_column_left.jsp">
+              		<jsp:include page="/stripes/common/sitemap.jsp">
                 		<jsp:param name="page_name" value="dataimport/importcdda" />
               		</jsp:include>
             	</div>

@@ -12,7 +12,8 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
-  String pageName = request.getRequestURI();
+  String pageName = request.getParameter( "page_name" );
+  if(pageName == null) pageName = request.getRequestURI();
   String bookmarkURL = pageName + "?a=true";
 
   Enumeration en = request.getParameterNames();
@@ -53,6 +54,9 @@
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/combined-search.jsp" accesskey="c" title="<%=cm.cmsPhrase("Combined search tool")%>"><%=cm.cmsPhrase("Combined search")%></a>
+      </li>
+      <li class="navTreeItem visualNoMarker">
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/externalglobal" accesskey="x" title="<%=cm.cmsPhrase("Global queries for external data")%>"><%=cm.cmsPhrase("Global queries")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/gis-tool.jsp" accesskey="u" title="<%=cm.cmsPhrase("Interactive maps")%>"><%=cm.cmsPhrase("Interactive maps")%></a>

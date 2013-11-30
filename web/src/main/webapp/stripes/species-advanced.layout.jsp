@@ -185,7 +185,7 @@
 		<!-- start of the left (by default at least) column -->
 		<div id="portal-column-one">
 		<div class="visualPadding"><jsp:include
-			page="/inc_column_left.jsp">
+			page="/stripes/common/sitemap.jsp">
 			<jsp:param name="page_name" value="sites" />
 		</jsp:include></div>
 		</div>

@@ -68,7 +68,7 @@
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("generic_combined-search-results-sites_title") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= location%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= location%>">
     <stripes:layout-component name="head">
         <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
     </stripes:layout-component>

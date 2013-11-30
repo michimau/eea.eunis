@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}" bookmarkPageName="references/${actionBean.idref}">
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
@@ -163,14 +163,5 @@
 		<!-- END MAIN CONTENT -->
 		</stripes:layout-component>
 		<stripes:layout-component name="foot">
-			<!-- start of the left (by default at least) column -->
-				<div id="portal-column-one">
-	            	<div class="visualPadding">
-	              		<jsp:include page="/stripes/common/sitemap.jsp">
-	                		<jsp:param name="page_name" value="references/${actionBean.idref}" />
-	              		</jsp:include>
-	            	</div>
-	          	</div>
-	          	<!-- end of the left (by default at least) column -->
 		</stripes:layout-component>
 </stripes:layout-render>

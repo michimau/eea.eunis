@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Global queries">
+<stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="externalglobal" pageTitle="Global queries">
 
     <stripes:layout-component name="contents">
 
@@ -76,14 +76,5 @@
 
     </stripes:layout-component>
     <stripes:layout-component name="foot">
-        <!-- start of the left (by default at least) column -->
-            <div id="portal-column-one">
-                <div class="visualPadding">
-                    <jsp:include page="/stripes/common/sitemap.jsp">
-                        <jsp:param name="page_name" value="countries" />
-                    </jsp:include>
-                </div>
-            </div>
-            <!-- end of the left (by default at least) column -->
     </stripes:layout-component>
 </stripes:layout-render>

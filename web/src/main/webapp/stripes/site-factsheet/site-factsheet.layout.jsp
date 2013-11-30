@@ -11,7 +11,7 @@
         <c:set var="title" value="${notExistErrMsg}"></c:set>
     </c:otherwise>
 </c:choose>
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
+<stripes:layout-render name="/stripes/common/template.jsp" hideMenu="true" pageTitle="${title}">
     <stripes:layout-component name="head">
         <!-- Custom js needed for Species page -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>

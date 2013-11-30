@@ -86,7 +86,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("habitats_species-result_title") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
 
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>

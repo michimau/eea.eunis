@@ -22,7 +22,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Site coordinates") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="sites-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
         <script type="text/javascript" language="Javascript" src="<%=request.getContextPath()%>/script/sites-coordinates.js"></script>
         <script type="text/javascript" language="Javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>

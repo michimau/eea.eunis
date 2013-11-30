@@ -26,7 +26,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("pick_species_show_habitat_types") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-habitats.js" type="text/javascript"></script>
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/save-criteria.js" type="text/javascript"></script>

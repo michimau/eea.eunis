@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Import National CDDA sites and designations">
+<stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="dataimport/importcdda" pageTitle="Import National CDDA sites and designations">
 
 	<stripes:layout-component name="contents">
 
@@ -69,14 +69,5 @@ Code rural L. 236-12 et R. 236-84 et R. 236-95.&lt;/Law&gt;
 	</c:choose>
 	</stripes:layout-component>
 	<stripes:layout-component name="foot">
-		<!-- start of the left (by default at least) column -->
-			<div id="portal-column-one">
-            	<div class="visualPadding">
-              		<jsp:include page="/stripes/common/sitemap.jsp">
-                		<jsp:param name="page_name" value="dataimport/importcdda" />
-              		</jsp:include>
-            	</div>
-          	</div>
-          	<!-- end of the left (by default at least) column -->
 	</stripes:layout-component>
 </stripes:layout-render>

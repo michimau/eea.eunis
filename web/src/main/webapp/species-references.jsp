@@ -35,7 +35,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("pick_references_show_species") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-references.js"></script>
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>

@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle}">
+<stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="designations/${actionBean.idGeo}:${actionBean.idDesig}" pageTitle="${actionBean.pageTitle}">
 	<stripes:layout-component name="head">
 		<script language="JavaScript" type="text/javascript">
 		    //<![CDATA[
@@ -300,14 +300,5 @@
 		<!-- END MAIN CONTENT -->
 		</stripes:layout-component>
 		<stripes:layout-component name="foot">
-			<!-- start of the left (by default at least) column -->
-				<div id="portal-column-one">
-	            	<div class="visualPadding">
-	              		<jsp:include page="/stripes/common/sitemap.jsp">
-	                		<jsp:param name="page_name" value="designations/${actionBean.idGeo}:${actionBean.idDesig}" />
-	              		</jsp:include>
-	            	</div>
-	          	</div>
-	          	<!-- end of the left (by default at least) column -->
 		</stripes:layout-component>
 </stripes:layout-render>

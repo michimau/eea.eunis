@@ -19,7 +19,7 @@
 %>
 <c:set var="title" value='<%= title %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" >
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" >
     <stripes:layout-component name="head">
     </stripes:layout-component>
     <stripes:layout-component name="contents">

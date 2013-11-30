@@ -43,7 +43,7 @@
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Login into EUNIS Database") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
     </stripes:layout-component>
     <stripes:layout-component name="contents">

@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="habitats">
     <stripes:layout-component name="head">
                 <c:if test="${!empty actionBean.factsheet}">
                         <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
@@ -217,46 +217,44 @@
         </script>
     </stripes:layout-component>
     <stripes:layout-component name="foot">
-        <!-- start of the left (by default at least) column -->
-            <div id="portal-column-one">
-                <div class="visualPadding">
-                    <jsp:include page="/stripes/common/sitemap.jsp">
-                        <jsp:param name="page_name" value="habitats" />
-                    </jsp:include>
-<dl class="portlet portlet-navigation-tree">
-  <dd class="portletItem">
-    <ul class="portletNavigationTree navTreeLevel0">
-        <c:if test="${actionBean.factsheet.hasPictures}">
-      <li class="navTreeItem visualNoMarker">
-                <a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
-                </a>
-      </li>
-        </c:if>
-        <c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
-      <li class="navTreeItem visualNoMarker">
-                <a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
-                </a>
-      </li>
-        </c:if>
-    </ul>
-    <span class="portletBottomLeft"></span>
-    <span class="portletBottomRight"></span>
-  </dd>
-</dl>
-                </div>
-            </div>
+
+<%--todo check if these are actually used--%>
+
+<%--<dl class="portlet portlet-navigation-tree">--%>
+  <%--<dd class="portletItem">--%>
+    <%--<ul class="portletNavigationTree navTreeLevel0">--%>
+        <%--<c:if test="${actionBean.factsheet.hasPictures}">--%>
+      <%--<li class="navTreeItem visualNoMarker">--%>
+                <%--<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">--%>
+                        <%--${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}--%>
+                <%--</a>--%>
+      <%--</li>--%>
+        <%--</c:if>--%>
+        <%--<c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">--%>
+      <%--<li class="navTreeItem visualNoMarker">--%>
+                <%--<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">--%>
+                        <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}--%>
+                <%--</a>--%>
+      <%--</li>--%>
+        <%--</c:if>--%>
+    <%--</ul>--%>
+    <%--<span class="portletBottomLeft"></span>--%>
+    <%--<span class="portletBottomRight"></span>--%>
+  <%--</dd>--%>
+<%--</dl>--%>
+
               <!-- end of the left (by default at least) column -->
         <!-- end of the main and left columns -->
         <!-- start of right (by default at least) column -->
-        <div id="portal-column-two">
-            <div class="visualPadding">
-                <jsp:include page="/right-dynamic.jsp">
-                    <jsp:param name="mapLink" value="show" />
-                </jsp:include>
-            </div>
-        </div>
+
+        <%--<div id="portal-column-two">--%>
+            <%--<div class="visualPadding">--%>
+                <%--<jsp:include page="/right-dynamic.jsp">--%>
+                    <%--<jsp:param name="mapLink" value="show" />--%>
+                <%--</jsp:include>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
         <!-- end of the right (by default at least) column -->
         <div class="visualClear"><!-- --></div>
     </stripes:layout-component>

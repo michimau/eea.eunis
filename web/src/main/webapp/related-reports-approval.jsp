@@ -43,7 +43,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("related_reports_approval_page_title") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
 <stripes:layout-component name="head">
 
   <script language="JavaScript" type="text/JavaScript">

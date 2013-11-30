@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="sites">
 	<stripes:layout-component name="head">
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
 			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}/rdf" />
@@ -170,24 +170,6 @@
 	    </script>
 	</stripes:layout-component>
 	<stripes:layout-component name="foot">
-		<!-- start of the left (by default at least) column -->
-			<div id="portal-column-one">
-				<div class="visualPadding">
-					<jsp:include page="/stripes/common/sitemap.jsp">
-						<jsp:param name="page_name" value="sites" />
-					</jsp:include>
-				</div>
-			</div>
-          	<!-- end of the left (by default at least) column -->
-		<!-- end of the main and left columns -->
-		<!-- start of right (by default at least) column -->
-		<div id="portal-column-two">
-			<div class="visualPadding">
-				<jsp:include page="/right-dynamic.jsp">
-					<jsp:param name="mapLink" value="show" />
-				</jsp:include>
-			</div>
-		</div>
 	</stripes:layout-component>
 </stripes:layout-render>
 

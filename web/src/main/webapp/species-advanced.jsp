@@ -36,7 +36,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + (request.getParameter("natureobject")!=null?request.getParameter("natureobject"):"") + cm.cms("advanced_search") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[

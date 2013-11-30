@@ -128,7 +128,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("sites_neighborhood-detail_title") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>"  btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>"  btrail="<%= btrail%>">
     <stripes:layout-component name="head">
     <script type="text/javascript" language="javascript">
       //<![CDATA[

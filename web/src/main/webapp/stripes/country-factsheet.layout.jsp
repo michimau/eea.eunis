@@ -56,7 +56,7 @@
 
         <c:if test="${actionBean.country == null}">
             <div class="error-msg">
-                ${eunis:cmsPhrase(actionBean.contentManagement, ('The requested country could not be found!'))}
+                ${eunis:cmsPhrase(actionBean.contentManagement, "The requested country could not be found!")}
             </div>
         </c:if>
 
@@ -182,14 +182,5 @@
     <%-- End of main contents layout component --%>
 
     <stripes:layout-component name="foot">
-        <!-- start of the left (by default at least) column -->
-        <div id="portal-column-one">
-            <div class="visualPadding">
-                <jsp:include page="/stripes/common/sitemap.jsp">
-                    <jsp:param name="page_name" value="sites-statistical-result.jsp" />
-                </jsp:include>
-            </div>
-        </div>
-        <!-- end of the left (by default at least) column -->
     </stripes:layout-component>
 </stripes:layout-render>

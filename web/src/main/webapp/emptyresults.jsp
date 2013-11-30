@@ -24,7 +24,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= location%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= location%>">
     <stripes:layout-component name="head">
     </stripes:layout-component>
     <stripes:layout-component name="contents">

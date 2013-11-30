@@ -165,7 +165,7 @@
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("EUNIS feedback") %>'></c:set>
 
 <%-- todo: form needs more horizontal space or a redesign (URL textfield shorter) --%>
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" downloadLink="test download" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" downloadLink="test download" btrail="<%= btrail%>">
 <stripes:layout-component name="head">
         <script type="text/javascript">
           //<![CDATA[

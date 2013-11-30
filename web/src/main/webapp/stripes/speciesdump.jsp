@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Generate species XML dump">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Generate species XML dump" bookmarkPageName="dataimport/importcdda">
 
 	<stripes:layout-component name="contents">
 
@@ -21,14 +21,5 @@
 	</c:choose>
 	</stripes:layout-component>
 	<stripes:layout-component name="foot">
-		<!-- start of the left (by default at least) column -->
-			<div id="portal-column-one">
-            	<div class="visualPadding">
-              		<jsp:include page="/stripes/common/sitemap.jsp">
-                		<jsp:param name="page_name" value="dataimport/importcdda" />
-              		</jsp:include>
-            	</div>
-          	</div>
-          	<!-- end of the left (by default at least) column -->
 	</stripes:layout-component>
 </stripes:layout-render>

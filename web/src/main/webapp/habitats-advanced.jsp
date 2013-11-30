@@ -48,7 +48,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") +(request.getParameter("natureobject") != null ? request.getParameter("natureobject") : "") + cm.cms("advanced_search")%>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
         <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
         <script language="JavaScript" type="text/javascript">

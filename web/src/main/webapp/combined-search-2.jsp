@@ -24,7 +24,7 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + (request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : "") + cm.cms("combined_search") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="combined-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="combined-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
 <stripes:layout-component name="head">
 
     <script language="JavaScript" type="text/javascript">

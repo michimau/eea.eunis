@@ -1,4 +1,7 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement, java.net.URLEncoder, java.util.Enumeration" %>
+<%@ page import="ro.finsiel.eunis.utilities.EunisUtil" %>
+<%@ page import="com.hp.hpl.jena.ontology.OntTools" %>
+<%@ page import="eionet.eunis.util.JstlFunctions" %>
 <%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
@@ -13,7 +16,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String pageName = request.getParameter( "page_name" );
-  if(pageName == null) pageName = request.getRequestURI();
+  if(pageName == null || pageName.length()==0) pageName = request.getRequestURI();
   String bookmarkURL = pageName + "?a=true";
 
   Enumeration en = request.getParameterNames();

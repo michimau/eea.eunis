@@ -26,7 +26,7 @@
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("taxonomic_classification") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
         <link rel="StyleSheet" href="css/eunistree.css" type="text/css" />
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/tree.js"></script>

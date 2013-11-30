@@ -40,7 +40,7 @@
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("species_legal_title") %>'></c:set>
 
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
     <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-legal.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">

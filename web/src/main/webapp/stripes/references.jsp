@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References" bookmarkPageName="references">
 
     <stripes:layout-component name="contents">
         <!-- MAIN CONTENT value="${actionBean.defaultFilterValue}"-->
@@ -28,14 +28,5 @@
         <!-- END MAIN CONTENT -->
     </stripes:layout-component>
     <stripes:layout-component name="foot">
-        <!-- start of the left (by default at least) column -->
-            <div id="portal-column-one">
-                <div class="visualPadding">
-                      <jsp:include page="/stripes/common/sitemap.jsp">
-                        <jsp:param name="page_name" value="references" />
-                      </jsp:include>
-                </div>
-              </div>
-              <!-- end of the left (by default at least) column -->
     </stripes:layout-component>
 </stripes:layout-render>

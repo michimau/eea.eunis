@@ -20,7 +20,7 @@
 <%
     String domainName = application.getInitParameter( "DOMAIN_NAME" );
 %>
-<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
     </stripes:layout-component>
     <stripes:layout-component name="contents">

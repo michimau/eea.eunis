@@ -51,7 +51,12 @@ Input parameters  on REQUEST:
     if (null != dynHeaderPrintLink)
     {
 %>
-          <a href="<%=dynHeaderPrintLink%>"><%=cm.cmsPhrase( "Downloadable PDF" )%></a>
+      <a href="<%=dynHeaderPrintLink%>">
+          <img src="images/pdf.png"
+               alt="<%=cm.cmsPhrase("Download page as PDF")%>"
+               title="<%=cm.cmsPhrase( "Download page as PDF")%>" />
+          <%=cm.cmsPhrase("Download page as PDF")%>
+      </a>
 <%
     }
     if (null != dynHeaderDownloadLink)

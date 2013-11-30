@@ -12,6 +12,8 @@
       pageTitle: the page title
       btrail: breadcrumbs trail (not displayed now)
       downloadLink: link for downloads, displayed in the header
+      hideMenu: hides the right column menu
+      pdfLink: link for downloadable PDF
     --%>
     <%@page contentType="text/html;charset=UTF-8"%>
     <%
@@ -55,6 +57,7 @@
                             <jsp:include page="/header-dynamic.jsp">
                                 <jsp:param name="location" value="${btrail}" />
                                 <jsp:param name="downloadLink" value="${downloadLink}"/>
+                                <jsp:param name="printLink" value="${pdfLink}"/>
                             </jsp:include>
                         </c:if>
 

@@ -22,21 +22,7 @@
 			<c:choose>
 				<c:when test="${!empty actionBean.factsheet}">
 					<h1 class="documentFirstHeading">${eunis:cmsPhrase(actionBean.contentManagement, 'Designation type')}: ${actionBean.fromWho}</h1>
-					<div class="documentActions">
-				  		<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions') }</h5>
-				  		<ul>
-				    		<li>
-				      			<a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-				            		alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
-				            		title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" /></a>
-				    		</li>
-				    		<li>
-				      			<a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-				             		alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}"
-				             		title="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}" /></a>
-						    </li>
-				  		</ul>
-				  	</div>
+
 				  	<h2>${eunis:cmsPhrase(actionBean.contentManagement, 'General information')}</h2>
 				  	<table class="datatable fullwidth">
 				  		<%--Code--%>

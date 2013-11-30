@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="sites">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="sites" pdfLink="javascript:openLink('sites-factsheet-pdf.jsp?idsite=${actionBean.idsite}')">
 	<stripes:layout-component name="head">
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
 			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}/rdf" />
@@ -54,36 +54,7 @@
 							alt="${eunis:cms(actionBean.contentManagement, 'loading')}"
 							title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
 						<h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.factsheet.siteObject.name)}</h1>
-						<div class="documentActions">
-							<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
-							<ul>
-								<li>
-									<a href="javascript:this.print();">
-										<img
-											src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
-											title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" />
-									</a>
-								</li>
-								<li>
-									<a href="javascript:toggleFullScreenMode();">
-										<img
-											src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}"
-											title="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}" />
-									</a>
-								</li>
-								<li>
-									<a href="javascript:openLink('sites-factsheet-pdf.jsp?idsite=${actionBean.idsite}')">
-										<img
-											src="images/pdf.png"
-											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}"
-											title="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}" />
-									${eunis:cmsTitle(actionBean.contentManagement, 'header_download_pdf_title')}
-									</a>
-								</li>
-							</ul>
-						</div>
+
 						<div class="documentDescription">
 							${eunis:cmsPhrase(actionBean.contentManagement, 'Factsheet filled with data from')} ${actionBean.sourceDbName}
 							${eunis:cmsPhrase(actionBean.contentManagement, 'data set')}

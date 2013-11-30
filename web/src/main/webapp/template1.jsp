@@ -38,26 +38,7 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
+
 <!-- MAIN CONTENT -->
                 <img alt="Loading image" id="loading" src="images/loading.gif" />
                 <h1>Heading of level 1 - Page title</h1>

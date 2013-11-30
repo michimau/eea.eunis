@@ -6,19 +6,6 @@
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
-				<div class="documentActions">
-					<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Reference Actions')}</h5>
-					<ul>
-						<li>
-							<a href="javascript:this.print();">
-								<img
-									src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-									alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
-									title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" />
-							</a>
-						</li>
-					</ul>
-				</div>
 				<br clear="all" />
 				<div id="tabbedmenu">
                   <ul>

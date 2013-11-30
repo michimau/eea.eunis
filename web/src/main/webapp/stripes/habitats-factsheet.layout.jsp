@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="habitats">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="habitats" pdfLink="javascript:openLink('habitats-factsheet-pdf.jsp?idHabitat=${actionBean.idHabitat}')">
     <stripes:layout-component name="head">
                 <c:if test="${!empty actionBean.factsheet}">
                         <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
@@ -39,35 +39,6 @@
                                 title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
                         </c:if>
                         <h1 class="documentFirstHeading">${eunis:bracketsToItalics(eunis:replaceTags(actionBean.factsheet.habitatScientificName))}</h1>
-                        <div class="documentActions">
-                            <h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
-                            <ul>
-                                <li>
-                                    <a href="javascript:this.print();">
-                                        <img
-                                            src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                                            alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
-                                            title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:toggleFullScreenMode();">
-                                        <img
-                                            src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                                            alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}"
-                                            title="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:openLink('habitats-factsheet-pdf.jsp?idHabitat=${actionBean.idHabitat}')">
-                                        <img
-                                            src="images/pdf.png"
-                                            alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Download page as PDF')}"
-                                            title="${eunis:cmsPhrase(actionBean.contentManagement, 'Download page as PDF')}" />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                         <br style="clear:both;" />
                         <c:if test="${!actionBean.mini}">
                             <div id="tabbedmenu">

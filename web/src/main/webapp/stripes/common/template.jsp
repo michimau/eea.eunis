@@ -49,7 +49,9 @@
             <!-- The wrapper div. It contains the two columns. -->
             <div id="portal-columns">
 
-                    <div id="content" <c:if test="${empty hideMenu}">class="column-area"</c:if> >
+                <div id="portal-column-content" <c:if test="${empty hideMenu}">class="column-area"</c:if>>
+
+                    <div id="content">
 
                         <%--todo: test this --%>
                         <c:if test="${empty btrail}"><c:set var="btrail" value="${actionBean.btrail}"/> </c:if>
@@ -140,11 +142,12 @@
 
                     </div>
                         <!--END content -->
+                </div>
                 <c:choose>
                     <c:when test="${empty hideMenu}">
                         <!-- start of right column -->
-                        <div id="right-column" class="right-column-area">
-                            <div class="visualPadding">
+                        <div id="portal-column-two" class="right-column-area">
+                            <div class="portletWrapper">
                                 <jsp:include page="/stripes/common/sitemap.jsp">
                                     <jsp:param name="page_name" value="${bookmarkPageName}" />
                                 </jsp:include>
@@ -161,6 +164,7 @@
                     <stripes:layout-component name="foot"/>
             </div>
                 <!-- END column wrapper -->
+
         </div>
             <!-- END visual portal wrapper -->
         <jsp:include page="/footer-static.jsp" />

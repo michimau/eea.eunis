@@ -38,14 +38,17 @@
     eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=420,height=230');");
   }
 </script>
-<dl class="portlet" id="portlet-navigation-tree">
-  <dt class="portletHeader">
-    <span class="portletTopLeft"></span>
+<dl class="portlet portletNavigationTree">
+  <dt id="firstHeader" class="portletHeader"
     <a href="index.jsp" class="tile">EUNIS</a>
-    <span class="portletTopRight"></span>
   </dt>
-  <dd class="portletItem lastItem">
-    <ul class="portletNavigationTree navTreeLevel0">
+  <dt class="portletSubMenuHeader current">
+    <span class="title">
+        Menu
+    </span>
+  </dt>
+  <dd class="portletItem lastItem" style="display: block;">
+    <ul class="navTree navTreeLevel0">
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/species.jsp" accesskey="s" title="<%=cm.cmsPhrase("Species module")%>"><%=cm.cmsPhrase("Species")%></a>
       </li>
@@ -84,12 +87,12 @@
     <span class="portletBottomLeft"></span>
     <span class="portletBottomRight"></span>
   </dd>
-  <dt class="portletHeader">
+  <dt class="portletSubMenuHeader">
     <br />
     <%=cm.cmsPhrase( "General information" )%>
   </dt>
-  <dd class="portletItem">
-    <ul class="portletNavigationTree navTreeLevel0">
+  <dd class="portletItem lastItem" style="display: block;">
+    <ul class="navTree navTreeLevel0">
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" title="<%=cm.cmsPhrase("About EUNIS Database")%>" href="<%=request.getContextPath()%>/about.jsp" accesskey="b"><%=cm.cmsPhrase( "About EUNIS" )%></a>
       </li>
@@ -123,12 +126,12 @@
     <span class="portletBottomLeft"></span>
     <span class="portletBottomRight"></span>
   </dd>
-  <dt class="portletHeader">
+  <dt class="portletSubMenuHeader">
     <br />
     <%=cm.cmsPhrase("User operations")%>
   </dt>
-  <dd class="portletItem lastItem">
-    <ul class="portletNavigationTree navTreeLevel0">
+  <dd class="portletItem lastItem" style="display: block;">
+    <ul class="navTree navTreeLevel0">
 <%
   if ( SessionManager.isAuthenticated() )
   {

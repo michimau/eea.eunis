@@ -5,7 +5,6 @@ import ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain;
 import ro.finsiel.eunis.jrfTables.*;
-import ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryDomain;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.code.OtherClassWrapper;
 import ro.finsiel.eunis.search.habitats.advanced.DictionaryBean;
@@ -214,42 +213,6 @@ public class HabitatsSearchUtility {
         return results;
     }
 
-    /**
-     * Search terms within glossary (uses Chm62edtHabitatGlossaryDomain).
-     * @param searchString Searched string.
-     * @param op Operator, can be ro.finsiel.eunis.Utilities.OPERATOR_* values
-     * @param useTerm Search in terms (one of useTerm / useDef must be set to true)
-     * @param useDef Search in definitions (one of useTerm / useDef must be set to true)
-     * @return A list of Chm62edtHabitatGlossaryPersist objects, one for each term found in database
-     */
-    public static List findGlossaryTerms(String searchString, Integer op, boolean useTerm, boolean useDef) {
-        List list = null;
-
-        if (useTerm || useDef) {
-            String sql = "";
-
-            sql += " TERM_DOMAIN LIKE '%HABITAT%' AND SEARCH_DOMAIN LIKE '%EASY%' AND (";
-            if (useTerm) {
-                sql += Utilities.prepareSQLOperator("TERM", searchString, op);
-                if (useDef) {
-                    sql += " OR ";
-                } else {
-                    sql += " ) ";
-                }
-            }
-            if (useDef) {
-                sql += Utilities.prepareSQLOperator("DEFINITION", searchString, op);
-                sql += " ) ";
-            }
-            // Do the search
-            // System.out.println("SQL=:" + sql);
-            list = new Chm62edtGlossaryDomain().findWhere(sql + " ORDER BY TERM");
-        }
-        if (null == list) {
-            list = new Vector();
-        }
-        return list;
-    }
 
     /**
      * Return the name of the language by its ID from the CHM62EDT_LANGUAGE.

@@ -40,7 +40,6 @@ import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist;
-import ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.CommonRecordsDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.CommonRecordsPersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatNatureObjectGeoscopeDomain;
@@ -1273,53 +1272,6 @@ public final class Utilities {
         return (s == null ? "" : (s.equalsIgnoreCase("null") ? "" : s));
     }
 
-    /**
-     * This method finds the references for a term used within a specific module from web site.
-     *
-     * @param searchString searched string.
-     * @param operand      relation operator.
-     * @param useTerm      search in terms realm.
-     * @param useDef       search in definition realm.
-     * @param module       search module (species, habitats, sites).
-     * @return List of Chm62edtGlossaryPersist objects.
-     */
-    public static List findGlossaryTerms(String searchString,
-            Integer operand,
-            boolean useTerm,
-            boolean useDef,
-            String module) {
-        List list = new Vector();
-
-        if (useTerm || useDef) {
-            String sql = " 1 = 1 ";
-
-            if (module != null) {
-                sql += " AND TERM_DOMAIN LIKE '%" + module + "%' ";
-            }
-            sql += "AND ( ";
-            if (useTerm) {
-                sql += Utilities.prepareSQLOperator(" TERM ", searchString,
-                        operand);
-                sql += (useDef) ? " OR " : " ) ";
-            }
-            if (useDef) {
-                sql += Utilities.prepareSQLOperator(" DEFINITION ", searchString,
-                        operand);
-                sql += " ) ";
-            }
-            try {
-                list = new Chm62edtGlossaryDomain().findWhere(
-                        sql + " ORDER BY TERM");
-            } catch (Exception exVal) {
-                exVal.printStackTrace(System.err);
-            } finally {
-                if (null == list) {
-                    list = new Vector();
-                }
-            }
-        }
-        return list;
-    }
 
     /**
      * This method parse if the first string begin, contains or is equal with the second string depend to relationOp value.

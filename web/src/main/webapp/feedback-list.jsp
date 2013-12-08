@@ -23,8 +23,6 @@
 %>
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Feedback list") %>'></c:set>
 
-<%--todo: the table needs more horizontal space --%>
-
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
     </stripes:layout-component>

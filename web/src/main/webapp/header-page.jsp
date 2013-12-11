@@ -92,4 +92,5 @@
   }
 %>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_tabs.css" />
 

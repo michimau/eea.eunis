@@ -1,0 +1,94 @@
+
+/* EUNIS home proposal 
+    ticket #17701  */
+    
+.column-area {
+width: 100%;
+}
+
+.main-boxes {
+float:left; 
+/*position: absolute; 
+left:0; 
+top:0; */
+padding-right: 0;
+width: 40%;
+}
+
+.main-boxes .portlet {
+width: 100%;
+display: inline-block;
+float: left; 
+padding-bottom: 5px;
+}
+
+.main-boxes .submitSearchButton {
+float: right;
+}
+
+#promo-gallery-wrapper {
+width: 51%;
+margin-left: 466px;
+}
+
+
+
+/* EUNIS navigation proposal
+   ticket #16978 */
+   
+ #tabbedmenu {
+border-bottom: 0px;
+} 
+   
+#tabbedmenu ul {
+float: left;
+width: 100%;
+border-bottom: 0px;
+font-size: 12px;
+line-height: normal;
+background-color: rgb(44, 141, 162);
+border-radius: 10px 10px 0 0;
+padding: 0;
+}
+
+#tabbedmenu ul li {
+color: rgb(255, 255, 255);
+text-shadow: 1px 1px 1px rgb(0, 0, 0);
+margin: 0;
+padding: 0;
+max-width: 150px;
+text-align: center;
+background: none;
+}
+
+#tabbedmenu a:hover,
+#tabbedmenu a.current {
+background-color: rgb(243, 243, 243);
+color: rgb(0, 94, 125);
+text-shadow: 1px 1px 1px rgb(255, 255, 255);
+}
+
+#tabbedmenu a {
+height: 30px;
+min-height: 17px;
+/*font-size: 125%; */
+padding: 9px 8px 11px 8px;
+display: inline-table;
+max-width: 30px;
+white-space: normal;
+margin: 0;
+font-weight: normal;
+border: 0;
+color: rgb(255, 255, 255);
+}
+
+#tabbedmenu .first-tab {
+border-top-left-radius: 10px;
+}
+
+.border-tabbedmenu {
+border: 1px solid rgb(221, 221, 221);
+border-top: 0;
+/* background-color: rgb(243, 243, 243); */ /* ONLY IF NEEDED */
+padding: 10px;
+}

@@ -1,15 +1,15 @@
 
 /* EUNIS home proposal 
     ticket #17701  */
-    
+
 .column-area {
 width: 100%;
 }
 
 .main-boxes {
-float:left; 
-/*position: absolute; 
-left:0; 
+float:left;
+/*position: absolute;
+left:0;
 top:0; */
 padding-right: 0;
 width: 40%;
@@ -18,7 +18,7 @@ width: 40%;
 .main-boxes .portlet {
 width: 100%;
 display: inline-block;
-float: left; 
+float: left;
 padding-bottom: 5px;
 }
 
@@ -35,12 +35,15 @@ margin-left: 466px;
 
 /* EUNIS navigation proposal
    ticket #16978 */
-   
- #tabbedmenu {
+
+.tabbedmenu {
 border-bottom: 0px;
-} 
-   
-#tabbedmenu ul {
+float:left;
+width: 100%;
+line-height: normal;
+}
+
+.tabbedmenu ul {
 float: left;
 width: 100%;
 border-bottom: 0px;
@@ -48,10 +51,13 @@ font-size: 12px;
 line-height: normal;
 background-color: rgb(44, 141, 162);
 border-radius: 10px 10px 0 0;
+margin: 0;
 padding: 0;
+list-style: none;
+list-style-image: none;
 }
 
-#tabbedmenu ul li {
+.tabbedmenu ul li {
 color: rgb(255, 255, 255);
 text-shadow: 1px 1px 1px rgb(0, 0, 0);
 margin: 0;
@@ -59,17 +65,19 @@ padding: 0;
 max-width: 150px;
 text-align: center;
 background: none;
+float: left;
+white-space: nowrap;
 }
 
-#tabbedmenu a:hover,
-#tabbedmenu a.current {
+.tabbedmenu a:hover,
+.tabbedmenu a.current {
 background-color: rgb(243, 243, 243);
 color: rgb(0, 94, 125);
 text-shadow: 1px 1px 1px rgb(255, 255, 255);
 }
 
-#tabbedmenu a {
-height: 30px;
+.tabbedmenu a {
+height: 32px;
 min-height: 17px;
 /*font-size: 125%; */
 padding: 9px 8px 11px 8px;
@@ -82,7 +90,7 @@ border: 0;
 color: rgb(255, 255, 255);
 }
 
-#tabbedmenu .first-tab {
+.tabbedmenu .first-tab {
 border-top-left-radius: 10px;
 }
 

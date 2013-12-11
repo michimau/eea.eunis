@@ -51,7 +51,7 @@
                 <div id="portal-column-content" <c:if test="${empty hideMenu}">class="column-area"</c:if>>
 
                     <!-- EUNIS MENU with EIONET MARKUP but EEA tabbedmenu style -->
-                    <div id="tabbedmenu">
+                    <div class="tabbedmenu">
                           <ul>
                                   <li><a href="index.jsp" class="first-tab">EUNIS Home</a></li>
                                   <li><a href="species.jsp">Species</a></li>

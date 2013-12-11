@@ -44,14 +44,28 @@
     <body>
         <jsp:include page="/header.jsp" />
         <!-- visual portal wrapper -->
-        <div id="visual-portal-wrapper">
 
+        <div id="visual-portal-wrapper">
             <!-- The wrapper div. It contains the two columns. -->
             <div id="portal-columns">
-
                 <div id="portal-column-content" <c:if test="${empty hideMenu}">class="column-area"</c:if>>
 
-                    <div id="content">
+                    <!-- EUNIS MENU with EIONET MARKUP but EEA tabbedmenu style -->
+                    <div id="tabbedmenu">
+                          <ul>
+                                  <li><a href="index.jsp" class="first-tab">EUNIS Home</a></li>
+                                  <li><a href="species.jsp">Species</a></li>
+                                  <li><a href="habitats.jsp">Habitat types</a></li>
+                                  <li><a href="sites.jsp">Sites</a></li>
+                                  <li><a href="combined-search.jsp">Combined search</a></li>
+                                  <li><a href="externalglobal">Global queries</a></li>
+                                  <li><a href="gis-tool.jsp">Interactive maps</a></li>
+                                  <li><a href="references">References</a></li>
+                                  <li><a href="related-reports.jsp" class="last-tab current">Downloads and links</a></li>
+                          </ul>
+                     </div>
+
+                     <div id="content" class="border-tabbedmenu">
 
                         <%--todo: test this --%>
                         <c:if test="${empty btrail}"><c:set var="btrail" value="${actionBean.btrail}"/> </c:if>

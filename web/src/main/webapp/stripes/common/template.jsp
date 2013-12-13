@@ -2,6 +2,8 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 
+<c:set var="hideMenu" value="true"/>
+
 <stripes:layout-definition>
     <%--
       - Author(s) : The EUNIS Database Team.

@@ -2,7 +2,10 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="externalglobal" pageTitle="Global queries">
+<%
+    String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#index.jsp,externalglobal";
+%>
+<stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="externalglobal" pageTitle="Global queries" btrail="<%=btrail %>">
 
     <stripes:layout-component name="contents">
 

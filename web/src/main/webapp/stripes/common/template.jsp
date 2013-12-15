@@ -2,6 +2,7 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 
+<%--todo: the right menu is disabled here--%>
 <c:set var="hideMenu" value="true"/>
 
 <stripes:layout-definition>
@@ -52,18 +53,31 @@
             <div id="portal-columns">
                 <div id="portal-column-content" <c:if test="${empty hideMenu}">class="column-area"</c:if>>
 
+
+
+                    <c:set var="currentTab" value="${fn:substringAfter(btrail, '#index.jsp,')}" />
+                    <c:if test="${fn:contains(currentTab, '#')}">
+                        <c:set var="currentTab" value="${fn:substringBefore(currentTab, '#')}" />
+                    </c:if>
+
+                    <c:if test="${empty currentTab}">
+                        <c:set var="currentTab" value="index" />
+                    </c:if>
+
+                    <%--<script>  alert("${btrail}" + "  " + "${currentTab}"); </script>--%>
+
                     <!-- EUNIS MENU with EIONET MARKUP but EEA tabbedmenu style -->
                     <div class="tabbedmenu">
                           <ul>
-                                  <li><a href="index.jsp" class="first-tab">EUNIS Home</a></li>
-                                  <li><a href="species.jsp">Species</a></li>
-                                  <li><a href="habitats.jsp">Habitat types</a></li>
-                                  <li><a href="sites.jsp">Sites</a></li>
-                                  <li><a href="combined-search.jsp">Combined search</a></li>
-                                  <li><a href="externalglobal">Global queries</a></li>
-                                  <li><a href="gis-tool.jsp">Interactive maps</a></li>
-                                  <li><a href="references">References</a></li>
-                                  <li><a href="related-reports.jsp" class="last-tab current">Downloads and links</a></li>
+                                  <li><a href="index.jsp" class="first-tab <c:if test = "${currentTab == 'index'}">current</c:if>">EUNIS Home</a></li>
+                                  <li><a href="species.jsp" <c:if test = "${currentTab == 'species'}">class="current"</c:if> >Species</a></li>
+                                  <li><a href="habitats.jsp" <c:if test = "${currentTab == 'habitat_types'}">class="current"</c:if> >Habitat types</a></li>
+                                  <li><a href="sites.jsp" <c:if test = "${currentTab == 'sites'}">class="current"</c:if> >Sites</a></li>
+                                  <li><a href="combined-search.jsp" <c:if test = "${currentTab == 'combined_search'}">class="current"</c:if> >Combined search</a></li>
+                                  <li><a href="externalglobal" <c:if test = "${currentTab == 'externalglobal'}">class="current"</c:if> >Global queries</a></li>
+                                  <li><a href="gis-tool.jsp" <c:if test = "${currentTab == 'gis_tool'}">class="current"</c:if> >Interactive maps</a></li>
+                                  <li><a href="references" <c:if test = "${currentTab == 'references'}">class="current"</c:if> >References</a></li>
+                                  <li><a href="related-reports.jsp" class="last-tab <c:if test = "${currentTab == 'related_reports'}">current</c:if>">Downloads and links</a></li>
                           </ul>
                      </div>
 

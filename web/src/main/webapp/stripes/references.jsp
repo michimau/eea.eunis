@@ -1,8 +1,10 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
-
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References" bookmarkPageName="references">
+<%
+    String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#index.jsp,references";
+%>
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References" bookmarkPageName="references" btrail="<%= btrail %>">
 
     <stripes:layout-component name="contents">
         <!-- MAIN CONTENT value="${actionBean.defaultFilterValue}"-->

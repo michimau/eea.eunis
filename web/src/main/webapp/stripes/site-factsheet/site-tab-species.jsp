@@ -3,9 +3,6 @@
 <stripes:layout-definition>
 <%@ page import=
 "ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
-java.util.List,
-java.util.HashMap,
-java.util.Map,
 ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist,
 ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist,
 ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist,
@@ -13,6 +10,7 @@ ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist,
 ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.utilities.EunisUtil,
 ro.finsiel.eunis.utilities.SQLUtilities, ro.finsiel.eunis.search.Utilities"
 %>
+<%@ page import="java.util.*" %>
 
 
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -34,11 +32,11 @@ String information = factsheet.getSiteObject().getRespondent();
  
 /* All data for species. */
 List species                                = null;
-List sitesSpecificspecies                   = null;
-List eunisSpeciesListedAnnexesDirectives    = null;
-List eunisSpeciesOtherMentioned             = null;
-List notEunisSpeciesListedAnnexesDirectives = null;
-List notEunisSpeciesOtherMentioned          = null;
+List sitesSpecificspecies                   = new ArrayList();
+List eunisSpeciesListedAnnexesDirectives    = new ArrayList();
+List eunisSpeciesOtherMentioned             = new ArrayList();
+List notEunisSpeciesListedAnnexesDirectives = new ArrayList();
+List notEunisSpeciesOtherMentioned          = new ArrayList();
 HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 
 %>

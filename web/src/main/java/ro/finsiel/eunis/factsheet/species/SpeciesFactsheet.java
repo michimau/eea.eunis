@@ -351,7 +351,7 @@ public class SpeciesFactsheet {
                         + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
                         + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'"
                         + " AND A.ID_SPECIES <> '" + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
-                        + getSpeciesObject().getScientificName() + " %')" + " GROUP BY C.ID_NATURE_OBJECT";
+                        + EunisUtil.mysqlEscapes(getSpeciesObject().getScientificName()) + "%')" + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);

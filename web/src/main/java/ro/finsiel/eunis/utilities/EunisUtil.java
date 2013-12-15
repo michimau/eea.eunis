@@ -19,7 +19,7 @@ public class EunisUtil {
     public static String replaceTagsExport(String in) {
 
         in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
 
         for (int i = 0; i < in.length(); i++) {
             char c = in.charAt(i);
@@ -42,10 +42,15 @@ public class EunisUtil {
         return ret.toString();
     }
 
+    /**
+     * Adds escape characters to quotes
+     * @param in
+     * @return
+     */
     public static String replaceTagsImport(String in) {
 
         in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
 
         for (int i = 0; i < in.length(); i++) {
             char c = in.charAt(i);
@@ -92,7 +97,7 @@ public class EunisUtil {
     public static String replaceBrackets(String in) {
 
         in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
 
         for (int i = 0; i < in.length(); i++) {
             char c = in.charAt(i);
@@ -109,22 +114,37 @@ public class EunisUtil {
         return ret.toString();
     }
 
+    /**
+     * Replace pattern within source with the replace string.
+     * @param source Source string; if null returns empty string
+     * @param pattern Pattern to be replaced; if null returns the source
+     * @param replace String to replace with
+     * @return
+     */
     public static String replace(String source, String pattern, String replace) {
         if (source != null) {
-            final int len = pattern.length();
-            StringBuffer sb = new StringBuffer();
-            int found = -1;
-            int start = 0;
+            if(replace != null){
+                if(pattern!=null && pattern.length() != 0){
+                    int len = pattern.length();
+                    StringBuilder sb = new StringBuilder();
+                    int found = -1;
+                    int start = 0;
 
-            while ((found = source.indexOf(pattern, start)) != -1) {
-                sb.append(source.substring(start, found));
-                sb.append(replace);
-                start = found + len;
+                    while ((found = source.indexOf(pattern, start)) != -1) {
+                        sb.append(source.substring(start, found));
+                        sb.append(replace);
+                        start = found + len;
+                    }
+
+                    sb.append(source.substring(start));
+
+                    return sb.toString();
+                } else {
+                    return source;
+                }
+            } else {
+                return source;
             }
-
-            sb.append(source.substring(start));
-
-            return sb.toString();
         } else {
             return "";
         }
@@ -140,8 +160,8 @@ public class EunisUtil {
     public static String digestHexDec(String src, String algorithm) {
 
         byte[] srcBytes = src.getBytes();
-        byte[] dstBytes = new byte[16];
-        StringBuffer buf = new StringBuffer();
+        byte[] dstBytes;
+        StringBuilder buf = new StringBuilder();
 
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
@@ -150,8 +170,7 @@ public class EunisUtil {
             dstBytes = md.digest();
             md.reset();
 
-            for (int i = 0; i < dstBytes.length; i++) {
-                Byte byteWrapper = new Byte(dstBytes[i]);
+            for (Byte byteWrapper : dstBytes) {
                 String s = Integer.toHexString(byteWrapper.intValue());
 
                 if (s.length() == 1) {
@@ -193,7 +212,7 @@ public class EunisUtil {
             String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
 
         in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
 
         for (int i = 0; i < in.length(); i++) {
             char c = in.charAt(i);
@@ -253,7 +272,7 @@ public class EunisUtil {
      */
     public static String setAnchors(String s, boolean newWindow, int cutLink) {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(s, " \t\n\r\f", true);
 
@@ -263,7 +282,7 @@ public class EunisUtil {
             if (!isURL(token)) {
                 buf.append(token);
             } else {
-                StringBuffer _buf = new StringBuffer("<a ");
+                StringBuilder _buf = new StringBuilder("<a ");
 
                 if (newWindow) {
                     _buf.append("target=\"_blank\" ");
@@ -334,7 +353,7 @@ public class EunisUtil {
         }
 
         if (s.length() > len) {
-            StringBuffer buf = new StringBuffer(s.substring(0, len));
+            StringBuilder buf = new StringBuilder(s.substring(0, len));
 
             buf.append("...");
             return buf.toString();
@@ -343,6 +362,11 @@ public class EunisUtil {
         }
     }
 
+    /**
+     * Checks if the gven String is an integer
+     * @param in String to check
+     * @return true if no NumberFormatException is thrown while trying to convert
+     */
     public static boolean isNumber(String in) {
 
         try {
@@ -390,6 +414,18 @@ public class EunisUtil {
         }
 
         return ret;
+    }
+
+    /**
+     * Escapes MySQL strings
+     * @param text
+     * @return
+     */
+    public static String mysqlEscapes(String text)
+    {
+        text = text.replace("'","''");
+
+        return text;
     }
 
 }

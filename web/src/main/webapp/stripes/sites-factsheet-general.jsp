@@ -273,12 +273,12 @@
         </c:if>
         <c:if test="${actionBean.typeNatura2000}">
             <div>
-                <a rel="nofollow" href="http://natura2000.eea.europa.eu/Natura2000/SDFPublic.aspx?site=${actionBean.factsheet.siteObject.idSite}">
+                <a rel="nofollow" href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${actionBean.factsheet.siteObject.idSite}">
                     <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 factsheet')}"/>
                 </a>
             </div>
             <div>
-                <a href="http://natura2000.eea.europa.eu/N2KGisViewer.html#siteCode=${actionBean.factsheet.siteObject.idSite}">
+                <a href="http://natura2000.eea.europa.eu/#siteCode=${actionBean.factsheet.siteObject.idSite}">
                     <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 mapviewer')}"/>
                 </a>
             </div>

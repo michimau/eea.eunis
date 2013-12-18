@@ -77,12 +77,10 @@ text-shadow: 1px 1px 1px rgb(255, 255, 255);
 }
 
 .tabbedmenu a {
-height: 32px;
 min-height: 17px;
 /*font-size: 125%; */
 padding: 9px 8px 11px 8px;
 display: inline-table;
-max-width: 30px;
 white-space: normal;
 margin: 0;
 font-weight: normal;

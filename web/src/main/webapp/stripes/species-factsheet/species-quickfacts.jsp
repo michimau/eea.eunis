@@ -64,12 +64,6 @@
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}
                             </p
                         </c:if>
-		     <h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Main sections')}</h2>
-		     <ul>
-		       <li><a href="${ actionBean.pageUrl }#species-status">How is this species doing?</a></li>
-		       <li><a href="${ actionBean.pageUrl }#protected">Where is the species protected?</a></li>
-		       <li><a href="${ actionBean.pageUrl }#species-reported">Where can the species be found?</a></li>
-		     </ul>
 
                         <p><a href="#generic-references-overlay" rel="#generic-references-overlay" class="float-right standardButton">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a></p>
                     </div>

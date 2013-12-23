@@ -19,10 +19,17 @@
                             <c:set var="statusCodeE25-title" value="${statusCodeE25 eq 'un' ? 'Not assessed threat level for the EU' : actionBean.consStatusE25.statusDesc}"></c:set>
 
                             <div class="threat-status-${statusCodeWO} roundedCorners">
-
+                                <%--World status--%>
                                 <c:choose>
-                                    <c:when test="${not empty actionBean.consStatusWO}">
-                                        <a href="references/${actionBean.consStatusWO.idDc}">
+                                    <c:when test="${!empty actionBean.consStatusWO}">
+                                        <c:choose>
+                                            <c:when test="${!empty actionBean.redlistLink}">
+                                                <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
+                                            </c:otherwise>
+                                        </c:choose>
                                             <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusWO.statusDesc}">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
                                                 <p class="threat-status-label small-text">${actionBean.consStatusWO.statusName}</p>
@@ -40,10 +47,20 @@
                                     </c:otherwise>
                                 </c:choose>
 
+                                <%--EU status--%>
                                 <div class="threat-status-${statusCodeEU} roundedCorners width-11">
                                     <c:choose>
                                         <c:when test="${not empty actionBean.consStatusEU}">
-                                            <a href="references/${actionBean.consStatusEU.idDc}">
+
+                                        <c:choose>
+                                            <c:when test="${!empty actionBean.redlistLink}">
+                                                <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
+                                            </c:otherwise>
+                                        </c:choose>
+                                            <%--<a href="references/${actionBean.consStatusEU.idDc}">--%>
                                                 <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusEU.statusDesc}">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
                                                     <p class="threat-status-label small-text">${actionBean.consStatusEU.statusName}</p>
@@ -61,10 +78,19 @@
                                         </c:otherwise>
                                     </c:choose>
 
+                                    <%--E25 status--%>
                                     <div class="threat-status-${statusCodeE25} roundedCorners width-9">
                                         <c:choose>
                                             <c:when test="${not empty actionBean.consStatusE25}">
-                                                <a href="references/${actionBean.consStatusE25.idDc}">
+                                                <c:choose>
+                                                    <c:when test="${!empty actionBean.redlistLink}">
+                                                        <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <%--<a href="references/${actionBean.consStatusE25.idDc}">--%>
                                                     <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusE25.statusDesc}">
                                                         <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
                                                         <p class="threat-status-label small-text">${actionBean.consStatusE25.statusName}</p>

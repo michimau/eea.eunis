@@ -66,6 +66,9 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 <%-- Species is mentioned by the following legal instruments --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
 
+                <%-- Synonyms and vernacular names --%>
+                <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
+
 
             </c:when>
             <c:otherwise>

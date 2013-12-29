@@ -52,23 +52,56 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 </h1>
 
                 <%-- Quick facts --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-quickfacts.jsp"/>
+                <div>
+                    <stripes:layout-render name="/stripes/species-factsheet/species-quickfacts.jsp"/>
+                </div>
 
-                <%-- Areas where this species has been reported --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+                <div>
+                <%--Accordion for the other data--%>
+                <div class="eea-accordion-panels non-exclusive">
 
-                <%-- Threat status and conservation status --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
+                    <%-- Areas where this species has been reported --%>
+                    <div class="eea-accordion-panel" style="clear: both;">
+                    <h2 class="notoc eea-icon-right-container">Distribution</h2>
+                        <div class="pane">
+                            <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+                        </div>
+                    </div>
 
-                <%-- This species is being protected in Europe --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
+                    <%-- Threat status and conservation status --%>
+                    <div class="eea-accordion-panel" style="clear: both;">
+                        <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
+                        <div class="pane">
+                            <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
+                        </div>
+                    </div>
 
-                <%-- Species is mentioned by the following legal instruments --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
+                    <%-- This species is being protected in Europe --%>
+                    <div class="eea-accordion-panel" style="clear: both;">
+                        <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
+                        <div class="pane">
+                            <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
+                        </div>
+                    </div>
 
-                <%-- Synonyms and vernacular names --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
+                    <%-- Species is mentioned by the following legal instruments --%>
+                <div class="eea-accordion-panel" style="clear: both;">
+                    <h2 class="notoc eea-icon-right-container">Legal status</h2>
+                    <div class="pane">
+                        <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
+                    </div>
+                </div>
 
+                    <%-- Synonyms and vernacular names --%>
+                <div class="eea-accordion-panel" style="clear: both;">
+                    <h2 class="notoc eea-icon-right-container">Common names and synonyms</h2>
+                    <div class="pane">
+                        <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
+                    </div>
+                </div>
+
+                </div>
+                </div>
 
             </c:when>
             <c:otherwise>

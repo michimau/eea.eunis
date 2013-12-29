@@ -271,7 +271,7 @@
                 <!-- species reported -->
                 <div class="reported-areas">
 		    <a name="species-reported"></a>
-                    <h2 class="visualClear">${eunis:cmsPhrase(actionBean.contentManagement, 'Where can the species be found?')}</h2>
+                    <%--<h2 class="visualClear">${eunis:cmsPhrase(actionBean.contentManagement, 'Where can the species be found?')}</h2>--%>
                     <div class="left-area reported-areas-fieldset">
                         <fieldset>
                             <legend><strong>Select layer</strong></legend>

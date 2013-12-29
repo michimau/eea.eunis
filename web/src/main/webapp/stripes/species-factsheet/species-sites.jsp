@@ -6,7 +6,7 @@
 
                 <!-- species protection -->
                 <a name="protected"></a>
-                <h2 class="visualClear" id="protected">Natura 2000 Sites</h2>
+                <%--<h2 class="visualClear" id="protected">Natura 2000 Sites</h2>--%>
 
 	                <c:choose>
 	                	<c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">

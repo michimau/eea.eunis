@@ -3,7 +3,7 @@
 <stripes:layout-definition>
 <!-- Species synonyms and vernacular names -->
 
-<h2 class="visualClear" id="synonyms">${eunis:cmsPhrase(actionBean.contentManagement, 'Common names and synonyms of ')} <span class="italics">${actionBean.scientificName}</span></h2>
+<%--<h2 class="visualClear" id="synonyms">${eunis:cmsPhrase(actionBean.contentManagement, 'Common names and synonyms of ')} <span class="italics">${actionBean.scientificName}</span></h2>--%>
 
 <div class="left-area species">
     <%--Common names--%>

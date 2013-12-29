@@ -3,7 +3,7 @@
 <stripes:layout-definition>
                 <!-- species status -->
                 <a name="species-status"></a>
-                <h2 class="visualClear">How is this species doing?</h2>
+                <%--<h2 class="visualClear">How is this species doing?</h2>--%>
 
                 <div class="left-area">
                     <div class="threat-status-indicator width-12">

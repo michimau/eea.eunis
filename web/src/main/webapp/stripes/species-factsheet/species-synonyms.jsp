@@ -7,98 +7,112 @@
 
 <div class="left-area species">
     <%--Common names--%>
-    <div class="scroll-auto" style="height: 300px">
-        <table summary="Common names" class="listing fullwidth">
-            <thead>
-            <tr>
-                <th scope="col" style="cursor: pointer;"><img
-                        src="http://www.eea.europa.eu/arrowBlank.gif"
-                        height="6" width="9">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Common Name')}
-                        ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+    <c:choose>
+    <c:when test="${actionBean.vernNamesCount>0}">
+        <div class="scroll-auto" style="height: 300px">
+            <table summary="Common names" class="listing fullwidth">
+                <thead>
+                <tr>
+                    <th scope="col" style="cursor: pointer;"><img
+                            src="http://www.eea.europa.eu/arrowBlank.gif"
+                            height="6" width="9">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Common Name')}
+                            ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                    <img src="http://www.eea.europa.eu/arrowUp.gif"
-                         height="6" width="9"></th>
-                <th scope="col" style="cursor: pointer;"><img
-                        src="http://www.eea.europa.eu/arrowBlank.gif"
-                        height="6" width="9">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Language')}
-                        ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+                        <img src="http://www.eea.europa.eu/arrowUp.gif"
+                             height="6" width="9"></th>
+                    <th scope="col" style="cursor: pointer;"><img
+                            src="http://www.eea.europa.eu/arrowBlank.gif"
+                            height="6" width="9">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Language')}
+                            ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                    <img src="http://www.eea.europa.eu/arrowBlank.gif"
-                         height="6" width="9"></th>
-                <th scope="col" style="cursor: pointer;"><img
-                        src="http://www.eea.europa.eu/arrowBlank.gif"
-                        height="6" width="9">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Reference')}
-                        ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+                        <img src="http://www.eea.europa.eu/arrowBlank.gif"
+                             height="6" width="9"></th>
+                    <th scope="col" style="cursor: pointer;"><img
+                            src="http://www.eea.europa.eu/arrowBlank.gif"
+                            height="6" width="9">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Reference')}
+                            ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                    <img src="http://www.eea.europa.eu/arrowBlank.gif"
-                         height="6" width="9"></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <c:forEach items="${actionBean.vernNames}" var="vern" varStatus="loop">
-                <c:set var="ref" value="-1"></c:set>
-                <c:if test="${!empty vern.idDc}">
-                    <c:set var="ref" value="${vern.idDc}"></c:set>
-                </c:if>
-                <tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
-                    <td xml:lang="${vern.languageCode}">
-                            ${eunis:treatURLSpecialCharacters(vern.name)}
-                    </td>
-                    <td>
-                            ${vern.language}
-                    </td>
-                    <td>
-                        <a class="link-plain" href="references/${ref}">${eunis:getAuthorAndUrlByIdDc(ref)}</a>
-                    </td>
+                        <img src="http://www.eea.europa.eu/arrowBlank.gif"
+                             height="6" width="9"></th>
                 </tr>
-            </c:forEach>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                <c:forEach items="${actionBean.vernNames}" var="vern" varStatus="loop">
+                    <c:set var="ref" value="-1"></c:set>
+                    <c:if test="${!empty vern.idDc}">
+                        <c:set var="ref" value="${vern.idDc}"></c:set>
+                    </c:if>
+                    <tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+                        <td xml:lang="${vern.languageCode}">
+                                ${eunis:treatURLSpecialCharacters(vern.name)}
+                        </td>
+                        <td>
+                                ${vern.language}
+                        </td>
+                        <td>
+                            <a class="link-plain" href="references/${ref}">${eunis:getAuthorAndUrlByIdDc(ref)}</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+                </tbody>
+            </table>
     </div>
+    </c:when>
+        <c:otherwise>
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'The species has no common names')}
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <div class="right-area quickfacts">
 
     <%--Synonyms--%>
-    <div class="scroll-auto" style="height: 300px">
-        <table summary="List of synonyms" class="listing fullwidth">
-            <colgroup>
-                <col style="width:40%">
-                <col style="width:40%">
-            </colgroup>
-            <thead>
-            <tr>
-                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Synonym')}
-                        ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
+    <c:choose>
+    <c:when test="${actionBean.synonymsCount>0}">
+        <div class="scroll-auto" style="height: 300px">
+            <table summary="List of synonyms" class="listing fullwidth">
+                <colgroup>
+                    <col style="width:40%">
+                    <col style="width:40%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Synonym')}
+                            ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
 
-                    <img src="http://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
-                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}
-                        ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
-                    <img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <c:forEach items="${actionBean.factsheet.synonymsIterator}" var="synonym" varStatus="loop">
-                <tr ${loop.index % 2 == 1 ? '' : 'class="zebraeven"'}>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/species/${synonym.idSpecies}">${eunis:treatURLSpecialCharacters(synonym.scientificName)}</a>
-                    </td>
-                    <td>
-                            ${eunis:treatURLSpecialCharacters(synonym.author)}
-                    </td>
+                        <img src="http://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
+                    <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}
+                            ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
+                        <img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+
+                <c:forEach items="${actionBean.factsheet.synonymsIterator}" var="synonym" varStatus="loop">
+                    <tr ${loop.index % 2 == 1 ? '' : 'class="zebraeven"'}>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/species/${synonym.idSpecies}">${eunis:treatURLSpecialCharacters(synonym.scientificName)}</a>
+                        </td>
+                        <td>
+                                ${eunis:treatURLSpecialCharacters(synonym.author)}
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:when>
+        <c:otherwise>
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'The species has no synonyms')}
+        </c:otherwise>
+    </c:choose>
 
 </div>
 

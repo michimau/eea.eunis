@@ -2,10 +2,14 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
 <stripes:layout-definition>
-                <!-- detailed reference -->
-                <a name="legal-instruments"></a>
+    <!-- detailed reference -->
+    <a name="legal-instruments"></a>
+    <h2 class="visualClear" id="legal-status">Legal status</h2>
+
+    <%--todo: change the table according to http://taskman.eionet.europa.eu/issues/15649--%>
+
                 <div class='detailed-reference'>
-                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'By means of the following international legal instruments and agreements')}</h3>
+                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in the following international legal instruments and agreements')}</h3>
 
                     <table summary="List of legal instruments"
                        class="listing fullwidth">
@@ -58,8 +62,8 @@
 						</tbody>
 					  </table>
                     
-                  <p>See also <a href="${ actionBean.unepWcmcPageLink }">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC page')}</a>
-                  </p>
+                  <%--<p>See also <a href="${ actionBean.unepWcmcPageLink }">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC page')}</a>--%>
+                  <%--</p>--%>
                 </div>
                 <!-- END detailed reference -->
 </stripes:layout-definition>

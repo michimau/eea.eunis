@@ -6,7 +6,7 @@
 
                 <!-- species protection -->
                 <a name="protected"></a>
-                <h2 class="visualClear" id="protected">Where is the species protected?</h2>
+                <h2 class="visualClear" id="protected">Natura 2000 Sites</h2>
 
 	                <c:choose>
 	                	<c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">
@@ -17,7 +17,7 @@
 	                	</c:otherwise>
 	                </c:choose>
                 
-                    <h3>By Means of Protected Sites (Natura 2000)</h3>
+                    <h3>Protected in the following Natura 2000 sites</h3>
                     <c:choose>
 	                    <c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">
 	                    	<div class="scroll-auto" style="height: 250px">

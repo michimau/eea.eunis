@@ -14,6 +14,11 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
+    <property name="id_site.type" value="varchar(16)"/>
+    <property name="id_habitat.type" value="int(16)"/>
+    <property name="id_nature_object.type" value="int(11)"/>
+    <property name="id_dc.type" value="int(11)"/>
+
     <changeSet author="roug" id="rev-1">
         <sql>CREATE TABLE chm62edt_abundance (
   ID_ABUNDANCE int(11) NOT NULL default '0',
@@ -1947,6 +1952,74 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         <dropIndex tableName="chm62edt_sites_related_designations" indexName="IDX_ID_SITE"/>
         <dropIndex tableName="chm62edt_sites_sites" indexName="IDX_ID_SITE"/>
         <dropIndex tableName="eunis_web_content" indexName="IDX_ID_PAGE"/>
+
+        <rollback>
+            <createIndex tableName="chm62edt_biogeoregion" indexName="IDX_ID_BIOGEOREGION">
+                <column name="ID_BIOGEOREGION" type="int"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_country_biogeoregion" indexName="IDX_CODE_BIOGEOREGION">
+                <column name="CODE_BIOGEOREGION" type="varchar(16)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_country_sites_factsheet" indexName="IDX_SOURCE_DB">
+                <column name="SOURCE_DB" type="varchar(50)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_designations" indexName="IDX_ID_DESIGNATION">
+                <column name="ID_DESIGNATION" type="varchar(16)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_geoscope" indexName="IDX_ID_GEOSCOPE">
+                <column name="ID_GEOSCOPE" type="int"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_geoscope" indexName="IDX_ID_GEOSCOPE_PARENT">
+                <column name="ID_GEOSCOPE_PARENT" type="int"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_glossary" indexName="IDX_TERM">
+                <column name="TERM" type="varchar(64)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_grid" indexName="IDX_NAME">
+                <column name="NAME" type="varchar(16)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_class_code" indexName="IDX_ID_HABITAT">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_habitat" indexName="IDX_ID_HABITAT_LINK">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+                <column name="ID_HABITAT_LINK" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_habitat" indexName="IDX_ID_HABITAT">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_international_name" indexName="IDX_ID_HABITAT">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_references" indexName="IDX_ID_HABITAT">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_habitat_syntaxa" indexName="IDX_ID_HABITAT">
+                <column name="ID_HABITAT" type="${id_habitat.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_nature_object_report_type" indexName="IDX_ID_NATURE_OBJECT">
+                <column name="ID_NATURE_OBJECT" type="${id_nature_object.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_reports" indexName="IDX_ID_NATURE_OBJECT">
+                <column name="ID_NATURE_OBJECT" type="${id_nature_object.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_site_attributes" indexName="IDX_ID_SITE">
+                <column name="ID_SITE" type="${id_site.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_site_attributes" indexName="IDX_ID_SITE_NAME">
+                <column name="ID_SITE" type="${id_site.type}"/>
+                <column name="NAME" type="varchar(128)"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites_related_designations" indexName="IDX_ID_SITE">
+                <column name="ID_SITE" type="${id_site.type}"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites_sites" indexName="IDX_ID_SITE">
+                <column name="ID_SITE" type="${id_site.type}"/>
+            </createIndex>
+            <createIndex tableName="eunis_web_content" indexName="IDX_ID_PAGE">
+                <column name="ID_PAGE" type="varchar(64)"/>
+            </createIndex>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>

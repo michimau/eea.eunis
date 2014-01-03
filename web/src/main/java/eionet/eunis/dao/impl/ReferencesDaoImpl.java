@@ -35,9 +35,6 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     public ReferencesDaoImpl() {
     }
 
-    /**
-     * @see eionet.eunis.dao.IReferencesDao#getReferences(int page, int defaltPageSize, String sort, String dir) {@inheritDoc}
-     */
     @Override
     public CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir, String like) {
 
@@ -119,7 +116,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     /**
      *
      * @param like
-     * @return
+     * @return number of references
      */
     private int getReferencesCnt(String like) {
         int ret = 0;
@@ -151,9 +148,6 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return ret;
     }
 
-    /**
-     * @see eionet.eunis.dao.IReferencesDao#getDcAttributes(java.lang.String) {@inheritDoc}
-     */
     @Override
     public List<AttributeDto> getDcAttributes(String idDc) {
         List<AttributeDto> ret = new ArrayList<AttributeDto>();

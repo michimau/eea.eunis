@@ -87,7 +87,7 @@ public class EunisUtil {
      * Replace { with [ and } with ]. It is actually replacing braces with brackets.
      *
      * @param in - input string
-     * @returns - string with replacements.
+     * @return - string with replacements.
      */
     public static String replaceBrackets(String in) {
 
@@ -134,7 +134,7 @@ public class EunisUtil {
      * A method for creating a unique Hexa-Decimal digest of a String message.
      *
      * @param src String to be digested.
-     * @param algosrithm Digesting algorithm (please see Java documentation for allowable values).
+     * @param algorithm Digesting algorithm (please see Java documentation for allowable values).
      * @return A unique String-typed Hexa-Decimal digest of the input message.
      */
     public static String digestHexDec(String src, String algorithm) {
@@ -168,7 +168,7 @@ public class EunisUtil {
 
     /**
      * @param in
-     * @return
+     * @return new string with replacements.
      */
     public static String replaceTags(String in) {
         return replaceTags(in, false, false);
@@ -177,7 +177,7 @@ public class EunisUtil {
     /**
      * @param in
      * @param dontCreateHTMLAnchors
-     * @return
+     * @return new string with replacements.
      */
     public static String replaceTags(String in, boolean dontCreateHTMLAnchors) {
         return replaceTags(in, dontCreateHTMLAnchors, false);
@@ -185,8 +185,9 @@ public class EunisUtil {
 
     /**
      * @param in
-     * @param inTextarea
-     * @return
+     * @param dontCreateHTMLAnchors
+     * @param dontCreateHTMLLineBreaks - do not change \n into &lt;br/&gt;
+     * @return new string with replacements.
      */
     public static String replaceTags(
             String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {

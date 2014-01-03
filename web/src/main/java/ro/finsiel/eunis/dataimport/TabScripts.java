@@ -510,7 +510,6 @@ public class TabScripts {
     /**
      * 
      * @param con
-     * @return
      * @throws SQLException
      */
     private void generateSpeciesLinkedDataTabFlag(Connection con) throws SQLException {
@@ -534,7 +533,6 @@ public class TabScripts {
     /**
      * 
      * @param con
-     * @return
      * @throws SQLException
      */
     private void generateHabitatsLinkedDataTabFlag(Connection con) throws SQLException {
@@ -556,14 +554,6 @@ public class TabScripts {
         }
     }
 
-    /**
-     * @param sql
-     * @param con
-     * @param sqlc
-     * @param tab
-     * @param table
-     * @throws Exception
-     */
     private void updateTab(String sql, Connection con, SQLUtilities sqlc, String tab, String table) throws Exception {
 
         PreparedStatement ps = null;

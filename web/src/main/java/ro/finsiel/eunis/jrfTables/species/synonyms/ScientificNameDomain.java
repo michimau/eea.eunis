@@ -214,7 +214,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
      * in your code that this method is called (in ideal way) only once and results are cached. This is what
      * countResults() method does in this class
 
-     * @return
+     * @return count of the total list of results from a query as Long
      * @throws ro.finsiel.eunis.exceptions.CriteriaMissingException
      */
     private Long _rawCount() throws CriteriaMissingException {

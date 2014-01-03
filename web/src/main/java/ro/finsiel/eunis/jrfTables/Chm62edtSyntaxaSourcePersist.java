@@ -45,7 +45,7 @@ public class Chm62edtSyntaxaSourcePersist extends PersistentObject {
 
     /**
      * Setter for a database field.
-     * @param description
+     * @param source
      **/
     public void setSource(String source) {
         this.source = source;
@@ -54,7 +54,7 @@ public class Chm62edtSyntaxaSourcePersist extends PersistentObject {
 
     /**
      * Setter for a database field.
-     * @param idAbundance
+     * @param idSyntaxaSource
      **/
     public void setIdSyntaxaSource(String idSyntaxaSource) {
         this.idSyntaxaSource = idSyntaxaSource;

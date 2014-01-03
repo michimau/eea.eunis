@@ -279,7 +279,7 @@ public class UnicodeEscapes {
     /**
      * 
      * @param ent
-     * @return
+     * @return numeric value of entity.
      */
     public int getDecimal(String ent) {
         
@@ -294,7 +294,7 @@ public class UnicodeEscapes {
     /**
      * 
      * @param s
-     * @return
+     * @return true if the string is a known entity.
      */
     public boolean isXHTMLEntity(String s) {
     
@@ -315,9 +315,9 @@ public class UnicodeEscapes {
     }
 
     /**
-     * 
+     * Returns true is the string is a numeric entity. Does not check hex-codes.
      * @param s
-     * @return
+     * @return true is the string is a numeric entity.
      */
     public boolean isNumericHTMLEscapeCode(String s) {
 

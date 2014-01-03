@@ -271,7 +271,6 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     /**
-     * @see eionet.eunis.dao.ISitesDao#deleteSites(Map<String, String>)
      * {@inheritDoc}
      */
     public void deleteSitesCdda(Map<String, String> sites) throws SQLException {

@@ -1152,7 +1152,8 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_COUNTRY WHERE ISO_2L='" + idSite.substring(0, 2) +"'" * @return
+     * Get name of country for this site. Tries first english, then falls back to French, then the country's
+     * own name for itself.
      *
      * @return Country for this site.
      */
@@ -2391,7 +2392,7 @@ public class SiteFactsheet {
      *
      * @param picturePath
      * @param domainName
-     * @return
+     * @return picture metadata as object
      */
     public PictureDTO getMainPicture(String picturePath, String domainName) {
 
@@ -2441,9 +2442,9 @@ public class SiteFactsheet {
     /**
      * Returns the main pictures of this site,a s present in the CHM62EDT_NATURE_OBJECT_PICTURE table.
      *
-     * @param limit
-     * @param mainPicOnly
-     * @return
+     * @param limit - max number of pictures to return
+     * @param mainPicOnly - only return the thumbnail.
+     * @return list of pictures
      */
     private List<Chm62edtNatureObjectPicturePersist> getPicturesForSites(Integer limit, boolean mainPicOnly) {
 

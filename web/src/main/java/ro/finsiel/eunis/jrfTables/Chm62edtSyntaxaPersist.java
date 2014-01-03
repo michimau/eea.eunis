@@ -61,7 +61,7 @@ public class Chm62edtSyntaxaPersist extends PersistentObject {
 
     /**
      * Setter for a database field.
-     * @param code
+     * @param sourceAbbrev
      **/
     public void setSourceAbbrev(String sourceAbbrev) {
         i_sourceAbbrev = sourceAbbrev;
@@ -80,7 +80,7 @@ public class Chm62edtSyntaxaPersist extends PersistentObject {
 
     /**
      * Setter for a database field.
-     * @param name
+     * @param source
      **/
     public void setSource(String source) {
         i_source = source;

@@ -48,7 +48,7 @@ public class SpeciesFactsheetRedirectActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param currentTab the currentTab to set
+     * @param tab the currentTab to set
      */
     public void setTab(int tab) {
         if (tab > 11 || tab < 0) {

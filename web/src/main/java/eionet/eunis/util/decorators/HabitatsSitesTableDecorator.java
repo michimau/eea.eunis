@@ -12,7 +12,7 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return id of habitat
      */
     public String getId() {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
@@ -22,7 +22,7 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return source database
      */
     public String getSource() {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
@@ -33,7 +33,7 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return country (aka area)
      */
     public String getArea() {
         StringBuilder ret = new StringBuilder();
@@ -45,7 +45,7 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return name of site as HTML snippet
      */
     public String getSiteName() {
         StringBuilder ret = new StringBuilder();

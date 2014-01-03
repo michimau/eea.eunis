@@ -32,10 +32,6 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showEUNISInvalidatedSpecies Show invalidated species
-   * @param SQL_DRV SQL Driver
-   * @param SQL_URL SQL Driver URL
-   * @param SQL_USR SQL Driver user
-   * @param SQL_PWD SQL Driver password
    */
   public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies) {
     super("species-references_" + sessionID + ".tsv");

@@ -44,7 +44,7 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return id as String
      */
     public String getId() {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
@@ -54,7 +54,7 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return source database
      */
     public String getSource() {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
@@ -64,7 +64,7 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return country as HTML snippet
      */
     public String getArea() {
         StringBuilder ret = new StringBuilder();
@@ -95,7 +95,7 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
 
     /**
      *
-     * @return
+     * @return site name as HTML snippet
      */
     public String getSiteName() {
         StringBuilder ret = new StringBuilder();

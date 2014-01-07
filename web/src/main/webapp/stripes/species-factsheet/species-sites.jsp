@@ -95,10 +95,13 @@
                 <div class="right-area protected-sites-map">
                     <h3>Protected sites</h3>
                     <div id="sites-map" class="map-view" style="width:500px; height:400px; border:2px solid #050505;">
-                    	<iframe id="protectionMap" src="http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SpiecesName=${actionBean.scientificNameUrlEncoded}" width="500" height="400"></iframe>
+                    	<iframe id="protectionMap" src="" width="500" height="400"></iframe>
                     
                     </div>
                 </div>
+                <script>
+                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SpiecesName=${actionBean.scientificNameUrlEncoded}");
+                </script>
 
 
 		        <script type="text/javascript">

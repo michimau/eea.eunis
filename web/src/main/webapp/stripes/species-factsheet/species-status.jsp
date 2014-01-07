@@ -147,8 +147,12 @@
                     <h3>EU's conservation status by biogeographical regions</h3>
                     <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
                     <div class="map-view">
-                        <iframe src="http://discomap.eea.europa.eu/map/Filtermap/?webmap=7ddade4a57384b48ae2f4f020b6a813b&speciesname=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}" height="400px" width="500px"></iframe>
+                        <iframe id="speciesStatusMap" src="" height="400px" width="500px"></iframe>
                     </div>
+
+                    <script>
+                        addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=7ddade4a57384b48ae2f4f020b6a813b&speciesname=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}");
+                    </script>
 
                     <div class="footer">
                         <!-- Table definition dropdown example -->

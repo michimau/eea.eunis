@@ -18,6 +18,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
     <stripes:layout-component name="head">
         <!-- Custom js needed for Species page -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
 
         <style>
         .cell-title {
@@ -69,9 +70,9 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
 
                     <%-- Threat status and conservation status --%>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" >
                         <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
-                        <div class="pane">
+                        <div class="pane" id="speciesStatusPane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
                         </div>
                     </div>
@@ -79,7 +80,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     <%-- This species is being protected in Europe --%>
                     <div class="eea-accordion-panel" style="clear: both;">
                         <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
-                        <div class="pane">
+                        <div class="pane" id="speciesSitesPane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
                         </div>
                     </div>

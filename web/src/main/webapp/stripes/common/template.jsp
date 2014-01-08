@@ -153,7 +153,7 @@
                                                     <a href="javascript:this.print();">
                                                         <img src="http://www.eea.europa.eu/templates/print_icon.gif"
                                                              alt="<%=cm.cmsPhrase("Print this page")%>"
-                                                             title="<%=cm.cmsPhrase("Print this page")%>" /></a>
+                                                             title="<%=cm.cmsPhrase("Print this page")%>" />
                                                     </a>
                                                 </li>
                                                 <c:if test="${not empty helpLink}">

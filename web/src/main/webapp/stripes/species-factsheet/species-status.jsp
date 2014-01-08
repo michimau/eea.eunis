@@ -126,15 +126,7 @@
                         <div class="overlay" id="threat-status-overlay">
 
                             <p>
-                                <c:choose>
-                                    <c:when test="${!empty actionBean.redlistLink}">
-                                        <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List page')}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List search')}</a>
-                                    </c:otherwise>
-                                </c:choose>
-                 <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">${eunis:cmsPhrase(actionBean.contentManagement, 'European Red List (by European Commission)')}</a>
+                                <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">${eunis:cmsPhrase(actionBean.contentManagement, 'European Red List (by European Commission)')}</a>
                             </p>
 
 

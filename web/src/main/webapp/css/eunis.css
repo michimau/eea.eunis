@@ -462,10 +462,6 @@ div.overlay .formControls a {
     visibility: visible;
 }
 
-.gallery img {
-    max-width: 388px;
-}
-
 .to-right {
     float: right;
 }

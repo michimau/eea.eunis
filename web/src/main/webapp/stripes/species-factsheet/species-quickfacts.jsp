@@ -6,7 +6,7 @@
                <!--  Gallery on left -->
                 <div class="left-area species">
 
-                    <div class="galleryViews js-noFilmstrip" data-options='{
+                    <div id="speciesGallery" class="galleryViews js-noFilmstrip" data-options='{
                         "pause_on_hover" : true,
                         "hover_nav_buttons_images" : false,
                         "keep_nav_buttons_visible" : true,
@@ -32,7 +32,7 @@
                                             </c:if>
                                         </p>
                                     </div>
-                                    <img src="${pic.path}/${pic.filename}" title="${pic.description}" />
+                                    <img src="${pic.path}/${pic.filename}" title="${pic.description}" style="height: 1px; width: 1px" />
                                 </li>
                             </c:forEach>
                         </ul>

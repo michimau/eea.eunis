@@ -138,8 +138,8 @@
                 <div class="right-area conservation-status">
                     <h3>EU's conservation status by biogeographical regions</h3>
                     <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
-                    <div class="map-view" style="width:490px; height:400px; border:1px solid #050505;">
-                        <iframe id="speciesStatusMap" src="" height="400px" width="490px"></iframe>
+                    <div class="map-view" style="border:1px solid #050505;">
+                        <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
                     </div>
 
                     <script>

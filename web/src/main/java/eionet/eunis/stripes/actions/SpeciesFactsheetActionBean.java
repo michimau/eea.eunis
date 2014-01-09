@@ -69,28 +69,8 @@ import eionet.sparqlClient.helpers.ResultValue;
  *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@UrlBinding("/species/{idSpecies}/{tab}")
+@UrlBinding("/species/{idSpecies}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
-
-    /** */
-    private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-            "Trends", "Legal Instruments", "Habitat types", "Sites", "External data", "Conservation status"};
-
-    /** */
-    private static final Map<String, String[]> types = new HashMap<String, String[]>();
-    static {
-        types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
-        types.put("VERNACULAR_NAMES", new String[] {"vernacular", tabs[1]});
-        types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"geo", tabs[2]});
-        types.put("POPULATION", new String[] {"population", tabs[3]});
-        types.put("TRENDS", new String[] {"trends", tabs[4]});
-        // types.put("GRID_DISTRIBUTION", new String[] {"grid", "Grid distribution"});
-        types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[5]});
-        types.put("HABITATS", new String[] {"habitats", tabs[6]});
-        types.put("SITES", new String[] {"sites", tabs[7]});
-        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[8]});
-        types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[9]});
-    }
 
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
@@ -100,14 +80,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String scientificName = "";
     private String author = "";
 
-    /**
-     * selected tab.
-     */
-    private String tab;
-    /**
-     * tabs to display.
-     */
-    private List<Pair<String, String>> tabsWithData = new ArrayList<Pair<String, String>>();
     /**
      * senior synonym name.
      */
@@ -236,11 +208,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public Resolution index() {
         String idSpeciesText = null;
 
-        // Default tab is "general"
-        if (tab == null || tab.length() == 0) {
-            tab = "general";
-        }
-
         ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
 
         // sanity checks
@@ -282,48 +249,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
             author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
             
-
-            SQLUtilities sqlUtil = getContext().getSqlUtilities();
-
-            // Decide what tabs to show, based on tab display settings in the database
-            List<String> existingTabs =
-                    sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
-            for (String tab : existingTabs) {
-                if (types.containsKey(tab)) {
-                    String[] tabData = types.get(tab);
-                    tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
-                }
-            }
-
             specie = factsheet.getSpeciesNatureObject();
 
-            if (tab != null && tab.equals("general")) {
-                generalTabActions(mainIdSpecies);
-            }
-
-            if (tab != null && tab.equals("vernacular")) {
-                vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-            }
-
-            if (tab != null && tab.equals("geo")) {
-                setGeoValues();
-            }
-
-            if (tab != null && tab.equals("grid")) {
-                gridDistributionTabActions();
-            }
-
-            if (tab != null && tab.equals("sites")) {
-                setSites();
-            }
-
-            if (tab != null && tab.equals("linkeddata")) {
-                linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
-            }
-
-            if (tab != null && tab.equals("conservation_status")) {
-                setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
-            }
+            generalTabActions(mainIdSpecies);
 
             // Sets all actionBean values for quickfactsheet
             setQuickFactSheetValues();
@@ -365,7 +293,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if (factsheet.exists()) {
             authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
             scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
-            author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());;
+            author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
             synonyms = factsheet.getSynonymsIterator();
             synonymsCount = synonyms.size();
             vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
@@ -1017,27 +945,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @return the currentTab
-     */
-    public String getTab() {
-        return tab;
-    }
-
-    /**
-     * @param tab the currentTab to set
-     */
-    public void setTab(String tab) {
-        this.tab = tab;
-    }
-
-    /**
-     * @return the tabsWithData
-     */
-    public List<Pair<String, String>> getTabsWithData() {
-        return tabsWithData;
-    }
-
-    /**
      * @return the idSpecies
      */
     public String getIdSpecies() {
@@ -1352,10 +1259,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public int getSeniorIdSpecies() {
         return seniorIdSpecies;
-    }
-
-    public String[] getTabs() {
-        return tabs;
     }
 
     public PublicationWrapper getSpeciesBook() {

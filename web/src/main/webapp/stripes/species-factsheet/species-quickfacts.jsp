@@ -46,23 +46,23 @@
                 <!-- Textual facts on right -->
                 <div class="right-area quickfacts">
                     <h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h2>
-                    <div class="bold">
-                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It has')} <span class="quickfact-number">${ (actionBean.synonymsCount + 1) }</span>
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'scientific names')} ${eunis:cmsPhrase(actionBean.contentManagement, 'and')}
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'common names')} ${eunis:cmsPhrase(actionBean.contentManagement, 'in')}
-                            <span class="quickfact-number">${ actionBean.vernNamesCount }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'languages')}
-                            .</p>
+                    <div>
 
-                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}  <span class="quickfact-number">${ actionBean.speciesSitesCount }</span>
-                            <a href="${ actionBean.pageUrl }#protected">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.</p>
+                        <p><a href="${ actionBean.pageUrl }#threat_status" onclick="if($('#threat_status ~ h2').attr('class').indexOf('current')==-1) $('#threat_status ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'Threat status Europe')}</a>
+                                <span class="bold">${actionBean.consStatusEU.statusName}</span></p>
 
-                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in')} <span class="quickfact-number">${ actionBean.legalInstrumentCount }</span>
-                            <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'international legal instruments')}</a>.</p>
-  
+                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}
+                        <span class="bold">TODO[EU Nature Directives?]</span> and
+                        <span class="bold">${ actionBean.legalInstrumentCount }</span>
+                            <a href="${ actionBean.pageUrl }#legal_status" onclick="if($('#legal_status ~ h2').attr('class').indexOf('current')==-1) $('#legal_status ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}</a>.</p>
+
+                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}  <span class="bold">${ actionBean.speciesSitesCount }</span>
+                            <a href="${ actionBean.pageUrl }#protected" onclick="if($('#protected ~ h2').attr('class').indexOf('current')==-1) $('#protected ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.</p>
+
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}
-                            </p
+                            </p>
                         </c:if>
 
                         <p><a href="#generic-references-overlay" rel="#generic-references-overlay" class="float-right standardButton">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a></p>

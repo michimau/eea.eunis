@@ -71,6 +71,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 
                     <%-- Threat status and conservation status --%>
                     <div class="eea-accordion-panel" style="clear: both;" >
+                        <a id="threat_status" ></a>
                         <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
                         <div class="pane" id="speciesStatusPane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
@@ -79,6 +80,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 
                     <%-- This species is being protected in Europe --%>
                     <div class="eea-accordion-panel" style="clear: both;">
+                        <a id="protected" ></a>
                         <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
                         <div class="pane" id="speciesSitesPane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
@@ -87,6 +89,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 
                     <%-- Species is mentioned by the following legal instruments --%>
                 <div class="eea-accordion-panel" style="clear: both;">
+                    <a id="legal_status" ></a>
                     <h2 class="notoc eea-icon-right-container">Legal status</h2>
                     <div class="pane">
                         <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>

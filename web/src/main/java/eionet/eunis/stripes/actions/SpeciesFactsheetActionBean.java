@@ -361,7 +361,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * @author Jaak Kapten
      */
     private void setQuickFactSheetValues() {
-        pageUrl = this.getContext().getRequest().getRequestURL().toString();
+        pageUrl = getContext().getInitParameter("DOMAIN_NAME") + "/species/" + idSpecies;
         if (factsheet.exists()) {
             authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
             scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
@@ -631,6 +631,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             speciesName =
                     (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
                             : scientificName);
+
+            redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
             // World Register of Marine Species - also has seals etc.
             wormsid = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);

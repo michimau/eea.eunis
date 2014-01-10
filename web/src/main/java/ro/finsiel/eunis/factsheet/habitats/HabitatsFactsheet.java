@@ -226,7 +226,8 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve habitat description in human readable string, english language
+     * Retrieve habitat description in human readable string, english language.
+     *
      * @return habitat description as appears in factsheet (Description)
      */
     public String getMetaHabitatDescription() {
@@ -416,6 +417,7 @@ public class HabitatsFactsheet {
 
     /**
      * Generate the SQL required for OTHER INFO tab.
+     *
      * @param information Information to be retrieved
      * @return SQL statement
      * @throws InitializationException Incorrect initialization
@@ -1247,7 +1249,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve description & owner information for a habitat (from CHM62EDT_HABITAT_DESCRIPTION) using
+     * Retrieve description &amp; owner information for a habitat (from CHM62EDT_HABITAT_DESCRIPTION) using
      * Chm62edtHabitatDescriptionDomain.
      *
      * @return Vector of DescriptionWrapper objects.
@@ -1283,7 +1285,7 @@ public class HabitatsFactsheet {
 
     /**
      * Retrieve habitat references (from CHM62EDT_HABITAT_REFERENCES) using
-     * Chm62edtHabitatReferenceDomain
+     * Chm62edtHabitatReferenceDomain.
      *
      * @return List of Chm62edtHabitatReferencePersist objects.
      * @throws InitializationException if idHabitat was null during object construction.
@@ -1325,7 +1327,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Find the EUNIS_CODE & EUNIS_HABITAT_LEVEL associated with specified habitat.
+     * Find the EUNIS_CODE &amp; EUNIS_HABITAT_LEVEL associated with specified habitat.
      *
      * @param idHabitat ID of the habitat to retrieve data for
      * @return The encapsulated data. If no information found or error ocurred, new CodeLevelWrapper("na", new Integer(0)).
@@ -1813,6 +1815,7 @@ public class HabitatsFactsheet {
 
     /**
      * Check if habitat is EUNIS.
+     *
      * @param idHab habitat ID
      * @return True for EUNIS habitats
      */
@@ -2162,8 +2165,10 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Returns link to outside sources if one exists
-     * @param nauture object ID, outside source name
+     * Returns link to outside sources if one exists.
+     *
+     * @param nature_object_id object ID
+     * @param link_name outside source name
      * @return link URL
      */
     public String getLink(Integer nature_object_id, String link_name) {
@@ -2184,7 +2189,8 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Returns database edition
+     * Returns database edition.
+     *
      * @return String edition
      */
     public String getEdition() {

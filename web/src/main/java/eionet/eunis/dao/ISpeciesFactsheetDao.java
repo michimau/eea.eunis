@@ -32,8 +32,8 @@ public interface ISpeciesFactsheetDao {
      * For given id species returns canonical id species. If given id species is a synonym to another specie - id of that specie is
      * returned. If given id species is a canonical id species - it is returned. If given id is not found - 0 is returned.
      *
-     * @param idSpecies id species.
-     * @return
+     * @param idSpecies id of species.
+     * @return canonical id of species
      */
     int getCanonicalIdSpecies(int idSpecies);
 

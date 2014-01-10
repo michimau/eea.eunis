@@ -643,9 +643,9 @@ public class Chm62edtCountryPersist extends PersistentObject {
 
       /**
        *
-       * @return
+       * @return true if object is a country.
        */
       public boolean isIndeedCountry(){
-          return i_iso2l != null && i_iso2l.length()>0 && !i_iso2l.toLowerCase().equals("null") && i_selection != 0;
+          return i_iso2l != null && i_iso2l.length() > 0 && !i_iso2l.toLowerCase().equals("null") && i_selection != 0;
       }
 }

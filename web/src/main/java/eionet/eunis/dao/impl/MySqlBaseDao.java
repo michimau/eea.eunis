@@ -22,7 +22,7 @@ public abstract class MySqlBaseDao {
     /**
      * Returns a new database connection.
      *
-     * @throw ServiceException if no connections were available.
+     * @throws ServiceException if no connections were available.
      */
     public static synchronized Connection getConnection() throws SQLException {
 
@@ -104,7 +104,7 @@ public abstract class MySqlBaseDao {
      * @param parameterizedSQL
      * @param values
      * @param conn
-     * @return
+     * @return statement with parameters filled in.
      * @throws SQLException
      */
     private PreparedStatement prepareStatement(String parameterizedSQL, List<Object> values, Connection conn) throws SQLException {
@@ -200,9 +200,10 @@ public abstract class MySqlBaseDao {
     /**
      * Executes parameterized sql query and return list of results.
      * Note! only first column in query is returned.
+     *
      * @param sql - sql string
      * @param params - sql parameters
-     * @return
+     * @return list of results
      * @throws SQLException
      */
     @SuppressWarnings("unchecked")

@@ -92,7 +92,7 @@ public class SQLUtilities {
      *            - sql string
      * @param params
      *            - sql parameters
-     * @return
+     * @return list of results
      * @throws SQLException
      */
     @SuppressWarnings("unchecked")
@@ -396,7 +396,7 @@ public class SQLUtilities {
      * @param parameterizedSQL
      * @param valueMap
      * @param conn
-     * @return
+     * @return prepared sql statement
      * @throws SQLException
      */
     private PreparedStatement prepareStatement(String parameterizedSQL, List<Object> values, Connection conn) throws SQLException {
@@ -723,7 +723,7 @@ public class SQLUtilities {
      *
      * @param tableName
      *            table name
-     * @param tableColumns
+     * @param tableRows
      *            columns
      * @return operation status
      */

@@ -13,39 +13,39 @@ public abstract class DaoFactory {
 
     /**
      * Returns default implementation of {@link DaoFactory}.
-     * @return
+     * @return default implementation
      */
     public static DaoFactory getDaoFactory() {
         return MYSQL_DAO_FACTORY;
     }
 
     /**
-     * @return
+     * @return references DAO
      */
     public abstract IReferencesDao getReferncesDao();
 
     /**
-     * @return
+     * @return external objects DAO
      */
     public abstract IExternalObjectsDao getExternalObjectsDao();
 
     /**
-     * @return
+     * @return sites DAO
      */
     public abstract ISitesDao getSitesDao();
 
     /**
-     * @return
+     * @return species DAO
      */
     public abstract ISpeciesDao getSpeciesDao();
 
     /**
-     * @return
+     * @return species factsheet DAO
      */
     public abstract ISpeciesFactsheetDao getSpeciesFactsheetDao();
 
     /**
-     * @return
+     * @return nature object DAO
      */
     public abstract INatureObjectAttrDao getNatureObjectAttrDao();
 }

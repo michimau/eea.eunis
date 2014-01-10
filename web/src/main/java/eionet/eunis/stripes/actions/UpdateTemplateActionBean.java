@@ -30,7 +30,7 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
 
     /**
      * updates the templates and redirects to result page
-     * @return
+     * @return redirection
      */
     @DefaultHandler
     public Resolution defaultAction() {

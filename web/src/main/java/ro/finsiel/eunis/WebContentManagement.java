@@ -843,7 +843,7 @@ public class WebContentManagement implements java.io.Serializable {
      * Pair id - HTTP status code, Pair value - response body.
      *
      * @param url url to check.
-     * @return
+     * @return Pair id - HTTP status code, Pair value - response body.
      */
     public Pair<Integer, String> readContentFromUrl(String url) {
         Pair<Integer, String> result = null;

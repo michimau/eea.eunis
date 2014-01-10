@@ -301,7 +301,7 @@ public class CountryUtil {
      * Finds country by its ID.
      *
      * @param countryId
-     * @return
+     * @return object containing country data.
      */
     @SuppressWarnings("rawtypes")
     public static Chm62edtCountryPersist findCountry(int countryId) {

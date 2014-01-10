@@ -29,7 +29,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
      * get application property from eunis.properties file.
      *
      * @param key key to fetch.
-     * @return
+     * @return application property value
      */
     public String getApplicationProperty(String key) {
         if (eunisProperties == null) {
@@ -48,7 +48,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
      * Gets an object from session.
      *
      * @param key
-     * @return
+     * @return object
      */
     public Object getFromSession(String key) {
         return getRequest().getSession().getAttribute(key);
@@ -77,7 +77,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
      * Gets application init parameter.
      *
      * @param key
-     * @return
+     * @return application init parameter
      */
     public String getInitParameter(String key) {
         return getServletContext().getInitParameter(key);

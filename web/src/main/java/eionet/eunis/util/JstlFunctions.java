@@ -166,7 +166,7 @@ public class JstlFunctions {
      * in italics.
      *
      * @param inStr - input string
-     * @returns - string with replacements.
+     * @return - string with replacements.
      */
     public static String bracketsToItalics(String inStr) {
         if (inStr.contains("[") || inStr.contains("]")) {
@@ -275,7 +275,7 @@ public class JstlFunctions {
      * This is a direct call to {@link Utilities#formatArea(String, int, int, String, String)},
      * see the JavaDoc of that method for more information.
      *
-     * @return
+     * @return The formatted string
      */
     public static String formatArea(String input, int left, int right, String blank, String cssStyle) {
         return Utilities.formatArea(input, left, right, blank, cssStyle);
@@ -289,7 +289,7 @@ public class JstlFunctions {
      * @param left
      * @param right
      * @param blank
-     * @return
+     * @return The formatted string
      */
     public static String formatArea(String input, int left, int right, String blank) {
         return Utilities.formatArea(input, left, right, blank);

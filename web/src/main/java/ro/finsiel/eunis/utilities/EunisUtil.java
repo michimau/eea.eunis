@@ -92,7 +92,7 @@ public class EunisUtil {
      * Replace { with [ and } with ]. It is actually replacing braces with brackets.
      *
      * @param in - input string
-     * @returns - string with replacements.
+     * @return - string with replacements.
      */
     public static String replaceBrackets(String in) {
 
@@ -119,7 +119,7 @@ public class EunisUtil {
      * @param source Source string; if null returns empty string
      * @param pattern Pattern to be replaced; if null returns the source
      * @param replace String to replace with
-     * @return
+     * @return Replaced string
      */
     public static String replace(String source, String pattern, String replace) {
         if (source != null) {
@@ -187,7 +187,7 @@ public class EunisUtil {
 
     /**
      * @param in
-     * @return
+     * @return new string with replacements.
      */
     public static String replaceTags(String in) {
         return replaceTags(in, false, false);
@@ -196,7 +196,7 @@ public class EunisUtil {
     /**
      * @param in
      * @param dontCreateHTMLAnchors
-     * @return
+     * @return new string with replacements.
      */
     public static String replaceTags(String in, boolean dontCreateHTMLAnchors) {
         return replaceTags(in, dontCreateHTMLAnchors, false);
@@ -205,8 +205,8 @@ public class EunisUtil {
     /**
      * @param in
      * @param dontCreateHTMLAnchors
-     * @param dontCreateHTMLLineBreaks
-     * @return
+     * @param dontCreateHTMLLineBreaks - do not change \n into &lt;br/&gt;
+     * @return new string with replacements.
      */
     public static String replaceTags(
             String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
@@ -419,7 +419,7 @@ public class EunisUtil {
     /**
      * Escapes MySQL strings
      * @param text
-     * @return
+     * @return The text with MySQL-style escapes, if needed
      */
     public static String mysqlEscapes(String text)
     {

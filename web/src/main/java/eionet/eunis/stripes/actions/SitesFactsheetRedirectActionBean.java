@@ -26,7 +26,7 @@ public class SitesFactsheetRedirectActionBean extends AbstractStripesAction {
     private int tab;
 
     /**
-     * This action bean only serves RDF through {@link RdfAware}.
+     * Redirect to relevant tab.
      */
     @DefaultHandler
     public Resolution defaultAction() {

@@ -117,7 +117,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
 
     /**
-     * This action bean only serves RDF through {@link RdfAware}.
+     * RDF output is served from elsewhere.
      */
     @DefaultHandler
     public Resolution defaultAction() {

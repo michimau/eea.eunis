@@ -19,17 +19,7 @@ String siteid = request.getParameter("idsite");
 SiteFactsheet factsheet = new SiteFactsheet(siteid);
 WebContentManagement cm = SessionManager.getWebContent();
 int type = factsheet.getType();
-String designationDescr = factsheet.getDesignation();
 
-String SQL_DRV = application.getInitParameter("JDBC_DRV");
-String SQL_URL = application.getInitParameter("JDBC_URL");
-String SQL_USR = application.getInitParameter("JDBC_USR");
-String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
-SQLUtilities sqlc = new SQLUtilities();
-sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-String information = factsheet.getSiteObject().getRespondent();
- 
 /* All data for species. */
 List species                                = null;
 List sitesSpecificspecies                   = new ArrayList();
@@ -93,10 +83,9 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 								}
 							}
 							
-							if (sitesSpecificspecies.size() > 0) {					
-								for (int i = 0; i < sitesSpecificspecies.size(); i++) {
-									String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
-									Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
+                            for (int i = 0; i < sitesSpecificspecies.size(); i++) {
+                                String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+                                Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
 							%>
 									<tr<%=cssClass%>>
 										<td>
@@ -105,7 +94,6 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 										<td></td>
 									</tr>
 							<%
-								}
 							}
 							%>
 						</tbody>
@@ -274,9 +262,9 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 			<%
 				}
 			}
-			if (sitesSpecificspecies != null) {					
-				for (int i = 0; i < sitesSpecificspecies.size(); i++) {
-					Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
+
+            for (int i = 0; i < sitesSpecificspecies.size(); i++) {
+                Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
 			%>
 				<div class="photoAlbumEntry">
 		            <a href="javascript:void(0);">
@@ -291,11 +279,9 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 		            </a>
        	 		</div>
 			<%
-				}
 			}
-			if (eunisSpeciesListedAnnexesDirectives != null) {
-				for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++){
-					SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesListedAnnexesDirectives.get(i);
+            for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++){
+                SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesListedAnnexesDirectives.get(i);
 			%>
 				<div class="photoAlbumEntry">
 		            <a href="javascript:void(0);">
@@ -310,7 +296,6 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 		            </a>
        	 		</div>
 			<%
-				}
 			}
 			if(!notEunisSpeciesListedAnnexesDirectives.isEmpty()) {
 				Chm62edtSitesAttributesPersist attribute2 = null;

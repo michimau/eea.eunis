@@ -18,6 +18,8 @@
     <stripes:layout-component name="head">
         <!-- Custom js needed for Species page -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
+
 
         <style>
 	        .cell-title {
@@ -135,9 +137,40 @@
                 <%-- Quick facts --%>
                 <stripes:layout-render name="/stripes/site-factsheet/site-quickfacts.jsp"/>
                 
-                <%-- Site tab --%>
+                <%-- Accordion --%>
                 <br/>
-                <stripes:layout-render name="/stripes/site-factsheet/site-tabs.jsp"/>
+                <div>
+                    <div class="eea-accordion-panels non-exclusive">
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Species</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/site-factsheet/site-tab-species.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Habitat types</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/site-factsheet/site-tab-habitats.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Designation info</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/site-factsheet/site-tab-designations.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Interactive map</h2>
+                            <div class="pane" id="sitesMapPane">
+                                <iframe id="interactive-map-iframe" height="500" width="950" src=""></iframe>
+                            </div>
+                            <script>
+                                // todo: the link is incorrect, as it's the same as the map in quickfacts; check #14803
+                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SiteCode=${ (actionBean.idsite) }");
+                            </script>
+                        </div>
+                    </div>
+                </div>
 
             </c:when>
             <c:otherwise>

@@ -2,9 +2,7 @@ package eionet.eunis.stripes.actions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,10 +21,11 @@ import ro.finsiel.eunis.search.Utilities;
  * 
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@UrlBinding("/sites/{idsite}/{tab}")
+@UrlBinding("/sites/{idsite}")
 public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     static final Map<String, String> biogeographicRegionTitles = new HashMap<String, String>();
+    static final Map<String, String> sourceDBTitles = new HashMap<String, String>();
 
     static {
         biogeographicRegionTitles.put("alpine", "Alpine");
@@ -40,6 +39,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         biogeographicRegionTitles.put("pannonic", "Pannonian");
         biogeographicRegionTitles.put("pontic", "Black Sea");
         biogeographicRegionTitles.put("steppic", "Steppic");
+
+        sourceDBTitles.put("NATURA2000", "Natura 2000");
+        sourceDBTitles.put("CORINE", "Corine");
+        sourceDBTitles.put("CDDA_NATIONAL", "CDDA National");
+        sourceDBTitles.put("EMERALD", "Emerald");
+        sourceDBTitles.put("DIPLOMA", "Diploma");
+        sourceDBTitles.put("BIOGENETIC", "Biogenetic");
+
     }
 
     /** The id of the site in question. */
@@ -66,6 +73,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private int protectedSpeciesCount;
     private int totalSpeciesCount;
     private int habitatsCount;
+
+    private String regionCode;
+    private String regionName;
 
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
@@ -266,12 +276,24 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return bioRegionsMap;
     }
 
-    /**
-     * 
-     * @return
-     */
     public boolean isTypeCorine() {
         return factsheet.getType() == SiteFactsheet.TYPE_CORINE;
+    }
+
+    public boolean isTypeNatura2000(){
+        return factsheet.getType() == SiteFactsheet.TYPE_NATURA2000;
+    }
+
+    public String getTypeName(){
+        return factsheet.getSiteObject().getSourceDB();
+    }
+
+    /**
+     * The title of the site type / source_db, using the sourceDBTitles list
+     * @return The site type title
+     */
+    public String getTypeTitle(){
+        return sourceDBTitles.get(getTypeName());
     }
 
     public String getIdsite() {
@@ -368,6 +390,47 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public void setHabitatsCount(int habitatsCount) {
         this.habitatsCount = habitatsCount;
+    }
+
+    /**
+     * The percentage of marine area in the site
+     * @return Zero for now, as there is no DB field for this data
+     */
+    public int getMarineAreaPercentage(){
+        // todo: implement after the field is added to DB, see http://taskman.eionet.europa.eu/issues/17767
+        return 0;
+    }
+
+    /**
+     * The IUCN category (IUCNAT DB field)
+     * @return The IUCN category
+     */
+    public String getIucnCategory(){
+        return factsheet.getSiteObject().getIucnat();
+    }
+
+    /**
+     * Read the region fields (NUTS code, Region name) from the factsheet
+     */
+    private void prepareRegion(){
+        this.regionCode = factsheet.getSiteObject().getNuts();
+        this.regionName = factsheet.getRegionName();
+    }
+
+    /**
+     * NUTS code
+     * @return The code of the region
+     */
+    public String getRegionCode(){
+        return regionCode;
+    }
+
+    /**
+     *
+     * @return The name of the region
+     */
+    public String getRegionName(){
+        return regionName;
     }
 
 }

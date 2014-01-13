@@ -7,31 +7,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtGlobalDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtGlobalPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtIsolationDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtIsolationPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatura2000ConservationCodeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatura2000ConservationCodePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectGeoscopeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectGeoscopePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtPopulationDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtPopulationPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist;
-import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsDomain;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesDomain;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityDomain;
@@ -97,6 +73,7 @@ public class SiteFactsheet {
     private Chm62edtSitesPersist siteTableObject = null;
     private String siteTableDesignations = null;
     private Chm62edtSitesAttributesPersist siteTableAttributes = null;
+    private Chm62edtRegionCodesPersist regionCodes = null;
 
     /**
      * The main constructor for factsheet's and takes as parameter the ID of the site.
@@ -1254,6 +1231,39 @@ public class SiteFactsheet {
             res = "";
         }
         return res;
+    }
+
+    /**
+     * Extracts region from region code (NUTS)
+     * SELECT * FROM CHM62EDT_REGION_CODES WHERE ID_REGION_CODE = 'nuts';
+     * @return The name of the region
+     */
+    public Chm62edtRegionCodesPersist getRegionCodes(){
+        if(regionCodes == null){
+            try {
+                List results = new Chm62edtRegionCodesDomain().findWhere("ID_REGION_CODE='" + getSiteObject().getNuts() +"'");
+
+                if (null != results && results.size() > 0) {
+                    regionCodes = (Chm62edtRegionCodesPersist) results.get(0);
+                }
+
+            } catch (Exception _ex) {
+                _ex.printStackTrace(System.err);
+                regionCodes = null;
+            }
+        }
+        return regionCodes;
+    }
+
+    public String getRegionName()
+    {
+        Chm62edtRegionCodesPersist regionCodesPersist = getRegionCodes();
+        if(regionCodesPersist != null){
+            return regionCodesPersist.getName();
+        }
+        else {
+            return "";
+        }
     }
 
     /**

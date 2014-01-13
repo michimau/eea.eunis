@@ -29,6 +29,13 @@ List notEunisSpeciesListedAnnexesDirectives = new ArrayList();
 List notEunisSpeciesOtherMentioned          = new ArrayList();
 HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 
+speciesStatistics.put("Amphibians",0);
+speciesStatistics.put("Birds",0);
+speciesStatistics.put("Fishes",0);
+speciesStatistics.put("Invertebrates",0);
+speciesStatistics.put("Mammals",0);
+speciesStatistics.put("Flowering Plants",0);
+
 %>
 <div class="right-area">
 	<div class="species-change-view">
@@ -158,7 +165,7 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 								:(groupName.equalsIgnoreCase("invert") ? "Invertebrates"
 								:(groupName.equalsIgnoreCase("mammal") ? "Mammals"
 								:(groupName.equalsIgnoreCase("plant") ? "Flowering Plants" : "")))))));
-								
+
 								String word = groupName;
 								int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 								speciesStatistics.put(word, count + 1);
@@ -240,16 +247,8 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 	</div>
 	<!-- ---------------------------------- GALERY VIEW ------------------------------- -->
 	<div id="sites-species-gallery">
-        <%
-//        Check that there is actually something to display
-         if( species.size()
-         + sitesSpecificspecies.size()
-         + eunisSpeciesListedAnnexesDirectives.size()
-         + notEunisSpeciesListedAnnexesDirectives.size()
-         + eunisSpeciesOtherMentioned.size()
-         + notEunisSpeciesOtherMentioned.size()> 0) {
-        %>
-
+	<c:choose>
+	<c:when test="${actionBean.totalSpeciesCount>0}">
 		<div class="paginate">
 			<%
 			if ( species != null) {
@@ -395,27 +394,33 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 			}
 			%>
 		</div>
-    <%
-    }
-    else
-    {
-    %>
-    There are no species to be displayed.
-    <%
-    }
-    %>
-
+    </c:when>
+    <c:otherwise>
+        There are no species to be displayed.
+    </c:otherwise>
+    </c:choose>
 	</div>
 </div>
 	
 <div class="right-area">
-	<fieldset class="widget-fieldset">
-		<legend>Species group number</legend>
-		<table>
+    <h3>Species summary</h3>
+    Nature directives' species in this site (${actionBean.totalSpeciesCount})
+		<table class="listing table-inline">
+            <thead>
+            <tr>
+                <th scope="col"><%=cm.cmsPhrase("Species group")%></th>
+                <th scope="col"><%=cm.cmsPhrase("Number")%></th>
+            </tr>
+            </thead>
 			<%
-			for (Map.Entry<String, Integer> entry : speciesStatistics.entrySet()) {
-			    String key = entry.getKey();
-			    Integer value = entry.getValue();
+			// the requested naming is a bit different
+			speciesStatistics.put("Plants", speciesStatistics.remove("Flowering Plants"));
+			speciesStatistics.put("Amphibians / Reptiles", speciesStatistics.remove("Amphibians"));
+
+			ArrayList<String> sortedKeys = new ArrayList<String>(speciesStatistics.keySet());
+			java.util.Collections.sort(sortedKeys);
+			for (String key : sortedKeys) {
+			    Integer value = speciesStatistics.get(key);
 			%>	
 				<tr>
 					<td><%=key%></td>
@@ -425,6 +430,5 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 			}
 			%>
 		</table>
-	</fieldset>
 </div>
 </stripes:layout-definition>

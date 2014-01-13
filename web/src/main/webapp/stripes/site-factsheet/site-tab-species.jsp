@@ -21,7 +21,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 int type = factsheet.getType();
 
 /* All data for species. */
-List species                                = null;
+List species                                = new ArrayList();
 List sitesSpecificspecies                   = new ArrayList();
 List eunisSpeciesListedAnnexesDirectives    = new ArrayList();
 List eunisSpeciesOtherMentioned             = new ArrayList();
@@ -240,6 +240,16 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 	</div>
 	<!-- ---------------------------------- GALERY VIEW ------------------------------- -->
 	<div id="sites-species-gallery">
+        <%
+//        Check that there is actually something to display
+         if( species.size()
+         + sitesSpecificspecies.size()
+         + eunisSpeciesListedAnnexesDirectives.size()
+         + notEunisSpeciesListedAnnexesDirectives.size()
+         + eunisSpeciesOtherMentioned.size()
+         + notEunisSpeciesOtherMentioned.size()> 0) {
+        %>
+
 		<div class="paginate">
 			<%
 			if ( species != null) {
@@ -385,6 +395,16 @@ HashMap<String, Integer> speciesStatistics   = new HashMap<String, Integer>();
 			}
 			%>
 		</div>
+    <%
+    }
+    else
+    {
+    %>
+    There are no species to be displayed.
+    <%
+    }
+    %>
+
 	</div>
 </div>
 	

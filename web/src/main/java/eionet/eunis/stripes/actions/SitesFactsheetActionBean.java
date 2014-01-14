@@ -394,11 +394,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * The percentage of marine area in the site
-     * @return Zero for now, as there is no DB field for this data
+     * @return -1 if not available, as there is no DB field for this data
      */
     public int getMarineAreaPercentage(){
         // todo: implement after the field is added to DB, see http://taskman.eionet.europa.eu/issues/17767
-        return 0;
+        return -1;
     }
 
     /**

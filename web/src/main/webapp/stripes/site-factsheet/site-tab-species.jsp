@@ -71,14 +71,12 @@ speciesStatistics.put("Flowering Plants",0);
 							<%
 							if ( species.size() > 0) {
 								for (int i = 0; i < species.size(); i++) {			
-									String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
 									SiteSpeciesPersist specie = (SiteSpeciesPersist)species.get(i);
-									String attrValue;
 									String word = specie.getSpeciesCommonName();
 									int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 									speciesStatistics.put(word, count + 1);
 							%>
-									<tr<%=cssClass%>>
+									<tr>
 										<td>
 											<a class="link-plain" href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
 										</td>
@@ -91,10 +89,9 @@ speciesStatistics.put("Flowering Plants",0);
 							}
 							
                             for (int i = 0; i < sitesSpecificspecies.size(); i++) {
-                                String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
                                 Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
 							%>
-									<tr<%=cssClass%>>
+									<tr>
 										<td>
 											<a href="http://www.google.com/search?q=<%=specie.getValue()%>"><%=specie.getValue()%></a>
 										</td>
@@ -120,7 +117,6 @@ speciesStatistics.put("Flowering Plants",0);
 			notEunisSpeciesOtherMentioned = factsheet.findNotEunisSpeciesOtherMentioned();
 		
 			if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty()) {
-				Chm62edtReportAttributesPersist attribute;
 				if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty() || !eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty()) {
 			%>
 				<table summary="<%=cm.cms("species")%>" class="listing fullwidth table-inline">
@@ -134,13 +130,12 @@ speciesStatistics.put("Flowering Plants",0);
 						<%
 						if (!eunisSpeciesListedAnnexesDirectives.isEmpty()) {
 							for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++){	
-								String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
 								SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesListedAnnexesDirectives.get(i);
 								String word = specie.getSpeciesCommonName();
 								int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 								speciesStatistics.put(word, count + 1);
 						%>
-								<tr class="<%=cssClass%>">
+								<tr>
 									<td>
 										<a class="link-plain" href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
 									</td>
@@ -152,9 +147,7 @@ speciesStatistics.put("Flowering Plants",0);
 							}
 						}
 						if(!notEunisSpeciesListedAnnexesDirectives.isEmpty()) {
-							Chm62edtSitesAttributesPersist attribute2 = null;
 							for (int i = 0; i < notEunisSpeciesListedAnnexesDirectives.size(); i++) {
-								String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
 								Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesListedAnnexesDirectives.get(i);
 								String specName = specie.getName();
 								specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -170,7 +163,7 @@ speciesStatistics.put("Flowering Plants",0);
 								int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 								speciesStatistics.put(word, count + 1);
 								%>
-								<tr<%=cssClass%>>
+								<tr>
 									<td>
 										<%=specName%>
 									</td>
@@ -185,13 +178,12 @@ speciesStatistics.put("Flowering Plants",0);
 						if (!eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty()) {
 								if (!eunisSpeciesOtherMentioned.isEmpty()) {
 								for (int i = 0; i < eunisSpeciesOtherMentioned.size(); i++) {
-									String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
 									SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesOtherMentioned.get(i);
 									String word = specie.getSpeciesCommonName();
 									int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 									speciesStatistics.put(word, count + 1);
 							%>
-									<tr class="<%=cssClass%>">
+									<tr>
 										<td>
 											<a class="link-plain" href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
 										</td>
@@ -205,7 +197,6 @@ speciesStatistics.put("Flowering Plants",0);
 							if (!notEunisSpeciesOtherMentioned.isEmpty()) {
 								Chm62edtSitesAttributesPersist  attribute2 = null;
 								for (int i = 0; i < notEunisSpeciesOtherMentioned.size(); i++) {
-									String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
 									Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesOtherMentioned.get(i);
 									String specName = specie.getName();
 									specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -224,7 +215,7 @@ speciesStatistics.put("Flowering Plants",0);
 									int count = speciesStatistics.containsKey(word) ? speciesStatistics.get(word) : 0;
 									speciesStatistics.put(word, count + 1);
 									%>
-									<tr class="<%=cssClass%>">
+									<tr>
 										<td>
 											<%=specName%>
 										</td>
@@ -254,7 +245,6 @@ speciesStatistics.put("Flowering Plants",0);
 			if ( species != null) {
 				for (int i = 0; i < species.size(); i++) {
 					SiteSpeciesPersist specie = (SiteSpeciesPersist)species.get(i);
-					String attrValue;
 			%>
 				<div class="photoAlbumEntry">
 		            <a href="javascript:void(0);">
@@ -307,9 +297,7 @@ speciesStatistics.put("Flowering Plants",0);
 			<%
 			}
 			if(!notEunisSpeciesListedAnnexesDirectives.isEmpty()) {
-				Chm62edtSitesAttributesPersist attribute2 = null;
 				for (int i = 0; i < notEunisSpeciesListedAnnexesDirectives.size(); i++) {
-					String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
 					Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesListedAnnexesDirectives.get(i);
 					String specName = specie.getName();
 					specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -340,7 +328,6 @@ speciesStatistics.put("Flowering Plants",0);
 			if (!eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty()) {
 					if (!eunisSpeciesOtherMentioned.isEmpty()) {
 					for (int i = 0; i < eunisSpeciesOtherMentioned.size(); i++) {
-						String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
 						SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesOtherMentioned.get(i);
 				%>
 					<div class="photoAlbumEntry">
@@ -361,7 +348,6 @@ speciesStatistics.put("Flowering Plants",0);
 				if (!notEunisSpeciesOtherMentioned.isEmpty()) {
 					Chm62edtSitesAttributesPersist  attribute2 = null;
 					for (int i = 0; i < notEunisSpeciesOtherMentioned.size(); i++) {
-						String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
 						Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesOtherMentioned.get(i);
 						String specName = specie.getName();
 						specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));

@@ -94,13 +94,13 @@
 			<c:choose>
 				<c:when test="${!empty actionBean.gbifLink}">
 					<div>
-		        		<a href="http://data.gbif.org/species/${actionBean.gbifLink}">${eunis:cmsPhrase(actionBean.contentManagement, 'GBIF page')}</a>
-		      		</div>
+		        		<a href="http://www.gbif.org/species/${actionBean.gbifLink}">${eunis:cmsPhrase(actionBean.contentManagement, 'GBIF page')}</a>
+					</div>
 				</c:when>
 		  		<c:otherwise>
 					<div>
-		        		<a href="http://data.gbif.org/species/${actionBean.gbifLink2}">${eunis:cmsPhrase(actionBean.contentManagement, 'GBIF search')}</a>
-		      		</div>
+		        		<a href="http://www.gbif.org/species/search?q=${actionBean.gbifLink2}&amp;dataset_key=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c">${eunis:cmsPhrase(actionBean.contentManagement, 'GBIF search')}</a>
+					</div>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${actionBean.natureObjectAttributesMap['sameSynonymAnimalsWCMC'] == null && actionBean.natureObjectAttributesMap['sameSynonymPlantsWCMC'] == null}">

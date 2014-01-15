@@ -22,7 +22,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 	<!-- ---------------------------------- LIST VIEW ------------------------------- -->
 	<div id="sites-species-list" style="display: none;">
 	<c:choose>
-        <c:when test="${not actionBean.typeNatura2000}">
+        <c:when test="${actionBean.totalSpeciesCount>0}">
             <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth table-inline">
                 <thead>
                 <tr>
@@ -51,20 +51,6 @@ WebContentManagement cm = SessionManager.getWebContent();
                         <td></td>
                     </tr>
                 </c:forEach>
-                </tbody>
-            </table>
-
-            <br />
-        </c:when>
-        <c:otherwise>
-            <table summary="<%=cm.cms("species")%>" class="listing fullwidth table-inline">
-                <thead>
-                <tr>
-                    <th scope="col"><%=cm.cmsPhrase("Species scientific name")%></th>
-                    <th scope="col"><%=cm.cmsPhrase("Species group")%></th>
-                </tr>
-                </thead>
-                <tbody>
                 <c:forEach items="${actionBean.eunisSpeciesListedAnnexesDirectives}" var="specie">
                     <tr>
                         <td>
@@ -87,7 +73,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                         </td>
                     </tr>
                 </c:forEach>
-                <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}">
+                <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}" var="specie">
                     <tr>
                         <td>
                             <a class="link-plain" href="species/${specie.source.idSpecies}">
@@ -112,6 +98,9 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 </tbody>
             </table>
+            </c:when>
+            <c:otherwise>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'There are no species to be displayed')}
         </c:otherwise>
 	</c:choose>
 
@@ -178,7 +167,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                     </a>
                 </div>
             </c:forEach>
-            <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}">
+            <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}" var="specie">
                 <div class="photoAlbumEntry">
                     <a href="javascript:void(0);">
 			                <span class="photoAlbumEntryWrapper">
@@ -210,7 +199,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 		</div>
     </c:when>
     <c:otherwise>
-        There are no species to be displayed.
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'There are no species to be displayed')}
     </c:otherwise>
     </c:choose>
 	</div>

@@ -23,6 +23,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 	<div id="sites-species-list" style="display: none;">
 	<c:choose>
         <c:when test="${actionBean.totalSpeciesCount>0}">
+            <c:if test="${actionBean.totalSpeciesCount>24}"><div class="scroll-auto" style="height: 700px; width: 100%; clear: both;"></c:if>
             <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth table-inline">
                 <thead>
                 <tr>
@@ -98,8 +99,9 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 </tbody>
             </table>
-            </c:when>
-            <c:otherwise>
+        <c:if test="${actionBean.totalSpeciesCount>24}"></div></c:if>
+        </c:when>
+        <c:otherwise>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'There are no species to be displayed')}
         </c:otherwise>
 	</c:choose>

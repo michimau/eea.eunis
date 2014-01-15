@@ -211,10 +211,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             addToSpeciesStatistics(species.getGroup());
         }
 
-        // the requested naming is a bit different
-        speciesStatistics.put("Plants", speciesStatistics.remove("Flowering Plants"));
-        speciesStatistics.put("Amphibians / Reptiles", speciesStatistics.remove("Amphibians"));
-
     }
 
     private int addToSpeciesStatistics(String key){
@@ -638,8 +634,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         public SpeciesBean(SitesSpeciesReportAttributesPersist species) {
             this.source = species;
             this.scientificName = species.getSpeciesScientificName();
-            this.commonName = species.getSpeciesCommonName();
-            this.group = species.getSpeciesCommonName(); //todo: check if correct
+//            this.commonName = species.getSpeciesCommonName();
+            this.group = species.getSpeciesCommonName();
         }
 
         public String getScientificName() {

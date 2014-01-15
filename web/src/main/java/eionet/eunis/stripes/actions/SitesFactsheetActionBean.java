@@ -14,6 +14,9 @@ import net.sourceforge.stripes.action.UrlBinding;
 import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist;
 import ro.finsiel.eunis.search.Utilities;
 
 /**
@@ -77,6 +80,15 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private String regionCode;
     private String regionName;
 
+    private List<SiteSpeciesPersist> siteSpecies;
+    private List siteSpecificSpecies;
+    private List<SitesSpeciesReportAttributesPersist> eunisSpeciesListedAnnexesDirectives;
+    private List<SitesSpeciesReportAttributesPersist> eunisSpeciesOtherMentioned;
+    private List<Chm62edtSitesAttributesPersist> notEunisSpeciesListedAnnexesDirectives;
+    private List<Chm62edtSitesAttributesPersist> notEunisSpeciesOtherMentioned;
+    HashMap<String, Integer> speciesStatistics;
+
+
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
      * 
@@ -122,10 +134,114 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             calculateHabitatsCount();
             prepareBiogeographicRegion();
+            populateSpeciesLists();
         }
 
         // Forward to the factsheet layout page.
         return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
+    }
+
+    /**
+     * Populates the species list for the Site
+     */
+    private void populateSpeciesLists(){
+        if(factsheet == null) return;
+
+        /* 1. everything but Natura 2000 */
+        // todo: not exactly "everything but natura"
+        if(SiteFactsheet.TYPE_EMERALD == factsheet.getType() || SiteFactsheet.TYPE_DIPLOMA == factsheet.getType() || SiteFactsheet.TYPE_BIOGENETIC == factsheet.getType() || SiteFactsheet.TYPE_CORINE == factsheet.getType()) {
+            siteSpecies = factsheet.findSitesSpeciesByIDNatureObject();
+            siteSpecificSpecies = factsheet.findSitesSpecificSpecies();
+            eunisSpeciesListedAnnexesDirectives = new ArrayList();
+            eunisSpeciesOtherMentioned = new ArrayList();
+            notEunisSpeciesListedAnnexesDirectives = new ArrayList();
+            notEunisSpeciesOtherMentioned = new ArrayList();
+        }
+        // Natura 2000
+        if(SiteFactsheet.TYPE_NATURA2000 == factsheet.getType() ) {
+            siteSpecies = new ArrayList();
+            siteSpecificSpecies = new ArrayList();
+            eunisSpeciesListedAnnexesDirectives = factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000();
+            eunisSpeciesOtherMentioned = factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000();
+            notEunisSpeciesListedAnnexesDirectives = factsheet.findNotEunisSpeciesListedAnnexesDirectives();
+            notEunisSpeciesOtherMentioned = factsheet.findNotEunisSpeciesOtherMentioned();
+        }
+        calculateSpeciesStatistics();
+    }
+
+    /**
+     * Calculate statistics for the species
+     * Moved from site-tab-species.jsp
+     * todo: it can be refactored a bit
+     */
+    private void calculateSpeciesStatistics(){
+        // initialize
+        speciesStatistics = new HashMap<String, Integer>();
+        speciesStatistics.put("Amphibians",0);
+        speciesStatistics.put("Birds",0);
+        speciesStatistics.put("Fishes",0);
+        speciesStatistics.put("Invertebrates",0);
+        speciesStatistics.put("Mammals",0);
+        speciesStatistics.put("Flowering Plants",0);
+
+        // calculate
+        for (SiteSpeciesPersist species: siteSpecies){
+            addToSpeciesStatistics(species.getSpeciesCommonName());
+        }
+        for(SitesSpeciesReportAttributesPersist species : eunisSpeciesListedAnnexesDirectives){
+            addToSpeciesStatistics(species.getSpeciesCommonName());
+        }
+        for(SitesSpeciesReportAttributesPersist species : eunisSpeciesOtherMentioned){
+            addToSpeciesStatistics(species.getSpeciesCommonName());
+        }
+        for(Chm62edtSitesAttributesPersist species : notEunisSpeciesListedAnnexesDirectives){
+            String groupName = species.getSourceTable();
+            groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("amprep") ? "Amphibians"
+                    : (groupName.equalsIgnoreCase("bird") ? "Birds"
+                    : (groupName.equalsIgnoreCase("fishes") ? "Fishes"
+                    : (groupName.equalsIgnoreCase("invert") ? "Invertebrates"
+                    : (groupName.equalsIgnoreCase("mammal") ? "Mammals"
+                    : (groupName.equalsIgnoreCase("plant") ? "Flowering Plants" : "")))))));
+            addToSpeciesStatistics(groupName);
+        }
+        for(Chm62edtSitesAttributesPersist species : notEunisSpeciesOtherMentioned){
+            Chm62edtSitesAttributesPersist attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + species.getName());
+            String groupName = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";
+            groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("P") ? "Plants"
+                    : (groupName.equalsIgnoreCase("A") ? "Amphibians"
+                    : (groupName.equalsIgnoreCase("F") ? "Fishes"
+                    : (groupName.equalsIgnoreCase("I") ? "Invertebrates"
+                    : (groupName.equalsIgnoreCase("M") ? "Mammals"
+                    : (groupName.equalsIgnoreCase("B") ? "Birds"
+                    : (groupName.equalsIgnoreCase("F") ? "Flowering"
+                    : (groupName.equalsIgnoreCase("R") ? "Reptiles" : "")))))))));
+            addToSpeciesStatistics(groupName);
+        }
+
+        // the requested naming is a bit different
+        speciesStatistics.put("Plants", speciesStatistics.remove("Flowering Plants"));
+        speciesStatistics.put("Amphibians / Reptiles", speciesStatistics.remove("Amphibians"));
+
+    }
+
+    private int addToSpeciesStatistics(String key){
+        int count = speciesStatistics.containsKey(key) ? speciesStatistics.get(key) : 0;
+        count++;
+        speciesStatistics.put(key, count);
+        return count;
+    }
+
+    /**
+     * Accessor for species statistics list
+     * @return Sorted list of species statistics object
+     */
+    public List<SpeciesStatistics> getSpeciesStatisticsSorted(){
+        ArrayList<String> sortedKeys = new ArrayList<String>(speciesStatistics.keySet());
+        java.util.Collections.sort(sortedKeys);
+        ArrayList<SpeciesStatistics> result = new ArrayList<SpeciesStatistics>();
+        for(String key:sortedKeys)
+            result.add(new SpeciesStatistics(key, speciesStatistics.get(key)));
+        return result;
     }
 
     /**
@@ -431,6 +547,24 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      */
     public String getRegionName(){
         return regionName;
+    }
+
+    public class SpeciesStatistics{
+        private String key;
+        private int value;
+
+        public SpeciesStatistics(String key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
 }

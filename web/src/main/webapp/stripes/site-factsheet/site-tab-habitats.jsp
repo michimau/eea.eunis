@@ -93,10 +93,11 @@
 	          {
 	            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
 	            SiteHabitatsPersist habitat = (SiteHabitatsPersist)habit1Eunis.get(i);
+
 	%>
 	      <tr<%=cssClass%>>
 	        <td>
-	          <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+	          <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getCode2000()%></a>
 	        </td>
 	        <td>
 	          <a  href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
@@ -259,7 +260,7 @@
 	%>
 	      <tr<%=cssClass%>>
 	        <td>
-	         <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+	         <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getCode2000()%></a>
 	       </td>
 	        <td>
 	          <%String val = habitat.getHabitatDescription();%>

@@ -35,7 +35,17 @@ public class SiteHabitatsPersist extends PersistentObject {
 
   private Integer idGeoscope = null;
 
-  /**
+  private String code2000 = null;
+
+    public String getCode2000() {
+        return code2000;
+    }
+
+    public void setCode2000(String code2000) {
+        this.code2000 = code2000;
+    }
+
+    /**
    *
    */
   public SiteHabitatsPersist() {

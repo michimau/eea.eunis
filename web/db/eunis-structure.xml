@@ -2021,5 +2021,67 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
             </createIndex>
         </rollback>
     </changeSet>
+    <changeSet id="rev-128" author="melisand">
+        <comment>Removes the DMS latitude/longitude fields according to http://taskman.eionet.europa.eu/issues/17806.</comment>
+        <sql>UPDATE chm62edt_sites SET LATITUDE=-(LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000) WHERE LATITUDE IS NULL AND LAT_NS='S' AND LAT_DEG IS NOT NULL</sql>
+        <sql>UPDATE chm62edt_sites SET LATITUDE=LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000 WHERE LATITUDE IS NULL AND LAT_NS='N' AND LAT_DEG is NOT NULL</sql>
+        <sql>UPDATE chm62edt_sites SET LONGITUDE=-(LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000) WHERE LONGITUDE IS NULL AND LONG_EW='W' AND LONG_DEG IS NOT NULL</sql>
+        <sql>UPDATE chm62edt_sites SET LONGITUDE=LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000 WHERE LONGITUDE IS NULL AND LONG_EW='E' AND LONG_DEG IS NOT NULL</sql>
+        <dropColumn tableName="chm62edt_sites" columnName="LAT_NS"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LAT_DEG"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LAT_MIN"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LAT_SEC"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LONG_EW"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LONG_DEG"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LONG_MIN"/>
+        <dropColumn tableName="chm62edt_sites" columnName="LONG_SEC"/>
+        <rollback>
+            <comment>Create columns</comment>
+            <addColumn tableName="chm62edt_sites">
+                <column name="LAT_NS" type="char(1)" defaultValue="NULL"/>
+                <column name="LAT_DEG" type="int(11)" defaultValue="NULL"/>
+                <column name="LAT_MIN" type="int(11)" defaultValue="NULL"/>
+                <column name="LAT_SEC" type="int(11)" defaultValue="NULL"/>
+                <column name="LONG_EW" type="char(1)" defaultValue="NULL"/>
+                <column name="LONG_DEG" type="int(11)" defaultValue="NULL"/>
+                <column name="LONG_MIN" type="int(11)" defaultValue="NULL"/>
+                <column name="LONG_SEC" type="int(11)" defaultValue="NULL"/>
+            </addColumn>
+            <comment>Populate columns</comment>
+            <sql>UPDATE chm62edt_sites SET LAT_NS='S' where LATITUDE &lt; 0</sql>
+            <sql>UPDATE chm62edt_sites SET LAT_NS='N' where LATITUDE &gt;= 0</sql>
+            <sql>UPDATE chm62edt_sites SET LONG_EW='W' where LATITUDE &lt; 0</sql>
+            <sql>UPDATE chm62edt_sites SET LONG_EW='E' where LATITUDE &gt;= 0</sql>
+            <sql>UPDATE chm62edt_sites SET LAT_DEG=truncate(abs(latitude),0), LAT_MIN=truncate((abs(latitude)-truncate(abs(latitude),0))*60,0),
+             LAT_SEC=truncate((abs(latitude)*60 - truncate(abs(latitude)*60,0))*60,0) where latitude is not null</sql>
+            <sql>UPDATE chm62edt_sites SET LONG_DEG=truncate(abs(longitude),0), LONG_MIN=truncate((abs(longitude)-truncate(abs(longitude),0))*60,0),
+             LONG_SEC=truncate((abs(longitude)*60 - truncate(abs(longitude)*60,0))*60,0) where longitude is not null</sql>
+            <comment>Create indexes</comment>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LONG_EW">
+                <column name="LONG_EW"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LONG_DEG">
+                <column name="LONG_DEG"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LONG_MIN">
+                <column name="LONG_MIN"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LONG_SEC">
+                <column name="LONG_SEC"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LAT_NS">
+                <column name="LAT_NS"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LAT_DEG">
+                <column name="LAT_DEG"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LAT_MIN">
+                <column name="LAT_MIN"/>
+            </createIndex>
+            <createIndex tableName="chm62edt_sites" indexName="IDX_LAT_SEC">
+                <column name="LAT_SEC"/>
+            </createIndex>
+        </rollback>
+    </changeSet>
 
 </databaseChangeLog>

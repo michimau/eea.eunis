@@ -1,46 +1,24 @@
 package eionet.eunis.stripes.actions;
 
-import java.awt.Color;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.dto.*;
+import eionet.eunis.rdf.LinkedData;
+import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
+import eionet.eunis.util.Constants;
+import eionet.sparqlClient.helpers.ResultValue;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.RedirectResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
-
+import net.sourceforge.stripes.action.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-
-import ro.finsiel.eunis.ImageProcessing;
-import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
-import ro.finsiel.eunis.factsheet.species.LegalStatusWrapper;
-import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
-import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
-import ro.finsiel.eunis.factsheet.species.ThreatColor;
+import ro.finsiel.eunis.factsheet.species.*;
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
-import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.UniqueVector;
@@ -48,20 +26,11 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
-import ro.finsiel.eunis.utilities.SQLUtilities;
-import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.ClassificationDTO;
-import eionet.eunis.dto.ForeignDataQueryDTO;
-import eionet.eunis.dto.LinkDTO;
-import eionet.eunis.dto.PictureDTO;
-import eionet.eunis.dto.SpeciesDistributionDTO;
-import eionet.eunis.rdf.LinkedData;
-import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
-import eionet.eunis.util.Constants;
-import eionet.eunis.util.Pair;
-import eionet.sparqlClient.helpers.ResultValue;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
@@ -144,9 +113,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private Hashtable<String, String> statusColorPair;
 
     /** Grid distribution tab variables. */
-    private String gridImage;
     private boolean gridDistSuccess;
-    private List<SpeciesDistributionDTO> speciesDistribution;
 
     /** Sites distribution tab variables. */
     private List<SitesByNatureObjectPersist> speciesSites;
@@ -199,10 +166,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String scientificNameUrlEncoded;
 
 
-
     /**
-     *
-     * @return
+     * Default Stripes handler
+     * @return Stripes resolution
      */
     @DefaultHandler
     public Resolution index() {
@@ -280,13 +246,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
     }
     
-    
-    
 
     /**
      * Prepares all specific information for quickFacktSheet
-     *
-     * @author Jaak Kapten
      */
     private void setQuickFactSheetValues() {
         pageUrl = getContext().getInitParameter("DOMAIN_NAME") + "/species/" + idSpecies;
@@ -321,22 +283,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 speciesTitle += " - "+author; 
             }
 
-            
         }
 
         // For later refactoring. The following parameteres are used in QuickFactSheet, but initialized outside this method.
         //
         // links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
-        // ncbi
         // specie.scientificName
-        // specie.genus
         // speciesName
-        // faeu
-        // wormsid
-        // redlistLink
-        // kingdomname
-        // gbifLink2
-        // gbifLink
 
     }
 
@@ -361,10 +314,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // List of species national threat status.
             if (consStatus != null && consStatus.size() > 0) {
                 List<NationalThreatWrapper> newConsStatusList = new ArrayList<NationalThreatWrapper>();
-                for (int i = 0; i < consStatus.size(); i++) {
-                    NationalThreatWrapper threat = consStatus.get(i);
-
-                    if (threat.getReference() != null && threat.getReference().indexOf("IUCN") >= 0) {
+                for (NationalThreatWrapper threat : consStatus) {
+                    if (threat.getReference() != null && threat.getReference().contains("IUCN")) {
                         scientificNameURL = scientificName.replace(' ', '+');
                     }
                     newConsStatusList.add(threat);
@@ -390,18 +341,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
 
     /**
-     *
      * Prepares all specific information for legal instruments section
-     *
-     * @author Jaak Kapten
-     * @return
      */
     private void setLegalInstruments() {
         Vector legals = factsheet.getLegalStatus();
 
         legalStatuses = new ArrayList<LegalStatusWrapper>();
-        for (int i = 0; i < legals.size(); i++) {
-            LegalStatusWrapper legalStatus = (LegalStatusWrapper) legals.get(i);
+        for (Object legal : legals) {
+            LegalStatusWrapper legalStatus = (LegalStatusWrapper) legal;
             legalStatus.setDetailedReference(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus
                     .getDetailedReference())));
             legalStatus.setLegalText(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus.getLegalText())));
@@ -427,7 +374,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 unepWcmcPageLink = link.getUrl();
             }
         }
-
 
     }
 
@@ -531,7 +477,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     if (classificationExpand.length() > 0){
                         classificationExpand+=",";    
                     }
-                    classificationExpand += classif.getId().toString();
+                    classificationExpand += classif.getId();
                     breadcrumbClassificationExpands.add(classificationExpand);
                     if (classif.getLevel().equalsIgnoreCase("kingdom")) {
                         kingdomname = classif.getName();
@@ -557,7 +503,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             speciesName =
-                    (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
+                    (scientificName.trim().contains(" ") ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
                             : scientificName);
 
             redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
@@ -581,8 +527,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (!subSpecies.isEmpty()) {
                 List<SpeciesNatureObjectPersist> newList = new ArrayList<SpeciesNatureObjectPersist>();
 
-                for (int i = 0; i < subSpecies.size(); i++) {
-                    SpeciesNatureObjectPersist species = subSpecies.get(i);
+                for (SpeciesNatureObjectPersist species : subSpecies) {
                     String bad = SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore());
 
                     if (bad != null) {
@@ -597,8 +542,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (!parentSpecies.isEmpty()) {
                 List<SpeciesNatureObjectPersist> newList = new ArrayList<SpeciesNatureObjectPersist>();
 
-                for (int i = 0; i < parentSpecies.size(); i++) {
-                    SpeciesNatureObjectPersist species = parentSpecies.get(i);
+                for (SpeciesNatureObjectPersist species : parentSpecies) {
                     String bad = SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore());
 
                     if (bad != null) {
@@ -656,8 +600,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             UniqueVector statuses = new UniqueVector();
 
             // Get all distinct statuses
-            for (int i = 0; i < bioRegions.size(); i++) {
-                GeographicalStatusWrapper aRow = bioRegions.get(i);
+            for (GeographicalStatusWrapper aRow : bioRegions) {
                 statuses.addElement(aRow.getStatus());
             }
             // Compute distinct color for each status
@@ -666,8 +609,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // fix to display in map legend only visible colours
             statuses.clear();
-            for (int i = 0; i < bioRegions.size(); i++) {
-                GeographicalStatusWrapper aRow = bioRegions.get(i);
+            for (GeographicalStatusWrapper aRow : bioRegions) {
                 Chm62edtCountryPersist cntry = aRow.getCountry();
 
                 if (cntry != null && !addedCountries.contains(cntry.getAreaNameEnglish())) {
@@ -706,7 +648,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private boolean isSpeciesLayer(String scientificName, int layerNumber) {
         boolean results = false;
-        if (scientificName != null && scientificName.isEmpty() == false && layerNumber > 0) {
+        if (scientificName != null && !scientificName.isEmpty() && layerNumber > 0) {
 
             String layerNumberS = Integer.toString(layerNumber);
             String rawMapServerFindOperationUrl = getContext().getApplicationProperty("DISCOMAP_SERVER_BIO");
@@ -739,110 +681,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * Populate the member variables used in the "grid" tab.
-     */
-    private void gridDistributionTabActions() {
-
-        speciesDistribution = new ArrayList<SpeciesDistributionDTO>();
-
-        DistributionWrapper dist = new DistributionWrapper(factsheet.getSpeciesNatureObject().getIdNatureObject());
-        List d = dist.getDistribution();
-
-        if (null != d && d.size() > 0) {
-            String filename = getContext().getRequest().getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
-            String tempDir = getContext().getInitParameter("TEMP_DIR");
-            String inputFilename = getContext().getServletContext().getRealPath("/") + "gis/europe-bio.jpg";
-
-            gridImage = tempDir + filename;
-            String outputFilename = getContext().getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + gridImage;
-
-            gridDistSuccess = false;
-            try {
-                ImageProcessing img = new ImageProcessing(inputFilename, outputFilename);
-
-                img.init();
-                for (int i = 0; i < d.size(); i += 2) {
-                    ReportsDistributionStatusPersist dis;
-
-                    if (i < d.size() - 1) {
-                        dis = (ReportsDistributionStatusPersist) d.get(i + 1);
-                        if (dis.getLatitude() != null && dis.getLongitude() != null && dis.getLatitude().doubleValue() != 0
-                                && dis.getLongitude().doubleValue() != 0) {
-                            double longitude = dis.getLongitude().doubleValue();
-                            double latitude = dis.getLatitude().doubleValue();
-                            int x;
-                            int y;
-
-                            // WEST +15
-                            // EAST +44
-                            // NORTH +73
-                            // SOUTH +34
-                            // PIC SIZE: 616 x 407
-                            // the map goes from -15 to 44 in longitude
-                            x = (int) ((616 * 15) / 59 + ((longitude * 616) / 59));
-                            // the map goes from 34 to 73 in latitude
-                            y = (int) (407 - ((((latitude - 34) * 407) / 39)));
-                            int radius = 4;
-
-                            img.drawPoint(x, y, Color.RED, radius);
-                        }
-                    }
-                }
-                img.save();
-                gridDistSuccess = true;
-            } catch (Throwable ex) {
-                gridDistSuccess = false;
-                ex.printStackTrace();
-            }
-
-            for (int i = 0; i < d.size(); i += 2) {
-                SpeciesDistributionDTO gridDTO = new SpeciesDistributionDTO();
-
-                ReportsDistributionStatusPersist dis = (ReportsDistributionStatusPersist) d.get(i);
-
-                gridDTO.setName(dis.getIdLookupGrid());
-                gridDTO.setStatus(dis.getDistributionStatus());
-                gridDTO.setReference(dis.getIdDc().toString());
-                if (i < d.size() - 1) {
-                    dis = (ReportsDistributionStatusPersist) d.get(i + 1);
-                    gridDTO.setLongitude(dis.getLongitude().toString());
-                    gridDTO.setLatitude(dis.getLatitude().toString());
-                }
-                speciesDistribution.add(gridDTO);
-            }
-        }
-    }
-
-
-
-    /**
-     * Populate the member variables used in the "linkeddata" tab.
-     *
-     * @param idSpecies - The species ID.
-     */
-    private void linkeddataTabActions(int idSpecies, Integer natObjId) {
-        try {
-            Properties props = new Properties();
-            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
-            LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
-            queries = fd.getQueryObjects();
-            if (!StringUtils.isBlank(query)) {
-
-                fd.executeQuery(query, idSpecies);
-                queryResultCols = fd.getCols();
-                queryResultRows = fd.getRows();
-
-                attribution = fd.getAttribution();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Run the queries to be executed on "Conservation status" tab.
      *
-     * @param idSpecies
+     * @param idSpecies The species id
      * @param natObjId -ID_NATURE_OBJECT
      */
     private void setConservationStatusDetails(int idSpecies, Integer natObjId) {
@@ -852,8 +693,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_species.xml"));
             LinkedData ld = new LinkedData(props, natObjId, "_conservationStatusQueries");
             conservationStatusQueries = ld.getQueryObjects();
-            for (int i = 0; i < conservationStatusQueries.size(); i++) {
-                conservationStatusQuery = conservationStatusQueries.get(i).getId();
+            for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
+                conservationStatusQuery = conservationStatusQuery1.getId();
                 if (!StringUtils.isBlank(conservationStatusQuery)) {
                     ld.executeQuery(conservationStatusQuery, idSpecies);
                     conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
@@ -868,9 +709,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     *
-     * @param sites
-     * @return
+     * Returns the site ID list
+     * @param sites The sites list
+     * @return Comma separated Site IDs
      */
     private String getIds(List<SitesByNatureObjectPersist> sites) {
 
@@ -999,14 +840,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setGridDistSuccess(boolean gridDistSuccess) {
         this.gridDistSuccess = gridDistSuccess;
-    }
-
-    public List<SpeciesDistributionDTO> getSpeciesDistribution() {
-        return speciesDistribution;
-    }
-
-    public String getGridImage() {
-        return gridImage;
     }
 
     public List<PictureDTO> getPics() {
@@ -1313,7 +1146,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             @SuppressWarnings("unchecked")
             List<Chm62edtNatureObjectAttributesPersist> natureObjectAttributes =
                     new Chm62edtNatureObjectAttributesDomain().findWhere("ID_NATURE_OBJECT= " + currentNaturalObjectId);
-            ;
+
             natureObjectAttributesMap = new HashMap<String, List<Chm62edtNatureObjectAttributesPersist>>();
             for (Chm62edtNatureObjectAttributesPersist noa : natureObjectAttributes) {
                 if (natureObjectAttributesMap.containsKey(noa.getName())) {
@@ -1424,8 +1257,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return consStatusE25;
     }
 
-
-
     public List<LegalStatusWrapper> getLegalStatuses() {
         return legalStatuses;
     }
@@ -1482,29 +1313,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         this.breadcrumbClassificationExpands = breadcrumbClassificationExpands;
     }
 
-
-
-
     public String getEnglishName() {
         return englishName;
     }
-
-
-
 
     public void setEnglishName(String englishName) {
         this.englishName = englishName;
     }
 
-
-
-
     public String getSpeciesTitle() {
         return speciesTitle;
     }
-
-
-
 
     public void setSpeciesTitle(String speciesTitle) {
         this.speciesTitle = speciesTitle;

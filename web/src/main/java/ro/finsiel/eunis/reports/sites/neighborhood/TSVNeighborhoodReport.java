@@ -113,8 +113,8 @@ public class TSVNeighborhoodReport extends AbstractTSVReport {
           aRow.addElement(Utilities.formatString(site.getName()));
           aRow.addElement(Utilities.formatAreaPDF("" + SitesSearchUtility.distanceBetweenSites(mainSite, site), 4, 3 , ""));
           // Coordinates
-          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()));
-          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()));
+          aRow.addElement(SitesSearchUtility.formatPDFLongitude(site.getLongitude()));
+          aRow.addElement(SitesSearchUtility.formatPDFLatitude(site.getLatitude()));
           // Size
           aRow.addElement(Utilities.formatAreaPDF(site.getArea(), 5, 2, ""));
           writeRow(aRow);

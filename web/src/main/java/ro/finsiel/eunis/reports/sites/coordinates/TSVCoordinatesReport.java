@@ -139,8 +139,8 @@ public class TSVCoordinatesReport extends AbstractTSVReport
           // Designation
           aRow.addElement(designations);
           // Coordinates
-          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()));
-          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()));
+          aRow.addElement(SitesSearchUtility.formatPDFLongitude(site.getLongitude()));
+          aRow.addElement(SitesSearchUtility.formatPDFLatitude(site.getLatitude()));
           // Altitude
           aRow.addElement(Utilities.formatString(site.getArea()));
           // Year

@@ -246,10 +246,10 @@
                             <%=Utilities.formatArea("" + SitesSearchUtility.distanceBetweenSites(mainSite, site), 4, 3, "&nbsp;")%>
                           </td>
                           <td align="center" nowrap="nowrap">
-                            <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
+                            <%=SitesSearchUtility.formatLongitude(site.getLongitude())%>
                           </td>
                           <td align="center" nowrap="nowrap">
-                            <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
+                            <%=SitesSearchUtility.formatLatitude(site.getLatitude())%>
                           </td>
                           <td align="right" nowrap="nowrap">
                             <%=Utilities.formatArea(site.getArea(), 5, 2, "&nbsp;")%>

@@ -70,14 +70,8 @@ public class NeighborhoodDetailSortCriteria extends AbstractSortCriteria {
         possibleSorts.put(SORT_SIZE, "AREA");
         possibleSorts.put(SORT_COUNTRY, "AREA_NAME_EN");
         possibleSorts.put(SORT_DESIGN, "DESCRIPTION");
-        possibleSorts.put(SORT_LAT,
-                "IF(LAT_NS='N',IF(LAT_DEG IS NULL, 0, LAT_DEG) * 3600 + " + " IF(LAT_MIN IS NULL, 0, LAT_MIN) * 60 + "
-                + " IF(LAT_SEC IS NULL, 0, LAT_SEC),(-1)*(IF(LAT_DEG IS NULL, 0, LAT_DEG)*3600 + "
-                + " IF(LAT_MIN IS NULL,0, LAT_MIN)*60 + IF(LAT_SEC IS NULL,0,LAT_SEC)))");
-        possibleSorts.put(SORT_LONG,
-                "IF(LONG_EW='E',IF(LONG_DEG IS NULL,0,LONG_DEG)*3600 + " + " IF(LONG_MIN IS NULL,0,LONG_MIN)*60 + "
-                + " IF(LONG_SEC IS NULL,0,LONG_SEC),(-1)*(IF(LONG_DEG IS NULL,0,LONG_DEG) *3600 + "
-                + " IF(LONG_MIN IS NULL,0,LONG_MIN)*60 + IF(LONG_SEC IS NULL,0,LONG_SEC)))");
+        possibleSorts.put(SORT_LAT, "LATITUDE");
+        possibleSorts.put(SORT_LONG, "LONGITUDE");
         possibleSorts.put(SORT_YEAR,
                 "CONCAT(" + "IF(SOURCE_DB='BIOGENETIC',left(DESIGNATION_DATE,4),''),"
                 + "IF(SOURCE_DB='CDDA_INTERNATIONAL',RIGHT(DESIGNATION_DATE,4),''),"

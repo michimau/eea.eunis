@@ -58,14 +58,6 @@ public class CoordinatesPersist extends PersistentObject implements CoordinatesP
   private String nationalCode = null;
   private String nuts = null;
   private String length = null;
-  private String longEW = null;
-  private String longDeg = null;
-  private String longMin = null;
-  private String longSec = null;
-  private String latNS = null;
-  private String latDeg = null;
-  private String latMin = null;
-  private String latSec = null;
   private String altMean = null;
   private String altMax = null;
   private String altMin = null;
@@ -297,70 +289,6 @@ public class CoordinatesPersist extends PersistentObject implements CoordinatesP
 
   public void setLength(String length) {
     this.length = length;
-  }
-
-  public String getLongEW() {
-    return longEW;
-  }
-
-  public void setLongEW(String longEW) {
-    this.longEW = longEW;
-  }
-
-  public String getLongDeg() {
-    return longDeg;
-  }
-
-  public void setLongDeg(String longDeg) {
-    this.longDeg = longDeg;
-  }
-
-  public String getLongMin() {
-    return longMin;
-  }
-
-  public void setLongMin(String longMin) {
-    this.longMin = longMin;
-  }
-
-  public String getLongSec() {
-    return longSec;
-  }
-
-  public void setLongSec(String longSec) {
-    this.longSec = longSec;
-  }
-
-  public String getLatNS() {
-    return latNS;
-  }
-
-  public void setLatNS(String latNS) {
-    this.latNS = latNS;
-  }
-
-  public String getLatDeg() {
-    return latDeg;
-  }
-
-  public void setLatDeg(String latDeg) {
-    this.latDeg = latDeg;
-  }
-
-  public String getLatMin() {
-    return latMin;
-  }
-
-  public void setLatMin(String latMin) {
-    this.latMin = latMin;
-  }
-
-  public String getLatSec() {
-    return latSec;
-  }
-
-  public void setLatSec(String latSec) {
-    this.latSec = latSec;
   }
 
   public String getAltMean() {

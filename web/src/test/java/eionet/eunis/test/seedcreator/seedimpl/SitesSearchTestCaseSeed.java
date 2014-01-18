@@ -34,7 +34,7 @@ public class SitesSearchTestCaseSeed extends TestCaseSeedBase {
         partialDataSet
                 .addTable(
                         "chm62edt_sites",
-                        "SELECT ID_SITE, ID_NATURE_OBJECT, ID_DESIGNATION, ID_GEOSCOPE, NAME, COMPLEX_NAME, DISTRICT_NAME, IUCNAT, DESIGNATION_DATE,NATIONAL_CODE, NUTS, AREA, LENGTH, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, LAT_NS, LAT_DEG, LAT_MIN, LAT_SEC, ALT_MEAN, ALT_MAX, ALT_MIN, LONGITUDE, LATITUDE, SOURCE_DB FROM chm62edt_sites WHERE name LIKE '%lah%'");
+                        "SELECT ID_SITE, ID_NATURE_OBJECT, ID_DESIGNATION, ID_GEOSCOPE, NAME, COMPLEX_NAME, DISTRICT_NAME, IUCNAT, DESIGNATION_DATE,NATIONAL_CODE, NUTS, AREA, LENGTH, ALT_MEAN, ALT_MAX, ALT_MIN, LONGITUDE, LATITUDE, SOURCE_DB FROM chm62edt_sites WHERE name LIKE '%lah%'");
         return partialDataSet;
     }
 

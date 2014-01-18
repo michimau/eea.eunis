@@ -120,9 +120,9 @@ public class TSVSitesAdvanced extends AbstractTSVReport
           // Designation year
           row.addElement(SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB()));
           // Longitude
-          row.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()));
+          row.addElement(SitesSearchUtility.formatPDFLongitude(site.getLongitude()));
           // Latitude
-          row.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()));
+          row.addElement(SitesSearchUtility.formatPDFLatitude(site.getLatitude()));
           // Size
           row.addElement(Utilities.formatAreaPDF(site.getArea(), 5, 2, ""));
           // Length

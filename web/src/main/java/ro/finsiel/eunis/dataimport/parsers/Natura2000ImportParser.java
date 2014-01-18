@@ -53,15 +53,7 @@ public class Natura2000ImportParser extends DefaultHandler {
     private String respondent;
     private String description;
     private String longitude;
-    private String lonEw;
-    private String lonDeg;
-    private String lonMin;
-    private String lonSec;
     private String latitude;
-    private String latNs;
-    private String latDeg;
-    private String latMin;
-    private String latSec;
     private String area;
     private String altMin;
     private String altMax;
@@ -321,9 +313,6 @@ public class Natura2000ImportParser extends DefaultHandler {
                     dateCompilation = "";
                 }
 
-                calculateLatitudeParams();
-                calculateLongitudeParams();
-
                 preparedStatementNatObject.setString(1, siteNatureObjectId);
                 preparedStatementNatObject.setString(2, siteCode);
                 preparedStatementNatObject.executeUpdate();
@@ -339,26 +328,18 @@ public class Natura2000ImportParser extends DefaultHandler {
                 preparedStatementSiteInsert.setString(7, respondent);
                 preparedStatementSiteInsert.setString(8, description);
                 preparedStatementSiteInsert.setString(9, latitude);
-                preparedStatementSiteInsert.setString(10, latNs);
-                preparedStatementSiteInsert.setString(11, latDeg);
-                preparedStatementSiteInsert.setString(12, latMin);
-                preparedStatementSiteInsert.setString(13, latSec);
-                preparedStatementSiteInsert.setString(14, longitude);
-                preparedStatementSiteInsert.setString(15, lonEw);
-                preparedStatementSiteInsert.setString(16, lonDeg);
-                preparedStatementSiteInsert.setString(17, lonMin);
-                preparedStatementSiteInsert.setString(18, lonSec);
-                preparedStatementSiteInsert.setString(19, area);
-                preparedStatementSiteInsert.setString(20, altMin);
-                preparedStatementSiteInsert.setString(21, altMax);
-                preparedStatementSiteInsert.setString(22, altMean);
-                preparedStatementSiteInsert.setString(23, "NATURA2000");
-                preparedStatementSiteInsert.setString(24, "80");
-                preparedStatementSiteInsert.setString(25, siteDesignation);
+                preparedStatementSiteInsert.setString(10, longitude);
+                preparedStatementSiteInsert.setString(11, area);
+                preparedStatementSiteInsert.setString(12, altMin);
+                preparedStatementSiteInsert.setString(13, altMax);
+                preparedStatementSiteInsert.setString(14, altMean);
+                preparedStatementSiteInsert.setString(15, "NATURA2000");
+                preparedStatementSiteInsert.setString(16, "80");
+                preparedStatementSiteInsert.setString(17, siteDesignation);
                 if (lengthKm != null && lengthKm.length() > 0) {
-                    preparedStatementSiteInsert.setString(26, lengthKm);
+                    preparedStatementSiteInsert.setString(18, lengthKm);
                 } else {
-                    preparedStatementSiteInsert.setNull(26, Types.DECIMAL);
+                    preparedStatementSiteInsert.setNull(18, Types.DECIMAL);
                 }
                 preparedStatementSiteInsert.executeUpdate();
 
@@ -1006,10 +987,10 @@ public class Natura2000ImportParser extends DefaultHandler {
             String querySiteInsert =
                 "INSERT INTO chm62edt_sites (ID_SITE, ID_NATURE_OBJECT, NAME, COMPILATION_DATE, "
                 + "COMPLEX_NAME, DISTRICT_NAME, "
-                + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, LAT_NS, LAT_DEG, LAT_MIN, LAT_SEC, "
-                + "LONGITUDE, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
+                + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, "
+                + "LONGITUDE, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
                 + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH) VALUES "
-                + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
             String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";
@@ -1361,129 +1342,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         } finally {
             if (ps != null) {
                 ps.close();
-            }
-        }
-    }
-
-    private void calculateLatitudeParams() {
-        latNs = "S";
-        latDeg = null;
-        latMin = null;
-        latSec = null;
-
-        if (latitude != null && latitude.length() > 0) {
-            // calculate LAT_NS
-            double lat_num = new Double(latitude).doubleValue();
-
-            if (!latitude.contains(".")) {
-                latitude = new Double(lat_num).toString();
-            }
-            if (lat_num > 0) {
-                latNs = "N";
-            }
-
-            // calculate LAT_DEG
-            int index = latitude.indexOf(".");
-
-            if (index != -1) {
-                latDeg = latitude.substring(0, index);
-                String rest = latitude.substring(index + 1, latitude.length());
-
-                // calculate LAT_MIN
-                if (rest != null && rest.length() > 0) {
-                    rest = "0." + rest;
-                    double d = new Double(rest).doubleValue();
-                    double min = d * 60;
-                    String minString = new Double(min).toString();
-                    int indexMin = minString.indexOf(".");
-
-                    if (indexMin != -1) {
-                        latMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1,
-                                minString.length());
-
-                        // calculate LAT_SEC
-                        if (restMin != null && restMin.length() > 0) {
-                            restMin = "0." + restMin;
-                            double dsec = new Double(restMin).doubleValue();
-                            double sec = dsec * 60;
-                            String secString = new Double(sec).toString();
-                            int indexSec = secString.indexOf(".");
-
-                            if (indexSec != -1) {
-                                latSec = secString.substring(0, indexSec);
-                            } else {
-                                latSec = secString;
-                            }
-                        }
-                    } else {
-                        latMin = minString;
-                    }
-                }
-            } else {
-                latDeg = latitude;
-            }
-        }
-    }
-
-    private void calculateLongitudeParams() {
-        lonEw = "W";
-        lonDeg = null;
-        lonMin = null;
-        lonSec = null;
-
-        if (longitude != null && longitude.length() > 0) {
-
-            // calculate LON_EW
-            double lon_num = new Double(longitude).doubleValue();
-
-            if (!longitude.contains(".")) {
-                longitude = new Double(lon_num).toString();
-            }
-            if (lon_num > 0) {
-                lonEw = "E";
-            }
-
-            // calculate LON_DEG
-            int index = longitude.indexOf(".");
-
-            if (index != -1) {
-                lonDeg = longitude.substring(0, index);
-                String rest = longitude.substring(index + 1, longitude.length());
-
-                // calculate LON_MIN
-                if (rest != null && rest.length() > 0) {
-                    rest = "0." + rest;
-                    double d = new Double(rest).doubleValue();
-                    double min = d * 60;
-                    String minString = new Double(min).toString();
-                    int indexMin = minString.indexOf(".");
-
-                    if (indexMin != -1) {
-                        lonMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1,
-                                minString.length());
-
-                        // calculate LON_SEC
-                        if (restMin != null && restMin.length() > 0) {
-                            restMin = "0." + restMin;
-                            double dsec = new Double(restMin).doubleValue();
-                            double sec = dsec * 60;
-                            String secString = new Double(sec).toString();
-                            int indexSec = secString.indexOf(".");
-
-                            if (indexSec != -1) {
-                                lonSec = secString.substring(0, indexSec);
-                            } else {
-                                lonSec = secString;
-                            }
-                        }
-                    } else {
-                        lonMin = minString;
-                    }
-                }
-            } else {
-                lonDeg = longitude;
             }
         }
     }

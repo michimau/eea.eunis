@@ -351,10 +351,10 @@
             {
           %>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsPhrase("Longitude")%>
+                            <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_LONG%>&amp;ascendency=<%=formBean.changeAscendency(sortLong, null == sortLong)%>"><%=Utilities.getSortImageTag(sortLong)%><%=cm.cmsPhrase("Longitude")%></a>
                         </th>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsPhrase("Latitude")%>
+                            <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_LAT%>&amp;ascendency=<%=formBean.changeAscendency(sortLat, null == sortLat)%>"><%=Utilities.getSortImageTag(sortLat)%><%=cm.cmsPhrase("Latitude")%></a>
                         </th>
           <%
             }
@@ -421,10 +421,10 @@
               {
           %>
                         <td style="text-align : center; white-space : nowrap">
-                          <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
+                          <%=SitesSearchUtility.formatLongitude(site.getLongitude())%>
                         </td>
                         <td style="text-align : center; white-space : nowrap">
-                          <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
+                          <%=SitesSearchUtility.formatLatitude(site.getLatitude())%>
                         </td>
           <%
               }

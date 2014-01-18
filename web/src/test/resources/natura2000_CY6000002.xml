@@ -1,0 +1,1607 @@
+<Natura2000-SDF DBVersion="End2010" Form="PUBLIC">
+  <TitlePage>
+    <SiteCode>CY6000002</SiteCode>
+    <SiteName>ALYKES LARNAKAS</SiteName>
+  </TitlePage>
+  <SiteIdentification>
+    <SiteCode>CY6000002</SiteCode>
+    <SiteName>ALYKES LARNAKAS</SiteName>
+    <SiteType>C</SiteType>
+    <Date_Compilation>2000-02-01T00:00:00</Date_Compilation>
+    <Respondent>GEORGHIOU K. (Sci. Resp.), ECONOMIDOU E., LEGAKIS A., NIKOLAIDOU A., MAKRIS C., NKUA, GR15784.
+KYRIAKOU K.  (Editor), IEZEKIEL S.A., CHRISTODOULOU CH. Forestry Dpt, MANRE, Lefkosia
+HATJICHRISTOFOROU M. DFMR,  MANRE, Lefkosia</Respondent>
+    <Publ_Date>2006-07-19T00:00:00</Publ_Date>
+    <Description>Mediterranean</Description>
+  </SiteIdentification>
+  <SiteLocation>
+    <Longitude>33.622222</Longitude>
+    <Latitude>34.883333</Latitude>
+    <AreaHA>1560.0000</AreaHA>
+    <LengthKM>9.00</LengthKM>
+    <Altitude_Min>-2</Altitude_Min>
+    <Altitude_Max>20</Altitude_Max>
+    <Altitude_Mean>11</Altitude_Mean>
+    <AdministrativeRegion>
+      <NutsCode>CY6</NutsCode>
+      <NutsCover>100.00</NutsCover>
+    </AdministrativeRegion>
+    <BiogeograpichRegion>
+      <BioDescription>Mediterranean</BioDescription>
+    </BiogeograpichRegion>
+  </SiteLocation>
+  <EcologicalInformation>
+    <EcologicalInformation31>
+      <Habitat>
+        <HCode>1150</HCode>
+        <HCover>37.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>A</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>A</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>1210</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>1310</HCode>
+        <HCover>0.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>B</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>A</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>1410</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>1420</HCode>
+        <HCover>22.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>B</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>A</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>2110</HCode>
+        <HCover>0.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>5420</HCode>
+        <HCover>0.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>6220</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+    </EcologicalInformation31>
+    <EcologicalInformation32>
+      <EcologicalInformation32A>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A229</SpeciesCode>
+            <SpeciesName>Alcedo atthis</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A209</SpeciesCode>
+            <SpeciesName>Ardea purpurea</SpeciesName>
+            <Winter>R</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A138</SpeciesCode>
+            <SpeciesName>Charadrius alexandrinus</SpeciesName>
+            <Resident>P</Resident>
+            <Breeding>C</Breeding>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A196</SpeciesCode>
+            <SpeciesName>Chlidonias hybridus</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A031</SpeciesCode>
+            <SpeciesName>Ciconia ciconia</SpeciesName>
+            <Staging>V</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A081</SpeciesCode>
+            <SpeciesName>Circus aeruginosus</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A231</SpeciesCode>
+            <SpeciesName>Coracias garrulus</SpeciesName>
+            <Breeding>R</Breeding>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A027</SpeciesCode>
+            <SpeciesName>Egretta alba</SpeciesName>
+            <Winter>R</Winter>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A072</SpeciesCode>
+            <SpeciesName>Egretta garzetta</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A447</SpeciesCode>
+            <SpeciesName>Emberiza caesia</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A154</SpeciesCode>
+            <SpeciesName>Gallinago media</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A189</SpeciesCode>
+            <SpeciesName>Gelochelidon nilotica</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A131</SpeciesCode>
+            <SpeciesName>Himantopus himantopus</SpeciesName>
+            <Breeding>C</Breeding>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A022</SpeciesCode>
+            <SpeciesName>Ixobrychus minutus</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A339</SpeciesCode>
+            <SpeciesName>Lanius minor</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A433</SpeciesCode>
+            <SpeciesName>Lanius nubicus</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A176</SpeciesCode>
+            <SpeciesName>Larus melanocephalus</SpeciesName>
+            <Winter>V</Winter>
+            <Staging>V</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A177</SpeciesCode>
+            <SpeciesName>Larus minutus</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A242</SpeciesCode>
+            <SpeciesName>Melanocorypha calandra</SpeciesName>
+            <Resident>C</Resident>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A023</SpeciesCode>
+            <SpeciesName>Nycticorax nycticorax</SpeciesName>
+            <Breeding>R</Breeding>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A467</SpeciesCode>
+            <SpeciesName>Oenanthe cypriaca</SpeciesName>
+            <Resident>C</Resident>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A019</SpeciesCode>
+            <SpeciesName>Pelecanus onocrotalus</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A151</SpeciesCode>
+            <SpeciesName>Philomachus pugnax</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A034</SpeciesCode>
+            <SpeciesName>Platalea leucorodia</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A032</SpeciesCode>
+            <SpeciesName>Plegadis falcinellus</SpeciesName>
+            <Breeding>V</Breeding>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A007</SpeciesCode>
+            <SpeciesName>Podiceps auritus</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A120</SpeciesCode>
+            <SpeciesName>Porzana parva</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A132</SpeciesCode>
+            <SpeciesName>Recurvirostra avosetta</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A468</SpeciesCode>
+            <SpeciesName>Sylvia melanothorax</SpeciesName>
+            <Resident>R</Resident>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A166</SpeciesCode>
+            <SpeciesName>Tringa glareola</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32A>
+      <EcologicalInformation32B>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A247</SpeciesCode>
+            <SpeciesName>Alauda arvensis</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A054</SpeciesCode>
+            <SpeciesName>Anas acuta</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A056</SpeciesCode>
+            <SpeciesName>Anas clypeata</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A051</SpeciesCode>
+            <SpeciesName>Anas crecca</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A050</SpeciesCode>
+            <SpeciesName>Anas penelope</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A053</SpeciesCode>
+            <SpeciesName>Anas platyrhynchos</SpeciesName>
+            <Resident>C</Resident>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A055</SpeciesCode>
+            <SpeciesName>Anas querquedula</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A051</SpeciesCode>
+            <SpeciesName>Anas strepera</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A041</SpeciesCode>
+            <SpeciesName>Anser albifrons</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A043</SpeciesCode>
+            <SpeciesName>Anser anser</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A258</SpeciesCode>
+            <SpeciesName>Anthus cervinus</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A257</SpeciesCode>
+            <SpeciesName>Anthus pratensis</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A259</SpeciesCode>
+            <SpeciesName>Anthus spinoletta</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A256</SpeciesCode>
+            <SpeciesName>Anthus trivialis</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A226</SpeciesCode>
+            <SpeciesName>Apus apus</SpeciesName>
+            <Breeding>C</Breeding>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A228</SpeciesCode>
+            <SpeciesName>Apus melba</SpeciesName>
+            <Staging>V</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A028</SpeciesCode>
+            <SpeciesName>Ardea cinerea</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A169</SpeciesCode>
+            <SpeciesName>Arenaria interpres</SpeciesName>
+            <Staging>R</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A059</SpeciesCode>
+            <SpeciesName>Aythya ferina</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A061</SpeciesCode>
+            <SpeciesName>Aythya fuligula</SpeciesName>
+            <Breeding>V</Breeding>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A057</SpeciesCode>
+            <SpeciesName>Bucephala clangula</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A149</SpeciesCode>
+            <SpeciesName>Calidris alpina</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A147</SpeciesCode>
+            <SpeciesName>Calidris ferruginea</SpeciesName>
+            <Winter>R</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A145</SpeciesCode>
+            <SpeciesName>Calidris minuta</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A146</SpeciesCode>
+            <SpeciesName>Calidris temminckii</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A136</SpeciesCode>
+            <SpeciesName>Charadrius dubius</SpeciesName>
+            <Breeding>R</Breeding>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A137</SpeciesCode>
+            <SpeciesName>Charadrius hiaticula</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A198</SpeciesCode>
+            <SpeciesName>Chlidonias leucopterus</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A113</SpeciesCode>
+            <SpeciesName>Coturnix coturnix</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A036</SpeciesCode>
+            <SpeciesName>Cygnus olor</SpeciesName>
+            <Winter>R</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A253</SpeciesCode>
+            <SpeciesName>Delichon urbica</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A125</SpeciesCode>
+            <SpeciesName>Fulica atra</SpeciesName>
+            <Breeding>R</Breeding>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A153</SpeciesCode>
+            <SpeciesName>Gallinago gallinago</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A123</SpeciesCode>
+            <SpeciesName>Gallinula chloropus</SpeciesName>
+            <Breeding>R</Breeding>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A251</SpeciesCode>
+            <SpeciesName>Hirundo rustica</SpeciesName>
+            <Breeding>C</Breeding>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A459</SpeciesCode>
+            <SpeciesName>Larus cachinnans</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A183</SpeciesCode>
+            <SpeciesName>Larus fuscus</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A179</SpeciesCode>
+            <SpeciesName>Larus ridibundus</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A156</SpeciesCode>
+            <SpeciesName>Limosa limosa</SpeciesName>
+            <Winter>R</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A070</SpeciesCode>
+            <SpeciesName>Mergus merganser</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A230</SpeciesCode>
+            <SpeciesName>Merops apiaster</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A280</SpeciesCode>
+            <SpeciesName>Monticola saxatilis</SpeciesName>
+            <Staging>V</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A281</SpeciesCode>
+            <SpeciesName>Monticola solitarius</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A262</SpeciesCode>
+            <SpeciesName>Motacilla alba</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A058</SpeciesCode>
+            <SpeciesName>Netta rufina</SpeciesName>
+            <Winter>V</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A144</SpeciesCode>
+            <SpeciesName>Numenius arquata</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A171</SpeciesCode>
+            <SpeciesName>Oenanthe oenanthe</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A273</SpeciesCode>
+            <SpeciesName>Phoenicurus ochruros</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A274</SpeciesCode>
+            <SpeciesName>Phoenicurus phoenicurus</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A005</SpeciesCode>
+            <SpeciesName>Podiceps cristatus</SpeciesName>
+            <Staging>V</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A118</SpeciesCode>
+            <SpeciesName>Rallus aquaticus</SpeciesName>
+            <Breeding>R</Breeding>
+            <Winter>R</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A276</SpeciesCode>
+            <SpeciesName>Saxicola torquata</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A210</SpeciesCode>
+            <SpeciesName>Streptopelia turtur</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A311</SpeciesCode>
+            <SpeciesName>Sylvia atricapilla</SpeciesName>
+            <Breeding>V</Breeding>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A309</SpeciesCode>
+            <SpeciesName>Sylvia communis</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A306</SpeciesCode>
+            <SpeciesName>Sylvia hortensis</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A004</SpeciesCode>
+            <SpeciesName>Tachybaptus ruficollis</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A048</SpeciesCode>
+            <SpeciesName>Tadorna tadorna</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A164</SpeciesCode>
+            <SpeciesName>Tringa nebularia</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A165</SpeciesCode>
+            <SpeciesName>Tringa ochropus</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A163</SpeciesCode>
+            <SpeciesName>Tringa stagnatilis</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A162</SpeciesCode>
+            <SpeciesName>Tringa totanus</SpeciesName>
+            <Winter>C</Winter>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A286</SpeciesCode>
+            <SpeciesName>Turdus iliacus</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A283</SpeciesCode>
+            <SpeciesName>Turdus merula</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A232</SpeciesCode>
+            <SpeciesName>Upupa epops</SpeciesName>
+            <Staging>C</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A142</SpeciesCode>
+            <SpeciesName>Vanellus vanellus</SpeciesName>
+            <Winter>C</Winter>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32B>
+      <EcologicalInformation32C>
+        <SpeciesList />
+      </EcologicalInformation32C>
+      <EcologicalInformation32D>
+        <SpeciesList />
+      </EcologicalInformation32D>
+      <EcologicalInformation32E>
+        <SpeciesList />
+      </EcologicalInformation32E>
+      <EcologicalInformation32F>
+        <SpeciesList />
+      </EcologicalInformation32F>
+      <EcologicalInformation32G>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>2329</SpeciesCode>
+            <SpeciesName>Ophrys kotschyi</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <Conservation>-</Conservation>
+            <IsolationFactor>-</IsolationFactor>
+            <GlobalImportance>-</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32G>
+    </EcologicalInformation32>
+    <EcologicalInformation33>
+      <OtherSpeciesList>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Bufo viridis</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Coluber jugularis</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Coluber nummifer</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Cyrtopodion kotschyi</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Hemidactylus turcicus</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Malpolon monspessulanus</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Rana ridibunda</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Typhlops vermicularis</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Vipera lebetina</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Eumeces schneideri</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Hyla savignyi</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Mabuya vittata</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Alectoris chukar</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Athene noctua</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Carduelis carduelis</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Carduelis chloris</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Cisticola juncidis</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Falco tinnunculus</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Galerida cristata</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Serinus serinus</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Sylvia conspicillata</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Troglodytes troglodytes</SciName>
+          <Population>P</Population>
+          <Motivation>B</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Orthetrum chrysostigma</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Barlia robertiana</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Filago mareotica</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ophrys apifera</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ophrys fusca</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ophrys sphegodes</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Orchis italica</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Serapias parviflora</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Serapias vomeracea</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+      </OtherSpeciesList>
+    </EcologicalInformation33>
+  </EcologicalInformation>
+  <SiteDescription>
+    <HabitatClasses>
+      <Description>Tidal rivers, Estuaries, Mud flats, Sand flats, Lagoons (including saltwork basins)</Description>
+      <Cover>37.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Salt marshes, Salt pastures, Salt steppes</Description>
+      <Cover>23.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Coastal sand dunes, Sand beaches, Machair</Description>
+      <Cover>0.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Shingle, Sea cliffs, Islets</Description>
+      <Cover>1.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Bogs, Marshes, Water fringed vegetation, Fens</Description>
+      <Cover>0.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Heath, Scrub, Maquis and Garrigue, Phygrana</Description>
+      <Cover>0.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Dry grassland, Steppes</Description>
+      <Cover>1.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Other arable land</Description>
+      <Cover>12.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Artificial forest monoculture (e.g. Plantations of poplar or Exotic trees)</Description>
+      <Cover>3.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Inland rocks, Screes, Sands, Permanent Snow and ice</Description>
+      <Cover>0.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Other land (including Towns, Villages, Roads, Waste places, Mines, Industrial sites)</Description>
+      <Cover>23.00</Cover>
+    </HabitatClasses>
+    <OtherCharacteristics />
+    <QualityImportance />
+    <Vulnerability />
+    <SiteDesignation />
+    <Documentation />
+  </SiteDescription>
+  <SiteProtection>
+    <DesignationTypes>
+      <Code>CY05</Code>
+      <Cover>41.00</Cover>
+    </DesignationTypes>
+    <DesignationTypes>
+      <Code>CY05</Code>
+      <Cover>51.00</Cover>
+    </DesignationTypes>
+    <DesignationTypes>
+      <Code>CY99</Code>
+      <Cover>100.00</Cover>
+    </DesignationTypes>
+    <RegRelations>
+      <Code>CY05</Code>
+      <SiteName>PERMANENT GAME RESERVE OF LARNAKA SALT LAKE</SiteName>
+      <Type>*</Type>
+      <Cover>41.00</Cover>
+    </RegRelations>
+    <RegRelations>
+      <Code>CY05</Code>
+      <SiteName>A/A 3272</SiteName>
+      <Type>*</Type>
+      <Cover>51.00</Cover>
+    </RegRelations>
+    <RegRelations>
+      <Code>CY99</Code>
+      <SiteName>ALYKES LARNAKAS</SiteName>
+      <Type>-</Type>
+      <Cover>100.00</Cover>
+    </RegRelations>
+    <IntRelations>
+      <Code>IN06</Code>
+      <SiteName>IBA: LARNAKA SALT LAKES</SiteName>
+      <Type>+</Type>
+      <Cover>38.00</Cover>
+    </IntRelations>
+    <IntRelations>
+      <Code>IN00</Code>
+      <SiteName>Larnaka Salt lake</SiteName>
+      <Type>+</Type>
+      <Cover>38.00</Cover>
+    </IntRelations>
+    <IntRelations>
+      <Code>IN04</Code>
+      <SiteName>Lac de Larnaka</SiteName>
+      <Type>+</Type>
+      <Cover>38.00</Cover>
+    </IntRelations>
+  </SiteProtection>
+  <SiteImpacts>
+    <WithinSite>
+      <Code>100</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>110</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>120</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>140</Code>
+      <Intensity>B</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>161</Code>
+      <Intensity>C</Intensity>
+      <Percent>4.00</Percent>
+      <Influence>+</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>166</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>+</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>180</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>230</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>240</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>241</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>243</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>250</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>402</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>423</Code>
+      <Intensity>C</Intensity>
+      <Percent>2.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>502</Code>
+      <Intensity>B</Intensity>
+      <Percent>30.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>505</Code>
+      <Intensity>B</Intensity>
+      <Percent>25.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>511</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>609</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>622</Code>
+      <Intensity>C</Intensity>
+      <Percent>30.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>701</Code>
+      <Intensity>C</Intensity>
+      <Percent>40.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>702</Code>
+      <Intensity>B</Intensity>
+      <Percent>90.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>703</Code>
+      <Intensity>C</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>710</Code>
+      <Intensity>A</Intensity>
+      <Percent>100.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>730</Code>
+      <Intensity>C</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>740</Code>
+      <Intensity>C</Intensity>
+      <Percent>40.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>890</Code>
+      <Intensity>C</Intensity>
+      <Percent>30.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>920</Code>
+      <Intensity>C</Intensity>
+      <Percent>50.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <SiteManagement>
+      <Responsible>MINISTRY OF AGRICULTURE, NATURAL RESOURCES AND ENVIRONMENT.</Responsible>
+    </SiteManagement>
+  </SiteImpacts>
+  <SiteMap />
+  <SiteSlides />
+</Natura2000-SDF>

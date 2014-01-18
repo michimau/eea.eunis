@@ -70,11 +70,8 @@ public class YearSortCriteria extends AbstractSortCriteria {
         possibleSorts.put(SORT_SIZE, "A.AREA"); // Order
         possibleSorts.put(SORT_COUNTRY, "C.AREA_NAME_EN"); // Order
         possibleSorts.put(SORT_DESIGN, "E.DESCRIPTION"); // Order
-        possibleSorts.put(SORT_LAT,
-                "IF(A.LAT_NS='N',IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC),(-1)*(IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC)))"); // Order
-        possibleSorts.put(
-                SORT_LONG,
-                "IF(A.LONG_EW='E',IF(A.LONG_DEG IS NULL,0,A.LONG_DEG)*3600 +IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC),(-1)*(IF(A.LONG_DEG IS NULL,0,A.LONG_DEG) *3600 + IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC)))"); // Order
+        possibleSorts.put(SORT_LAT, "A.LATITUDE"); // Order
+        possibleSorts.put(SORT_LONG, "A.LONGITUDE"); // Order
         possibleSorts.put(
                 SORT_YEAR,
                 "CAST(CONCAT(" + "IF(A.source_db='BIOGENETIC',left(designation_date,4),''),"

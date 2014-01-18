@@ -48,15 +48,8 @@ public class CddaSitesImportParser extends DefaultHandler {
     private String year;
     private String chngYear;
     private String lat;
-    private String latNs;
-    private String latDeg;
-    private String latMin;
-    private String latSec;
     private String lon;
-    private String lonEw;
-    private String lonDeg;
-    private String lonMin;
-    private String lonSec;
+
     private boolean newSite = false;
 
     private Connection con;
@@ -173,9 +166,6 @@ public class CddaSitesImportParser extends DefaultHandler {
                     }
                 }
 
-                calculateLatitudeParams();
-                calculateLongitudeParams();
-
                 if (!newSite) {
                     preparedStatementSitesUpdate.setString(1, siteCodeNat);
                     preparedStatementSitesUpdate.setString(2, desigAbbr);
@@ -186,17 +176,9 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementSitesUpdate.setString(7, year);
                     preparedStatementSitesUpdate.setString(8, chngYear);
                     preparedStatementSitesUpdate.setString(9, lat);
-                    preparedStatementSitesUpdate.setString(10, latNs);
-                    preparedStatementSitesUpdate.setString(11, latDeg);
-                    preparedStatementSitesUpdate.setString(12, latMin);
-                    preparedStatementSitesUpdate.setString(13, latSec);
-                    preparedStatementSitesUpdate.setString(14, lon);
-                    preparedStatementSitesUpdate.setString(15, lonEw);
-                    preparedStatementSitesUpdate.setString(16, lonDeg);
-                    preparedStatementSitesUpdate.setString(17, lonMin);
-                    preparedStatementSitesUpdate.setString(18, lonSec);
-                    preparedStatementSitesUpdate.setInt(19, geoscopeId);
-                    preparedStatementSitesUpdate.setString(20, siteCode);
+                    preparedStatementSitesUpdate.setString(10, lon);
+                    preparedStatementSitesUpdate.setInt(11, geoscopeId);
+                    preparedStatementSitesUpdate.setString(12, siteCode);
                     preparedStatementSitesUpdate.addBatch();
                 } else {
                     preparedStatementNatObject.setString(1, siteNatureObjectId);
@@ -213,17 +195,9 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementSites.setString(8, year);
                     preparedStatementSites.setString(9, chngYear);
                     preparedStatementSites.setString(10, lat);
-                    preparedStatementSites.setString(11, latNs);
-                    preparedStatementSites.setString(12, latDeg);
-                    preparedStatementSites.setString(13, latMin);
-                    preparedStatementSites.setString(14, latSec);
-                    preparedStatementSites.setString(15, lon);
-                    preparedStatementSites.setString(16, lonEw);
-                    preparedStatementSites.setString(17, lonDeg);
-                    preparedStatementSites.setString(18, lonMin);
-                    preparedStatementSites.setString(19, lonSec);
-                    preparedStatementSites.setInt(20, geoscopeId);
-                    preparedStatementSites.setString(21, siteNatureObjectId);
+                    preparedStatementSites.setString(11, lon);
+                    preparedStatementSites.setInt(12, geoscopeId);
+                    preparedStatementSites.setString(13, siteNatureObjectId);
                     preparedStatementSites.addBatch();
                 }
 
@@ -299,16 +273,15 @@ public class CddaSitesImportParser extends DefaultHandler {
 
             String querySites = "INSERT INTO chm62edt_sites (ID_SITE, NATIONAL_CODE, ID_DESIGNATION, "
                     + "NAME, AREA, IUCNAT, NUTS, DESIGNATION_DATE, UPDATE_DATE, "
-                    + "LATITUDE, LAT_NS, LAT_DEG, LAT_MIN, LAT_SEC, LONGITUDE, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, "
+                    + "LATITUDE, LONGITUDE,"
                     + "SOURCE_DB, ID_GEOSCOPE, ID_NATURE_OBJECT) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'CDDA_NATIONAL',?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,'CDDA_NATIONAL',?,?)";
 
             this.preparedStatementSites = con.prepareStatement(querySites);
 
             String querySitesUpdate = "UPDATE chm62edt_sites SET NATIONAL_CODE=?, ID_DESIGNATION=?, "
                     + "NAME=?, AREA=?, IUCNAT=?, NUTS=?, DESIGNATION_DATE=?, UPDATE_DATE=?, "
-                    + "LATITUDE=?, LAT_NS=?, LAT_DEG=?, LAT_MIN=?, LAT_SEC=?, LONGITUDE=?, LONG_EW=?, "
-                    + "LONG_DEG=?, LONG_MIN=?, LONG_SEC=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=? "
+                    + "LATITUDE=?, LONGITUDE=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=? "
                     + "WHERE ID_SITE = ?";
 
             this.preparedStatementSitesUpdate = con.prepareStatement(
@@ -485,128 +458,5 @@ public class CddaSitesImportParser extends DefaultHandler {
             }
         }
         return ret;
-    }
-
-    private void calculateLatitudeParams() {
-        latNs = "S";
-        latDeg = null;
-        latMin = null;
-        latSec = null;
-
-        if (lat != null && lat.length() > 0) {
-            // calculate LAT_NS
-            double lat_num = new Double(lat).doubleValue();
-
-            if (!lat.contains(".")) {
-                lat = new Double(lat_num).toString();
-            }
-            if (lat_num > 0) {
-                latNs = "N";
-            }
-
-            // calculate LAT_DEG
-            int index = lat.indexOf(".");
-
-            if (index != -1) {
-                latDeg = lat.substring(0, index);
-                String rest = lat.substring(index + 1, lat.length());
-
-                // calculate LAT_MIN
-                if (rest != null && rest.length() > 0) {
-                    rest = "0." + rest;
-                    double d = new Double(rest).doubleValue();
-                    double min = d * 60;
-                    String minString = new Double(min).toString();
-                    int indexMin = minString.indexOf(".");
-
-                    if (indexMin != -1) {
-                        latMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1,
-                                minString.length());
-
-                        // calculate LAT_SEC
-                        if (restMin != null && restMin.length() > 0) {
-                            restMin = "0." + restMin;
-                            double dsec = new Double(restMin).doubleValue();
-                            double sec = dsec * 60;
-                            String secString = new Double(sec).toString();
-                            int indexSec = secString.indexOf(".");
-
-                            if (indexSec != -1) {
-                                latSec = secString.substring(0, indexSec);
-                            } else {
-                                latSec = secString;
-                            }
-                        }
-                    } else {
-                        latMin = minString;
-                    }
-                }
-            } else {
-                latDeg = lat;
-            }
-        }
-    }
-
-    private void calculateLongitudeParams() {
-        lonEw = "W";
-        lonDeg = null;
-        lonMin = null;
-        lonSec = null;
-
-        if (lon != null && lon.length() > 0) {
-
-            // calculate LON_EW
-            double lon_num = new Double(lon).doubleValue();
-
-            if (!lon.contains(".")) {
-                lon = new Double(lon_num).toString();
-            }
-            if (lon_num > 0) {
-                lonEw = "E";
-            }
-
-            // calculate LON_DEG
-            int index = lon.indexOf(".");
-
-            if (index != -1) {
-                lonDeg = lon.substring(0, index);
-                String rest = lon.substring(index + 1, lon.length());
-
-                // calculate LON_MIN
-                if (rest != null && rest.length() > 0) {
-                    rest = "0." + rest;
-                    double d = new Double(rest).doubleValue();
-                    double min = d * 60;
-                    String minString = new Double(min).toString();
-                    int indexMin = minString.indexOf(".");
-
-                    if (indexMin != -1) {
-                        lonMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1,
-                                minString.length());
-
-                        // calculate LON_SEC
-                        if (restMin != null && restMin.length() > 0) {
-                            restMin = "0." + restMin;
-                            double dsec = new Double(restMin).doubleValue();
-                            double sec = dsec * 60;
-                            String secString = new Double(sec).toString();
-                            int indexSec = secString.indexOf(".");
-
-                            if (indexSec != -1) {
-                                lonSec = secString.substring(0, indexSec);
-                            } else {
-                                lonSec = secString;
-                            }
-                        }
-                    } else {
-                        lonMin = minString;
-                    }
-                }
-            } else {
-                lonDeg = lon;
-            }
-        }
     }
 }

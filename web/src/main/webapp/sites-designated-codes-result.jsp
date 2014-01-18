@@ -392,10 +392,10 @@
               {
           %>
                     <td style="white-space : nowrap; text-align : center;">
-                      <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
+                      <%=SitesSearchUtility.formatLongitude(site.getLongitude())%>
                     </td>
                     <td style="white-space : nowrap; text-align : center;">
-                      <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
+                      <%=SitesSearchUtility.formatLatitude(site.getLatitude())%>
                     </td>
           <%
               }

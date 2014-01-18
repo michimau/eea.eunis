@@ -59,10 +59,7 @@ public class SpeciesSortCriteria extends AbstractSortCriteria {
         possibleSorts.put(SORT_NAME, "H.NAME");
         possibleSorts.put(SORT_DESIGNATION, "J.DESCRIPTION");
         possibleSorts.put(SORT_SPECIES, "C.SCIENTIFIC_NAME");
-        possibleSorts.put(SORT_LAT,
-                "IF(H.LAT_NS='N',IF(H.LAT_DEG IS NULL,0,H.LAT_DEG)*3600 + IF(H.LAT_MIN IS NULL,0,H.LAT_MIN)*60 + IF(H.LAT_SEC IS NULL,0,H.LAT_SEC),(-1)*(IF(H.LAT_DEG IS NULL,0,H.LAT_DEG)*3600 + IF(H.LAT_MIN IS NULL,0,H.LAT_MIN)*60 + IF(H.LAT_SEC IS NULL,0,H.LAT_SEC)))"); // Order
-        possibleSorts.put(
-                SORT_LONG,
-                "IF(H.LONG_EW='E',IF(H.LONG_DEG IS NULL,0,H.LONG_DEG)*3600 +IF(H.LONG_MIN IS NULL,0,H.LONG_MIN)*60 + IF(H.LONG_SEC IS NULL,0,H.LONG_SEC),(-1)*(IF(H.LONG_DEG IS NULL,0,H.LONG_DEG) *3600 + IF(H.LONG_MIN IS NULL,0,H.LONG_MIN)*60 + IF(H.LONG_SEC IS NULL,0,H.LONG_SEC)))"); // Order
+        possibleSorts.put(SORT_LAT, "H.LATITUDE"); // Order
+        possibleSorts.put(SORT_LONG, "H.LONGITUDE"); // Order
     }
 }

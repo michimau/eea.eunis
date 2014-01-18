@@ -2216,28 +2216,8 @@ public class PDFSitesFactsheet {
             String longitude;
             String latitude;
 
-            if (SiteFactsheet.TYPE_CORINE != type) {
-                latitude = SitesSearchUtility.formatCoordinatesPDF(
-                        factsheet.getSiteObject().getLatNS(),
-                        factsheet.getSiteObject().getLatDeg(),
-                        factsheet.getSiteObject().getLatMin(),
-                        factsheet.getSiteObject().getLatSec());
-                longitude = SitesSearchUtility.formatCoordinatesPDF(
-                        factsheet.getSiteObject().getLongEW(),
-                        factsheet.getSiteObject().getLongDeg(),
-                        factsheet.getSiteObject().getLongMin(),
-                        factsheet.getSiteObject().getLongSec());
-            } else {
-                latitude = SitesSearchUtility.formatCoordinatesPDF("N",
-                        factsheet.getSiteObject().getLatDeg(),
-                        factsheet.getSiteObject().getLatMin(),
-                        factsheet.getSiteObject().getLatSec());
-                longitude = SitesSearchUtility.formatCoordinatesPDF(
-                        factsheet.getSiteObject().getLongEW(),
-                        factsheet.getSiteObject().getLongDeg(),
-                        factsheet.getSiteObject().getLongMin(),
-                        factsheet.getSiteObject().getLongSec());
-            }
+            latitude = SitesSearchUtility.formatPDFLatitude(factsheet.getSiteObject().getLatitude());
+            longitude = SitesSearchUtility.formatPDFLongitude(factsheet.getSiteObject().getLongitude());
 
             report.writeln(contentManagement.cmsPhrase("Longitude") + ": " + longitude,
                     fontNormal);

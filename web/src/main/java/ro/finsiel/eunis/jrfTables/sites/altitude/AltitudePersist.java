@@ -21,13 +21,6 @@ public class AltitudePersist extends PersistentObject implements CoordinatesProv
 
   private Integer idNatureObject = null;
   private String name = null;
-  private String longEW = null;
-  private String longDeg = null;
-  private String longMin = null;
-  private String longSec = null;
-  private String latDeg = null;
-  private String latMin = null;
-  private String latSec = null;
   private String altMean = null;
   private String altMin = null;
   private String altMax = null;
@@ -35,7 +28,6 @@ public class AltitudePersist extends PersistentObject implements CoordinatesProv
   private String desc = null;
 
   private String country = null;
-  private String latNS = null;
   private String iddesign = null;
   private String iso = null;
   private String year = null;
@@ -84,14 +76,6 @@ public class AltitudePersist extends PersistentObject implements CoordinatesProv
     this.iso = iso;
   }
 
-  public String getLatNS() {
-    return latNS;
-  }
-
-  public void setLatNS(String latNS) {
-    this.latNS = latNS;
-  }
-
   public Integer getIdNatureObject() {
     return idNatureObject;
   }
@@ -114,62 +98,6 @@ public class AltitudePersist extends PersistentObject implements CoordinatesProv
 
   public void setDescription(String desc) {
     this.desc = desc;
-  }
-
-  public String getLongEW() {
-    return longEW;
-  }
-
-  public void setLongEW(String longEW) {
-    this.longEW = longEW;
-  }
-
-  public String getLongDeg() {
-    return longDeg;
-  }
-
-  public void setLongDeg(String longDeg) {
-    this.longDeg = longDeg;
-  }
-
-  public String getLongMin() {
-    return longMin;
-  }
-
-  public void setLongMin(String longMin) {
-    this.longMin = longMin;
-  }
-
-  public String getLongSec() {
-    return longSec;
-  }
-
-  public void setLongSec(String longSec) {
-    this.longSec = longSec;
-  }
-
-  public String getLatDeg() {
-    return latDeg;
-  }
-
-  public void setLatDeg(String latDeg) {
-    this.latDeg = latDeg;
-  }
-
-  public String getLatMin() {
-    return latMin;
-  }
-
-  public void setLatMin(String latMin) {
-    this.latMin = latMin;
-  }
-
-  public String getLatSec() {
-    return latSec;
-  }
-
-  public void setLatSec(String latSec) {
-    this.latSec = latSec;
   }
 
   public String getAltMean() {

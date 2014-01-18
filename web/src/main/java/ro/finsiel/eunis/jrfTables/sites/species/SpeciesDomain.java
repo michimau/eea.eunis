@@ -93,16 +93,6 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new IntegerColumnSpec("ID_GEOSCOPE", "getIdGeoscope", "setIdGeoscope", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("ID_DESIGNATION", "getIdDesignation", "setIdDesignation", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("NAME", "getName", "setName", DEFAULT_TO_EMPTY_STRING, REQUIRED));
-        this.addColumnSpec(new StringColumnSpec("LONG_EW", "getLongEW", "setLongEW", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LONG_DEG", "getLongDeg", "setLongDeg", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LONG_MIN", "getLongMin", "setLongMin", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LONG_SEC", "getLongSec", "setLongSec", DEFAULT_TO_NULL));
-
-        this.addColumnSpec(new StringColumnSpec("LAT_NS", "getLatNS", "setLatNS", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LAT_DEG", "getLatDeg", "setLatDeg", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LAT_MIN", "getLatMin", "setLatMin", DEFAULT_TO_NULL));
-        this.addColumnSpec(new StringColumnSpec("LAT_SEC", "getLatSec", "setLatSec", DEFAULT_TO_NULL));
-
         this.addColumnSpec(new StringColumnSpec("LONGITUDE", "getLongitude", "setLongitude", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
 
@@ -125,9 +115,8 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
         StringBuffer filterSQL = new StringBuffer();
         this.sortCriteria = sortCriteria;
         filterSQL = _prepareWhereSearch();
-        String sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME, H.LONG_EW, H.LONG_DEG, H.LONG_MIN, " +
-                "H.LONG_SEC, H.LAT_NS, H.LAT_DEG, H.LAT_MIN, H.LAT_SEC, H.LONGITUDE, H.LATITUDE, " +
-                "C.SCIENTIFIC_NAME,C.ID_SPECIES,C.ID_SPECIES_LINK",
+        String sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME," +
+                " H.LONGITUDE, H.LATITUDE, C.SCIENTIFIC_NAME,C.ID_SPECIES,C.ID_SPECIES_LINK",
                 filterSQL + " GROUP BY H.ID_NATURE_OBJECT");
         // Add the ORDER BY clause to do the sorting
         if (sortCriteria.length > 0) {
@@ -293,8 +282,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
             filterSQL.append(" AND H.ID_NATURE_OBJECT='" + idNatureObject + "'");
         }
 
-        String sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME, H.LONG_EW, H.LONG_DEG, H.LONG_MIN, " +
-                "H.LONG_SEC, H.LAT_NS, H.LAT_DEG, H.LAT_MIN, H.LAT_SEC, H.LONGITUDE, H.LATITUDE, " +
+        String sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME, H.LONGITUDE, H.LATITUDE, " +
                 "C.SCIENTIFIC_NAME,C.ID_SPECIES,C.ID_SPECIES_LINK",
                 filterSQL + " GROUP BY C.ID_NATURE_OBJECT");
         try {
@@ -355,9 +343,8 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
         String sql = "";
         // SCIENTIFIC NAME
         if (searchAttribute.intValue() == SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME.intValue()) {
-            sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME, H.LONG_EW, H.LONG_DEG, H.LONG_MIN, " +
-                    "H.LONG_SEC, H.LAT_NS, H.LAT_DEG, H.LAT_MIN, H.LAT_SEC, H.LONGITUDE, H.LATITUDE, " +
-                    "C.SCIENTIFIC_NAME,C.ID_SPECIES,C.ID_SPECIES_LINK",
+            sql = prepareSQL("H.ID_SITE, H.SOURCE_DB, H.ID_NATURE_OBJECT, H.ID_GEOSCOPE, H.ID_DESIGNATION, H.NAME," +
+                    " H.LONGITUDE, H.LATITUDE, C.SCIENTIFIC_NAME,C.ID_SPECIES,C.ID_SPECIES_LINK",
                     filterSQL + " GROUP BY C.ID_NATURE_OBJECT");
             try {
                 results = new SpeciesDomain().findCustom(sql);

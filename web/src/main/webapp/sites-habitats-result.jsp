@@ -361,10 +361,10 @@
                 {
             %>
                       <td style="text-align: center; white-space: nowrap;">
-                        <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
+                        <%=SitesSearchUtility.formatLongitude(site.getLongitude())%>
                       </td>
                       <td style="text-align: center; white-space: nowrap;">
-                        <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
+                        <%=SitesSearchUtility.formatLatitude(site.getLatitude())%>
                       </td>
             <%
               }

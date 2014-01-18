@@ -397,8 +397,8 @@
               NamePersist site = (NamePersist)results.get(i);
               String detailURL = "sites-neighborhood-detail.jsp?idsite=" + site.getIdSite()+"&amp;countryCode=" + site.getAreaNameEn();
               detailURL += formBean.toURLParam(navigatorFormFields);
-              String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
-              String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
+              String longitude = SitesSearchUtility.formatLongitude(site.getLongitude());
+              String latitude = SitesSearchUtility.formatLatitude(site.getLatitude());
           %>
                   <tr<%=cssClass%>>
           <%

@@ -141,217 +141,41 @@ public class SitesSearchUtility {
     }
 
     /**
-     * Format the coordinates displayed within web page.
-     *
-     * @param latNS   Latitude (N or S)
-     * @param latDeg  Latitude in degrees.
-     * @param latMin  Latitude in minutes.
-     * @param latSec  Latitude in seconds.
-     * @param longEW  Longitude (E or W).
-     * @param longDeg Longitude in degrees.
-     * @param longMin Longitude in minutes.
-     * @param longSec Longitude in seconds.
-     * @return Formatted coordinates.
-     * @deprecated by formatCoordinates(String longitudeLatitude, String degrees, String minutes, String seconds)
+     * Formats the latitude for display
+     * @param latitude
+     * @return The formatted latitude
      */
-    public static String formatCoordinates(String latNS, String latDeg, String latMin, String latSec,
-            String longEW, String longDeg, String longMin, String longSec) {
-        if ((null != latNS && latNS.equalsIgnoreCase("-1")) || (null != latDeg && latDeg.equalsIgnoreCase("-1"))
-                || (null != latMin && latMin.equalsIgnoreCase("-1")) || (null != latSec && latSec.equalsIgnoreCase("-1"))
-                || (null != longEW && longEW.equalsIgnoreCase("-1")) || (null != longDeg && longDeg.equalsIgnoreCase("-1"))
-                || (null != longMin && longMin.equalsIgnoreCase("-1")) || (null != longSec && longSec.equalsIgnoreCase("-1"))) {
-            return "n/a&nbsp;";
-        }
-
-        // IF LONG_EW == NULL && LONG_DEG == 0 RETURN EMPTY STRING
-        if (null == longEW && (null != longDeg && longDeg.equalsIgnoreCase("0"))) {
-            return "n/a&nbsp;";
-        }
-        // IF LAT_NS == NULL && LAT_DEG == 0 RETURN EMPTY STRING
-        if (null == latNS && (null != latDeg && latDeg.equalsIgnoreCase("0"))) {
-            return "n/a&nbsp;";
-        }
-
-        // IF ALL THREE FIELDS ARE 0 RETURN ""
-        int iLatDeg = Utilities.checkedStringToInt(latDeg, 0);
-        int iLatMin = Utilities.checkedStringToInt(latMin, 0);
-        int iLatSec = Utilities.checkedStringToInt(latSec, 0);
-
-        if (0 == iLatDeg && 0 == iLatMin && 0 == iLatSec) {
-            return "n/a&nbsp;";
-        }
-        // IF ALL THREE FIELDS ARE 0 RETURN ""
-        int iLongDeg = Utilities.checkedStringToInt(longDeg, 0);
-        int iLongMin = Utilities.checkedStringToInt(longMin, 0);
-        int iLongSec = Utilities.checkedStringToInt(longSec, 0);
-
-        if (0 == iLongDeg && 0 == iLongMin && 0 == iLongSec) {
-            return "n/a&nbsp;";
-        }
-
-        StringBuffer ret = new StringBuffer();
-
-        ret.append("<span style=\"font-family:courier; font-size: 10px\">");
-        // -----------
-        ret.append((null != longEW && !longEW.equalsIgnoreCase("n/a")) ? longEW : " ");
-        ret.append(" ");
-        ret.append((null != longDeg) ? ((longDeg.length() == 1) ? "&nbsp;" + longDeg : longDeg) : "&nbsp;&nbsp;");
-        ret.append("&deg;");
-        ret.append((null != longMin) ? ((longMin.length() == 1) ? "0" + longMin : longMin) : "00");
-        ret.append("'");
-        ret.append((null != longSec) ? ((longSec.length() == 1) ? "0" + longSec : longSec) : "00");
-        ret.append("\"");
-        // -----------
-        ret.append("/");
-        ret.append((null != latNS && !latNS.equalsIgnoreCase("n/a")) ? latNS : " ");
-        ret.append(" ");
-        ret.append((null != latDeg) ? ((latDeg.length() == 1) ? "&nbsp;" + latDeg : latDeg) : "&nbsp;&nbsp;");
-        ret.append("&deg;");
-        ret.append((null != latMin) ? ((latMin.length() == 1) ? "0" + latMin : latMin) : "00");
-        ret.append("'");
-        ret.append((null != latSec) ? ((latSec.length() == 1) ? "0" + latSec : latSec) : "00");
-        ret.append("\"");
-        ret.append("</span>");
-        return ret.toString();
+    public static String formatLatitude(String latitude){
+        return latitude;
     }
 
     /**
-     * This is the final method for formatting coordinates.
-     *
-     * @param longitudeOrLatitude Longitude or latitude ((E or W) or (N or S)).
-     * @param degrees             Longitude/Latitude in degrees.
-     * @param minutes             Longitude/Latitude in minutes.
-     * @param seconds             Longitude/Latitude in seconds.
-     * @return Formatted coordinates.
+     * Formats the longitude for display
+     * @param longitude
+     * @return The formatted longitude
      */
-    public static String formatCoordinates(String longitudeOrLatitude, String degrees, String minutes, String seconds) {
-        if (((null != longitudeOrLatitude && longitudeOrLatitude.equalsIgnoreCase("-1"))
-                || (null != degrees && degrees.equalsIgnoreCase("-1")))
-                        || ((null != minutes && minutes.equalsIgnoreCase("-1"))
-                                || (null != seconds && seconds.equalsIgnoreCase("-1")))) {
-            return "n/a";
-        }
-
-        // IF LONG_EW == NULL && LONG_DEG == 0 RETURN EMPTY STRING
-        if (null == longitudeOrLatitude && (null != degrees && degrees.equalsIgnoreCase("0"))) {
-            return "n/a";
-        }
-
-        // IF ALL THREE FIELDS ARE 0 RETURN ""
-        int iDegrees = Utilities.checkedStringToInt(degrees, 0);
-        int iMinutes = Utilities.checkedStringToInt(minutes, 0);
-        int iSeconds = Utilities.checkedStringToInt(seconds, 0);
-
-        if (0 == iDegrees && 0 == iMinutes && 0 == iSeconds) {
-            return "n/a";
-        }
-
-        StringBuffer ret = new StringBuffer();
-
-        ret.append("<span class=\"coordinates\">[");
-        // -----------
-        ret.append((null != longitudeOrLatitude && !longitudeOrLatitude.equalsIgnoreCase("n/a")) ? longitudeOrLatitude : " ");
-        ret.append(" ");
-        ret.append((null != degrees) ? ((degrees.length() == 1) ? "&nbsp;" + degrees : degrees) : "&nbsp;&nbsp;");
-        ret.append("&deg;");
-        ret.append((null != minutes) ? ((minutes.length() == 1) ? "0" + minutes : minutes) : "00");
-        ret.append("'");
-        ret.append((null != seconds) ? ((seconds.length() == 1) ? "0" + seconds : seconds) : "00");
-        ret.append("\"");
-        ret.append("]</span>");
-        return ret.toString();
+    public static String formatLongitude(String longitude){
+        return longitude;
     }
 
     /**
-     * Format coordinates for PDF reports.
-     *
-     * @param longitudeOrLatitude Longitude or latitude ((E or W) or (N or S)).
-     * @param degrees             Longitude/Latitude in degrees.
-     * @param minutes             Longitude/Latitude in minutes.
-     * @param seconds             Longitude/Latitude in seconds.
-     * @return Formatted coordinates.
+     * Formats the given latitude for PDF output
+     * @param latitude
+     * @return The formatted latitude
      */
-    public static String formatCoordinatesPDF(String longitudeOrLatitude, String degrees, String minutes, String seconds) {
-        if (((null != longitudeOrLatitude && longitudeOrLatitude.equalsIgnoreCase("-1"))
-                || (null != degrees && degrees.equalsIgnoreCase("-1")))
-                        || ((null != minutes && minutes.equalsIgnoreCase("-1"))
-                                || (null != seconds && seconds.equalsIgnoreCase("-1")))) {
-            return "";
-        }
-
-        // IF LONG_EW == NULL && LONG_DEG == 0 RETURN EMPTY STRING
-        if (null == longitudeOrLatitude && (null != degrees && degrees.equalsIgnoreCase("0"))) {
-            return "";
-        }
-
-        // IF ALL THREE FIELDS ARE 0 RETURN ""
-        int iDegrees = Utilities.checkedStringToInt(degrees, 0);
-        int iMinutes = Utilities.checkedStringToInt(minutes, 0);
-        int iSeconds = Utilities.checkedStringToInt(seconds, 0);
-
-        if (0 == iDegrees && 0 == iMinutes && 0 == iSeconds) {
-            return "";
-        }
-
-        StringBuffer ret = new StringBuffer();
-
-        // -----------
-        ret.append((null != longitudeOrLatitude && !longitudeOrLatitude.equalsIgnoreCase("n/a")) ? longitudeOrLatitude : " ");
-        ret.append(" ");
-        ret.append((null != degrees) ? ((degrees.length() == 1) ? " " + degrees : degrees) : "  ");
-        ret.append("\u00B0");
-        ret.append((null != minutes) ? ((minutes.length() == 1) ? "0" + minutes : minutes) : "00");
-        ret.append("'");
-        ret.append((null != seconds) ? ((seconds.length() == 1) ? "0" + seconds : seconds) : "00");
-        ret.append("\"");
-
-        return ret.toString();
+    public static String formatPDFLatitude(String latitude){
+        // todo: check for detailed implementation
+        return formatLatitude(latitude);
     }
 
     /**
-     * Format the coordinates displayed within factsheet pdf.
-     *
-     * @param latNS   Latitude (N or S)
-     * @param latDeg  Latitude in degrees.
-     * @param latMin  Latitude in minutes.
-     * @param latSec  Latitude in seconds.
-     * @param longEW  Longitude (E or W).
-     * @param longDeg Longitude in degrees.
-     * @param longMin Longitude in minutes.
-     * @param longSec Longitude in seconds.
-     * @return Formatted coordinates.
+     * Formats the given longitude for PDF output
+     * @param longitude
+     * @return The formatted longitude
      */
-    public static String formatCoordinatesPDF(String latNS, String latDeg, String latMin, String latSec,
-            String longEW, String longDeg, String longMin, String longSec) {
-        if ((null != latNS && latNS.equalsIgnoreCase("-1")) || (null != latDeg && latDeg.equalsIgnoreCase("-1"))
-                || (null != latMin && latMin.equalsIgnoreCase("-1")) || (null != latSec && latSec.equalsIgnoreCase("-1"))
-                || (null != longEW && longEW.equalsIgnoreCase("-1")) || (null != longDeg && longDeg.equalsIgnoreCase("-1"))
-                || (null != longMin && longMin.equalsIgnoreCase("-1")) || (null != longSec && longSec.equalsIgnoreCase("-1"))) {
-            return "";
-        }
-
-        StringBuffer ret = new StringBuffer();
-
-        // -----------
-        ret.append((null != longEW && !longEW.equalsIgnoreCase("n/a")) ? longEW : " ");
-        ret.append(" ");
-        ret.append((null != longDeg) ? ((longDeg.length() == 1) ? " " + longDeg : longDeg) : "  ");
-        ret.append("\u00B0");
-        ret.append((null != longMin) ? ((longMin.length() == 1) ? "0" + longMin : longMin) : "00");
-        ret.append("'");
-        ret.append((null != longSec) ? ((longSec.length() == 1) ? "0" + longSec : longSec) : "00");
-        ret.append("\"");
-        // -----------
-        ret.append("/");
-        ret.append((null != latNS && !latNS.equalsIgnoreCase("n/a")) ? latNS : " ");
-        ret.append(" ");
-        ret.append((null != latDeg) ? ((latDeg.length() == 1) ? " " + latDeg : latDeg) : "  ");
-        ret.append("\u00B0");
-        ret.append((null != latMin) ? ((latMin.length() == 1) ? "0" + latMin : latMin) : "00");
-        ret.append("'");
-        ret.append((null != latSec) ? ((latSec.length() == 1) ? "0" + latSec : latSec) : "00");
-        ret.append("\"");
-        return ret.toString();
+    public static String formatPDFLongitude(String longitude){
+        // todo: check for detailed implementation
+        return formatLongitude(longitude);
     }
 
     /**
@@ -396,21 +220,9 @@ public class SitesSearchUtility {
     public static String getCoordinateForSite(CoordinatesProvider site) {
         Utilities.startTimer();
         String result = null;
-        int latSign = 1;
-        int longSign = 1;
-
-        latSign = (null == site.getLatNS() || site.getLatNS().length() == 0) ? 1 : -1;
-        longSign = (null == site.getLongEW() || site.getLongEW().length() == 0) ? 1 : -1;
         String latDeg = "";
         String longDeg = "";
 
-        // Decimal coordinates
-        if (latSign == -1) {
-            latDeg += "-" + latDeg;
-        }
-        if (longSign == -1) {
-            longDeg += "-" + longDeg;
-        }
         if (null != site.getLongitude() && site.getLongitude().length() > 0 && !site.getLongitude().equalsIgnoreCase("n/a")) {
             longDeg = site.getLongitude();
             if (null != site.getLatitude() && site.getLatitude().length() > 0 && !site.getLatitude().equalsIgnoreCase("n/a")) {
@@ -419,33 +231,7 @@ public class SitesSearchUtility {
                 return result;
             }
         }
-        //
-        if (null != site.getLatDeg() && !site.getLatDeg().equalsIgnoreCase("-1") && site.getLatDeg().equalsIgnoreCase("n/a")) {
-            if (null != site.getLatMin() && !site.getLatMin().equalsIgnoreCase("-1") && site.getLatMin().equalsIgnoreCase("n/a")) {
-                if (null != site.getLatSec() && !site.getLatSec().equalsIgnoreCase("-1") && site.getLatSec().equalsIgnoreCase("n/a")) {
-                    if (null != site.getLongDeg() && !site.getLongDeg().equalsIgnoreCase("-1")
-                            && site.getLongDeg().equalsIgnoreCase("n/a")) {
-                        if (null != site.getLongMin() && !site.getLongMin().equalsIgnoreCase("-1")
-                                && site.getLongMin().equalsIgnoreCase("n/a")) {
-                            if (null != site.getLongSec() && !site.getLongSec().equalsIgnoreCase("-1")
-                                    && site.getLongSec().equalsIgnoreCase("n/a")) {
-                                int LatDeg = Utilities.checkedStringToInt(site.getLatDeg(), 0);
-                                int LatMin = Utilities.checkedStringToInt(site.getLatMin(), 0);
-                                int LatSec = Utilities.checkedStringToInt(site.getLatSec(), 0);
-                                int LongDeg = Utilities.checkedStringToInt(site.getLongDeg(), 0);
-                                int LongMin = Utilities.checkedStringToInt(site.getLongMin(), 0);
-                                int LongSec = Utilities.checkedStringToInt(site.getLongSec(), 0);
 
-                                latDeg = "" + ((float) LatDeg + (LatMin / 60F) + (LatSec / 3600F));
-                                longDeg = "" + ((float) LongDeg + (LongMin / 60F) + (LongSec / 3600F));
-                                result = "" + longDeg.substring(0, 5) + ":" + latDeg.substring(0, 5);
-                                return result;
-                            }
-                        }
-                    }
-                }
-            }
-        }
         return result;
     }
 

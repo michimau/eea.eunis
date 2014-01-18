@@ -341,8 +341,8 @@
               ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryPersist site = (ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryPersist)it.next();
               String designationType = Utilities.formatString(site.getDesign());
               String designationYear = SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB());
-              String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
-              String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
+              String longitude = SitesSearchUtility.formatLongitude(site.getLongitude());
+              String latitude = SitesSearchUtility.formatLatitude(site.getLatitude());
               String size = Utilities.formatArea(site.getArea(), 5, 2, "&nbsp;");
               String length = Utilities.formatArea(site.getLength(), 5, 2, "&nbsp;");
           %>

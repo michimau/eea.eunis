@@ -1336,6 +1336,7 @@ public class SQLUtilities {
 
     /**
      * Execute INSERT statement
+     * @deprecated The fields that were updated by these scripts were deleted http://taskman.eionet.europa.eu/issues/17806
      */
     public void runPostImportSitesScript(boolean cmd) {
 
@@ -1348,18 +1349,6 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            ps =
-                con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=-(LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000) WHERE LATITUDE IS NULL AND LAT_NS='S' AND LAT_DEG IS NOT NULL");
-            ps.execute();
-            ps =
-                con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000 WHERE LATITUDE IS NULL AND LAT_NS='N' AND LAT_DEG is NOT NULL");
-            ps.execute();
-            ps =
-                con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=-(LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000) WHERE LONGITUDE IS NULL AND LONG_EW='W' AND LONG_DEG IS NOT NULL");
-            ps.execute();
-            ps =
-                con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000 WHERE LONGITUDE IS NULL AND LONG_EW='E' AND LONG_DEG IS NOT NULL");
-            ps.execute();
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites latitude/longitude values: " + e.getMessage(), cmd,
                     sqlc);

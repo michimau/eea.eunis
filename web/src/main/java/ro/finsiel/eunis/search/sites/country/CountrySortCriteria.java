@@ -64,10 +64,8 @@ public class CountrySortCriteria extends AbstractSortCriteria {
         possibleSorts.put(SORT_NAME, "C.NAME");
         possibleSorts.put(SORT_COUNTRY, "J.AREA_NAME_EN");
         possibleSorts.put(SORT_SIZE, "C.AREA");
-        possibleSorts.put(SORT_LAT,
-                "IF(C.LAT_NS='N',IF(C.LAT_DEG IS NULL,0,C.LAT_DEG)*3600 + IF(C.LAT_MIN IS NULL,0,C.LAT_MIN)*60 + IF(C.LAT_SEC IS NULL,0,C.LAT_SEC),(-1)*(IF(C.LAT_DEG IS NULL,0,C.LAT_DEG)*3600 + IF(C.LAT_MIN IS NULL,0,C.LAT_MIN)*60 + IF(C.LAT_SEC IS NULL,0,C.LAT_SEC)))");
-        possibleSorts.put(SORT_LONG,
-                "IF(C.LONG_EW='E',IF(C.LONG_DEG IS NULL,0,C.LONG_DEG)*3600 +IF(C.LONG_MIN IS NULL,0,C.LONG_MIN)*60 + IF(C.LONG_SEC IS NULL,0,C.LONG_SEC),(-1)*(IF(C.LONG_DEG IS NULL,0,C.LONG_DEG) *3600 + IF(C.LONG_MIN IS NULL,0,C.LONG_MIN)*60 + IF(C.LONG_SEC IS NULL,0,C.LONG_SEC)))");
+        possibleSorts.put(SORT_LAT, "C.LATITUDE");
+        possibleSorts.put(SORT_LONG, "C.LONGITUDE");
         possibleSorts.put(SORT_YEAR,
                 "CAST(CONCAT(" + "IF(C.source_db='CDDA_INTERNATIONAL',right(designation_date,4),''),"
                 + "IF(C.source_db='CDDA_NATIONAL',right(designation_date,4),''),"

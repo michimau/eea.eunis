@@ -43,14 +43,6 @@ public class CountryPersist extends PersistentObject implements CoordinatesProvi
   public void setIso2L(String iso) {
     this.iso2L = iso;
   }
-//
-//  public String getLatNS() {
-//    return latNS;
-//  }
-//
-//  public void setLatNS(String latNS) {
-//    this.latNS = latNS;
-//  }
 
   public Integer getIdNatureObject() {
     return idNatureObject;
@@ -67,62 +59,6 @@ public class CountryPersist extends PersistentObject implements CoordinatesProvi
   public void setName(String name) {
     this.name = name;
   }
-
-//  public String getLongEW() {
-//    return longEW;
-//  }
-//
-//  public void setLongEW(String longEW) {
-//    this.longEW = longEW;
-//  }
-//
-//  public String getLongDeg() {
-//    return longDeg;
-//  }
-//
-//  public void setLongDeg(String longDeg) {
-//    this.longDeg = longDeg;
-//  }
-//
-//  public String getLongMin() {
-//    return longMin;
-//  }
-//
-//  public void setLongMin(String longMin) {
-//    this.longMin = longMin;
-//  }
-//
-//  public String getLongSec() {
-//    return longSec;
-//  }
-//
-//  public void setLongSec(String longSec) {
-//    this.longSec = longSec;
-//  }
-//
-//  public String getLatDeg() {
-//    return latDeg;
-//  }
-//
-//  public void setLatDeg(String latDeg) {
-//    this.latDeg = latDeg;
-//  }
-//
-//  public String getLatMin() {
-//    return latMin;
-//  }
-//
-//  public void setLatMin(String latMin) {
-//    this.latMin = latMin;
-//  }
-//
-//  public String getLatSec() {
-//    return latSec;
-//  }
-//
-//  public void setLatSec(String latSec) {
-//    this.latSec = latSec;
-//  }
 
   public String getAltMean() {
     return altMean;

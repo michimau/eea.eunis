@@ -130,5 +130,12 @@ public class Chm62edtSitesDomain extends AbstractDomain {
         this.addColumnSpec(
                 new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB",
                 DEFAULT_TO_NULL));
+
+        this.addColumnSpec(
+                new StringColumnSpec("MARINE_PERCENT", "getMarineAreaPercentage", "setMarineAreaPercentage",
+                DEFAULT_TO_NULL));
+        this.addColumnSpec(
+                new StringColumnSpec("SITE_TYPE", "getSiteType", "setSiteType",
+                DEFAULT_TO_NULL));
     }
 }

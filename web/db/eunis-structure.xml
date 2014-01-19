@@ -2084,4 +2084,16 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         </rollback>
     </changeSet>
 
+    <changeSet id="rev-129" author="melisand">
+        <comment>Adds Marine Area Percentage (MARINE_PERCENT) and Site Type (SITE_TYPE) columns to the Sites (chm62edt_sites) table</comment>
+        <addColumn tableName="chm62edt_sites">
+            <column name="MARINE_PERCENT" type="decimal(5,2)" defaultValue="NULL"/>
+            <column name="SITE_TYPE" type="char(1)"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="chm62edt_sites" columnName="MARINE_PERCENT"/>
+            <dropColumn tableName="chm62edt_sites" columnName="SITE_TYPE"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

@@ -81,6 +81,9 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
     private String sourceDB = null;
     private String recordUpdate = null;
 
+    private String marineAreaPercentage = null;
+    private String siteType = null;
+
     public Chm62edtSitesPersist() {
         super();
     }
@@ -445,4 +448,28 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
         this.idGeoscope = idGeoscope;
     }
 
+    /**
+     * Marine area percentage
+     * @return The percentage of marine area in the site
+     */
+    public String getMarineAreaPercentage() {
+        return marineAreaPercentage;
+    }
+
+    public void setMarineAreaPercentage(String marineAreaPercentage) {
+        this.marineAreaPercentage = marineAreaPercentage;
+    }
+
+    /**
+     * Site type
+     * It can hold the values A, B or C. SPA = type A; SCI = type B; SAC = type B; Both SPA/SCI or SPA/SAC = type C
+     * @return The site type
+     */
+    public String getSiteType() {
+        return siteType;
+    }
+
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
+    }
 }

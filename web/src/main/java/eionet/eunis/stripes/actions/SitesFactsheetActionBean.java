@@ -1,6 +1,7 @@
 package eionet.eunis.stripes.actions;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -499,11 +500,13 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * The percentage of marine area in the site
-     * @return -1 if not available, as there is no DB field for this data
+     * @return null if there is no data
      */
-    public int getMarineAreaPercentage(){
-        // todo: implement after the field is added to DB, see http://taskman.eionet.europa.eu/issues/17767
-        return -1;
+    public String getMarineAreaPercentage(){
+        String val = factsheet.getSiteObject().getMarineAreaPercentage();
+        if(val == null)
+            return null;
+        return (new DecimalFormat("#")).format(Double.parseDouble(val));
     }
 
     /**

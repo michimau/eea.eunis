@@ -21,7 +21,7 @@
 
 			filterNatura2000('${actionBean.factsheet.code2000}');
 
-		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer");
 
 		    bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
             bio_regions_layer.opacity = 0.5;
@@ -37,7 +37,7 @@
 		    imageParameters_dist.layerIds = [4];
 		    imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 		    imageParameters_dist.transparent = true;
-		    layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+		    layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_dist});
 
 			// Species Range layer
 			var imageParameters_range = new esri.layers.ImageParameters();
@@ -47,7 +47,7 @@
 		    imageParameters_range.layerIds = [1];
 		    imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 		    imageParameters_range.transparent = true;
-		    layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+		    layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_range});
 
 			map.addLayer(layer_dist);
 			initLayers();
@@ -59,11 +59,11 @@
 		    query.where = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 
 		    // distribution layer
-		    var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/4");
+		    var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/4");
 		    queryTask.execute(query, showResults);
 
 		    // range layer
-		    queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/1");
+		    queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/1");
 		    queryTask.execute(query, showResults);
 		}
 
@@ -166,7 +166,7 @@
 
 		function filterNatura2000(habitatcode){
 	        //build query task
-	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/12");
+	        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/12");
 
 	        //build query filter
 	        var query = new esri.tasks.Query();
@@ -194,7 +194,7 @@
 	            ArrayhabitatsCode.push(habitatcodes[i].attributes.SITECODE);
 	        }
 	        //build query task
-	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/0");
+	        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/0");
 
 	        //build query filter
 	        var query = new esri.tasks.Query();

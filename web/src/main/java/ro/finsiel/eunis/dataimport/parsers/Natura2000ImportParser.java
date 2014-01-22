@@ -313,6 +313,10 @@ public class Natura2000ImportParser extends DefaultHandler {
                     dateCompilation = "";
                 }
 
+                if (dateSpa == null) {
+                    dateSpa = "";
+                }
+
                 preparedStatementNatObject.setString(1, siteNatureObjectId);
                 preparedStatementNatObject.setString(2, siteCode);
                 preparedStatementNatObject.executeUpdate();
@@ -848,19 +852,24 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             if (qName.equalsIgnoreCase("OtherCharacteristics")) {
                 siteDescriptionOtherCharacteristics = buf.toString().trim();
-                insertSiteAttribute(siteCode, "HABITAT_CHARACTERIZATION", siteDescriptionOtherCharacteristics, "TEXT", "habit2");
+                if(siteDescriptionOtherCharacteristics.length() > 0)
+                    insertSiteAttribute(siteCode, "HABITAT_CHARACTERIZATION", siteDescriptionOtherCharacteristics, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("QualityImportance")) {
                 siteDescriptionQualityImportance = buf.toString().trim();
+                if(siteDescriptionQualityImportance.length() > 0)
                 insertSiteAttribute(siteCode, "QUALITY", siteDescriptionQualityImportance, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("Vulnerability")) {
                 siteDescriptionVulnerability = buf.toString().trim();
-                insertSiteAttribute(siteCode, "VULNERABILITY", siteDescriptionVulnerability, "TEXT", "habit2");
+                if(siteDescriptionVulnerability.length() > 0)
+                    insertSiteAttribute(siteCode, "VULNERABILITY", siteDescriptionVulnerability, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("SiteDesignation")) {
                 siteDescriptionSiteDesignation = buf.toString().trim();
-                insertSiteAttribute(siteCode, "SITE_DESIGNATION", siteDescriptionSiteDesignation, "TEXT", "habit2");
+                if(siteDescriptionSiteDesignation.length() > 0)
+                    insertSiteAttribute(siteCode, "SITE_DESIGNATION", siteDescriptionSiteDesignation, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("Documentation")) {
                 siteDescriptionDocumentation = buf.toString().trim();
-                insertSiteAttribute(siteCode, "DOCUMENTATION", siteDescriptionDocumentation, "TEXT", "habit2");
+                if(siteDescriptionDocumentation.length() > 0)
+                    insertSiteAttribute(siteCode, "DOCUMENTATION", siteDescriptionDocumentation, "TEXT", "habit2");
             }
 
             if (qName.equalsIgnoreCase("Code")) {

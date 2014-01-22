@@ -1,0 +1,405 @@
+<Natura2000-SDF DBVersion="End2011" Form="PUBLIC">
+  <TitlePage>
+    <SiteCode>FI0900052</SiteCode>
+    <SiteName>Nytkymenjärvi</SiteName>
+  </TitlePage>
+  <SiteIdentification>
+    <SiteCode>FI0900052</SiteCode>
+    <SiteName>Nytkymenjärvi</SiteName>
+    <SiteType>B</SiteType>
+    <Date_Compilation>1996-09-01T00:00:00</Date_Compilation>
+    <Date_Prop_SCI>1998-08-01T00:00:00</Date_Prop_SCI>
+    <Respondent>Keski-Suomen ympäristökeskus
+PL 110
+40101 Jyväskylä</Respondent>
+    <Publ_Date>2005-01-13T00:00:00</Publ_Date>
+    <Description>Boreal</Description>
+  </SiteIdentification>
+  <SiteLocation>
+    <Longitude>24.936389</Longitude>
+    <Latitude>61.856667</Latitude>
+    <AreaHA>483.0000</AreaHA>
+    <Altitude_Min>144</Altitude_Min>
+    <Altitude_Max>187</Altitude_Max>
+    <Altitude_Mean>146</Altitude_Mean>
+    <AdministrativeRegion>
+      <NutsCode>FI141</NutsCode>
+      <NutsCover>68.00</NutsCover>
+    </AdministrativeRegion>
+    <AdministrativeRegion>
+      <NutsCode>FI173</NutsCode>
+      <NutsCover>32.00</NutsCover>
+    </AdministrativeRegion>
+    <BiogeograpichRegion>
+      <BioDescription>Boreal</BioDescription>
+    </BiogeograpichRegion>
+  </SiteLocation>
+  <EcologicalInformation>
+    <EcologicalInformation31>
+      <Habitat>
+        <HCode>3110</HCode>
+        <HCover>63.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>8220</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>9010</HCode>
+        <HCover>15.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>91D0</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>9050</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>9080</HCode>
+        <HCover>0.00</HCover>
+        <HRepresentatity>C</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7140</HCode>
+        <HCover>0.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>A</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>8230</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+    </EcologicalInformation31>
+    <EcologicalInformation32>
+      <EcologicalInformation32A>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A223</SpeciesCode>
+            <SpeciesName>Aegolius funereus</SpeciesName>
+            <Resident>1-5p</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A104</SpeciesCode>
+            <SpeciesName>Bonasa bonasia</SpeciesName>
+            <Resident>1-5p</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A038</SpeciesCode>
+            <SpeciesName>Cygnus cygnus</SpeciesName>
+            <Breeding>1p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A236</SpeciesCode>
+            <SpeciesName>Dryocopus martius</SpeciesName>
+            <Resident>1-5p</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A002</SpeciesCode>
+            <SpeciesName>Gavia arctica</SpeciesName>
+            <Breeding>1-5p</Breeding>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A001</SpeciesCode>
+            <SpeciesName>Gavia stellata</SpeciesName>
+            <Staging>1-5i</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A241</SpeciesCode>
+            <SpeciesName>Picoides tridactylus</SpeciesName>
+            <Resident>1-5p</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A234</SpeciesCode>
+            <SpeciesName>Picus canus</SpeciesName>
+            <Winter>1i</Winter>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A193</SpeciesCode>
+            <SpeciesName>Sterna hirundo</SpeciesName>
+            <Breeding>1-5p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A409</SpeciesCode>
+            <SpeciesName>Tetrao tetrix tetrix</SpeciesName>
+            <Resident>c</Resident>
+          </Species>
+          <Species>
+            <SpeciesCode>A108</SpeciesCode>
+            <SpeciesName>Tetrao urogallus</SpeciesName>
+            <Resident>1-5p</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32A>
+      <EcologicalInformation32B>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A039</SpeciesCode>
+            <SpeciesName>Anser fabalis</SpeciesName>
+            <Staging>1-5i</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A099</SpeciesCode>
+            <SpeciesName>Falco subbuteo</SpeciesName>
+            <Breeding>1-5p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A262</SpeciesCode>
+            <SpeciesName>Motacilla alba</SpeciesName>
+            <Resident>c</Resident>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A330</SpeciesCode>
+            <SpeciesName>Parus major</SpeciesName>
+            <Resident>c</Resident>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A377</SpeciesCode>
+            <SpeciesName>Phoenicurus phoenicurus</SpeciesName>
+            <Resident>c</Resident>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A409</SpeciesCode>
+            <SpeciesName>Tetrao tetrix tetrix</SpeciesName>
+            <Resident>c</Resident>
+            <AnnexII>N</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32B>
+      <EcologicalInformation32C>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1355</SpeciesCode>
+            <SpeciesName>Lutra lutra</SpeciesName>
+            <Resident>P</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>1910</SpeciesCode>
+            <SpeciesName>Pteromys volans</SpeciesName>
+            <Resident>1-5i</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32C>
+      <EcologicalInformation32D>
+        <SpeciesList />
+      </EcologicalInformation32D>
+      <EcologicalInformation32E>
+        <SpeciesList />
+      </EcologicalInformation32E>
+      <EcologicalInformation32F>
+        <SpeciesList />
+      </EcologicalInformation32F>
+      <EcologicalInformation32G>
+        <SpeciesList />
+      </EcologicalInformation32G>
+    </EcologicalInformation32>
+    <EcologicalInformation33>
+      <OtherSpeciesList>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Erithacus rubecula</SciName>
+          <Population>c</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Carduelis spinus</SciName>
+          <Population>c</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Tringa hypoleucos</SciName>
+          <Population>1p</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Castor canadensis</SciName>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>B</Group>
+          <SciName>Larus fuscus fuscus</SciName>
+          <Population>1-5p</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Lynx lynx</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>Y</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Ursus arctos</SciName>
+          <Population>P</Population>
+          <Motivation>C</Motivation>
+          <AnnexII>Y</AnnexII>
+        </OtherSpecies>
+      </OtherSpeciesList>
+    </EcologicalInformation33>
+  </EcologicalInformation>
+  <SiteDescription>
+    <HabitatClasses>
+      <Description>Inland water bodies (Standing water, Running water)</Description>
+      <Cover>64.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Bogs, Marshes, Water fringed vegetation, Fens</Description>
+      <Cover>1.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Coniferous woodland</Description>
+      <Cover>11.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Inland rocks, Screes, Sands, Permanent Snow and ice</Description>
+      <Cover>1.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Other land (including Towns, Villages, Roads, Waste places, Mines, Industrial sites)</Description>
+      <Cover>23.00</Cover>
+    </HabitatClasses>
+    <OtherCharacteristics />
+    <QualityImportance />
+    <Vulnerability />
+    <SiteDesignation />
+    <Documentation />
+  </SiteDescription>
+  <SiteProtection>
+    <DesignationTypes>
+      <Code>FI00</Code>
+      <Cover>95.00</Cover>
+    </DesignationTypes>
+    <DesignationTypes>
+      <Code>FI16</Code>
+      <Cover>5.00</Cover>
+    </DesignationTypes>
+  </SiteProtection>
+  <SiteImpacts>
+    <WithinSite>
+      <Code>164</Code>
+      <Intensity>B</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <AroundSite>
+      <Code>160</Code>
+      <Intensity>C</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <AroundSite>
+      <Code>409</Code>
+      <Intensity>B</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <SiteManagement>
+      <Responsible>Metsähallitus/Länsi-Suomen puistoalue, PL 38, 39701 Parkano
+Keski-Suomen ympäristökeskus, PL 110, 40101 Jyväskylä</Responsible>
+    </SiteManagement>
+  </SiteImpacts>
+  <SiteMap>
+    <PhysicalMap>
+      <MapNumber>2144 03, 06</MapNumber>
+    </PhysicalMap>
+    <PhysicalMap>
+      <MapNumber>2234 01, 04</MapNumber>
+      <Scale>20000</Scale>
+    </PhysicalMap>
+  </SiteMap>
+  <SiteSlides />
+</Natura2000-SDF>

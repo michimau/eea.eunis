@@ -1,0 +1,2527 @@
+<Natura2000-SDF DBVersion="End2011" Form="PUBLIC">
+  <TitlePage>
+    <SiteCode>AT2212000</SiteCode>
+    <SiteName>NSG Wörschacher Moos und ennsnahe Bereiche</SiteName>
+  </TitlePage>
+  <SiteIdentification>
+    <SiteCode>AT2212000</SiteCode>
+    <SiteName>NSG Wörschacher Moos und ennsnahe Bereiche</SiteName>
+    <SiteType>C</SiteType>
+    <Date_Compilation>1994-10-01T00:00:00</Date_Compilation>
+    <Date_Update>2010-07-01T00:00:00</Date_Update>
+    <Date_Prop_SCI>1995-03-01T00:00:00</Date_Prop_SCI>
+    <Date_Spa>1995-03-01T00:00:00</Date_Spa>
+    <OtherSiteCode>AT2229002</OtherSiteCode>
+    <Respondent>1. Institut für Naturschutz und Landschaftsökologie
+2. Amt der Steiermärkischen Landesregierung, Fachabteilung 13 C</Respondent>
+    <Publ_Date>2003-12-22T00:00:00</Publ_Date>
+    <Description>Alpine</Description>
+  </SiteIdentification>
+  <SiteLocation>
+    <Longitude>14.183056</Longitude>
+    <Latitude>47.553889</Latitude>
+    <AreaHA>401.0000</AreaHA>
+    <Altitude_Min>530</Altitude_Min>
+    <Altitude_Max>630</Altitude_Max>
+    <Altitude_Mean>580</Altitude_Mean>
+    <AdministrativeRegion>
+      <NutsCode>AT222</NutsCode>
+      <NutsRegion>Liezen</NutsRegion>
+      <NutsCover>100.00</NutsCover>
+    </AdministrativeRegion>
+    <BiogeograpichRegion>
+      <BioDescription>Alpine</BioDescription>
+    </BiogeograpichRegion>
+  </SiteLocation>
+  <EcologicalInformation>
+    <EcologicalInformation31>
+      <Habitat>
+        <HCode>91D0</HCode>
+        <HCover>27.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>B</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>6410</HCode>
+        <HCover>5.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>6430</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>A</HConsStatus>
+        <HGlobalAssesment>A</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>6510</HCode>
+        <HCover>5.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7110</HCode>
+        <HCover>3.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7120</HCode>
+        <HCover>5.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>C</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7210</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>A</HConsStatus>
+        <HGlobalAssesment>A</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7230</HCode>
+        <HCover>5.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>C</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>7140</HCode>
+        <HCover>1.00</HCover>
+        <HRepresentatity>B</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+      <Habitat>
+        <HCode>91E0</HCode>
+        <HCover>3.00</HCover>
+        <HRepresentatity>A</HRepresentatity>
+        <HRelsurface>C</HRelsurface>
+        <HConsStatus>B</HConsStatus>
+        <HGlobalAssesment>B</HGlobalAssesment>
+      </Habitat>
+    </EcologicalInformation31>
+    <EcologicalInformation32>
+      <EcologicalInformation32A>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A229</SpeciesCode>
+            <SpeciesName>Alcedo atthis</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A255</SpeciesCode>
+            <SpeciesName>Anthus campestris</SpeciesName>
+            <Staging>P</Staging>
+            <Population>B</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A029</SpeciesCode>
+            <SpeciesName>Ardea purpurea</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A045</SpeciesCode>
+            <SpeciesName>Branta leucopsis</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A215</SpeciesCode>
+            <SpeciesName>Bubo bubo</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A224</SpeciesCode>
+            <SpeciesName>Caprimulgus europaeus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A197</SpeciesCode>
+            <SpeciesName>Chlidonias niger</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A031</SpeciesCode>
+            <SpeciesName>Ciconia ciconia</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A030</SpeciesCode>
+            <SpeciesName>Ciconia nigra</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A081</SpeciesCode>
+            <SpeciesName>Circus aeruginosus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A082</SpeciesCode>
+            <SpeciesName>Circus cyaneus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A084</SpeciesCode>
+            <SpeciesName>Circus pygargus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A231</SpeciesCode>
+            <SpeciesName>Coracias garrulus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A122</SpeciesCode>
+            <SpeciesName>Crex crex</SpeciesName>
+            <Breeding>5-8p</Breeding>
+            <Population>A</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A236</SpeciesCode>
+            <SpeciesName>Dryocopus martius</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A027</SpeciesCode>
+            <SpeciesName>Egretta alba</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A026</SpeciesCode>
+            <SpeciesName>Egretta garzetta</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A379</SpeciesCode>
+            <SpeciesName>Emberiza hortulana</SpeciesName>
+            <Staging>P</Staging>
+            <Population>A</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A103</SpeciesCode>
+            <SpeciesName>Falco peregrinus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A097</SpeciesCode>
+            <SpeciesName>Falco vespertinus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A002</SpeciesCode>
+            <SpeciesName>Gavia arctica</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A217</SpeciesCode>
+            <SpeciesName>Glaucidium passerinum</SpeciesName>
+            <Winter>P</Winter>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A127</SpeciesCode>
+            <SpeciesName>Grus grus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A131</SpeciesCode>
+            <SpeciesName>Himantopus himantopus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A022</SpeciesCode>
+            <SpeciesName>Ixobrychus minutus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A338</SpeciesCode>
+            <SpeciesName>Lanius collurio</SpeciesName>
+            <Breeding>8p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A246</SpeciesCode>
+            <SpeciesName>Lullula arborea</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A272</SpeciesCode>
+            <SpeciesName>Luscinia svecica</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A073</SpeciesCode>
+            <SpeciesName>Milvus migrans</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A023</SpeciesCode>
+            <SpeciesName>Nycticorax nycticorax</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A094</SpeciesCode>
+            <SpeciesName>Pandion haliaetus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A072</SpeciesCode>
+            <SpeciesName>Pernis apivorus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A151</SpeciesCode>
+            <SpeciesName>Philomachus pugnax</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A234</SpeciesCode>
+            <SpeciesName>Picus canus</SpeciesName>
+            <Resident>P</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+          <Species>
+            <SpeciesCode>A120</SpeciesCode>
+            <SpeciesName>Porzana parva</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A193</SpeciesCode>
+            <SpeciesName>Sterna hirundo</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+          </Species>
+          <Species>
+            <SpeciesCode>A166</SpeciesCode>
+            <SpeciesName>Tringa glareola</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32A>
+      <EcologicalInformation32B>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>A085</SpeciesCode>
+            <SpeciesName>Accipiter gentilis</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A086</SpeciesCode>
+            <SpeciesName>Accipiter nisus</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A298</SpeciesCode>
+            <SpeciesName>Acrocephalus arundinaceus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A295</SpeciesCode>
+            <SpeciesName>Acrocephalus schoenobaenus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A054</SpeciesCode>
+            <SpeciesName>Anas acuta</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A056</SpeciesCode>
+            <SpeciesName>Anas clypeata</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A051</SpeciesCode>
+            <SpeciesName>Anas crecca</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A050</SpeciesCode>
+            <SpeciesName>Anas penelope</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A053</SpeciesCode>
+            <SpeciesName>Anas platyrhynchos</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A055</SpeciesCode>
+            <SpeciesName>Anas querquedula</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A051</SpeciesCode>
+            <SpeciesName>Anas strepera</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A257</SpeciesCode>
+            <SpeciesName>Anthus pratensis</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A226</SpeciesCode>
+            <SpeciesName>Apus apus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A028</SpeciesCode>
+            <SpeciesName>Ardea cinerea</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A059</SpeciesCode>
+            <SpeciesName>Aythya ferina</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A061</SpeciesCode>
+            <SpeciesName>Aythya fuligula</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A067</SpeciesCode>
+            <SpeciesName>Bucephala clangula</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A215</SpeciesCode>
+            <SpeciesName>Buteo buteo</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A371</SpeciesCode>
+            <SpeciesName>Carpodacus erythrinus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A136</SpeciesCode>
+            <SpeciesName>Charadrius dubius</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A007</SpeciesCode>
+            <SpeciesName>Columba oenas</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A208</SpeciesCode>
+            <SpeciesName>Columba palumbus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A347</SpeciesCode>
+            <SpeciesName>Coturnix coturnix</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A212</SpeciesCode>
+            <SpeciesName>Cuculus canorus</SpeciesName>
+            <Breeding>23p</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A036</SpeciesCode>
+            <SpeciesName>Cygnus olor</SpeciesName>
+            <Breeding>1p</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A099</SpeciesCode>
+            <SpeciesName>Falco subbuteo</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A096</SpeciesCode>
+            <SpeciesName>Falco tinnunculus</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A125</SpeciesCode>
+            <SpeciesName>Fulica atra</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A153</SpeciesCode>
+            <SpeciesName>Gallinago gallinago</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A123</SpeciesCode>
+            <SpeciesName>Gallinula chloropus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A233</SpeciesCode>
+            <SpeciesName>Jynx torquilla</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A179</SpeciesCode>
+            <SpeciesName>Larus ridibundus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A157</SpeciesCode>
+            <SpeciesName>Limosa limosa</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A292</SpeciesCode>
+            <SpeciesName>Locustella luscinioides</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A290</SpeciesCode>
+            <SpeciesName>Locustella naevia</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A260</SpeciesCode>
+            <SpeciesName>Motacilla flava</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A058</SpeciesCode>
+            <SpeciesName>Netta rufina</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A144</SpeciesCode>
+            <SpeciesName>Numenius arquata</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A391</SpeciesCode>
+            <SpeciesName>Phalacrocorax carbo</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A005</SpeciesCode>
+            <SpeciesName>Podiceps cristatus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A118</SpeciesCode>
+            <SpeciesName>Rallus aquaticus</SpeciesName>
+            <Breeding>12-13p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A336</SpeciesCode>
+            <SpeciesName>Remiz pendulinus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A249</SpeciesCode>
+            <SpeciesName>Riparia riparia</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>A</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A275</SpeciesCode>
+            <SpeciesName>Saxicola rubetra</SpeciesName>
+            <Breeding>34-36p</Breeding>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A381</SpeciesCode>
+            <SpeciesName>Saxicola torquata</SpeciesName>
+            <Breeding>1p</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A155</SpeciesCode>
+            <SpeciesName>Scolopax rusticola</SpeciesName>
+            <Breeding>P</Breeding>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A210</SpeciesCode>
+            <SpeciesName>Streptopelia turtur</SpeciesName>
+            <Breeding>1p</Breeding>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A213</SpeciesCode>
+            <SpeciesName>Strix aluco</SpeciesName>
+            <Resident>1p</Resident>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A004</SpeciesCode>
+            <SpeciesName>Tachybaptus ruficollis</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A164</SpeciesCode>
+            <SpeciesName>Tringa nebularia</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A165</SpeciesCode>
+            <SpeciesName>Tringa ochropus</SpeciesName>
+            <Breeding>P</Breeding>
+            <Population>A</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A162</SpeciesCode>
+            <SpeciesName>Tringa totanus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A232</SpeciesCode>
+            <SpeciesName>Upupa epops</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>N</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>A142</SpeciesCode>
+            <SpeciesName>Vanellus vanellus</SpeciesName>
+            <Staging>P</Staging>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>C</GlobalImportance>
+            <AnnexII>N</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32B>
+      <EcologicalInformation32C>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1355</SpeciesCode>
+            <SpeciesName>Lutra lutra</SpeciesName>
+            <Resident>P</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>B</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>1324</SpeciesCode>
+            <SpeciesName>Myotis myotis</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>Y</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>1303</SpeciesCode>
+            <SpeciesName>Rhinolophus hipposideros</SpeciesName>
+            <Staging>P</Staging>
+            <Population>D</Population>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32C>
+      <EcologicalInformation32D>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1193</SpeciesCode>
+            <SpeciesName>Bombina variegata</SpeciesName>
+            <Resident>R</Resident>
+            <Population>B</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>A</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32D>
+      <EcologicalInformation32E>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1163</SpeciesCode>
+            <SpeciesName>Cottus gobio</SpeciesName>
+            <Resident>P</Resident>
+            <Population>D</Population>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32E>
+      <EcologicalInformation32F>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1065</SpeciesCode>
+            <SpeciesName>Euphydryas aurinia</SpeciesName>
+            <Resident>P</Resident>
+            <Population>C</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32F>
+      <EcologicalInformation32G>
+        <SpeciesList>
+          <Species>
+            <SpeciesCode>1393</SpeciesCode>
+            <SpeciesName>Drepanocladus vernicosus</SpeciesName>
+            <Resident>R</Resident>
+            <Population>B</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>C</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+          <Species>
+            <SpeciesCode>1903</SpeciesCode>
+            <SpeciesName>Liparis loeselii</SpeciesName>
+            <Resident>V</Resident>
+            <Population>B</Population>
+            <Conservation>B</Conservation>
+            <IsolationFactor>A</IsolationFactor>
+            <GlobalImportance>B</GlobalImportance>
+            <AnnexII>Y</AnnexII>
+          </Species>
+        </SpeciesList>
+      </EcologicalInformation32G>
+    </EcologicalInformation32>
+    <EcologicalInformation33>
+      <OtherSpeciesList>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Erinaceus europaeus  </SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Lepus europaeus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Meles meles</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Mustela putorius</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Neomys anomalus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Neomys fodiens</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Rattus rattus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>M</Group>
+          <SciName>Sorex alpinus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Bufo bufo</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Triturus vulgaris</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>A</Group>
+          <SciName>Rana temporaria</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Lacerta vivipara</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Natrix natrix</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>R</Group>
+          <SciName>Vipera berus</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>F</Group>
+          <SciName>Salmo trutta f. fario</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Brenthis io</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cerura vinula</SciName>
+          <Population>P</Population>
+          <Motivation>B</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Clossiana selene</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Clossiana thore</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Clossiana titania</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Coenonympha arcania</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Colias australis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Colias hyale</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Colias phicomone</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cosmotriche lunigera</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cynthia cardui</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Deltode uncula</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Eilema lutarella</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Erebia eriphyle</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Erebia oeme</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Fabriciana niobe</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Hepialus carna</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Hepialus humuli</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Laothoe populi</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Parnassius apollo</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Proclossiana eunomia</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Procris heuseri</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Pyrgus alveus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Spialia sertorius</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Vanessa atalanta</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Zeuzera pyrina</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Osmylus fulvicephalus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Pentastiridius leporinus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Delphax crassicornis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Kelisia vittipennis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Bembidion foraminosum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Dysichirius mlaeviusculus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Omophron limbatum</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Perileptus areolatus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Coenagrion hastulatum</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Nehalennia speciosa</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Orthetrum albistylum</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Somatochlora arctica</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Araneus alsine</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Arctosa alpigena</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Boyphantes crucifer</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Hypsosinga pygmaea</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Lasaeola tristis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Oxyopes ramosus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Philodromus buxi</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Robertus truncorum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Aegopinella ressmanni</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Aplexa hypnorum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Balea b. biplicata</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Bathyomphalus contortus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Boettgerilla pallens</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Bulgarica cana</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cecilioides acicula</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cepaea vindobonensis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Charpentieria ornata</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Clausilia pumila</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Cochlicopa lubricella</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Columella edentula</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Euomphalis strigella</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Gyraulus albus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Helicodonta obvoluta</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Helix pomatia</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Merdigera obscura</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Monacha carlusiana</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Oxyloma elegans</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Perpolita hammonis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Petasina edentula subleucozona</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Planorbis carinatus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Planorbis planorbis</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Pseudofusulus varians</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Radix auricularia</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Radix ovata</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Sphyradium doliolum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Stagnicola corvus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Vertigo substriata</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Xerolenta obvia</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Carabus arvensis</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Bradycellus ruficollis</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Pterostichus rhaeticus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Chlaenius nigricornis</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Oodes helopiodes</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Stethophyma grossum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Chrysochraon dispar</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Chortippus albomarginatus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Hierochloe odorata</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Allium scorodoprasum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Alopecurus geniculatus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Andromeda polifolia</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Anemone ranunculoides</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Betula pubescens</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Blysmus compressus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Calamagrostis canescens</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Cardamine palustris</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex appropinquata</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex davalliana</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex diandra</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex flava</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex hartmanii</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex hostiana</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex nigra</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex panicea</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex paniculata</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex pauciflora</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex pseudocyperus</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex pulicaris</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex rostrata</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex tomentosa</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Carex vesicaria</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Centaurium pulchellum</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Cladium mariscus</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Colchicum autumnale</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Crepis mollis</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Dactylorhiza incarnata</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Dactylorhiza majalis</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Dactylorhiza traunsteineri</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Drosera anglica</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Drosera rotundifolia</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Drosera x obovata</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Eleocharis uniglumis</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Epipactis palustris</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Eriophorum angustifolium</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Eriophorum latifolium</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Eriophorum vaginatum</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Galium elongatum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Gentiana pneumonanthe</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Gymnadenia conopsea</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Herminium monorchis</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Hippurus vulgaris</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Inula salicina</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Iris pseudacorus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Iris sibirica</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Juniperus communis</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Laserpitium prutenicum</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Menyanthes trifoliata</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Myriophyllum verticillatum</SciName>
+          <Population>R</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Narcissus radiiflorus</SciName>
+          <Population>C</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Nymphaea alba</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Orchis militaris</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Parnassia palustris</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Pedicularis palustris</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Peucedanum palustre</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Pinguicula vulgaris</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Polygala amarella</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Populus nigra</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton crispus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton lucens</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton natans</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton pectinatus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton perfoliatus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potamogeton pusillus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Potentilla palustris</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Primula farinosa</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Prunella grandiflora</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ranunculus circinatus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ranunculus lingua</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ranunculus sceleratus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Ranunculus trichophyllus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Rhinanthus serotinus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Rhynchospora alba</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Rumex sanguineus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Salix aurita</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Salix daphnoides</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Sanguisorba officinalis</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Schoenoplectus lacustris</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Schoenus ferrugineus</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Selinum carvifolia</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Senecio aquaticus</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Senecio paludosus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Serratula tinctoria</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Sparganium emersum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Sparganium minimum</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Thalictrum lucidum</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Tofieldia calyculata</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Trichophorum alpinum</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Triglochin palustre</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Trollius europaeus</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Typha angustifolia</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Utricularia minor</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Utricularia intermedia </SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Utricularia vulgaris agg.</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Vaccinium oxycoccos</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Valeriana dioica</SciName>
+          <Population>C</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Veronica scutellata</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Viola palustris</SciName>
+          <Population>R</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Zannichiella palustris</SciName>
+          <Population>V</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Plagiomnium ellipticum</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>P</Group>
+          <SciName>Dicranella grevilleana</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>I</Group>
+          <SciName>Leistus terminatus</SciName>
+          <Population>P</Population>
+          <Motivation>D</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+        <OtherSpecies>
+          <Group>F</Group>
+          <SciName>Thymallus thymallus</SciName>
+          <Population>P</Population>
+          <Motivation>A</Motivation>
+          <AnnexII>N</AnnexII>
+        </OtherSpecies>
+      </OtherSpeciesList>
+    </EcologicalInformation33>
+  </EcologicalInformation>
+  <SiteDescription>
+    <HabitatClasses>
+      <Description>Inland water bodies (Standing water, Running water)</Description>
+      <Cover>3.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Bogs, Marshes, Water fringed vegetation, Fens</Description>
+      <Cover>48.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Humid grassland, Mesophile grassland</Description>
+      <Cover>11.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Other arable land</Description>
+      <Cover>15.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Mixed woodland</Description>
+      <Cover>2.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Artificial forest monoculture (e.g. Plantations of poplar or Exotic trees)</Description>
+      <Cover>15.00</Cover>
+    </HabitatClasses>
+    <HabitatClasses>
+      <Description>Other land (including Towns, Villages, Roads, Waste places, Mines, Industrial sites)</Description>
+      <Cover>6.00</Cover>
+    </HabitatClasses>
+    <OtherCharacteristics />
+    <QualityImportance />
+    <Vulnerability />
+    <SiteDesignation />
+    <Documentation />
+  </SiteDescription>
+  <SiteProtection>
+    <DesignationTypes>
+      <Code>AT03</Code>
+      <Cover>9.00</Cover>
+    </DesignationTypes>
+    <DesignationTypes>
+      <Code>AT04</Code>
+      <Cover>91.00</Cover>
+    </DesignationTypes>
+    <DesignationTypes>
+      <Code>AT17</Code>
+      <Cover>5.00</Cover>
+    </DesignationTypes>
+    <RegRelations>
+      <Code>AT04</Code>
+      <SiteName>Landschaftschutzgebiet Mittleres Ennstal</SiteName>
+      <Type>-</Type>
+      <Cover>100.00</Cover>
+    </RegRelations>
+    <RegRelations>
+      <Code>AT03</Code>
+      <SiteName>Naturschutzgebiet Wörschacher Moos</SiteName>
+      <Type>+</Type>
+      <Cover>6.00</Cover>
+    </RegRelations>
+    <RegRelations>
+      <Code>AT17</Code>
+      <SiteName>Enns mit Seitenbächen</SiteName>
+      <Type>+</Type>
+      <Cover>5.00</Cover>
+    </RegRelations>
+    <IntRelations>
+      <Code>IN01</Code>
+      <SiteName>Wörschacher Moos</SiteName>
+      <Type>+</Type>
+      <Cover>6.00</Cover>
+    </IntRelations>
+  </SiteProtection>
+  <SiteImpacts>
+    <WithinSite>
+      <Code>101</Code>
+      <Intensity>C</Intensity>
+      <Percent>25.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>120</Code>
+      <Intensity>B</Intensity>
+      <Percent>30.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>160</Code>
+      <Intensity>B</Intensity>
+      <Percent>10.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>300</Code>
+      <Intensity>C</Intensity>
+      <Percent>1.00</Percent>
+      <Influence>0</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>310</Code>
+      <Intensity>A</Intensity>
+      <Percent>25.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>601</Code>
+      <Intensity>B</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>800</Code>
+      <Intensity>A</Intensity>
+      <Percent>5.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>810</Code>
+      <Intensity>A</Intensity>
+      <Percent>60.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <WithinSite>
+      <Code>852</Code>
+      <Intensity>B</Intensity>
+      <Percent>20.00</Percent>
+      <Influence>-</Influence>
+    </WithinSite>
+    <AroundSite>
+      <Code>120</Code>
+      <Intensity>B</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <AroundSite>
+      <Code>160</Code>
+      <Intensity>C</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <AroundSite>
+      <Code>164</Code>
+      <Intensity>C</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <AroundSite>
+      <Code>210</Code>
+      <Intensity>C</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <AroundSite>
+      <Code>400</Code>
+      <Intensity>C</Intensity>
+      <Influence>-</Influence>
+    </AroundSite>
+    <SiteManagement>
+      <Responsible>Amt der Steiermärkischen Landesregierung, 
+Fachabteilung 13C, Fachstelle Naturschutz,
+Karmeliterplatz 2,
+8010 Graz.
+</Responsible>
+    </SiteManagement>
+  </SiteImpacts>
+  <SiteMap>
+    <PhysicalMap>
+      <MapNumber>BMN 5814</MapNumber>
+      <Scale>50.000</Scale>
+      <Projection>Gauß-Krüger (DE)</Projection>
+    </PhysicalMap>
+    <Details>ArcView GIS .shp (shape) file</Details>
+  </SiteMap>
+  <SiteSlides />
+</Natura2000-SDF>

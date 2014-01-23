@@ -181,8 +181,6 @@ public class HabitatImportParser extends DefaultHandler {
 
                     preparedStatementTabInfo.executeBatch();
                     preparedStatementTabInfo.clearParameters();
-
-                    System.gc();
                 }
 
                 eunisCode = null;
@@ -239,7 +237,6 @@ public class HabitatImportParser extends DefaultHandler {
 
                 preparedStatementTabInfo.executeBatch();
                 preparedStatementTabInfo.clearParameters();
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

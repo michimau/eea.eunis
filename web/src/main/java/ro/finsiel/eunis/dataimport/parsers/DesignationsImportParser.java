@@ -168,8 +168,6 @@ public class DesignationsImportParser extends DefaultHandler {
                 if (counter % 10000 == 0) {
                     preparedStatement.executeBatch();
                     preparedStatement.clearParameters();
-
-                    System.gc();
                 }
 
                 iso3 = null;
@@ -210,8 +208,6 @@ public class DesignationsImportParser extends DefaultHandler {
             if (!(counter % 10000 == 0)) {
                 preparedStatement.executeBatch();
                 preparedStatement.clearParameters();
-
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

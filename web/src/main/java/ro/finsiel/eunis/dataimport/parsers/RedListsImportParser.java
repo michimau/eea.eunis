@@ -222,8 +222,6 @@ public class RedListsImportParser extends DefaultHandler {
 
                     preparedStatementReportAttributes.executeBatch();
                     preparedStatementReportAttributes.clearParameters();
-
-                    System.gc();
                 }
 
                 scientificName = null;
@@ -342,8 +340,6 @@ public class RedListsImportParser extends DefaultHandler {
 
                 preparedStatementReportAttributes.executeBatch();
                 preparedStatementReportAttributes.clearParameters();
-
-                System.gc();
             }
             con.commit();
         } catch (Exception e) {

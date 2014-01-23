@@ -128,8 +128,6 @@ public class ClassCodesImportParser extends DefaultHandler {
                 if (counter % 10000 == 0) {
                     preparedStatement.executeBatch();
                     preparedStatement.clearParameters();
-
-                    System.gc();
                 }
 
                 classif = name;
@@ -165,8 +163,6 @@ public class ClassCodesImportParser extends DefaultHandler {
             if (!(counter % 10000 == 0)) {
                 preparedStatement.executeBatch();
                 preparedStatement.clearParameters();
-
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

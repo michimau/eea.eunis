@@ -265,7 +265,6 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                         }
                         st2.executeBatch();
                         st2.clearBatch();
-                        System.gc();
                     }
                 }
             }
@@ -279,7 +278,6 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 }
                 st2.executeBatch();
                 st2.clearBatch();
-                System.gc();
             }
 
         } catch (Exception e) {

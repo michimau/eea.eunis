@@ -204,7 +204,6 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                         ps18.clearParameters();
                         ps19.executeBatch();
                         ps19.clearParameters();
-                        System.gc();
                     }
                 }
             }
@@ -238,7 +237,6 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 ps18.clearParameters();
                 ps19.executeBatch();
                 ps19.clearParameters();
-                System.gc();
             }
 
         } catch (Exception e) {
@@ -635,7 +633,6 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             }
             psUpdateDesignation.executeBatch();
             psUpdateDesignation.clearParameters();
-            System.gc();
 
         } catch (Exception e) {
             e.printStackTrace();

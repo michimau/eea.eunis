@@ -229,7 +229,6 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementNatObjectGeoscope.executeBatch();
                     preparedStatementNatObjectGeoscope.clearParameters();
 
-                    System.gc();
                 }
 
                 siteCode = null;
@@ -307,7 +306,6 @@ public class CddaSitesImportParser extends DefaultHandler {
                 preparedStatementNatObjectGeoscope.executeBatch();
                 preparedStatementNatObjectGeoscope.clearParameters();
 
-                System.gc();
             }
             con.commit();
         } catch (Exception e) {

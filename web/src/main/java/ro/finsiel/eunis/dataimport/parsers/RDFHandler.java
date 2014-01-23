@@ -201,7 +201,6 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
             if (counter % 10000 == 0) {
                 preparedStatement.executeBatch();
                 preparedStatement.clearParameters();
-                System.gc();
             }
 
         } catch (Exception e) {
@@ -328,7 +327,6 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
             if (!(counter % 10000 == 0)) {
                 preparedStatement.executeBatch();
                 preparedStatement.clearParameters();
-                System.gc();
             }
         } catch (Exception e) {
             e.printStackTrace();

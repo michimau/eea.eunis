@@ -87,7 +87,6 @@ public class CddaImportParser extends DefaultHandler {
                     if (counter % 10000 == 0) {
                         preparedStatement.executeBatch();
                         preparedStatement.clearParameters();
-                        System.gc();
                     }
                     sites.put(idSite, siteName);
                     idSite = null;
@@ -113,7 +112,6 @@ public class CddaImportParser extends DefaultHandler {
             if (!(counter % 10000 == 0)) {
                 preparedStatement.executeBatch();
                 preparedStatement.clearParameters();
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

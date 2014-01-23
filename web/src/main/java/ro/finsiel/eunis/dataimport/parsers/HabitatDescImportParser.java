@@ -129,8 +129,6 @@ public class HabitatDescImportParser extends DefaultHandler {
 
                     preparedStatementNatureObject.executeBatch();
                     preparedStatementNatureObject.clearParameters();
-
-                    System.gc();
                 }
 
                 habId = null;
@@ -172,8 +170,6 @@ public class HabitatDescImportParser extends DefaultHandler {
 
                 preparedStatementNatureObject.executeBatch();
                 preparedStatementNatureObject.clearParameters();
-
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

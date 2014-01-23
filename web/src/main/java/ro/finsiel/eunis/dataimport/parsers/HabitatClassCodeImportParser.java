@@ -135,8 +135,6 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
 
                     preparedStatementTabInfo.executeBatch();
                     preparedStatementTabInfo.clearParameters();
-
-                    System.gc();
                 }
 
                 habId = null;
@@ -177,8 +175,6 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
 
                 preparedStatementTabInfo.executeBatch();
                 preparedStatementTabInfo.clearParameters();
-
-                System.gc();
             }
             // con.commit();
         } catch (Exception e) {

@@ -195,8 +195,6 @@ public class ReferencesImportParser extends DefaultHandler {
 
                     preparedStatementDcIndexUpdate.executeBatch();
                     preparedStatementDcIndexUpdate.clearParameters();
-
-                    System.gc();
                 }
 
                 refcd = null;
@@ -248,8 +246,6 @@ public class ReferencesImportParser extends DefaultHandler {
 
                 preparedStatementDcIndexUpdate.executeBatch();
                 preparedStatementDcIndexUpdate.clearParameters();
-
-                System.gc();
             }
             deleteRedundantRecords();
             // con.commit();

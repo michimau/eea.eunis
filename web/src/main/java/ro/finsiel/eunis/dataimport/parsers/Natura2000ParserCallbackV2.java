@@ -37,6 +37,9 @@ public class Natura2000ParserCallbackV2 {
         designationsMapping.put("J", "IN08");
         designationsMapping.put("K", "IN09");
 
+        // A = Amphibians, B = Birds, F = Fish, Fu = Fungi, I = Invertebrates,L = Lichens, M = Mammals, P = Plants, R = Reptiles
+        // http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal
+
         speciesSourceCode.put("A", "Amphibians");    // todo: these are not in the constants table
         speciesSourceCode.put("B", Constants.SPECIES_SOURCE_TABLE_BIRD);
         speciesSourceCode.put("F", Constants.SPECIES_SOURCE_TABLE_FISHES);
@@ -46,12 +49,6 @@ public class Natura2000ParserCallbackV2 {
         speciesSourceCode.put("M", Constants.SPECIES_SOURCE_TABLE_MAMMAL);
         speciesSourceCode.put("P",  Constants.SPECIES_SOURCE_TABLE_PLANT);
         speciesSourceCode.put("R", "Reptiles");
-    }
-
-    static{
-        // A = Amphibians, B = Birds, F = Fish, Fu = Fungi, I = Invertebrates,L = Lichens, M = Mammals, P = Plants, R = Reptiles
-        // http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal
-
     }
 
     private final SQLUtilities sqlUtilities;
@@ -426,7 +423,7 @@ public class Natura2000ParserCallbackV2 {
         String speciesPopulation = speciesPopulationUpper;
 
         if(speciesPopulationUpper != null && speciesPopulationLower != null){
-            speciesPopulation = speciesPopulationUpper + "-" + speciesPopulationLower;
+            speciesPopulation =  speciesPopulationLower + "-" + speciesPopulationUpper;
         }
         if(speciesPopulation != null && speciesPopulationUnit != null) {
             speciesPopulation = speciesPopulation + speciesPopulationUnit;

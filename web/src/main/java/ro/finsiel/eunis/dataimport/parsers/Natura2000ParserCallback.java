@@ -243,7 +243,7 @@ public class Natura2000ParserCallback {
             if(lengthKm!= null){
                 double length = Double.parseDouble(lengthKm);
                 length = length * 1000;
-                lengthKm = new Double(length).toString();
+                lengthKm = Double.toString(length);
             }
         } catch (NumberFormatException e){
             errors.add("Length " + lengthKm + " is unparseable!");

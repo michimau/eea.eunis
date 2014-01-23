@@ -231,9 +231,19 @@ public class Natura2000ImportParserTest {
         // compare
         int problems = 0;
 
-        // add here regex to match the ingorable compare errors
+        // add here text contained in the ingorable compare errors
         String[] toIgnore = {
-//        ".*OTHER_SPECIES.*"
+        "ID_LOOKUP",
+        "CHM62EDT_SITES_SITES",
+        "HABITAT_",
+        "INTENSITY",
+        "INFLUENCE",
+        "IN_OUT",
+        "ALT_",          // no altitude
+        "AMT DER STMK.",     // new documentation
+        "Das Steirische Ennstal",  // new quality
+        "COVER",
+        "OTHER_SPECIES"
         };
 
         try {
@@ -244,7 +254,7 @@ public class Natura2000ImportParserTest {
                     for(String d : diff){
                         boolean ignoreFlag = false;
                         for(String ignored : toIgnore){
-                            if(d.matches(ignored)){
+                            if(d.contains(ignored)){
                                 ignoreFlag = true;
                                 break;
                             }
@@ -412,10 +422,10 @@ public class Natura2000ImportParserTest {
                     result.add("Differences: " + t.tableName + " \n" + listDiff(toFind, best.get(0)));
                     found.add(toFind); found.add(best.get(0));
                 } else {
-                    System.out.println("UNDECIDED match for " + tableName +" " + toFind);
-                    for(Row r : best){
-                        System.out.println(r);
-                    }
+//                    System.out.println("UNDECIDED match for " + tableName +" " + toFind);
+//                    for(Row r : best){
+//                        System.out.println(r);
+//                    }
                 }
             }
 
@@ -434,14 +444,14 @@ public class Natura2000ImportParserTest {
         }
 
         private String listDiff(Row row1, Row row2){
-            String diff = "";
+            String diff = row1.toString() + '\n';
             for(int i=0;i<columnNames.size();i++) {
                 if(row1.columns.get(i) == null || row2.columns.get(i) == null){
                     if(!(row1.columns.get(i) == null && row2.columns.get(i) == null)){
-                        diff += " column " + columnNames.get(i)+ ": " + truncate(row1.columns.get(i)) + " <> " + truncate(row2.columns.get(i)) +"\n";
+                        diff += " column " + columnNames.get(i)+ ": " + truncate(row1.columns.get(i)) + " <> " + truncate(row2.columns.get(i)) + "\n";
                     }
                 } else if(!row1.columns.get(i).equals(row2.columns.get(i))) {
-                    diff += " column " + columnNames.get(i)+ ": " + truncate(row1.columns.get(i)) + " <> " + truncate(row2.columns.get(i)) +"\n";
+                    diff += " column " + columnNames.get(i)+ ": " + truncate(row1.columns.get(i)) + " <> " + truncate(row2.columns.get(i)) + "\n";
                 }
             }
             return diff;

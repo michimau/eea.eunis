@@ -347,7 +347,12 @@ public class Natura2000ParserCallbackV2 {
     public void callSpecies(String path, Values values) throws Exception {
         String speciesCode = values.getFromCurrent("speciesCode");
 
-        if(speciesCode == null){
+//        <!-- IF motivation element EXISTS then -->
+//        <!-- 3.3. Other important species of flora and fauna (optional) -->
+//        <!-- ELSE -->
+//        <!-- 3.2. Species referred to in Artcle 4 of Directive 2009/147/EC and listed in Annex II of Directive 92/43/EEC and site evaluation form them -->
+
+        if(values.getFromCurrent("motivations.motivation") != null){
             // Other species
             callOtherSpecies(path, values);
             return;
@@ -355,13 +360,13 @@ public class Natura2000ParserCallbackV2 {
 
         String speciesName = values.getFromCurrent("scientificName");
         String speciesWinter = values.getFromCurrent("Winter");
-        String speciesPopulation = getPopulation(values);
+        String speciesPopulation = values.getFromCurrent("population");
         String speciesIsolation = values.getFromCurrent("isolation");
         String speciesConservation = values.getFromCurrent("conservation");
         String speciesGlobal = values.getFromCurrent("global");
         String speciesResident = values.getFromCurrent("Resident");
         String speciesStaging = values.getFromCurrent("Staging");
-        String speciesBreeding = values.getFromCurrent("Breeding");
+        String speciesBreeding = getPopulation(values);
 
         String ecoInfo = speciesSourceCode.get(values.getFromCurrent("speciesGroup"));
 
@@ -423,7 +428,11 @@ public class Natura2000ParserCallbackV2 {
         String speciesPopulation = speciesPopulationUpper;
 
         if(speciesPopulationUpper != null && speciesPopulationLower != null){
-            speciesPopulation =  speciesPopulationLower + "-" + speciesPopulationUpper;
+            if(speciesPopulationLower.equalsIgnoreCase(speciesPopulationUpper)){
+                speciesPopulation = speciesPopulationUpper;
+            } else {
+                speciesPopulation =  speciesPopulationLower + "-" + speciesPopulationUpper;
+            }
         }
         if(speciesPopulation != null && speciesPopulationUnit != null) {
             speciesPopulation = speciesPopulation + speciesPopulationUnit;
@@ -441,7 +450,7 @@ public class Natura2000ParserCallbackV2 {
 //    @SaxCallback("sdfs.sdf.ecologicalInformation.EcologicalInformation33.OtherSpeciesList.OtherSpecies")
     public void callOtherSpecies(String path, Values values) throws Exception {
         String otherSpeciesSciName = values.getFromCurrent("scientificName");
-        String otherSpeciesPopulation = getPopulation(values);
+        String otherSpeciesPopulation = values.getFromCurrent("abundanceCategory");
         String otherSpeciesMotivation = values.getFromCurrent("motivations.motivation");
         String otherSpeciesGroup = values.getFromCurrent("speciesGroup");
 

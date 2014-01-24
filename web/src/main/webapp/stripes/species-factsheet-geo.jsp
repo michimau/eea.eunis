@@ -112,7 +112,7 @@
 	                imageParameters_dist.layerIds = [4];
 	                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 	                imageParameters_dist.transparent = true;
-	                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+	                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_dist});
                 }
 
                 // Species Range layer
@@ -125,7 +125,7 @@
 	                imageParameters_range.layerIds = [1];
 	                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 	                imageParameters_range.transparent = true;
-	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_range});
                 }
                 map.addLayer(gbifLayer);
 			}

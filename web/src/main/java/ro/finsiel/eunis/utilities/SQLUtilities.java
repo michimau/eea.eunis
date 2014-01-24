@@ -590,7 +590,7 @@ public class SQLUtilities {
 
             ps =
                 con.prepareStatement("UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
-                        + (whereCondition == null && whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
+                        + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();

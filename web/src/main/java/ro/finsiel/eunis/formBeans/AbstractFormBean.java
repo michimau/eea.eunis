@@ -26,12 +26,12 @@ public abstract class AbstractFormBean implements java.io.Serializable {
     /**
      * Describes if a column is displayed in results.
      */
-    public static final Boolean SHOW = new Boolean(true);
+    public static final Boolean SHOW = Boolean.TRUE;
 
     /**
      * Describes if a column is hidden in results.
      */
-    public static final Boolean HIDE = new Boolean(false);
+    public static final Boolean HIDE = Boolean.FALSE;
 
     /**
      * Current page dispayed on the view.

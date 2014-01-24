@@ -31,7 +31,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
      * @param key key to fetch.
      * @return application property value
      */
-    public String getApplicationProperty(String key) {
+    public synchronized String getApplicationProperty(String key) {
         if (eunisProperties == null) {
             try {
                 eunisProperties = new Properties();

@@ -141,22 +141,20 @@ public class NationalBean extends AbstractFormBean {
     public String getStringMain() {
         String result = "";
 
-        if (null != groupName && null != statusName && null != countryName) {
-            if (statusName != null) {
-                result += " " + statusName;
-            } else {
-                result += " any";
-            }
-            if (countryName != null && !countryName.equals("any")) {
-                result += " in " + countryName;
-            } else {
-                result += " in any country";
-            }
-            if (groupName != null) {
-                result += " and belong to group " + groupName;
-            } else {
-                result += " and belong to any group";
-            }
+        if (statusName != null) {
+            result += " " + statusName;
+        } else {
+            result += " any";
+        }
+        if (countryName != null && !countryName.equals("any")) {
+            result += " in " + countryName;
+        } else {
+            result += " in any country";
+        }
+        if (groupName != null) {
+            result += " and belong to group " + groupName;
+        } else {
+            result += " and belong to any group";
         }
         return result;
     }

@@ -180,7 +180,7 @@ public abstract class AbstractPaginator {
     public final int setCurrentPage(int currentPage) {
         try {
             this.currentPage = (currentPage >= countPages()) ? currentPage = countPages() - 1 : currentPage;
-            this.currentPage = (currentPage <= 0) ? currentPage = 0 : currentPage;
+            this.currentPage = (currentPage <= 0) ? 0 : currentPage;
             return this.currentPage;
         } catch (CriteriaMissingException ex) {
             System.err

@@ -63,9 +63,9 @@ public class DcIndexPersist extends PersistentObject {
 
     public void setReference(Integer reference) {
         if (reference == null) {
-            reference = -1;
+            this.reference = -1;
         } else {
-            reference = reference.intValue();
+            this.reference = reference;
         }
         this.markModifiedPersistentState();
     }

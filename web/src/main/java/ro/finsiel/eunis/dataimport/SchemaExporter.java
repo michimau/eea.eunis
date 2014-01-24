@@ -95,8 +95,7 @@ public class SchemaExporter extends HttpServlet {
                         if (type == Types.INTEGER || type == Types.BIGINT
                                 || type == Types.NUMERIC) {
                             xsdType = "xsd:int";
-                        } else if (type == Types.FLOAT || type == Types.FLOAT
-                                || type == Types.REAL || type == Types.DECIMAL) {
+                        } else if (type == Types.FLOAT || type == Types.REAL || type == Types.DECIMAL) {
                             xsdType = "xsd:double";
                         } else if (type == Types.TINYINT
                                 || type == Types.SMALLINT) {

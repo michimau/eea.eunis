@@ -140,8 +140,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             resultCount = 0;
 
@@ -164,7 +163,7 @@ public class SQLUtilities {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            result = "";
         } finally {
             closeAll(con, ps, rs);
         }
@@ -205,8 +204,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -218,7 +216,7 @@ public class SQLUtilities {
             closeAll(con, ps, rs);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            result = null;
         } finally {
             closeAll(con, ps, rs);
         }
@@ -247,8 +245,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -259,11 +256,9 @@ public class SQLUtilities {
                 d.setTwo(rs.getString(secondColumn));
                 result.add(d);
             }
-
-            closeAll(con, ps, rs);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            result = null;
         } finally {
             closeAll(con, ps, rs);
         }
@@ -293,8 +288,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -305,7 +299,6 @@ public class SQLUtilities {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
         } finally {
             closeAll(con, ps, rs);
         }
@@ -315,7 +308,7 @@ public class SQLUtilities {
 
 
     /**
-     * Executes a CREATE sql .
+     * Executes a CREATE sql.
      *
      * @param SQL
      */
@@ -333,8 +326,7 @@ public class SQLUtilities {
         int updateQuery = 0;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             statement = con.createStatement();
             updateQuery = statement.executeUpdate(SQL);
@@ -346,15 +338,8 @@ public class SQLUtilities {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         } finally {
-            try {
-                statement.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+            closeAll(con, statement, null);
         }
     }
 
@@ -376,26 +361,21 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                ps.close();
-                con.close();
-            } catch (Exception ex) {
-            }
+            closeAll(con, ps, null);
         }
     }
 
     /**
-     * @param parameterizedSQL
-     * @param valueMap
-     * @param conn
+     * @param parameterizedSQL The prepared statement SQL
+     * @param values The list of values, in the PS order
+     * @param conn Connection to run the PS
      * @return prepared sql statement
      * @throws SQLException
      */
@@ -440,7 +420,7 @@ public class SQLUtilities {
         PreparedStatement pstmt = null;
         Connection con = null;
         try {
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
             pstmt = prepareStatement(parameterizedSQL, values, con);
             rs = pstmt.executeQuery();
             if (rs != null) {
@@ -454,19 +434,7 @@ public class SQLUtilities {
                 }
             }
         } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException e) {
-                // Ignore closing exceptions.
-            }
+            closeAll(con, pstmt, rs);
         }
 
     }
@@ -493,8 +461,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -511,13 +478,18 @@ public class SQLUtilities {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ArrayList();
+            result = new ArrayList();
         } finally {
             closeAll(con, ps, rs);
         }
         return result;
     }
 
+    /**
+     * Executes the statement and returns the result as a hashtable.
+     * @param sql_stmt SLQ to run
+     * @return Hashtable containing results, keyed by column name; only the <i>last</i> row is returned
+     */
     public Hashtable<String, String> getHashtable(String sql_stmt) {
 
         Connection con = null;
@@ -527,8 +499,7 @@ public class SQLUtilities {
         Hashtable<String, String> h = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
             stmt = con.prepareStatement(sql_stmt);
             rset = stmt.executeQuery(sql_stmt);
             ResultSetMetaData md = rset.getMetaData();
@@ -585,8 +556,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps =
                 con.prepareStatement("UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
@@ -602,7 +572,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Execute DELETE statement
+     * Execute DELETE statement.
      *
      * @param tableName
      *            table name
@@ -618,8 +588,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps =
                 con.prepareStatement("DELETE FROM " + tableName + " WHERE 1=1"
@@ -635,7 +604,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Insert bookmark functionality
+     * Insert bookmark functionality.
      *
      * @param username
      *            username associated with that bookmark
@@ -652,8 +621,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
             ps = con.prepareStatement(INSERT_BOOKMARK);
             ps.setString(1, username);
             ps.setString(2, bookmarkURL);
@@ -669,7 +637,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Execute INSERT statement
+     * Execute INSERT statement.
      *
      * @param tableName
      *            table name
@@ -691,18 +659,17 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             String namesList = "";
             String valuesList = "";
 
             for (int i = 0; i < tableColumns.getColumnsNames().size(); i++) {
                 namesList +=
-                    (String) tableColumns.getColumnsNames().get(i)
+                     tableColumns.getColumnsNames().get(i)
                     + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
                 valuesList +=
-                    "'" + (String) tableColumns.getColumnsValues().get(i) + "'"
+                    "'" + tableColumns.getColumnsValues().get(i) + "'"
                     + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
             }
 
@@ -719,7 +686,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Execute INSERT statement
+     * Execute INSERT statement.
      *
      * @param tableName
      *            table name
@@ -741,8 +708,7 @@ public class SQLUtilities {
         String query = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
             con.setAutoCommit(false);
 
             st = con.createStatement();
@@ -813,7 +779,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Determines what tabs will be shown for given factsheet
+     * Determines what tabs will be shown for given factsheet.
      *
      * @param idNatureObject
      *            object from database
@@ -834,8 +800,7 @@ public class SQLUtilities {
         SQL += " WHERE ID_NATURE_OBJECT=" + idNatureObject;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -864,14 +829,28 @@ public class SQLUtilities {
         // return false;
     }
 
-    public static void closeAll(Connection con, PreparedStatement ps, ResultSet rs) {
+    /**
+     * Closes up the given resources, if they are not null.
+     * @param con The DB connection
+     * @param ps The Statement or PreparedStatement
+     * @param rs The ResultSet
+     */
+    public static void closeAll(Connection con, Statement ps, ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
             if (ps != null) {
                 ps.close();
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
             if (con != null) {
                 con.close();
             }
@@ -887,27 +866,24 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT COUNT(*) AS RECORD_COUNT";
-
-        strSQL = strSQL + " FROM `chm62edt_sites`";
-        strSQL =
-            strSQL
-            + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
-        strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
-        strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
-
+        String strSQL = "SELECT COUNT(*) AS RECORD_COUNT FROM `chm62edt_sites` INNER JOIN `chm62edt_designations` " +
+                "ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND " +
+                "`chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE) " +
+                "WHERE `chm62edt_sites`.ID_DESIGNATION = ?  AND `chm62edt_sites`.ID_GEOSCOPE = ?";
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(strSQL);
+            ps.setString(1, idDesignation);
+            ps.setString(2, idGeoscope);
             rs = ps.executeQuery();
 
             rs.next();
             result = rs.getInt(1) > 0;
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
         }
 
         return result;
@@ -920,25 +896,25 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_HABITAT";
-
-        strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-        strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '" + idCode + "%'";
-        strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)>" + idCode.length();
+        String strSQL = "SELECT ID_HABITAT FROM CHM62EDT_HABITAT";
+        strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE ?";
+        strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)>?";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(strSQL);
+            ps.setString(1, idCode+"%");
+            ps.setLong(2, idCode.length());
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 result = true;
             }
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
         }
 
         return result;
@@ -951,15 +927,12 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_HABITAT";
-
-        strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+        String strSQL = "SELECT ID_HABITAT FROM CHM62EDT_HABITAT";
         strSQL = strSQL + " WHERE CODE_2000 LIKE '" + idCode + "%'";
         strSQL = strSQL + " AND CODE_2000<>'" + idCodeParent + "'";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(strSQL);
             rs = ps.executeQuery();
@@ -967,14 +940,20 @@ public class SQLUtilities {
             if (rs.next()) {
                 result = true;
             }
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
         }
 
         return result;
     }
 
+    /**
+     * Checks that a taxonomy has child taxonomies (any taxonomy's parent id is the given id code).
+     * @param idCode Taxonomy id
+     * @return True if there are child taxonomies.
+     */
     public boolean SpeciesHasChildTaxonomies(String idCode) {
         boolean result = false;
 
@@ -982,30 +961,35 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_TAXONOMY";
-
-        strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
-        strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT = '" + idCode + "'";
-        strSQL = strSQL + " AND ID_TAXONOMY<>'" + idCode + "'";
+        String strSQL = "SELECT ID_TAXONOMY FROM CHM62EDT_TAXONOMY";
+        strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT = ?";
+        strSQL = strSQL + " AND ID_TAXONOMY<>?";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(strSQL);
+            ps.setString(1, idCode);
+            ps.setString(2, idCode);
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 result = true;
             }
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
         }
 
         return result;
     }
 
+    /**
+     * Checks that the given species has child species (there is any species with the taxonomy id equal with the given id code).
+     * @param idCode Taxonomy id
+     * @return True if at least one record is found
+     */
     public boolean SpeciesHasChildSpecies(String idCode) {
         boolean result = false;
 
@@ -1013,42 +997,43 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_SPECIES";
-
-        strSQL = strSQL + " FROM CHM62EDT_SPECIES";
-        strSQL = strSQL + " WHERE ID_TAXONOMY = '" + idCode + "'";
+        String strSQL = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES";
+        strSQL = strSQL + " WHERE ID_TAXONOMY = ?";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement(strSQL);
+            ps.setString(1, idCode);
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 result = true;
             }
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
         }
 
         return result;
     }
 
+    /**
+     * Lists all the table names starting with chm63edt or dc_.
+     * @return The list of table names
+     */
     public List<String> getAllChm62edtTableNames() {
 
         List<String> ret = new ArrayList<String>();
         Connection con = null;
+        ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             DatabaseMetaData meta = con.getMetaData();
-            ResultSet rs = meta.getTables(null, null, null, new String[] {"TABLE"});
-
-            ;
+            rs = meta.getTables(null, null, null, new String[] {"TABLE"});
 
             while (rs.next()) {
                 String tableName = rs.getString("TABLE_NAME");
@@ -1058,25 +1043,32 @@ public class SQLUtilities {
                 }
             }
 
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, null,  rs);
         }
 
         return ret;
     }
 
+    /**
+     * Reads the table info (column metadata).
+     * @param tableName The table to return metadata for
+     * @return A map contatining the column metadata keyed by column name.
+     */
     public HashMap<String, ColumnDTO> getTableInfo(String tableName) {
 
         Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
         HashMap<String, ColumnDTO> columns = new HashMap<String, ColumnDTO>();
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM " + tableName);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM " + tableName);
             ResultSetMetaData rsMeta = rs.getMetaData();
 
             int numberOfColumns = rsMeta.getColumnCount();
@@ -1102,11 +1094,10 @@ public class SQLUtilities {
 
                 columns.put(columnName.toLowerCase(), column);
             }
-
-            st.close();
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, st, rs);
         }
 
         return columns;
@@ -1115,14 +1106,15 @@ public class SQLUtilities {
     public List<ColumnDTO> getTableInfoList(String tableName) {
 
         Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
         List<ColumnDTO> columns = new ArrayList<ColumnDTO>();
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM " + tableName);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM " + tableName);
             ResultSetMetaData rsMeta = rs.getMetaData();
 
             int numberOfColumns = rsMeta.getColumnCount();
@@ -1148,11 +1140,10 @@ public class SQLUtilities {
 
                 columns.add(column);
             }
-
-            st.close();
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, st, rs);
         }
 
         return columns;
@@ -1161,16 +1152,17 @@ public class SQLUtilities {
     public String getTableContentAsXML(String tableName) {
 
         Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
         StringBuilder ret = new StringBuilder();
 
         String nl = "\n";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM " + tableName);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM " + tableName);
             ResultSetMetaData rsMeta = rs.getMetaData();
             int numberOfColumns = rsMeta.getColumnCount();
 
@@ -1201,10 +1193,10 @@ public class SQLUtilities {
                 ret.append("</ROW>").append(nl);
             }
 
-            st.close();
-            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            closeAll(con, st, rs);
         }
 
         return ret.toString();
@@ -1228,8 +1220,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
             message = EunisUtil.replaceTagsImport(message);
             ps =
                 con.prepareStatement("INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '" + message
@@ -1253,8 +1244,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps =
                 con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
@@ -1269,7 +1259,6 @@ public class SQLUtilities {
                 result.add(dto);
             }
 
-            closeAll(con, ps, rs);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -1280,6 +1269,10 @@ public class SQLUtilities {
         return result;
     }
 
+    /**
+     * Returns all URLs in the DB
+     * @return URLs from DC_INDEX, GLOSSARY, SITE_ATTRIBUTES, DESIGNATIONS
+     */
     public List<String> getUrls() {
         List<String> ret = new ArrayList<String>();
 
@@ -1291,12 +1284,12 @@ public class SQLUtilities {
 
         statements.add("SELECT URL FROM DC_INDEX");
         statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
-        statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
-        statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
+        // can also be https!
+        statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http%'");
+        statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http%'");
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             for (String stmt : statements) {
                 ps = con.prepareStatement(stmt);
@@ -1322,11 +1315,9 @@ public class SQLUtilities {
                 }
             }
 
-            closeAll(con, ps, rs);
-
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            ret = null;
         } finally {
             closeAll(con, ps, rs);
         }
@@ -1335,7 +1326,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Execute INSERT statement
+     * Execute INSERT statement.
      * @deprecated The fields that were updated by these scripts were deleted http://taskman.eionet.europa.eu/issues/17806
      */
     public void runPostImportSitesScript(boolean cmd) {
@@ -1359,7 +1350,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Reconstruct the TAXONOMY_TREE
+     * Reconstruct the TAXONOMY_TREE.
      */
     public void reconstructTaxonomyTree() {
 
@@ -1372,8 +1363,7 @@ public class SQLUtilities {
         String origId = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = getConnection();
 
             ps = con.prepareStatement("SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM CHM62EDT_TAXONOMY LIMIT 100");
             rs = ps.executeQuery();

@@ -52,7 +52,7 @@
                                 <span class="bold">${actionBean.consStatusEU.statusName}</span></p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}
-                        <span class="bold">TODO[EU Nature Directives?]</span> and
+                        <span class="bold">Not available</span> EU Nature Directives and
                         <span class="bold">${ actionBean.legalInstrumentCount }</span>
                             <a href="${ actionBean.pageUrl }#legal_status" onclick="if($('#legal_status ~ h2').attr('class').indexOf('current')==-1) $('#legal_status ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}</a>.</p>
 

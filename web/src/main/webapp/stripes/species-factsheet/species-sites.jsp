@@ -4,8 +4,12 @@
 
 
 
-                <!-- species protection -->
-                <a name="protected"></a>
+    <!-- species protection -->
+    <a name="protected"></a>
+
+    <c:choose>
+        <c:when test="${fn:length(actionBean.speciesSitesTable) gt 0 or fn:length(actionBean.subSpeciesSitesTable) gt 0}">
+
                 <%--<h2 class="visualClear" id="protected">Natura 2000 Sites</h2>--%>
 
 	                <c:choose>
@@ -114,9 +118,13 @@
 
 
                 <!-- END species protection -->
-                
-                
-                
+
+
+    </c:when>
+        <c:otherwise>
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+        </c:otherwise>
+    </c:choose>
                 
                 
                 

@@ -7,7 +7,8 @@
     <%--<h2 class="visualClear" id="legal-status">Legal status</h2>--%>
 
     <%--todo: change the table according to http://taskman.eionet.europa.eu/issues/15649--%>
-
+        <c:choose>
+            <c:when test="${fn:length(actionBean.legalStatuses) gt 0}">
                 <div class='detailed-reference'>
                     <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in the following international legal instruments and agreements')}</h3>
 
@@ -66,4 +67,9 @@
                   <%--</p>--%>
                 </div>
                 <!-- END detailed reference -->
+            </c:when>
+            <c:otherwise>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+            </c:otherwise>
+        </c:choose>
 </stripes:layout-definition>

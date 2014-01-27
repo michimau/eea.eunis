@@ -81,7 +81,7 @@
                 map = new esri.Map("map",{extent:initExtent});
 
 			    veTileLayer = new esri.virtualearth.VETiledLayer({
-			    bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+			    bingMapsKey: 'AngrFRWkKXOKP4DuIx_T3wGWalupu63oFfJcDJHqa5_QA34tELFodeuc97CMw5us',
 			    mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD});
 			    map.addLayer(veTileLayer);
 

@@ -13,8 +13,8 @@
 			var initExtent =  new esri.geometry.Extent({"xmin":-3222779.52198856,"ymin": 2736409.05279762,"xmax":7105006.15070147,"ymax": 11615622.1895779,"spatialReference":{"wkid":3857}})
 
 			map = new esri.Map("map",{extent:initExtent});
-		    map.addLayer(new esri.virtualearth.VETiledLayer({
-		          bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+			map.addLayer(new esri.virtualearth.VETiledLayer({
+		          bingMapsKey: 'AngrFRWkKXOKP4DuIx_T3wGWalupu63oFfJcDJHqa5_QA34tELFodeuc97CMw5us',
 		          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD}));
 
 			n2000layer = new esri.layers.GraphicsLayer();

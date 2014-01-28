@@ -880,10 +880,7 @@ public class Natura2000ParserCallbackV2 {
     }
 
     private String getSpeciesNatObjectId(String speciesCode) {
-        String query =
-                "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '"
-                        + Constants.SAME_SYNONYM_N2000 + "' AND OBJECT = '" + speciesCode + "'";
-
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE CODE_2000='" +speciesCode+"'";
         return sqlUtilities.ExecuteSQL(query);
     }
 

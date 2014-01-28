@@ -72,6 +72,9 @@ public class SpeciesNatureObjectDomain extends AbstractDomain {
         this.addColumnSpec(
                 new StringColumnSpec("GENUS", "getGenus", "setGenus",
                 DEFAULT_TO_NULL));
+        this.addColumnSpec(
+                new StringColumnSpec("CODE_2000", "getNatura2000Code", "setNatura2000Code",
+                DEFAULT_TO_NULL));
 
         JoinTable natureObject = new JoinTable("CHM62EDT_NATURE_OBJECT",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");

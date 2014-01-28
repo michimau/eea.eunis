@@ -6,10 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Types;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -1247,11 +1244,8 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getSpeciesNatObjectId(String speciesCode) {
-        String query =
-            "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '"
-            + Constants.SAME_SYNONYM_N2000 + "' AND OBJECT = '" + speciesCode + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE CODE_2000='" +speciesCode+"'";
         String noId = sqlUtilities.ExecuteSQL(query);
-
         return noId;
     }
 

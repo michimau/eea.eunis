@@ -13,7 +13,6 @@ import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
  * User: ancai
  * Date: 10.03.2005
  * Time: 12:34:38
- * To change this template use File | Settings | File Templates.
  */
 public class SitesSpeciesReportAttributesDomain extends AbstractDomain {
 
@@ -54,6 +53,7 @@ public class SitesSpeciesReportAttributesDomain extends AbstractDomain {
     species.addJoinColumn(new StringJoinColumn("SCIENTIFIC_NAME", "setSpeciesScientificName"));
     species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES", "setIdSpecies"));
     species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES_LINK", "setIdSpeciesLink"));
+    species.addJoinColumn(new StringJoinColumn("CODE_2000", "setNatura2000Code"));
     this.addJoinTable(species);
 
     JoinTable group = new JoinTable("CHM62EDT_GROUP_SPECIES", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");

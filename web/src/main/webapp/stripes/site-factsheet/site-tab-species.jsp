@@ -27,6 +27,7 @@ WebContentManagement cm = SessionManager.getWebContent();
             <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth table-inline">
                 <thead>
                 <tr>
+                    <th scope="col"><%=cm.cmsPhrase("Natura 2000 code")%></th>
                     <th scope="col"><%=cm.cmsPhrase("Species scientific name")%></th>
                     <th scope="col"><%=cm.cmsPhrase("Species group")%></th>
                 </tr>
@@ -34,6 +35,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                 <tbody>
                 <c:forEach items="${actionBean.siteSpecies}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                             <a class="link-plain" href="species/${specie.source.idSpecies}">${specie.scientificName}</a>
                         </td>
@@ -44,6 +46,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 <c:forEach items="${actionBean.siteSpecificSpecies}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                             <a href="http://www.google.com/search?q=${specie.scientificName}">
                                     ${specie.scientificName}
@@ -54,6 +57,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 <c:forEach items="${actionBean.eunisSpeciesListedAnnexesDirectives}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                             <a class="link-plain"
                                href="species/${specie.source.idSpecies}">${specie.scientificName}
@@ -66,6 +70,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 <c:forEach items="${actionBean.notEunisSpeciesListedAnnexesDirectives}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                                 ${specie.scientificName}
                         </td>
@@ -76,9 +81,10 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </c:forEach>
                 <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                             <a class="link-plain" href="species/${specie.source.idSpecies}">
-                                    ${specie.scientificName}
+                                ${specie.scientificName}
                             </a>
                         </td>
                         <td>
@@ -89,6 +95,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 
                 <c:forEach items="${actionBean.notEunisSpeciesOtherMentioned}" var="specie">
                     <tr>
+                        <td>${specie.natura2000Code}</td>
                         <td>
                                 ${specie.scientificName}
                         </td>

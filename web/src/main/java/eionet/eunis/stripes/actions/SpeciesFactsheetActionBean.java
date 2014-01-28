@@ -511,7 +511,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // World Register of Marine Species - also has seals etc.
             wormsid = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
-            n2000id = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
+            n2000id = specie.getNatura2000Code();
 
             if (kingdomname.equalsIgnoreCase("Animals")) {
                 faeu = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);

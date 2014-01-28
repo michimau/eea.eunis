@@ -2096,4 +2096,17 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         </rollback>
     </changeSet>
 
+    <changeSet id="rev-130" author="melisand">
+        <comment>Add natura 2000 code in Species table.</comment>
+        <addColumn tableName="chm62edt_species">
+            <column name="CODE_2000" type="varchar(10)" defaultValue="NULL"/>
+        </addColumn>
+        <comment>Populate the column from the old data. A select(object) should be enough if there are no bad (double) entries.</comment>
+        <sql>UPDATE chm62edt_species s SET CODE_2000=(select max(object) from chm62edt_nature_object_attributes a where a.name='sameSynonymN2000' and a.id_nature_object = s.id_nature_object)</sql>
+
+        <rollback>
+            <dropColumn tableName="chm62edt_species" columnName="CODE_2000"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

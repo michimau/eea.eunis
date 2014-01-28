@@ -38,6 +38,8 @@ public class SitesSpeciesReportAttributesPersist extends PersistentObject {
 
   private Integer idSpeciesLink = null;
 
+  private String natura2000Code = null;
+
 
   public SitesSpeciesReportAttributesPersist() {
     super();
@@ -133,7 +135,15 @@ public class SitesSpeciesReportAttributesPersist extends PersistentObject {
     return i_idReportType;
   }
 
-  /**
+    public String getNatura2000Code() {
+        return natura2000Code;
+    }
+
+    public void setNatura2000Code(String natura2000Code) {
+        this.natura2000Code = natura2000Code;
+    }
+
+    /**
    * Getter for a database field.
    **/
 //  public Short getRelationExist() { return i_relationExist; }

@@ -7,6 +7,9 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.AttributeDto;
+import eionet.eunis.util.Constants;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -152,11 +155,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         if (SiteFactsheet.TYPE_NATURA2000 != factsheet.getType()) {
             siteSpecies = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findSitesSpeciesByIDNatureObject())
-                siteSpecies.add(new SpeciesBean((SiteSpeciesPersist) s));
+                siteSpecies.add(speciesBeanFromSiteSpecies((SiteSpeciesPersist) s));
 
             siteSpecificSpecies = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findSitesSpecificSpecies())
-                siteSpecificSpecies.add(new SpeciesBean((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_SITE_SPECIFIC));
+                siteSpecificSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_SITE_SPECIFIC));
 
             eunisSpeciesListedAnnexesDirectives = new ArrayList();
             eunisSpeciesOtherMentioned = new ArrayList();
@@ -167,18 +170,41 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             siteSpecificSpecies = new ArrayList<SpeciesBean>();
             eunisSpeciesListedAnnexesDirectives = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000())
-                eunisSpeciesListedAnnexesDirectives.add(new SpeciesBean((SitesSpeciesReportAttributesPersist) s));
+                eunisSpeciesListedAnnexesDirectives.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s));
             eunisSpeciesOtherMentioned = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000())
-                eunisSpeciesOtherMentioned.add(new SpeciesBean((SitesSpeciesReportAttributesPersist) s));
+                eunisSpeciesOtherMentioned.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s));
             notEunisSpeciesListedAnnexesDirectives = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findNotEunisSpeciesListedAnnexesDirectives())
-                notEunisSpeciesListedAnnexesDirectives.add(new SpeciesBean((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_NOT_EUNIS_LISTED));
+                notEunisSpeciesListedAnnexesDirectives.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_NOT_EUNIS_LISTED));
             notEunisSpeciesOtherMentioned = new ArrayList<SpeciesBean>();
             for (Object s : factsheet.findNotEunisSpeciesOtherMentioned())
-                notEunisSpeciesOtherMentioned.add(new SpeciesBean((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_NOT_EUNIS_OTHER));
+                notEunisSpeciesOtherMentioned.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.TYPE_NOT_EUNIS_OTHER));
         }
         calculateSpeciesStatistics();
+//        speciesDebug();
+    }
+
+    private void speciesDebug()
+    {
+        System.out.println("----- siteSpecies");
+        for(SpeciesBean s : siteSpecies)
+            System.out.println(s);
+        System.out.println("----- siteSpecificSpecies");
+        for(SpeciesBean s : siteSpecificSpecies)
+            System.out.println(s);
+        System.out.println("----- eunisSpeciesListedAnnexesDirectives");
+        for(SpeciesBean s : eunisSpeciesListedAnnexesDirectives)
+            System.out.println(s);
+        System.out.println("----- eunisSpeciesOtherMentioned");
+        for(SpeciesBean s : eunisSpeciesOtherMentioned)
+            System.out.println(s);
+        System.out.println("----- notEunisSpeciesListedAnnexesDirectives");
+        for(SpeciesBean s : notEunisSpeciesListedAnnexesDirectives)
+            System.out.println(s);
+        System.out.println("----- notEunisSpeciesOtherMentioned");
+        for(SpeciesBean s : notEunisSpeciesOtherMentioned)
+            System.out.println(s);
     }
 
     /**
@@ -583,6 +609,61 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+
+    /**
+     * Factory for SpeciesBean from SiteSpeciesPersist
+     * @param species The species object
+     * @return new SpeciesBean
+     */
+    public SpeciesBean speciesBeanFromSiteSpecies(SiteSpeciesPersist species) {
+        return new SpeciesBean(species.getSpeciesScientificName(), species.getSpeciesCommonName(), species.getSpeciesCommonName(), species, species.getNatura2000Code());
+    }
+
+    /**
+     * Factory for SpeciesBean from SitesSpeciesReportAttributesPersist
+     * @param species The species object
+     * @return new SpeciesBean
+     */
+    public SpeciesBean speciesBeanFromSitesSpeciesReportAttributes(SitesSpeciesReportAttributesPersist species) {
+        return new SpeciesBean(species.getSpeciesScientificName(), species.getSpeciesCommonName(), species.getSpeciesCommonName(), species, species.getNatura2000Code());
+    }
+
+    public SpeciesBean speciesBeanFromSitesAttributes(Chm62edtSitesAttributesPersist species, int type) {
+        String scientificName = null;
+        String group = null;
+
+        if (type == SpeciesBean.TYPE_SITE_SPECIFIC) {
+            scientificName = species.getValue();
+            group = "";
+        } else if (type == SpeciesBean.TYPE_NOT_EUNIS_LISTED) {
+            scientificName = (species.getName() == null ? "" : species.getName().substring(species.getName().lastIndexOf("_") + 1));
+            String groupName = species.getSourceTable();
+            groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("amprep") ? "Amphibians"
+                    : (groupName.equalsIgnoreCase("bird") ? "Birds"
+                    : (groupName.equalsIgnoreCase("fishes") ? "Fishes"
+                    : (groupName.equalsIgnoreCase("invert") ? "Invertebrates"
+                    : (groupName.equalsIgnoreCase("mammal") ? "Mammals"
+                    : (groupName.equalsIgnoreCase("plant") ? "Flowering Plants" : "")))))));
+            group = groupName;
+        } else if (type == SpeciesBean.TYPE_NOT_EUNIS_OTHER) {
+            scientificName = (species.getName() == null ? "" : species.getName().substring(species.getName().lastIndexOf("_") + 1));
+            Chm62edtSitesAttributesPersist attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + species.getName());
+            String groupName = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";
+            groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("P") ? "Plants"
+                    : (groupName.equalsIgnoreCase("A") ? "Amphibians"
+                    : (groupName.equalsIgnoreCase("F") ? "Fishes"
+                    : (groupName.equalsIgnoreCase("I") ? "Invertebrates"
+                    : (groupName.equalsIgnoreCase("M") ? "Mammals"
+                    : (groupName.equalsIgnoreCase("B") ? "Birds"
+                    : (groupName.equalsIgnoreCase("F") ? "Flowering"
+                    : (groupName.equalsIgnoreCase("R") ? "Reptiles" : "")))))))));
+            group = groupName;
+        }
+
+        return new SpeciesBean(scientificName, null, group, species, null);
+    }
+
+
     /**
      * Unify the species for easy display
      */
@@ -591,54 +672,18 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         private String commonName;
         private String group;
         private Object source;
+        private String natura2000Code;
 
         public static final int TYPE_SITE_SPECIFIC = 1;     // siteSpecificSpecies
         public static final int TYPE_NOT_EUNIS_LISTED = 2;  // notEunisSpeciesListedAnnexesDirectives
         public static final int TYPE_NOT_EUNIS_OTHER = 3;   // notEunisSpeciesOtherMentioned
 
-        public SpeciesBean(SiteSpeciesPersist species) {
-            this.source = species;
-            this.scientificName = species.getSpeciesScientificName();
-            this.group = species.getSpeciesCommonName();
-            this.commonName = species.getSpeciesCommonName();
-        }
-
-        public SpeciesBean(Chm62edtSitesAttributesPersist species, int type) {
-            this.source = species;
-            if (type == TYPE_SITE_SPECIFIC) {
-                this.scientificName = species.getValue();
-                this.group = "";
-            } else if (type == TYPE_NOT_EUNIS_LISTED) {
-                this.scientificName = (species.getName() == null ? "" : species.getName().substring(species.getName().lastIndexOf("_") + 1));
-                String groupName = species.getSourceTable();
-                groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("amprep") ? "Amphibians"
-                        : (groupName.equalsIgnoreCase("bird") ? "Birds"
-                        : (groupName.equalsIgnoreCase("fishes") ? "Fishes"
-                        : (groupName.equalsIgnoreCase("invert") ? "Invertebrates"
-                        : (groupName.equalsIgnoreCase("mammal") ? "Mammals"
-                        : (groupName.equalsIgnoreCase("plant") ? "Flowering Plants" : "")))))));
-                this.group = groupName;
-            } else if (type == TYPE_NOT_EUNIS_OTHER) {
-                this.scientificName = (species.getName() == null ? "" : species.getName().substring(species.getName().lastIndexOf("_") + 1));
-                Chm62edtSitesAttributesPersist attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + species.getName());
-                String groupName = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";
-                groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("P") ? "Plants"
-                        : (groupName.equalsIgnoreCase("A") ? "Amphibians"
-                        : (groupName.equalsIgnoreCase("F") ? "Fishes"
-                        : (groupName.equalsIgnoreCase("I") ? "Invertebrates"
-                        : (groupName.equalsIgnoreCase("M") ? "Mammals"
-                        : (groupName.equalsIgnoreCase("B") ? "Birds"
-                        : (groupName.equalsIgnoreCase("F") ? "Flowering"
-                        : (groupName.equalsIgnoreCase("R") ? "Reptiles" : "")))))))));
-                this.group = groupName;
-            }
-        }
-
-        public SpeciesBean(SitesSpeciesReportAttributesPersist species) {
-            this.source = species;
-            this.scientificName = species.getSpeciesScientificName();
-//            this.commonName = species.getSpeciesCommonName();
-            this.group = species.getSpeciesCommonName();
+        public SpeciesBean(String scientificName, String commonName, String group, Object source, String natura2000Code) {
+            this.scientificName = scientificName;
+            this.commonName = commonName;
+            this.group = group;
+            this.source = source;
+            this.natura2000Code = natura2000Code;
         }
 
         public String getScientificName() {
@@ -655,6 +700,21 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
         public String getCommonName() {
             return commonName;
+        }
+
+        public String getNatura2000Code() {
+            return natura2000Code;
+        }
+
+        @Override
+        public String toString() {
+            return "SpeciesBean{" +
+                    "scientificName='" + scientificName + '\'' +
+                    ", commonName='" + commonName + '\'' +
+                    ", natura2000Code='" + natura2000Code + '\'' +
+                    ", group='" + group + '\'' +
+                    ", source=" + source +
+                    '}';
         }
     }
 

@@ -82,6 +82,8 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
     // Additional field for species factsheet
     private String bookAuthorDate = null;
 
+    private String natura2000Code = null;
+
     public int getReference() {
         if (reference == null) {
             return -1;
@@ -338,5 +340,13 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
 
     public void setBookAuthorDate(String bookAuthorDate) {
         this.bookAuthorDate = bookAuthorDate;
+    }
+
+    public String getNatura2000Code() {
+        return natura2000Code;
+    }
+
+    public void setNatura2000Code(String natura2000Code) {
+        this.natura2000Code = natura2000Code;
     }
 }

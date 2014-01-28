@@ -49,10 +49,11 @@ public class SiteSpeciesDomain extends AbstractDomain {
 //    reportAttributes.addJoinColumn(new StringJoinColumn("VALUE", "setReportValue"));
 //    this.addJoinTable(reportAttributes);
 
-    JoinTable species = new JoinTable("CHM62EDT_SPECIES", "ID_NATURE_OBJECT_LINK", "ID_NATURE_OBJECT");
+    JoinTable species = new JoinTable("CHM62EDT_SPECIES S", "ID_NATURE_OBJECT_LINK", "ID_NATURE_OBJECT");
     species.addJoinColumn(new StringJoinColumn("SCIENTIFIC_NAME", "setSpeciesScientificName"));
     species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES", "setIdSpecies"));
     species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES_LINK", "setIdSpeciesLink"));
+    species.addJoinColumn(new StringJoinColumn("CODE_2000", "setNatura2000Code"));
 
     JoinTable group = new JoinTable("CHM62EDT_GROUP_SPECIES", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
     group.addJoinColumn(new StringJoinColumn("COMMON_NAME", "setSpeciesCommonName"));

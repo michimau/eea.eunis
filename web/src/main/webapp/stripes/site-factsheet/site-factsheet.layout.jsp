@@ -129,8 +129,8 @@
 <!-- TODO the old template added "Upload pictures" menu item to the left menu for logged in users -->
 
                 <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) ?-->
-                <!-- <h1>Site: ${actionBean.siteName}</h1> -->
-                <h1>Site: ${actionBean.siteName}</h1>
+
+                <h1>${actionBean.siteName}</h1>
 				<%-- Site map --%>
                 <stripes:layout-render name="/stripes/site-factsheet/site-map.jsp"/>
 

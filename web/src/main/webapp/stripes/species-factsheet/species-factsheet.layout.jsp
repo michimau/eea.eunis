@@ -46,7 +46,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 <%-- Species breadcrumb --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>
 
-                <h1>Species: <c:if test="${not empty actionBean.englishName}">${actionBean.englishName} -</c:if> <span class="italics">${actionBean.scientificName}</span> ${actionBean.author}
+                <h1><c:if test="${not empty actionBean.englishName}">${actionBean.englishName} -</c:if> <span class="italics">${actionBean.scientificName}</span> ${actionBean.author}
                     <c:if test="${actionBean.seniorSpecies != null}">
                         <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
                     </c:if>

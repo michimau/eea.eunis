@@ -59,7 +59,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 
                 <div>
                 <%--Accordion for the other data--%>
-                <div class="eea-accordion-panels non-exclusive">
+                <div class="eea-accordion-panels non-exclusive collapsed-by-default">
 
                     <%-- Areas where this species has been reported --%>
                     <div class="eea-accordion-panel" style="clear: both;">

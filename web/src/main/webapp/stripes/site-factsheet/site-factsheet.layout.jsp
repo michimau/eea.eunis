@@ -140,7 +140,7 @@
                 <%-- Accordion --%>
                 <br/>
                 <div>
-                    <div class="eea-accordion-panels non-exclusive">
+                    <div class="eea-accordion-panels non-exclusive collapsed-by-default">
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Species</h2>
                             <div class="pane">

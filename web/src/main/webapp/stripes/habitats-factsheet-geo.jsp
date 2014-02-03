@@ -13,15 +13,15 @@
 			var initExtent =  new esri.geometry.Extent({"xmin":-3222779.52198856,"ymin": 2736409.05279762,"xmax":7105006.15070147,"ymax": 11615622.1895779,"spatialReference":{"wkid":3857}})
 
 			map = new esri.Map("map",{extent:initExtent});
-		    map.addLayer(new esri.virtualearth.VETiledLayer({
-		          bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+			map.addLayer(new esri.virtualearth.VETiledLayer({
+		          bingMapsKey: 'AngrFRWkKXOKP4DuIx_T3wGWalupu63oFfJcDJHqa5_QA34tELFodeuc97CMw5us',
 		          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD}));
 
 			n2000layer = new esri.layers.GraphicsLayer();
 
 			filterNatura2000('${actionBean.factsheet.code2000}');
 
-		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer");
 
 		    bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
             bio_regions_layer.opacity = 0.5;
@@ -63,7 +63,6 @@
 		    queryTask.execute(query, showResults);
 
 		    // range layer
-
 		    queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/1");
 		    queryTask.execute(query, showResults);
 		}
@@ -167,7 +166,7 @@
 
 		function filterNatura2000(habitatcode){
 	        //build query task
-	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/12");
+	        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/12");
 
 	        //build query filter
 	        var query = new esri.tasks.Query();
@@ -195,7 +194,7 @@
 	            ArrayhabitatsCode.push(habitatcodes[i].attributes.SITECODE);
 	        }
 	        //build query task
-	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/0");
+	        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/0");
 
 	        //build query filter
 	        var query = new esri.tasks.Query();

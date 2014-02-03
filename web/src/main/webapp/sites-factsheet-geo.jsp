@@ -54,14 +54,14 @@
             var clc2006Layer;
 
             //URL for Natura 2000 REST service in use
-            function getSitesMapServiceNatura2000() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer'; }
+            function getSitesMapServiceNatura2000() { return 'http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer'; }
 
             function init() {
               map = new esri.Map("map", {logo:false, slider: true, nav: true});
 
               //Creates a BING Maps object layer to add to the map
               veTileLayer = new esri.virtualearth.VETiledLayer({
-                bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+                bingMapsKey: 'AngrFRWkKXOKP4DuIx_T3wGWalupu63oFfJcDJHqa5_QA34tELFodeuc97CMw5us',
                 mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD
               });
 
@@ -79,7 +79,7 @@
               natura2000Layer.setDefinitionExpression("SITECODE='" + sitecode + "'");
 
               // Prepare CLC2006 layer
-              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer", {opacity:0.4});
+              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer", {opacity:0.4});
 
               // Loads Natura 2000 layer.
               map.addLayer(natura2000Layer);

@@ -81,13 +81,13 @@
                 map = new esri.Map("map",{extent:initExtent});
 
 			    veTileLayer = new esri.virtualearth.VETiledLayer({
-			    bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+			    bingMapsKey: 'AngrFRWkKXOKP4DuIx_T3wGWalupu63oFfJcDJHqa5_QA34tELFodeuc97CMw5us',
 			    mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD});
 			    map.addLayer(veTileLayer);
 
 			    n2000layer = new esri.layers.GraphicsLayer();
 
-                cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+                cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer");
 
                 bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
                 bio_regions_layer.opacity = 0.5;
@@ -135,7 +135,7 @@
             var objIDs;
 		    function filterNatura2000(specie){
 		        //build query task
-                var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/9");
+                var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/9");
 
                 //build query filter
                 var query = new esri.tasks.Query();
@@ -147,7 +147,7 @@
                 dojo.connect(queryTask, "onComplete", function(featureSet) {
                     dojo.forEach(featureSet.features,function(feature){
 
-                        var speciesTable = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/9");
+                        var speciesTable = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/9");
 
                         var relatedQuery = new esri.tasks.RelationshipQuery();
                         relatedQuery.outFields = ["OBJECTID"];
@@ -192,7 +192,7 @@
 		    	    new dojo.Color([255,0,0,0.75]));
 
 		    function addGraphics(objIDs){
-		        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/11");
+		        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/11");
 
 		        var relatedQuery = new esri.tasks.RelationshipQuery();
 		        relatedQuery.outFields = ["SITECODE", "SITENAME"];

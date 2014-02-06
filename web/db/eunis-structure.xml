@@ -2022,4 +2022,36 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         </rollback>
     </changeSet>
 
+    <changeSet author="roug" id="rev-128">
+        <comment>Expand the code and name for new activity codes</comment>
+        <modifyDataType tableName="chm62edt_natura2000_activity_code" columnName="ID_ACTIVITY_CODE" newDataType="VARCHAR(9) NOT NULL"/>
+        <modifyDataType tableName="chm62edt_natura2000_activity_code" columnName="NAME" newDataType="VARCHAR(128)"/>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-129" context="seedcontent">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+    SELECT COUNT(*) FROM chm62edt_natura2000_activity_code WHERE ID_ACTIVITY_CODE LIKE "1%"
+      ]]></sqlCheck>
+        </preConditions>
+        <comment>Load the old NATURA2000 activities</comment>
+        <loadData quotchar='"' separator="," file="db/activities-old.csv" tableName="chm62edt_natura2000_activity_code">
+            <column name="ID_ACTIVITY_CODE"/>
+            <column name="NAME"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-130" context="seedcontent">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+    SELECT COUNT(*) FROM chm62edt_natura2000_activity_code WHERE ID_ACTIVITY_CODE LIKE "A04%"
+      ]]></sqlCheck>
+        </preConditions>
+        <comment>Load the new NATURA2000 activities</comment>
+        <loadData quotchar='"' separator="," file="db/activities.csv" tableName="chm62edt_natura2000_activity_code">
+            <column name="ID_ACTIVITY_CODE"/>
+            <column name="NAME"/>
+        </loadData>
+    </changeSet>
+
 </databaseChangeLog>

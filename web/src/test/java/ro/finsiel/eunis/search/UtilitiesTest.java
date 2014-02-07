@@ -133,4 +133,15 @@ public class UtilitiesTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    public void removeQuotes() {
+        String result = Utilities.removeQuotes("Don't do it");
+        assertEquals("Don t do it", result);
+
+        result = Utilities.removeQuotes("A´B`C‘D\"E'F\u0027G H");
+        assertEquals("A B C D E F G H", result);
+
+        result = Utilities.removeQuotes("A´B`C‘D\"E'F\u0027G H'I","=");
+        assertEquals("A=B=C=D=E=F=G H=I", result);
+    }
 }

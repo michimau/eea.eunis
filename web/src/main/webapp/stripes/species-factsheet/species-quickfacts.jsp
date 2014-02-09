@@ -59,6 +59,21 @@
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}  <span class="bold">${ actionBean.speciesSitesCount }</span>
                             <a href="${ actionBean.pageUrl }#protected" onclick="if($('#protected ~ h2').attr('class').indexOf('current')==-1) $('#protected ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.</p>
 
+                        <c:if test="${not empty actionBean.habitats}">
+                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in ')}
+                            <span class="bold">
+                                <%--todo: add a comma separator--%>
+                                <c:forEach items="${actionBean.habitats}" var="habitat">
+                                    ${habitat}
+                                </c:forEach>
+                            </span> ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}</p>
+                        </c:if>
+
+                        <c:if test="${actionBean.invasiveNobanis}">
+                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by ')}
+                            <span class="bold">Nobanis</span></p>
+                        </c:if>
+
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}

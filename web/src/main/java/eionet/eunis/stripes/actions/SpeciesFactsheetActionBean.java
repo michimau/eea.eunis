@@ -1328,5 +1328,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public void setSpeciesTitle(String speciesTitle) {
         this.speciesTitle = speciesTitle;
     }
+
+    /**
+     * Is it reported as invasive by NOBANIS?
+     * todo: implement http://taskman.eionet.europa.eu/issues/17886
+     * @return
+     */
+    public boolean isInvasiveNobanis(){
+        return false;
+    }
+
+    /**
+     * Lists the habitats for the species
+     * todo: implement http://taskman.eionet.europa.eu/issues/17887
+     * @return
+     */
+    public List<String> getHabitats(){
+        return null;
+    }
 }
 

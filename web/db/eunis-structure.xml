@@ -8,7 +8,6 @@
       Potentially with -Dliquibase.dropFirst=true
       To roll back do: -Dliquibase.rollbackCount=2 liquibase:rollback
 
-     $Id$
  -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -18,6 +17,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
     <property name="id_habitat.type" value="int(16)"/>
     <property name="id_nature_object.type" value="int(11)"/>
     <property name="id_dc.type" value="int(11)"/>
+    <property name="text" value=" text" dbms="mysql"/>
 
     <changeSet author="roug" id="rev-1">
         <sql>CREATE TABLE chm62edt_abundance (
@@ -2052,6 +2052,12 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
             <column name="ID_ACTIVITY_CODE"/>
             <column name="NAME"/>
         </loadData>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-131">
+        <comment>Expand the TITLE to fit new annex titles</comment>
+        <!-- Note: If we just set the new data type to "text", then liquibase substitutes 'LONGTEXT' -->
+        <modifyDataType tableName="dc_index" columnName="TITLE" newDataType="text COMMENT 'Document title'"/>
     </changeSet>
 
 </databaseChangeLog>

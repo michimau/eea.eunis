@@ -27,79 +27,24 @@ WebContentManagement cm = SessionManager.getWebContent();
             <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth table-inline">
                 <thead>
                 <tr>
-                    <th scope="col"><%=cm.cmsPhrase("Natura 2000 code")%></th>
+                    <th scope="col"><%=cm.cmsPhrase("Natura 2000")%></th>
                     <th scope="col"><%=cm.cmsPhrase("Species scientific name")%></th>
+                    <th scope="col"><%=cm.cmsPhrase("Common name")%></th>
                     <th scope="col"><%=cm.cmsPhrase("Species group")%></th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${actionBean.siteSpecies}" var="specie">
+                <c:forEach items="${actionBean.allSiteSpecies}" var="specie">
                     <tr>
                         <td>${specie.natura2000Code}</td>
                         <td>
-                            <a class="link-plain" href="species/${specie.source.idSpecies}">${specie.scientificName}</a>
+                            <c:choose>
+                                <c:when test="${not empty specie.url}"><a class="link-plain" href="${specie.url}">${specie.scientificName}</a></c:when>
+                                <c:otherwise>${specie.scientificName}</c:otherwise>
+                            </c:choose>
                         </td>
+                        <td>${specie.commonName}</td>
                         <td align="center">
-                                ${specie.group}
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:forEach items="${actionBean.siteSpecificSpecies}" var="specie">
-                    <tr>
-                        <td>${specie.natura2000Code}</td>
-                        <td>
-                            <a href="http://www.google.com/search?q=${specie.scientificName}">
-                                    ${specie.scientificName}
-                            </a>
-                        </td>
-                        <td></td>
-                    </tr>
-                </c:forEach>
-                <c:forEach items="${actionBean.eunisSpeciesListedAnnexesDirectives}" var="specie">
-                    <tr>
-                        <td>${specie.natura2000Code}</td>
-                        <td>
-                            <a class="link-plain"
-                               href="species/${specie.source.idSpecies}">${specie.scientificName}
-                            </a>
-                        </td>
-                        <td>
-                                ${specie.group}
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:forEach items="${actionBean.notEunisSpeciesListedAnnexesDirectives}" var="specie">
-                    <tr>
-                        <td>${specie.natura2000Code}</td>
-                        <td>
-                                ${specie.scientificName}
-                        </td>
-                        <td align="center">
-                                ${specie.group}
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}" var="specie">
-                    <tr>
-                        <td>${specie.natura2000Code}</td>
-                        <td>
-                            <a class="link-plain" href="species/${specie.source.idSpecies}">
-                                ${specie.scientificName}
-                            </a>
-                        </td>
-                        <td>
-                                ${specie.group}
-                        </td>
-                    </tr>
-                </c:forEach>
-
-                <c:forEach items="${actionBean.notEunisSpeciesOtherMentioned}" var="specie">
-                    <tr>
-                        <td>${specie.natura2000Code}</td>
-                        <td>
-                                ${specie.scientificName}
-                        </td>
-                        <td>
                                 ${specie.group}
                         </td>
                     </tr>
@@ -120,87 +65,24 @@ WebContentManagement cm = SessionManager.getWebContent();
 	<c:when test="${actionBean.totalSpeciesCount>0}">
 		<div class="paginate">
 
-            <c:forEach items="${actionBean.siteSpecies}" var="specie">
+            <c:forEach items="${actionBean.allSiteSpecies}" var="specie">
                 <div class="photoAlbumEntry">
                     <a href="javascript:void(0);">
 		                <span class="photoAlbumEntryWrapper">
-		                    <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
+		                    <c:choose>
+		                        <c:when test="${specie.speciesType == 1 || specie.speciesType == 3 || specie.speciesType == 4}">
+		                            <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="images/sites/${specie.source.idSite}/thumbnail.jpg"/>
+                                </c:otherwise>
+                            </c:choose>
 		                </span>
 		                <span class="photoAlbumEntryTitle">
-		                    ${specie.scientificName}
+		                    ${specie.commonName}
 		                	<br/>
-		                	${specie.commonName}
+		                	<span class="italics">${specie.scientificName} </span>
 		                </span>
-                    </a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${actionBean.siteSpecificSpecies}" var="specie">
-                <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
-		                <span class="photoAlbumEntryWrapper">
-		                    <img src="images/sites/${specie.source.idSite}/thumbnail.jpg"/>
-		                </span>
-		                <span class="photoAlbumEntryTitle">
-		                	${specie.scientificName}
-		                	<br/>
-		                	${specie.commonName}
-		                </span>
-                    </a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${actionBean.eunisSpeciesListedAnnexesDirectives}" var="specie">
-                <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
-		                <span class="photoAlbumEntryWrapper">
-		                    <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
-		                </span>
-		                <span class="photoAlbumEntryTitle">
-		                    ${specie.scientificName}
-		                	<br/>
-		                	${specie.commonName}
-		                </span>
-                    </a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${actionBean.notEunisSpeciesListedAnnexesDirectives}" var="specie">
-                <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
-			                <span class="photoAlbumEntryWrapper">
-			                    <img src="images/sites/${specie.source.idSite}/thumbnail.jpg"/>
-			                </span>
-			                <span class="photoAlbumEntryTitle">
-			                	${specie.scientificName}
-			                	<br/>
-			                	${specie.group}
-			                </span>
-                    </a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${actionBean.eunisSpeciesOtherMentioned}" var="specie">
-                <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
-			                <span class="photoAlbumEntryWrapper">
-			                    <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
-			                </span>
-			                <span class="photoAlbumEntryTitle">
-			                	${specie.commonName}
-			                	<br/>
-			                	${specie.scientificName}
-			                </span>
-                    </a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${actionBean.notEunisSpeciesOtherMentioned}" var="specie">
-                <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
-				                <span class="photoAlbumEntryWrapper">
-				                    <img src="images/sites/${specie.source.idSite}/thumbnail.jpg"/>
-				                </span>
-				                <span class="photoAlbumEntryTitle">
-				                	${specie.scientificName}
-				                	<br/>
-				                	 ${specie.group}
-				                </span>
                     </a>
                 </div>
             </c:forEach>

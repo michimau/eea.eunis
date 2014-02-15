@@ -60,7 +60,9 @@
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It is in the')} <span class="bold">
                 <c:choose>
                 <c:when test="${not empty actionBean.biogeographicRegion}">
-                    ${ (actionBean.biogeographicRegion) }
+                    <c:forEach items="${actionBean.biogeographicRegion}" var="bioregion" varStatus="loopStatus">
+                        ${ bioregion }<c:if test="${!loopStatus.last}">, </c:if>
+                    </c:forEach>
                  </c:when>
                  <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                 </c:choose>

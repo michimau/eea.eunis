@@ -74,7 +74,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     private String surfaceAreaKm2;
 
-    private String biogeographicRegion;
+    private List<String> biogeographicRegion = new ArrayList<String>();
     private Map<String, Object> bioRegionsMap;
 
     private int protectedSpeciesCount;
@@ -361,47 +361,47 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
                 if (alpine) {
                     bioRegionsMap.put("alpine", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("alpine");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("alpine"));
                 }
                 if (anatol) {
                     bioRegionsMap.put("anatol", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("anatol");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("anatol"));
                 }
                 if (arctic) {
                     bioRegionsMap.put("arctic", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("arctic");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("arctic"));
                 }
                 if (atlantic) {
                     bioRegionsMap.put("atlantic", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("atlantic");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("atlantic"));
                 }
                 if (boreal) {
                     bioRegionsMap.put("boreal", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("boreal");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("boreal"));
                 }
                 if (continent) {
                     bioRegionsMap.put("continent", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("continent");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("continent"));
                 }
                 if (macarones) {
                     bioRegionsMap.put("macarones", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("macarones");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("macarones"));
                 }
                 if (mediterranean) {
                     bioRegionsMap.put("mediterranean", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("mediterranean");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("mediterranean"));
                 }
                 if (pannonic) {
                     bioRegionsMap.put("pannonic", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("pannonic");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("pannonic"));
                 }
                 if (pontic) {
                     bioRegionsMap.put("pontic", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("pontic");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("pontic"));
                 }
                 if (steppic) {
                     bioRegionsMap.put("steppic", "");
-                    biogeographicRegion = biogeographicRegionTitles.get("steppic");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("steppic"));
                 }
             }
         }
@@ -492,11 +492,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         this.surfaceAreaKm2 = surfaceAreaKm2;
     }
 
-    public String getBiogeographicRegion() {
+    public List<String> getBiogeographicRegion() {
         return biogeographicRegion;
     }
 
-    public void setBiogeographicRegion(String biogeographicRegion) {
+    public void setBiogeographicRegion(List<String> biogeographicRegion) {
         this.biogeographicRegion = biogeographicRegion;
     }
 

@@ -62,10 +62,14 @@
                         <c:if test="${not empty actionBean.habitats}">
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in ')}
                             <span class="bold">
-                                <%--todo: add a comma separator--%>
-                                <c:forEach items="${actionBean.habitats}" var="habitat">
-                                    ${habitat}
-                                </c:forEach>
+                                <c:choose>
+                                    <c:when test="${not empty actionBean.habitats}">
+                                    <c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loopStatus">
+                                        ${habitat}<c:if test="${!loopStatus.last}">, </c:if>
+                                    </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>Not avaliable</c:otherwise>
+                                </c:choose>
                             </span> ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}</p>
                         </c:if>
 

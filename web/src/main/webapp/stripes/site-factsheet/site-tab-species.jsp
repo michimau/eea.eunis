@@ -9,7 +9,7 @@
 <%
 WebContentManagement cm = SessionManager.getWebContent();
 %>
-<div class="right-area">
+<div class="right-area" style="width:600px">
 	<div class="species-change-view">
 		<div onclick="changeSpeciesView(0);" class="species-list">
 			<i class="eea-icon eea-icon-align-justify"></i><br/>List
@@ -23,7 +23,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 	<div id="sites-species-list" style="display: none;">
 	<c:choose>
         <c:when test="${actionBean.totalSpeciesCount>0}">
-            <c:if test="${actionBean.totalSpeciesCount>24}"><div class="scroll-auto" style="height: 700px; width: 100%; clear: both;"></c:if>
+            <c:if test="${actionBean.totalSpeciesCount>18}"><div class="scroll-auto" style="height: 567px; width: 100%; clear: both;"></c:if>
             <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth table-inline">
                 <thead>
                 <tr>
@@ -96,10 +96,11 @@ WebContentManagement cm = SessionManager.getWebContent();
 	</div>
 </div>
 	
-<div class="right-area">
+<div class="right-area" style="width:300px">
+    <div style="width: 100%">
     <h3>Species summary</h3>
     Nature directives' species in this site (${actionBean.totalSpeciesCount})
-		<table class="listing table-inline">
+		<table class="listing table-inline" width="100%">
             <thead>
             <tr>
                 <th scope="col"><%=cm.cmsPhrase("Species group")%></th>
@@ -113,5 +114,6 @@ WebContentManagement cm = SessionManager.getWebContent();
                 </tr>
             </c:forEach>
 		</table>
+    </div>
 </div>
 </stripes:layout-definition>

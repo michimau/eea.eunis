@@ -548,7 +548,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      * @return new SpeciesBean
      */
     public SpeciesBean speciesBeanFromSiteSpecies(SiteSpeciesPersist species, SpeciesBean.SpeciesType speciesType) {
-    // todo check if id nature object is correct
+        // there are no such species in the database
         String url = "species/" + species.getIdSpecies();
         return new SpeciesBean(speciesType, species.getSpeciesScientificName(), species.getSpeciesCommonName(), species.getSpeciesCommonName(), species, species.getNatura2000Code(), url, species.getIdNatureObjectLink());
     }

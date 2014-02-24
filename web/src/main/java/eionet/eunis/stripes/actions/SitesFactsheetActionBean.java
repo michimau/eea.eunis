@@ -169,6 +169,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         }
 
         calculateSpeciesStatistics();
+
+        Collections.sort(allSiteSpecies);
     }
 
     /**
@@ -603,7 +605,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Unify the species for easy display
      */
-    public static class SpeciesBean {
+    public static class SpeciesBean implements Comparable<SpeciesBean>{
         private String scientificName;
         private String commonName;
         private String group;
@@ -685,6 +687,29 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                     ", group='" + group + '\'' +
                     ", source=" + source +
                     '}';
+        }
+
+        /**
+         * Comparator to order by group and scientific name
+         * @param o
+         * @return
+         */
+        @Override
+        public int compareTo(SpeciesBean o) {
+            String thisGroup = this.getGroup();
+            String otherGroup = o.getGroup();
+            String thisName = this.getScientificName();
+            String otherName = o.getScientificName();
+            if(thisGroup == null) thisGroup = "";
+            if(otherGroup == null) otherGroup = "";
+            if(thisName == null) thisName = "";
+            if(otherName == null) otherName = "";
+
+            if(otherGroup.equals(thisGroup)) {
+                return thisName.compareTo(otherName);
+            } else {
+                return thisGroup.compareTo(otherGroup);
+            }
         }
     }
 

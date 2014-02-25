@@ -67,7 +67,11 @@
                  <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                 </c:choose>
               </span>
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical region')}</p>
+              <c:choose>
+                <c:when test="${actionBean.biogeographicRegionsCount > 1}">${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical regions')}</c:when>
+                <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical region')}</c:otherwise>
+              </c:choose>
+            </p>
 
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN management category')}
             <span class="bold">

@@ -454,6 +454,13 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         this.biogeographicRegion = biogeographicRegion;
     }
 
+    public int getBiogeographicRegionsCount() {
+        if(biogeographicRegion != null)
+            return biogeographicRegion.size();
+        else
+            return 0;
+    }
+
     public int getProtectedSpeciesCount() {
         return protectedSpeciesCount;
     }
@@ -691,7 +698,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
         /**
          * Comparator to order by group and scientific name
-         * @param o
+         * @param o Object to compare
          * @return
          */
         @Override

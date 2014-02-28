@@ -162,11 +162,14 @@
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Interactive map</h2>
                             <div class="pane" id="sitesMapPane">
-                                <iframe id="interactive-map-iframe" height="500" width="950" src=""></iframe>
+                                <iframe id="interactive-map-iframe" height="600" width="100%" src=""></iframe>
+                                <p>
+                                    <a class="standardButton" target="_blank" href="http://discomap.eea.europa.eu/map/EEAGalleryBasicViewer/?appid=341d4e5b87a044f89cd3544f4d93a295&group=accf98b78d894ecba22dc13e6bd88ae4">Full screen mode</a>
+                                </p>
                             </div>
+
                             <script>
-                                // todo: the link is incorrect, as it's the same as the map in quickfacts; check #14803
-                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SiteCode=${ (actionBean.idsite) }");
+                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://discomap.eea.europa.eu/map/EEAGalleryBasicViewer/?appid=341d4e5b87a044f89cd3544f4d93a295&group=accf98b78d894ecba22dc13e6bd88ae4&embed=true");
                             </script>
                         </div>
                     </div>

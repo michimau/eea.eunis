@@ -60,9 +60,6 @@
         <a href="<%=domain%>/index.jsp" accesskey="1" title="<%=cm.cmsPhrase("Home page")%>"><%=cm.cmsPhrase("EUNIS")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/login.jsp" accesskey="l" title="<%=cm.cmsPhrase("User login")%>"><%=cm.cmsPhrase("EUNIS Login")%></a>
-      </td>
-      <td style="padding-left : 5px;">
         <a href="<%=domain%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </td>
       <td style="padding-left : 5px;">

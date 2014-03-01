@@ -173,20 +173,7 @@
                     </div>
                         <!--END content -->
                 </div>
-                <c:choose>
-                    <c:when test="${empty hideMenu}">
-                        <!-- start of right column -->
-                        <div id="portal-column-two" class="right-column-area">
-                            <div class="portletWrapper">
-                                <jsp:include page="/stripes/common/sitemap.jsp">
-                                    <jsp:param name="page_name" value="${bookmarkPageName}" />
-                                </jsp:include>
-                                <stripes:layout-component name="sitemap"/>
-                            </div>
-                        </div>
-                        <!-- end of the right (by default at least) column -->
-                    </c:when>
-                </c:choose>
+
                 <div class="visualClear"><!-- --></div>
 
                     <!-- - TODO Check if we can replace foot by bottom menu  -->

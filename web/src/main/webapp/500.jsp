@@ -34,7 +34,6 @@
         <br />
         <br />
         <%=cm.cmsText("generic_404_01")%>
-        <a title="<%=cm.cmsPhrase("Send feedback")%>" href="feedback.jsp"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.
         <br />
         <br />
         <%=cm.cmsPhrase("We appologize for the inconvenience.<br />The EUNIS team.")%>

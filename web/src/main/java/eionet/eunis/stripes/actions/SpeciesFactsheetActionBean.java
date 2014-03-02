@@ -165,6 +165,27 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectViewDTO> subSpeciesSitesTable;
     private String scientificNameUrlEncoded;
 
+    /**
+     * Map for default picture (if there is no other picture in the DB)
+     */
+    static final Map<String, String> defaultPictures = new HashMap<String, String>();
+
+    static {
+        defaultPictures.put("Algae","005");
+        defaultPictures.put("Amphibians","003");
+        defaultPictures.put("Birds","018");
+        defaultPictures.put("Conifers","020");
+        defaultPictures.put("Ferns","007");
+        defaultPictures.put("Fishes","006");
+        defaultPictures.put("Flowering plants","009");
+        defaultPictures.put("Fungi","013");
+        defaultPictures.put("Invertebrates","001");
+        defaultPictures.put("Mammals","015");
+        defaultPictures.put("Mosses & Liverworts","010");
+        defaultPictures.put("Protists","019");
+        defaultPictures.put("Reptiles","008");
+    }
+
 
     /**
      * Default Stripes handler
@@ -303,6 +324,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
         pics = factsheet.getPictures(picturePath);
 
+        // http://taskman.eionet.europa.eu/issues/17992
+        // display abstract images if no picture available
+
+        if(pics.size() == 0) {
+            // different picture by group
+            String group = factsheet.getSpeciesGroup();
+
+            PictureDTO pic = new PictureDTO();
+            pic.setFilename("default/abstract" + defaultPictures.get(group) + ".jpg");
+            pic.setDescription("No photo available");
+            pic.setSource("Paco Sánchez Aguado");
+            pic.setSourceUrl("http://www.freenatureimages.eu/");
+            pic.setPath(picturePath);
+            pic.setLicense("CC BY-NC");
+
+            pics.add(pic);
+        }
     }
 
     /**

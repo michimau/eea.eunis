@@ -19,6 +19,7 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
+import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist;
 import ro.finsiel.eunis.search.Utilities;
@@ -74,6 +75,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /** The site's designation date */
     private String siteDesignationDateDisplayValue;
+
+    List<DesignationsSitesRelatedDesignationsPersist> sitesDesigc;
 
     private String surfaceAreaKm2;
 
@@ -140,10 +143,23 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             calculateHabitatsCount();
             prepareBiogeographicRegion();
             populateSpeciesLists();
+
+            populateDesignationArea();
         }
 
         // Forward to the factsheet layout page.
         return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
+    }
+
+    private void populateDesignationArea() {
+        sitesDesigc = new ArrayList<DesignationsSitesRelatedDesignationsPersist>();
+        int type = factsheet.getType();
+        if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD ) {
+            sitesDesigc = factsheet.findSiteRelationsNatura2000Desigc();
+        } else if(type == SiteFactsheet.TYPE_CORINE){
+            //CORINE
+            sitesDesigc = factsheet.findSiteRelationsCorine();
+        }
     }
 
     /**
@@ -218,6 +234,45 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
+    public String getSpaDate(){
+        return formatDate(factsheet.getSiteObject().getSpaDate());
+    }
+
+    public String getSacDate(){
+        return formatDate(factsheet.getSiteObject().getSacDate());
+    }
+
+    public String getProposedDate(){
+        return formatDate(factsheet.getSiteObject().getProposedDate());
+    }
+
+    public String getDesignationDate(){
+        return formatDate(factsheet.getSiteObject().getDesignationDate());
+    }
+
+    public String getUpdateDate(){
+        return formatDate(factsheet.getSiteObject().getUpdateDate());
+    }
+
+    public String getSiteType(){
+        return factsheet.getSiteObject().getSiteType();
+    }
+
+    private String formatDate(String rawDate){
+        try {
+            String sourceFormat = "yyyyMMdd";
+            String targetFormat = "d MMM yyyy";
+
+            DateFormat formatter = new SimpleDateFormat(sourceFormat);
+            Date date = formatter.parse(rawDate);
+
+            formatter = new SimpleDateFormat(targetFormat);
+            return formatter.format(date);
+        } catch (Exception ex) {
+            return rawDate;
+        }
+    }
+
     /**
      * Sets the site's designation date as displayed on the general tab.
      */
@@ -247,20 +302,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                 bld.append(desigDate);
             }
 
-            try {
-                String rawDate = bld.toString();
-                
-                String sourceFormat = "yyyyMMdd";
-                String targetFormat = "d MMM yyyy";
-                
-                DateFormat formatter = new SimpleDateFormat(sourceFormat);
-                Date date = formatter.parse(rawDate);
-                
-                formatter = new SimpleDateFormat(targetFormat);
-                this.siteDesignationDateDisplayValue = formatter.format(date);
-            } catch (Exception ex) {
-                this.siteDesignationDateDisplayValue = bld.toString();
-            }
+            this.siteDesignationDateDisplayValue = formatDate(bld.toString());
         }
     }
 
@@ -432,6 +474,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public void setFactsheet(SiteFactsheet factsheet) {
         this.factsheet = factsheet;
+    }
+
+    /**
+     * List of designations overlapping the site
+     * @return
+     */
+    public List<DesignationsSitesRelatedDesignationsPersist> getSitesDesigc() {
+        return sitesDesigc;
     }
 
     public String getSiteDesignationDateDisplayValue() {

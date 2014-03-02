@@ -1,157 +1,94 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
+    NATURA 2000 is the ecological network for the conservation of wild animals and plant
+    species and natural habitats of Community importance within the Union. It consists of
+    sites classified under the Birds Directive and the Habitats Directive (the Nature Directives).
 
-	<%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet, ro.finsiel.eunis.WebContentManagement"%>
-	<%@ page import="java.util.List"%>
-	<%@ page import="ro.finsiel.eunis.search.Utilities"%>
-	<%@ page import="ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist"%>
-	<%@ page import="java.util.Vector"%>
-	<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-	<%
-	  String siteid = request.getParameter("idsite");
-	  ro.finsiel.eunis.factsheet.sites.SiteFactsheet factsheet = new SiteFactsheet( siteid );
-	  WebContentManagement cm = SessionManager.getWebContent();
-	  int type = factsheet.getType();
-	  if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD  || type == SiteFactsheet.TYPE_CORINE )
-	  {
-	    List sitesDesigc;
-	    if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD ) {
-	      sitesDesigc = factsheet.findSiteRelationsNatura2000Desigc();
-	    } else {
-	      //CORINE
-	      sitesDesigc = factsheet.findSiteRelationsCorine();
-	    }
-	    //2nd table should be called "National and/or International Designation of Natura 2000 site"
-	    // and should display information from desigc table decoded with desig-x table.
-	    //Columns should then be desigcode, descript with a link to Site module designation fact sheet (should always exist),
-	    // category and cover.
-	    if (sitesDesigc.size() > 0 )
-	    {
-	%>
-	  <h2>
-	    <%=cm.cmsPhrase("National and/or International Designation of Natura 2000 site")%>
-	  </h2>
-	  <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing fullwidth  table-inline">
+<h3>NATURA 2000 site under</h3>
+<table style="width: 600px">
+    <tr><td style="width: 400px">Birds Directive <span class="discreet">2009/147/EC</span>     (SPA)</td>
+    <td>
+        <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
+            <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Birds directive"></img>
+        </c:if>
+
+    </td>
+    </tr>
+    <tr><td>Habitats Directive <span class="discreet">92/43/EEC</span> (SCI or SAC)</td>
+    <td>
+        <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
+            <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Habitats directive"></img>
+        </c:if>
+    </td>
+    </tr>
+</table>
+<h3>NATURA 2000 site since</h3>
+<table style="width: 600px">
+    <tr><td style="width: 400px">Date classified as Special Protection Area (SPA)</td><td>${actionBean.spaDate}</td></tr>
+    <tr><td>Date proposed as Site of Community Importance (SCI)</td><td>${actionBean.proposedDate}</td></tr>
+    <tr><td>Date designated as Special Area of Conservation (SAC)</td><td>${actionBean.sacDate}</td></tr>
+    <tr><td>Date of Standard data form update</td><td>${actionBean.updateDate}</td></tr>
+</table>
+
+    <h3>
+    ${eunis:cmsPhrase(actionBean.contentManagement, 'National designations overlapping the NATURA 2000 site')}
+	  </h3>
+	  <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'sites_factsheet_designations_national')}" class="listing fullwidth  table-inline">
 	    <thead>
 	      <tr>
-	        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
-	          <%=cm.cmsPhrase("Designation code")%>
+	        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
+	          ${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name (Original)')}
 	        </th>
-	        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
-	          <%=cm.cmsPhrase("Designation name")%>
+	        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
+              ${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name (English)')}
 	        </th>
-	        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
-	          <%=cm.cmsPhrase("Category")%>
+	        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
+              ${eunis:cmsPhrase(actionBean.contentManagement, 'Category')}
 	        </th>
-	        <th style="text-align : right;" title="<%=cm.cmsPhrase("Sort results on this column")%>">
-	          <%=cm.cmsPhrase("Cover(%)")%>
+	        <th style="text-align : right;" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}">
+              ${eunis:cmsPhrase(actionBean.contentManagement, 'Cover(%)')}
 	        </th>
 	      </tr>
 	    </thead>
 	    <tbody>
-	<%
-	  for (int i = 0; i < sitesDesigc.size(); i++)
-	  {
-	    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
-	    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigc.get(i);
-	%>
-	      <tr<%=cssClass%>>
+
+        <c:forEach items="${actionBean.sitesDesigc}" var="desig">
+	      <tr>
 	        <td>
-	          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=en"><%=desig.getDescription()%></a>&nbsp;
-	          <%=cm.cmsTitle("open_designation_factsheet")%>
+	          <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.description}</a>&nbsp;
 	        </td>
 	        <td>
-	          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=en"><%=desig.getDescriptionEn()%></a>
-	          <%=cm.cmsTitle("open_designation_factsheet")%>
+	          <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.descriptionEn}</a>
 	        </td>
 	        <td>
-	          <%=Utilities.formatString(desig.getNationalCategory())%>
-	          &nbsp;
+	            <c:choose>
+                    <c:when test="${desig.nationalCategory eq 'A'}">
+                        Designation types used with the intention to protect fauna, flora, habitats and landscapes (the latter as far as relevant for fauna, flora and for habitat protection)
+                        (Code ${desig.nationalCategory})
+                    </c:when>
+                    <c:when test="${desig.nationalCategory eq 'B'}">
+                        Statutes under sectorial, particularly forestry, legislative and administrative acts providing an adequate protection relevant for fauna, flora and habitat conservation
+                        (Code ${desig.nationalCategory})
+                    </c:when>
+                    <c:when test="${desig.nationalCategory eq 'C'}">
+                        Private statute providing durable protection for fauna, flora or habitats
+                        (Code ${desig.nationalCategory})
+                    </c:when>
+                    <c:otherwise>
+                        ${desig.nationalCategory}
+                    </c:otherwise>
+	            </c:choose>
+
 	        </td>
 	        <td style="text-align : right">
-	          <%=Utilities.formatDecimal(desig.getOverlap(), 2 )%>&nbsp;
+                <fmt:formatNumber value=" ${desig.overlap}" type="number" pattern="#"/>
 	        </td>
 	      </tr>
-	<%
-	      }
-	%>
+        </c:forEach>
 	    </tbody>
 	  </table>
 	  <br />
-	<%
-	  }
-	    //Third table should be called "Relation with designated areas" and should display information
-	    // from desigr table decoded with desig-x table.
-	    //Columns should then be des_site with link to "http://eunis.eea.europa.eu/sites-names.jsp" prefilled with site name
-	    // and data sets CDDA National, European Diploma, CDDA International and Biogenetic Reserve selected,
-	    // descript with a link to Site module designation fact sheet (should always exist),
-	    // category, overlap and overlap_p.
-	    List sitesDesigr = new Vector();
-	    if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD)
-	    {
-	        sitesDesigr = factsheet.findSiteRelationsNatura2000Desigr();
-	    }
-	
-	     if (sitesDesigr.size() > 0 )
-	     {
-	%>
-	  <h2>
-	    <%=cm.cms("sites_factsheet_designations_areas")%>
-	  </h2>
-	  <table summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="listing fullwidth  table-inline">
-	    <thead>
-	      <tr>
-	        <th style="text-align: left;">
-	          <%=cm.cmsPhrase("Designated site")%>
-	        </th>
-	        <th style="text-align: left;">
-	          <%=cm.cmsPhrase("Designation name")%>
-	        </th>
-	        <th style="text-align: left;">
-	          <%=cm.cmsPhrase("category")%>
-	        </th>
-	        <th style="text-align : right;">
-	          <%=cm.cmsPhrase("Overlap(%)")%>
-	        </th>
-	        <th style="text-align : right;">
-	          <%=cm.cmsPhrase("Overlap P(%)")%>
-	        </th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	<%
-	      for (int i = 0; i < sitesDesigr.size(); i++)
-	      {
-	        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
-	        DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigr.get(i);
-	%>
-	      <tr<%=cssClass%>>
-	        <td>
-	          <a title="<%=cm.cms("search_site_by_name")%>" href="sites-names.jsp?siteNameFromFactsheet=<%=desig.getDesignatedSite()%>"><%=Utilities.formatString(desig.getDesignatedSite())%></a>&nbsp;
-	          <%=cm.cmsTitle("search_site_by_name")%>
-	        </td>
-	        <td>
-	          <%=Utilities.formatString(desig.getDescriptionEn(),"&nbsp;")%>
-	        </td>
-	        <td>
-	          <%=Utilities.formatString(desig.getNationalCategory(), "&nbsp;")%>
-	        </td>
-	        <td style="text-align : right">
-	          <%=Utilities.formatString(Utilities.formatDecimal(desig.getOverlap(), 2), "&nbsp;")%>
-	        </td>
-	        <td style="text-align : right">
-	          <%=Utilities.formatString(desig.getOverlapType(), "&nbsp;")%>
-	        </td>
-	      </tr>
-	<%
-	      }
-	%>
-	    </tbody>
-	  </table>
-	<%
-	    }
-	  }
-	%>
+
 
 </stripes:layout-definition>

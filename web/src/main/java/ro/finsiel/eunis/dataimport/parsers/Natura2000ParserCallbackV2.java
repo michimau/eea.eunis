@@ -261,6 +261,10 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementSiteInsert.setString(17, siteDesignation);
         preparedStatementSiteInsert.setString(19, values.get("sdfs.sdf.siteLocation.marineAreaPercentage"));
         preparedStatementSiteInsert.setString(20, siteType);
+        //        PROPOSED_DATE, CONFIRMED_DATE, SAC_DATE
+        preparedStatementSiteInsert.setString(21, parseDate(values.get("sdfs.sdf.siteIdentification.sciProposalDate")));
+        preparedStatementSiteInsert.setString(22, parseDate(values.get("sdfs.sdf.siteIdentification.sciConfirmationDate")));
+        preparedStatementSiteInsert.setString(23, parseDate(values.get("sdfs.sdf.siteIdentification.sacDesignationDate")));
 
         String lengthKm = values.get("sdfs.sdf.siteLocation.siteLength");
 
@@ -268,7 +272,7 @@ public class Natura2000ParserCallbackV2 {
             if(lengthKm!= null){
                 double length = Double.parseDouble(lengthKm);
                 length = length * 1000;
-                lengthKm = new Double(length).toString();
+                lengthKm = Double.toString(length);
             }
         } catch (NumberFormatException e){
             errors.add("Length " + lengthKm + " is unparseable!");
@@ -768,8 +772,9 @@ public class Natura2000ParserCallbackV2 {
                         + "COMPLEX_NAME, DISTRICT_NAME, "
                         + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, "
                         + "LONGITUDE, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
-                        + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH, MARINE_PERCENT, SITE_TYPE) VALUES "
-                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH, MARINE_PERCENT, SITE_TYPE," +
+                        "PROPOSED_DATE, CONFIRMED_DATE, SAC_DATE) VALUES " //21,22,23
+                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
         String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";

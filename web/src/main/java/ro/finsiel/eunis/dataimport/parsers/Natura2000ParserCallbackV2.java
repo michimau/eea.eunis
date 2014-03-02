@@ -259,6 +259,8 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementSiteInsert.setString(15, "NATURA2000");
         preparedStatementSiteInsert.setString(16, "80");
         preparedStatementSiteInsert.setString(17, siteDesignation);
+        preparedStatementSiteInsert.setString(19, values.get("sdfs.sdf.siteLocation.marineAreaPercentage"));
+        preparedStatementSiteInsert.setString(20, siteType);
 
         String lengthKm = values.get("sdfs.sdf.siteLocation.siteLength");
 
@@ -766,8 +768,8 @@ public class Natura2000ParserCallbackV2 {
                         + "COMPLEX_NAME, DISTRICT_NAME, "
                         + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, "
                         + "LONGITUDE, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
-                        + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH) VALUES "
-                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH, MARINE_PERCENT, SITE_TYPE) VALUES "
+                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
         String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";

@@ -84,12 +84,6 @@
 <br>
 			<c:if test="${ actionBean.typeNatura2000 }">
                 <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">Natura 2000 Standard Data Form</a></p>
-				<input onclick="displayMoreResourcesSite();" id="more-resources" class="searchButton" type="button" value="Other resources">
-				<div id="more-resources-container" class="more-resources-container" style="display: none;">
-					<p><a href="http://natura2000.eea.europa.eu" target="_BLANK">Natura 2000 map viewer</a></p>
-					<p><a href="http://www.protectedplanet.net" target="_BLANK">Protected planet map viewer</a></p>
-					<p><a href="http://www.eea.europa.eu/data-and-maps/data/natura-3" target="_BLANK">Data download</a></p>
-				</div>
             </c:if>
 		</div>
 	</div>

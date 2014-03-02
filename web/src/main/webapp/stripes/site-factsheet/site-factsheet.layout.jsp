@@ -160,6 +160,7 @@
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
+                            <a id="interactive_map" ></a>
                             <h2 class="notoc eea-icon-right-container">Interactive map</h2>
                             <div class="pane" id="sitesMapPane">
                                 <iframe id="interactive-map-iframe" height="600" width="100%" src=""></iframe>
@@ -171,6 +172,12 @@
                             <script>
                                 addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://discomap.eea.europa.eu/map/EEAGalleryBasicViewer/?appid=341d4e5b87a044f89cd3544f4d93a295&group=accf98b78d894ecba22dc13e6bd88ae4&embed=true");
                             </script>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Other resources</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/site-factsheet/site-other-resources.jsp"/>
+                            </div>
                         </div>
                     </div>
                 </div>

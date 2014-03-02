@@ -38,7 +38,7 @@ import java.util.*;
  *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@UrlBinding("/species/{idSpecies}")
+@UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /** The argument given. Can be a species number or scientific name */
@@ -214,7 +214,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             setMetaDescription(factsheet.getSpeciesDescription());
             scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
             author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
-            
+
             specie = factsheet.getSpeciesNatureObject();
 
             generalTabActions(mainIdSpecies);
@@ -232,6 +232,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // Sets data about international threat status
             setConservationStatusData();
+
+            // populates the external data
+            linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
 
             // Sets country level and biogeo conservation status
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
@@ -733,6 +736,31 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         return ids;
+    }
+
+    /**
+     * Populate the member variables used in the "linkeddata" tab.
+     *
+     * @param idSpecies
+     *            - The species ID.
+     */
+    private void linkeddataTabActions(int idSpecies, Integer natObjId) {
+        try {
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
+            LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
+            queries = fd.getQueryObjects();
+            if (!StringUtils.isBlank(query)) {
+
+                fd.executeQuery(query, idSpecies);
+                queryResultCols = fd.getCols();
+                queryResultRows = fd.getRows();
+
+                attribution = fd.getAttribution();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {

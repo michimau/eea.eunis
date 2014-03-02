@@ -104,6 +104,14 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
                 </div>
 
+                <%--Other resources--%>
+                <div class="eea-accordion-panel" style="clear: both;">
+                    <h2 class="notoc eea-icon-right-container">Other resources</h2>
+                    <div class="pane">
+                        <stripes:layout-render name="/stripes/species-factsheet/species-other-resources.jsp"/>
+                    </div>
+                </div>
+
                 </div>
                 </div>
 

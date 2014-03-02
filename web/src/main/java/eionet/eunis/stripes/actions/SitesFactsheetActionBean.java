@@ -24,6 +24,7 @@ import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPe
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
+import ro.finsiel.eunis.utilities.EmptyLastComparator;
 
 /**
  * Action bean to handle sites-factsheet functionality.
@@ -89,6 +90,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private List<SpeciesBean> allSiteSpecies;
     HashMap<String, Integer> speciesStatistics;
 
+    private String pageUrl;
+
 
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
@@ -100,6 +103,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
         // Get EEA's home page URL from servlet context.
         String eeaHomePageUrl = getContext().getInitParameter("EEA_HOME");
+        pageUrl = getContext().getInitParameter("DOMAIN_NAME") + "/sites/" + idsite;
 
         // Construct the factsheet data object for the given site.
         factsheet = new SiteFactsheet(idsite);
@@ -203,11 +207,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Accessor for species statistics list
-     * @return Sorted list of species statistics object
+     * @return Sorted list of species statistics object; the nulls or empty are <i>last</i>
      */
     public List<SpeciesStatistics> getSpeciesStatisticsSorted(){
         ArrayList<String> sortedKeys = new ArrayList<String>(speciesStatistics.keySet());
-        java.util.Collections.sort(sortedKeys);
+        java.util.Collections.sort(sortedKeys, EmptyLastComparator.getComparator());
         ArrayList<SpeciesStatistics> result = new ArrayList<SpeciesStatistics>();
         for(String key:sortedKeys)
             result.add(new SpeciesStatistics(key, speciesStatistics.get(key)));
@@ -461,6 +465,19 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             return 0;
     }
 
+    public String getBiogeographicRegionList() {
+        String s = "";
+        for(int i=0; i<biogeographicRegion.size(); i++){
+            s = s + biogeographicRegion.get(i);
+            if(i == biogeographicRegion.size() - 2)  {
+                s += " and ";
+            } else if(i<biogeographicRegion.size() - 1) {
+                s += ", ";
+            }
+        }
+        return s;
+    }
+
     public int getProtectedSpeciesCount() {
         return protectedSpeciesCount;
     }
@@ -483,6 +500,10 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public void setHabitatsCount(int habitatsCount) {
         this.habitatsCount = habitatsCount;
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
     }
 
     /**
@@ -707,17 +728,15 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             String otherGroup = o.getGroup();
             String thisName = this.getScientificName();
             String otherName = o.getScientificName();
-            if(thisGroup == null) thisGroup = "";
-            if(otherGroup == null) otherGroup = "";
-            if(thisName == null) thisName = "";
-            if(otherName == null) otherName = "";
 
             if(otherGroup.equals(thisGroup)) {
-                return thisName.compareTo(otherName);
+                return EmptyLastComparator.getComparator().compare(thisName, otherName);
             } else {
-                return thisGroup.compareTo(otherGroup);
+                return EmptyLastComparator.getComparator().compare(thisGroup, otherGroup);
             }
         }
     }
+
+
 
 }

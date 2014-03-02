@@ -166,60 +166,13 @@
                     <div class="footer">
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
-                            <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right standardButton">Other resources</a>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
                                 <span class="table-definition-target standardButton float-left">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
                                 </span>
-                                <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
-                                    <div class="table-definition-body visualClear">
-                                        <div style="margin-top:20px">
-                                            <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
-                                            <c:set var="queryId" value="${query.id}"/>
-
-                                            <div style="overflow-x:auto">
-                                                <span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>
-                                                <table style="margin-top:20px" class="datatable listing inline-block">
-                                                    <thead>
-                                                        <tr>
-                                                            <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                                                <th class="dt_sortable">
-                                                                 ${col.property}
-                                                                </th>
-                                                            </c:forEach>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
-                                                            <tr>
-                                                                <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                                                    <td>${row[col.property]}</td>
-                                                                </c:forEach>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
                             </c:if>
                         </div>
-                        <!-- Conservation status other resources overlay -->
-                        <div class="overlay" id="conservation-status-overlay">
-                            <c:forEach items="${actionBean.links}" var="link" varStatus="loop">
-                                <p>
-                                    <c:choose>
-                                        <c:when test="${!empty link.url}">
-                                            <a href="${eunis:treatURLSpecialCharacters(link.url)}">${link.name}</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${link.name}
-                                        </c:otherwise>
-                                    </c:choose>
-                                </p>
-                            </c:forEach>
-                        </div>
+
                     </div>
                 </div>
                 <!-- END species status -->

@@ -9,17 +9,26 @@
 <table style="width: 600px">
     <tr><td style="width: 400px">Birds Directive <span class="discreet">2009/147/EC</span>     (SPA)</td>
     <td>
-        <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
-            <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Birds directive"></img>
-        </c:if>
-
+        <c:choose>
+            <c:when test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
+                <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Birds directive"></img>
+            </c:when>
+            <c:otherwise>
+                <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Birds directive">
+            </c:otherwise>
+        </c:choose>
     </td>
     </tr>
     <tr><td>Habitats Directive <span class="discreet">92/43/EEC</span> (SCI or SAC)</td>
     <td>
-        <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
+        <c:choose>
+            <c:when test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
             <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Habitats directive"></img>
-        </c:if>
+        </c:when>
+        <c:otherwise>
+            <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Habitats directive">
+        </c:otherwise>
+    </c:choose>
     </td>
     </tr>
 </table>

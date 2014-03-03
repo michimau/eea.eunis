@@ -335,9 +335,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             pic.setFilename("default/abstract" + defaultPictures.get(group) + ".jpg");
             pic.setDescription("No photo available");
             pic.setSource("Paco Sánchez Aguado");
-            pic.setSourceUrl("http://www.freenatureimages.eu/");
             pic.setPath(picturePath);
-            pic.setLicense("CC BY-NC");
 
             pics.add(pic);
         }

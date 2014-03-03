@@ -788,16 +788,76 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
             queries = fd.getQueryObjects();
-            if (!StringUtils.isBlank(query)) {
 
-                fd.executeQuery(query, idSpecies);
-                queryResultCols = fd.getCols();
-                queryResultRows = fd.getRows();
+            // runs all the queries
+            // todo: this is only to demo the way to display data
 
-                attribution = fd.getAttribution();
+            allQueries = new ArrayList<Query>();
+
+            for(ForeignDataQueryDTO queryDTO : queries){
+                fd.executeQuery(queryDTO.getId(), idSpecies);
+                Query q = new Query(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
+                allQueries.add(q);
             }
+
+//            if (!StringUtils.isBlank(query)) {
+//
+//                fd.executeQuery(query, idSpecies);
+//                queryResultCols = fd.getCols();
+//                queryResultRows = fd.getRows();
+//
+//                attribution = fd.getAttribution();
+//            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private List<Query> allQueries;
+
+    public List<Query> getAllQueries() {
+        return allQueries;
+    }
+
+    public class Query {
+        private ForeignDataQueryDTO query;
+        private List<Map<String, Object>> resultCols;
+        private List<HashMap<String, ResultValue>> resultRows;
+        private String attribution;
+        private String title;
+        private String summary;
+
+        private Query(ForeignDataQueryDTO query, List<Map<String, Object>> resultCols, List<HashMap<String, ResultValue>> resultRows, String attribution) {
+            this.query = query;
+            this.resultCols = resultCols;
+            this.resultRows = resultRows;
+            this.attribution = attribution;
+            this.title = query.getTitle();
+            this.summary = query.getSummary();
+        }
+
+        public ForeignDataQueryDTO getQuery() {
+            return query;
+        }
+
+        public List<Map<String, Object>> getResultCols() {
+            return resultCols;
+        }
+
+        public List<HashMap<String, ResultValue>> getResultRows() {
+            return resultRows;
+        }
+
+        public String getAttribution() {
+            return attribution;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getSummary() {
+            return summary;
         }
     }
 

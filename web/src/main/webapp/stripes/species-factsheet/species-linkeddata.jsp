@@ -2,53 +2,49 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
     <h3>
-        ${eunis:cmsPhrase(actionBean.contentManagement, 'External data')}
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'External data')}
     </h3>
-    <c:choose>
-        <c:when test="${empty actionBean.query}">
-            <c:if test="${not empty actionBean.queries}">
-                <p>
-                This page contains reports that query foreign systems for structured data that <em>links</em> to the species.
-                It is possible that there is no relevant data and then the query shows nothing. As more data becomes available as external data we will add more queries.
-                </p>
-                <h3>Select a query:</h3>
-                <dl>
-                    <c:forEach items="${actionBean.queries}" var="query" varStatus="loop">
-                        <dt><a href="species/${actionBean.idSpecies}/linkeddata?query=${query.id}" rel="nofollow">${query.title}</a></dt>
-                        <dd>${query.summary}</dd>
-                    </c:forEach>
-                </dl>
-            </c:if>
-        </c:when>
-        <c:otherwise>
-            <c:if test="${not empty actionBean.queries}">
-                <div style="font-weight:bold">Select a query:</div>
-                <stripes:form action="/species/${actionBean.idSpecies}/linkeddata" method="post">
-                <p>
-                    <stripes:select name="query">
-                        <stripes:options-collection collection="${actionBean.queries}" label="title" value="id"/>
-                    </stripes:select>
-                    <stripes:submit name="linkeddata" value="Execute query"/>
-                </p>
-                </stripes:form>
-            </c:if>
-            <c:choose>
-                <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
-                    <div style="overflow-x:auto ">
-                        <display:table name="actionBean.queryResultRows" class="sortable" pagesize="30" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
-                            <c:forEach var="cl" items="${actionBean.queryResultCols}">
-                                <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
-                            </c:forEach>
-                        </display:table>
-                    </div>
-                    <c:if test="${not empty actionBean.attribution}">
-                        <b>Source:</b> ${actionBean.attribution}
-                    </c:if>
-                </c:when>
-                <c:otherwise>
-                    Query didn't return any result!
-                </c:otherwise>
-            </c:choose>
-        </c:otherwise>
-    </c:choose>
+    <p>
+        This page contains reports that query foreign systems for structured data that <em>links</em> to the species.
+        It is possible that there is no relevant data and then the query shows nothing. As more data becomes available as external data we will add more queries.
+    </p>
+
+    <div id="panels_query" class="eea-accordion-panels collapsed-by-default">
+    <c:forEach items="${actionBean.allQueries}" var="query">
+
+        <div class="eea-accordion-panel" style="clear: both;">
+            <h2 class="notoc eea-icon-right-container">${query.title}</h2>
+            <div class="pane">
+                <p>${query.summary}</p>
+
+                <c:choose>
+                    <c:when test="${not empty query.resultCols && not empty query.resultRows}">
+                        <c:if test="${fn:length(query.resultRows) gt 10}">
+                            <div class="scroll-auto" style="height: 400px">
+                        </c:if>
+                            <div style="overflow-x:auto ">
+                                <display:table name="${query.resultRows}" class="sortable" pagesize="2000" sort="list">
+                                    <c:forEach var="cl" items="${query.resultCols}">
+                                        <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
+                                    </c:forEach>
+                                </display:table>
+                        <c:if test="${fn:length(query.resultRows) gt 10}">
+                            </div>
+                        </c:if>
+                        </div>
+                        <c:if test="${not empty query.attribution}">
+                            <b>Source:</b> ${query.attribution}
+                        </c:if>
+                    </c:when>
+                    <c:otherwise>
+                        Query didn't return any result!
+                    </c:otherwise>
+                </c:choose>
+            </div>
+
+        </div>
+
+    </c:forEach>
+    </div>
+
 </stripes:layout-definition>

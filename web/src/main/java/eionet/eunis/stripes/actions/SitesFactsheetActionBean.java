@@ -7,9 +7,8 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.util.Constants;
+import eionet.eunis.stripes.actions.beans.HabitatsBean;
+import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -20,11 +19,10 @@ import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
 import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist;
 import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
-import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.EmptyLastComparator;
 
 /**
@@ -95,6 +93,10 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     private String pageUrl;
 
+    private List habit1Eunis;
+    private List habit1NotEunis;
+    private List<SiteHabitatsPersist> habit2Eunis;
+    private List habit2NotEunis;
 
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
@@ -137,14 +139,16 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             setSiteDesignationDateDisplayValue();
             surfaceAreaKm2 = Math.round(Double.parseDouble(factsheet.getSiteObject().getArea()) / 100) + "";
 
-            protectedSpeciesCount = factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000().size();
-            totalSpeciesCount = protectedSpeciesCount + factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000().size();
+//            protectedSpeciesCount = factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000().size();
+//            totalSpeciesCount = protectedSpeciesCount + factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000().size();
 
+            populateHabitatLists();
             calculateHabitatsCount();
             prepareBiogeographicRegion();
             populateSpeciesLists();
 
             populateDesignationArea();
+            prepareRegion();
         }
 
         // Forward to the factsheet layout page.
@@ -180,6 +184,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         } else {
             for (Object s : factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000())
                 allSiteSpecies.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_LISTED));
+            protectedSpeciesCount = allSiteSpecies.size();
+
             for (Object s : factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000())
                 allSiteSpecies.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_OTHER_MENTIONED));
             for (Object s : factsheet.findNotEunisSpeciesListedAnnexesDirectives())
@@ -187,6 +193,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             for (Object s : factsheet.findNotEunisSpeciesOtherMentioned())
                 allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.NOT_EUNIS_OTHER));
         }
+        totalSpeciesCount = allSiteSpecies.size();
+
 
         calculateSpeciesStatistics();
 
@@ -200,16 +208,17 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private void calculateSpeciesStatistics() {
         // initialize
         speciesStatistics = new HashMap<String, Integer>();
-        speciesStatistics.put("Amphibians", 0);
-        speciesStatistics.put("Birds", 0);
-        speciesStatistics.put("Fishes", 0);
-        speciesStatistics.put("Invertebrates", 0);
-        speciesStatistics.put("Mammals", 0);
-        speciesStatistics.put("Flowering Plants", 0);
+//        speciesStatistics.put("Amphibians", 0);
+//        speciesStatistics.put("Birds", 0);
+//        speciesStatistics.put("Fishes", 0);
+//        speciesStatistics.put("Invertebrates", 0);
+//        speciesStatistics.put("Mammals", 0);
+//        speciesStatistics.put("Flowering Plants", 0);
 
         // calculate
         for (SpeciesBean species : allSiteSpecies) {
-            addToSpeciesStatistics(species.getGroup());
+            if(species.getSpeciesType() ==  SpeciesBean.SpeciesType.EUNIS_LISTED)
+                addToSpeciesStatistics(species.getGroup());
         }
 
     }
@@ -306,15 +315,40 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    private void populateHabitatLists() {
+        habit1Eunis = factsheet.findHabit1Eunis();
+        habit1NotEunis = factsheet.findHabit1NotEunis();
+        habit2Eunis = factsheet.findHabit2Eunis();
+        habit2NotEunis = factsheet.findHabit2NotEunis();
+        // todo: also for other types!
+
+        habitats =  new ArrayList<HabitatsBean>();
+        for(SiteHabitatsPersist shp : habit2Eunis){
+            String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
+            HabitatsBean h = new HabitatsBean(shp, cover);
+            habitats.add(h);
+        }
+    }
+
+    public List getHabit2Eunis() {
+        return habit2Eunis;
+    }
+
+    public List<HabitatsBean> getHabitats() {
+        return habitats;
+    }
+
+    private List<HabitatsBean> habitats;
+
     private void calculateHabitatsCount() {
 
         habitatsCount = 0;
 
         if (factsheet.getType() == SiteFactsheet.TYPE_NATURA2000 || factsheet.getType() == SiteFactsheet.TYPE_EMERALD) {
-            habitatsCount += factsheet.findHabit1Eunis().size();
-            habitatsCount += factsheet.findHabit1NotEunis().size();
-            habitatsCount += factsheet.findHabit2Eunis().size();
-            habitatsCount += factsheet.findHabit2NotEunis().size();
+//            habitatsCount += habit1Eunis.size();
+//            habitatsCount += habit1NotEunis.size();
+            habitatsCount += habit2Eunis.size();
+//            habitatsCount += habit2NotEunis.size();
         } else {
             habitatsCount += factsheet.findSitesHabitatsByIDNatureObject().size();
             habitatsCount += factsheet.findSitesSpecificHabitats().size();
@@ -678,115 +712,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         String url = url = "http://www.google.com/search?q=" + scientificName;
         return new SpeciesBean(type, scientificName, null, group, species, null, url, null);
     }
-
-
-    /**
-     * Unify the species for easy display
-     */
-    public static class SpeciesBean implements Comparable<SpeciesBean>{
-        private String scientificName;
-        private String commonName;
-        private String group;
-        private Object source;
-        private String natura2000Code;
-        private String url;
-        private SpeciesType speciesType;
-
-        public static enum SpeciesType {
-            SITE (1),  // siteSpecies
-            SITE_SPECIFIC (2), // siteSpecificSpecies
-            EUNIS_LISTED (3),  // eunisSpeciesListedAnnexesDirectives
-            EUNIS_OTHER_MENTIONED (4), // eunisSpeciesOtherMentioned
-            NOT_EUNIS_LISTED (5), // notEunisSpeciesListedAnnexesDirectives
-            NOT_EUNIS_OTHER (6);   // notEunisSpeciesOtherMentioned
-
-            private final int id;
-            SpeciesType(int id){
-                this.id = id;
-            }
-        }
-
-
-        public SpeciesBean(SpeciesType speciesType, String scientificName, String commonName, String group, Object source, String natura2000Code, String url, Integer idNatureObject) {
-            this.speciesType = speciesType;
-            this.scientificName = scientificName;
-            this.commonName = commonName;
-            this.group = group;
-            this.source = source;
-            this.natura2000Code = natura2000Code;
-            this.url = url;
-
-            if(this.commonName == null && idNatureObject != null){
-                List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(idNatureObject);
-                for (VernacularNameWrapper vernName : vernNames){
-                    if (vernName.getLanguageCode().toLowerCase().equals("en")){
-                        this.commonName = vernName.getName();
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        public String getScientificName() {
-            return scientificName;
-        }
-
-        public String getGroup() {
-            return group;
-        }
-
-        public Object getSource() {
-            return source;
-        }
-
-        public String getCommonName() {
-            return commonName;
-        }
-
-        public String getNatura2000Code() {
-            return natura2000Code;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public int getSpeciesType() {
-            return speciesType.id;
-        }
-
-        @Override
-        public String toString() {
-            return "SpeciesBean{" +
-                    "scientificName='" + scientificName + '\'' +
-                    ", commonName='" + commonName + '\'' +
-                    ", natura2000Code='" + natura2000Code + '\'' +
-                    ", group='" + group + '\'' +
-                    ", source=" + source +
-                    '}';
-        }
-
-        /**
-         * Comparator to order by group and scientific name
-         * @param o Object to compare
-         * @return
-         */
-        @Override
-        public int compareTo(SpeciesBean o) {
-            String thisGroup = this.getGroup();
-            String otherGroup = o.getGroup();
-            String thisName = this.getScientificName();
-            String otherName = o.getScientificName();
-
-            if(otherGroup.equals(thisGroup)) {
-                return EmptyLastComparator.getComparator().compare(thisName, otherName);
-            } else {
-                return EmptyLastComparator.getComparator().compare(thisGroup, otherGroup);
-            }
-        }
-    }
-
 
 
 }

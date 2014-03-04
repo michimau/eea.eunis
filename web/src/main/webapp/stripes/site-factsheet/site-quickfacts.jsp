@@ -50,7 +50,7 @@
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Marine area:')}
                 <span class="bold">
                     <c:choose>
-                        <c:when test="${not empty actionBean.marineAreaPercentage}">
+                        <c:when test="${not empty actionBean.marineAreaPercentage and actionBean.marineAreaPercentage != 0}">
                             ${actionBean.marineAreaPercentage}%
                         </c:when>
                         <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'No')}</c:otherwise>

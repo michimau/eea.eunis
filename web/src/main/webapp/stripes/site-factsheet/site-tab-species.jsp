@@ -70,7 +70,7 @@ WebContentManagement cm = SessionManager.getWebContent();
                     <a href="javascript:void(0);">
 		                <span class="photoAlbumEntryWrapper">
 		                    <c:choose>
-		                        <c:when test="${specie.speciesType == 1 || specie.speciesType == 3 || specie.speciesType == 4}">
+		                        <c:when test="${specie.speciesTypeId == 1 || specie.speciesTypeId == 3 || specie.speciesTypeId == 4}">
 		                            <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
                                 </c:when>
                                 <c:otherwise>
@@ -99,7 +99,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 <div class="right-area" style="width:300px">
     <div style="width: 100%">
     <h3>Species summary</h3>
-    Nature directives' species in this site (${actionBean.totalSpeciesCount})
+    Nature directives' species in this site (${(actionBean.protectedSpeciesCount)})
 		<table class="listing table-inline" width="100%">
             <thead>
             <tr>

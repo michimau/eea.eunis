@@ -1,15 +1,14 @@
 package ro.finsiel.eunis.dataimport;
 
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import ro.finsiel.eunis.dataimport.parsers.CallbackSAXParser;
 import ro.finsiel.eunis.dataimport.parsers.Natura2000ImportParser;
+import ro.finsiel.eunis.dataimport.parsers.Natura2000ParserCallbackV2;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
@@ -41,32 +40,39 @@ public class Natura2000Importer {
 
                 sqlUtilities.Init(dbDriver, dbUrl, dbUser, dbPass);
 
-                List<String> errors = new ArrayList<String>();
+                List<Exception> errors = new ArrayList<Exception>();
                 int cnt = 1;
 
                 for (File f : files) {
-                    Natura2000ImportParser parser = new Natura2000ImportParser(sqlUtilities);
-
                     fis = new FileInputStream(f);
                     bis = new BufferedInputStream(fis);
 
                     System.out.print(cnt + ". Importing file: " + f.getName());
-                    List<String> file_errors = parser.execute(bis);
 
-                    if (file_errors != null && file_errors.size() > 0) {
-                        System.out.println(" - import failed.");
-                        errors.addAll(file_errors);
-                    } else {
-                        System.out.println();
+                    try{
+                        Natura2000ParserCallbackV2 callback = new Natura2000ParserCallbackV2(sqlUtilities);
+                        CallbackSAXParser parser = new CallbackSAXParser(callback);
+                        parser.setDebug(false);
+                        List<Exception> file_errors = parser.execute(bis);
+                        for(Exception e : errors) e.printStackTrace();
+                        bis.close();
+
+                        if (file_errors != null && file_errors.size() > 0) {
+                            System.out.println(" - import failed.");
+                            errors.addAll(file_errors);
+                        } else {
+                            System.out.println();
+                        }
+                    } catch (Exception e){
+                        e.printStackTrace();
                     }
 
                     cnt++;
-                    fis.close();
                     bis.close();
                 }
                 if (errors != null && errors.size() > 0) {
                     System.out.println("Error(s) occured during import:");
-                    for (String error : errors) {
+                    for (Exception error : errors) {
                         System.out.println(error);
                     }
                 } else {

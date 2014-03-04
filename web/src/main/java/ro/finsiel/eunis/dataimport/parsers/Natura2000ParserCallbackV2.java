@@ -107,39 +107,6 @@ public class Natura2000ParserCallbackV2 {
     }
 
     /**
-     * Callback for adminitrative region, writes the NutsCode and NutsCover data
-     * @param path The full path
-     * @throws Exception
-     * todo: could be more than one
-     */
-    @SaxCallback("sdfs.sdf.siteLocation.adminRegions.region")
-    public void callAdminRegion(String path, Values values) throws Exception {
-
-        String nutsCode = values.getFromCurrent("code");
-        String nutsCover = values.getFromCurrent("NutsCover");  // todo: missing
-
-        if (nutsCode != null && nutsCode.length() > 0 && nutsCover != null && nutsCover.length() > 0) {
-            boolean regionExists = regionExists(nutsCode);
-
-            if (regionExists) {
-                maxReportTypeId++;
-                maxReportAttributeId++;
-                insertNatObjectReportType(siteNatureObjectId, "-1", -1, maxReportTypeId, maxReportAttributeId, -1);
-
-                preparedStatementReportType.setInt(1, maxReportTypeId);
-                preparedStatementReportType.setString(2, nutsCode);
-                preparedStatementReportType.setString(3, "REGION_CODE");
-                preparedStatementReportType.executeUpdate();
-
-                insertReportAttribute("COVER", "NUMBER", nutsCover);
-
-            } else {
-                System.out.println(" Warning! AdministrativeRegion with code " + nutsCode + " doesn't exist!");
-            }
-        }
-    }
-
-    /**
      * Callback for BioDescription
      * @param path The full path
      * @throws Exception
@@ -265,6 +232,9 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementSiteInsert.setString(21, parseDate(values.get("sdfs.sdf.siteIdentification.sciProposalDate")));
         preparedStatementSiteInsert.setString(22, parseDate(values.get("sdfs.sdf.siteIdentification.sciConfirmationDate")));
         preparedStatementSiteInsert.setString(23, parseDate(values.get("sdfs.sdf.siteIdentification.sacDesignationDate")));
+        // NUTS code
+        // todo: there is actually a list of region codes
+        preparedStatementSiteInsert.setString(24, values.get("sdfs.sdf.siteLocation.adminRegions.region.code"));
 
         String lengthKm = values.get("sdfs.sdf.siteLocation.siteLength");
 
@@ -358,7 +328,7 @@ public class Natura2000ParserCallbackV2 {
 //        <!-- ELSE -->
 //        <!-- 3.2. Species referred to in Artcle 4 of Directive 2009/147/EC and listed in Annex II of Directive 92/43/EEC and site evaluation form them -->
 
-        if(values.getFromCurrent("motivations.motivation") != null){
+        if(values.existsInCurrent("motivations.motivation")){
             // Other species
             callOtherSpecies(path, values);
             return;
@@ -773,8 +743,8 @@ public class Natura2000ParserCallbackV2 {
                         + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, "
                         + "LONGITUDE, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
                         + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH, MARINE_PERCENT, SITE_TYPE," +
-                        "PROPOSED_DATE, CONFIRMED_DATE, SAC_DATE) VALUES " //21,22,23
-                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        "PROPOSED_DATE, CONFIRMED_DATE, SAC_DATE, NUTS) VALUES " //21,22,23
+                        + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
         String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";

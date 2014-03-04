@@ -93,6 +93,7 @@ public class CallbackSAXParser extends DefaultHandler {
     private Object callback;
     private Stack<String> stack;
     private Values values;
+    private String NULL_ELEMENT = ">@NULL_ELEMENT@<";
     /**
      * Receive warnings about overwritten and missing elements, and callback start
      */
@@ -192,7 +193,7 @@ public class CallbackSAXParser extends DefaultHandler {
         if (buf.toString().trim().length() > 0)
             values.put(currentPath, buf.toString().trim());
         else {
-            values.setCurrentPath(currentPath);
+            values.put(currentPath, NULL_ELEMENT);
         }
 
         // callback
@@ -267,7 +268,20 @@ public class CallbackSAXParser extends DefaultHandler {
          * @return The object
          */
         public String get(String key) {
-            return values.get(key);
+            String result = values.get(key);
+            if(result != null && result.equals(NULL_ELEMENT))
+                result = null;
+            return result;
+        }
+
+        /**
+         * Returns true if the path exists (even if there is no value)
+         * @param key The path
+         * @return true if the path exists
+         */
+        public boolean exists(String key) {
+            String result = values.get(key);
+            return result!=null;
         }
 
         /**
@@ -334,7 +348,16 @@ public class CallbackSAXParser extends DefaultHandler {
         public String getFromCurrent(String key) {
             if (debug && !values.containsKey(currentPath + PATH_SEPARATOR + key))
                 System.out.println("WARNING: getFromCurrent path " + currentPath + PATH_SEPARATOR + key + " not found");
-            return values.get(currentPath + PATH_SEPARATOR + key);
+            return get(currentPath + PATH_SEPARATOR + key);
+        }
+
+        /**
+         * Returns true if the key exists in the current path (even if the value is null)
+         * @param key Search key
+         * @return True if the key exists in the current path
+         */
+        public boolean existsInCurrent(String key) {
+            return exists(currentPath + PATH_SEPARATOR + key);
         }
 
         /**

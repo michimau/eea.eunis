@@ -25,6 +25,12 @@ public class Natura2000Importer {
                 System.out.println("Usage: ro.finsiel.eunis.dataimport.Natura2000Importer {folderName}");
             } else {
                 File directory = new File(args[0]);
+
+                if(!directory.exists()) {
+                    System.out.println("The folder " + directory.getAbsolutePath() + " could not be found");
+                    return;
+                }
+
                 File files[] = directory.listFiles();
 
                 FileInputStream fis = null;

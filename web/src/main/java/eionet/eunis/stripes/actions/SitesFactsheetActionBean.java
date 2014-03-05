@@ -2,6 +2,7 @@ package eionet.eunis.stripes.actions;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -267,51 +268,72 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return factsheet.getSiteObject().getSiteType();
     }
 
-    private String formatDate(String rawDate){
+    /**
+     * Parses a date from the DB format (yyyyMMdd)
+     * @param rawDate
+     * @return The parsed date or null if it cannot be parsed
+     */
+    private Date parseDate(String rawDate){
+        String sourceFormat = "yyyyMMdd";
+
+        DateFormat formatter = new SimpleDateFormat(sourceFormat);
         try {
-            String sourceFormat = "yyyyMMdd";
-            String targetFormat = "d MMM yyyy";
-
-            DateFormat formatter = new SimpleDateFormat(sourceFormat);
-            Date date = formatter.parse(rawDate);
-
-            formatter = new SimpleDateFormat(targetFormat);
-            return formatter.format(date);
-        } catch (Exception ex) {
-            return rawDate;
+            return formatter.parse(rawDate);
+        } catch (Exception e) {
+            return null;
         }
     }
 
     /**
+     * Formats the given String as Date using  formatDate(Date)
+     * @param rawDate
+     * @return The formatted date or the original String if the date cannot be parsed
+     */
+    private String formatDate(String rawDate){
+        Date date = parseDate(rawDate);
+        if(date == null) return rawDate;
+        return formatDate(date);
+    }
+
+    /**
+     * Formats the given Date in the d MMM yyyy format
+     * @param date
+     * @return The formatted date or null if it cannot be formatted
+     */
+    private String formatDate(Date date){
+        try {
+            String targetFormat = "d MMM yyyy";
+            DateFormat formatter = new SimpleDateFormat(targetFormat);
+            return formatter.format(date);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Finds the least of two dates, ignoring the nulls
+     * @param a
+     * @param b
+     * @return The least of the dates
+     */
+    public static Date least(Date a, Date b) {
+        return a == null ? b : (b == null ? a : (a.before(b) ? a : b));
+    }
+
+    /**
      * Sets the site's designation date as displayed on the general tab.
+     * Date Earliest date of SPA_DATE, PROPOSED_DATE or SAC_DATE
      */
     private void setSiteDesignationDateDisplayValue() {
 
         // Set it only when it's applicable to this site.
         if (factsheet.getType() != SiteFactsheet.TYPE_CORINE) {
 
-            String spaDate = factsheet.getSiteObject().getSpaDate();
-            String sacDate = factsheet.getSiteObject().getSacDate();
-            String desigDate = factsheet.getSiteObject().getDesignationDate();
+            Date spaDate = parseDate(factsheet.getSiteObject().getSpaDate());
+            Date sacDate = parseDate(factsheet.getSiteObject().getSacDate());
+            Date proposedDate = parseDate(factsheet.getSiteObject().getProposedDate());
 
-            StringBuilder bld = new StringBuilder();
-            if (StringUtils.isNotBlank(spaDate)) {
-                bld.append(spaDate);
-            }
-            if (StringUtils.isNotBlank(sacDate)) {
-                if (bld.length() > 0) {
-                    bld.append(", ");
-                }
-                bld.append(sacDate);
-            }
-            if (StringUtils.isNotBlank(desigDate)) {
-                if (bld.length() > 0) {
-                    bld.append("/ ");
-                }
-                bld.append(desigDate);
-            }
-
-            this.siteDesignationDateDisplayValue = formatDate(bld.toString());
+            this.siteDesignationDateDisplayValue = formatDate(least(least(spaDate, sacDate), proposedDate));
         }
     }
 

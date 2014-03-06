@@ -2,6 +2,55 @@
  * Utilities for maps
  */
 
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+function isDOMAttrModifiedSupported() {
+    var p = document.createElement('p');
+    var flag = false;
+
+    if (p.addEventListener) p.addEventListener('DOMAttrModified', function() {
+        flag = true
+    }, false);
+    else if (p.attachEvent) p.attachEvent('onDOMAttrModified', function() {
+        flag = true
+    });
+    else return false;
+
+    p.setAttribute('id', 'target');
+
+    return flag;
+}
+
+$.fn.attrchange = function(callback) {
+    if (MutationObserver) {
+        var options = {
+            subtree: false,
+            attributes: true
+        };
+
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(e) {
+                callback.call(e.target, e.attributeName);
+            });
+        });
+
+        return this.each(function() {
+            observer.observe(this, options);
+        });
+
+    } else if (isDOMAttrModifiedSupported()) {
+        return this.on('DOMAttrModified', function(e) {
+            callback.call(this, e.attrName);
+        });
+    } else if ('onpropertychange' in document.body) {
+        return this.on('propertychange', function(e) {
+            callback.call(this, window.event.propertyName);
+        });
+    }
+}
+
+
+
 /**
  * Workaround for showing maps in accordion; Firefox does not load the DOM for hidden iframes, so the iframe needs to be reloaded
  * when the accordion section is displayed.
@@ -14,10 +63,8 @@
 function addReloadOnDisplay(paneId, mapId, link) {
     var speciesStatusPane = document.getElementById (paneId);
     var loadHandler = function loadSpeciesMapWorkaround(event) {
-        if(('attrChange' in event && event.attrName=="style")){
-//          alert("DOMAttrModified event! " + event.attrName + " attribute has been changed from " + event.prevValue + " to " + event.newValue);
-            if(event.newValue=="display: block;" && !document.getElementById(mapId).loaded)
-            {
+        if (event == "style") {   // Modern browsers
+            if(document.getElementById(paneId).style.display == "block" && !document.getElementById(mapId).loaded){
                 document.getElementById(mapId).src=link;
                 document.getElementById(mapId).loaded=true;  // only loaded once
             }
@@ -28,16 +75,15 @@ function addReloadOnDisplay(paneId, mapId, link) {
                 document.getElementById(mapId).loaded=true;  // only loaded once
             }
         }
+
     }
     loadHandler.mapId = mapId;
     loadHandler.paneId = paneId;
     loadHandler.link = link;
 
     if (speciesStatusPane.addEventListener) { // all browsers
-        speciesStatusPane.addEventListener ('DOMAttrModified', loadHandler, false);
-        document.getElementById(mapId).src=link;  // set the link even before display
-    }
-    if (speciesStatusPane.attachEvent) {  // IE8
+        $("#"+paneId).attrchange(loadHandler);
+    } else if (speciesStatusPane.attachEvent) {  // IE8
         speciesStatusPane.attachEvent ('onpropertychange', loadHandler);
     }
 }

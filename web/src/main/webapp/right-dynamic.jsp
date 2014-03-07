@@ -27,7 +27,6 @@ Input parameters  on REQUEST:
       <jsp:param name="downloadLink" value="javascript:openlink('reports/species/tsv.jsp?<%=formBean.toURLParam(reportFields)%>')"/>
     </jsp:include>
 --%>
-<%--<jsp:include page="header-static.jsp"/>--%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String domain = application.getInitParameter( "DOMAIN_NAME" );

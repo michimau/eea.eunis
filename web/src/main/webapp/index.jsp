@@ -219,14 +219,6 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 				<div class="search_details" style="margin-bottom: 20px;">
 					<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
 				</div>
-				<%--
-                <a href="gis-tool.jsp"><strong><%=cm.cmsPhrase( "Interactive Maps" )%></strong></a>
-                &nbsp;
-                <a href="gis-tool.jsp" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>"><img src="images/compass.jpg" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" /></a>
-                <br />
-                <%=cm.cmsPhrase("Geographical information accessible within an interactive GIS tool allowing users to build maps or identify areas.")%>
-                <br />
-				--%>
                 <!-- END MAIN CONTENT -->
               </div>
           </div>

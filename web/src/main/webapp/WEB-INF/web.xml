@@ -92,13 +92,6 @@
             temporary files should be created</description>
     </context-param>
 
-    <!-- Directory where reports will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
-    <context-param>
-        <param-name>UPLOAD_DIR_FILES</param-name>
-        <param-value>upload/</param-value>
-        <description>Upload path for related reports</description>
-    </context-param>
-
     <!-- Directory where pictures of species will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>UPLOAD_DIR_PICTURES_SPECIES</param-name>
@@ -284,11 +277,6 @@
     </listener>
 
     <!-- Servlet declarations, configurations & mappings to URLs -->
-    <servlet>
-        <servlet-name>upload</servlet-name>
-        <servlet-class>ro.finsiel.eunis.admin.EUNISUploadServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
 
     <servlet>
         <servlet-name>schemas</servlet-name>
@@ -358,11 +346,6 @@
 
     <!-- Map servlet to URL -->
     <servlet-mapping>
-        <servlet-name>upload</servlet-name>
-        <url-pattern>/fileupload</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>schemas</servlet-name>
         <url-pattern>/schemas/*</url-pattern>
     </servlet-mapping>
@@ -420,11 +403,6 @@
     <servlet-mapping>
         <servlet-name>DownloadServlet</servlet-name>
         <url-pattern>/temp/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>DownloadServlet</servlet-name>
-        <url-pattern>/upload/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -575,10 +553,6 @@
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/refreshtemplate</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StripesDispatcher</servlet-name>
-        <url-pattern>/pictures-upload.jsp</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

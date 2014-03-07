@@ -333,7 +333,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             PictureDTO pic = new PictureDTO();
             pic.setFilename("default/abstract" + defaultPictures.get(group) + ".jpg");
-            pic.setDescription("No photo available");
+            pic.setDescription("No photo available for this species");
             pic.setSource("Paco Sánchez Aguado");
             pic.setPath(picturePath);
 

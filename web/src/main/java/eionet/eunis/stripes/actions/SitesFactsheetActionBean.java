@@ -73,7 +73,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private String country;
 
     /** The site's designation date */
-    private String siteDesignationDateDisplayValue;
+    private Date siteDesignationDateDisplayValue;
 
     List<DesignationsSitesRelatedDesignationsPersist> sitesDesigc;
 
@@ -244,69 +244,54 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
-    public String getSpaDate(){
-        return formatDate(factsheet.getSiteObject().getSpaDate());
+    public Date getSpaDate(){
+        return parseDate(factsheet.getSiteObject().getSpaDate());
     }
 
-    public String getSacDate(){
-        return formatDate(factsheet.getSiteObject().getSacDate());
+    public Date getSacDate(){
+        return parseDate(factsheet.getSiteObject().getSacDate());
     }
 
-    public String getProposedDate(){
-        return formatDate(factsheet.getSiteObject().getProposedDate());
+    public Date getProposedDate(){
+        return parseDate(factsheet.getSiteObject().getProposedDate());
     }
 
-    public String getDesignationDate(){
-        return formatDate(factsheet.getSiteObject().getDesignationDate());
+    public Date getDesignationDate(){
+        return parseDate(factsheet.getSiteObject().getDesignationDate());
     }
 
-    public String getUpdateDate(){
-        return formatDate(factsheet.getSiteObject().getUpdateDate());
+    public Date getUpdateDate(){
+        return parseDate(factsheet.getSiteObject().getUpdateDate());
     }
 
     public String getSiteType(){
         return factsheet.getSiteObject().getSiteType();
     }
 
-    /**
-     * Parses a date from the DB format (yyyyMMdd)
-     * @param rawDate
-     * @return The parsed date or null if it cannot be parsed
-     */
-    private Date parseDate(String rawDate){
-        String sourceFormat = "yyyyMMdd";
-
-        DateFormat formatter = new SimpleDateFormat(sourceFormat);
-        try {
-            return formatter.parse(rawDate);
-        } catch (Exception e) {
-            return null;
+    public String getDateFormat(){
+        if(isTypeNatura2000()){
+            return "MMMM yyyy";
+        } else {
+            return "yyyy";
         }
     }
 
     /**
-     * Formats the given String as Date using  formatDate(Date)
+     * Parses a date from the DB format (yyyyMMdd or yyyy)
      * @param rawDate
-     * @return The formatted date or the original String if the date cannot be parsed
+     * @return The parsed date or null if it cannot be parsed
      */
-    private String formatDate(String rawDate){
-        Date date = parseDate(rawDate);
-        if(date == null) return rawDate;
-        return formatDate(date);
-    }
-
-    /**
-     * Formats the given Date in the d MMM yyyy format
-     * @param date
-     * @return The formatted date or null if it cannot be formatted
-     */
-    private String formatDate(Date date){
+    private Date parseDate(String rawDate){
+        DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         try {
-            String targetFormat = "d MMM yyyy";
-            DateFormat formatter = new SimpleDateFormat(targetFormat);
-            return formatter.format(date);
-        } catch (Exception ex) {
-            return null;
+            return formatter.parse(rawDate);
+        } catch (Exception e) {
+            formatter = new SimpleDateFormat("yyyy");
+            try {
+                return formatter.parse(rawDate);
+            } catch (Exception e1) {
+                return null;
+            }
         }
     }
 
@@ -327,13 +312,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private void setSiteDesignationDateDisplayValue() {
 
         // Set it only when it's applicable to this site.
-        if (factsheet.getType() != SiteFactsheet.TYPE_CORINE) {
-
+        if (isTypeNatura2000()) {
             Date spaDate = parseDate(factsheet.getSiteObject().getSpaDate());
             Date sacDate = parseDate(factsheet.getSiteObject().getSacDate());
             Date proposedDate = parseDate(factsheet.getSiteObject().getProposedDate());
 
-            this.siteDesignationDateDisplayValue = formatDate(least(least(spaDate, sacDate), proposedDate));
+            this.siteDesignationDateDisplayValue = least(least(spaDate, sacDate), proposedDate);
+        } else if (isTypeCDDA()){
+            this.siteDesignationDateDisplayValue = parseDate(factsheet.getSiteObject().getDesignationDate());
         }
     }
 
@@ -472,6 +458,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return factsheet.getType() == SiteFactsheet.TYPE_NATURA2000;
     }
 
+    public boolean isTypeCDDA() {
+        return factsheet.getType() == SiteFactsheet.TYPE_CDDA_INTERNATIONAL
+                || factsheet.getType() == SiteFactsheet.TYPE_CDDA_NATIONAL;
+    }
+
     public String getTypeName(){
         return factsheet.getSiteObject().getSourceDB();
     }
@@ -540,11 +531,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return sitesDesigc;
     }
 
-    public String getSiteDesignationDateDisplayValue() {
+    public Date getSiteDesignationDateDisplayValue() {
         return siteDesignationDateDisplayValue;
     }
 
-    public void setSiteDesignationDateDisplayValue(String siteDesignationDateDisplayValue) {
+    public void setSiteDesignationDateDisplayValue(Date siteDesignationDateDisplayValue) {
         this.siteDesignationDateDisplayValue = siteDesignationDateDisplayValue;
     }
 
@@ -734,6 +725,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         String url = url = "http://www.google.com/search?q=" + scientificName;
         return new SpeciesBean(type, scientificName, null, group, species, null, url, null);
     }
+
 
 
 }

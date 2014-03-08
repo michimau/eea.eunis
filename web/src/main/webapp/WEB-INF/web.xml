@@ -524,6 +524,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/updatesite/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/taxonomy/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

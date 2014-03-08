@@ -84,6 +84,7 @@
 <br>
 			<c:if test="${ actionBean.typeNatura2000 }">
                 <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">Natura 2000 Standard Data Form</a></p>
+                <p class="discreet" style="color:red;"><a href="/updatesite/${ actionBean.idsite }" title="Testing only">Force SDF update from Natura 2000 site</a></p>
             </c:if>
 		</div>
 	</div>

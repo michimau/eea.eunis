@@ -99,6 +99,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private List<SiteHabitatsPersist> habit2Eunis;
     private List habit2NotEunis;
 
+    private List<HabitatsBean> habitats;
+
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
      * 
@@ -324,18 +326,24 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     }
 
     private void populateHabitatLists() {
-        habit1Eunis = factsheet.findHabit1Eunis();
-        habit1NotEunis = factsheet.findHabit1NotEunis();
-        habit2Eunis = factsheet.findHabit2Eunis();
-        habit2NotEunis = factsheet.findHabit2NotEunis();
-        // todo: also for other types!
-
         habitats =  new ArrayList<HabitatsBean>();
-        for(SiteHabitatsPersist shp : habit2Eunis){
-            String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
-            HabitatsBean h = new HabitatsBean(shp, cover);
-            habitats.add(h);
+        if(isTypeNatura2000()) {
+
+            habit1Eunis = factsheet.findHabit1Eunis();
+            habit1NotEunis = factsheet.findHabit1NotEunis();
+            habit2Eunis = factsheet.findHabit2Eunis();
+            habit2NotEunis = factsheet.findHabit2NotEunis();
+
+            for(SiteHabitatsPersist shp : habit2Eunis){
+                String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
+                HabitatsBean h = new HabitatsBean(shp, cover);
+                habitats.add(h);
+            }
         }
+//        else {
+//            factsheet.findSitesHabitatsByIDNatureObject();
+//            factsheet.findSitesSpecificHabitats();
+//        }
     }
 
     public List getHabit2Eunis() {
@@ -346,21 +354,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return habitats;
     }
 
-    private List<HabitatsBean> habitats;
-
     private void calculateHabitatsCount() {
-
-        habitatsCount = 0;
-
-        if (factsheet.getType() == SiteFactsheet.TYPE_NATURA2000 || factsheet.getType() == SiteFactsheet.TYPE_EMERALD) {
-//            habitatsCount += habit1Eunis.size();
-//            habitatsCount += habit1NotEunis.size();
-            habitatsCount += habit2Eunis.size();
-//            habitatsCount += habit2NotEunis.size();
-        } else {
-            habitatsCount += factsheet.findSitesHabitatsByIDNatureObject().size();
-            habitatsCount += factsheet.findSitesSpecificHabitats().size();
-        }
+        habitatsCount = habitats.size();
     }
 
     private void prepareBiogeographicRegion() {

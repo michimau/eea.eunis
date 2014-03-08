@@ -1,6 +1,5 @@
 package eionet.eunis.stripes.actions.beans;
 
-import eionet.eunis.stripes.actions.SitesFactsheetActionBean;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 
 /**

@@ -57,6 +57,7 @@
                     </c:choose>
                 </span>
             </p>
+            <c:if test="${ actionBean.typeNatura2000 }">
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Located in ')} <span class="bold">
                 <c:choose>
                 <c:when test="${not empty actionBean.biogeographicRegion}">
@@ -70,6 +71,7 @@
                 <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical region')}</c:otherwise>
               </c:choose>
             </p>
+            </c:if>
 
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN management category:')}
             <span class="bold">
@@ -78,13 +80,17 @@
                     <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                 </c:choose>
             </span></p>
+            <c:if test="${ actionBean.typeNatura2000 }">
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.protectedSpeciesCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}</p>
             <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.habitatsCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}</p>
-
+            </c:if>
 <br>
 			<c:if test="${ actionBean.typeNatura2000 }">
-                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">Natura 2000 Standard Data Form</a></p>
+                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 Standard Data Form')}</a></p>
                 <p class="discreet" style="color:red;"><a href="/updatesite/${ actionBean.idsite }" title="Testing only">Force SDF update from Natura 2000 site</a></p>
+            </c:if>
+            <c:if test="${ actionBean.typeCDDA}">
+                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: ${eunis:cmsPhrase(actionBean.contentManagement, 'Nationally designated areas (CDDA)')}</p>
             </c:if>
 		</div>
 	</div>

@@ -277,6 +277,11 @@
     </listener>
 
     <!-- Servlet declarations, configurations & mappings to URLs -->
+    <servlet>
+        <servlet-name>initservlet</servlet-name>
+        <servlet-class>ro.finsiel.eunis.InitServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
     <servlet>
         <servlet-name>schemas</servlet-name>

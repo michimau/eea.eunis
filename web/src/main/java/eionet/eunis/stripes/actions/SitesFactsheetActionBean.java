@@ -22,8 +22,10 @@ import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
 import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.utilities.EmptyLastComparator;
 
 /**
@@ -75,7 +77,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     /** The site's designation date */
     private Date siteDesignationDateDisplayValue;
 
-    List<DesignationsSitesRelatedDesignationsPersist> sitesDesigc;
+    List sitesDesigc;
 
     private String surfaceAreaKm2;
 
@@ -159,13 +161,13 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     }
 
     private void populateDesignationArea() {
-        sitesDesigc = new ArrayList<DesignationsSitesRelatedDesignationsPersist>();
-        int type = factsheet.getType();
-        if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD ) {
+        sitesDesigc = new ArrayList();
+        if( isTypeNatura2000() || factsheet.getType() == SiteFactsheet.TYPE_EMERALD ) {
             sitesDesigc = factsheet.findSiteRelationsNatura2000Desigc();
-        } else if(type == SiteFactsheet.TYPE_CORINE){
-            //CORINE
+        } else if(isTypeCorine()){
             sitesDesigc = factsheet.findSiteRelationsCorine();
+        } else if (isTypeCDDA()){
+            sitesDesigc = SitesSearchUtility.findDesignationsForSitesFactsheet(factsheet.getSiteObject().getIdSite());
         }
     }
 
@@ -522,7 +524,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      * List of designations overlapping the site
      * @return
      */
-    public List<DesignationsSitesRelatedDesignationsPersist> getSitesDesigc() {
+    public List getSitesDesigc() {
         return sitesDesigc;
     }
 

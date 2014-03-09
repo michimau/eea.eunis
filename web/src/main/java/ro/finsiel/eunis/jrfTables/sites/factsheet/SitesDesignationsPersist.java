@@ -17,6 +17,7 @@ public class SitesDesignationsPersist extends PersistentObject {
   private String areaName = null;
   private String dataSource = null;
   private String idGeoscope = null;
+  private String nationalCategory = null;
 
   public SitesDesignationsPersist() {
     super();
@@ -87,4 +88,12 @@ public class SitesDesignationsPersist extends PersistentObject {
   public void setIdGeoscope(String IdGeoscope) {
     this.idGeoscope = IdGeoscope;
   }
+
+    public String getNationalCategory() {
+        return nationalCategory;
+    }
+
+    public void setNationalCategory(String nationalCategory) {
+        this.nationalCategory = nationalCategory;
+    }
 }

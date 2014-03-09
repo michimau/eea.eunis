@@ -59,7 +59,12 @@ Agency.
 
             </td>
             <td style="text-align : right">
-                TODO
+                <c:choose>
+                    <c:when test="${not empty actionBean.siteDesignationDateDisplayValue}">
+                        <fmt:formatDate value="${ (actionBean.siteDesignationDateDisplayValue) }" pattern="${actionBean.dateFormat}"/>
+                    </c:when>
+                    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
+                </c:choose>
             </td>
         </tr>
     </c:forEach>

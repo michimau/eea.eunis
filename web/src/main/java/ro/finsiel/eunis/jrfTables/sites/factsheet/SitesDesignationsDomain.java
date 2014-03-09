@@ -29,5 +29,6 @@ public class SitesDesignationsDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("AREA_NAME_EN", "getAreaName", "setAreaName", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("ORIGINAL_DATASOURCE", "getDataSource", "setDataSource", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("ID_GEOSCOPE", "getIdGeoscope", "setIdGeoscope", DEFAULT_TO_NULL));
+    this.addColumnSpec(new StringColumnSpec("NATIONAL_CATEGORY", "getNationalCategory", "setNationalCategory", DEFAULT_TO_NULL));
   }
 }

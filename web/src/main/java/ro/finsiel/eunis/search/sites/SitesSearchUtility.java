@@ -424,7 +424,7 @@ public class SitesSearchUtility {
         try {
             List tempList = new SitesDesignationsDomain().findCustom(
                     "SELECT A.ID_SITE, A.ID_DESIGNATION,"
-                            + " B.DESCRIPTION,B.DESCRIPTION_EN,B.DESCRIPTION_FR,C.AREA_NAME_EN,B.ORIGINAL_DATASOURCE,A.ID_GEOSCOPE"
+                            + " B.DESCRIPTION,B.DESCRIPTION_EN,B.DESCRIPTION_FR,C.AREA_NAME_EN,B.ORIGINAL_DATASOURCE,A.ID_GEOSCOPE, B.NATIONAL_CATEGORY"
                             + " FROM CHM62EDT_SITES AS A"
                             + " INNER JOIN CHM62EDT_DESIGNATIONS AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE)"
                             + " INNER JOIN CHM62EDT_COUNTRY AS C ON (A.ID_GEOSCOPE = C.ID_GEOSCOPE)" + " WHERE A.ID_SITE = '"

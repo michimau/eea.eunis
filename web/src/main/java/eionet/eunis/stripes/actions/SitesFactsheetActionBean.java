@@ -144,9 +144,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             setSiteDesignationDateDisplayValue();
             surfaceAreaKm2 = Math.round(Double.parseDouble(factsheet.getSiteObject().getArea()) / 100) + "";
 
-//            protectedSpeciesCount = factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000().size();
-//            totalSpeciesCount = protectedSpeciesCount + factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000().size();
-
             populateHabitatLists();
             calculateHabitatsCount();
             prepareBiogeographicRegion();
@@ -160,6 +157,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
     }
 
+    /**
+     * Populates the sitesDesigc list
+     */
     private void populateDesignationArea() {
         sitesDesigc = new ArrayList();
         if( isTypeNatura2000() || factsheet.getType() == SiteFactsheet.TYPE_EMERALD ) {
@@ -200,7 +200,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         }
         totalSpeciesCount = allSiteSpecies.size();
 
-
         calculateSpeciesStatistics();
 
         Collections.sort(allSiteSpecies);
@@ -208,19 +207,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Calculate statistics for the species
-     * Moved from site-tab-species.jsp
      */
     private void calculateSpeciesStatistics() {
-        // initialize
-        speciesStatistics = new HashMap<String, Integer>();
-//        speciesStatistics.put("Amphibians", 0);
-//        speciesStatistics.put("Birds", 0);
-//        speciesStatistics.put("Fishes", 0);
-//        speciesStatistics.put("Invertebrates", 0);
-//        speciesStatistics.put("Mammals", 0);
-//        speciesStatistics.put("Flowering Plants", 0);
 
-        // calculate
+        speciesStatistics = new HashMap<String, Integer>();
+
         for (SpeciesBean species : allSiteSpecies) {
             if(species.getSpeciesType() ==  SpeciesBean.SpeciesType.EUNIS_LISTED)
                 addToSpeciesStatistics(species.getGroup());
@@ -248,30 +239,10 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
-    public Date getSpaDate(){
-        return parseDate(factsheet.getSiteObject().getSpaDate());
-    }
-
-    public Date getSacDate(){
-        return parseDate(factsheet.getSiteObject().getSacDate());
-    }
-
-    public Date getProposedDate(){
-        return parseDate(factsheet.getSiteObject().getProposedDate());
-    }
-
-    public Date getDesignationDate(){
-        return parseDate(factsheet.getSiteObject().getDesignationDate());
-    }
-
-    public Date getUpdateDate(){
-        return parseDate(factsheet.getSiteObject().getUpdateDate());
-    }
-
-    public String getSiteType(){
-        return factsheet.getSiteObject().getSiteType();
-    }
-
+    /**
+     * Returns the date format to display, depending on the factsheet type (month year for Natura, only year for others)
+     * @return
+     */
     public String getDateFormat(){
         if(isTypeNatura2000()){
             return "MMMM yyyy";
@@ -346,14 +317,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 //            factsheet.findSitesHabitatsByIDNatureObject();
 //            factsheet.findSitesSpecificHabitats();
 //        }
-    }
-
-    public List getHabit2Eunis() {
-        return habit2Eunis;
-    }
-
-    public List<HabitatsBean> getHabitats() {
-        return habitats;
     }
 
     private void calculateHabitatsCount() {
@@ -500,10 +463,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return siteName;
     }
 
-    public void setSiteName(String siteName) {
-        this.siteName = siteName;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -514,10 +473,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public SiteFactsheet getFactsheet() {
         return factsheet;
-    }
-
-    public void setFactsheet(SiteFactsheet factsheet) {
-        this.factsheet = factsheet;
     }
 
     /**
@@ -532,24 +487,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return siteDesignationDateDisplayValue;
     }
 
-    public void setSiteDesignationDateDisplayValue(Date siteDesignationDateDisplayValue) {
-        this.siteDesignationDateDisplayValue = siteDesignationDateDisplayValue;
-    }
-
     public String getSurfaceAreaKm2() {
         return surfaceAreaKm2;
     }
 
-    public void setSurfaceAreaKm2(String surfaceAreaKm2) {
-        this.surfaceAreaKm2 = surfaceAreaKm2;
-    }
-
     public List<String> getBiogeographicRegion() {
         return biogeographicRegion;
-    }
-
-    public void setBiogeographicRegion(List<String> biogeographicRegion) {
-        this.biogeographicRegion = biogeographicRegion;
     }
 
     public int getBiogeographicRegionsCount() {
@@ -576,24 +519,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return protectedSpeciesCount;
     }
 
-    public void setProtectedSpeciesCount(int protectedSpeciesCount) {
-        this.protectedSpeciesCount = protectedSpeciesCount;
-    }
-
     public int getTotalSpeciesCount() {
         return totalSpeciesCount;
     }
 
-    public void setTotalSpeciesCount(int totalSpeciesCount) {
-        this.totalSpeciesCount = totalSpeciesCount;
-    }
-
     public int getHabitatsCount() {
         return habitatsCount;
-    }
-
-    public void setHabitatsCount(int habitatsCount) {
-        this.habitatsCount = habitatsCount;
     }
 
     public String getPageUrl() {
@@ -719,10 +650,42 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             group = groupName;
         }
 
-        String url = url = "http://www.google.com/search?q=" + scientificName;
+        String url = "http://www.google.com/search?q=" + scientificName;
         return new SpeciesBean(type, scientificName, null, group, species, null, url, null);
     }
 
+
+    public Date getSpaDate(){
+        return parseDate(factsheet.getSiteObject().getSpaDate());
+    }
+
+    public Date getSacDate(){
+        return parseDate(factsheet.getSiteObject().getSacDate());
+    }
+
+    public Date getProposedDate(){
+        return parseDate(factsheet.getSiteObject().getProposedDate());
+    }
+
+    public Date getDesignationDate(){
+        return parseDate(factsheet.getSiteObject().getDesignationDate());
+    }
+
+    public Date getUpdateDate(){
+        return parseDate(factsheet.getSiteObject().getUpdateDate());
+    }
+
+    public String getSiteType(){
+        return factsheet.getSiteObject().getSiteType();
+    }
+
+    public List getHabit2Eunis() {
+        return habit2Eunis;
+    }
+
+    public List<HabitatsBean> getHabitats() {
+        return habitats;
+    }
 
 
 }

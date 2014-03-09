@@ -11,6 +11,8 @@ Agency.
 <h3>
     ${eunis:cmsPhrase(actionBean.contentManagement, 'National designation')}
 </h3>
+<c:choose>
+    <c:when test="${not empty actionBean.sitesDesigc}">
 <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'sites_factsheet_designations_national')}" class="listing fullwidth  table-inline">
     <thead>
     <tr>
@@ -70,5 +72,10 @@ Agency.
     </c:forEach>
     </tbody>
 </table>
+</c:when>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
+    </c:otherwise>
+</c:choose>
 
 </stripes:layout-definition>

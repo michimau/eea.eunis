@@ -56,6 +56,8 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
 <h3>
     ${eunis:cmsPhrase(actionBean.contentManagement, 'National designations overlapping the NATURA 2000 site')}
 </h3>
+<c:choose>
+<c:when test="${not empty actionBean.sitesDesigc}">
 <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'sites_factsheet_designations_national')}" class="listing fullwidth  table-inline">
     <thead>
     <tr>
@@ -110,5 +112,10 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
     </c:forEach>
     </tbody>
 </table>
+</c:when>
+<c:otherwise>
+    ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
+</c:otherwise>
+</c:choose>
 
 </stripes:layout-definition>

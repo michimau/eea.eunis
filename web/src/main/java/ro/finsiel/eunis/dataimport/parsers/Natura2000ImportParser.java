@@ -527,17 +527,17 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             // values are one step ahead
             if (qName.equalsIgnoreCase("EcologicalInformation32A")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_BIRD;
             } else if (qName.equalsIgnoreCase("EcologicalInformation32B")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_MAMMAL;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_MAMMAL;
             } else if (qName.equalsIgnoreCase("EcologicalInformation32C")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_AMPREP;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_AMPREP;
             } else if (qName.equalsIgnoreCase("EcologicalInformation32D")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_FISHES;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_FISHES;
             } else if (qName.equalsIgnoreCase("EcologicalInformation32E")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_INVERT;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_INVERT;
             } else if (qName.equalsIgnoreCase("EcologicalInformation32F")) {
-                ecoInfo = Constants.SPECIES_SOURCE_TABLE_PLANT;
+                ecoInfo = Constants.N2000_SPECIES_GROUP_PLANT;
             }
 
             if (qName.equalsIgnoreCase("Species")) {
@@ -547,7 +547,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                     if (speciesIdNatObject != null && speciesIdNatObject.length() > 0) {
 
                         if (ecoInfo == null || ecoInfo.length() == 0) {
-                            ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;
+                            ecoInfo = Constants.N2000_SPECIES_GROUP_BIRD;
                         }
 
                         maxReportAttributeId++;

@@ -82,12 +82,16 @@ public interface Constants {
     public static final String SITES_TAB_OTHER_INFO = "OTHER";
 
     // SOURCE_TABLE values
-    public static final String SPECIES_SOURCE_TABLE_BIRD = "Bird";
-    public static final String SPECIES_SOURCE_TABLE_MAMMAL = "Mammal";
-    public static final String SPECIES_SOURCE_TABLE_AMPREP = "Amprep";
-    public static final String SPECIES_SOURCE_TABLE_FISHES = "Fishes";
-    public static final String SPECIES_SOURCE_TABLE_INVERT = "invert";
-    public static final String SPECIES_SOURCE_TABLE_PLANT = "Plant";
+    public static final String N2000_SPECIES_GROUP_BIRD = "Bird";
+    public static final String N2000_SPECIES_GROUP_MAMMAL = "Mammal";
+    public static final String N2000_SPECIES_GROUP_AMPREP = "Amprep";
+    public static final String N2000_SPECIES_GROUP_FISHES = "Fishes";
+    public static final String N2000_SPECIES_GROUP_INVERT = "invert";
+    public static final String N2000_SPECIES_GROUP_PLANT = "Plant";
+    public static final String N2000_SPECIES_GROUP_AMPHIBIANS = "Amphibians";
+    public static final String N2000_SPECIES_GROUP_FUNGI = "Fungi";
+    public static final String N2000_SPECIES_GROUP_LICHENS = "Lichens";
+    public static final String N2000_SPECIES_GROUP_REPTILES = "Reptiles";
 
     // RDF datatypes
     public static final String XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal";

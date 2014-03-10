@@ -40,15 +40,15 @@ public class Natura2000ParserCallbackV2 {
         // A = Amphibians, B = Birds, F = Fish, Fu = Fungi, I = Invertebrates,L = Lichens, M = Mammals, P = Plants, R = Reptiles
         // http://bd.eionet.europa.eu/activities/Natura_2000/reference_portal
 
-        speciesSourceCode.put("A", "Amphibians");    // todo: these are not in the constants table
-        speciesSourceCode.put("B", Constants.SPECIES_SOURCE_TABLE_BIRD);
-        speciesSourceCode.put("F", Constants.SPECIES_SOURCE_TABLE_FISHES);
-        speciesSourceCode.put("Fu", "Fungi");
-        speciesSourceCode.put("I", Constants.SPECIES_SOURCE_TABLE_INVERT);
-        speciesSourceCode.put("L", "Lichens");
-        speciesSourceCode.put("M", Constants.SPECIES_SOURCE_TABLE_MAMMAL);
-        speciesSourceCode.put("P",  Constants.SPECIES_SOURCE_TABLE_PLANT);
-        speciesSourceCode.put("R", "Reptiles");
+        speciesSourceCode.put("A", Constants.N2000_SPECIES_GROUP_AMPHIBIANS);
+        speciesSourceCode.put("B", Constants.N2000_SPECIES_GROUP_BIRD);
+        speciesSourceCode.put("F", Constants.N2000_SPECIES_GROUP_FISHES);
+        speciesSourceCode.put("Fu", Constants.N2000_SPECIES_GROUP_FUNGI );
+        speciesSourceCode.put("I", Constants.N2000_SPECIES_GROUP_INVERT);
+        speciesSourceCode.put("L", Constants.N2000_SPECIES_GROUP_LICHENS);
+        speciesSourceCode.put("M", Constants.N2000_SPECIES_GROUP_MAMMAL);
+        speciesSourceCode.put("P",  Constants.N2000_SPECIES_GROUP_PLANT);
+        speciesSourceCode.put("R", Constants.N2000_SPECIES_GROUP_REPTILES);
     }
 
     private final SQLUtilities sqlUtilities;
@@ -366,7 +366,7 @@ public class Natura2000ParserCallbackV2 {
             if (speciesIdNatObject != null && speciesIdNatObject.length() > 0) {
 
                 if (ecoInfo == null || ecoInfo.length() == 0) {
-                    ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;      // default?
+                    ecoInfo = Constants.N2000_SPECIES_GROUP_BIRD;      // default?
                 }
 
                 maxReportAttributeId++;

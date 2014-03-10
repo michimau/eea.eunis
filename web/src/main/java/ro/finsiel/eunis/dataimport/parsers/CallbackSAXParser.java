@@ -178,7 +178,7 @@ public class CallbackSAXParser extends DefaultHandler {
         int cleaned = values.cleanup(getFullPath());
 
         if (debug && cleaned > 0 && !endElementMap.containsKey(getFullPath())) {
-            System.out.println("WARNING: Parsing problem: Path " + getFullPath() + " is not unique. You should add a callback for it!");
+            debug("WARNING: Parsing problem: Path " + getFullPath() + " is not unique. You should add a callback for it!");
         }
 
     }
@@ -202,7 +202,7 @@ public class CallbackSAXParser extends DefaultHandler {
                 Method method = endElementMap.get(currentPath);
                 if (method == null)
                     method = endElementMap.get("*");
-                else if (debug) System.out.println("Called " + method.getName());
+                else debug("Called " + method.getName());
 
                 method.invoke(callback, currentPath, values);
             } catch (Exception e) {
@@ -212,6 +212,10 @@ public class CallbackSAXParser extends DefaultHandler {
 
         stack.pop();
         buf = new StringBuffer();
+    }
+
+    private void debug(String message) {
+        if(debug) System.out.println((new Date().getTime()) + " " + message);
     }
 
     /**
@@ -347,7 +351,7 @@ public class CallbackSAXParser extends DefaultHandler {
          */
         public String getFromCurrent(String key) {
             if (debug && !values.containsKey(currentPath + PATH_SEPARATOR + key))
-                System.out.println("WARNING: getFromCurrent path " + currentPath + PATH_SEPARATOR + key + " not found");
+                debug("WARNING: getFromCurrent path " + currentPath + PATH_SEPARATOR + key + " not found");
             return get(currentPath + PATH_SEPARATOR + key);
         }
 

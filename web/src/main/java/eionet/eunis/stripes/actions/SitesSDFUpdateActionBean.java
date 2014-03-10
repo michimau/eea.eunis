@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,12 +24,12 @@ public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
     private String idsite = "";
 
     public Resolution defaultAction() {
-
+        Date d1 = new Date();
         // downloads the data and runs the import
         try {
             URL url = new URL("http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=" + idsite + "&release=2&form=Clean");
 
-            System.out.println("Trying to update SDF for site " + idsite + " from URL " + url);
+            System.out.println(d1 + " Trying to update SDF for site " + idsite + " from URL " + url);
 
 
             InputStream inputStream = url.openStream();
@@ -51,7 +52,8 @@ public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        long diff = (new Date().getTime() - d1.getTime())/1000;
+        System.out.println(new Date() + " Update finished for " + idsite + " in " + diff + " seconds");
         // redirect to the page
         return new RedirectResolution("/sites/" + idsite);
     }

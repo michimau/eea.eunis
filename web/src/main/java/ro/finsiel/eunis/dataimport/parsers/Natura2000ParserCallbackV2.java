@@ -315,6 +315,20 @@ public class Natura2000ParserCallbackV2 {
     }
 
     /**
+     * Commit the species
+     * @param path
+     * @param values
+     * @throws Exception
+     */
+    @SaxCallback({"sdfs.sdf.ecologicalInformation.species"})
+    public void callEndSpecies(String path, Values values) throws Exception {
+        preparedStatementSiteAttribute.executeBatch();
+        preparedStatementSiteAttribute.clearParameters();
+        preparedStatementReportAttribute.executeBatch();
+        preparedStatementReportAttribute.clearParameters();
+    }
+
+    /**
      * Writes species
      * @param path
      * @throws Exception
@@ -373,8 +387,6 @@ public class Natura2000ParserCallbackV2 {
                 batchReportAttribute(Constants.REPORT_ATTRIBUTE_SPECIES_BREEDING, "TEXT", "False");
                 batchReportAttribute(Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE, "TEXT", ecoInfo);
 
-                preparedStatementReportAttribute.executeBatch();
-                preparedStatementReportAttribute.clearParameters();
             } else {
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_" + speciesName, "TEXT", speciesName, "spec");
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_RESIDENT_" + speciesName, "TEXT", speciesResident, "spec");
@@ -385,8 +397,6 @@ public class Natura2000ParserCallbackV2 {
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_CONSERVATION_" + speciesName, "TEXT", speciesConservation, "spec");
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_ISOLATION_" + speciesName, "TEXT", speciesIsolation, "spec");
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_GLOBAL_" + speciesName, "TEXT", speciesGlobal, "spec");
-                preparedStatementSiteAttribute.executeBatch();
-                preparedStatementSiteAttribute.clearParameters();
             }
         }
     }
@@ -445,10 +455,6 @@ public class Natura2000ParserCallbackV2 {
                 batchReportAttribute(Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE, "TEXT", "spec");
                 batchReportAttribute(Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_MOTIVATION, "TEXT", otherSpeciesMotivation);
                 batchReportAttribute(Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_POPULATION, "TEXT", otherSpeciesPopulation);
-
-                preparedStatementReportAttribute.executeBatch();
-                preparedStatementReportAttribute.clearParameters();
-
             } else {
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_" + otherSpeciesSciName, "TEXT", "spec", "spec" );
                 setSitesTab(siteNatureObjectId, Constants.SITES_TAB_FAUNA_FLORA);
@@ -456,9 +462,6 @@ public class Natura2000ParserCallbackV2 {
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_TAXGROUP_" + otherSpeciesSciName, "TEXT", otherSpeciesGroup, "spec" );
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_POPULATION_" + otherSpeciesSciName, "TEXT", otherSpeciesPopulation, "spec" );
                 batchSiteAttribute(siteCode, "OTHER_SPECIES_MOTIVATION_" + otherSpeciesSciName, "TEXT", otherSpeciesMotivation, "spec" );
-
-                preparedStatementSiteAttribute.executeBatch();
-                preparedStatementSiteAttribute.clearParameters();
             }
         }
     }

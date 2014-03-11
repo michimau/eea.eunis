@@ -74,39 +74,6 @@
         </p>
     </c:forEach>
 
-    <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
-        <div class="table-definition-body visualClear">
-            <div style="margin-top:20px">
-                <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
-                <c:set var="queryId" value="${query.id}"/>
-
-                <div style="overflow-x:auto">
-                    <span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>
-                    <table style="margin-top:20px" class="datatable listing inline-block">
-                        <thead>
-                        <tr>
-                            <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                <th class="dt_sortable">
-                                        ${col.property}
-                                </th>
-                            </c:forEach>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
-                            <tr>
-                                <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                    <td>${row[col.property]}</td>
-                                </c:forEach>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </c:forEach>
-
     <%--todo: External Data goes here--%>
     <stripes:layout-render name="/stripes/species-factsheet/species-linkeddata.jsp"/>
 

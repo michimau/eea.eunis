@@ -1,13 +1,15 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-	<%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet"%>
 	<div class="right-area quickfacts">
-		<h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h2>
+		<h4>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h4>
 		<div>
-            <p><span class="bold">${ actionBean.typeTitle } site</span> <span class="discreet">(code ${ actionBean.idsite })</span></p>
+		    <ul>
+            <li>
+                <span class="bold">${ actionBean.typeTitle } site</span> <span class="discreet">(code ${ actionBean.idsite })</span>
+            </li>
 
-            <p>
+            <li>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Since:')}
               <span class="bold">
                   <c:choose>
@@ -17,8 +19,8 @@
                    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                   </c:choose>
               </span>
-            </p>
-			<p>
+            </li>
+			<li>
 			    ${eunis:cmsPhrase(actionBean.contentManagement, 'Country:')}
                 <span class="bold">
                     <c:choose>
@@ -26,8 +28,8 @@
                       <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                     </c:choose>
                 </span>
-            </p>
-			<p>
+            </li>
+			<li>
 			    ${eunis:cmsPhrase(actionBean.contentManagement, 'Region:')}
 			    <c:choose>
                 <c:when test="${not empty actionBean.regionCode}">
@@ -35,8 +37,8 @@
 			    </c:when>
 			    <c:otherwise><span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</span></c:otherwise>
                 </c:choose>
-			</p>
-            <p>
+			</li>
+            <li>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Surface area:')}
                 <c:choose>
                     <c:when test="${not empty actionBean.surfaceAreaKm2}">
@@ -44,9 +46,9 @@
                     </c:when>
                     <c:otherwise><span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</span></c:otherwise>
                  </c:choose>
-            </p>
+            </li>
 
-            <p>
+            <li>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Marine area:')}
                 <span class="bold">
                     <c:choose>
@@ -56,9 +58,9 @@
                         <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'No')}</c:otherwise>
                     </c:choose>
                 </span>
-            </p>
+            </li>
             <c:if test="${ actionBean.typeNatura2000 }">
-            <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Located in ')} <span class="bold">
+            <li>${eunis:cmsPhrase(actionBean.contentManagement, 'Located in ')} <span class="bold">
                 <c:choose>
                 <c:when test="${not empty actionBean.biogeographicRegion}">
                     ${actionBean.biogeographicRegionList}
@@ -70,21 +72,27 @@
                 <c:when test="${actionBean.biogeographicRegionsCount > 1}">${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical regions')}</c:when>
                 <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'biogeographical region')}</c:otherwise>
               </c:choose>
-            </p>
+            </li>
             </c:if>
 
-            <p>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN management category:')}
+            <li>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN management category:')}
             <span class="bold">
                 <c:choose>
                     <c:when test="${not empty actionBean.iucnCategory }">${ actionBean.iucnCategory }</c:when>
                     <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                 </c:choose>
-            </span></p>
+            </span>
+            </li>
             <c:if test="${ actionBean.typeNatura2000 }">
-            <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.protectedSpeciesCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}</p>
-            <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.habitatsCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}</p>
+            <li>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.protectedSpeciesCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}
+            </li>
+            <li>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.habitatsCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}
+            </li>
             </c:if>
-<br>
+          </ul>
+          <br>
 			<c:if test="${ actionBean.typeNatura2000 }">
                 <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 Standard Data Form')}</a></p>
                 <p class="discreet" style="color:red;"><a href="/updatesite/${ actionBean.idsite }" title="Testing only">Force SDF update from Natura 2000 site</a></p>

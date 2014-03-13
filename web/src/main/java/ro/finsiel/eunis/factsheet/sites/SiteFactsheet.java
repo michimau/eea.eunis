@@ -241,7 +241,7 @@ public class SiteFactsheet {
                     new Chm62edtSitesAttributesDomain()
                             .findWhere("ID_SITE='"
                                     + getSiteObject().getIdSite()
-                                    + "' AND SOURCE_TABLE = 'SPEC' AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
+                                    + "' AND SOURCE_TABLE = 'spec' AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -298,7 +298,7 @@ public class SiteFactsheet {
         try {
             List attrList =
                     new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
-                            + "' AND SOURCE_TABLE = 'SPEC' AND NAME = 'OTHER_SPECIES_" + attrName + "'");
+                            + "' AND SOURCE_TABLE = 'spec' AND NAME = 'OTHER_SPECIES_" + attrName + "'");
 
             if (attrList != null && attrList.size() > 0) {
                 result = (Chm62edtSitesAttributesPersist) attrList.get(0);

@@ -637,7 +637,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             group = groupName;
         } else if (type == SpeciesBean.SpeciesType.NOT_EUNIS_OTHER) {
             scientificName = (species.getName() == null ? "" : species.getName().substring(species.getName().lastIndexOf("_") + 1));
-            Chm62edtSitesAttributesPersist attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + species.getName());
+            Chm62edtSitesAttributesPersist attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + scientificName);
             String groupName = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";
             groupName = (groupName == null ? "" : (groupName.equalsIgnoreCase("P") ? "Plants"
                     : (groupName.equalsIgnoreCase("A") ? "Amphibians"

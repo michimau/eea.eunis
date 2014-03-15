@@ -27,20 +27,23 @@ public class CddaSitesImportParserTest {
      */
     @Test
     public void loadSitesTest(){
-        if(true) return;         // todo: implement when we have the data
-        try{
-            CddaSitesImportParser parser = new CddaSitesImportParser(
-                    sqlUtilities);
-            InputStream inputStream = DbHelper.class.getClassLoader().getResourceAsStream("TEST_DATA");
+        try {
+            String result = sqlUtilities.ExecuteSQL("select count(1) from chm62edt_nature_object where ORIGINAL_CODE='184031'");
+            Assert.assertEquals("0", result);
+
+            CddaSitesImportParser parser = new CddaSitesImportParser(sqlUtilities);
+            InputStream inputStream = DbHelper.class.getClassLoader().getResourceAsStream("cdda_site_184031.xml");
             BufferedInputStream bis = new BufferedInputStream(inputStream);
 
             Map<String, String> sites = parser.execute(bis);
             bis.close();
 
             for(String s: sites.keySet())     {
-                System.out.println("Site " + s);
-                System.out.println("  " + sites.get(s));
+                System.out.println("Imported Site " + s);
             }
+
+            result = sqlUtilities.ExecuteSQL("select count(1) from chm62edt_nature_object where ORIGINAL_CODE='184031'");
+            Assert.assertEquals("1", result);
 
         } catch(Exception e){
             e.printStackTrace();

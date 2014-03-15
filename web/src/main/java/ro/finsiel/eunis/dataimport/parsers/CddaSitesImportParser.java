@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -141,14 +142,14 @@ public class CddaSitesImportParser extends DefaultHandler {
                 lon = buf.toString().trim();
             }
 
-            if (qName.equalsIgnoreCase("CDDA_sites")) {
+            if (qName.equalsIgnoreCase("CDDA_v8_sites")) {
 
                 siteNatureObjectId = natObjectIds.get(siteCode);
                 if (siteNatureObjectId == null
                         || siteNatureObjectId.length() == 0) {
                     newSite = true;
                     maxNoIdInt++;
-                    siteNatureObjectId = new Integer(maxNoIdInt).toString();
+                    siteNatureObjectId = Integer.toString(maxNoIdInt);
                 } else {
                     newSite = false;
                 }
@@ -217,18 +218,7 @@ public class CddaSitesImportParser extends DefaultHandler {
 
                 counter++;
                 if (counter % 10000 == 0) {
-                    preparedStatementNatObject.executeBatch();
-                    preparedStatementNatObject.clearParameters();
-
-                    preparedStatementSites.executeBatch();
-                    preparedStatementSites.clearParameters();
-
-                    preparedStatementSitesUpdate.executeBatch();
-                    preparedStatementSitesUpdate.clearParameters();
-
-                    preparedStatementNatObjectGeoscope.executeBatch();
-                    preparedStatementNatObjectGeoscope.clearParameters();
-
+                    executeBatch();
                 }
 
                 siteCode = null;
@@ -294,18 +284,7 @@ public class CddaSitesImportParser extends DefaultHandler {
 
             parseDocument();
             if (!(counter % 10000 == 0)) {
-                preparedStatementNatObject.executeBatch();
-                preparedStatementNatObject.clearParameters();
-
-                preparedStatementSites.executeBatch();
-                preparedStatementSites.clearParameters();
-
-                preparedStatementSitesUpdate.executeBatch();
-                preparedStatementSitesUpdate.clearParameters();
-
-                preparedStatementNatObjectGeoscope.executeBatch();
-                preparedStatementNatObjectGeoscope.clearParameters();
-
+                executeBatch();
             }
             con.commit();
         } catch (Exception e) {
@@ -336,6 +315,24 @@ public class CddaSitesImportParser extends DefaultHandler {
 
         return sites;
 
+    }
+
+    /**
+     * Execute the batches for the prepared statements
+     * @throws SQLException
+     */
+    private void executeBatch() throws SQLException {
+        preparedStatementNatObject.executeBatch();
+        preparedStatementNatObject.clearParameters();
+
+        preparedStatementSites.executeBatch();
+        preparedStatementSites.clearParameters();
+
+        preparedStatementSitesUpdate.executeBatch();
+        preparedStatementSitesUpdate.clearParameters();
+
+        preparedStatementNatObjectGeoscope.executeBatch();
+        preparedStatementNatObjectGeoscope.clearParameters();
     }
 
     private HashMap<String, String> getNatObjectIds() throws Exception {
@@ -411,7 +408,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                 int idGeoscope = rset.getInt("ID_GEOSCOPE");
                 String idDesig = rset.getString("ID_DESIGNATION");
 
-                ret.put(idDesig, new Integer(idGeoscope));
+                ret.put(idDesig, idGeoscope);
             }
 
         } catch (Exception e) {
@@ -442,7 +439,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                 int idGeoscope = rset.getInt("ID_GEOSCOPE");
                 String iso3L = rset.getString("ISO_3L");
 
-                ret.put(iso3L, new Integer(idGeoscope));
+                ret.put(iso3L, idGeoscope);
             }
 
         } catch (Exception e) {

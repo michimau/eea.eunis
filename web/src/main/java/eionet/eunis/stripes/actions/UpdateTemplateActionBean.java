@@ -1,6 +1,10 @@
 package eionet.eunis.stripes.actions;
 
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +15,8 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
 
+import ro.finsiel.eunis.dataimport.parsers.CDDADesignationsCallback;
+import ro.finsiel.eunis.dataimport.parsers.CallbackSAXParser;
 import ro.finsiel.eunis.jrfTables.EunisISOLanguagesPersist;
 import eionet.eunis.util.Pair;
 
@@ -94,6 +100,10 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
             errors.add("Could not update required head template for language EN");
             ;
         }
+
+        // update the CDDA Destinations
+        updateCDDADesignations("http://dd.eionet.europa.eu/CodelistServlet?id=66479&type=ELM&format=xml");
+
         if (!errors.isEmpty()) {
             logger.warn(errors.toString());
         }
@@ -111,6 +121,36 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
                     (short) result.getValue().length(), null, true,
                     getContext().getJdbcDriver(), getContext().getJdbcUrl(),
                     getContext().getJdbcUser(), getContext().getJdbcPassword());
+        }
+        return false;
+    }
+
+    private boolean updateCDDADesignations(String url){
+        Pair<Integer, String> result = getContentManagement().readContentFromUrl(url);
+        if (result != null && result.getId() != null && result.getId() == 200
+                && StringUtils.isNotBlank(result.getValue())) {
+
+            CDDADesignationsCallback c = new CDDADesignationsCallback();
+            CallbackSAXParser parser = new CallbackSAXParser(c);
+            try {
+                InputStream stream = new ByteArrayInputStream(result.getValue().getBytes("UTF-8"));
+                BufferedInputStream bis = new BufferedInputStream(stream);
+                parser.execute(bis);
+
+                for(Pair<String, String> pair : c.getResultList()){
+                    getContentManagement().savePageContentJDBC("CDDA_" + pair.getId(),
+                            pair.getValue(), "dd.eionet.europa.eu/CodelistServlet?id=66479", "EN",
+                            (short) pair.getValue().length(), null, true,
+                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
+                            getContext().getJdbcUser(), getContext().getJdbcPassword());
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
         }
         return false;
     }

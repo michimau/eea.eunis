@@ -88,15 +88,15 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
             <td>
                 <c:choose>
                     <c:when test="${desig.nationalCategory eq 'A'}">
-                        Designation types used with the intention to protect fauna, flora, habitats and landscapes (the latter as far as relevant for fauna, flora and for habitat protection)
+                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_A')}
                         (Code ${desig.nationalCategory})
                     </c:when>
                     <c:when test="${desig.nationalCategory eq 'B'}">
-                        Statutes under sectorial, particularly forestry, legislative and administrative acts providing an adequate protection relevant for fauna, flora and habitat conservation
+                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_B')}
                         (Code ${desig.nationalCategory})
                     </c:when>
                     <c:when test="${desig.nationalCategory eq 'C'}">
-                        Private statute providing durable protection for fauna, flora or habitats
+                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_C')}
                         (Code ${desig.nationalCategory})
                     </c:when>
                     <c:otherwise>

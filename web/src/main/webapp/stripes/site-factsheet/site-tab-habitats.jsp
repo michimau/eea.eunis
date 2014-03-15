@@ -28,7 +28,7 @@
             <td>
                 ${habitat.habitat.habitatDescription}
             </td>
-            <td class="number">
+            <td style="text-align : right">
                 ${habitat.cover}
             </td>
         </tr>

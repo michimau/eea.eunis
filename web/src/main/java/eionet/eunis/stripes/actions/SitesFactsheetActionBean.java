@@ -309,7 +309,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             for(SiteHabitatsPersist shp : habit2Eunis){
                 String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
-                HabitatsBean h = new HabitatsBean(shp, cover);
+                HabitatsBean h = new HabitatsBean(shp, calculatePercent(cover, factsheet.getSiteObject().getArea()));
                 habitats.add(h);
             }
         }
@@ -317,6 +317,28 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 //            factsheet.findSitesHabitatsByIDNatureObject();
 //            factsheet.findSitesSpecificHabitats();
 //        }
+    }
+
+    /**
+     * Calculates the percentage of one area from another
+     * @param cover
+     * @param area
+     * @return
+     */
+    private String calculatePercent(String cover, String area){
+        try {
+            float fArea = Float.parseFloat(area);
+            float fCover = Float.parseFloat(cover);
+            if(fArea == 0) {
+                return cover;
+            }
+
+            float fPercent = fCover*100/fArea;
+            DecimalFormat df = new DecimalFormat("0.00");
+            return df.format(fPercent);
+        } catch (Exception e) {
+            return cover;
+        }
     }
 
     private void calculateHabitatsCount() {

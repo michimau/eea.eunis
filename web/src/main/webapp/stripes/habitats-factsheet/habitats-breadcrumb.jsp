@@ -3,15 +3,27 @@
 <stripes:layout-definition>
 
 <c:if test="${!empty actionBean.factsheet.otherHabitatsRelations}">
-    <c:forEach items="${actionBean.factsheet.otherHabitatsRelations}" var="other" varStatus="loop">
-        <tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
-            <td>
-                &nbsp;
-            </td>
-            <td>
-                ${other.eunisCode}
-            </td>
-            <td>
+
+    <div id="portal-breadcrumbs" class='species-taxonomy'>
+        <span id="breadcrumbs-home">
+            <a href="${actionBean.context.domainName}">EUNIS Home</a>
+            <span class="breadcrumbSeparator">
+                &gt;
+            </span>
+        </span>
+
+        <span id="breadcrumbs-0" dir="ltr">
+            <a href="habitats-key.jsp">EUNIS habitat classification 2012</a>
+            <span class="breadcrumbSeparator">
+                &gt;
+            </span>
+        </span>
+
+        <c:forEach items="${actionBean.factsheet.otherHabitatsRelations}" var="other" varStatus="loop">
+            <span id="breadcrumbs-${loop.index + 1}" style="display: inline-block;" dir="ltr">
+                <c:if test="${not empty other.eunisCode}">
+                    ${other.eunisCode} -
+                </c:if>
                 <c:choose>
                     <c:when test="${other.idHabitat != '10000'}">
                         <a href="habitats/${other.idHabitat}">${eunis:bracketsToItalics(eunis:replaceTags(other.scientificName))}</a>
@@ -20,17 +32,19 @@
                         ${other.scientificName}
                     </c:otherwise>
                 </c:choose>
-            </td>
-            <td>
-                <c:if test="${other.level < 3 && eunis:execMethodParamString('ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet', 'isEunis', other.idHabitat)}">
-                    <a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Go to key navigator, starting with this habitat')}" href="habitats-key.jsp?pageCode=${other.eunisCode}&amp;level=${other.level + 1}">
-                        <img src="images/mini/key_out.png" alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Go to key navigator, starting with this habitat')}" border="0" />
-                    </a>
-                </c:if>
-                &nbsp;&nbsp;&nbsp;${other.relation}
-            </td>
-        </tr>
-    </c:forEach>
+                <span class="breadcrumbSeparator">
+                    &gt;
+                </span>
+            </span>
+        </c:forEach>
+        <span id="breadcrumbs-current" style="display: inline-block;" dir="ltr">
+            <c:if test="${not empty actionBean.factsheet.eunisHabitatCode}">
+                ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')} -
+            </c:if>
+            ${eunis:bracketsToItalics(eunis:replaceTags(actionBean.factsheet.habitatScientificName))}
+        </span>
+    </div>
+
 </c:if>
 
 </stripes:layout-definition>

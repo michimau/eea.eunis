@@ -23,6 +23,9 @@
             </div>
         </c:when>
         <c:otherwise>
+
+            <stripes:layout-render name="/stripes/habitats-factsheet/habitats-breadcrumb.jsp"/>
+
             <h1>${eunis:bracketsToItalics(eunis:replaceTags(actionBean.factsheet.habitatScientificName))}</h1>
 
             <%--Quick facts--%>

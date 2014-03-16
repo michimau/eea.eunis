@@ -13,7 +13,7 @@
         </span>
 
         <span id="breadcrumbs-0" dir="ltr">
-            <a href="habitats-key.jsp">EUNIS habitat classification 2012</a>
+            <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>
             <span class="breadcrumbSeparator">
                 &gt;
             </span>

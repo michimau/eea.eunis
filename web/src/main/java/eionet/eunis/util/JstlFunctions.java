@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.WebContentManagement;
+import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinDomain;
 import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinPersist;
 import ro.finsiel.eunis.search.Utilities;
@@ -433,4 +434,9 @@ public class JstlFunctions {
 
         return ret;
     }
+
+    public static String mapHabitatsRelations(String relation)  {
+        return HabitatsFactsheet.mapHabitatsRelations(relation);
+    }
+
 }

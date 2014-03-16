@@ -317,4 +317,15 @@
 			${execMethodParamString("className","methodName","param")}
 		</example>
 	</function>
+	<function>
+		<description>
+            Calls HabitatsFactsheet.mapHabitatsRelations
+	 	</description>
+		<name>mapHabitatsRelations</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String mapHabitatsRelations(java.lang.String)</function-signature>
+		<example>
+			${execMethodParamString("className","methodName","param")}
+		</example>
+	</function>
 </taglib>

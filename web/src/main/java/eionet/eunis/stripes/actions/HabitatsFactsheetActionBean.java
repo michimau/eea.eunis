@@ -204,7 +204,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
-        return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
+        return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
     }
 
     /**

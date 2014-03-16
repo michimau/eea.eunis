@@ -25,7 +25,7 @@
 		<description>Wrapper to call WebContentManagement.cms</description>
 		<name>cms</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cms(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cms(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cms(actionBean.webContent, key)}
 		</example>
@@ -35,7 +35,7 @@
 		<description>Wrapper to call WebContentManagement.cmsText</description>
 		<name>cmsText</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsText(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsText(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsText(actionBean.webContent, key)}
 		</example>
@@ -45,7 +45,7 @@
 		<description>Wrapper to call WebContentManagement.cmsTitle</description>
 		<name>cmsTitle</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsTitle(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsTitle(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsTitle(actionBean.webContent, key)}
 		</example>
@@ -55,7 +55,7 @@
 		<description>Wrapper to call WebContentManagement.cmsPhrase</description>
 		<name>cmsPhrase</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsPhrase(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsPhrase(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsPhrase(actionBean.webContent, key)}
 		</example>
@@ -65,7 +65,7 @@
 		<description>Wrapper to call WebContentManagement.cmsMessage</description>
 		<name>cmsMsg</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsMsg(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsMsg(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsMsg(actionBean.webContent, key)}
 		</example>
@@ -75,7 +75,7 @@
 		<description>Wrapper to call WebContentManagement.br</description>
 		<name>br</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String br(ro.finsiel.eunis.WebContentManagement)</function-signature>
+		<function-signature>java.lang.String br(ro.finsiel.eunis.WebContentManagement)</function-signature>
 		<example>
 			${br(actionBean.webContent)}
 		</example>
@@ -85,7 +85,7 @@
 		<description>Wrapper to call WebContentManagement.cmsInput</description>
 		<name>cmsInput</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsInput(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsInput(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsInput(actionBean.webContent, text)}
 		</example>
@@ -95,7 +95,7 @@
 		<description>Wrapper to call WebContentManagement.cmsLabel</description>
 		<name>cmsLabel</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsLabel(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsLabel(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsLabel(actionBean.webContent, text)}
 		</example>
@@ -105,7 +105,7 @@
 		<description>Wrapper to call WebContentManagement.cmsAlt</description>
 		<name>cmsAlt</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String cmsAlt(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<function-signature>java.lang.String cmsAlt(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsAlt(actionBean.webContent, text)}
 		</example>
@@ -288,7 +288,7 @@
 	 	</description>
 		<name>getYesNo</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String getYesNo(java.lang.Integer)</function-signature>
+		<function-signature>java.lang.String getYesNo(java.lang.Integer)</function-signature>
 		<example>
 			${getYesNo(1)}
 		</example>
@@ -300,7 +300,7 @@
 	 	</description>
 		<name>execMethodParamInteger</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String execMethodParamInteger(java.lang.String, java.lang.String, java.lang.Integer)</function-signature>
+		<function-signature>java.lang.Object execMethodParamInteger(java.lang.String, java.lang.String, java.lang.Integer)</function-signature>
 		<example>
 			${execMethodParamInteger("className","methodName",1)}
 		</example>
@@ -312,7 +312,7 @@
 	 	</description>
 		<name>execMethodParamString</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>String execMethodParamString(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+		<function-signature>java.lang.Object execMethodParamString(java.lang.String, java.lang.String, java.lang.String)</function-signature>
 		<example>
 			${execMethodParamString("className","methodName","param")}
 		</example>
@@ -325,7 +325,7 @@
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
 		<function-signature>java.lang.String mapHabitatsRelations(java.lang.String)</function-signature>
 		<example>
-			${execMethodParamString("className","methodName","param")}
+			${mapHabitatsRelations(">")}
 		</example>
 	</function>
 </taglib>

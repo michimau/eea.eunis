@@ -18,8 +18,8 @@
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites";
-  int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Help") };
+//  int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
+//  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Help") };
 %>
 
 <c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Sites") %>'></c:set>
@@ -31,7 +31,6 @@
     <stripes:layout-component name="contents">
 
         <a name="documentContent"></a>
-        <img id="loading" alt="Loading progress" title="Loading progress" src="images/loading.gif" width="250" height="45" />
         <h1 class="documentFirstHeading">
           <%=cm.cmsPhrase("Sites search")%>
         </h1>
@@ -39,8 +38,7 @@
                 <div class="documentDescription">
                   <%=cm.cmsPhrase("Access information about sites of interest for biodiversity and nature protection")%>
                 </div>
-                <div style="text-align : center; padding-left : 10px; width : 730px; vertical-align : middle; color : black;">
-                  <br />
+                <div style="text-align : center; padding-left : 10px; width : 90%; vertical-align : middle;>
                   <form name="quick_search" id="quick_search" action="sites-names-result.jsp" method="post" onsubmit="return validateQS();">
                     <input type="hidden" name="showSourceDB" value="true" />
                     <input type="hidden" name="showCountry" value="true" />
@@ -71,45 +69,22 @@
                            onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter code or site name here...")%>';" />
                     <input type="submit" value="<%=cm.cmsPhrase("Search")%>" name="Submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                     <a href="fuzzy-search-help.jsp" title="<%=cm.cmsPhrase("Help on fuzzy search")%>"><img alt="" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
-                    <br />
                   </form>
+                  <br />
                 </div>
                 <br />
-                <div id="tabbedmenu">
-                  <ul>
-          <%
-            String currentTab;
-            for ( int i = 0; i < tabs.length; i++ )
-            {
-              currentTab = "";
-              if ( tab == i ) currentTab = " id=\"currenttab\"";
-          %>
-                <li<%=currentTab%>>
-                  <a href="sites.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
-                </li>
-          <%
-              }
-          %>
-                  </ul>
-                </div>
-                <br class="brClear" />
-                <br />
-          <%
-            if ( tab == 0 )
-            {
-          %>
-                    <table class="datatable fullwidth" summary="Easy search">
-                      <caption><%=cm.cmsPhrase( "A set of predefined functions to search the database" ) %></caption>
-                      <thead>
-                        <tr>
-                          <th>
-                           <%=cm.cmsPhrase("Links to easy searches")%>
-                          </th>
-                          <th>
-                           <%=cm.cmsPhrase("Description")%>
-                          </th>
-                        </tr>
-                      </thead>
+        <div class="eea-accordion-panels non-exclusive">
+
+        <div class="eea-accordion-panel" style="clear: both;">
+        <h2 class="notoc eea-icon-right-container"><%= cm.cms("easy_search") %></h2>
+        <div class="pane">
+        <h4><%=cm.cmsPhrase("A set of predefined functions to search the database") %></h4>
+        <table class="fullwidth">
+        <colgroup>
+            <col style="width: 310px; white-space: nowrap;">
+            <col>
+        </colgroup>
+
                       <tbody>
                         <tr>
                           <td>
@@ -124,7 +99,7 @@
                             <%=cm.cmsPhrase("Search sites by name")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Search sites by size")%>" href="sites-size.jsp">
@@ -150,7 +125,7 @@
                             <%=cm.cmsPhrase("Search sites by geographical coordinates")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Search sites by country location")%>" href="sites-country.jsp">
@@ -176,7 +151,7 @@
                             <%=cm.cmsPhrase("Search sites by characterizing altitude")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Search sites by the year of designation")%>" href="sites-year.jsp">
@@ -202,7 +177,7 @@
                             <%=cm.cmsPhrase("Identify species located within sites")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Identify habitat types located within sites ")%>" href="habitats-sites.jsp">
@@ -228,7 +203,7 @@
                             <%=cm.cmsPhrase("Search sites by legal instruments ")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Search designation types")%>" href="sites-designations.jsp">
@@ -254,7 +229,7 @@
                             <%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Sites tree browser")%>" href="sites-tree.jsp">
@@ -269,23 +244,17 @@
                         </tr>
                       </tbody>
                     </table>
-          <%
-            }
-            if ( tab == 1 )
-            {
-          %>
-                    <table class="datatable fullwidth" summary="Advanced search">
-                      <caption><%=cm.cmsPhrase( "A flexible search tool to build your own query" ) %></caption>
-                      <thead>
-                        <tr>
-                          <th>
-                            <%=cm.cmsPhrase("Links to advanced searches")%>
-                          </th>
-                          <th>
-                            <%=cm.cmsPhrase("Description")%>
-                          </th>
-                        </tr>
-                      </thead>
+        </div>
+        </div>
+        <div class="eea-accordion-panel" style="clear: both;">
+        <h2 class="notoc eea-icon-right-container"><%=cm.cms("advanced_searches")%></h2>
+        <div class="pane">
+        <h4><%=cm.cmsPhrase("A flexible search tool to build your own query") %></h4>
+        <table class="fullwidth">
+        <colgroup>
+            <col style="width: 310px; white-space: nowrap;">
+            <col>
+        </colgroup>
                       <tbody>
                         <tr>
                           <td>
@@ -300,7 +269,7 @@
                             <%=cm.cmsPhrase("Search sites information using more complex filtering capabilities")%>
                           </td>
                         </tr>
-                        <tr class="zebraeven">
+                        <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Help on sites Advanced Search")%>" href="advanced-help.jsp">
@@ -315,23 +284,17 @@
                         </tr>
                       </tbody>
                     </table>
-          <%
-            }
-            if ( tab == 2 )
-            {
-          %>
-                    <table class="datatable fullwidth" summary="Statistical data">
-                      <caption><%=cm.cmsPhrase( "A search tool to build aggregated data" ) %></caption>
-                      <thead>
-                        <tr>
-                          <th>
-                            <%=cm.cmsPhrase("Links to statistical data")%>
-                          </th>
-                          <th>
-                            <%=cm.cmsPhrase("Description")%>
-                          </th>
-                        </tr>
-                      </thead>
+        </div>
+        </div>
+        <div class="eea-accordion-panel" style="clear: both;">
+        <h2 class="notoc eea-icon-right-container">Statistical data</h2>
+        <div class="pane">
+        <h4><%=cm.cmsPhrase("A search tool to build aggregated data") %></h4>
+        <table class="fullwidth">
+        <colgroup>
+            <col style="width: 310px; white-space: nowrap;">
+            <col>
+        </colgroup>
                       <tbody>
                         <tr>
                           <td>
@@ -348,23 +311,17 @@
                         </tr>
                       </tbody>
                     </table>
-          <%
-            }
-            if ( tab == 3 )
-            {
-          %>
-                <table class="datatable fullwidth" summary="Help">
-                  <caption><%=cm.cmsPhrase( "General information on EUNIS application" ) %></caption>
-                  <thead>
-                    <tr>
-                      <th>
-                        <%=cm.cmsPhrase("Links to online help")%>
-                      </th>
-                      <th>
-                        <%=cm.cmsPhrase("Description")%>
-                      </th>
-                    </tr>
-                  </thead>
+        </div>
+        </div>
+        <div class="eea-accordion-panel" style="clear: both;">
+        <h2 class="notoc eea-icon-right-container"><%=cm.cms("help")%></h2>
+        <div class="pane">
+        <h4><%=cm.cmsPhrase("General information on EUNIS application") %></h4>
+        <table class="fullwidth">
+        <colgroup>
+            <col style="width: 310px; white-space: nowrap;">
+            <col>
+        </colgroup>
                   <tbody>
                     <tr>
                       <td>
@@ -379,7 +336,7 @@
                         <%=cm.cmsPhrase("Help on sites <strong>Easy Searches</strong>")%>
                       </td>
                     </tr>
-                    <tr class="zebraeven">
+                    <tr>
                       <td>
                         <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                         <a title="<%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>" href="glossary.jsp?module=sites">
@@ -407,36 +364,7 @@
                     </tr>
                   </tbody>
                 </table>
-          <%
-            }
-          %>
-          <%
-            for ( int i = 0; i < tabs.length; i++ )
-            {
-          %>
-                <%=cm.cmsMsg( tabs[ i ] )%>
-                <%=cm.br()%>
-          <%
-            }
-          %>
-                <%=cm.cmsMsg("sites")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("sites_main_easySearchesDesc")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("flexible_search_tool_to_build_your_own_query")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("search_tool_to_build_aggregated_data")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("sites_main_linksDesc")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("general_information_on_eunis")%>
 <!-- END MAIN CONTENT -->
 
-        <script language="JavaScript" type="text/javascript">
-            try {
-                var load = document.getElementById( "loading" );
-                load.style.display="none";
-            } catch(e) { }
-        </script>
     </stripes:layout-component>
 </stripes:layout-render>

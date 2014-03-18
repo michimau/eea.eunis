@@ -26,9 +26,10 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
-    <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-country.js" type="text/javascript"></script>
-    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript">
+        <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
+        <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-country.js" type="text/javascript"></script>
+        <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+        <script language="JavaScript" type="text/javascript">
     //<![CDATA[
         window.onload= function() {
             <%
@@ -273,7 +274,7 @@
                           <%
                             }
                           %>
-                          <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsPhrase("Disclaimer: Databases does not contain data for all countries")%></strong></td></tr>
+                          <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsPhrase("Disclaimer: Database does not contain data for all countries")%></strong></td></tr>
                         </table>
                     </form>
                     </td>

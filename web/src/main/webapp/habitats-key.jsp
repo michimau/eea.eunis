@@ -40,6 +40,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+    <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
     function MM_jumpMenu(targ,selObj,restore){ //v3.0

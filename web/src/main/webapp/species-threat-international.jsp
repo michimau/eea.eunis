@@ -61,6 +61,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
     <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-country.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
@@ -395,10 +396,7 @@
                                  <strong>
                                  <%=cm.cmsPhrase("and")%>
                                  </strong>
-                                 &nbsp;  <% //threat status%>
-                                <%=cm.cmsPhrase("Threat Status")%>
-                                &nbsp;
-                                <label for="Status" class="noshow"><%=cm.cms("status")%></label>
+                                <label for="Status"><%=cm.cms("Threat status")%></label>
                                 <select title="<%=cm.cms("status")%>" name="Status" id="Status" onchange="MM_jumpMenuInternational('parent',this,0)">
                                   <option value="species-threat-international.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>&amp;countryName=<%=countryName%>&amp;idCountry=<%=country%>" selected="selected">
                                     <%=cm.cms("please_select_a_threat_status")%>

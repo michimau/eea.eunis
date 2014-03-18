@@ -27,6 +27,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+    <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-names.js"></script>
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
 
@@ -55,15 +56,12 @@
     </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
-        <a name="documentContent"></a>
           <h1>
             <%=cm.cmsPhrase("Scientific name")%>
           </h1>
 
 <!-- MAIN CONTENT -->
-              <table summary="layout" width="100%" border="0">
-                <tr>
-                  <td>
+    <div style="width: 100%">
                       <form name="eunis1" method="get" onsubmit="return(validateForm1());" action="species-names-result.jsp">
                           <input type="hidden" name="typeForm" value="<%=NameSearchCriteria.CRITERIA_SCIENTIFIC%>" />
                           <input type="hidden" name="showScientificName" value="true" />
@@ -76,7 +74,7 @@
                               <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by scientific name <br />(ex.: search all species having <strong>acrocephalus</strong> in their scientific name)")%>
                               <br />
                               <br />
-                              <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
+                              <table summary="layout" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE; width: 100%;">
                                 <tr>
                                   <td>
                                     <strong>
@@ -149,10 +147,7 @@
                       <br />
                       <hr class="horizontal_line" />
                       <br />
-                    </td>
-                  </tr>
-                  <tr>
-                  <td>
+</div><div style="width: 100%">
                       <form name="eunis2" method="get" onsubmit="return(validateForm2());" action="species-names-result.jsp">
                         <input type="hidden" name="typeForm" value="<%=NameSearchCriteria.CRITERIA_VERNACULAR%>" />
                         <input type="hidden" name="expand" value="true" />
@@ -161,15 +156,16 @@
                         <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
                         <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
                         <input type="hidden" name="noSoundex" value="true" />
-                          <table summary="layout" width="100%" border="0" style="text-align:left">
+
+                          <h1>
+                              <%=cm.cmsPhrase("Vernacular Name")%>
+                          </h1>
+                          <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by vernacular name<br />(ex.: search for species with popular name <strong>red fox</strong>)")%>
+                           <br>
+                           <br>
+                          <table summary="layout" border="0" style="text-align:left; width: 100%;">
                             <tr>
                               <td>
-                                <h1>
-                                  <%=cm.cmsPhrase("Vernacular Name")%>
-                                </h1>
-                                <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by vernacular name<br />(ex.: search for species with popular name <strong>red fox</strong>)")%>
-                                <br />
-                                <br />
                                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                                   <tr>
                                     <td>
@@ -287,9 +283,7 @@
                           <%
                                   }
                           %>
-                    </td>
-                  </tr>
-                </table>
+                </div>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("species_names_02_Msg")%>
                 <%=cm.br()%>

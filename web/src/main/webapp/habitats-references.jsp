@@ -38,7 +38,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
-
+      <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-references.js" type="text/javascript"></script>
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/save-criteria.js" type="text/javascript"></script>
 

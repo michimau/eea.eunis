@@ -1,0 +1,23 @@
+input, label {
+    padding: 1px;
+    margin: 2px;
+}
+
+select {
+    margin: 2px;
+}
+
+label {
+    line-height: 18px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#content table {
+    display: table;
+}
+
+
+td {
+    padding: 1px;
+}

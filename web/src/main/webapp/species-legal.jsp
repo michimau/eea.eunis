@@ -42,6 +42,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
     <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-legal.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -255,7 +256,6 @@
                         <tr>
                           <td>
             <%
-              boolean ckShowScientificName = true;
               boolean ckShowGroup = true;
               boolean ckShowLegalText = true;
               boolean ckShowAbbreviation = true;
@@ -265,7 +265,6 @@
               boolean isPostBack = Utilities.checkedStringToBoolean( request.getParameter( "postBack"), false );
               if ( isPostBack )
               {
-                ckShowScientificName = Utilities.checkedStringToBoolean( request.getParameter( "showScientificName" ), true);
                 ckShowGroup = Utilities.checkedStringToBoolean( request.getParameter( "showGroup" ), true );
                 ckShowLegalText = Utilities.checkedStringToBoolean( request.getParameter( "showLegalText" ), true );
                 ckShowAbbreviation = Utilities.checkedStringToBoolean( request.getParameter( "showAbbreviation" ), true );

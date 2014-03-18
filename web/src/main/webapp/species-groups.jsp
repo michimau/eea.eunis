@@ -25,6 +25,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
 <stripes:layout-component name="head">
+    <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
     <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-groups-save-criteria.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
@@ -77,7 +78,7 @@
                     <form name="eunis" onsubmit="return validateForm()" method="get" action="species-groups-result.jsp">
                       <input type="hidden" name="showScientificName" value="true" />
                       <input type="hidden" name="expand" value="false" />
-                      <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                         <tr>
                           <td>
                             <strong>
@@ -103,7 +104,7 @@
                           </td>
                         </tr>
                       </table>
-                      <table summary="<%=cm.cms("species_groups_19_Sum")%>" class="datatable" >
+                      <table class="datatable" >
                         <tr>
                           <th colspan="2">
                             <%=cm.cmsPhrase("Group")%>
@@ -183,18 +184,17 @@
                             </strong>
                           </td>
                         </tr>
-                        <tr>
-                          <td colspan="5" style="text-align:right">
-                            <br />
-                            <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
-                            <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
-                          </td>
-                        </tr>
                       </table>
-                    </form>
                   </td>
                 </tr>
+                    <tr>
+                        <td colspan="5" style="text-align:right">
+                            <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
+                            <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
+                        </td>
+                    </tr>
                 </table>
+        </form>
                       <%
                         // Save search criteria
                         if (SessionManager.isAuthenticated()&& SessionManager.isSave_search_criteria_RIGHT())

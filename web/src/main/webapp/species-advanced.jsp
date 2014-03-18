@@ -38,6 +38,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+    <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
   var current_selected="";
@@ -46,6 +47,7 @@
 
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
+  var defaultValue="enter value here...";
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;
@@ -141,7 +143,8 @@
   function submitFirstValueForm(firstvalue, idnode) {
     if(firstvalue.value == "") {
       firstvalue.value = document.criteria.oldfirstvalue.value;
-      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
+      if(defaultValue != document.criteria.oldfirstvalue.value)
+        alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return(false);
     }
@@ -170,7 +173,8 @@
   function submitLastValueForm(lastvalue, idnode) {
     if(lastvalue.value == "") {
       lastvalue.value = document.criteria.oldlastvalue.value;
-      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
+      if(defaultValue != document.criteria.oldlastvalue.value)
+            alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return false;
     }
@@ -208,11 +212,20 @@
   }
 
   function saveFirstValue(val) {
-    document.criteria.oldfirstvalue.value=val.value;
+    if(val.value == defaultValue){
+        val.value="";
+    } else {
+        document.criteria.oldfirstvalue.value=val.value;
+    }
   }
 
   function saveLastValue(val) {
-    document.criteria.oldlastvalue.value=val.value;
+      if(val.value == defaultValue){
+          val.value="";
+      } else {
+          document.criteria.oldlastvalue.value=val.value;
+      }
+
   }
 
   function SaveCriteriaFunction() {

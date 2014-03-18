@@ -27,11 +27,11 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-synonyms.js"></script>
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
-        <a name="documentContent"></a>
           <h1>
             <%=cm.cmsPhrase("Synonyms")%>
           </h1>
@@ -77,10 +77,7 @@
                                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_included.gif" />
                                 <%=cm.cmsAlt("field_optional")%>
                                 &nbsp;
-                                <strong>
-                                  <%=cm.cmsPhrase("Group name")%>
-                                </strong>
-                                <label for="select1" class="noshow"><%=cm.cms("group_name")%></label>
+                                <label for="select1"><%=cm.cms("group_name")%></label>
                                 <select id="select1" title="<%=cm.cms("group_name")%>" name="groupName">
                                   <option value="0" selected="selected">
                                     <%=cm.cms("any_group")%>

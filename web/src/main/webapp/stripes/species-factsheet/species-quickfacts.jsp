@@ -3,6 +3,13 @@
 <stripes:layout-definition>
                <!-- quick facts -->
 
+               <script>
+                   function openSection(sectionName) {
+                       if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
+                           $('#' + sectionName + ' ~ h2').click();
+                   }
+               </script>
+
                <!--  Gallery on left -->
                 <div class="left-area species">
 
@@ -49,22 +56,23 @@
                     <div>
                         <ul>
                             <li>
-                                <a href="${ actionBean.pageUrl }#threat_status" onclick="if($('#threat_status ~ h2').attr('class').indexOf('current')==-1) $('#threat_status ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'Threat status Europe')}</a>
-                                <span class="bold">${actionBean.consStatusEU.statusName}</span></p>
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Threat status Europe')}:
+                                <a href="${ actionBean.pageUrl }#threat_status" onclick="openSection('threat_status');"><span class="bold">${actionBean.consStatusEU.statusName}</span></a>
                             </li>
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}:
                                 <span class="bold">Not available</span> EU Nature Directives and
-                                <span class="bold">${ actionBean.legalInstrumentCount }</span>
-                                <a href="${ actionBean.pageUrl }#legal_status" onclick="if($('#legal_status ~ h2').attr('class').indexOf('current')==-1) $('#legal_status ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}</a>.
+                                <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ actionBean.legalInstrumentCount }</span></a>
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}.
                             </li>
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}  <span class="bold">${ actionBean.speciesSitesCount }</span>
-                                    <a href="${ actionBean.pageUrl }#protected" onclick="if($('#protected ~ h2').attr('class').indexOf('current')==-1) $('#protected ~ h2').click(); ">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}:
+                                <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}.
                             </li>
                             <c:if test="${not empty actionBean.habitats}">
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in ')}
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in ')}:
                                 <span class="bold">
                                     <c:choose>
                                         <c:when test="${not empty actionBean.habitats}">
@@ -74,12 +82,13 @@
                                         </c:when>
                                         <c:otherwise>Not avaliable</c:otherwise>
                                     </c:choose>
-                                </span> ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}
+                                </span>
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}
                             </li>
                             </c:if>
                             <c:if test="${actionBean.invasiveNobanis}">
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by ')}
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by ')}:
                                 <span class="bold">Nobanis</span>
                             </li>
                             </c:if>
@@ -87,7 +96,7 @@
 
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}
                             </p>
                         </c:if>
                     </div>

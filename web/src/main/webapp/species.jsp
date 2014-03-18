@@ -308,16 +308,6 @@
                     <tr>
                       <td>
                         <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                        <a href="glossary.jsp?module=species"><strong><%=cm.cmsPhrase("Glossary")%></strong></a>
-                        <%=cm.cmsTitle("species_main_glossary_Title")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database species module")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                         <a href="http://biodiversity-chm.eea.europa.eu/search_html">
                             <strong><%=cm.cmsPhrase("Browse")%></strong></a>
                         <%=cm.cmsTitle("generic_information_tools_on_species")%>

@@ -339,19 +339,6 @@
                     <tr>
                       <td>
                         <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <a title="<%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>" href="glossary.jsp?module=sites">
-                          <strong>
-                            <%=cm.cmsPhrase("Glossary")%>
-                          </strong>
-                        </a>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                         <a title="<%=cm.cmsPhrase("Sites online help")%>" href="sites-help.jsp">
                           <strong>
                             <%=cm.cmsPhrase("How to use")%>

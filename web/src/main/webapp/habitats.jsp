@@ -250,16 +250,6 @@
                       </tr>
                       <tr>
                         <td>
-                          <img alt="<%=cm.cms("glossary")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("glossary")%>
-                          <a title="<%=cm.cms("habitats_main_glossaryDesc")%>"  href="glossary.jsp?module=habitat"><strong><%=cm.cmsPhrase("Glossary")%></strong></a>
-                          <%=cm.cmsTitle("habitats_main_glossaryDesc")%>
-                        </td>
-                        <td>
-                          <%=cm.cmsPhrase("Glossary of terms used in EUNIS Database habitat types module")%>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <img alt="<%=cm.cms("how_to_use")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use")%>
                           <a title="<%=cm.cms("habitats_main_howToDesc")%>"  href="habitats-help.jsp"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_howToDesc")%>

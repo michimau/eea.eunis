@@ -41,6 +41,11 @@ public class NameSortCriteria extends AbstractSortCriteria {
     public static final Integer SORT_VALID_NAME = new Integer(5);
 
     /**
+     * Sort by type of result (found by scientific name / common name)
+     */
+    public static final Integer SORT_S_ORDER = new Integer(6);
+
+    /**
      * New sort criteria.
      * @param sortCriteria Criteria used for sorting.
      * @param ascendency Ascendency.
@@ -61,6 +66,7 @@ public class NameSortCriteria extends AbstractSortCriteria {
             possibleSorts.put(SORT_SCIENTIFIC_NAME, "A.SCIENTIFIC_NAME"); // Scientific name
             possibleSorts.put(SORT_VALID_NAME, "A.VALID_NAME"); // Valid name
         }
+        possibleSorts.put(SORT_S_ORDER, "S_ORDER");
 
     }
 }

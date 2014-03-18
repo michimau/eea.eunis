@@ -60,6 +60,8 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
     private String taxonomyTree = null;
     private String taxonomyName = null;
 
+    private Short sortOrder;
+
     /**
      * Normal constructor
      */
@@ -344,5 +346,13 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
 
     public void setTaxonomyName(String taxonomyName) {
         this.taxonomyName = taxonomyName;
+    }
+
+    public Short getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(Short sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

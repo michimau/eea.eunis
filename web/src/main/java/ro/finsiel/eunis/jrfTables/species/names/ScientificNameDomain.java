@@ -218,10 +218,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                     + " WHERE " + _prepareWhereSearchVernacular()
                     + " AND F.LOOKUP_TYPE = 'LANGUAGE'"
                     + " AND I.NAME ='VERNACULAR_NAME' "
-                    + " AND A.SCIENTIFIC_NAME NOT LIKE 'VERNACULAR_NAME' "
                     + " ) " +  _prepareWhereSort()
                     + " LIMIT " + offsetStart + ", " + pageSize;
-
             results = this.findCustom(query);
         } else {
             if (searchCriteria.length < 1) {
@@ -361,6 +359,14 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 filterSQL.append(
                         Utilities.prepareSQLOperator("I.VALUE",
                         aCriteria.getScientificName(), aCriteria.getRelationOp()));
+
+//                removes the duplicates
+                String original = aCriteria.toSQL();
+
+                if(original.contains("LIKE")) original = original.replace("LIKE", "NOT LIKE");
+                if(original.contains("=")) original = original.replace("=", "<>");
+
+                filterSQL.append( " AND " + original);
             } else {
                 if (i > 0) {
                     filterSQL.append(" AND ");

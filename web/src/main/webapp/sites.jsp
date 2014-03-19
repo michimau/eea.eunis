@@ -141,19 +141,6 @@
                         <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by characterizing altitude")%>" href="sites-altitude.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Altitude")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by characterizing altitude")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
                             <a title="<%=cm.cmsPhrase("Search sites by the year of designation")%>" href="sites-year.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Designation year")%>

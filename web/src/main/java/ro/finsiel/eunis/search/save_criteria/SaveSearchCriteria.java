@@ -101,7 +101,6 @@ public class SaveSearchCriteria {
         fromWhereMapping.put("species-sites.jsp", "Species by sites".toUpperCase());
         fromWhereMapping.put("species-books.jsp", "References of Species selected by scientific name".toUpperCase());
         fromWhereMapping.put("sites-country.jsp", "Sites located within a particular country ".toUpperCase());
-        fromWhereMapping.put("sites-altitude.jsp", "sites located in a specific range of altitudes ".toUpperCase());
         fromWhereMapping.put("sites-year.jsp", "sites after their year of establishment ".toUpperCase());
         fromWhereMapping.put("habitats-sites.jsp", "Habitat types within Sites ".toUpperCase());
         fromWhereMapping.put("sites-designated-codes.jsp", "sites by designation types ".toUpperCase());

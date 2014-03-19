@@ -92,7 +92,8 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
-    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
+        <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
         <a name="documentContent"></a>
@@ -226,14 +227,14 @@
             AbstractSortCriteria sortLat = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LAT);
             AbstractSortCriteria sortLong = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LONG);
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
             if (showSourceDB)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                       </th>
           <%
@@ -241,7 +242,7 @@
             if (showDesignType)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Designation type")%>
                       </th>
           <%
@@ -249,7 +250,7 @@
             if (showName)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                       </th>
           <%
@@ -268,7 +269,7 @@
             if (showSpecies)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Species name")%>
                       </th>
           <%
@@ -282,10 +283,9 @@
             int i = 0;
             while (it.hasNext())
             {
-              String cssClass = i++ % 2 == 0 ? " class=\"zebraeven\"" : "";
               SpeciesPersist site = (SpeciesPersist)it.next();
           %>
-                  <tr<%=cssClass%>>
+                  <tr>
           <%
             if (showSourceDB)
             {
@@ -347,7 +347,7 @@
               if (resultsSpecies != null && resultsSpecies.size() > 0)
               {
           %>
-                      <table summary="<%=cm.cms("species_from_site")%>">
+                      <%--<ul>--%>
           <%
                 for(int ii=0;ii<resultsSpecies.size();ii++)
                 {
@@ -355,15 +355,13 @@
                   String scientificName = (String)tableColumns.getColumnsValues().get(0);
                   Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
           %>
-                        <tr>
-                          <td>
+                        <p>
                             <a href="species/<%=idSpecies%>"><%=scientificName%></a>
-                          </td>
-                        </tr>
+                          </p>
           <%
                 }
           %>
-                      </table>
+                      <%--</ul>--%>
           <%
             }
           %>
@@ -382,7 +380,7 @@
             if (showSourceDB)
             {
           %>
-                    <th scope="col">
+                    <th class="nosort" scope="col">
                       <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                     </th>
           <%
@@ -390,7 +388,7 @@
             if (showDesignType)
             {
           %>
-                    <th scope="col">
+                    <th class="nosort" scope="col">
                       <%=cm.cmsPhrase("Designation type")%>
                     </th>
           <%
@@ -398,7 +396,7 @@
             if (showName)
             {
           %>
-                    <th scope="col">
+                    <th class="nosort" scope="col">
                       <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                     </th>
           <%
@@ -417,7 +415,7 @@
             if (showSpecies)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Species name")%>
                       </th>
           <%

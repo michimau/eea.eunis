@@ -36,7 +36,7 @@
   int pageSize = Utilities.checkedStringToInt(request.getParameter("pageSize"), 10);
   List sites;
 
-  Vector hiddenParams = new Vector();
+  Vector<String> hiddenParams = new Vector<String>();
   hiddenParams.addElement("sort");
   hiddenParams.addElement("ascendency");
   hiddenParams.addElement("criteriaSearch");
@@ -93,10 +93,13 @@
 %>
 
 <%
+    String tsvLink ="";
+    int maxSitesPerMap = 0;
+    String ids = "";
+
     if (sites.size() > 0)
     {
-        String ids = "";
-        int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
+        maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
         NeighborhoodPaginator mapPaginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
         try
         {
@@ -124,22 +127,31 @@
         reportFields.addElement("criteriaSearch");
         reportFields.addElement("oper");
         reportFields.addElement("criteriaType");
-        String tsvLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
+        tsvLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
+    }
 %>
-<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("sites_neighborhood-detail_title") %>'></c:set>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("sites_neighborhood-detail_title") %>'/>
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>"  btrail="<%= btrail%>">
     <stripes:layout-component name="head">
-    <script type="text/javascript" language="javascript">
-      //<![CDATA[
-      function openlink( URL )
-      {
-        eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0');");
-      }
-      //]]>
-    </script>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
+
+        <script type="text/javascript" language="javascript">
+          //<![CDATA[
+          function openlink( URL )
+          {
+            eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0');");
+          }
+          //]]>
+        </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
+
+    <%
+        if (sites.size() > 0)
+        {
+    %>
+
         <a name="documentContent"></a>
           <h1>
             <%=cm.cmsPhrase("Site neighborhood")%>
@@ -198,30 +210,28 @@
                   AbstractSortCriteria sortSourceDB = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_SOURCE_DB);
                   AbstractSortCriteria sortName = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_NAME);
                   AbstractSortCriteria sortSize = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_SIZE);
-                  AbstractSortCriteria sortLat = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_LAT);
-                  AbstractSortCriteria sortLong = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_LONG);
                 %>
                       <a name="dataTable"></a>
-                      <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                      <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                         <thead>
                           <tr>
-                            <th scope="col" nowrap="nowrap">
+                            <th class="nosort" scope="col" nowrap="nowrap">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                             </th>
-                            <th scope="col" nowrap="nowrap">
+                            <th class="nosort" scope="col" nowrap="nowrap">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                             </th>
-                            <th scope="col" nowrap="nowrap" nowrap="nowrap" style="text-align : right;">
+                            <th class="nosort" scope="col" nowrap="nowrap" nowrap="nowrap" style="text-align : right;">
                               <%=cm.cmsPhrase("&nbsp;Distance (km)")%>
                             </th>
-                            <th scope="col" nowrap="nowrap" style="text-align : center;">
+                            <th class="nosort" scope="col" nowrap="nowrap" style="text-align : center;">
 
                               <%=cm.cmsPhrase("Longitude")%>
                             </th>
-                            <th scope="col" nowrap="nowrap" style="text-align : center;">
+                            <th class="nosort" scope="col" nowrap="nowrap" style="text-align : center;">
                               <%=cm.cmsPhrase("Latitude")%>
                             </th>
-                            <th scope="col" align="right" nowrap="nowrap" style="text-align : right;">
+                            <th class="nosort" scope="col" align="right" nowrap="nowrap" style="text-align : right;">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                             </th>
                           </tr>
@@ -231,9 +241,8 @@
                     for (int i = 0; i < sites.size(); i++)
                     {
                       Chm62edtSitesPersist site = (Chm62edtSitesPersist)sites.get(i);
-                      String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
                 %>
-                        <tr<%=cssClass%>>
+                        <tr>
                           <td>
                             <strong>
                               <%=SitesSearchUtility.translateSourceDB(site.getSourceDB())%>
@@ -288,10 +297,10 @@
                   else
                   {
                 %>
-                      <jsp:include page="header-dynamic.jsp">
-                        <jsp:param name="location" value="<%=btrail%>"/>
-                        <jsp:param name="mapLink" value="show"/>
-                      </jsp:include>
+                      <%--<jsp:include page="header-dynamic.jsp">--%>
+                        <%--<jsp:param name="location" value="<%=btrail%>"/>--%>
+                        <%--<jsp:param name="mapLink" value="show"/>--%>
+                      <%--</jsp:include>--%>
                         <h1>
                           <%=cm.cmsPhrase("Site neighborhood")%>
                         </h1>

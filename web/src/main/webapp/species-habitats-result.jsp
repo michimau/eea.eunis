@@ -23,6 +23,7 @@
                  ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist"%>
+<%@ page import="eionet.eunis.util.JstlFunctions" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.habitats.HabitateBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -87,6 +88,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -277,14 +279,14 @@
                       <%
                       }
                       %>
-                      <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                      <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                       <thead>
                         <tr>
                         <%
                             if (showGroup)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitateSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           </th>
                           <%
@@ -292,7 +294,7 @@
                             if (showOrder)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Order")%>
                           </th>
                           <%
@@ -300,7 +302,7 @@
                             if (showFamily)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Family")%>
                           </th>
                           <%
@@ -308,7 +310,7 @@
                             if (showScientificName)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitateSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Species scientific name")%></a>
                           </th>
                         <%
@@ -316,13 +318,13 @@
                             if (showVernacularNames && isExpanded)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                          </th>
                         <%
                             }
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Habitat type(s)")%>
                           </th>
                         </tr>
@@ -333,13 +335,12 @@
                         {
                         for(int j = 0;j<results.size();j++)
                         {
-                            String cssClass = j % 2 == 0 ? " class=\"zebraeven\"" : "";
                             ScientificNamePersist specie = (ScientificNamePersist)results.get(j);
                             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
                             // Sort this vernacular names in alphabetical order
                             Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
                       %>
-                        <tr<%=cssClass%>>
+                        <tr>
                               <%
                                   if (showGroup)
                                   {
@@ -428,7 +429,7 @@
                                 SQLUtilities sqlc = new SQLUtilities();
                                 sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                               %>
-                            <table summary="<%=cm.cms("list_habitat_types")%>" border="1" cellspacing="0" cellpadding="0">
+                            <%--<ul>--%>
                               <%
                                 for(int i=0;i<resultsHabitats.size();i++)
                                 {
@@ -436,15 +437,13 @@
                                   String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
                                   String idHabitat = (habitatName == null ? "-1" : sqlc.ExecuteSQL("SELECT ID_HABITAT FROM chm62edt_habitat WHERE   "+isGoodHabitat+" AND SCIENTIFIC_NAME='"+habitatName.replaceAll("'","''")+"'"));
                                 %>
-                                <tr>
-                                  <td style="text-align:left">
-                                    <a href="habitats/<%=idHabitat%>"><%=habitatName%></a>
-                                  </td>
-                                </tr>
+                                <p>
+                                    <a href="habitats/<%=idHabitat%>"><%= JstlFunctions.bracketsToItalics(habitatName)%></a>
+                                </p>
                                 <%
                                 }
                               %>
-                              </table>
+                              <%--</ul>--%>
                               <%
                               }
                               %>
@@ -461,7 +460,7 @@
                             if (showGroup)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitateSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           </th>
                           <%
@@ -469,7 +468,7 @@
                             if (showOrder)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Order")%>
                           </th>
                           <%
@@ -477,7 +476,7 @@
                             if (showFamily)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Family")%>
                           </th>
                           <%
@@ -485,7 +484,7 @@
                             if (showScientificName)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitateSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Species scientific name")%></a>
                           </th>
                         <%
@@ -493,13 +492,13 @@
                             if (showVernacularNames && isExpanded)
                             {
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                          </th>
                         <%
                             }
                         %>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Habitat type(s)")%>
                           </th>
                         </tr>

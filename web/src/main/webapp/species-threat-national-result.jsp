@@ -128,6 +128,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -306,20 +307,20 @@
                     <%
                         }
                     %>
-                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                  <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
                       <%
                           if (showGroup && idGroup.equalsIgnoreCase("-1"))
                           {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                         </th>
                       <%
                           } else {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Group")%>
                         </th>
                       <%
@@ -327,7 +328,7 @@
                          if(showCountry)
                          {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Country")%>
                         </th>
                       <%
@@ -335,20 +336,20 @@
                           if(showStatus)
                           {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                          <%=cm.cmsPhrase("Threat Status")%>
                         </th>
                       <%
                            }
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
                       <%
                         if (isExpanded && showVernacularNames)
                         {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                         </th>
                       <%
@@ -363,12 +364,11 @@
                       int col = 0;
                       while (it.hasNext())
                       {
-                        String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                         NationalThreatStatusPersist specie = (NationalThreatStatusPersist)it.next();
                         Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
                         // Sort this vernacular names in alphabetical order
                         Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);%>
-                          <tr<%=cssClass%>>
+                          <tr>
                             <%
                                 if (showGroup)
                                 {
@@ -447,13 +447,13 @@
                           if (showGroup && idGroup.equalsIgnoreCase("-1"))
                           {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                         </th>
                       <%
                           } else {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Group")%>
                         </th>
                       <%
@@ -461,7 +461,7 @@
                          if(showCountry)
                          {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Country")%>
                         </th>
                       <%
@@ -469,20 +469,20 @@
                           if(showStatus)
                           {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Threat Status")%>
                         </th>
                       <%
                            }
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
                       <%
                         if (isExpanded && showVernacularNames)
                         {
                       %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                         </th>
                       <%

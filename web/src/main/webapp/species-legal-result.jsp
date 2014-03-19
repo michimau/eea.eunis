@@ -148,6 +148,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -368,14 +369,14 @@
                       String urlSortString = formBean.toURLParam(sortURLFields);
                       AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(LegalSortCriteria.SORT_SCIENTIFIC_NAME);
                     %>
-                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                  <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
             <%
               if (showScientificName)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
             <%
@@ -383,7 +384,7 @@
               if (showGroup)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Group")%>
                         </th>
             <%
@@ -391,7 +392,7 @@
               if (showLegalText)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("legal text")%>
                         </th>
             <%
@@ -399,7 +400,7 @@
               if ( showAbbreviation )
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Abbreviation")%>
                         </th>
             <%
@@ -407,7 +408,7 @@
               if (showComment)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Comment")%>
                         </th>
             <%
@@ -415,7 +416,7 @@
               if (showURL)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Url")%>
                         </th>
             <%
@@ -602,7 +603,7 @@
               if (showScientificName)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
             <%
@@ -610,7 +611,7 @@
               if (showGroup)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Group")%>
                         </th>
             <%
@@ -618,7 +619,7 @@
               if (showLegalText)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("legal text")%>
                         </th>
             <%
@@ -626,7 +627,7 @@
               if ( showAbbreviation )
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Abbreviation")%>
                         </th>
             <%
@@ -634,7 +635,7 @@
               if (showComment)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Comment")%>
                         </th>
             <%
@@ -642,7 +643,7 @@
               if (showURL)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Url")%>
                         </th>
             <%

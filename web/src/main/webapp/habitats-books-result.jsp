@@ -23,6 +23,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="eionet.eunis.util.JstlFunctions" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.references.ReferencesBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -82,6 +83,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -227,38 +229,38 @@
                   speciesURLFields.addElement("criteriaSearch");
                   String search = formBean.toURLParam(speciesURLFields);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%>
                         </a>
                       </th>
-                      <th title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
+                      <th class="nosort" title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
                         <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
                           <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%>
                         </a>
                       </th>
-                      <th scope="col" width="15%" style="text-align : center;">
+                      <th class="nosort" scope="col" width="12%" style="text-align : center;">
                         <%=cm.cmsPhrase("Source type")%>
                       </th>
-                      <th scope="col" width="20%" style="text-align : center;">
+                      <th class="nosort" scope="col" width="23%" >
                         <%=cm.cmsPhrase("Habitat type(s)")%>
                       </th>
                     </tr>
@@ -272,10 +274,9 @@
                     Iterator it = results.iterator();
                     while (it.hasNext())
                     {
-                      String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                       HabitatsBooksPersist book = (HabitatsBooksPersist) it.next();
                 %>
-                    <tr<%=cssClass%>>
+                    <tr>
                       <td>
                         <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getSource()), "&nbsp;")%>
                       </td>
@@ -294,7 +295,7 @@
                       <td style="text-align : center;">
                         <%=Utilities.returnSourceValueReferences(book.getHaveSource())%>
                       </td>
-                      <td style="text-align : center;">
+                      <td>
                       <%
                         // Request parameter
                         HabitatsBooksDomain habitatsBooks = new HabitatsBooksDomain(formBean.toSearchCriteria(), database);
@@ -305,22 +306,20 @@
                         if (resultsHabitats != null && resultsHabitats.size() > 0)
                         {
                       %>
-                        <table summary="<%=cm.cms("habitat_types")%>" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse">
+                        <%--<ul>--%>
                         <%
                           for (int ii = 0; ii < resultsHabitats.size(); ii++) {
                             TableColumns tableColumns = (TableColumns) resultsHabitats.get(ii);
                             String scientificName = (String) tableColumns.getColumnsValues().get(0);
                             String idHabitat = (String) tableColumns.getColumnsValues().get(1);
                         %>
-                          <tr>
-                            <td>
-                              <a href="habitats/<%=idHabitat%>"><%=scientificName%></a>
-                            </td>
-                          </tr>
+                          <p>
+                              <a href="habitats/<%=idHabitat%>"><%=JstlFunctions.bracketsToItalics(scientificName)%></a>
+                            </p>
                         <%
                           }
                         %>
-                        </table>
+                        <%--</ul>--%>
                       <%
                         }
                       %>
@@ -333,35 +332,35 @@
                   </tbody>
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%>
                         </a>
                       </th>
-                      <th title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
+                      <th class="nosort" title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
                         <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
                           <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%>
                         </a>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%>
                         </a>
                       </th>
-                      <th scope="col" width="15%" style="text-align : center;">
+                      <th class="nosort" scope="col" width="12%" style="text-align : center;">
                         <%=cm.cmsPhrase("Source type")%>
                       </th>
-                      <th scope="col" width="20%" style="text-align : center;">
+                      <th class="nosort" scope="col" width="23%">
                         <%=cm.cmsPhrase("Habitat type(s)")%>
                       </th>
                     </tr>

@@ -84,6 +84,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -263,14 +264,14 @@
                       <%
                       }
                       %>
-                      <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                      <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                         <thead>
                           <tr>
               <%
                           if (showGroup)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             </th>
               <%
@@ -278,7 +279,7 @@
                         if (showOrder)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Order")%>
                             </th>
               <%
@@ -286,13 +287,13 @@
                           if (showFamily)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Family")%>
                             </th>
               <%
                           }
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Species scientific name")%></a>
                             </th>
                         <%
@@ -301,7 +302,7 @@
                             if (showVernacularNames)
                             {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                             </th>
               <%
@@ -310,7 +311,7 @@
                 if ( showSites )
                 {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Site(s) name(s)")%>
                             </th>
               <%
@@ -324,13 +325,12 @@
                         {
                         for( int i = 0; i < results.size(); i++ )
                         {
-                            String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
                             SpeciesSitesPersist specie = (SpeciesSitesPersist)results.get( i );
                             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
                             // Sort this vernacular names in alphabetical order
                             Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
                       %>
-                          <tr<%=cssClass%>>
+                          <tr>
                               <%
                                   if (showGroup)
                                   {
@@ -422,7 +422,7 @@
                                     SQLUtilities sqlc = new SQLUtilities();
                                     sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
               %>
-                              <table summary="<%=cm.cms("list_species")%>" border="0" cellspacing="0" cellpadding="0">
+                              <%--<ul>--%>
               <%
                                       for(int ii=0;ii<resultsSites.size();ii++)
                                       {
@@ -431,15 +431,13 @@
                                         String siteSourceDb = (String) l.get(1);
                                         String idSite = sqlc.ExecuteSQL("SELECT ID_SITE FROM chm62edt_sites WHERE NAME='"+siteName.replaceAll("'","''")+"'");
               %>
-                                      <tr>
-                                        <td style="text-align:left">
+                                      <p>
                                           <a href="sites/<%=idSite%>"><%=siteName%></a>&nbsp;(<%=siteSourceDb%>)
-                                        </td>
-                                      </tr>
+                                        </p>
                                       <%
                                       }
                                     %>
-                              </table>
+                              <%--</ul>--%>
                                   <%
                                   }
                                 %>
@@ -459,7 +457,7 @@
                           if (showGroup)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             </th>
               <%
@@ -467,7 +465,7 @@
                         if (showOrder)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Order")%>
                             </th>
               <%
@@ -475,13 +473,13 @@
                           if (showFamily)
                           {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Family")%>
                             </th>
               <%
                           }
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Species scientific name")%></a>
                             </th>
                         <%
@@ -490,7 +488,7 @@
                             if (showVernacularNames)
                             {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                             </th>
               <%
@@ -499,7 +497,7 @@
                 if ( showSites )
                 {
               %>
-                            <th scope="col">
+                            <th class="nosort" scope="col">
                               <%=cm.cmsPhrase("Site(s) name(s)")%>
                             </th>
               <%

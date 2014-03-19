@@ -102,6 +102,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-designations.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -267,14 +268,14 @@
             AbstractSortCriteria sortDesignEn = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_DESIGNATION_EN);
             AbstractSortCriteria sortCountry = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_COUNTRY);
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
             if (showSourceDB)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                       </th>
           <%
@@ -282,7 +283,7 @@
             if (showIso)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                       </th>
           <%
@@ -290,7 +291,7 @@
             if (showDesignation)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignation, sortDesignation == null )%>"><%=Utilities.getSortImageTag(sortDesignation)%><%=cm.cmsPhrase("Designation name")%></a>
                       </th>
           <%
@@ -298,7 +299,7 @@
             if (showDesignEn)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_EN%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignEn, sortDesignEn == null )%>"><%=Utilities.getSortImageTag(sortDesignEn)%><%=cm.cmsPhrase("English designation name")%></a>
                       </th>
           <%
@@ -306,7 +307,7 @@
             if (showAbreviation)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_ABREVIATION%>&amp;ascendency=<%=formBean.changeAscendency(sortAbreviation, sortAbreviation == null )%>"><%=Utilities.getSortImageTag(sortAbreviation)%><%=cm.cmsPhrase("Abbreviation")%></a>
                       </th>
           <%
@@ -318,10 +319,9 @@
           <%
             for (int i = 0; i < results.size(); i++)
             {
-              String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
               DesignationsPersist designation = (DesignationsPersist)results.get(i);
           %>
-                  <tr<%=cssClass%>>
+                  <tr>
           <%
               if (showSourceDB)
               {
@@ -406,7 +406,7 @@
             if (showSourceDB)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                       </th>
           <%
@@ -414,7 +414,7 @@
             if (showIso)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                       </th>
           <%
@@ -422,7 +422,7 @@
             if (showDesignation)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignation, sortDesignation == null )%>"><%=Utilities.getSortImageTag(sortDesignation)%><%=cm.cmsPhrase("Designation name")%></a>
                       </th>
           <%
@@ -430,7 +430,7 @@
             if (showDesignEn)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_EN%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignEn, sortDesignEn == null )%>"><%=Utilities.getSortImageTag(sortDesignEn)%><%=cm.cmsPhrase("English designation name")%></a>
                       </th>
           <%
@@ -438,7 +438,7 @@
             if (showAbreviation)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_ABREVIATION%>&amp;ascendency=<%=formBean.changeAscendency(sortAbreviation, sortAbreviation == null )%>"><%=Utilities.getSortImageTag(sortAbreviation)%><%=cm.cmsPhrase("Abbreviation")%></a>
                       </th>
           <%

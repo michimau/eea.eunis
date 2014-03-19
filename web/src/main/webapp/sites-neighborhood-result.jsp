@@ -93,6 +93,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="sites-help.jsp" pageTitle="${title}" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -331,14 +332,14 @@
             AbstractSortCriteria sortLong = formBean.lookupSortCriteria(NeighborhoodSortCriteria.SORT_LONG);
             AbstractSortCriteria sortYear = formBean.lookupSortCriteria(NeighborhoodSortCriteria.SORT_YEAR);
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
             if (showSourceDB)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                       </th>
           <%
@@ -346,20 +347,20 @@
             if (showCountry)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                       </th>
           <%
             }
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                       </th>
           <%
             if (showDesignType)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Designation type")%>
                       </th>
           <%
@@ -393,14 +394,13 @@
           <%
             for (int i = 0; i < results.size(); i++)
             {
-              String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
               NamePersist site = (NamePersist)results.get(i);
               String detailURL = "sites-neighborhood-detail.jsp?idsite=" + site.getIdSite()+"&amp;countryCode=" + site.getAreaNameEn();
               detailURL += formBean.toURLParam(navigatorFormFields);
               String longitude = SitesSearchUtility.formatLongitude(site.getLongitude());
               String latitude = SitesSearchUtility.formatLatitude(site.getLatitude());
           %>
-                  <tr<%=cssClass%>>
+                  <tr>
           <%
               if (showSourceDB)
               {
@@ -485,7 +485,7 @@
             if (showSourceDB)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                       </th>
           <%
@@ -493,20 +493,20 @@
             if (showCountry)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                       </th>
           <%
             }
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                       </th>
           <%
             if (showDesignType)
             {
           %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Designation type")%>
                       </th>
           <%

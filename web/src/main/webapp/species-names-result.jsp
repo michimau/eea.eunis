@@ -38,16 +38,16 @@
   	boolean showVernacularNames = Utilities.checkedStringToBoolean(formBean.getShowVernacularNames(), NameBean.HIDE);
   	boolean searchSynonyms = Utilities.checkedStringToBoolean( formBean.getSearchSynonyms(), false );
   	boolean newName = Utilities.checkedStringToBoolean( formBean.getNewName(), false );
-  	boolean searchVernacular = formBean.getSearchVernacular().booleanValue();
+  	boolean searchVernacular = formBean.getSearchVernacular();
   	boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );
   	// Initialization
   	String languageReq = formBean.getLanguage();
-  	boolean isAnyLanguage = null != languageReq && languageReq.equalsIgnoreCase( "any" ) ? true : false;
+  	boolean isAnyLanguage = null != languageReq && languageReq.equalsIgnoreCase("any");
   	int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   	int typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue());
   	NamePaginator paginator = null;
   	// Coming from form 1
-  	if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
+  	if (NameSearchCriteria.CRITERIA_SCIENTIFIC == typeForm){
       	String cqs = "" + formBean.getComeFromQuickSearch();
       	boolean showInvalidatedSpecies = SessionManager.getShowEUNISInvalidatedSpecies();
       	if(newName){
@@ -65,7 +65,7 @@
       	}
   	}
   	// Coming from form 2
-  	if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm){
+  	if (NameSearchCriteria.CRITERIA_VERNACULAR == typeForm){
     	if (isAnyLanguage){
       		paginator = new NamePaginator(new VernacularNameAnyDomain(formBean.toSearchCriteria(),
                                                                 formBean.toSortCriteria(),
@@ -103,7 +103,7 @@
 	String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-names.jsp?" + formBean.toURLParam(reportFields) + "')";
 	if( results.isEmpty() && !newName){
 		String sname;
-    	if(NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
+    	if(NameSearchCriteria.CRITERIA_SCIENTIFIC == typeForm){
        		sname = formBean.getScientificName();
     	} else {
 	      	sname = formBean.getVernacularName();
@@ -132,10 +132,11 @@
   	}
 %>
 
-<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("species_names-result_pageTitle") %>'></c:set>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("species_names-result_pageTitle") %>'/>
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     	<script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
 
     </stripes:layout-component>
@@ -150,13 +151,13 @@
                         				<%=cm.cmsPhrase("Search by name results")%>
                       				<%
                       				} else {
-                        				if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm) {
+                        				if (NameSearchCriteria.CRITERIA_SCIENTIFIC == typeForm) {
                        				%>
                              				<%=cm.cmsPhrase("Search by name results")%>
                        				<%
                           				}
                           				// Coming from form 2
-                          				if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm) {
+                          				if (NameSearchCriteria.CRITERIA_VERNACULAR == typeForm) {
                         			%>
                              				<%=cm.cmsPhrase("Vernacular names")%>
                         			<%
@@ -187,7 +188,7 @@
 	                											String searchCriteria = "";
 	                											String name = "";
 	                											Integer oper = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-	                											if(typeForm == NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue()){
+	                											if(typeForm == NameSearchCriteria.CRITERIA_SCIENTIFIC){
 	                          										if(searchVernacular){
 	                    												searchCriteria = "name";
 	                  												} else {
@@ -195,7 +196,7 @@
 	                  												}
 	                  												name = formBean.getScientificName();
 	                											}
-	                											if(typeForm == NameSearchCriteria.CRITERIA_VERNACULAR.intValue()){
+	                											if(typeForm == NameSearchCriteria.CRITERIA_VERNACULAR){
 				                          							searchCriteria = "vernacular name";
 				                          							name = formBean.getVernacularName();
 	                											}
@@ -386,20 +387,20 @@
                       						<%
                         					}
                       						%>
-                      						<table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable">
+                      						<table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable listing">
                         						<thead>
                         							<tr>
             								<%
                         								if (showGroup) {
                         									if(newName){
                         					%>
-                        										<th scope="col">
+                        										<th scope="col" class="nosort">
 	                                								<%=cm.cmsPhrase("Group")%>
 	                          									</th>
                         					<%                        										
                         									} else {
             								%>
-	                          									<th class="sorted" scope="col">
+	                          									<th class="sorted" scope="col" class="nosort">
 	                            									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
 	                            									<%=cm.cmsTitle("species_names-result_07_Title")%>
 	                          									</th>
@@ -408,21 +409,21 @@
                         								}
                         								if (showOrder) {
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                                 								<%=cm.cmsPhrase("Order")%>
                           									</th>
             								<%
                         								}
                         								if (showFamily) {
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<%=cm.cmsPhrase("Family")%>
                           									</th>
             								<%
                         								}
                         								if (showScientificName)	{
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                             									<%=cm.cmsTitle("species_names-result_07_Title")%>
                           									</th>
@@ -431,13 +432,13 @@
                         								if (showValidName) {
                         									if(newName){
                         					%>
-                        										<th scope="col">
+                        										<th scope="col" class="nosort">
 	                            									<%=cm.cmsPhrase("Valid name")%>
 	                          									</th>
                         					<%				
                         									} else {
             								%>
-	                          									<th scope="col">
+	                          									<th scope="col" class="nosort">
 	                            									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsPhrase("Valid name")%></a>
 	                            									<%=cm.cmsTitle("species_names-result_07_Title")%>
 	                          									</th>
@@ -446,7 +447,7 @@
                         								}
                         								if (showVernacularNames && isExpanded){
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                           									</th>
             								<%
@@ -457,19 +458,18 @@
             								<%
                         					Iterator it = results.iterator();
                         					// Coming from first form
-                        					if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
+                        					if (NameSearchCriteria.CRITERIA_SCIENTIFIC == typeForm){
                         						%>
                         						<tbody>
                         						<%
                           						int col = 0;
                           						while ( it.hasNext() ){
-                            						String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                             						ScientificNamePersist specie = ( ScientificNamePersist ) it.next();
 
 						                            Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
 						                            // Sort this vernacular names in alphabetical order
 						                            Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );%>
-                        							<tr<%=cssClass%>>
+                        							<tr>
                         					<%
                           								if ( showGroup ){
                         					%>
@@ -573,19 +573,18 @@
                         					<%
                         					}
                         					// Coming from second form - ANY LANGUAGE
-                        					if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm && isAnyLanguage){
+                        					if (NameSearchCriteria.CRITERIA_VERNACULAR == typeForm && isAnyLanguage){
                         						%>
                         						<tbody>
                         						<%
                           						int col = 0;
                           						while (it.hasNext()){
-                            						String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
 						                            VernacularNameAnyPersist specie = (VernacularNameAnyPersist)it.next();
 						                            Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
 						                            // Sort this vernacular names in alphabetical order
 						                            Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
             								%>
-                          								<tr<%=cssClass%>>
+                          								<tr>
             								<%
                           								if (showGroup){
             								%>
@@ -615,7 +614,7 @@
                             								</td>
             								<%
                           								}
-                            							boolean isValid = specie.getValidName() != null && specie.getValidName().intValue() == 1 ? true : false;
+                            							boolean isValid = specie.getValidName() != null && specie.getValidName().intValue() == 1;
                             							if ( showValidName ){
                               								if ( isValid ){
             								%>
@@ -649,15 +648,15 @@
                               												String vernacularName = aVernName.getName();
 											                              	String searchedName = formBean.getVernacularName();
 											                              	String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
-											                              	int relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS).intValue();
+											                              	int relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
 											                              	if ( null != searchedName ) {
-                                												if ( relationOp == Utilities.OPERATOR_IS.intValue() && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
+                                												if ( relationOp == Utilities.OPERATOR_IS && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
                                   													bgColor1 = "#BBBBFF";
                                 												}
-                                												if ( relationOp == Utilities.OPERATOR_CONTAINS.intValue() && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
+                                												if ( relationOp == Utilities.OPERATOR_CONTAINS && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
                                   													bgColor1 = "#BBBBFF";
                                 												}
-                                												if ( relationOp == Utilities.OPERATOR_STARTS.intValue() && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
+                                												if ( relationOp == Utilities.OPERATOR_STARTS && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
                                   													bgColor1 = "#BBBBFF";
                                 												}
                               												}
@@ -687,18 +686,17 @@
         									<%
                         						}
                           						// Coming from second form - A LANGUAGE
-                          						if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm && !isAnyLanguage){
+                          						if (NameSearchCriteria.CRITERIA_VERNACULAR == typeForm && !isAnyLanguage){
                             						int col = 0;
             								%>
                           							<tbody>
                         					<%
                             						while (it.hasNext()){
-                              							String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                               							VernacularNamePersist specie = (VernacularNamePersist)it.next();
                               							Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
                               							// Sort this vernacular names in alphabetical order
                               							Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);%>
-                              							<tr<%=cssClass%>>
+                              							<tr>
             								<%
                               								if (showGroup){
             								%>
@@ -760,17 +758,17 @@
                 																String specieLangName = aVernName.getLanguage();
                 																String vernacularName = aVernName.getName();
                 																String searchedName = formBean.getVernacularName();
-                																int relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS).intValue();
+                																int relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
                 																if (language.toLowerCase().equalsIgnoreCase( specieLangName.toLowerCase()) || language.toLowerCase().equalsIgnoreCase("english") ){
                   																	String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
                   																	if ( null != searchedName ){
-                    																	if ( relationOp == Utilities.OPERATOR_IS.intValue() && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
+                    																	if ( relationOp == Utilities.OPERATOR_IS && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
                       																		bgColor1 = "#BBBBFF";
                     																	}
-                    																	if ( relationOp == Utilities.OPERATOR_CONTAINS.intValue() && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
+                    																	if ( relationOp == Utilities.OPERATOR_CONTAINS && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
                       																		bgColor1 = "#BBBBFF";
                     																	}
-                    																	if ( relationOp == Utilities.OPERATOR_STARTS.intValue() && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
+                    																	if ( relationOp == Utilities.OPERATOR_STARTS && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
                     																		bgColor1 = "#BBBBFF";
                     																	}
                   																	}
@@ -807,13 +805,13 @@
                         								if (showGroup){
                         									if(newName){
                         					%>
-                        										<th scope="col">
+                        										<th scope="col" class="nosort">
 	                                								<%=cm.cmsPhrase("Group")%>
 	                          									</th>
                         					<%				
                         									} else {
             								%>
-	                          									<th scope="col">
+	                          									<th scope="col" class="nosort">
 	                            									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
 	                            									<%=cm.cmsTitle("species_names-result_07_Title")%>
 	                          									</th>
@@ -822,21 +820,21 @@
                         								}
                         								if (showOrder){
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                                 								<%=cm.cmsPhrase("Order")%>
                           									</th>
             								<%
                         								}
                         								if (showFamily){
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<%=cm.cmsPhrase("Family")%>
                           									</th>
             								<%
                         								}
                         								if (showScientificName){
             								%>	
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
 									                            <%=cm.cmsTitle("species_names-result_07_Title")%>
                           									</th>
@@ -845,13 +843,13 @@
                         								if (showValidName){
                         									if(newName){
                         					%>
-                        										<th scope="col">
+                        										<th scope="col" class="nosort">
 	                            									<%=cm.cmsPhrase("Valid name")%>
 	                          									</th>
                         					<%				
                         									} else {
             								%>
-	                          									<th scope="col">
+	                          									<th scope="col" class="nosort">
 	                            									<a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsPhrase("Valid name")%></a>
 	                            									<%=cm.cmsTitle("species_names-result_07_Title")%>
 	                          									</th>
@@ -860,7 +858,7 @@
                         								}
                         								if (showVernacularNames && isExpanded){
             								%>
-                          									<th scope="col">
+                          									<th scope="col" class="nosort">
                             									<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                           									</th>
             								<%

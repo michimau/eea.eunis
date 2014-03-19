@@ -81,6 +81,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -244,30 +245,30 @@
                     speciesURLFields.addElement("criteriaSearch");
                     String search = formBean.toURLParam(speciesURLFields);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>"><%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>"><%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>"><%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Species name(s)")%>
                       </th>
                     </tr>
@@ -314,7 +315,7 @@
                             if (resultsSpecies != null && resultsSpecies.size() > 0)
                             {
                         %>
-                        <table summary="<%=cm.cms("list_species")%>" border="0" cellspacing="0" cellpadding="0">
+                        <%--<ul>--%>
                             <%
                                 for (int ii = 0; ii < resultsSpecies.size(); ii++)
                                 {
@@ -322,16 +323,14 @@
                                     String scientificName = Utilities.treatURLSpecialCharacters(specie.getName());
                                     Integer idSpecies = specie.getId();
                             %>
-                          <tr>
-                            <td>
+                            <p>
                               <a href="species/<%=idSpecies%>" title="<%=cm.cms("species_books-result_23_Title")%>"><%=scientificName%></a>
                               <%=cm.cmsTitle("species_books-result_23_Title")%>
-                            </td>
-                          </tr>
+                            </p>
                             <%
                                 }
                             %>
-                        </table>
+                        <%--</ul>--%>
                         <%
                             }
                         %>
@@ -343,27 +342,27 @@
                   </tbody>
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>"><%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>"><%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>"><%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%></a>
                         <%=cm.cmsTitle("sort_by_column")%>
                       </th>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Species name(s)")%>
                       </th>
                     </tr>

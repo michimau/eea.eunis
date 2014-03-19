@@ -146,6 +146,8 @@ public class SitesSearchUtility {
      * @return The formatted latitude
      */
     public static String formatLatitude(String latitude){
+        if(latitude != null && latitude.endsWith("000"))
+            return latitude.substring(0, latitude.length()-3);
         return latitude;
     }
 
@@ -155,6 +157,8 @@ public class SitesSearchUtility {
      * @return The formatted longitude
      */
     public static String formatLongitude(String longitude){
+        if(longitude != null && longitude.endsWith("000"))
+            return longitude.substring(0, longitude.length()-3);
         return longitude;
     }
 

@@ -23,6 +23,7 @@
                  ro.finsiel.eunis.search.habitats.legal.LegalSortCriteria,
                  java.util.List" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="eionet.eunis.util.JstlFunctions" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.legal.LegalBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -83,6 +84,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="habitats-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-result.js" type="text/javascript"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -236,29 +238,29 @@
                   AbstractSortCriteria legalTxtCrit = formBean.lookupSortCriteria(LegalSortCriteria.SORT_LEGAL_INSTRUMENTS);
                   AbstractSortCriteria sortLevel = formBean.lookupSortCriteria(LegalSortCriteria.SORT_LEVEL);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsPhrase("Level")%></a>
                       </th>
                       <%
                         if (showCode)
                         {
                       %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsPhrase("EUNIS Code")%></a>
                       </th>
                       <%
                         }
                       %>
                       <%if (showScientificName) {%>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%></a>
                       </th>
                       <%}%>
                       <%if (showLegalText) {%>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Legal text")%>
                       </th>
                       <%}%>
@@ -268,11 +270,10 @@
                 <%
                   for (int i = 0; i < results.size(); i++)
                   {
-                    String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
                     EUNISLegalPersist habitat = (EUNISLegalPersist) results.get(i);
                     int level = habitat.getHabLevel().intValue();
                 %>
-                    <tr<%=cssClass%>>
+                    <tr>
                       <td style="white-space : nowrap;">
                 <%
                     for (int iter = 0; iter < level; iter++)
@@ -294,27 +295,24 @@
                     {
                   %>
                       <td>
-                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=JstlFunctions.bracketsToItalics(habitat.getScientificName())%></a>
                       </td>
                   <%}%>
                   <%if (showLegalText) {%>
                       <td>
-                        <table summary="<%=cm.cms("legal_instruments")%>" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <%--<ul>--%>
                       <%
                         List legalTexts = HabitatsSearchUtility.findHabitatLegalInstrument(habitat.getIdHabitat());
                         for (int j = 0; j < legalTexts.size(); j++) {
-                          String legalBgColor = (0 == j % 2) ? "#FFFFFF" : "#EEEEEE";
                           EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
                       %>
-                          <tr bgcolor="<%=legalBgColor%>">
-                            <td width="20%">
+                            <p>
                               <%=legalText.getLegalName()%>
-                            </td>
-                          </tr>
+                            </p>
                       <%
                         }
                       %>
-                        </table>
+                        <%--</ul>--%>
                       </td>
                   <%}%>
                     </tr>
@@ -322,26 +320,26 @@
                   </tbody>
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsPhrase("Level")%></a>
                       </th>
                       <%
                         if (showCode)
                         {
                       %>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsPhrase("EUNIS Code")%></a>
                       </th>
                       <%
                         }
                       %>
                       <%if (showScientificName) {%>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%></a>
                       </th>
                       <%}%>
                       <%if (showLegalText) {%>
-                      <th scope="col">
+                      <th class="nosort" scope="col">
                         <%=cm.cmsPhrase("Legal text")%>
                       </th>
                       <%}%>

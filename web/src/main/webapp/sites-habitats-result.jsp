@@ -21,6 +21,7 @@
                  ro.finsiel.eunis.search.*,
                  ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
+<%@ page import="eionet.eunis.util.JstlFunctions" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.habitats.HabitatBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -100,6 +101,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -246,14 +248,14 @@
               AbstractSortCriteria sortLong = formBean.lookupSortCriteria(HabitatSortCriteria.SORT_LONG);
             %>
                   <br />
-                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                  <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
             <%
               if (showSourceDB)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                         </th>
             <%
@@ -261,7 +263,7 @@
               if (showDesignType)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Designation type")%>
                         </th>
             <%
@@ -269,7 +271,7 @@
               if (showSiteCode)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Site code")%>
                         </th>
             <%
@@ -277,7 +279,7 @@
               if (showName)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                         </th>
             <%
@@ -296,7 +298,7 @@
               if (showHabitat)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Habitat type(s)")%>
                         </th>
             <%
@@ -392,7 +394,7 @@
                     SQLUtilities sqlc = new SQLUtilities();
                     sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
             %>
-                        <table border="0" cellspacing="0" cellpadding="0" summary="<%=cm.cms("habitat_types")%>">
+                        <ul>
             <%
                     for(int ii=0;ii<resultsHabitats.size();ii++)
                     {
@@ -400,15 +402,13 @@
                       String habitatName = (String) resultsHabitats.get(ii);
                       String idHabitat = sqlc.ExecuteSQL("SELECT ID_HABITAT FROM chm62edt_habitat WHERE    "+isGoodHabitat+" AND SCIENTIFIC_NAME='"+habitatName+"'");
             %>
-                          <tr>
-                            <td>
-                              <a href="habitats/<%=idHabitat%>"><%=habitatName%></a>
-                            </td>
-                          </tr>
+                      <li>
+                              <a href="habitats/<%=idHabitat%>"><%=JstlFunctions.bracketsToItalics(habitatName)%></a>
+                        </li>
             <%
                     }
             %>
-                        </table>
+                        </ul>
             <%
                   }
             %>
@@ -427,7 +427,7 @@
               if (showSourceDB)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                         </th>
             <%
@@ -435,7 +435,7 @@
               if (showDesignType)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Designation type")%>
                         </th>
             <%
@@ -443,7 +443,7 @@
               if (showSiteCode)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Site code")%>
                         </th>
             <%
@@ -451,7 +451,7 @@
               if (showName)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                         </th>
             <%
@@ -470,7 +470,7 @@
               if (showHabitat)
               {
             %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=cm.cmsPhrase("Habitat type(s)")%>
                         </th>
             <%

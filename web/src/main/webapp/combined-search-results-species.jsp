@@ -74,6 +74,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     </stripes:layout-component>
     <stripes:layout-component name="contents">
 
@@ -258,14 +259,14 @@
                   expand.addElement("pageSize");
                   expand.addElement("currentPage");
                   String expandURL = formBean.toURLParam(expand);%>
-                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                  <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
                         <%
                           if(showGroup)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                         </th>
                         <%
@@ -275,7 +276,7 @@
                           if(showOrder)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsPhrase("Order")%></a>
                         </th>
                         <%
@@ -285,7 +286,7 @@
                           if(showFamily)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsPhrase("Family")%></a>
                         </th>
                         <%
@@ -295,7 +296,7 @@
                           if(showScientificName)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
                         <%
@@ -305,7 +306,7 @@
                           if(showVernacularName)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
                           <%=cm.cmsPhrase("Vernacular names")%>
                         </th>
@@ -315,7 +316,7 @@
                         <%
                           if(showThreat || showDistribution || showReferences) {
                         %>
-                        <th scope="col" style="text-align : center;">
+                        <th class="nosort" scope="col" style="text-align : center;">
                           <%=cm.cmsPhrase("Other Info")%>
                         </th>
                         <%
@@ -446,7 +447,7 @@
                           if(showGroup)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                         </th>
                         <%
@@ -456,7 +457,7 @@
                           if(showOrder)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsPhrase("Order")%></a>
                         </th>
                         <%
@@ -466,7 +467,7 @@
                           if(showFamily)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsPhrase("Family")%></a>
                         </th>
                         <%
@@ -476,7 +477,7 @@
                           if(showScientificName)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                         </th>
                         <%
@@ -486,7 +487,7 @@
                           if(showVernacularName)
                           {
                         %>
-                        <th scope="col">
+                        <th class="nosort" scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
                           <%=cm.cmsPhrase("Vernacular names")%>
                         </th>
@@ -496,7 +497,7 @@
                         <%
                           if(showThreat || showDistribution || showReferences) {
                         %>
-                        <th scope="col" style="text-align : center;">
+                        <th class="nosort" scope="col" style="text-align : center;">
                           <%=cm.cmsPhrase("Other Info")%>
                         </th>
                         <%

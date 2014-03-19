@@ -37,7 +37,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
-
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
         <script language="JavaScript" type="text/javascript">
            function MM_jumpMenuCountry(targ,selObj,restore){ //v3.0
              eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");

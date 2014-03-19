@@ -78,6 +78,7 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" helpLink="species-help.jsp" pageTitle="${title}" downloadLink="<%= tsvLink%>" btrail="<%= location%>">
     <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-result.js"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -286,10 +287,10 @@
 //            AbstractSortCriteria sortFamily = formBean.lookupSortCriteria(SynonymsSortCriteria.SORT_FAMILY);
                                     AbstractSortCriteria sortSciName = formBean.lookupSortCriteria(SynonymsSortCriteria.SORT_SCIENTIFIC_NAME);
                         %>
-                    <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
+                    <table class="sortable listing" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                       <thead>
                         <tr>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
             <%
             if (formBean.getGroupName().equals("0"))
                 {
@@ -304,10 +305,10 @@
                 }
             %>
                           </th>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Synonym")%></a>
                           </th>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Species scientific name")%>
                           </th>
                         </tr>
@@ -318,10 +319,9 @@
                         int col = 0;
                         while (it.hasNext())
                         {
-                          String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                           ScientificNamePersist specie = (ScientificNamePersist)it.next();
             %>
-                        <tr<%=cssClass%>>
+                        <tr>
                           <td>
                             <%=Utilities.treatURLSpecialCharacters(Utilities.formatString(specie.getGrName()))%>
                           </td>
@@ -340,7 +340,7 @@
                            if (resultsSpecies != null && resultsSpecies.size() > 0)
                          {
                          %>
-                            <table summary="<%=cm.cms("list_species")%>" width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <%--<ul>--%>
                          <%
                            for(int ii=0;ii<resultsSpecies.size();ii++)
                            {
@@ -348,15 +348,13 @@
                              String scientificName = (String)tableColumns.getColumnsValues().get(0);
                              Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
                            %>
-                              <tr>
-                                <td>
+                               <p>
                                   <a href="species/<%=idSpecies%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
-                                </td>
-                              </tr>
+                               </p>
                            <%
                            }
                          %>
-                            </table>
+                            <%--</ul>--%>
                          <%
                          }
                          %>
@@ -368,7 +366,7 @@
                       </tbody>
                       <thead>
                         <tr>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
             <%
             if (formBean.getGroupName().equals("0"))
                 {
@@ -383,10 +381,10 @@
                 }
             %>
                           </th>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Synonym")%></a>
                           </th>
-                          <th scope="col">
+                          <th class="nosort" scope="col">
                             <%=cm.cmsPhrase("Species scientific name")%>
                           </th>
                         </tr>

@@ -221,7 +221,17 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
             if (speciesName != null && speciesName.length() > 1) {
                 String three = speciesName.substring(0, 3);
 
-                list_all = this.findWhere("A.SCIENTIFIC_NAME LIKE '%" + three + "%'");
+                // get the other criteria (but without the main criteria)
+                StringBuilder filterSQL = new StringBuilder();
+                for (AbstractSearchCriteria aSearchCriteria : searchCriteria) {
+                    NameSearchCriteria aCriteria = (NameSearchCriteria) aSearchCriteria;
+                    if (!aCriteria.isMainCriteria()) {
+                        filterSQL.append(" AND ");
+                        filterSQL.append(aCriteria.toSQL());
+                    }
+                }
+
+                list_all = this.findWhere("A.SCIENTIFIC_NAME LIKE '%" + three + "%'" + filterSQL);
                 List<ScientificNamePersist>[] array = new ArrayList[10];
 
                 for (ScientificNamePersist specie : list_all) {

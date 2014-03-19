@@ -2149,15 +2149,9 @@ public final class Utilities {
         if (str == null) {
             return "";
         }
-        char ch = (char) 39;
-        char chspace = (char) 32;
-
         str = str.replaceAll("\"", replacement).replaceAll("'", replacement)
-                .replaceAll("\"", replacement).replaceAll("´", replacement)
-                .replaceAll("`", replacement).replaceAll("‘", replacement)
-                .replaceAll("'", replacement).replaceAll("\u0027", replacement);
-        str = str.replace(ch, chspace);
-
+                .replaceAll("´", replacement)
+                .replaceAll("`", replacement).replaceAll("‘", replacement);
         return str;
     }
 

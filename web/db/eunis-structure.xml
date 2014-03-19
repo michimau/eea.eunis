@@ -8,7 +8,6 @@
       Potentially with -Dliquibase.dropFirst=true
       To roll back do: -Dliquibase.rollbackCount=2 liquibase:rollback
 
-     $Id$
  -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -18,6 +17,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
     <property name="id_habitat.type" value="int(16)"/>
     <property name="id_nature_object.type" value="int(11)"/>
     <property name="id_dc.type" value="int(11)"/>
+    <property name="text" value=" text" dbms="mysql"/>
 
     <changeSet author="roug" id="rev-1">
         <sql>CREATE TABLE chm62edt_abundance (
@@ -2107,6 +2107,44 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         <rollback>
             <dropColumn tableName="chm62edt_species" columnName="CODE_2000"/>
         </rollback>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-128">
+        <comment>Expand the code and name for new activity codes</comment>
+        <modifyDataType tableName="chm62edt_natura2000_activity_code" columnName="ID_ACTIVITY_CODE" newDataType="VARCHAR(9) NOT NULL"/>
+        <modifyDataType tableName="chm62edt_natura2000_activity_code" columnName="NAME" newDataType="VARCHAR(128)"/>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-129" context="seedcontent">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+    SELECT COUNT(*) FROM chm62edt_natura2000_activity_code WHERE ID_ACTIVITY_CODE LIKE "1%"
+      ]]></sqlCheck>
+        </preConditions>
+        <comment>Load the old NATURA2000 activities</comment>
+        <loadData quotchar='"' separator="," file="db/activities-old.csv" tableName="chm62edt_natura2000_activity_code">
+            <column name="ID_ACTIVITY_CODE"/>
+            <column name="NAME"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-130" context="seedcontent">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+    SELECT COUNT(*) FROM chm62edt_natura2000_activity_code WHERE ID_ACTIVITY_CODE LIKE "A04%"
+      ]]></sqlCheck>
+        </preConditions>
+        <comment>Load the new NATURA2000 activities</comment>
+        <loadData quotchar='"' separator="," file="db/activities.csv" tableName="chm62edt_natura2000_activity_code">
+            <column name="ID_ACTIVITY_CODE"/>
+            <column name="NAME"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-131">
+        <comment>Expand the TITLE to fit new annex titles</comment>
+        <!-- Note: If we just set the new data type to "text", then liquibase substitutes 'LONGTEXT' -->
+        <modifyDataType tableName="dc_index" columnName="TITLE" newDataType="text COMMENT 'Document title'"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -2,6 +2,7 @@ package ro.finsiel.eunis.jrfTables.species.names;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
@@ -12,7 +13,7 @@ import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -256,6 +257,27 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
                     List<ScientificNamePersist> list = array[i];
 
                     if (list != null) {
+                        // order the results by the Jaro Winkler Distance (#18590)
+                        Collections.sort(list, new Comparator<ScientificNamePersist>() {
+                            @Override
+                            public int compare(ScientificNamePersist o1, ScientificNamePersist o2) {
+                                String n1 = o1.getScientificName();
+                                String n2 = o2.getScientificName();
+                                if(n1 != null && n2 != null) {
+                                    // this gives a higher ratio to the common prefix
+                                    double d1 = StringUtils.getJaroWinklerDistance(speciesName, n1) * org.apache.commons.lang3.StringUtils.getCommonPrefix(speciesName, n1).length();
+                                    double d2 = StringUtils.getJaroWinklerDistance(speciesName, n2) * org.apache.commons.lang3.StringUtils.getCommonPrefix(speciesName, n2).length();
+
+                                    if(d1 == d2) {  // if the score is the same, order alphabetically
+                                        return n1.compareTo(n2);
+                                    }
+
+                                    // the comparison (d2, d1) is correct, because the "distance" is bigger the closer the words are
+                                    return Double.compare(d2, d1);
+                                }
+                                return 0;
+                            }
+                        });
                         ret.addAll(list);
                     }
                 }

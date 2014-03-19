@@ -641,12 +641,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       out.println("<option"+selected+" value=\"Longitude\">"+cm.cms("longitude")+"</option>");
                       if(val.equalsIgnoreCase("Latitude")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Latitude\">"+cm.cms("latitude")+"</option>");
-                      if(val.equalsIgnoreCase("MinimumAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"MinimumAltitude\">"+cm.cms("min_altitude")+"</option>");
-                      if(val.equalsIgnoreCase("MaximumAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"MaximumAltitude\">"+cm.cms("max_altitude")+"</option>");
-                      if(val.equalsIgnoreCase("MeanAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"MeanAltitude\">"+cm.cms("mean_altitude")+"</option>");
                       if(val.equalsIgnoreCase("Designation")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Designation\">"+cm.cms("designation_type")+"</option>");
                       if(val.equalsIgnoreCase("HumanActivity")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -664,9 +658,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <%=cm.cmsInput("size")%>
                     <%=cm.cmsInput("longitude")%>
                     <%=cm.cmsInput("latitude")%>
-                    <%=cm.cmsInput("min_altitude")%>
-                    <%=cm.cmsInput("max_altitude")%>
-                    <%=cm.cmsInput("mean_altitude")%>
                     <%=cm.cmsInput("designation_type")%>
                     <%=cm.cmsInput("human_activity")%>
                     <%=cm.cmsInput("motivation")%>

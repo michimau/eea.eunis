@@ -4,7 +4,8 @@
 
 <stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="designations/${actionBean.idGeo}:${actionBean.idDesig}" pageTitle="${actionBean.pageTitle}">
 	<stripes:layout-component name="head">
-		<script language="JavaScript" type="text/javascript">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
+        <script language="JavaScript" type="text/javascript">
 		    //<![CDATA[
 		    function MM_openBrWindow(theURL,winName,features) { //v2.0
 		      window.open(theURL,winName,features);

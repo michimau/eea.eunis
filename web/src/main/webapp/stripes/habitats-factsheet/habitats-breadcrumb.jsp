@@ -5,12 +5,12 @@
 <c:if test="${!empty actionBean.factsheet.otherHabitatsRelations}">
 
     <div id="portal-breadcrumbs" class='species-taxonomy'>
-        <span id="breadcrumbs-home">
-            <a href="${actionBean.context.domainName}">EUNIS Home</a>
-            <span class="breadcrumbSeparator">
-                &gt;
-            </span>
-        </span>
+        <%--<span id="breadcrumbs-home">--%>
+            <%--<a href="${actionBean.context.domainName}">EUNIS Home</a>--%>
+            <%--<span class="breadcrumbSeparator">--%>
+                <%--&gt;--%>
+            <%--</span>--%>
+        <%--</span>--%>
 
         <span id="breadcrumbs-0" dir="ltr">
             <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>

@@ -1,11 +1,11 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-    <c:if test="${!empty actionBean.factsheet.otherClassifications || !empty actionBean.factsheet.otherHabitatsRelations}">
+    <c:if test="${!empty actionBean.factsheet.otherClassifications}">
         <h3>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}
         </h3>
-        <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}" class="listing fullwidth">
+        <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}" class="listing fullwidth" style="display: table">
             <col style="width:30%"/>
             <col style="width:15%"/>
             <col style="width:40%"/>
@@ -27,9 +27,8 @@
             </tr>
             </thead>
             <tbody>
-            <c:if test="${!empty actionBean.factsheet.otherClassifications}">
-                <c:forEach items="${actionBean.factsheet.otherClassifications}" var="classif" varStatus="loop">
-                    <tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+                <c:forEach items="${actionBean.otherClassifications}" var="classif" varStatus="loop">
+                    <tr>
                         <td>
                                 ${eunis:formatString(eunis:treatURLSpecialCharacters(classif.name), '&nbsp;')}
                         </td>
@@ -44,11 +43,10 @@
                         </td>
                     </tr>
                 </c:forEach>
-            </c:if>
             </tbody>
         </table>
     </c:if>
 
-    For relation to plant communities (syntaxa), see Vegetation types
+    ${eunis:cmsPhrase(actionBean.contentManagement, 'For relation to plant communities (syntaxa), see Vegetation types')}
 
 </stripes:layout-definition>

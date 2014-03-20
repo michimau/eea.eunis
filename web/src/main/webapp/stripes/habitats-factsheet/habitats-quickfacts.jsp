@@ -50,7 +50,7 @@
                 </li>
                 <li>
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by')}:
-                    <span class="bold">EU Habitats Directive, CoE Bern Convention</span>
+                    <span class="bold">[not implemented] EU Habitats Directive, CoE Bern Convention </span>
                     <%--todo--%>
                 </li>
                 <li>

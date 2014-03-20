@@ -62,7 +62,7 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 public class CountryFactsheetActionBean extends AbstractStripesAction {
 
     /**  */
-    private static final String FACTSHEET_LAYOUT_JSP = "/stripes/country-factsheet.layout.jsp";
+    private static final String FACTSHEET_LAYOUT_JSP = "/stripes/countries-factsheet/country-factsheet.layout.jsp";
 
     /** The tables listed on this factsheet. */
     public static final Tab[] TABS = {Tab.GENERAL, Tab.DESIG_TYPES, Tab.SPECIES, Tab.HABITAT_TYPES};

@@ -1492,7 +1492,31 @@ public class HabitatsFactsheet {
         try {
             result = new OtherClassificationDomain().findWhere(
                     "ID_HABITAT='" + idHabitat
-                    + "' AND LEGAL=0 ORDER BY SORT_ORDER");
+                    + "' AND LEGAL=0  AND current_data=1 ORDER BY SORT_ORDER");
+        } catch (Exception ex) {
+            ex.printStackTrace(System.err);
+            result = new Vector();
+        }
+        return result;
+    }
+
+    /**
+     * The representation of current habitat in other classifications.
+     *
+     * @return A List of OtherClassificationPersist objects.
+     * @throws InitializationException if idHabitat was null during object construction.
+     */
+    public List getHistory() throws InitializationException {
+        if (null == idHabitat) {
+            throw new InitializationException(
+                    "idHabitat was null. Cannot retrieve information.");
+        }
+        List result = new Vector();
+
+        try {
+            result = new OtherClassificationDomain().findWhere(
+                    "ID_HABITAT='" + idHabitat
+                            + "' AND LEGAL=0 AND current_data=0 ORDER BY SORT_ORDER");
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             result = new Vector();

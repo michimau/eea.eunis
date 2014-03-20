@@ -19,6 +19,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
@@ -116,6 +117,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusQueryResultRows =
             new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
 
+    private List history = new ArrayList();
+    private List otherClassifications = new ArrayList();
+
     /**
      * RDF output is served from elsewhere.
      */
@@ -204,7 +208,14 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
-        return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
+        try {
+            history = factsheet.getHistory();
+            otherClassifications = factsheet.getOtherClassifications();
+        } catch (InitializationException e) {
+            e.printStackTrace();
+        }
+
+        return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
     }
 
     /**
@@ -536,4 +547,19 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return conservationStatusQueryResultRows;
     }
 
+    /**
+     * Returns the list of historical classifications
+     * @return
+     */
+    public List getHistory() {
+        return history;
+    }
+
+    /**
+     * Returns the list of current other classifications
+     * @return
+     */
+    public List getOtherClassifications() {
+        return otherClassifications;
+    }
 }

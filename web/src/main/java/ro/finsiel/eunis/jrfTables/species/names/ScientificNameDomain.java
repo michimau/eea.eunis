@@ -120,8 +120,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 new StringColumnSpec("ID_TAXONOMY", "getIdTaxcode",
                 "setIdTaxcode", DEFAULT_TO_NULL));
 
-        if(searchVernacular)
-            this.addColumnSpec(new ShortColumnSpec("s_order", "getSortOrder", "setSortOrder", null));
+//        if(searchVernacular)
+//            this.addColumnSpec(new ShortColumnSpec("s_order", "getSortOrder", "setSortOrder", null));
 
         // Joined tables
         OuterJoinTable groupSpecies;
@@ -171,10 +171,10 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
 
         if (searchVernacular) {
             // adds ordering for synonym and origin
-            AbstractSortCriteria[] asc = new AbstractSortCriteria[sortCriteria.length+2];
-            asc[0] = new NameSortCriteria(NameSortCriteria.SORT_S_ORDER, AbstractSortCriteria.ASCENDENCY_ASC, true);
-            asc[1] = new NameSortCriteria(NameSortCriteria.SORT_VALID_NAME, AbstractSortCriteria.ASCENDENCY_DESC, true);
-            System.arraycopy(sortCriteria, 0, asc, 2, sortCriteria.length);
+            AbstractSortCriteria[] asc = new AbstractSortCriteria[sortCriteria.length+1];
+//            asc[0] = new NameSortCriteria(NameSortCriteria.SORT_S_ORDER, AbstractSortCriteria.ASCENDENCY_ASC, true);
+            asc[0] = new NameSortCriteria(NameSortCriteria.SORT_VALID_NAME, AbstractSortCriteria.ASCENDENCY_DESC, true);
+            System.arraycopy(sortCriteria, 0, asc, 1, sortCriteria.length);
             this.sortCriteria = asc;
         }
 
@@ -187,8 +187,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                     + " A.VALID_NAME AS validName," + " A.ID_SPECIES_LINK,"
                     + " A.TYPE_RELATED_SPECIES," + " A.TEMPORARY_SELECT,"
                     + " A.SPECIES_MAP," + " A.ID_GROUP_SPECIES,"
-                    + " A.ID_TAXONOMY, 1 as s_order, " +
-                    " B.COMMON_NAME AS commonName,"
+                    + " A.ID_TAXONOMY, " // 1 as s_order, " +
+                    + " B.COMMON_NAME AS commonName,"
                     + " C.NAME AS taxonomyName," + " C.LEVEL, "
                     + " C.TAXONOMY_TREE, " + " C.NAME AS taxonomicNameFamily, "
                     + " C.NAME AS taxonomicNameOrder"
@@ -204,7 +204,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                     + " A.VALID_NAME AS validName," + " A.ID_SPECIES_LINK,"
                     + " A.TYPE_RELATED_SPECIES," + " A.TEMPORARY_SELECT,"
                     + " A.SPECIES_MAP," + " A.ID_GROUP_SPECIES,"
-                    + " A.ID_TAXONOMY, 2 as s_order, "
+                    + " A.ID_TAXONOMY, " // 2 as s_order, "
                     + " B.COMMON_NAME AS commonName,"
                     + " C.NAME AS taxonomyName," + " C.LEVEL,"
                     + " C.TAXONOMY_TREE, " + " C.NAME AS taxonomicNameFamily, "
@@ -362,12 +362,12 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                         aCriteria.getScientificName(), aCriteria.getRelationOp()));
 
 //                removes the duplicates
-                String original = aCriteria.toSQL();
+//                String original = aCriteria.toSQL();
+//
+//                if(original.contains("LIKE")) original = original.replace("LIKE", "NOT LIKE");
+//                if(original.contains("=")) original = original.replace("=", "<>");
 
-                if(original.contains("LIKE")) original = original.replace("LIKE", "NOT LIKE");
-                if(original.contains("=")) original = original.replace("=", "<>");
-
-                filterSQL.append( " AND " + original);
+//                filterSQL.append( " AND " + original);
             } else {
                 if (i > 0) {
                     filterSQL.append(" AND ");

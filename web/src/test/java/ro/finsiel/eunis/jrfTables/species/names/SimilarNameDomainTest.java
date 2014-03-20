@@ -80,7 +80,7 @@ public class SimilarNameDomainTest {
      * We go through the results and verify that all hits are fishes.
      * You can do the same through the UI.
      */
-    //@Test
+    @Test
     public void searchNameContainsLynAndFishesGroup() throws Exception {
         NameSearchCriteria criteria1 = new NameSearchCriteria("Lynx", Utilities.OPERATOR_CONTAINS);
         NameSearchCriteria criteria2 = new NameSearchCriteria("Fishes",

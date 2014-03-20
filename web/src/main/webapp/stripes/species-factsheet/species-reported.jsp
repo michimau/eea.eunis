@@ -114,7 +114,7 @@
                 var layerDefs_dist = [];
                 var isDistributionLayerExist = ${actionBean.distributionLayer};
                 if(isDistributionLayerExist){
-	                layerDefs_dist[4] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                layerDefs_dist[4] = "Type = 'species' and Speciesname = '${actionBean.scientificName}'";
 	                imageParameters_dist.layerDefinitions = layerDefs_dist;
 	                imageParameters_dist.layerIds = [4];
 	                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
@@ -127,7 +127,7 @@
                 var layerDefs_range = [];
                 var isRangeLayerExist = ${actionBean.rangeLayer};
                 if (isRangeLayerExist){
-	                layerDefs_range[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                layerDefs_range[1] = "Type = 'species' and Speciesname = '${actionBean.scientificName}'";
 	                imageParameters_range.layerDefinitions = layerDefs_range;
 	                imageParameters_range.layerIds = [1];
 	                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
@@ -290,14 +290,17 @@
 									Species distribution (reported by FAO) <!-- TODO: To add indicative year of last update -->
 								</label>
 								<p class="discreet">Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</p>
-							</c:if> 
-							
-							<!-- TODO: To add the species tanges from IUCN
-							Species range (2012, IUCN Red List) [http://www.iucnredlist.org/technical-documents/spatial-data]
-							The species range marks roughly where the species could be found. 
-					                -->
+							</c:if>
 
-							<c:if test="${not empty actionBean.gbifCode}">
+                            <c:if test="${actionBean.rangeLayer}">
+                                    <label for="range">
+                                        <input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
+                                        Species range (2012, IUCN Red List)
+                                    </label>
+                                <p class="discreet">The species range marks roughly where the species could be found. Data source: <a href="http://www.iucnredlist.org/technical-documents/spatial-data">IUCN</a></p>
+                            </c:if>
+
+                            <c:if test="${not empty actionBean.gbifCode}">
 								<label for="gbif">
 									<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
 									Single observations (GBIF, Global Biodiversity Information Facility)

@@ -62,11 +62,12 @@ public class NameSortCriteria extends AbstractSortCriteria {
         if (searchVernacular) {
             possibleSorts.put(SORT_SCIENTIFIC_NAME, "scientificName"); // Scientific name
             possibleSorts.put(SORT_VALID_NAME, "validName"); // Valid name
+            possibleSorts.put(SORT_S_ORDER, "S_ORDER");
         } else {
             possibleSorts.put(SORT_SCIENTIFIC_NAME, "A.SCIENTIFIC_NAME"); // Scientific name
             possibleSorts.put(SORT_VALID_NAME, "A.VALID_NAME"); // Valid name
         }
-        possibleSorts.put(SORT_S_ORDER, "S_ORDER");
+
 
     }
 }

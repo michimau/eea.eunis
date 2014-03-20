@@ -32,9 +32,9 @@
 		    // Distribution layer
 		    var imageParameters_dist = new esri.layers.ImageParameters();
 		    var layerDefs_dist = [];
-		    layerDefs_dist[4] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
+		    layerDefs_dist[5] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 		    imageParameters_dist.layerDefinitions = layerDefs_dist;
-		    imageParameters_dist.layerIds = [4];
+		    imageParameters_dist.layerIds = [5];
 		    imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 		    imageParameters_dist.transparent = true;
 		    layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_dist});
@@ -42,9 +42,9 @@
 			// Species Range layer
 			var imageParameters_range = new esri.layers.ImageParameters();
 			var layerDefs_range = [];
-			layerDefs_range[1] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
+			layerDefs_range[2] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 			imageParameters_range.layerDefinitions = layerDefs_range;
-		    imageParameters_range.layerIds = [1];
+		    imageParameters_range.layerIds = [2];
 		    imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 		    imageParameters_range.transparent = true;
 		    layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_range});
@@ -59,11 +59,11 @@
 		    query.where = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 
 		    // distribution layer
-		    var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/4");
+		    var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/5");
 		    queryTask.execute(query, showResults);
 
 		    // range layer
-		    queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/1");
+		    queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer/2");
 		    queryTask.execute(query, showResults);
 		}
 

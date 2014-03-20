@@ -120,7 +120,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 new StringColumnSpec("ID_TAXONOMY", "getIdTaxcode",
                 "setIdTaxcode", DEFAULT_TO_NULL));
 
-        this.addColumnSpec(new ShortColumnSpec("s_order", "getSortOrder", "setSortOrder", null));
+        if(searchVernacular)
+            this.addColumnSpec(new ShortColumnSpec("s_order", "getSortOrder", "setSortOrder", null));
 
         // Joined tables
         OuterJoinTable groupSpecies;
@@ -168,14 +169,14 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
     public List getResults(int offsetStart, int pageSize, AbstractSortCriteria[] sortCriteria) throws CriteriaMissingException {
         this.sortCriteria = sortCriteria;
 
-//        s_order asc, validName desc
-
-        AbstractSortCriteria[] asc = new AbstractSortCriteria[sortCriteria.length+2];
-        asc[0] = new NameSortCriteria(NameSortCriteria.SORT_S_ORDER, AbstractSortCriteria.ASCENDENCY_ASC, true);
-        asc[1] = new NameSortCriteria(NameSortCriteria.SORT_VALID_NAME, AbstractSortCriteria.ASCENDENCY_DESC, true);
-        System.arraycopy(sortCriteria, 0, asc, 2, sortCriteria.length);
-
-        this.sortCriteria = asc;
+        if (searchVernacular) {
+            // adds ordering for synonym and origin
+            AbstractSortCriteria[] asc = new AbstractSortCriteria[sortCriteria.length+2];
+            asc[0] = new NameSortCriteria(NameSortCriteria.SORT_S_ORDER, AbstractSortCriteria.ASCENDENCY_ASC, true);
+            asc[1] = new NameSortCriteria(NameSortCriteria.SORT_VALID_NAME, AbstractSortCriteria.ASCENDENCY_DESC, true);
+            System.arraycopy(sortCriteria, 0, asc, 2, sortCriteria.length);
+            this.sortCriteria = asc;
+        }
 
         List results;
 

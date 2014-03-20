@@ -107,7 +107,7 @@
                 var layerDefs_dist = [];
                 var isDistributionLayerExist = ${actionBean.distributionLayer};
                 if(isDistributionLayerExist){
-	                layerDefs_dist[4] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                layerDefs_dist[4] = "Type = 'species' and Speciesname = '${actionBean.scientificName}'";
 	                imageParameters_dist.layerDefinitions = layerDefs_dist;
 	                imageParameters_dist.layerIds = [4];
 	                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
@@ -120,7 +120,7 @@
                 var layerDefs_range = [];
                 var isRangeLayerExist = ${actionBean.rangeLayer};
                 if (isRangeLayerExist){
-	                layerDefs_range[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                layerDefs_range[1] = "Type = 'species' and Speciesname = '${actionBean.scientificName}'";
 	                imageParameters_range.layerDefinitions = layerDefs_range;
 	                imageParameters_range.layerIds = [1];
 	                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;

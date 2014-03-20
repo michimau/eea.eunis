@@ -38,7 +38,7 @@
                 <div class="documentDescription">
                   <%=cm.cmsPhrase("Access information about sites of interest for biodiversity and nature protection")%>
                 </div>
-                <div style="text-align : center; padding-left : 10px; width : 90%; vertical-align : middle;>
+                <div style="text-align : center; padding-left : 10px; width : 90%; vertical-align : middle;">
                   <form name="quick_search" id="quick_search" action="sites-names-result.jsp" method="post" onsubmit="return validateQS();">
                     <input type="hidden" name="showSourceDB" value="true" />
                     <input type="hidden" name="showCountry" value="true" />

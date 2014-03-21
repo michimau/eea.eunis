@@ -36,58 +36,22 @@
         });
 
 
-        // galleryView override
+//        galleryView override
         if ($.fn.galleryView !== undefined) {
-            $.fn.eeaGalleryView = function(opts) {
-                return this.each(function(){
-                    var $this = $(this);
-                    var $gallery_parent = $this.parent(),
-                        $gallery_class = $gallery_parent[0].className,
-                        parent_width, parent_height,
-                        gallery_width, gallery_height;
-                    parent_width = $gallery_parent.width() - 10;
-                    parent_height = Math.round((parent_width /4)*3);
-                    gallery_width = $gallery_class === 'gallery_fancybox_view' ? 640 : parent_width;
-                    gallery_height = $gallery_class === 'gallery_fancybox_view' ? 433 : parent_height;
-                    // added possibility to override the width and height of the gallery by passing in
-                    // a width and/or height to the gallery
-                    var gallery_style_attr = $this.attr('style');
-                    if (gallery_style_attr){
-                        gallery_width = gallery_style_attr.indexOf('width') !== -1 ? $this.width() : gallery_width;
-                        gallery_height = gallery_style_attr.indexOf('height') !== -1 ? $this.height() : gallery_height;
-                    }
 
-                    var defaults = {
-                        panel_width: gallery_width,
-                        panel_height: gallery_height,
-                        frame_width: 50,
-                        frame_height: 50,
-                        transition_speed: 350,
-                        transition_interval: 10000,
-                        zIndex: 90
-                    };
+            $('.galleryViewss').galleryView({
+                enable_overlays: true,
+                panel_scale: 'fit',
+                show_filmstrip: false,
+                show_filmstrip_nav: false,
+                show_captions: true,
+                autoplay: true,
+                frame_width: 50,
+                frame_height: 50,
+                frame_scale: 'fit',
+                show_infobar: false,
+            });
 
-                    if ($this.hasClass('js-noFilmstrip')) {
-                        defaults.show_filmstrip = false;
-                    }
-                    var options = $.extend(defaults, opts);
-                    var data_options = $this.data('options');
-                    if (data_options) {
-                        try {
-                            data_options = $.parseJSON(data_options);
-                            options = $.extend(data_options, options);
-                        }
-                        catch(e) {
-                            var console = window.console || { log: function() {} };
-                            console.log('Non Valid JSON passed as');
-                        }
-                    }
-
-                    $this.galleryView(options);
-                });
-
-            };
-            $(".galleryViews").eeaGalleryView();
         }
 
     });

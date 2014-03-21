@@ -10,43 +10,32 @@
                    }
                </script>
 
+
                <!--  Gallery on left -->
                 <div class="left-area species">
 
-                    <div id="speciesGallery" class="galleryViews js-noFilmstrip" data-options='{
-                        "pause_on_hover" : true,
-                        "hover_nav_buttons_images" : false,
-                        "keep_nav_buttons_visible" : true,
-                        "theme_path": "${pageContext.request.contextPath}/images",
-                        "nav_theme": ""}'>
-                        <ul>
+
+                    <%--<ul id="galleryView2" class="galleryView js-noFilmstrip">--%>
+                        <%--<li>--%>
+                            <%--<span class="panel-overlay">Overlay text goes here</span>--%>
+                            <%--<img src="mr-monkey/image_large" />--%>
+                        <%--</li>--%>
+                        <%--<li><img src="monkey-with-makeup/image_large" /></li>--%>
+                    <%--</ul>--%>
+                    <%----%>
+                    <ul id="speciesGallery" class="galleryViewss">
                             <c:forEach items="${actionBean.pics}" var="pic" varStatus="loop">
                                 <li>
-                                    <div class="panel-overlay">
-                                        <h3>${pic.description}</h3>
-                                        <p>${loop.index + 1}/${fn:length(actionBean.pics)}&nbsp;
-                                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
-                                            <c:choose>
-                                                <c:when test="${!empty pic.sourceUrl}">
-                                                    <a href="${eunis:treatURLSpecialCharacters(pic.sourceUrl)}">${pic.source}</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    ${pic.source}
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:if test="${!empty pic.license}">
-                                                &nbsp;(${pic.license})
-                                            </c:if>
-                                        </p>
-                                    </div>
-                                    <img src="${pic.path}/${pic.filename}" title="${pic.description}" style="height: 1px; width: 1px" />
+                                    <img src="${pic.path}/${pic.filename}"
+                                    title="${pic.description}"
+                                     style="display: none;"
+                                     data-description="${pic.source}"
+                                     />
                                 </li>
                             </c:forEach>
                         </ul>
-                    </div>
-                    <!-- TODO add link for authenticated users to upload/delete images -->
                     <p class="text-right">
-                        <a href="http://images.google.com/images?q=${eunis:replaceTags(actionBean.scientificName)}">More images</a>
+                        <a href="http://images.google.com/images?q=${eunis:replaceTags(actionBean.scientificName)}">Images from the web</a>
                     </p>
                 </div>
 

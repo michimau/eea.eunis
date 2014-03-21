@@ -69,7 +69,7 @@ function addReloadOnDisplay(paneId, mapId, link) {
                 document.getElementById(mapId).loaded=true;  // only loaded once
             }
         }
-        else if ('propertyName' in event && event.propertyName=="style.display"){  // IE8
+        else if (event && event.propertyName=="style.display"){  // IE8
             if(document.getElementById(paneId).style.display == "block") {
                 document.getElementById(mapId).src=link;
                 document.getElementById(mapId).loaded=true;  // only loaded once

@@ -2045,13 +2045,13 @@ public class HabitatsFactsheet {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) species.get(
                             i);
                     String abundance = findReportTypeValue(
-                            specie.getIdReportType(), "abundance");
+                            specie.getIdReportType(), "ABUNDANCE");
                     String frequencies = findReportTypeValue(
-                            specie.getIdReportType(), "frequencies");
+                            specie.getIdReportType(), "FREQUENCIES");
                     String faithfulness = findReportTypeValue(
-                            specie.getIdReportType(), "faithfulness");
+                            specie.getIdReportType(), "FAITHFULNESS");
                     String speciesStatus = findReportTypeValue(
-                            specie.getIdReportType(), "species_status");
+                            specie.getIdReportType(), "SPECIES_STATUS");
                     String comment = findReportAttributesValue(
                             specie.getIdReportAttributes(), "comment");
                     String geoscope = CountryUtil.findBiogeoregionByIDGeoscope(

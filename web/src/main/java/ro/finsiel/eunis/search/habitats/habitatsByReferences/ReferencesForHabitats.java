@@ -211,19 +211,19 @@ public class ReferencesForHabitats {
         } else {
 
             if (fromWhere.equalsIgnoreCase("author")) {
-                result_list = new DcSourceHabitatDomain().findWhere("1=1 " + sql.toString());
+                result_list = new DcSourceHabitatDomain().findWhere("1=1 " + sql.toString().replaceAll("J\\.", "D."));
             }
             if (fromWhere.equalsIgnoreCase("date")) {
-                result_list = new DcDateHabitatDomain().findWhere("1=1 " + sql.toString());
+                result_list = new DcDateHabitatDomain().findWhere("1=1 " + sql.toString().replaceAll("J\\.","E."));
             }
             if (fromWhere.equalsIgnoreCase("title")) {
-                result_list = new DcTitleHabitatDomain().findWhere("1=1 " + sql.toString());
+                result_list = new DcTitleHabitatDomain().findWhere("1=1 " + sql.toString().replaceAll("J\\.","F."));
             }
             if (fromWhere.equalsIgnoreCase("editor")) {
-                result_list = new DcSourceHabitatDomain().findWhere("1=1 " + sql.toString());
+                result_list = new DcSourceHabitatDomain().findWhere("1=1 " + sql.toString().replaceAll("J\\.", "D."));
             }
             if (fromWhere.equalsIgnoreCase("publisher")) {
-                result_list = new DcPublisherHabitatDomain().findWhere("1=1 " + sql.toString());
+                result_list = new DcPublisherHabitatDomain().findWhere("1=1 " + sql.toString().replaceAll("J\\.","G."));
             }
 
         }

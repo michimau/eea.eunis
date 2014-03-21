@@ -6,6 +6,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.DateJoinColumn;
+import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist;
 
 
@@ -59,7 +60,7 @@ public class DcDateHabitatDomain extends AbstractDomain {
         JoinTable Date = null;
 
         Date = new JoinTable("DC_INDEX E", "ID_DC", "ID_DC");
-        Date.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));
+        Date.addJoinColumn(new StringJoinColumn("CREATED", "created", "setCreated"));
         habitatReferences.addJoinTable(Date);
 
     }

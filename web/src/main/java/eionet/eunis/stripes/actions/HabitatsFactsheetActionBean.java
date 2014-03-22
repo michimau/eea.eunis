@@ -16,8 +16,10 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
+import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
+import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
@@ -198,6 +200,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE   "
                 + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject()
                 + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
+
+        // populate the area code for the country link
+        for(SitesByNatureObjectPersist site : sites) {
+            site.setEunisAreaCode(CountryUtil.findCountry(site.getAreaNameEn()).getEunisAreaCode());
+        }
 
         // Sites for habitat subtypes.
         sitesForSubtypes =

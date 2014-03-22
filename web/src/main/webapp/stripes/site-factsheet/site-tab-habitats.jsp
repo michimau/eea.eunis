@@ -26,7 +26,7 @@
                 <a href="habitats/${habitat.habitat.idHabitat}">${habitat.habitat.code2000}</a>
             </td>
             <td>
-                ${habitat.habitat.habitatDescription}
+                <a href="habitats/${habitat.habitat.idHabitat}">${habitat.habitat.habitatDescription}</a>
             </td>
             <td style="text-align : right">
                 ${habitat.cover}

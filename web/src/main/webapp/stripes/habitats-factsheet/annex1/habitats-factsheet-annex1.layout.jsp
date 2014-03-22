@@ -11,7 +11,14 @@
         </c:if>
 
         <script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
 
+        <script>
+            function openSection(sectionName) {
+                if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
+                    $('#' + sectionName + ' ~ h2').click();
+            }
+        </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
 
@@ -54,9 +61,10 @@
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
+                            <a id="sites" ></a>
                             <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
-                            <div class="pane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            <div class="pane" id="habitatsSitesPane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-sites.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">

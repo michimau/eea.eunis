@@ -15,6 +15,8 @@ public class SitesByNatureObjectPersist extends PersistentObject {
     private String areaNameEn = null;
     private String Latitude = "";
     private String Longitude = "";
+    // this field is NOT populated by default
+    private String i_eunisAreaCode = null;
 
     public String getLatitude() {
         return Latitude;
@@ -66,4 +68,12 @@ public class SitesByNatureObjectPersist extends PersistentObject {
     public void setAreaNameEn(String areaNameEn) {
         this.areaNameEn = areaNameEn;
     }
-}
+
+     public String getEunisAreaCode() {
+         return i_eunisAreaCode;
+     }
+
+     public void setEunisAreaCode(String eunisAreaCode) {
+         this.i_eunisAreaCode = eunisAreaCode;
+     }
+ }

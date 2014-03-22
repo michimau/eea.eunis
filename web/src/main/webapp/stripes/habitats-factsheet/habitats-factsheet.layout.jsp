@@ -11,6 +11,12 @@
     </c:if>
 
     <script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
+    <script>
+        function openSection(sectionName) {
+            if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
+                $('#' + sectionName + ' ~ h2').click();
+        }
+    </script>
 
 </stripes:layout-component>
 <stripes:layout-component name="contents">

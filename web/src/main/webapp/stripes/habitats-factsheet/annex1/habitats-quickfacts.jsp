@@ -3,13 +3,6 @@
 <stripes:layout-definition>
     <!-- quick facts -->
 
-    <script>
-        function openSection(sectionName) {
-            if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
-                $('#' + sectionName + ' ~ h2').click();
-        }
-    </script>
-
     <!--  Description on the left -->
     <div class="left-area">
         <div>
@@ -45,7 +38,6 @@
                 </c:if>
             </c:forEach>
         </div>
-
     </div>
 
     <!-- Textual facts on right -->
@@ -61,8 +53,9 @@
                     </c:if>
                 </li>
                 <li>
-                    Protected in <span class="bold">148</span> Natura 2000 sites
-                    <%--todo: implement--%>
+                    Protected in
+                    <a href="${ actionBean.pageUrl }#sites" onclick="openSection('sites');"><span class="bold">${fn:length(actionBean.sites)}</span></a>
+                     Natura 2000 sites
                 </li>
                 <li>
                     <span class="bold">8</span> associated species from Annex II and IV in EU Habitats Directive

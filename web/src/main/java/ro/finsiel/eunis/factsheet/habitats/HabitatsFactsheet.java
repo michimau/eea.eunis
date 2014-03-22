@@ -67,6 +67,10 @@ import ro.finsiel.eunis.jrfTables.DcIndexPersist;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
+import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
+import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesPersist;
 import ro.finsiel.eunis.search.CountryUtil;
@@ -2243,4 +2247,23 @@ public class HabitatsFactsheet {
 
         return edition;
     }
+
+    /**
+     * Get the sites for the habitat
+     * @return
+     */
+    public List<HabitatsSitesPersist> getSites(){
+        List<HabitatsSitesPersist> results = null;
+
+        try {
+            results = new HabitatsSitesDomain().findWhere("A.ID_HABITAT='"+ getIdHabitat()+ "'");
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        if (null == results) {
+            results = new Vector<HabitatsSitesPersist>();
+        }
+        return results;
+    }
+
 }

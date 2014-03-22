@@ -2,14 +2,6 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
     <!-- quick facts -->
-
-    <script>
-        function openSection(sectionName) {
-            if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
-                $('#' + sectionName + ' ~ h2').click();
-        }
-    </script>
-
     <!--  Description on the left -->
     <div class="left-area">
         <div>

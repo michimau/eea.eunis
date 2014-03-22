@@ -1,10 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +27,12 @@ import ro.finsiel.eunis.utilities.TableColumns;
 public class CountryUtil {
 
     /**
+     * Cache for the countries by , to improve performance
+     */
+    private static final Map<String, Chm62edtCountryPersist> COUNTRY_PERSIST_BY_EN_NAME = new ConcurrentHashMap<String, Chm62edtCountryPersist>();
+
+
+    /**
      * This method finds the bioregions located within a country.
      * @param countryCode Country area code. Note: If you specify 'any' as the country string, it will return all of the
      * biogeographic regions available.
@@ -50,10 +54,9 @@ public class CountryUtil {
             }
         }
         Vector _regions = new Vector();
-        Iterator _it = _regionsCodes.iterator();
 
-        while (_it.hasNext()) {
-            Chm62edtCountryBiogeoregionPersist _aRegion = (Chm62edtCountryBiogeoregionPersist) _it.next();
+        for (Object _regionsCode : _regionsCodes) {
+            Chm62edtCountryBiogeoregionPersist _aRegion = (Chm62edtCountryBiogeoregionPersist) _regionsCode;
 
             _regions.addElement(
                     new RegionWrapper(
@@ -82,6 +85,7 @@ public class CountryUtil {
                         "CODE_BIOGEOREGION='" + regionCode + "'");
             } catch (Exception e) {
                 e.printStackTrace();
+                _countryCodes = new ArrayList();
             }
         }
         Vector _countries = new Vector();
@@ -191,14 +195,14 @@ public class CountryUtil {
     /**
      * This method finds the ID_GEOSCOPE for a region (taken from CHM62EDT_BIOGEOREGION).
      * @param regionName Name of the region (NAME)
-     * @return An integer with ID of the region or -1 if error
+     * @return An integer with ID of the region.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
      */
     public String findRegionIdGeoscope(String regionName) throws RecordNotFoundException {
         if (regionName.equals("any")) {
             return "any";
         }
-        Integer ret = new Integer(-1);
+        Integer ret;
         List _list = new Vector();
 
         try {
@@ -219,14 +223,14 @@ public class CountryUtil {
     /**
      * This method finds the ID_GEOSCOPE for a country (taken from CHM62EDT_COUNTRY) by using its AREA_NAME_ENGLISH.
      * @param countryName Name of the country (AREA_NAME_ENGLISH).
-     * @return An string with ID of the country or "-1" if error.
+     * @return An string with ID of the country.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
      */
     public String findCountryIdGeoscope(String countryName) throws RecordNotFoundException {
         if (countryName.equals("any")) {
             return "any";
         }
-        Integer ret = new Integer(-1);
+        Integer ret;
         List _list = new Vector();
 
         try {
@@ -248,7 +252,7 @@ public class CountryUtil {
     /**
      * This method finds the ID_GEOSCOPE for a country (taken from CHM62EDT_COUNTRY) by using its EUNIS_AREA_CODE.
      * @param countryCode Country code (EUNIS_AREA_CODE).
-     * @return A string with ID of the country or "-1" if error.
+     * @return A string with ID of the country.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
      */
     public String findCountryIdGeoscope(Object countryCode) throws RecordNotFoundException {
@@ -257,7 +261,7 @@ public class CountryUtil {
         if (code.equals("any")) {
             return "any";
         }
-        Integer ret = new Integer(-1);
+        Integer ret;
         List _list = new Vector();
 
         try {
@@ -278,23 +282,39 @@ public class CountryUtil {
 
     /**
      * Find country information by giving its english name (AREA_NAME_EN from CHM62EDT_COUNTRY).
+     * Cached for better performance. The cache entries DO NOT REFRESH!
      * @param englishName Name of the country in english (EXACT MATCH)
      * @return null if nothing found, or the country object with data.
      */
     public static Chm62edtCountryPersist findCountry(String englishName) {
-        Chm62edtCountryPersist country = null;
 
-        try {
-            List contries = new Chm62edtCountryDomain().findWhere(
-                    "AREA_NAME_EN='" + englishName + "'");
+        if(englishName == null) return null;
 
-            if (null != contries && contries.size() > 0) {
-                country = (Chm62edtCountryPersist) contries.get(0);
+        if(COUNTRY_PERSIST_BY_EN_NAME.containsKey(englishName)){
+            // found in cache
+            return COUNTRY_PERSIST_BY_EN_NAME.get(englishName);
+        } else {
+
+            Chm62edtCountryPersist country = null;
+
+            try {
+                List contries = new Chm62edtCountryDomain().findWhere(
+                        "AREA_NAME_EN='" + englishName + "'");
+
+                if (null != contries && contries.size() > 0) {
+                    country = (Chm62edtCountryPersist) contries.get(0);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace(System.err);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+
+            if(country != null){
+                // cache it
+                COUNTRY_PERSIST_BY_EN_NAME.put(englishName, country);
+            }
+
+            return country;
         }
-        return country;
     }
 
     /**
@@ -393,7 +413,7 @@ public class CountryUtil {
     }
 
     public static List findAllRegions() {
-        List ret = null;
+        List ret;
 
         try {
             ret = new Chm62edtBiogeoregionDomain().findOrderBy("NAME");
@@ -410,7 +430,7 @@ public class CountryUtil {
      * @return A list of Chm62edtCountryPersist objects.
      */
     public static List findAllCountriesMatchingName(String name) {
-        List ret = null;
+        List ret;
 
         if (null == name) {
             return findAllCountries();
@@ -512,7 +532,7 @@ public class CountryUtil {
      */
     public static String findBiogeoregionByIDGeoscope(Integer idGeoscope) {
         // System.out.println( "findBiogeoregionByIDGeoscope::idGeoscope = " + idGeoscope );
-        String result = "";
+        String result;
 
         try {
             List results = new Chm62edtBiogeoregionDomain().findWhere(
@@ -647,9 +667,9 @@ public class CountryUtil {
         List resultsAsStrings = new ArrayList();
 
         if (results != null && results.size() > 0) {
-            for (int i = 0; i < results.size(); i++) {
+            for (Object result : results) {
                 resultsAsStrings.add(
-                        ((TableColumns) results.get(i)).getColumnsValues().get(
+                        ((TableColumns) result).getColumnsValues().get(
                                 0));
             }
         }

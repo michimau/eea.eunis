@@ -69,6 +69,8 @@ public class HabitatLegalPersist extends PersistentObject {
   private String code = "";
   private String legalName = "";
 
+  private Integer idDc = null;
+
 
   public HabitatLegalPersist() {
     super();
@@ -343,4 +345,20 @@ public class HabitatLegalPersist extends PersistentObject {
     i_scientificName = scientificName;
     this.markModifiedPersistentState();
   }
+
+    /**
+     * get the reference to dc_index
+     * @return
+     */
+    public Integer getIdDc() {
+        return idDc;
+    }
+
+    /**
+     * Set the reference to dc_index
+     * @param idDc
+     */
+    public void setIdDc(Integer idDc) {
+        this.idDc = idDc;
+    }
 }

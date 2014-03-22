@@ -23,10 +23,12 @@
                 </thead>
                 <tbody>
 
-                <c:forEach items="${actionBean.factsheet.habitatLegalInfo}" var="legal">
+                <c:forEach items="${actionBean.legalInfo}" var="legal">
                     <tr>
                         <td>
+                               <a href="/references/${legal.idDc}">
                                 ${legal.legalName}
+                               </a>
                         </td>
                         <td>
                                 ${legal.title}

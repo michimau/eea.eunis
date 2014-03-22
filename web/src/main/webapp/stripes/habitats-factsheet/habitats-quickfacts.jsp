@@ -3,9 +3,18 @@
 <stripes:layout-definition>
     <!-- quick facts -->
 
+    <script>
+        function openSection(sectionName) {
+            if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
+                $('#' + sectionName + ' ~ h2').click();
+        }
+    </script>
+
     <!--  Description on the left -->
     <div class="left-area">
         <div>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'English name')}:
+            <span class="bold">${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription))}</span>
             <c:forEach items="${actionBean.descriptions}" var="desc" varStatus="loop">
                 <c:if test="${fn:toLowerCase(desc.language) == 'english'}">
                     <h4>
@@ -45,17 +54,21 @@
         <div>
             <ul>
                 <li>
-                    ${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}:
-                    <span class="bold">${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')}</span>
+                    <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</span>
+                    ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')}
                 </li>
                 <li>
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by')}:
-                    <span class="bold">[not implemented] EU Habitats Directive, CoE Bern Convention </span>
-                    <%--todo--%>
-                </li>
-                <li>
-                    ${eunis:cmsPhrase(actionBean.contentManagement, 'English name')}:
-                    <span class="bold">${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription))}</span>
+                    <c:choose>
+                        <c:when test="${not empty actionBean.protectedBy}">
+                            <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');">
+                            <c:forEach items="${actionBean.protectedBy}" var="legal" varStatus="stat">
+                                <span class="bold">${legal}</span><c:if test="${not stat.last}">, </c:if>
+                            </c:forEach>
+                            </a>
+                        </c:when>
+                        <c:otherwise><span class="bold">Not available</span></c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
         </div>

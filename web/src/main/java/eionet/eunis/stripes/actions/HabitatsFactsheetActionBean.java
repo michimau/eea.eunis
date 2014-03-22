@@ -1,13 +1,6 @@
 package eionet.eunis.stripes.actions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Vector;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +15,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
@@ -72,6 +66,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         HabitatsFactsheet.OTHER_INFO_USAGE};
     private int dictionaryLength;
 
+    private String pageUrl;
+
     private String btrail;
     private String pageTitle = "";
     private String metaDescription = "";
@@ -120,6 +116,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List history = new ArrayList();
     private List otherClassifications = new ArrayList();
 
+    private List legalInfo = null;
+    private Set<String> protectedBy = null;
+
     /**
      * RDF output is served from elsewhere.
      */
@@ -129,6 +128,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         if (tab == null || tab.length() == 0) {
             tab = "general";
         }
+
+        pageUrl = getContext().getInitParameter("DOMAIN_NAME") + "/habitats/" + idHabitat;
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
@@ -561,5 +562,43 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      */
     public List getOtherClassifications() {
         return otherClassifications;
+    }
+
+    /**
+     * Returns the current page URL
+     * @return
+     */
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    /**
+     * Returns the Protected by list; obtained from the legal info, but with unique document names.
+     * @return A set of unique document names from legalInfo.
+     */
+    public Set<String> getProtectedBy() {
+        if(protectedBy == null){
+            Set<String> s = new HashSet<String>();
+            for(HabitatLegalPersist h : getLegalInfo()) {
+                s.add(h.getLegalName());
+            }
+            protectedBy = s;
+        }
+        return protectedBy;
+    }
+
+    /**
+     * Returns the legal info list
+     * @return List of HabitatLegalPersist objects
+     */
+    public List<HabitatLegalPersist> getLegalInfo() {
+        if(legalInfo == null){
+            try {
+                legalInfo = factsheet.getHabitatLegalInfo();
+            } catch (InitializationException e) {
+                legalInfo = new ArrayList<HabitatLegalPersist>();
+            }
+        }
+        return legalInfo;
     }
 }

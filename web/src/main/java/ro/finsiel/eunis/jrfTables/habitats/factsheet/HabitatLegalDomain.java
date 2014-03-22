@@ -6,6 +6,7 @@ import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
+import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 public class HabitatLegalDomain extends AbstractDomain {
@@ -49,6 +50,7 @@ public class HabitatLegalDomain extends AbstractDomain {
     JoinTable repType = null;
     repType = new JoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
     repType.addJoinColumn(new StringJoinColumn("NAME", "setLegalName"));
+    repType.addJoinColumn(new IntegerJoinColumn("ID_DC", "setIdDc"));
     natObjRepType.addJoinTable(repType);
   }
 }

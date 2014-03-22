@@ -36,6 +36,7 @@
             <div>
                 <div class="eea-accordion-panels non-exclusive collapsed-by-default">
                     <div class="eea-accordion-panel" style="clear: both;">
+                        <a id="legal" ></a>
                         <h2 class="notoc eea-icon-right-container">Legal instruments</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-legal.jsp"/>

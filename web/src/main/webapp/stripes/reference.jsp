@@ -3,6 +3,9 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}" bookmarkPageName="references/${actionBean.idref}">
+    <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
+    </stripes:layout-component>
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>

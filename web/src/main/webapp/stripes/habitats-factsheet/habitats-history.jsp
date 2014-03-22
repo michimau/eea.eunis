@@ -27,7 +27,9 @@
                 <c:forEach items="${actionBean.history}" var="classif" varStatus="loop">
                     <tr>
                         <td>
-                                ${eunis:formatString(eunis:treatURLSpecialCharacters(classif.name), '&nbsp;')}
+                            <a href="/references/${classif.idDc}">
+                                ${classif.name}
+                            </a>
                         </td>
                         <td>
                                 ${eunis:formatString(classif.code, '&nbsp;')}

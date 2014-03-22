@@ -82,7 +82,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
         String defaultPageSize = getContext().getApplicationProperty("default.page.size");
         
-        System.out.println("Listing: "+listing);
+//        System.out.println("Listing: "+listing);
 
         if (!StringUtils.isBlank(idref) && EunisUtil.isNumber(idref)) {
             forwardPage = "/stripes/reference.jsp";

@@ -6,6 +6,9 @@
 %>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References" bookmarkPageName="references" btrail="<%= btrail %>">
 
+    <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
+    </stripes:layout-component>
     <stripes:layout-component name="contents">
         <!-- MAIN CONTENT value="${actionBean.defaultFilterValue}"-->
 

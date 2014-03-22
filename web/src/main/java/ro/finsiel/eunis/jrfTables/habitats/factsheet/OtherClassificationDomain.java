@@ -40,6 +40,7 @@ public class OtherClassificationDomain extends AbstractDomain {
     JoinTable classCode = new JoinTable("CHM62EDT_CLASS_CODE B", "ID_CLASS_CODE", "ID_CLASS_CODE");
     classCode.addJoinColumn(new StringJoinColumn("NAME", "setName"));
     classCode.addJoinColumn(new IntegerJoinColumn("SORT_ORDER", "setSortOrder"));
+    classCode.addJoinColumn(new IntegerJoinColumn("ID_DC", "setIdDc"));
     this.addJoinTable(classCode);
   }
 }

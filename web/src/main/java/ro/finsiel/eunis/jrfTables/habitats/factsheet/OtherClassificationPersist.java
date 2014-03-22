@@ -35,6 +35,7 @@ public class OtherClassificationPersist extends PersistentObject {
 
   private String name = null;
   private Integer sortOrder = null;
+  private Integer idDc = null;
 
   public OtherClassificationPersist() {
     super();
@@ -150,5 +151,19 @@ public class OtherClassificationPersist extends PersistentObject {
     this.markModifiedPersistentState();
   }
 
+    /**
+     * Return the reference to dc_index
+     * @return
+     */
+    public Integer getIdDc() {
+        return idDc;
+    }
 
+    /**
+     * Set the reference to dc_index
+     * @param idDc
+     */
+    public void setIdDc(Integer idDc) {
+        this.idDc = idDc;
+    }
 }

@@ -122,7 +122,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 		</jsp:include>
 		<a name="documentContent"></a>
 		<h1 class="documentFirstHeading">
-			<%=cm.cmsPhrase( "Welcome to EUNIS biodiversity database - find species, habitats and sites across Europe" )%>
+			<%=cm.cmsPhrase( "Welcome to EUNIS, the European Nature Information System - find species, habitat types and sites across Europe" )%>
 		</h1>
 		<div class="visualClear"><!--&nbsp; --></div>
           <div style="position: relative;height: 380px;">

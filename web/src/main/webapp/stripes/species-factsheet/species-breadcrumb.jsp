@@ -3,14 +3,7 @@
 <stripes:layout-definition>
     <!-- breadcrumbs -->
     <div id="portal-breadcrumbs" class='species-taxonomy'>
-        <span id="breadcrumbs-home">
-            <a href="${actionBean.context.domainName}">EUNIS Home</a>
-            <span class="breadcrumbSeparator">
-                &gt;
-            </span>
-        </span>
 
-        <!--  FIXME link -->
         <c:forEach items="${actionBean.classifications}" var="classif" varStatus="loop">
             <span id="breadcrumbs-${loop.index + 1}" dir="ltr">
                 ${classif.level}:
@@ -21,7 +14,6 @@
             </span>
         </c:forEach>
 
-        <!--  FIXME link -->
         <span id="breadcrumbs-${fn:length(actionBean.classifications)+1}" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Genus')}:
             ${actionBean.specie.genus}
@@ -30,14 +22,11 @@
             </span>
         </span>
 
-        <!--  FIXME link -->
         <span id="breadcrumbs-current" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Species')}:
             ${actionBean.scientificName }
         </span>
 
-        <!--  FIXME link -->
-    
 		<c:if test="${!empty actionBean.subSpecies}">
 	        <span id="breadcrumbs-last" dir="ltr">
 	        	<span class="breadcrumbSeparator">

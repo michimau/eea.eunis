@@ -1,0 +1,86 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+
+<%@ include file="/stripes/common/taglibs.jsp"%>
+<%
+    String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#index.jsp,habitat_types";
+%>
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }" bookmarkPageName="habitats" btrail="<%= btrail %>">
+    <stripes:layout-component name="head">
+        <c:if test="${!empty actionBean.factsheet}">
+            <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
+        </c:if>
+
+        <script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
+
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
+        <!-- MAIN CONTENT -->
+        <c:choose>
+            <c:when test="${actionBean.factsheet.habitat == null}">
+                <div class="error-msg">
+                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Sorry, no habitat type has been found in the database')}
+                </div>
+            </c:when>
+            <c:otherwise>
+
+                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-breadcrumb.jsp"/>
+
+                <h1>${eunis:bracketsToItalics(eunis:replaceTags(actionBean.factsheet.habitatScientificName))}</h1>
+
+                <%--Quick facts--%>
+                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-quickfacts.jsp"/>
+
+
+                <%--Accordion--%>
+                <div>
+                    <div class="eea-accordion-panels non-exclusive collapsed-by-default">
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Distribution</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Conservation status</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Species</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Legal status</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Relation to EUNIS habitat classification</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                            </div>
+                        </div>
+                        <div class="eea-accordion-panel" style="clear: both;">
+                            <h2 class="notoc eea-icon-right-container">Other resources</h2>
+                            <div class="pane">
+                                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-resources.jsp"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        <!-- END MAIN CONTENT -->
+    </stripes:layout-component>
+</stripes:layout-render>

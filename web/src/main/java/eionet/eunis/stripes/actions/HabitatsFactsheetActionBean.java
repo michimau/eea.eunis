@@ -36,26 +36,10 @@ import eionet.sparqlClient.helpers.ResultValue;
  * 
  * @author Risto Alt
  */
-@UrlBinding("/habitats/{idHabitat}/{tab}")
+@UrlBinding("/habitats/{idHabitat}")
 public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     private String idHabitat = "";
-
-    private static final String[] tabs = {"General information", "Geographical distribution", "Legal instruments",
-        "Habitat types", "Sites", "Species", "Conservation status", "External data", "Other info"};
-
-    private static final Map<String, String[]> types = new HashMap<String, String[]>();
-    static {
-        types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
-        // types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
-        types.put("LEGAL_INSTRUMENTS", new String[] {"instruments", tabs[2]});
-        types.put("HABITATS", new String[] {"habitats", tabs[3]});
-        types.put("SITES", new String[] {"sites", tabs[4]});
-        types.put("SPECIES", new String[] {"species", tabs[5]});
-        types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[6]});
-        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[7]});
-        types.put("OTHER", new String[] {"other", tabs[8]});
-    }
 
     private static final Integer[] dictionary = {HabitatsFactsheet.OTHER_INFO_ALTITUDE, HabitatsFactsheet.OTHER_INFO_DEPTH,
         HabitatsFactsheet.OTHER_INFO_CLIMATE, HabitatsFactsheet.OTHER_INFO_GEOMORPH, HabitatsFactsheet.OTHER_INFO_SUBSTRATE,
@@ -75,11 +59,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private HabitatsFactsheet factsheet;
     private List<HabitatFactsheetOtherDTO> otherInfo = new ArrayList<HabitatFactsheetOtherDTO>();
 
-    // selected tab
-    private String tab;
     private boolean isMini;
-    // tabs to display
-    private List<Pair<String, String>> tabsWithData = new ArrayList<Pair<String, String>>();
 
     // Sites tab variables
     private List<SitesByNatureObjectPersist> sites;
@@ -125,10 +105,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     @DefaultHandler
     public Resolution defaultAction() {
 
-        if (tab == null || tab.length() == 0) {
-            tab = "general";
-        }
-
         pageUrl = getContext().getInitParameter("DOMAIN_NAME") + "/habitats/" + idHabitat;
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -153,61 +129,42 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
                         + factsheet.getHabitat().getScientificName();
 
-        // Decide what tabs to show
-        List<String> existingTabs =
-                getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
-        for (String tab : existingTabs) {
-            if (types.containsKey(tab)) {
-                String[] tabData = types.get(tab);
-                tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
-            }
-        }
+
+        generalTabActions();
 
         if (factsheet.isAnnexI()) {
-            tabsWithData.add(new Pair<String, String>("geo", "Geographical information"));
-        }
-
-        if (tab != null && tab.equals("general")) {
-            generalTabActions();
-        }
-
-        if (tab != null && tab.equals("linkeddata")) {
-            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-        }
-
-        if (tab != null && tab.equals("conservation_status")) {
-            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-        }
-
-        if (tab != null && tab.equals("sites")) {
             sitesTabActions();
+            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            factsheet.getSpeciesForHabitats();
         }
 
-        if (tab != null && tab.equals("other")) {
-            dictionaryLength = dictionary.length;
-            if (factsheet.isEunis()) {
-                for (int i = 0; i < dictionary.length; i++) {
-                    try {
-                        Integer dictionaryType = dictionary[i];
-                        String title = factsheet.getOtherInfoDescription(dictionaryType);
-                        String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
-                        String noElements = getContext().getSqlUtilities().ExecuteSQL(SQL);
 
-                        if (title != null) {
-                            HabitatFactsheetOtherDTO dto = new HabitatFactsheetOtherDTO();
-
-                            dto.setTitle(title);
-                            dto.setDictionaryType(dictionaryType);
-                            dto.setNoElements(noElements);
-                            otherInfo.add(dto);
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+//        if (tab != null && tab.equals("other")) {
+//            dictionaryLength = dictionary.length;
+//            if (factsheet.isEunis()) {
+//                for (int i = 0; i < dictionary.length; i++) {
+//                    try {
+//                        Integer dictionaryType = dictionary[i];
+//                        String title = factsheet.getOtherInfoDescription(dictionaryType);
+//                        String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
+//                        String noElements = getContext().getSqlUtilities().ExecuteSQL(SQL);
+//
+//                        if (title != null) {
+//                            HabitatFactsheetOtherDTO dto = new HabitatFactsheetOtherDTO();
+//
+//                            dto.setTitle(title);
+//                            dto.setDictionaryType(dictionaryType);
+//                            dto.setNoElements(noElements);
+//                            otherInfo.add(dto);
+//                        }
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }
 
         try {
             history = factsheet.getHistory();
@@ -216,7 +173,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             e.printStackTrace();
         }
 
-        return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
+        if(factsheet.isAnnexI()){
+            return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
+        } else {
+            return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
+        }
     }
 
     /**
@@ -370,13 +331,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @return the tabs
-     */
-    public String[] getTabs() {
-        return tabs;
-    }
-
-    /**
      * @return the btrail
      */
     @Override
@@ -399,34 +353,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return metaDescription;
     }
 
-    /**
-     * @return the tab
-     */
-    public String getTab() {
-        return tab;
-    }
-
-    /**
-     * @param tab
-     *            the tab to set
-     */
-    public void setTab(String tab) {
-        this.tab = tab;
-    }
-
     public boolean isMini() {
         return isMini;
     }
 
     public void setMini(boolean isMini) {
         this.isMini = isMini;
-    }
-
-    /**
-     * @return the tabsWithData
-     */
-    public List<Pair<String, String>> getTabsWithData() {
-        return tabsWithData;
     }
 
     public List<HabitatFactsheetOtherDTO> getOtherInfo() {

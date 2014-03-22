@@ -1,6 +1,9 @@
 package ro.finsiel.eunis.search;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -143,5 +146,30 @@ public class UtilitiesTest {
 
         result = Utilities.removeQuotes("A´B`C‘D\"E'F\u0027G H'I","=");
         assertEquals("A=B=C=D=E=F=G H=I", result);
+    }
+
+    /**
+     * Test for the isEmptyString method
+     */
+    @Test
+    public void testEmptyString() {
+        assertTrue(Utilities.isEmptyString(null));
+        assertTrue(Utilities.isEmptyString(""));
+        assertTrue(Utilities.isEmptyString("    "));
+        assertTrue(Utilities.isEmptyString("\t"));
+        assertFalse(Utilities.isEmptyString("a"));
+    }
+
+    /**
+     * Test for the getHabitatType method
+     */
+    @Test
+    public void testHabitatType() {
+        assertEquals(Utilities.EUNIS_HABITAT, Utilities.getHabitatType(null, null));
+        assertEquals(Utilities.ANNEX_I_HABITAT, Utilities.getHabitatType("a", null));
+        assertEquals(Utilities.ANNEX_I_HABITAT, Utilities.getHabitatType(null, "a"));
+        // older (compatibility) version
+        assertEquals(Utilities.EUNIS_HABITAT, Utilities.getHabitatType(null));
+        assertEquals(Utilities.ANNEX_I_HABITAT, Utilities.getHabitatType("a"));
     }
 }

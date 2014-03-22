@@ -54,22 +54,28 @@
         <div>
             <ul>
                 <li>
-                    <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</span>
-                    <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')})</span>
+                    ${eunis:cmsPhrase(actionBean.contentManagement, 'EU Habitats Directive')}
+                    <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'Annex I habitat type')}</span>
+                    <c:if test="${not empty actionBean.factsheet.code2000}">
+                        <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.code2000, '')})</span>
+                    </c:if>
                 </li>
                 <li>
-                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by')}:
-                    <c:choose>
-                        <c:when test="${not empty actionBean.protectedBy}">
-                            <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');">
-                            <c:forEach items="${actionBean.protectedBy}" var="legal" varStatus="stat">
-                                <span class="bold">${legal}</span><c:if test="${not stat.last}">, </c:if>
-                            </c:forEach>
-                            </a>
-                        </c:when>
-                        <c:otherwise><span class="bold">Not available</span></c:otherwise>
-                    </c:choose>
+                    Protected in <span class="bold">148</span> Natura 2000 sites
+                    <%--todo: implement--%>
                 </li>
+                <li>
+                    <span class="bold">8</span> associated species from Annex II and IV in EU Habitats Directive
+                    <%--todo: implement--%>
+                </li>
+                <c:if test="${actionBean.factsheet.annexI}">
+                    <span class="discreet">
+                        Source: Interpretation Manual of European Union Habitats, version EUR 28 (2013)
+                        <%--todo: data source?--%>
+                        <%--todo: link--%>
+                    </span>
+                </c:if>
+
             </ul>
         </div>
     </div>

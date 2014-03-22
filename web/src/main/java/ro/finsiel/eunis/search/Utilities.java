@@ -1222,24 +1222,32 @@ public final class Utilities {
 
     /**
      * This methods finds if an habitat is EUNIS or ANNEX I.
-     *
-     * @param codeAnnexI This is the Code 2000 for the habitat
+     * @param codeAnnexI This is the code annex I
+     * @param code2000 This is the Code 2000 for the habitat
      * @return EUNIS_HABITAT or ANNEX_I_HABITAT.
      */
-    public static Integer getHabitatType(String codeAnnexI) {
-        Integer ret;
-
-        if (null == codeAnnexI) {
-            ret = EUNIS_HABITAT;
+    public static Integer getHabitatType(String codeAnnexI, String code2000) {
+        if(isEmptyString(codeAnnexI) && isEmptyString(code2000)){
+            return EUNIS_HABITAT;
         } else {
-            if (codeAnnexI.trim().equals("")) {
-                ret = EUNIS_HABITAT;
-            } else {
-                ret = ANNEX_I_HABITAT;
-            }
+            return ANNEX_I_HABITAT;
         }
-        return ret;
     }
+
+    public static Integer getHabitatType(String codeAnnexI) {
+        return getHabitatType(codeAnnexI, null);
+    }
+
+    /**
+     * Checks if a string is empty or null
+     * @param s
+     * @return
+     */
+    public static boolean isEmptyString(String s) {
+        if(s == null) return true;
+        return s.trim().isEmpty();
+    }
+
 
     /**
      * Map source to human readable string.

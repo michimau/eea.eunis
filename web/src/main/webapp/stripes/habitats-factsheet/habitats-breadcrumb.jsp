@@ -13,7 +13,15 @@
         <%--</span>--%>
 
         <span id="breadcrumbs-0" dir="ltr">
-            <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>
+            <c:choose>
+                <c:when test="${actionBean.factsheet.annexI}">
+                    <a href="habitats-annex1-browser.jsp">Habitat Annex I Directive hierarchical view</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>
+                </c:otherwise>
+            </c:choose>
+
             <span class="breadcrumbSeparator">
                 &gt;
             </span>

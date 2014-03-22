@@ -1822,7 +1822,7 @@ public class HabitatsFactsheet {
      * @return EUNIS_HABITAT or ANNEX_I_HABITAT.
      */
     public Integer getHabitatType() {
-        return Utilities.getHabitatType(habitat.getCodeAnnex1());
+        return Utilities.getHabitatType(habitat.getCodeAnnex1(), habitat.getCode2000());
     }
 
     /**

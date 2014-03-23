@@ -288,6 +288,7 @@ public class SpeciesFactsheet {
 
                     int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -100);
 
+                    // todo: there is also Utilities.getHabitatType()
                     if (idHabitat != -100) {
                         if (idHabitat >= 1 && idHabitat < 10000) {
                             code = habitat.getEunisHabitatCode();

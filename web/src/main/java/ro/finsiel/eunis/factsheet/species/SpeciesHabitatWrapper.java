@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.factsheet.species;
 
 
+import ro.finsiel.eunis.search.Utilities;
+
 /**
  * Wrapper object for species - habitats link.
  * @author finsiel
@@ -10,12 +12,12 @@ public class SpeciesHabitatWrapper {
     /**
      * Define an EUNIS habitat.
      */
-    public static final int HABITAT_EUNIS = 0;
+    public static final int HABITAT_EUNIS = Utilities.EUNIS_HABITAT;
 
     /**
      * Defina an ANNEX I habitat.
      */
-    public static final int HABITAT_ANNEX_I = 1;
+    public static final int HABITAT_ANNEX_I = Utilities.ANNEX_I_HABITAT;
 
     /** Name of the habitat. */
     private String habitatName = null;

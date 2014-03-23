@@ -2,6 +2,8 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
 
+<c:choose>
+    <c:when test="${not empty actionBean.habitatSintaxa}">
     <h3>
         ${eunis:cmsPhrase(actionBean.contentManagement, 'Relation to vegetation types (syntaxa)')}
     </h3>
@@ -32,7 +34,7 @@
         </thead>
         <tbody>
         
-        <c:forEach items="${actionBean.factsheet.habitatSintaxa}" var="syntaxa">
+        <c:forEach items="${actionBean.habitatSintaxa}" var="syntaxa">
             <tr>
                 <td>
                     ${syntaxa.name}
@@ -56,5 +58,10 @@
         </c:forEach>
         </tbody>
     </table>
+    </c:when>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+    </c:otherwise>
+</c:choose>
 
 </stripes:layout-definition>

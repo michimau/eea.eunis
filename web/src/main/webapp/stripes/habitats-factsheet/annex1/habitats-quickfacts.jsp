@@ -5,7 +5,7 @@
 
     <!--  Description on the left -->
     <div class="left-area">
-        <div>
+        <div style="margin-left: 5px;">
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'English name')}:
             <span class="bold">${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription))}</span>
             <c:forEach items="${actionBean.descriptions}" var="desc" varStatus="loop">

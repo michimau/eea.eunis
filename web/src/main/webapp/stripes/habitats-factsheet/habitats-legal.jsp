@@ -3,7 +3,7 @@
 <stripes:layout-definition>
 
     <c:choose>
-        <c:when test="${actionBean.factsheet.eunis}">
+        <c:when test="${not empty actionBean.legalInfo}">
             <h3>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Covered by the following habitat types in international legal instruments and agreements')}
             </h3>
@@ -42,7 +42,7 @@
             </table>
         </c:when>
         <c:otherwise>
-
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
         </c:otherwise>
     </c:choose>
 

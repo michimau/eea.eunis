@@ -19,6 +19,7 @@ import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
@@ -101,6 +102,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List legalInfo = null;
     private Set<String> protectedBy = null;
 
+    private List annex1Species = null;
+
     /**
      * RDF output is served from elsewhere.
      */
@@ -136,9 +139,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         if (factsheet.isAnnexI()) {
             sitesTabActions();
-            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-            factsheet.getSpeciesForHabitats();
+//            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+//            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
         }
 
 
@@ -539,5 +541,33 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
         return legalInfo;
+    }
+
+    /**
+     * Cache the species factsheet query
+     * @return List of species for this habitat
+     */
+    public List getSpecies() {
+        if(annex1Species == null){
+            annex1Species = factsheet.getSpeciesForHabitats();
+        }
+        return annex1Species;
+    }
+
+    private List habitatSintaxa = null;
+
+    /**
+     * Cache the habitat vegetation
+     * @return List of vegetation
+     */
+    public List getHabitatSintaxa() {
+        if(habitatSintaxa == null) {
+            try {
+                habitatSintaxa = factsheet.getHabitatSintaxa();
+            } catch (InitializationException e) {
+                habitatSintaxa = new ArrayList();
+            }
+        }
+        return habitatSintaxa;
     }
 }

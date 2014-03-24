@@ -1,7 +1,8 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-
+<c:choose>
+    <c:when test="${not empty actionBean.speciesForHabitats}">
     <h3>
         ${eunis:cmsPhrase(actionBean.contentManagement, 'Species characteristics for habitat type')}
     </h3>
@@ -29,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${actionBean.factsheet.speciesForHabitats}" var="species">
+        <c:forEach items="${actionBean.speciesForHabitats}" var="species">
             <tr>
                 <td>
                     <a href="species/${species.idSpecies}">${species.speciesName}</a>
@@ -53,4 +54,9 @@
         </c:forEach>
         </tbody>
     </table>
+    </c:when>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+    </c:otherwise>
+</c:choose>
 </stripes:layout-definition>

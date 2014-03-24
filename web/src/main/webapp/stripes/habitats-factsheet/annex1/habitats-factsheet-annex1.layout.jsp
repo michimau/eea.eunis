@@ -55,9 +55,10 @@
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
+                            <a id="species" ></a>
                             <h2 class="notoc eea-icon-right-container">Species</h2>
                             <div class="pane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-species.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
@@ -70,13 +71,13 @@
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Legal status</h2>
                             <div class="pane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-legal.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Relation to EUNIS habitat classification</h2>
                             <div class="pane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-classifications.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">

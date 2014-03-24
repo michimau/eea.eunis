@@ -48,7 +48,7 @@
             </tbody>
         </table>
     </c:if>
-
-    ${eunis:cmsPhrase(actionBean.contentManagement, 'For relation to plant communities (syntaxa), see Vegetation types')}
-
+    <c:if test="${not actionBean.factsheet.annexI}">
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'For relation to plant communities (syntaxa), see Vegetation types')}
+    </c:if>
 </stripes:layout-definition>

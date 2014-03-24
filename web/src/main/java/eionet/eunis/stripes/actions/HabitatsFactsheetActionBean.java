@@ -570,4 +570,13 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
         return habitatSintaxa;
     }
+
+    private List speciesForHabitats = null;
+
+    public List getSpeciesForHabitats(){
+        if(speciesForHabitats == null) {
+            speciesForHabitats = factsheet.getSpeciesForHabitats();
+        }
+        return speciesForHabitats;
+    }
 }

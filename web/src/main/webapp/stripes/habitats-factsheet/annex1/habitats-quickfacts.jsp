@@ -53,23 +53,30 @@
                     </c:if>
                 </li>
                 <li>
+                    <a href="${ actionBean.pageUrl }#sites" onclick="openSection('species');"><span class="bold">${fn:length(actionBean.speciesForHabitats)}</span></a> characteristic species
+                </li>
+                <li>
                     Protected in
                     <a href="${ actionBean.pageUrl }#sites" onclick="openSection('sites');"><span class="bold">${fn:length(actionBean.sites)}</span></a>
                      Natura 2000 sites
                 </li>
-                <li>
-                    <span class="bold">8</span> associated species from Annex II and IV in EU Habitats Directive
-                    <%--todo: implement--%>
-                </li>
-                <c:if test="${actionBean.factsheet.annexI}">
-                    <span class="discreet">
-                        Source: Interpretation Manual of European Union Habitats, version EUR 28 (2013)
-                        <%--todo: data source?--%>
-                        <%--todo: link--%>
-                    </span>
-                </c:if>
-
             </ul>
+            <br>
+            <c:if test="${actionBean.factsheet.annexI}">
+                    <span class="discreet">
+                    <c:forEach items="${actionBean.descriptions}" var="desc" varStatus="loop">
+                        <c:if test="${!empty desc.idDc && idDc != -1}">
+                            <c:set var="ssource" value="${eunis:execMethodParamInteger('ro.finsiel.eunis.factsheet.species.SpeciesFactsheet', 'getBookAuthorDate', desc.idDc)}"/>
+                            <c:if test="${!empty ssource}">
+                                <p>
+                                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+                                    <a href="references/${desc.idDc}">${eunis:treatURLSpecialCharacters(ssource)}</a>
+                                </p>
+                            </c:if>
+                        </c:if>
+                    </c:forEach>
+                    </span>
+            </c:if>
         </div>
     </div>
 

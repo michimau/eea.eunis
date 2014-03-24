@@ -108,7 +108,7 @@
                       <a href="species-names.jsp" title="<%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
                     </td>
                     <td>
-                      <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>
+                      <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by common name (popular name)")%>
                     </td>
                   </tr>
                   <tr>
@@ -123,93 +123,11 @@
                   <tr>
                     <td>
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-synonyms.jsp" title="<%=cm.cmsPhrase("Identify synonym names for species")%>"><strong><%=cm.cmsPhrase("Synonyms")%></strong></a>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Identify synonym names for species")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-country.jsp"><strong><%=cm.cmsPhrase("Country/Biogeographic region")%></strong></a>
-                      <%=cm.cmsTitle("find_species_located_in_country_region")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find species located within a country and/or a biogeographic region")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-threat-international.jsp"><strong><%=cm.cmsPhrase("International Threat Status")%></strong></a>
-                      <%=cm.cmsTitle("species_threatened_at_international_level")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Species threatened at international level")%>
-                    </td>
-                  </tr>
-<!--
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-threat-national.jsp"><strong><%=cm.cmsPhrase("National threat status")%></strong></a>
-                      <%=cm.cmsTitle("species_threatened_at_country_level")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Species threatened at country level")%>
-                    </td>
-                  </tr>
--->
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="species-legal.jsp"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
                       <%=cm.cmsTitle("species_protected_by_legal_texts")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species protected by legal texts at European level")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="habitats-species.jsp?expandare=no&amp;showCode=on&amp;showLevel=on&amp;showVernacularName=on">
-                          <strong><%=cm.cmsPhrase("Pick species, show habitat types")%></strong></a>
-                      <%=cm.cmsTitle("find_habitat_types_characterized_by_species")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find habitat types characterised by a particular species")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="sites-species.jsp"><strong><%=cm.cmsPhrase("Pick species, show sites")%></strong></a>
-                      <%=cm.cmsTitle("find_sites_types_characterized_by_species")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find sites characterized by a particular species")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-books.jsp"><strong><%=cm.cmsPhrase("Pick species, show references")%></strong></a>
-                      <%=cm.cmsTitle("find_books_articles")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find books, articles which refers to species")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-references.jsp"><strong><%=cm.cmsPhrase("Pick references, show species")%></strong></a>
-                      <%=cm.cmsTitle("fins_species_reffered_by_books")%>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find species referred by books, articles etc.")%>
                     </td>
                   </tr>
                   <tr>

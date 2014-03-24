@@ -95,7 +95,7 @@
           var groupID = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].value;
           var groupName = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].text;
           var frm = document.createElement( "FORM" );
-          document.getElementById("main").appendChild( frm );
+          $('body').get(0).appendChild( frm );
           frm.method = "get";
           frm.action="species-legal.jsp";
 

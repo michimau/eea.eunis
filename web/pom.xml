@@ -213,6 +213,7 @@
                     <!-- Default configuration for application database. -->
                     <propertyFile>target/classes/liquibase.properties</propertyFile>
                     <changeLogFile>db/eunis-structure.xml</changeLogFile>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
                 <executions>
                     <execution>

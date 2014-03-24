@@ -29,6 +29,7 @@ public class JstlFunctions {
      * @return String
      */
     public static boolean exists(Object suspicious) {
+        if(suspicious == null) return false;
         try {
             Method exists = suspicious.getClass().getMethod("exists");
             boolean result = false;

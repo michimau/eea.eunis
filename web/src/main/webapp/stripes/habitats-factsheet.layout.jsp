@@ -77,7 +77,7 @@
                         </c:if>
                         -->
                         <c:if test="${actionBean.tab == 'geo'}">
-                            <stripes:layout-render name="/stripes/habitats-factsheet-geo.jsp"/>
+                            <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
                         </c:if>
                         <c:if test="${actionBean.tab == 'instruments'}">
                             <jsp:include page="/habitats-factsheet-legal.jsp">

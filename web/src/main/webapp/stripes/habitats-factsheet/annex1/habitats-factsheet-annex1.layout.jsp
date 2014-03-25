@@ -19,6 +19,9 @@
                     $('#' + sectionName + ' ~ h2').click();
             }
         </script>
+        <%--for distribution section--%>
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css"/>
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
 
@@ -38,20 +41,22 @@
                 <%--Quick facts--%>
                 <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-quickfacts.jsp"/>
 
-
                 <%--Accordion--%>
                 <div>
                     <div class="eea-accordion-panels non-exclusive collapsed-by-default">
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Distribution</h2>
-                            <div class="pane">
+                            <div class="pane" id="distributionPane">
                                 <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                <script>
+                                    addReloadOnDisplay("distributionPane", null, null, init);
+                                </script>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">
                             <h2 class="notoc eea-icon-right-container">Conservation status</h2>
                             <div class="pane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-conservation.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;">

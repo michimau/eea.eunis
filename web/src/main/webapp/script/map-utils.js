@@ -59,27 +59,39 @@ $.fn.attrchange = function(callback) {
  * @param paneId Accordion pane ID
  * @param mapId Map iframe ID
  * @param link Link to the map
+ * @param optionalInitFunction If needed, this function can be triggered instead of the map change.
  */
-function addReloadOnDisplay(paneId, mapId, link) {
+function addReloadOnDisplay(paneId, mapId, link, optionalInitFunction) {
     var speciesStatusPane = document.getElementById (paneId);
-    var loadHandler = function loadSpeciesMapWorkaround(event) {
-        if (event == "style") {   // Modern browsers
-            if(document.getElementById(paneId).style.display == "block" && !document.getElementById(mapId).loaded){
-                document.getElementById(mapId).src=link;
-                document.getElementById(mapId).loaded=true;  // only loaded once
-            }
-        }
-        else if (event && event.propertyName=="style.display"){  // IE8
-            if(document.getElementById(paneId).style.display == "block") {
-                document.getElementById(mapId).src=link;
-                document.getElementById(mapId).loaded=true;  // only loaded once
-            }
-        }
+    var loadHandler;
 
+    loadHandler = function loadSpeciesMapWorkaround(event) {
+        if (event == "style") {   // Modern browsers
+            if (document.getElementById(paneId).style.display == "block" && !document.getElementById(paneId).loaded) {
+                if (undefined === optionalInitFunction) {
+                    document.getElementById(mapId).src = link;
+                } else {
+                    optionalInitFunction();
+                }
+                document.getElementById(paneId).loaded = true;  // only loaded once
+            }
+        }
+        else if (event && event.propertyName == "style.display") {  // IE8
+            if (document.getElementById(paneId).style.display == "block") {
+                if (undefined === optionalInitFunction) {
+                    document.getElementById(mapId).src = link;
+                } else {
+                    optionalInitFunction();
+                }
+                document.getElementById(paneId).loaded = true;  // only loaded once
+            }
+        }
     }
+
     loadHandler.mapId = mapId;
     loadHandler.paneId = paneId;
     loadHandler.link = link;
+    loadHandler.optionalInitFunction = optionalInitFunction;
 
     if (speciesStatusPane.addEventListener) { // all browsers
         $("#"+paneId).attrchange(loadHandler);

@@ -56,6 +56,7 @@ margin-left: 466px;
 }
 
 .tabbedmenu ul > li > a.current,
+.tabbedmenu ul > li > a:hover,
 .tabbedmenu ul > li > a.current:hover {
     cursor: default;
     color: #005E7D;

@@ -34,7 +34,7 @@
   {
 %>
   <h2>
-  <%=cm.cmsPhrase("Habitat type syntaxa")%>
+  <%=cm.cmsPhrase("Vegetation types (syntaxa)")%>
   </h2>
   <table summary="<%=cm.cms("habitat_type_syntaxa")%>" class="listing fullwidth">
     <col style="width:25%"/>

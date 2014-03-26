@@ -146,6 +146,7 @@
               String correctedExplanation = "";
               correctedExplanation = question.getQuestionExplanation();
               correctedExplanation = correctedExplanation.replaceAll("<I>","###strong###").replaceAll("</I>","###/strong###");
+              correctedExplanation = correctedExplanation.replaceAll("<strong>","###strong###").replaceAll("</strong>","###/strong###");
               correctedExplanation = correctedExplanation.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
               correctedExplanation = correctedExplanation.replaceAll("###strong###","<strong>").replaceAll("###/strong###","</strong>");
           %>

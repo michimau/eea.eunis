@@ -6,7 +6,9 @@
     String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#index.jsp,externalglobal";
 %>
 <stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="externalglobal" pageTitle="Global queries" btrail="<%=btrail %>">
-
+    <stripes:layout-component name="head">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.servletPath}/css/eea_search.css"/>
+    </stripes:layout-component>
     <stripes:layout-component name="contents">
 
         <!-- MAIN CONTENT -->
@@ -57,10 +59,10 @@
                     <c:choose>
                         <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
 							<div style="overflow-x:auto ">
-							    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="100" sort="list" requestURI="${actionBean.urlBinding}">
+							    <display:table name="actionBean.queryResultRows" class="sortable listing" pagesize="100" sort="list" requestURI="${actionBean.urlBinding}">
 							    <display:setProperty name="paging.banner.placement" value="both" />
 							        <c:forEach var="cl" items="${actionBean.queryResultCols}">
-							            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
+							            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" headerClass="nosort" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
 							              </c:forEach>
 							          </display:table>
 							      </div>

@@ -309,7 +309,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             for(SiteHabitatsPersist shp : habit2Eunis){
                 String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
-                HabitatsBean h = new HabitatsBean(shp, calculatePercent(cover, factsheet.getSiteObject().getArea()));
+                HabitatsBean h = new HabitatsBean(shp, cover);
                 habitats.add(h);
             }
         }

@@ -98,7 +98,10 @@
                 <p class="discreet" style="color:red;"><a href="/updatesite/${ actionBean.idsite }" title="Testing only">Force SDF update from Natura 2000 site</a></p>
             </c:if>
             <c:if test="${ actionBean.typeCDDA}">
-                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: ${eunis:cmsPhrase(actionBean.contentManagement, 'Nationally designated areas (CDDA)')}</p>
+                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+                <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/adc3b1a11bd54cd7b3adefa19fe11fdf">
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Nationally designated areas (CDDA)')}
+                </a></p>
             </c:if>
 		</div>
 	</div>

@@ -14,7 +14,7 @@
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type english name')}
             </th>
             <th scope="col">
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Cover(%)')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Cover [ha]')}
             </th>
         </tr>
         </thead>

@@ -23,15 +23,13 @@
              <stripes:submit   value="Filter" name="filterPrase2" />
          </stripes:form>
          <br/>
-         <display:table name="${actionBean.refs}" class="sortable" sort="external" id="listItem" htmlId="listItem" requestURI="/references" decorator="eionet.eunis.util.decorators.ReferencesTableDecorator">
-             <display:column property="idRef" title="ID" sortable="true"/>
-             <display:column property="refTitle" title="Title" sortable="true"/>
-             <display:column property="author" title="Author" sortable="true" decorator="eionet.eunis.util.decorators.ReplaceTagsColumnDecorator"/>
-             <display:column property="refYear" title="Year" sortable="true"/>
+         <display:table name="${actionBean.refs}" class="listing fullwidth table-inline" sort="external" id="listItem" htmlId="listItem" requestURI="/references" decorator="eionet.eunis.util.decorators.ReferencesTableDecorator">
+             <display:column property="idRef" title="ID" sortable="true" headerClass="nosort"/>
+             <display:column property="refTitle" title="Title" sortable="true" headerClass="nosort"/>
+             <display:column property="author" title="Author" sortable="true" decorator="eionet.eunis.util.decorators.ReplaceTagsColumnDecorator" headerClass="nosort"/>
+             <display:column property="refYear" title="Year" sortable="true" headerClass="nosort"/>
          </display:table>
 
         <!-- END MAIN CONTENT -->
-    </stripes:layout-component>
-    <stripes:layout-component name="foot">
     </stripes:layout-component>
 </stripes:layout-render>

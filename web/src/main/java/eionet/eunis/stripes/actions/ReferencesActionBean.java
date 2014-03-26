@@ -15,7 +15,10 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
+import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.habitats.legal.LegalSearchCriteria;
+import ro.finsiel.eunis.search.habitats.legal.LegalSortCriteria;
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
@@ -35,7 +38,7 @@ import eionet.eunis.util.Pair;
  *
  * @author Risto Alt
  */
-@UrlBinding("/references/{idref}/{tab}")
+@UrlBinding("/references/{idref}")
 public class ReferencesActionBean extends AbstractStripesAction {
 
     /** */
@@ -46,11 +49,8 @@ public class ReferencesActionBean extends AbstractStripesAction {
     private DcIndexDTO dcIndex;
     private List<AttributeDto> dcAttributes;
 
-    /** selected tab */
-    private String tab;
-
     /** tabs to display */
-    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
+//    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
     List<ReferenceSpeciesGroupDTO> speciesGrouped = new ArrayList<ReferenceSpeciesGroupDTO>();
     List<ReferenceSpeciesDTO> speciesByName = new ArrayList<ReferenceSpeciesDTO>();
@@ -64,15 +64,9 @@ public class ReferencesActionBean extends AbstractStripesAction {
     /** References tab filter input and it's default phrase. */
     private String filterPhrase = DEFAULT_FILTER_VALUE;
     
-    /** The value is assigned from the sorting selector form */
-    private int listing = 1;
-
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
     public Resolution defaultAction() {
-        if (tab == null || tab.length() == 0) {
-            tab = "general";
-        }
 
         String forwardPage = "/stripes/references.jsp";
 
@@ -100,24 +94,21 @@ public class ReferencesActionBean extends AbstractStripesAction {
             }
             try {
                 ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
-                if (listing == 1){
-                    speciesGrouped = refDomain.getSpeciesForAReferenceByGroup(idref);
-                }
-                if (listing == 2){
-                    speciesByName = refDomain.getSpeciesForAReference(idref);    
-                }
+                speciesByName = refDomain.getSpeciesForAReference(idref);
 
                 habitats = refDomain.getHabitatsForAReferences(idref);
 
+//                LegalSearchCriteria[] legalSearchCriterias = { new LegalSearchCriteria("any", "%",dcIndex.getTitle(),2) };
+//                LegalSortCriteria[] legalSortCriterias = {new LegalSortCriteria(2,1)};
+//
+//                EUNISLegalDomain habitatDomain = new EUNISLegalDomain(legalSearchCriterias, legalSortCriterias);
+//
+//                List habitats2 = habitatDomain.getResults(0,1000,legalSortCriterias);
+//
+//                System.out.println(habitats2.size());
+
             } catch (CriteriaMissingException e) {
                 e.printStackTrace();
-            }
-            tabsWithData.add(new Pair<String, String>("general", getContentManagement().cmsPhrase("General information")));
-            if ((speciesGrouped != null && speciesGrouped.size() > 0) || (speciesByName != null && speciesByName.size() > 0)) {
-                tabsWithData.add(new Pair<String, String>("species", getContentManagement().cmsPhrase("Species")));
-            }
-            if (habitats != null && habitats.size() > 0) {
-                tabsWithData.add(new Pair<String, String>("habitats", getContentManagement().cmsPhrase("Habitats")));
             }
 
             setMetaDescription("reference");
@@ -156,22 +147,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     public void setDcIndex(DcIndexDTO dcIndex) {
         this.dcIndex = dcIndex;
-    }
-
-    public String getTab() {
-        return tab;
-    }
-
-    public void setTab(String tab) {
-        this.tab = tab;
-    }
-
-    public List<Pair<String, String>> getTabsWithData() {
-        return tabsWithData;
-    }
-
-    public void setTabsWithData(List<Pair<String, String>> tabsWithData) {
-        this.tabsWithData = tabsWithData;
     }
 
     public List<ReferenceSpeciesGroupDTO> getSpeciesGrouped() {
@@ -228,14 +203,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     public String getDefaultFilterValue() {
         return DEFAULT_FILTER_VALUE;
-    }
-
-    public int getListing() {
-        return listing;
-    }
-
-    public void setListing(int listing) {
-        this.listing = listing;
     }
 
     public List<ReferenceSpeciesDTO> getSpeciesByName() {

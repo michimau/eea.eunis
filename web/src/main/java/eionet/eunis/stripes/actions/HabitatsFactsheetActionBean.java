@@ -47,7 +47,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String idHabitat = "";
 
     private static final String[] tabs = {"General information", "Geographical distribution", "Legal instruments",
-        "Habitat types", "Sites", "Species", "Conservation status", "External data", "Other info"};
+        "Vegetation types", "Sites", "Species", "Conservation status", "External data", "Other info"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {

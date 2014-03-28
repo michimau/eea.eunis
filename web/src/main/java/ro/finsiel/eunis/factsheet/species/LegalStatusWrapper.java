@@ -1,7 +1,5 @@
 package ro.finsiel.eunis.factsheet.species;
 
-import java.util.List;
-
 /**
  * Wrapper for legal information about species, used in species factsheet.
  *
@@ -17,8 +15,12 @@ public class LegalStatusWrapper {
     private String comments = "";
     private Integer idDc;
     private String formattedUrl;
+    private String description = "";
 
-    
+    private String parentUrl = "";
+    private String parentName = "";
+    private String parentAlternative;
+
 
     /**
      * Create a new LegalStatusWrapper object.
@@ -219,6 +221,55 @@ public class LegalStatusWrapper {
             return i1.equals(i2);
         }
 
+    }
+
+    /**
+     * Description field (dc_attributes name="description")
+     * @return
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * URL of the parent reference
+     */
+    public String getParentUrl() {
+        return parentUrl;
+    }
+
+    public void setParentUrl(String parentUrl) {
+        this.parentUrl = parentUrl;
+    }
+
+    /**
+     * Name of the parent reference
+     */
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    /**
+     * Alternative name of the parent reference
+     * @param parentAlternative
+     */
+    public void setParentAlternative(String parentAlternative) {
+        this.parentAlternative = parentAlternative;
+    }
+
+    /**
+     * Alternative name of the parent reference
+     */
+    public String getParentAlternative() {
+        return parentAlternative;
     }
 
 }

@@ -148,8 +148,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List synonyms;
     private int vernNamesCount;
     private int speciesSitesCount;
-    private Vector legalInstruments;
-    private int legalInstrumentCount;
+
     private int habitatsCount;
     private String authorYear;
     private String pageUrl;
@@ -286,8 +285,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             vernNamesCount = vernNames.size();
             speciesSites = factsheet.getSitesForSpecies();
             speciesSitesCount = speciesSites.size();
-            legalInstruments = factsheet.getLegalStatus();
-            legalInstrumentCount = legalInstruments.size();
             habitatsCount = factsheet.getHabitatsForSpecies().size();
             
             for (VernacularNameWrapper vernName : vernNames){
@@ -1318,22 +1315,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setSpeciesSitesCount(int speciesSitesCount) {
         this.speciesSitesCount = speciesSitesCount;
-    }
-
-    public Vector getLegalInstruments() {
-        return legalInstruments;
-    }
-
-    public void setLegalInstruments(Vector legalInstruments) {
-        this.legalInstruments = legalInstruments;
-    }
-
-    public int getLegalInstrumentCount() {
-        return legalInstrumentCount;
-    }
-
-    public void setLegalInstrumentCount(int legalInstrumentCount) {
-        this.legalInstrumentCount = legalInstrumentCount;
     }
 
     public int getHabitatsCount() {

@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.IReferencesDao;
+import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -71,10 +74,6 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import com.ibm.icu.util.StringTokenizer;
-
-import eionet.eunis.dto.ClassificationDTO;
-import eionet.eunis.dto.PictureDTO;
-import eionet.eunis.dto.TaxonomyTreeDTO;
 
 /**
  * This is the factsheet generator for the species's factsheet.
@@ -641,7 +640,7 @@ public class SpeciesFactsheet {
                     publication.setDate(po.getCreated());
                 } else {
                     System.out.println("Warning: " + SpeciesFactsheet.class.getName()
-                            + "::getSpeciesBook() - date.getCreated returned null");
+                            + "::getSpeciesBook(ID_DC=" + getSpeciesNatureObject().getIdDublinCore()  + ") - date.getCreated returned null");
                 }
             }
         } catch (Exception _ex) {
@@ -775,63 +774,109 @@ public class SpeciesFactsheet {
                     new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + synonymsIDs
                             + ")");
 
-            if (list.size() > 0) {
                 for (Chm62edtReportsPersist report : list) {
                     LegalStatusWrapper legalStatus = new LegalStatusWrapper();
 
-                    if (report.getIdDc() != null) {
-                        legalStatus.setReference(report.getReference().toString());
-                        legalStatus.setRefcd(report.getRefcd().toString());
-                        legalStatus.setIdDc(report.getIdDc());
-                    } else {
-                        legalStatus.setReference("-1");
-                        legalStatus.setRefcd("-1");
-                    }
-                    List list2 = new Chm62edtCountryDomain().findWhere("ID_GEOSCOPE='" + report.getIdGeoscope() + "'");
-
-                    if (list2.size() > 0) {
-                        Chm62edtCountryPersist country = (Chm62edtCountryPersist) list2.get(0);
-
-                        legalStatus.setArea(country.getAreaNameEnglish());
-                    }
-                    // Legal text
-                    List l2 = new DcIndexDomain().findWhere("ID_DC='" + report.getIdDc() + "'");
-                    if (l2.size() > 0) {
-                        DcIndexPersist po = (DcIndexPersist) l2.get(0);
-                        legalStatus.setDetailedReference(po.getTitle());
-                        legalStatus.setLegalText(po.getAlternative());
-                        legalStatus.setUrl(po.getUrl());
-                    }
-
-                    legalStatus.setComments("");
-
-                    List list_lg = new Chm62edtLegalStatusDomain().findWhere("ID_LEGAL_STATUS=" + report.getIDLookup());
-
-                    if (list_lg.size() > 0) {
-                        Iterator it_lg = list_lg.iterator();
-
-                        if (it_lg.hasNext()) {
-                            Chm62edtLegalStatusPersist legal_status = (Chm62edtLegalStatusPersist) it_lg.next();
-
-                            legalStatus.setComments(legal_status.getComment());
-                        }
-                    }
+                    populateLegalStatusWrapper(legalStatus, report);
 
                     if (!results.contains(legalStatus)) {
                         results.add(legalStatus);
                     }
-
                 }
-
-            }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
         }
-        if (null == results) {
-            results = new Vector<LegalStatusWrapper>();
-        }
 
         return results;
+    }
+
+    /**
+     * Populates the LegalStatusWrapper with data from the report
+     * @param legalStatus  The legal status object
+     * @param report
+     */
+    private void populateLegalStatusWrapper(LegalStatusWrapper legalStatus, Chm62edtReportsPersist report) {
+        if (report.getIdDc() != null) {
+            legalStatus.setReference(report.getReference().toString());
+            legalStatus.setRefcd(report.getRefcd().toString());
+            legalStatus.setIdDc(report.getIdDc());
+
+            // get the description from attributes
+            IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+            List<AttributeDto> dcAttributes = dao.getDcAttributes(report.getIdDc().toString());
+            for(AttributeDto a : dcAttributes){
+                if(a.getName().equals("description"))
+                    legalStatus.setDescription(a.getObjectLabel());
+                if(a.getName().equals("isPartOf")) {
+                    // populate parent data
+                    DcIndexDTO dto = findParent(a.getValue());
+                    legalStatus.setParentName(dto.getTitle());
+                    legalStatus.setParentUrl(dto.getUrl());
+                    legalStatus.setParentAlternative(dto.getAlternative());
+                }
+            }
+
+        } else {
+            legalStatus.setReference("-1");
+            legalStatus.setRefcd("-1");
+        }
+
+        List list2 = new Chm62edtCountryDomain().findWhere("ID_GEOSCOPE='" + report.getIdGeoscope() + "'");
+
+        if (list2.size() > 0) {
+            Chm62edtCountryPersist country = (Chm62edtCountryPersist) list2.get(0);
+
+            legalStatus.setArea(country.getAreaNameEnglish());
+        }
+        // Legal text
+        List l2 = new DcIndexDomain().findWhere("ID_DC='" + report.getIdDc() + "'");
+        if (l2.size() > 0) {
+            DcIndexPersist po = (DcIndexPersist) l2.get(0);
+            legalStatus.setDetailedReference(po.getTitle());
+            legalStatus.setLegalText(po.getAlternative());
+            legalStatus.setUrl(po.getUrl());
+        }
+
+        legalStatus.setComments("");
+
+        List list_lg = new Chm62edtLegalStatusDomain().findWhere("ID_LEGAL_STATUS=" + report.getIDLookup());
+
+        if (list_lg.size() > 0) {
+            Iterator it_lg = list_lg.iterator();
+
+            if (it_lg.hasNext()) {
+                Chm62edtLegalStatusPersist legal_status = (Chm62edtLegalStatusPersist) it_lg.next();
+
+                legalStatus.setComments(legal_status.getComment());
+            }
+        }
+    }
+
+    /**
+     * Returns the parent (top level) DC for the given reference; returns current object if no parent found
+     * @param idDc reference id
+     * @return parent object
+     */
+    DcIndexDTO findParent(String idDc){
+        IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+
+        // only searches in the first 5, so it doesn't cycle if incorrect data
+        for(int i=0;i<5;i++){
+            List<AttributeDto> dtoAttributes = dao.getDcAttributes(idDc);
+            boolean foundParent = false;
+            for(AttributeDto dtoA : dtoAttributes){
+                if(dtoA.getName().equals("isPartOf")){
+                    idDc = dtoA.getValue();
+                    foundParent = true;
+                }
+            }
+            if(!foundParent) {
+                // top level
+                break;
+            }
+        }
+
+        return dao.getDcIndex(idDc);
     }
 
     /**

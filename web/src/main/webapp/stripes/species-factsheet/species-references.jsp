@@ -16,48 +16,53 @@
                        class="listing fullwidth">
                         <thead>
                         <tr>
-                            <th scope="col" style="cursor: pointer;"><img
-                                    src="http://www.eea.europa.eu/arrowBlank.gif"
-                                    height="6" width="9">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Detailed reference')}
-                                <img src="http://www.eea.europa.eu/arrowUp.gif"
-                                     height="6" width="9"></th>
-                            <th scope="col" style="cursor: pointer;"><img
-                                    src="http://www.eea.europa.eu/arrowBlank.gif"
-                                    height="6" width="9">
+                            <th scope="col" style="cursor: pointer;" class="nosort">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Legal text')}
-                                <img src="http://www.eea.europa.eu/arrowBlank.gif"
-                                     height="6" width="9"></th>
-                            <th scope="col" style="cursor: pointer;"><img
-                                    src="http://www.eea.europa.eu/arrowBlank.gif"
-                                    height="6" width="9">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Comments')}
-                                <img src="http://www.eea.europa.eu/arrowBlank.gif"
-                                     height="6" width="9"></th>
-                            <th scope="col" style="cursor: pointer;"><img
-                                    src="http://www.eea.europa.eu/arrowBlank.gif"
-                                    height="6" width="9">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Url')}
-                                <img src="http://www.eea.europa.eu/arrowBlank.gif"
-                                     height="6" width="9"></th>
+                                </th>
+                            <th scope="col" style="cursor: pointer;" class="nosort">
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
+                              </th>
+                            <th scope="col" style="cursor: pointer;" class="nosort">
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical and other restrictions')}
+                             </th>
+                            <th scope="col" style="cursor: pointer;" class="nosort">
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
 
+                        <c:set var="oldParent" value="${''}"/>
+                        <c:set var="oldLink" value="${''}"/>
 						<c:forEach items="${actionBean.legalStatuses}" var="legal" varStatus="loop">
-							<tr ${loop.index % 2 == 0 ? 'zebraodd' : 'class="zebraeven"'}>
-								<td>
-		          					<a href="references/${ legal.idDc }">${ legal.detailedReference }</a>
-		        				</td>
+
+							<tr>
 		        				<td>
-		          					${ legal.legalText }
-		        				</td>
+                                    <c:if test="${oldParent != legal.parentName}">
+    		          					<a href="${legal.parentUrl}">${ legal.parentName }</a>
+    		          					<c:if test="${not empty legal.parentAlternative}">(${legal.parentAlternative})</c:if>
+                                    </c:if>
+                                    <c:set var="oldParent" value="${legal.parentName}"/>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty legal.description}">
+                                            <a href="references/${ legal.idDc }">${ legal.description }</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${legal.detailedReference}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
 		        				<td>
 		              				${ legal.comments }
 		        				</td>
 		        				<td>
+		        				    <c:if test="${oldLink !=  legal.url}">
 		        					<a href="${ legal.url }" title="${ legal.url }">${ legal.formattedUrl }</a>
-		        				</td>
+                                    </c:if>
+                                    <c:set var="oldLink" value="${legal.url}"/>
+                                </td>
 							</tr>
 						</c:forEach>
 						</tbody>

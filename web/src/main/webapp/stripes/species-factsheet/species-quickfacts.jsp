@@ -51,7 +51,7 @@
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}:
                                 <span class="bold">Not available</span> EU Nature Directives and
-                                <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ actionBean.legalInstrumentCount }</span></a>
+                                <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ fn:length(actionBean.legalStatuses) }</span></a>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}.
                             </li>
                             <li>

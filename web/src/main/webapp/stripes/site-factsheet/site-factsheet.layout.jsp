@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <c:set var="title" value=""/>
-<c:set var="notExistErrMsg" value="${eunis:cmsPhrase(actionBean.contentManagement, 'We are sorry, the requested species does not exist')}"/>
+<c:set var="notExistErrMsg" value="${eunis:cmsPhrase(actionBean.contentManagement, 'We are sorry, the requested site does not exist')}"/>
 <c:choose>
     <c:when test="${eunis:exists(actionBean.factsheet)}">
         <c:set var="title" value="${actionBean.pageTitle }"></c:set>

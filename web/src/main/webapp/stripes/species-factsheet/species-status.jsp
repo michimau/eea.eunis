@@ -11,17 +11,14 @@
                         <p>The Threat Status' concept in IUCN Red lists assess the distance from extinction.</p>
                         <c:if test="${not empty actionBean.consStatus}">
 
-                            <c:set var="statusCodeWO" value="${not empty actionBean.consStatusWO ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
-                            <c:set var="statusCodeEU" value="${not empty actionBean.consStatusEU ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'un' }"></c:set>
-                            <c:set var="statusCodeE25" value="${not empty actionBean.consStatusE25 ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'un' }"></c:set>
-
-                            <c:set var="statusCodeEU-title" value="${statusCodeEU eq 'un' ? 'Not assessed threat level for the Europe' : actionBean.consStatusEU.statusDesc}"></c:set>
-                            <c:set var="statusCodeE25-title" value="${statusCodeE25 eq 'un' ? 'Not assessed threat level for the EU' : actionBean.consStatusE25.statusDesc}"></c:set>
+                            <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
+                            <c:set var="statusCodeEU" value="${(not empty actionBean.consStatusEU and not empty actionBean.consStatusEU.threatCode) ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'un' }"></c:set>
+                            <c:set var="statusCodeE25" value="${(not empty actionBean.consStatusE25 and not empty actionBean.consStatusE25.threatCode) ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'un' }"></c:set>
 
                             <div class="threat-status-${statusCodeWO} roundedCorners">
                                 <%--World status--%>
                                 <c:choose>
-                                    <c:when test="${!empty actionBean.consStatusWO}">
+                                    <c:when test="${!empty actionBean.consStatusWO and !(statusCodeWO eq 'un')}">
                                         <c:choose>
                                             <c:when test="${!empty actionBean.redlistLink}">
                                                 <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">
@@ -41,8 +38,6 @@
                                         <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the world')}">
                                             <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
                                             <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
-                                            <p class="threat-status-source small-text">
-                                                <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                         </div>
                                     </c:otherwise>
                                 </c:choose>
@@ -50,16 +45,16 @@
                                 <%--EU status--%>
                                 <div class="threat-status-${statusCodeEU} roundedCorners width-11">
                                     <c:choose>
-                                        <c:when test="${not empty actionBean.consStatusEU}">
+                                        <c:when test="${not empty actionBean.consStatusEU and !(statusCodeEU eq 'un')}">
 
-                                        <c:choose>
-                                            <c:when test="${!empty actionBean.redlistLink}">
-                                                <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
-                                            </c:otherwise>
-                                        </c:choose>
+                                            <c:choose>
+                                                <c:when test="${!empty actionBean.redlistLink and !(statusCodeEU eq 'un')}">
+                                                    <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
+                                                </c:otherwise>
+                                            </c:choose>
                                             <%--<a href="references/${actionBean.consStatusEU.idDc}">--%>
                                                 <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusEU.statusDesc}">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
@@ -72,8 +67,6 @@
                                             <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the Europe')}">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
                                                 <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
-                                                <p class="threat-status-source small-text">
-                                                    <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -81,7 +74,7 @@
                                     <%--E25 status--%>
                                     <div class="threat-status-${statusCodeE25} roundedCorners width-9">
                                         <c:choose>
-                                            <c:when test="${not empty actionBean.consStatusE25}">
+                                            <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'un')}">
                                                 <c:choose>
                                                     <c:when test="${!empty actionBean.redlistLink}">
                                                         <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
@@ -102,8 +95,6 @@
                                                 <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the EU')}">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
                                                     <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
-                                                    <p class="threat-status-source small-text">
-                                                        <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>

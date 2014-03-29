@@ -482,8 +482,8 @@ public class SpeciesFactsheet {
                     if (country.getIso2l() == null || (country.getIso2l() != null && country.getIso2l().equals(""))) {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
 
-                            String IntThrCode = consS.getCode();
-                            ; // "International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
+                            String intThreatCode = consS.getCode();
+                            // "International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
                             Integer idConsStatus = consS.getIdConsStatus();
                             Integer idDcConsStatus = consS.getIdDc();
                             String author = report.getSource();
@@ -498,12 +498,12 @@ public class SpeciesFactsheet {
                                                 + consS.getIdConsStatusLink() + "'");
                                 Chm62edtConservationStatusPersist consS2 = (Chm62edtConservationStatusPersist) consStatusList2.get(0);
                                 if (consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")) {
-                                    IntThrCode = consS2.getCode();
+                                    intThreatCode = consS2.getCode();
                                     idConsStatus = consS2.getIdConsStatus();
                                     // author = consS2.getSource(); // fix for #17069
                                 } else if (consS2.getSource() != null && !consS2.getSource().toUpperCase().contains("IUCN")) {
                                     // author = "";
-                                    IntThrCode = "";
+                                    intThreatCode = "";
                                     idConsStatus = 0;
                                     idDcConsStatus = 0;
                                     consDescription = "";
@@ -511,7 +511,7 @@ public class SpeciesFactsheet {
                                 }
                             } else if (consS.getIdConsStatusLink() == 0 && !consS.getSource().toUpperCase().contains("IUCN")) {
                                 // author = "";
-                                IntThrCode = "";
+                                intThreatCode = "";
                                 idConsStatus = 0;
                                 idDcConsStatus = 0;
                                 consDescription = "";
@@ -527,7 +527,7 @@ public class SpeciesFactsheet {
 
                             threat.setReference(author);
                             threat.setSelection(country.getSelection());
-                            threat.setThreatCode(IntThrCode);
+                            threat.setThreatCode(intThreatCode);
                             threat.setIdConsStatus(idConsStatus);
                             threat.setIdDcConsStatus(idDcConsStatus);
                             threat.setIdDc(report.getIdDc());

@@ -46,7 +46,16 @@
                         <ul>
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Threat status Europe')}:
-                                <a href="${ actionBean.pageUrl }#threat_status" onclick="openSection('threat_status');"><span class="bold">${actionBean.consStatusEU.statusName}</span></a>
+                                <a href="${ actionBean.pageUrl }#threat_status" onclick="openSection('threat_status');">
+                                <span class="bold">
+                                    <c:choose>
+                                        <c:when test="${not empty actionBean.consStatusEU.statusName}">
+                                            ${actionBean.consStatusEU.statusName}
+                                        </c:when>
+                                        <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</c:otherwise>
+                                    </c:choose>
+                                </span>
+                                </a>
                             </li>
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}:

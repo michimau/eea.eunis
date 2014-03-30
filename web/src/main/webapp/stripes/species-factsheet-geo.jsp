@@ -89,10 +89,10 @@
 
                 cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer");
 
-                bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
+                bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/BioRegions/Biogeographicalregions_Dyna_WM/MapServer");
                 bio_regions_layer.opacity = 0.5;
 
-                river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Water/RiverBasinDistrict_Dyna_WGS84/MapServer");
+                river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://water.discomap.eea.europa.eu/arcgis/rest/services/Water/WFDRiverBasinDistrictInfo_Dyna_WM/MapServer");
                 river_basin_districts_layer.opacity = 0.6;
 
                 //Add species parameter to filter Natura 2000

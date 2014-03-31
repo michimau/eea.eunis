@@ -3,9 +3,6 @@
 <stripes:layout-definition>
 <c:choose>
     <c:when test="${not empty actionBean.speciesForHabitats}">
-    <h3>
-        ${eunis:cmsPhrase(actionBean.contentManagement, 'Species characteristics for habitat type')}
-    </h3>
     <table summary="${eunis:cms(actionBean.contentManagement, 'habitat_species')}" class="listing fullwidth">
         <thead>
         <tr>

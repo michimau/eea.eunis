@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="eea-accordion-panel" style="clear: both;">
-                        <h2 class="notoc eea-icon-right-container">Species mentioned in the habitat definition</h2>
+                        <h2 class="notoc eea-icon-right-container">Species mentioned in habitat description</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-species.jsp"/>
                         </div>

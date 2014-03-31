@@ -46,7 +46,7 @@
   sql = Utilities.getConditionForSourceDB(sql, source_db, db, "S");
   List designations = new DesignationsDomain().findWhere(sql + " GROUP BY J.DESCRIPTION,J.DESCRIPTION_EN");
   Vector v = new Vector();
-  System.out.println( "designations = " + designations.size() );
+//  System.out.println( "designations = " + designations.size() );
   if (designations != null && designations.size() > 0)
   {
     for (int i = 0; i < designations.size(); i++)

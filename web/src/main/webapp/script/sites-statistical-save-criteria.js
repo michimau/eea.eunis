@@ -20,7 +20,7 @@ formFieldAttributes[0] = "country";
 formFieldAttributes[1] = "designation";
 formFieldAttributes[2] = "designationCat";
 formFieldAttributes[3] = "yearMin/yearMax";
-formFieldAttributes[4] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_NATURE_NET,DB_CORINE,DB_CDDA_INTERNATIONAL,DB_DIPLOMA,DB_BIOGENETIC,DB_EMERALD";
+formFieldAttributes[4] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_DIPLOMA";
 
 formFieldOperators[0] = "";
 formFieldOperators[1] = "";

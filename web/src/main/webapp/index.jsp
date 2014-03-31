@@ -196,12 +196,8 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 					<input type="hidden" name="DB_NATURA2000" value="ON" />
 					<input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
-					<input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
 					<input type="hidden" name="DB_DIPLOMA" value="ON" />
-					<input type="hidden" name="DB_CDDA_INTERNATIONAL" value="ON" />
-					<input type="hidden" name="DB_CORINE" value="ON" />
-					<input type="hidden" name="DB_BIOGENETIC" value="ON" />
-					<input type="hidden" name="DB_EMERALD" value="ON" />
+					<%--<input type="hidden" name="DB_EMERALD" value="ON" />--%>
 					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
 					<input type="hidden" name="fuzzySearch" value="true" />
 					<label for="englishName">

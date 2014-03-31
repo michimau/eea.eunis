@@ -17,7 +17,7 @@ attributesNames[2] = "sourceDB";
 
 formFieldAttributes[0] = "countryName";
 formFieldAttributes[1] = "regionName";
-formFieldAttributes[2] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_NATURE_NET,DB_CORINE,DB_CDDA_INTERNATIONAL,DB_DIPLOMA,DB_BIOGENETIC,DB_EMERALD";
+formFieldAttributes[2] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_DIPLOMA";
 
 formFieldOperators[0] = "";
 formFieldOperators[1] = "";

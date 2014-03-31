@@ -33,12 +33,8 @@
     var url = "";
     if (document.criteria.NATURA2000.checked)       url += "&DB_NATURA2000=true";
     if (document.criteria.CDDA_NATIONAL.checked)      url += "&DB_CDDA_NATIONAL=true";
-    //if (document.criteria.NATURENET.checked)        url += "&DB_NATURE_NET=true";
-    if (document.criteria.CORINE.checked)             url += "&DB_CORINE=true";
-    if (document.criteria.CDDA_INTERNATIONAL.checked) url += "&DB_CDDA_INTERNATIONAL=true";
     if (document.criteria.DIPLOMA.checked)            url += "&DB_DIPLOMA=true";
-    if (document.criteria.BIOGENETIC.checked)         url += "&DB_BIOGENETIC=true";
-    if (document.criteria.EMERALD.checked)          url += "&DB_EMERALD=true";
+//    if (document.criteria.EMERALD.checked)          url += "&DB_EMERALD=true";
     return url;
   }
 

@@ -31,20 +31,14 @@ function openHelper(URL,displayWarning)
     var DB_EMERALD = false;
 
     if (document.eunis.DB_NATURA2000.checked == true) DB_NATURA2000 = true;
-    if (document.eunis.DB_CORINE.checked == true) DB_CORINE = true;
     if (document.eunis.DB_DIPLOMA.checked == true) DB_DIPLOMA = true;
     if (document.eunis.DB_CDDA_NATIONAL.checked == true) DB_CDDA_NATIONAL = true;
-    if (document.eunis.DB_CDDA_INTERNATIONAL.checked == true) DB_CDDA_INTERNATIONAL = true;
-    if (document.eunis.DB_BIOGENETIC.checked == true) DB_BIOGENETIC = true;
-    if (document.eunis.DB_EMERALD.checked == true) DB_EMERALD = true;
+//    if (document.eunis.DB_EMERALD.checked == true) DB_EMERALD = true;
 
     URL2 = URL2+"&DB_NATURA2000=" + DB_NATURA2000;
-    URL2 = URL2+"&DB_CORINE=" + DB_CORINE;
     URL2 = URL2+"&DB_DIPLOMA=" + DB_DIPLOMA;
     URL2 = URL2+"&DB_CDDA_NATIONAL=" + DB_CDDA_NATIONAL;
-    URL2 = URL2+"&DB_CDDA_INTERNATIONAL=" + DB_CDDA_INTERNATIONAL;
-    URL2 = URL2+"&DB_BIOGENETIC=" + DB_BIOGENETIC;
-    URL2 = URL2+"&DB_EMERALD=" + DB_EMERALD;
+//    URL2 = URL2+"&DB_EMERALD=" + DB_EMERALD;
     eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
   }
 }

@@ -54,24 +54,16 @@
 
       var DB_NATURA2000 = document.eunis.DB_NATURA2000.checked;
       var DB_CDDA_NATIONAL = document.eunis.DB_CDDA_NATIONAL.checked;
-      var DB_NATURE_NET = document.eunis.DB_NATURE_NET.checked;
-      var DB_CORINE = document.eunis.DB_CORINE.checked;
-      var DB_CDDA_INTERNATIONAL = document.eunis.DB_CDDA_INTERNATIONAL.checked;
       var DB_DIPLOMA = document.eunis.DB_DIPLOMA.checked;
-      var DB_BIOGENETIC = document.eunis.DB_BIOGENETIC.checked;
-      var DB_EMERALD = document.eunis.DB_EMERALD.checked;
+//      var DB_EMERALD = document.eunis.DB_EMERALD.checked;
 
       var URL2=URL;
       URL2 += "?designation=" + designation;
       URL2 += "&country=" + country;
       if (DB_NATURA2000 == true) URL2 = URL2 + "&DB_NATURA2000=true";
       if (DB_CDDA_NATIONAL == true) URL2 = URL2 + "&DB_CDDA_NATIONAL=true";
-      if (DB_NATURE_NET == true) URL2 = URL2 + "&DB_NATURE_NET=true";
-      if (DB_CORINE == true) URL2 = URL2 + "&DB_CORINE=true";
-      if (DB_CDDA_INTERNATIONAL == true) URL2 = URL2 + "&DB_CDDA_INTERNATIONAL=true";
       if (DB_DIPLOMA == true) URL2 = URL2 + "&DB_DIPLOMA=true";
-      if (DB_BIOGENETIC == true) URL2 = URL2 + "&DB_BIOGENETIC=true";
-      if (DB_EMERALD == true) URL2 = URL2 + "&DB_EMERALD=true";
+//      if (DB_EMERALD == true) URL2 = URL2 + "&DB_EMERALD=true";
 
       eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
 //    }

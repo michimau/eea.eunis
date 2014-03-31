@@ -13,16 +13,10 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
-  boolean showCorine = Utilities.checkedStringToBoolean( request.getParameter( "showCorine" ), false );
-  String enableCorine = ( !showCorine ) ? "disabled=\"disabled\"" : "";
 
   String dbNatura2000 = Utilities.formatString(cm.cms("natura_2000"), "Natura 2000");
   String dbCDDANational = Utilities.formatString(cm.cms("cdda_national"), "CDDA National");
-  String dbNatureNet = Utilities.formatString(cm.cms("sites_databases_Nature_Net"), "Nature Net");
   String dbDiploma = Utilities.formatString(cm.cms("european_diploma"), "European Diploma");
-  String dbCDDAInternational = Utilities.formatString(cm.cms("cdda_international"), "CDDA International");
-  String dbCorine = Utilities.formatString(cm.cms("corine_biotopes"), "Corine Biotopes");
-  String dbBiogenetic = Utilities.formatString(cm.cms("biogenetic_reserve"), "Biogenetic Reserve");
   String dbEmerald = Utilities.formatString(cm.cms("emerald"), "Emerald");
 %>
 <script language="JavaScript" type="text/javascript">
@@ -32,9 +26,9 @@
   }
 
   function checkValidSelection() {
-    if (!document.eunis.DB_NATURA2000.checked && !document.eunis.DB_CDDA_NATIONAL.checked && !document.eunis.DB_NATURE_NET.checked &&
-        !document.eunis.DB_CORINE.checked && !document.eunis.DB_CDDA_INTERNATIONAL.checked && !document.eunis.DB_DIPLOMA.checked &&
-        !document.eunis.DB_BIOGENETIC.checked && !document.eunis.DB_EMERALD.checked) {
+    if (!document.eunis.DB_NATURA2000.checked && !document.eunis.DB_CDDA_NATIONAL.checked &&
+//          !document.eunis.DB_EMERALD.checked &&
+            !document.eunis.DB_DIPLOMA.checked ) {
             alert("<%=cm.cms("please_select_source_data_sets")%>");
             return false;
     }
@@ -65,26 +59,14 @@ function isNumber1(s)
     {
       document.eunis.DB_NATURA2000.checked = true;
       document.eunis.DB_CDDA_NATIONAL.checked = true;
-      //document.eunis.DB_NATURE_NET.checked = true;
-      if (!document.eunis.DB_CORINE.disabled) {
-        document.eunis.DB_CORINE.checked = true;
-      }
-      document.eunis.DB_CDDA_INTERNATIONAL.checked = true;
       document.eunis.DB_DIPLOMA.checked = true;
-      document.eunis.DB_BIOGENETIC.checked = true;
-      document.eunis.DB_EMERALD.checked = true;
+//      document.eunis.DB_EMERALD.checked = true;
       document.eunis.dynText.value = "Check none";
     } else {
       document.eunis.DB_NATURA2000.checked = false;
       document.eunis.DB_CDDA_NATIONAL.checked = false;
-      //document.eunis.DB_NATURE_NET.checked = false;
-      if(!document.eunis.DB_CORINE.disabled) {
-        document.eunis.DB_CORINE.checked = false;
-      }
-      document.eunis.DB_CDDA_INTERNATIONAL.checked = false;
       document.eunis.DB_DIPLOMA.checked = false;
-      document.eunis.DB_BIOGENETIC.checked = false;
-      document.eunis.DB_EMERALD.checked = false;
+//      document.eunis.DB_EMERALD.checked = false;
       document.eunis.dynText.value = "Check all";
     }
   }
@@ -95,25 +77,13 @@ function isNumber1(s)
     {
       document.eunis.DB_CDDA_NATIONAL.checked = true;
       document.eunis.DB_NATURA2000.checked = true;
-      if (!document.eunis.DB_CORINE.disabled)
-      {
-        document.eunis.DB_CORINE.checked = true;
-      }
-      document.eunis.DB_CDDA_INTERNATIONAL.checked = true;
       document.eunis.DB_DIPLOMA.checked = true;
-      document.eunis.DB_BIOGENETIC.checked = true;
-      document.eunis.DB_EMERALD.checked = true;
+//      document.eunis.DB_EMERALD.checked = true;
     } else {
       document.eunis.DB_NATURA2000.checked = false;
       document.eunis.DB_CDDA_NATIONAL.checked = false;
-      if(!document.eunis.DB_CORINE.disabled)
-      {
-        document.eunis.DB_CORINE.checked = false;
-      }
-      document.eunis.DB_CDDA_INTERNATIONAL.checked = false;
       document.eunis.DB_DIPLOMA.checked = false;
-      document.eunis.DB_BIOGENETIC.checked = false;
-      document.eunis.DB_EMERALD.checked = false;
+//      document.eunis.DB_EMERALD.checked = false;
     }
   }
 
@@ -132,20 +102,16 @@ The following fields are declared below:
  - Projects where search is done (checkboxes):
     NATURA 2000         - DB_NATURA2000
     CDDA  National      - DB_CDDA_NATIONAL
-    NatureNet           - DB_NATURE_NET
-    Corine Biotopes     - DB_CORINE
-    CDDA International  - DB_CDDA_INTERNATIONAL
     European Diploma    - DB_DIPLOMA
-    Biogenetic Reserve  - DB_BIOGENETIC
     Emerald             - DB_EMERALD
 --%>
 <br />
 <table width="100%" border="1" cellpadding="1" cellspacing="2" style="border-collapse: collapse" summary="layout">
-  <col style="width:33%"/>
-  <col style="width:33%"/>
-  <col style="width:34%"/>
+  <col style="width:50%"/>
+  <col style="width:50%"/>
+  <%--<col style="width:34%"/>--%>
   <tr>
-    <td colspan="2">
+    <td colspan="1">
       <%=cm.cmsPhrase("Select data set:")%>
     </td>
     <td align="right">
@@ -168,35 +134,13 @@ The following fields are declared below:
     </td>
     <td>
       <input type="checkbox" name="DB_CDDA_NATIONAL" id="DB_CDDA_NATIONAL" value="ON" />
-      <label for="DB_CDDA_NATIONAL"><%=cm.cmsPhrase("CDDA National")%></label>
-    </td>
-    <td>
-      <input type="checkbox" name="DB_NATURE_NET" id="DB_NATURE_NET" value="ON" disabled="disabled" />
-      <label for="DB_NATURE_NET"><%=cm.cmsPhrase("Nature Net")%></label>
+      <label for="DB_CDDA_NATIONAL"><%=cm.cmsPhrase("Nationally designated areas (CDDA)")%></label>
     </td>
   </tr>
   <tr>
     <td>
       <input type="checkbox" name="DB_DIPLOMA" id="DB_DIPLOMA" value="ON" />
       <label for="DB_DIPLOMA"><%=cm.cmsPhrase("European Diploma")%></label>
-    </td>
-    <td>
-      <input type="checkbox" name="DB_CDDA_INTERNATIONAL" id="DB_CDDA_INTERNATIONAL" value="ON" />
-      <label for="DB_CDDA_INTERNATIONAL"><%=cm.cmsPhrase("CDDA International")%></label>
-    </td>
-    <td>
-      <input type="checkbox" name="DB_CORINE" id="DB_CORINE" value="ON" <%=enableCorine%> />
-      <label for="DB_CORINE"><%=cm.cmsPhrase("Corine Biotopes")%></label>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <input type="checkbox" name="DB_BIOGENETIC" id="DB_BIOGENETIC" value="ON" />
-      <label for="DB_BIOGENETIC"><%=cm.cmsPhrase("Biogenetic Reserve")%></label>
-    </td>
-    <td>
-      <input type="checkbox" name="DB_EMERALD" id="DB_EMERALD" value="ON" />
-      <label for="DB_EMERALD"><%=cm.cmsPhrase("Emerald")%></label>
     </td>
     <td>
       <a href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>

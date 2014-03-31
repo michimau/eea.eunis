@@ -13,27 +13,8 @@
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Description')} ( ${desc.language} )
                     </h4>
                     <p>
-                            ${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(desc.description))}
+                            ${eunis:treatLineEndings(eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(desc.description)))}
                     </p>
-                    <c:if test="${!empty desc.ownerText && !fn:toLowerCase(desc.ownerText) == 'n/a'}">
-                        <h3>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Additional note')}
-                        </h3>
-                        <p>
-                                ${desc.ownerText}
-                        </p>
-                    </c:if>
-                    <%--<c:if test="${!empty desc.idDc && idDc != -1}">--%>
-                        <%--<c:set var="ssource" value="${eunis:execMethodParamInteger('ro.finsiel.eunis.factsheet.species.SpeciesFactsheet', 'getBookAuthorDate', desc.idDc)}"/>--%>
-                        <%--<c:if test="${!empty ssource}">--%>
-                            <%--<h4>--%>
-                                    <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}--%>
-                            <%--</h4>--%>
-                            <%--<p>--%>
-                                <%--<a href="references/${desc.idDc}">${eunis:treatURLSpecialCharacters(ssource)}</a>--%>
-                            <%--</p>--%>
-                        <%--</c:if>--%>
-                    <%--</c:if>--%>
                 </c:if>
             </c:forEach>
         </div>

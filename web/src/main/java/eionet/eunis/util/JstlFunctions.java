@@ -273,6 +273,13 @@ public class JstlFunctions {
         return result;
     }
 
+    public static String treatLineEndings(String str) {
+        if(str == null) {
+            return "";
+        }
+        return str.replaceAll("[\n\r]+","<br>");
+    }
+
     /**
      * This is a direct call to {@link Utilities#formatArea(String, int, int, String, String)},
      * see the JavaDoc of that method for more information.

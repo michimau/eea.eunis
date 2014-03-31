@@ -528,6 +528,23 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return protectedBy;
     }
 
+    public boolean isHabitatsDirective() {
+        for(String s : getProtectedBy()) {
+            if(s.contains("EU Habitats Directive")) return true;
+        }
+        return false;
+    }
+
+    public String getEquivalentEUHabitats() {
+        String result = "";
+        for(HabitatLegalPersist h : getLegalInfo()) {
+            if(h.getLegalName().contains("EU Habitats Directive"))
+                result = h.getTitle();
+        }
+
+        return result;
+    }
+
     /**
      * Returns the legal info list
      * @return List of HabitatLegalPersist objects

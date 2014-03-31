@@ -199,6 +199,18 @@
 
 	<function>
 		<description>
+			Replace line end with HTML break.
+	 	</description>
+		<name>treatLineEndings</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String treatLineEndings(java.lang.String)</function-signature>
+		<example>
+			${treatLineEndings("xxx")}
+		</example>
+	</function>
+
+	<function>
+		<description>
 			See JavaDoc of the below function-signature.
 	 	</description>
 		<name>formatArea</name>

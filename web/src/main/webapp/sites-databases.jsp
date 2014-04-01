@@ -61,40 +61,29 @@
   //]]>
 </script>
 <%
-  String CORINE = "";
-  if(request.getParameter("CORINE") != null) CORINE="checked";
   String DIPLOMA = "";
   if(request.getParameter("DIPLOMA") != null) DIPLOMA="checked";
   String CDDA_NATIONAL = "";
   if(request.getParameter("CDDA_NATIONAL") != null) CDDA_NATIONAL="checked";
-  String CDDA_INTERNATIONAL = "";
-  if(request.getParameter("CDDA_INTERNATIONAL") != null) CDDA_INTERNATIONAL="checked";
-  String BIOGENETIC = "";
-  if(request.getParameter("BIOGENETIC") != null) BIOGENETIC="checked";
   String NATURA2000 = "";
   if(request.getParameter("NATURA2000") != null) NATURA2000="checked";
-  String NATURENET = "";
-  if(request.getParameter("NATURENET") != null) NATURENET="checked";
   String EMERALD = "";
   if(request.getParameter("EMERALD") != null) EMERALD="checked";
   //EMERALD = null; // Disable EMERALD for now
 
-  String dbNatura2000 = Utilities.formatString(cm.cmsPhrase("Natura 2000 (v.1.0)"), "Natura 2000");
-  String dbCDDANational = Utilities.formatString(cm.cmsPhrase("CDDA National (v.1.0)"), "CDDA National");
-  String dbNatureNet = Utilities.formatString(cm.cmsPhrase("Nature Net (v.1.0)"), "Nature Net");
-  String dbDiploma = Utilities.formatString(cm.cmsPhrase("European Diploma (v.1.0)"), "European Diploma");
-  String dbCDDAInternational = Utilities.formatString(cm.cmsPhrase("CDDA International (v.1.0)"), "CDDA International");
-  String dbCorine = Utilities.formatString(cm.cmsPhrase("Corine Biotopes (v.1.0)"), "Corine Biotopes");
-  String dbBiogenetic = Utilities.formatString(cm.cmsPhrase("Biogenetic Reserve (v.1.0) "), "Biogenetic Reserve");
+  String dbNatura2000 = Utilities.formatString(cm.cmsPhrase("Natura 2000"), "Natura 2000");
+  String dbCDDANational = Utilities.formatString(cm.cmsPhrase("Nationally designated areas (CDDA)"), "CDDA National");
+  String dbDiploma = Utilities.formatString(cm.cmsPhrase("European Diploma"), "European Diploma");
   String dbEmerald = Utilities.formatString(cm.cmsPhrase("Emerald"), "Emerald");
 %>
 <div style="width : 100%;">
 <table summary="layout" border="1" cellpadding="0" cellspacing="2" style="border-collapse: collapse; border-color : black;" width="100%">
+<colgroup><col style="width: 50%"><col style="width: 50%"></colgroup>
   <tr>
-    <td colspan="2">
+    <td>
       <%=cm.cmsPhrase("Select data set:")%>
     </td>
-    <td>
+    <td style="text-align: right;">
       <input type="button" id="checkAll" name="checkAll"
              title="<%=cm.cms("select_all")%>" value="<%=cm.cms("select_all")%>"
              onclick="javascript:setSelection('true');"
@@ -113,43 +102,25 @@
     </td>
   </tr>
   <tr>
-    <td width="33%">
+    <td>
       <input type="checkbox" id="NATURA2000" title="NATURA2000" name="NATURA2000" value="<%=NATURA2000%>"  checked="checked" />
       <label for="NATURA2000"><%=dbNatura2000%></label>
     </td>
-    <td width="33%">
+    <td>
       <input type="checkbox" id="CDDA_NATIONAL" title="CDDA_NATIONAL" name="CDDA_NATIONAL" value="<%=CDDA_NATIONAL%>" checked="checked" />
       <label for="CDDA_NATIONAL"><%=dbCDDANational%></label>
     </td>
-    <td width="34%">
-      <input type="checkbox" id="NATURENET" title="NATURENET" name="NATURENET" value="<%=NATURENET%>" checked="checked" disabled="disabled" />
-      <label for="NATURENET"><%=dbNatureNet%></label>
-    </td>
   </tr>
   <tr>
-    <td width="33%">
+    <td>
       <input type="checkbox" id="DIPLOMA" title="DIPLOMA" name="DIPLOMA" value="<%=DIPLOMA%>" checked="checked" />
       <label for="DIPLOMA"><%=dbDiploma%></label>
     </td>
-    <td width="33%">
-      <input type="checkbox" id="CDDA_INTERNATIONAL" title="CDDA_INTERNATIONAL" name="CDDA_INTERNATIONAL" value="<%=CDDA_INTERNATIONAL%>" checked="checked" />
-      <label for="CDDA_INTERNATIONAL"><%=dbCDDAInternational%></label>
-    </td>
-    <td width="34%">
-      <input type="checkbox" id="CORINE" title="CORINE" name="CORINE" value="<%=CORINE%>" checked="checked" <%=enableCorine%> />
-      <label for="CORINE"><%=dbCorine%></label>
-    </td>
-  </tr>
-  <tr>
-    <td width="33%">
-      <input type="checkbox" id="BIOGENETIC" title="BIOGENETIC" name="BIOGENETIC" value="<%=BIOGENETIC%>" checked="checked" />
-      <label for="BIOGENETIC"><%=dbBiogenetic%></label>
-    </td>
-    <td width="33%">
-      <input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" checked="checked" />
-      <label for="EMERALD"><%=dbEmerald%></label>
-    </td>
-    <td width="34%">
+    <%--<td width="33%">--%>
+      <%--<input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" checked="checked" />--%>
+      <%--<label for="EMERALD"><%=dbEmerald%></label>--%>
+    <%--</td>--%>
+    <td>
       <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>
       <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>

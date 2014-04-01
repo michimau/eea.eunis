@@ -86,12 +86,9 @@
 										<stripes:param name="designation" value="${actionBean.statisticsBean.designation}"/>
 										<stripes:param name="designationCat" value="${actionBean.statisticsBean.designationCat}"/>
 										<stripes:param name="DB_NATURA2000" value="${actionBean.statisticsBean.DB_NATURA2000}"/>
-										<stripes:param name="DB_CORINE" value="${actionBean.statisticsBean.DB_CORINE}"/>
 										<stripes:param name="DB_DIPLOMA" value="${actionBean.statisticsBean.DB_DIPLOMA}"/>
 										<stripes:param name="DB_CDDA_NATIONAL" value="${actionBean.statisticsBean.DB_CDDA_NATIONAL}"/>
-										<stripes:param name="DB_BIOGENETIC" value="${actionBean.statisticsBean.DB_BIOGENETIC}"/>
-										<stripes:param name="DB_EMERALD" value="${actionBean.statisticsBean.DB_EMERALD}"/>
-										<stripes:param name="DB_CDDA_INTERNATIONAL" value="${actionBean.statisticsBean.DB_CDDA_INTERNATIONAL}"/>
+										<%--<stripes:param name="DB_EMERALD" value="${actionBean.statisticsBean.DB_EMERALD}"/>--%>
 		                            </c:if>
 		                            <c:if test="${tab == 'SPECIES'}">
 		                                <stripes:param name="country" value="${actionBean.country.idCountry}"/>

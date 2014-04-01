@@ -20,7 +20,7 @@ formFieldAttributes[0] = "altitude1/altitude2";
 formFieldAttributes[1] = "altitude21/altitude22";
 formFieldAttributes[2] = "altitude31/altitude32";
 formFieldAttributes[3] = "country";
-formFieldAttributes[4] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_NATURE_NET,DB_CORINE,DB_CDDA_INTERNATIONAL,DB_DIPLOMA,DB_BIOGENETIC,DB_EMERALD";
+formFieldAttributes[4] = "DB_NATURA2000,DB_CDDA_NATIONAL,DB_DIPLOMA";
 
 formFieldOperators[0] = "relationOp";
 formFieldOperators[1] = "relationOp2";

@@ -41,10 +41,7 @@
         {
           document.eunis.DB_CDDA_NATIONAL.checked = true;
           document.eunis.DB_DIPLOMA.checked = true;
-          document.eunis.DB_CDDA_INTERNATIONAL.checked = true;
-          document.eunis.DB_BIOGENETIC.checked = true;
-          document.eunis.DB_EMERALD.checked = true;
-          document.eunis.DB_CORINE.checked = true;
+//          document.eunis.DB_EMERALD.checked = true;
           document.eunis.DB_NATURA2000.checked = true;
         }
       }

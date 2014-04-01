@@ -51,12 +51,8 @@
                     <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
                     <input type="hidden" name="DB_NATURA2000" value="ON" />
                     <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
-                    <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
                     <input type="hidden" name="DB_DIPLOMA" value="ON" />
-                    <input type="hidden" name="DB_CDDA_INTERNATIONAL" value="ON" />
-                    <input type="hidden" name="DB_CORINE" value="ON" />
-                    <input type="hidden" name="DB_BIOGENETIC" value="ON" />
-                    <input type="hidden" name="DB_EMERALD" value="ON" />
+                    <%--<input type="hidden" name="DB_EMERALD" value="ON" />--%>
                     <input type="hidden" name="fuzzySearch" value="true" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
                     <label for="englishName"><%=cm.cmsPhrase("Search sites by code or by name starting with:")%></label>

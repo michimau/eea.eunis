@@ -7,18 +7,10 @@
         <div style="margin-left: 5px;">
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'English name')}:
             <span class="bold">${eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(actionBean.factsheet.habitatDescription))}</span>
-            <c:forEach items="${actionBean.descriptions}" var="desc" varStatus="loop">
-                <c:if test="${fn:toLowerCase(desc.language) == 'english'}">
-                    <h4>
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Description')} ( ${desc.language} )
-                    </h4>
-                    <p>
-                            ${eunis:treatLineEndings(eunis:bracketsToItalics(eunis:treatURLSpecialCharacters(desc.description)))}
-                    </p>
-                </c:if>
-            </c:forEach>
+            <c:if test="${fn:length(actionBean.englishDescription)<actionBean.descriptionThreshold}">
+                <stripes:layout-render name="/stripes/habitats-factsheet/habitats-quickfacts-description.jsp"/>
+            </c:if>
         </div>
-
     </div>
 
     <!-- Textual facts on right -->
@@ -46,6 +38,9 @@
             </ul>
         </div>
     </div>
+    <c:if test="${fn:length(actionBean.englishDescription)>=actionBean.descriptionThreshold}">
+        <stripes:layout-render name="/stripes/habitats-factsheet/habitats-quickfacts-description.jsp"/>
+    </c:if>
 
     <!-- END quick facts -->
 </stripes:layout-definition>

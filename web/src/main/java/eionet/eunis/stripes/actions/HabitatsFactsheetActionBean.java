@@ -42,6 +42,10 @@ import eionet.sparqlClient.helpers.ResultValue;
 @UrlBinding("/habitats/{idHabitat}")
 public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
+    /**
+     * The length of the Description field after which the description is moved to full page width
+     */
+    private static final int DESCRIPTION_THRESHOLD = 1500;
     private String idHabitat = "";
 
     private static final Integer[] dictionary = {HabitatsFactsheet.OTHER_INFO_ALTITUDE, HabitatsFactsheet.OTHER_INFO_DEPTH,
@@ -103,6 +107,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private Set<String> protectedBy = null;
 
     private List annex1Species = null;
+    private String englishDescription = null;
+
+    private List speciesForHabitats = null;
+
 
     /**
      * RDF output is served from elsewhere.
@@ -588,12 +596,36 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return habitatSintaxa;
     }
 
-    private List speciesForHabitats = null;
-
+    /**
+     * The list of species
+     */
     public List getSpeciesForHabitats(){
         if(speciesForHabitats == null) {
             speciesForHabitats = factsheet.getSpeciesForHabitats();
         }
         return speciesForHabitats;
+    }
+
+    /**
+     * The english description
+     * @return
+     */
+    public String getEnglishDescription(){
+        if(englishDescription == null) {
+            for(DescriptionWrapper d: getDescriptions()){
+                if(d.getLanguage().equalsIgnoreCase("english")){
+                    englishDescription = d.getDescription();
+                }
+            }
+            if(englishDescription == null) englishDescription = "";
+        }
+        return englishDescription;
+    }
+
+    /**
+     * The length of the Description field after which the description is moved to full page width
+     */
+    public int getDescriptionThreshold(){
+        return DESCRIPTION_THRESHOLD;
     }
 }

@@ -99,37 +99,6 @@
                         <!-- MAIN CONTENT -->
                         <stripes:layout-component name="contents"/>
 
-                        <!-- Document actions -->
-                        <div class="visualClear"><!--&nbsp; --></div>
-
-                            <div class="documentActions">
-                                <h5 class="hiddenStructure">
-                                    Document Actions
-                                </h5>
-                                <%--<h2 class="share-title">Share with others</h2>--%>
-
-                                <table class="table-document-actions">
-                                    <tr>
-                                        <td class="align-right">
-                                                <a href="javascript:this.print();">
-                                                    <img src="http://www.eea.europa.eu/templates/print_icon.gif"
-                                                         alt="<%=cm.cmsPhrase("Print this page")%>"
-                                                         title="<%=cm.cmsPhrase("Print this page")%>" />
-                                                </a>
-                                                <c:if test="${not empty helpLink}">
-                                                    <a href="<c:out value="${helpLink}"/>"><img src="images/help_icon.gif"
-                                                                                                alt="<%=cm.cmsPhrase("Help information")%>"
-                                                                                                title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                                                </c:if>
-                                                <!-- component for adding page specific actions -->
-                                                <stripes:layout-component name="documentActions"/>
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- END Document actions -->
-
                     </div>
                         <!--END content -->
                 </div>

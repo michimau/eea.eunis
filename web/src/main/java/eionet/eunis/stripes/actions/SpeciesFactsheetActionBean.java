@@ -409,8 +409,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (link.getName().toLowerCase().equals("unep-wcmc page")){
                 unepWcmcPageLink = link.getUrl();
             }
+            if(link.getName().toUpperCase().contains("NOBANIS:")){
+                nobanisLink = link;
+            }
         }
 
+    }
+
+    LinkDTO nobanisLink = null;
+
+    public LinkDTO getNobanisLink(){
+        return nobanisLink;
     }
 
     /**
@@ -555,9 +564,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             itisTSN = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
             ncbi = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
-
-            // Links to HMTL pages
-            links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
 
             subSpecies = factsheet.getSubspecies();
             if (!subSpecies.isEmpty()) {
@@ -1432,15 +1438,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setSpeciesTitle(String speciesTitle) {
         this.speciesTitle = speciesTitle;
-    }
-
-    /**
-     * Is it reported as invasive by NOBANIS?
-     * todo: implement http://taskman.eionet.europa.eu/issues/17886
-     * @return
-     */
-    public boolean isInvasiveNobanis(){
-        return false;
     }
 
     /**

@@ -46,6 +46,7 @@ public class TrimFilter implements Filter {
          * The modified map to be accessed by the getParameterMap() method
          */
         private Map trimmedMap = null;
+        private Map cachedMap = null;
 
         public FilteredRequest(ServletRequest request) {
             super((HttpServletRequest) request);
@@ -71,9 +72,15 @@ public class TrimFilter implements Filter {
          */
         @Override
         public Map getParameterMap() {
+
+            if(super.getParameterMap() != cachedMap){
+                cachedMap = super.getParameterMap();
+                trimmedMap = null;
+            }
+
             if (trimmedMap == null) {
                 HashMap h = new HashMap();
-                h.putAll(super.getParameterMap());
+                h.putAll(cachedMap);
                 for (Object o : h.keySet()) {
                     Object s = h.get(o);
                     if (s instanceof String[]) {

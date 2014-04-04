@@ -1448,5 +1448,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public List<String> getHabitats(){
         return null;
     }
+
+    /**
+     * todo: implement http://taskman.eionet.europa.eu/issues/17887
+     * @return
+     */
+    public boolean isProtectedByEUDirectives(){
+        return false;
+    }
 }
 

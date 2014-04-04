@@ -13,6 +13,8 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
             <c:choose>
                 <c:when test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
                     <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Birds directive">
+                    </td></tr><tr><td><ul><li>Date classified as Special Protection Area (SPA)</li></ul></td>
+                     <td><fmt:formatDate value="${actionBean.spaDate}" pattern="${actionBean.dateFormat}"/>
                 </c:when>
                 <c:otherwise>
                     <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Birds directive">
@@ -25,6 +27,14 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
             <c:choose>
                 <c:when test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
                     <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Habitats directive">
+                    </td></tr><tr><td><ul><li>
+                      Date proposed as Site of Community Importance (SCI)</li></ul></td>
+                        <td><fmt:formatDate value="${actionBean.proposedDate}" pattern="${actionBean.dateFormat}"/></td>
+                    </tr>
+                    <tr>
+                        <td><ul><li>Date designated as Special Area of Conservation (SAC)</li></ul></td>
+                        <td><fmt:formatDate value="${actionBean.sacDate}" pattern="${actionBean.dateFormat}"/>
+
                 </c:when>
                 <c:otherwise>
                     <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Habitats directive">
@@ -33,89 +43,13 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
         </td>
     </tr>
 </table>
-<h3>NATURA 2000 site since</h3>
+<br>
 <table style="width: 600px">
     <tr>
-        <td style="width: 400px">Date classified as Special Protection Area (SPA)</td>
-        <td><fmt:formatDate value="${actionBean.spaDate}" pattern="${actionBean.dateFormat}"/></td>
-    </tr>
-    <tr>
-        <td>Date proposed as Site of Community Importance (SCI)</td>
-        <td><fmt:formatDate value="${actionBean.proposedDate}" pattern="${actionBean.dateFormat}"/></td>
-    </tr>
-    <tr>
-        <td>Date designated as Special Area of Conservation (SAC)</td>
-        <td><fmt:formatDate value="${actionBean.sacDate}" pattern="${actionBean.dateFormat}"/></td>
-    </tr>
-    <tr>
-        <td>Date of Standard data form update</td>
+        <td style="width: 400px">Date of Standard data form update</td>
         <td><fmt:formatDate value="${actionBean.updateDate}" pattern="${actionBean.dateFormat}"/></td>
     </tr>
 </table>
 
-<h3>
-    ${eunis:cmsPhrase(actionBean.contentManagement, 'National designations overlapping the NATURA 2000 site')}
-</h3>
-<c:choose>
-<c:when test="${not empty actionBean.sitesDesigc}">
-<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'sites_factsheet_designations_national')}" class="listing fullwidth  table-inline">
-    <thead>
-    <tr>
-        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name (Original)')}
-        </th>
-        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name (English)')}
-        </th>
-        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Category')}
-        </th>
-        <th style="text-align : right;" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}">
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Cover(%)')}
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${actionBean.sitesDesigc}" var="desig">
-        <tr>
-            <td>
-                <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.description}</a>&nbsp;
-            </td>
-            <td>
-                <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.descriptionEn}</a>
-            </td>
-            <td>
-                <c:choose>
-                    <c:when test="${desig.nationalCategory eq 'A'}">
-                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_A')}
-                        (Code ${desig.nationalCategory})
-                    </c:when>
-                    <c:when test="${desig.nationalCategory eq 'B'}">
-                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_B')}
-                        (Code ${desig.nationalCategory})
-                    </c:when>
-                    <c:when test="${desig.nationalCategory eq 'C'}">
-                        ${eunis:cms(actionBean.contentManagement, 'CDDA_CATEGORY_C')}
-                        (Code ${desig.nationalCategory})
-                    </c:when>
-                    <c:otherwise>
-                        ${desig.nationalCategory}
-                    </c:otherwise>
-                </c:choose>
-
-            </td>
-            <td style="text-align : right">
-                <fmt:formatNumber value=" ${desig.overlap}" type="number" pattern="#"/>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-</c:when>
-<c:otherwise>
-    ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
-</c:otherwise>
-</c:choose>
 
 </stripes:layout-definition>

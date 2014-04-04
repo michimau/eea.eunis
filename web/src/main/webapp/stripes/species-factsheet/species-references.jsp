@@ -74,7 +74,7 @@
                 <!-- END detailed reference -->
             </c:when>
             <c:otherwise>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Not listed in legal texts')}
             </c:otherwise>
         </c:choose>
 </stripes:layout-definition>

@@ -58,10 +58,28 @@
                                 </a>
                             </li>
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by ')}:
-                                <span class="bold">Not available</span> EU Nature Directives and
-                                <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ fn:length(actionBean.legalStatuses) }</span></a>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement(s)')}.
+                                <c:choose>
+                                    <c:when test="${actionBean.protectedByEUDirectives or fn:length(actionBean.legalStatuses)>0}">
+                                        Protected by
+                                        <c:if test="${actionBean.protectedByEUDirectives}">
+                                            <span class="bold">EU Nature Directives</span>
+                                        </c:if>
+                                        <c:if test="${actionBean.protectedByEUDirectives and fn:length(actionBean.legalStatuses)>0}">and</c:if>
+                                        <c:if test="${fn:length(actionBean.legalStatuses)>0}">
+                                            <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ fn:length(actionBean.legalStatuses) }</span></a>
+                                            <c:if test="${actionBean.protectedByEUDirectives and fn:length(actionBean.legalStatuses)>0}">other</c:if>
+                                            <c:choose>
+                                                <c:when test="${fn:length(actionBean.legalStatuses)>1}">
+                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreements')}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreement')}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not listed in legal texts')}</c:otherwise>
+                                </c:choose>
                             </li>
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}:

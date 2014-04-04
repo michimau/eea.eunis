@@ -10,7 +10,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * This class is used to find the vernacular names for a specie in languages...
+ * This class is used to find the common names for a specie in languages...
  */
 public class VernacularNamesDomain extends AbstractDomain {
 

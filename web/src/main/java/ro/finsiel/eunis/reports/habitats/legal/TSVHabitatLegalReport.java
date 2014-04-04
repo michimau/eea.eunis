@@ -59,7 +59,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
     headers.addElement("Code");
     // Scientific name
     headers.addElement("English name");
-    // Vernacular names (multiple rows)
+    // Common names (multiple rows)
     headers.addElement("Legal text");
     return headers;
   }

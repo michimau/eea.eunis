@@ -98,7 +98,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
                 </div>
 
-                    <%-- Synonyms and vernacular names --%>
+                    <%-- Synonyms and common names --%>
                 <div class="eea-accordion-panel" style="clear: both;">
                     <h2 class="notoc eea-icon-right-container">Common names and synonyms</h2>
                     <div class="pane">

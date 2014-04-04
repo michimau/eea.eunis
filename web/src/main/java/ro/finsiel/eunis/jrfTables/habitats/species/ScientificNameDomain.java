@@ -315,7 +315,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 species.add(specie.getScientificName());
             }
         }
-        // VERNACULAR NAME
+        // COMMON NAME
         if (searchAttribute.intValue() == SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()) {
             sql = prepareSQL("F.VALUE AS COLUMN1", filterSQL.toString() + " GROUP BY F.VALUE LIMIT 0,200");
             try {
@@ -385,7 +385,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
             " INNER JOIN CHM62EDT_SPECIES AS C ON G.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
             " WHERE (1 = 1) " + whereCondition;
         }
-        // If we search on species vernacular name as main criteria
+        // If we search on species common name as main criteria
         if (searchAttribute.intValue() == SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()) {
             sql = "SELECT " + what +
             " FROM CHM62EDT_SPECIES AS C " +

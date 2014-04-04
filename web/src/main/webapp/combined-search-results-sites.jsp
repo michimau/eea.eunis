@@ -245,7 +245,7 @@
                   AbstractSortCriteria sortMaxAltitude = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_MAX_ALTITUDE);
                   AbstractSortCriteria sortMeanAltitude = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_MEAN_ALTITUDE);
 
-                  // Expand/Collapse vernacular names
+                  // Expand/Collapse common names
                   Vector expand = new Vector();
                   expand.addElement("sort");
                   expand.addElement("ascendency");

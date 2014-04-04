@@ -51,14 +51,14 @@ public class SpeciesSearchUtility {
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(0);
 
     /**
-     * Specifies that the search is used in species' vernacular names.
+     * Specifies that the search is used in species' comon names.
      * @see SpeciesSearchUtility#findSpeciesWithCriteria
      */
     public static final Integer CRITERIA_VERNACULAR_NAME = new Integer(1);
 
-    /** Finds the vernacular names for a given specie, returning a vector of pairs : language, name.
+    /** Finds the common names for a given specie, returning a vector of pairs : language, name.
      * @param idNatureObject ID Nature object of that specie
-     * @return A list of VernacularNameWrapper objects, containing vernacular names for that specie.
+     * @return A list of VernacularNameWrapper objects, containing common names for that specie.
      */
     public static final Vector<VernacularNameWrapper> findVernacularNames(Integer idNatureObject) {
         Vector<VernacularNameWrapper> ret = new Vector<VernacularNameWrapper>(0);
@@ -552,13 +552,13 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find species with their scientific or vernacular name matching a given criteria.
+     * Find species with their scientific or common name matching a given criteria.
      * @param criteria Where to search. Possible values: SpeciesSearchUtility.CRITERIA_SCIENTIFIC_NAME[CRITERIA_VERNACULAR_NAME]
      * @param name Name to be searched for
      * @param relationOp Relation between criteria and name parameters.
      * Possible values: Utilities.OPERATOR_IS[OPERATORS_CONTAINS / OPERATOR_STARTS]
      * @param langName The name of the language we are searching in (i.e. English). This parameters is used only for
-     * vernacular names search (CRITERIA_VERNACULAR_NAME).<br />
+     * common names search (CRITERIA_VERNACULAR_NAME).<br />
      * Possible values are:<br />
      * <UL>
      *  <LI> <I>null</I> - this means that any language is selected, search is done for that name in all available languages
@@ -899,7 +899,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Finds all the languages with species vernacular names.
+     * Finds all the languages with species common names.
      * @param SQL_DRV SQL Driver
      * @param SQL_URL SQL Driver URL
      * @param SQL_USR SQL Driver user

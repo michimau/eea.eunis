@@ -48,7 +48,7 @@ public class NameBean extends AbstractFormBean {
     private String useScientific = null;
 
     /**
-     * If non-null search in Names (Vernacular names).
+     * If non-null search in Names (Common names).
      */
     private String useVernacular = null;
 
@@ -74,7 +74,7 @@ public class NameBean extends AbstractFormBean {
     private String showScientificName = null;
 
     /**
-     * Display / Hide Vernacular name column.
+     * Display / Hide Common name column.
      */
     private String showVernacularName = null;
 
@@ -409,7 +409,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for useVernacular property - Do the search in vernacular names.
+     * Getter for useVernacular property - Do the search in common names.
      * 
      * @return value of useVernacular
      */
@@ -418,7 +418,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for useVernacular property - Do the search in vernacular names.
+     * Setter for useVernacular property - Do the search in common names.
      * 
      * @param useVernacular
      *            new value for useVernacular
@@ -504,7 +504,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularName property - Show / Hide Vernacular names column.
+     * Getter for showVernacularName property - Show / Hide Common names column.
      * 
      * @return value of showVernacularName
      */
@@ -513,7 +513,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularName property - Show / Hide Vernacular names column.
+     * Setter for showVernacularName property - Show / Hide Common names column.
      * 
      * @param showVernacularName
      *            new value for showVernacularName

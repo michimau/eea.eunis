@@ -30,7 +30,7 @@ public class CountrySearchCriteria extends AbstractSearchCriteria {
     /** Used for search in results, to filter after the scientific name. */
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(2);
 
-    /** Used for search in results, to filter after the vernacular name.*/
+    /** Used for search in results, to filter after the common name.*/
     public static final Integer CRITERIA_NAME = new Integer(3);
 
     /** Used for search in results, to filter after the ANNEX I code.*/

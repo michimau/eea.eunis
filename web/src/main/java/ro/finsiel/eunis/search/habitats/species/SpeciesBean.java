@@ -28,7 +28,7 @@ public class SpeciesBean extends AbstractFormBean {
 
     private Long indice = new Long(-1);
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse common names. */
     private String expand = null;
 
     /** Search type: can be 'eunis' or 'annex'. */
@@ -43,7 +43,7 @@ public class SpeciesBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular name column. */
+    /** Display / Hide Common name column. */
     private String showVernacularName = null;
 
     /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
@@ -335,7 +335,7 @@ public class SpeciesBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularName property - Show / Hide Vernacular names column.
+     * Getter for showVernacularName property - Show / Hide Common names column.
      * @return value of showVernacularName
      */
     public String getShowVernacularName() {
@@ -343,7 +343,7 @@ public class SpeciesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularName property - Show / Hide Vernacular names column.
+     * Setter for showVernacularName property - Show / Hide Common names column.
      * @param showVernacularName new value for showVernacularName
      */
     public void setShowVernacularName(String showVernacularName) {

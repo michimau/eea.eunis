@@ -100,7 +100,7 @@
                               <label for ="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" />
                               <%=cm.cmsTitle("vernacular_name")%>
-                              <label for ="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
+                              <label for ="checkbox5"><%=cm.cmsPhrase("Common Name")%></label>
                           </td>
                         </tr>
                       </table>

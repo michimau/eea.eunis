@@ -412,7 +412,7 @@ public class DictionarySearchCriteria extends AbstractSearchCriteria {
             humanMappings.put(CRITERIA_CODE, "EUNIS code ");
         }
         humanMappings.put(CRITERIA_LEVEL, "Habitat level ");
-        humanMappings.put(CRITERIA_NAME, "Vernacular name ");
+        humanMappings.put(CRITERIA_NAME, "Common name ");
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
     }
 }

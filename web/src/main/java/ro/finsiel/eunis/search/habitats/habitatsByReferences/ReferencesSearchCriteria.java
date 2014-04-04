@@ -23,7 +23,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
     /** Used for search in results, to filter after the scientific name. */
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(2);
 
-    /** Used for search in results, to filter after the vernacular name. */
+    /** Used for search in results, to filter after the common name. */
     public static final Integer CRITERIA_NAME = new Integer(3);
 
     /** Used for search in results, to filter after the annex code. */
@@ -151,7 +151,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_CODE_EUNIS, "EUNIS code ");
         humanMappings.put(CRITERIA_CODE_ANNEX, "ANNEX I code ");
         humanMappings.put(CRITERIA_LEVEL, "Habitat level ");
-        humanMappings.put(CRITERIA_NAME, "Vernacular name ");
+        humanMappings.put(CRITERIA_NAME, "Common name ");
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
     }
 

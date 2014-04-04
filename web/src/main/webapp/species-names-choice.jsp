@@ -48,7 +48,7 @@
   boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);
   Integer oper = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   boolean showNonValidatedSpecies = SessionManager.getShowEUNISInvalidatedSpecies();
-  // List of species vernacular names
+  // List of species common names
   List species = SpeciesSearchUtility.findSpeciesWithCriteria(SpeciesSearchUtility.CRITERIA_VERNACULAR_NAME,
                                                           formBean.getVernacularName(),
                                                           oper,
@@ -76,7 +76,7 @@
   {
 %>    <h2><%=cm.cmsPhrase("List of values for:")%></h2>
       <u>
-        <%=cm.cmsPhrase("Species vernacular name")%>
+        <%=cm.cmsPhrase("Species common name")%>
       </u>
       <em><%=Utilities.ReturnStringRelatioOp(oper)%></em>
       <strong><%=formBean.getVernacularName()%></strong>

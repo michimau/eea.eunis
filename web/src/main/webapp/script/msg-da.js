@@ -112,7 +112,7 @@ var species_legal_type_few_letters_msg = "Please type a few letters from species
 
 // species-names.js
 var species_names_few_letters_sn_msg = "Please type a few letters from species scientific name.";
-var species_names_few_letters_vn_msg = "Please type a few letters from species vernacular name.";
+var species_names_few_letters_vn_msg = "Please type a few letters from species common name.";
 
 // species-references.js
 var species_references_leaving_all_fields_blank_msg = "By leaving all the fields blank the search might take a long time. Are you sure you want to continue?"

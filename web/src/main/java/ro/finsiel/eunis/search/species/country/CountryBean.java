@@ -27,7 +27,7 @@ public final class CountryBean extends AbstractFormBean {
     /** region name - in human language.*/
     private String regionName = null; // Region name in clear
 
-    /** Used to show/hide the vernacular names. */
+    /** Used to show/hide the common names. */
     private String expand = null;
 
     /** Show / Hide Group column. */
@@ -278,7 +278,7 @@ public final class CountryBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for expand property - Expand / Collapse Vernacular names column.
+     * Getter for expand property - Expand / Collapse Common names column.
      * @return value of expand
      */
     public String getExpand() {
@@ -286,7 +286,7 @@ public final class CountryBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for expand property - Expand / Collapse Vernacular names column.
+     * Setter for expand property - Expand / Collapse Common names column.
      * @param expand new value for expand
      */
     public void setExpand(String expand) {

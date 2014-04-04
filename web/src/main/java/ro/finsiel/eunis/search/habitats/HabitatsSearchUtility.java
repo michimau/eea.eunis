@@ -41,7 +41,7 @@ public class HabitatsSearchUtility {
      * </UL>
      * @param useScientific Specifies that name parameter is searched in scientific names of habitats. At least one of
      * these three boolean parameters must be set to true in order to do some search
-     * @param useVernacular Specifies that name parameter is searched in vernacular names of habitats. At least one of
+     * @param useVernacular Specifies that name parameter is searched in common names of habitats. At least one of
      * these three boolean parameters must be set to true in order to do some search
      * @param useDescription Specifies that name parameter is searched in descriptions of habitats. At least one of
      * these three boolean parameters must be set to true in order to do some search
@@ -109,7 +109,7 @@ public class HabitatsSearchUtility {
      * @param relationOp Relation operator (is / contains / starts with).
      * @param database Database to search (eunis / annex).
      * @param useScientific Search in scientific names of habitats.
-     * @param useVernacular Search in vernacular names of habitats.
+     * @param useVernacular Search in common names of habitats.
      * @param useDescription Search in description of habitats.
      * @param limit Limit the output of results to a specified value.
      * @return List of ro.finsiel.eunis.jrfTables.habitats.names.NamesPersist objects.

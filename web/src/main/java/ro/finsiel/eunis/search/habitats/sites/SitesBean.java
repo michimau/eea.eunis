@@ -293,7 +293,7 @@ public class SitesBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularName property - Show / Hide Vernacular names column.
+     * Getter for showVernacularName property - Show / Hide Common names column.
      * @return value of showVernacularName
      */
     public String getShowVernacularName() {
@@ -301,7 +301,7 @@ public class SitesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularName property - Show / Hide Vernacular names column.
+     * Setter for showVernacularName property - Show / Hide Common names column.
      * @param showVernacularName new value for showVernacularName
      */
     public void setShowVernacularName(String showVernacularName) {

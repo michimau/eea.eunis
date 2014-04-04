@@ -98,7 +98,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String domainName;
     private Hashtable<String, AttributeDto> natObjectAttributes;
 
-    /** Vernacular names tab variables. */
+    /** Common names tab variables. */
     private List<VernacularNameWrapper> vernNames;
 
     /** geo tab variables. */

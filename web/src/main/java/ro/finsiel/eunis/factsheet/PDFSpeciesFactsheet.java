@@ -1491,13 +1491,13 @@ public final class PDFSpeciesFactsheet {
 
             Cell cell;
 
-            cell = new Cell(new Phrase("Vernacular names", fontTitle));
+            cell = new Cell(new Phrase("Common names", fontTitle));
             cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(3);
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Vernacular Name"),
+                    new Phrase(contentManagement.cmsPhrase("Common Name"),
                             fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);

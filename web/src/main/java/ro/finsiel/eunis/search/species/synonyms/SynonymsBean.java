@@ -25,7 +25,7 @@ public class SynonymsBean extends AbstractFormBean {
 
     private Long indice = new Long(-1);
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse common names. */
     private String expand = null;
 
     /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)

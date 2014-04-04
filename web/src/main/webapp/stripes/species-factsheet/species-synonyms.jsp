@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-<!-- Species synonyms and vernacular names -->
+<!-- Species synonyms and common names -->
 
 <%--<h2 class="visualClear" id="synonyms">${eunis:cmsPhrase(actionBean.contentManagement, 'Common names and synonyms of ')} <span class="italics">${actionBean.scientificName}</span></h2>--%>
 

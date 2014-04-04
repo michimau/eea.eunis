@@ -291,7 +291,7 @@
                     <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
                     <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
                   </jsp:include>
-                    <%// Expand/Collapse vernacular names
+                    <%// Expand/Collapse common names
                       Vector expand = new Vector();
                       expand.addElement("country"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
                       expand.addElement("region");  /* <form name='..."> in the navigator.jsp!                               */
@@ -306,7 +306,7 @@
                       if (!isExpanded)
                       {
                     %>
-                         <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
+                         <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names in results table")%></a>
                          <%=cm.cmsTitle("species_country-result_24_Title")%>
                     <%
                       }
@@ -351,7 +351,7 @@
                         {
             %>
                           <th class="nosort" scope="col">
-                            <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
+                            <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Common names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
                             <%=cm.cmsTitle("species_country-result_17_Title")%>
                           </th>
             <%
@@ -368,7 +368,7 @@
                           String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
                           PersistentObject specie = (PersistentObject)it.next();
                           Vector vernNamesList = new Vector();
-                          // FIND VERNACULAR NAMES DEPENDING ON THE TYPE OF SEARCH
+                          // FIND COMMON NAMES DEPENDING ON THE TYPE OF SEARCH
                           // *a* country / *a* region
                           if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any")) {
                             vernNamesList = SpeciesSearchUtility.findVernacularNames(((CountryRegionPersist)specie).getIdNatureObject());
@@ -381,7 +381,7 @@
                           if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && regionName.equalsIgnoreCase("any")) {
                             vernNamesList = SpeciesSearchUtility.findVernacularNames(((CountryPersist)specie).getIdNatureObjectRep());
                           }
-                          // Sort this vernacular names in alphabetical order
+                          // Sort this common names in alphabetical order
                           Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
             %>
                         <tr>
@@ -535,7 +535,7 @@
                           {
             %>
                           <td>
-                            <table summary="List of vernacular names" width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
+                            <table summary="List of common names" width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
             <%                  if(sortVernList == null || sortVernList.size()<=0)
                                  {
             %>
@@ -601,7 +601,7 @@
                         {
             %>
                         <th class="nosort" scope="col">
-                          <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
+                          <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Common names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
                           <%=cm.cmsTitle("species_country-result_17_Title")%>]
                         </th>
             <%

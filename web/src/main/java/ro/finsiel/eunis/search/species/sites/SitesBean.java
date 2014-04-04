@@ -24,7 +24,7 @@ public class SitesBean extends AbstractFormBean {
 
     private Long indice = new Long(-1);
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse common names. */
     private String expand = null;
 
     /** Display / Hide Group column. */
@@ -39,7 +39,7 @@ public class SitesBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular names column. */
+    /** Display / Hide Common names column. */
     private String showVernacularNames = null;
 
     /** Display / Hide sites names column. */
@@ -336,7 +336,7 @@ public class SitesBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularNames property - Specifies if Vernacular Names column will be displayed in resulted table.
+     * Getter for showVernacularNames property - Specifies if Common Names column will be displayed in resulted table.
      * Note that if this is true, then expand/collapse will be available in page.
      * @return value of showVernacularNames
      */
@@ -345,7 +345,7 @@ public class SitesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularNames property - Specifies if Vernacular Names column will be displayed in resulted table.
+     * Setter for showVernacularNames property - Specifies if Common Names column will be displayed in resulted table.
      * Note that if this is true, then expand/collapse will be available in page.
      * @param showVernacularNames new value for showVernacularNames
      */

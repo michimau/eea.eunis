@@ -23,7 +23,7 @@ public class ReferencesBean extends AbstractFormBean {
 
     private Long indice = new Long(-1);
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse common names. */
     private String expand = null;
 
     /** Search type: can be 'eunis' or 'annex'. */

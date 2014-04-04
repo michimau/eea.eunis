@@ -95,9 +95,9 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
     if (showScientificName) {
       headers.addElement("Scientific name");
     }
-    // Vernacular names (multiple rows)
+    // Common names (multiple rows)
     if (showVernacularName) {
-      headers.addElement("Vernacular names");
+      headers.addElement("Common names");
     }
     return headers;
   }
@@ -156,7 +156,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
             aRow.addElement(cellScientificName);
             xmlrow.addElement(cellScientificName);
           }
-          // Vernacular names (multiple rows)
+          // Common names (multiple rows)
           if (showVernacularName) {
             String xmlVernacularNames = "";
             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
@@ -171,7 +171,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
                 if (!blankLine) {
                   // Language
                   aRow.addElement(aVernName.getLanguage());
-                  // Vernacular name
+                  // Common name
                   aRow.addElement(aVernName.getName());
                   blankLine = true;
                   writeRow(aRow);
@@ -191,7 +191,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
                   }
                   // Language
                   anotherRow.addElement(aVernName.getLanguage());
-                  // Vernacular name
+                  // Common name
                   anotherRow.addElement(aVernName.getName());
                   writeRow(anotherRow);
                 }
@@ -201,7 +201,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
               }
               xmlrow.add(xmlVernacularNames);
             } else {
-              // If vernacular names list is empty add something to fill the cell or table gets screwed
+              // If common names list is empty add something to fill the cell or table gets screwed
               aRow.addElement("-");
               writeRow(aRow);
             }

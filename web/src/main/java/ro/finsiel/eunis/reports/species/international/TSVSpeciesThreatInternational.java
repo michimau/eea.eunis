@@ -65,7 +65,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
     headers.addElement("Status");
     headers.addElement("Group");
     headers.addElement("Scientific name");
-    headers.addElement("Vernacular names");
+    headers.addElement("Common names");
     return headers;
   }
 
@@ -104,7 +104,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
           aRow.addElement(cellStatus);
           aRow.addElement(cellGroup);
           aRow.addElement(cellScientificName);
-          // Vernacular names (multiple rows)
+          // Common names (multiple rows)
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
           String xmlVernacularNames = "";
           if (vernNamesList.size() > 0) {
@@ -117,7 +117,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
               if (!blankLine) {
                 // Language
                 aRow.addElement(aVernName.getLanguage());
-                // Vernacular name
+                // Common name
                 aRow.addElement(aVernName.getName());
                 blankLine = true;
                 writeRow(aRow);
@@ -128,7 +128,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
                 anotherRow.addElement("");
                 // Language
                 anotherRow.addElement(aVernName.getLanguage());
-                // Vernacular name
+                // Common name
                 anotherRow.addElement(aVernName.getName());
                 writeRow(anotherRow);
               }

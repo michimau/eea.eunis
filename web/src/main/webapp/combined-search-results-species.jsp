@@ -252,7 +252,7 @@
                   AbstractSortCriteria sortFamily = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_FAMILY);
                   AbstractSortCriteria sortSciName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_SCIENTIFIC_NAME);
 
-                  // Expand/Collapse vernacular names
+                  // Expand/Collapse common names
                   Vector expand = new Vector();
                   expand.addElement("sort");
                   expand.addElement("ascendency");
@@ -308,7 +308,7 @@
                         %>
                         <th class="nosort" scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
-                          <%=cm.cmsPhrase("Vernacular names")%>
+                          <%=cm.cmsPhrase("Common names")%>
                         </th>
                         <%
                           }
@@ -489,7 +489,7 @@
                         %>
                         <th class="nosort" scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
-                          <%=cm.cmsPhrase("Vernacular names")%>
+                          <%=cm.cmsPhrase("Common names")%>
                         </th>
                         <%
                           }

@@ -1279,14 +1279,14 @@ function showtooltip(ttip) {
   if(ttip=="Species_Threat") msg="Species threat";
   if(ttip=="Species_Status") msg="Species threat status";
   if(ttip=="Species_ScientificName") msg="Species scientific name (in Latin)";
-  if(ttip=="Species_VernacularName") msg="Species vernacular name";
+  if(ttip=="Species_VernacularName") msg="Species common name";
   if(ttip=="Species_ThreatStatus") msg="Species conservation status";
   if(ttip=="Species_Language") msg="Language to be used to query the database";
   if(ttip=="Species_Country") msg="Country where the species is found";
   if(ttip=="Species_Area") msg="Area where the species is found";
   if(ttip=="Species_Biogeoregion") msg="Biogeographic region where the species is found";
   if(ttip=="Species_LegalInstrument") msg="Legal texts at European level referring to species";
-  if(ttip=="Species_Group") msg="Group name (mammals, flowering plants …)";
+  if(ttip=="Species_Group") msg="Group name (mammals, flowering plants ï¿½)";
   if(ttip=="Species_Term") msg="Term used within the application";
   if(ttip=="Species_AdvancedCriteria") msg="Search criteria used to find species";
   if(ttip=="Species_Reference") msg="Reference to the species (book, journal, etc.)";

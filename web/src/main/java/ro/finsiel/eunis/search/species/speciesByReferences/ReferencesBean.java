@@ -30,7 +30,7 @@ public class ReferencesBean extends AbstractFormBean {
     private String relationOpPublisher = null;
     private String publisher = null;
 
-    /** Expand or collapse vernacular names. Only will work if also showVernacularNames is set. */
+    /** Expand or collapse common names. Only will work if also showVernacularNames is set. */
     private String expand = null;
 
     // These are the show columns fields...Determines which columns are displayed or hidden in the result page.
@@ -46,7 +46,7 @@ public class ReferencesBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular name column. */
+    /** Display / Hide Common name column. */
     private String showVernacularName = null;
 
     /**
@@ -326,7 +326,7 @@ public class ReferencesBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularName property - Show / Hide Vernacular names column.
+     * Getter for showVernacularName property - Show / Hide Common names column.
      * @return value of showVernacularName
      */
     public String getShowVernacularName() {
@@ -334,7 +334,7 @@ public class ReferencesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularName property - Show / Hide Vernacular names column.
+     * Setter for showVernacularName property - Show / Hide Common names column.
      * @param showVernacularName new value for showVernacularName
      */
     public void setShowVernacularName(String showVernacularName) {
@@ -486,7 +486,7 @@ public class ReferencesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for expand property - Expand / Collapse vernacular names column.
+     * Setter for expand property - Expand / Collapse Common names column.
      * @return value of expand property.
      */
     public String getExpand() {
@@ -494,7 +494,7 @@ public class ReferencesBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for expand property - Expand / Collapse vernacular names column.
+     * Setter for expand property - Expand / Collapse Common names column.
      * @param expand new value for expand property.
      */
     public void setExpand(String expand) {

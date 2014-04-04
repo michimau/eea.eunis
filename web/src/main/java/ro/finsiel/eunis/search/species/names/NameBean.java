@@ -21,16 +21,16 @@ public class NameBean extends AbstractFormBean {
     /** First form - Scientific name. */
     private String scientificName = null;
 
-    /** Second form - Vernacular name. */
+    /** Second form - Common name. */
     private String vernacularName = null;
 
     /** Second form - Language ID. */
     private String language = null;
 
-    /** Type of search (Scientific or Vernacular names).*/
+    /** Type of search (Scientific or Common names).*/
     private String typeForm = null;
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse common names. */
     private String expand = null;
 
     // Columns that will be displayed in the result window
@@ -46,7 +46,7 @@ public class NameBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular names column. */
+    /** Display / Hide Common names column. */
     private String showVernacularNames = null;
 
     /** Display / Hide Valid name column. */
@@ -394,7 +394,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularNames property - Specifies if Vernacular Names column will be displayed in resulted table.
+     * Getter for showVernacularNames property - Specifies if Common Names column will be displayed in resulted table.
      * Note that if this is true, then expand/collapse will be available in page
      * @return value of showVernacularNames
      */
@@ -403,7 +403,7 @@ public class NameBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularNames property - Specifies if Vernacular Names column will be displayed in resulted table.
+     * Setter for showVernacularNames property - Specifies if Common Names column will be displayed in resulted table.
      * Note that if this is true, then expand/collapse will be available in page
      * @param showVernacularNames new value for showVernacularNames
      */

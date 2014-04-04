@@ -88,7 +88,7 @@ public class SaveSearchCriteria {
         fromWhereMapping.put("sites-names.jsp", "sites by name".toUpperCase());
         fromWhereMapping.put("sites-habitats.jsp", "sites with habitat types".toUpperCase());
         fromWhereMapping.put("sites-size.jsp", "sites after their size / length".toUpperCase());
-        fromWhereMapping.put("species-names.jsp", "SPECIES BY SCIENTIFIC NAME / VERNACULAR NAME".toUpperCase());
+        fromWhereMapping.put("species-names.jsp", "SPECIES BY SCIENTIFIC NAME / COMMON NAME".toUpperCase());
         fromWhereMapping.put("species-synonyms.jsp", "SPECIES BY SYNONYMS".toUpperCase());
         fromWhereMapping.put("species-groups.jsp", "SPECIES BY GROUP SPECIES NAME".toUpperCase());
         fromWhereMapping.put("species-legal.jsp", "SPECIES BY LEGAL INSTRUMENTS".toUpperCase());
@@ -481,7 +481,7 @@ public class SaveSearchCriteria {
                     }
                     if (ro.finsiel.eunis.search.habitats.species.SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()
                             == Utilities.checkedStringToInt(attributeName, -1)) {
-                        result = "Vernacular name";
+                        result = "Common name";
                     }
                 }
                 if (fromWhere != null && fromWhere.equalsIgnoreCase("habitats-sites.jsp")) {
@@ -569,7 +569,7 @@ public class SaveSearchCriteria {
                     }
                     if (ro.finsiel.eunis.search.sites.species.SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()
                             == Utilities.checkedStringToInt(attributeName, -1)) {
-                        result = "Vernacular name";
+                        result = "Common name";
                     }
                 }
                 if (fromWhere != null && fromWhere.equalsIgnoreCase("sites-habitats.jsp")) {

@@ -45,7 +45,7 @@ public class SpeciesAdvancedActionBean extends AbstractStripesAction {
         ArrayList<String> attributes = new ArrayList<String>();
 
         attributes.add(getContentManagement().cmsPhrase("Scientific name"));
-        attributes.add(getContentManagement().cmsPhrase("Vernacular Name"));
+        attributes.add(getContentManagement().cmsPhrase("Common Name"));
         attributes.add(getContentManagement().cmsPhrase("Group"));
         attributes.add(getContentManagement().cmsPhrase("Threat Status"));
         attributes.add(getContentManagement().cmsPhrase("International Threat Status"));

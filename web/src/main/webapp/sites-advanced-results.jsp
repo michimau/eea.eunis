@@ -179,7 +179,7 @@
             AbstractSortCriteria sortCompilationDate = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_COMPILATION_DATE);
             AbstractSortCriteria sortProposedDate = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_PROPOSED_DATE);
 
-            // Expand/Collapse vernacular names
+            // Expand/Collapse common names
             Vector expand = new Vector();
             expand.addElement("sort");
             expand.addElement("ascendency");

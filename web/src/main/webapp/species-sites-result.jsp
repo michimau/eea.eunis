@@ -245,7 +245,7 @@
                         AbstractSortCriteria sortFamily = formBean.lookupSortCriteria( SitesSortCriteria.SORT_FAMILY );
                         AbstractSortCriteria sortSciName = formBean.lookupSortCriteria( SitesSortCriteria.SORT_SCIENTIFIC_NAME );
 
-                        // Expand/Collapse vernacular names
+                        // Expand/Collapse common names
                         Vector expand = new Vector();
                         expand.addElement( "sort" );
                         expand.addElement( "ascendency" );
@@ -259,7 +259,7 @@
                         if ( showVernacularNames && !isExpanded )
                         {
                       %>
-                          <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names")%></a>
+                          <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names")%></a>
                           <%=cm.cmsTitle("show_vernacular_list")%>
                       <%
                       }
@@ -303,7 +303,7 @@
                             {
               %>
                             <th class="nosort" scope="col">
-                              <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                              <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                             </th>
               <%
                             }
@@ -327,7 +327,7 @@
                         {
                             SpeciesSitesPersist specie = (SpeciesSitesPersist)results.get( i );
                             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-                            // Sort this vernacular names in alphabetical order
+                            // Sort this common names in alphabetical order
                             Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
                       %>
                           <tr>
@@ -489,7 +489,7 @@
                             {
               %>
                             <th class="nosort" scope="col">
-                              <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                              <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                             </th>
               <%
                             }

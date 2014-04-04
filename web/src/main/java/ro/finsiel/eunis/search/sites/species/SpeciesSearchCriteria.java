@@ -25,7 +25,7 @@ public class SpeciesSearchCriteria extends SitesSearchCriteria {
     public static final Integer SEARCH_GROUP = new Integer(6);
 
     /**
-     * Search by species vernacular name.
+     * Search by species common name.
      */
     public static final Integer SEARCH_VERNACULAR = new Integer(7);
 
@@ -116,7 +116,7 @@ public class SpeciesSearchCriteria extends SitesSearchCriteria {
 
         humanMappings.put(SEARCH_SCIENTIFIC_NAME, "species scientific name ");
         humanMappings.put(SEARCH_GROUP, "species group name ");
-        humanMappings.put(SEARCH_VERNACULAR, "species vernacular name ");
+        humanMappings.put(SEARCH_VERNACULAR, "species common name ");
         humanMappings.put(SEARCH_LEGAL_INSTRUMENTS, "legal instrument name ");
         humanMappings.put(SEARCH_COUNTRY, "country name ");
         humanMappings.put(SEARCH_REGION, "biogeographic region name ");

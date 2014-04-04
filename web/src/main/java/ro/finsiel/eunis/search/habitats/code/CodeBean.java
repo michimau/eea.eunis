@@ -41,7 +41,7 @@ public class CodeBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular name column. */
+    /** Display / Hide Common name column. */
     private String showEnglishName = null;
     private String expanded = null;
 

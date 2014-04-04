@@ -66,8 +66,8 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
     headers.addElement("Country");
     // Scientific name
     headers.addElement("Scientific name");
-    // Vernacular names (multiple rows)
-    headers.addElement("Vernacular names");
+    // Common names (multiple rows)
+    headers.addElement("Common names");
     return headers;
   }
 
@@ -108,7 +108,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
                 aRow.addElement(specie.getCountry());
                 // Scientific name
                 aRow.addElement(specie.getScName());
-                // Vernacular name
+                // Common name
                 aRow.addElement(vernacularName);
                 writeRow(aRow);
               }
@@ -120,7 +120,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
                 aRow.addElement("");
                 // Scientific name
                 aRow.addElement("");
-                // Vernacular name
+                // Common name
                 aRow.addElement(vernacularName);
                 writeRow(aRow);
               }
@@ -134,7 +134,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
             aRow.addElement(specie.getCountry());
             // Scientific name
             aRow.addElement(specie.getScName());
-            // Vernacular name
+            // Common name
             aRow.addElement("-");
             writeRow(aRow);
           }

@@ -16,7 +16,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     /** Coming from first form (scientific name). */
     public static final Integer CRITERIA_SCIENTIFIC = new Integer(0);
 
-    /** Coming from second form (vernacular name). */
+    /** Coming from second form (common name). */
     public static final Integer CRITERIA_VERNACULAR = new Integer(1);
 
     /** Used in filters, filtering by Group. */
@@ -34,13 +34,13 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     /** Scientific name if coming from first form. */
     private String scientificName = null;
 
-    /** Vernacular name if coming from second form. */
+    /** Common name if coming from second form. */
     private String vernacularName = null;
 
     /** Relation between scientificName or vernacularName (starts, contains, is). */
     private Integer relationOp = null;
 
-    /** Language for vernacular name. */
+    /** Language for common name. */
     private String language = null;
 
     /** Mappings from search criteria -> SQL Statement. */
@@ -55,7 +55,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
      * Main constructor, when doing initial search for scientific name.
      * 
      * @param scientificName
-     *            Scientific name or vernacular, depending which form we came from
+     *            Scientific name or common, depending which form we came from
      * @param relationOp
      *            Relation used for search (starts, contains, is). Can be OPERATOR_IS/CONTAINS/STARTS
      */
@@ -68,10 +68,10 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     }
 
     /**
-     * Main constructor, when doing initial search for vernacular name.
+     * Main constructor, when doing initial search for common name.
      * 
      * @param vernacularName
-     *            Vernacular name searching for
+     *            Common name searching for
      * @param language
      *            ID of the language we're searching in (could also be 'any'
      * @param relationOp
@@ -138,7 +138,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         }
         humanMappings = new Hashtable();
         humanMappings.put(CRITERIA_SCIENTIFIC, "Scientific name ");
-        humanMappings.put(CRITERIA_VERNACULAR, "Vernacular name ");
+        humanMappings.put(CRITERIA_VERNACULAR, "Common name ");
         humanMappings.put(CRITERIA_GROUP, "Group ");
         humanMappings.put(CRITERIA_ORDER, "Order ");
         humanMappings.put(CRITERIA_FAMILY, "Family ");

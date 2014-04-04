@@ -58,7 +58,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
     headers.addElement("Order");
     headers.addElement("Family");
     headers.addElement("Scientific name");
-    headers.addElement("Vernacular names");
+    headers.addElement("Common names");
     return headers;
   }
 
@@ -100,7 +100,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
                 row.addElement(specie.getFamilyName());
                 // Scientific name
                 row.addElement(specie.getScientificName());
-                // Vernacular name
+                // Common name
                 row.addElement(vernacularName);
                 writeRow(row);
               } else {
@@ -113,7 +113,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
                 row.addElement("");
                 // Scientific name
                 row.addElement("");
-                // Vernacular name
+                // Common name
                 row.addElement(vernacularName);
                 writeRow(row);
               }
@@ -128,7 +128,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
             row.addElement(specie.getFamilyName());
             // Scientific name
             row.addElement(specie.getScientificName());
-            // Vernacular name
+            // Common name
             row.addElement("-");
             writeRow(row);
           }
@@ -141,7 +141,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
           row.addElement(specie.getFamilyName());
           // Scientific name
           row.addElement(specie.getScientificName());
-          // Vernacular name
+          // Common name
           row.addElement(xmlVernacularNames);
           xmlreport.writeRow(row);
         }

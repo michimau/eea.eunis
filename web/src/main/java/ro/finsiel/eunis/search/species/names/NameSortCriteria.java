@@ -49,7 +49,7 @@ public class NameSortCriteria extends AbstractSortCriteria {
      * New sort criteria.
      * @param sortCriteria Criteria used for sorting.
      * @param ascendency Ascendency.
-     * @param searchVernacular Search in vernacular names also
+     * @param searchVernacular Search in common names also
      */
     public NameSortCriteria(Integer sortCriteria, Integer ascendency, Boolean searchVernacular) {
         setSortCriteria(sortCriteria);

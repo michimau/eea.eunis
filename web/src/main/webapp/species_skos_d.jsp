@@ -77,7 +77,7 @@
       out.print("    " + spec_scientific_name + "\n");
       out.print("  </skos:prefLabel>" + "\n");
 
-      //insert vernacular names
+      //insert common names
       String strSQLNames = "SELECT distinct e.code, c.value";
       strSQLNames = strSQLNames + " from chm62edt_species as a";
       strSQLNames = strSQLNames + " inner join chm62edt_reports as b on a.id_nature_object = b.id_nature_object";

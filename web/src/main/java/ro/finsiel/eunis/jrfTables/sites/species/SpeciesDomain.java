@@ -356,7 +356,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
                 species.add(specie.getSpecieScientificName());
             }
         }
-        // VERNACULAR NAME
+        // COMMON NAME
         if (searchAttribute.intValue() == SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()) {
             try {
                 results = new Chm62edtReportAttributesDomain().findCustom("SELECT *" +
@@ -481,7 +481,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
             " INNER JOIN CHM62EDT_SITES AS H ON G.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT " +
             " WHERE (1 = 1) " + whereCondition;
         }
-        // If we search on species vernacular name as main criteria
+        // If we search on species common name as main criteria
         if (searchAttribute.intValue() == SpeciesSearchCriteria.SEARCH_VERNACULAR.intValue()) {
             sql = "SELECT " + what +
             " FROM CHM62EDT_SPECIES AS C " +

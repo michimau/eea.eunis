@@ -96,7 +96,7 @@ public class ScientificNameDomainTest {
         ScientificNameDomain instance = new ScientificNameDomain(searchCriteria, sortCriteria,
                 searchSynonymsT, showEUNISInvalidatedSpeciesT, searchVernacularT);
         assertNotNull("Instantiation failed", instance);
-        // Known issue: If we search for vernacular names, then the page size must be > 0
+        // Known issue: If we search for common names, then the page size must be > 0
         // If not, then pagesize=0 is the same as no limit.
         List result = instance.getResults(0, 1000, sortCriteria);
         assertEquals(16, result.size());
@@ -117,7 +117,7 @@ public class ScientificNameDomainTest {
         ScientificNameDomain instance = new ScientificNameDomain(searchCriteria, sortCriteria,
                 searchSynonymsT, showEUNISInvalidatedSpeciesT, searchVernacularT);
         assertNotNull("Instantiation failed", instance);
-        // Known issue: If we search for vernacular names, then the page size must be > 0
+        // Known issue: If we search for common names, then the page size must be > 0
         // If not, then pagesize=0 is the same as no limit.
         List result = instance.getResults(0, 1000, sortCriteria);
         assertEquals(9, result.size());
@@ -140,7 +140,7 @@ public class ScientificNameDomainTest {
         ScientificNameDomain instance = new ScientificNameDomain(searchCriteria, sortCriteria,
                 searchSynonyms, showEUNISInvalidatedSpecies, searchVernacular);
         assertNotNull("Instantiation failed", instance);
-        // Known issue: If we search for vernacular names, then the page size must be > 0
+        // Known issue: If we search for common names, then the page size must be > 0
         // If not, then pagesize=0 is the same as no limit.
         List result = instance.getResults(0, 1000, sortCriteria);
         assertEquals(12, result.size());

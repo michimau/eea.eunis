@@ -255,7 +255,7 @@
                 AbstractSortCriteria sortAnnexCode = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ANNEX_CODE);
                 AbstractSortCriteria sortScientificName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_SCIENTIFIC_NAME);
                 AbstractSortCriteria sortEnglishName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ENGLISH_NAME);
-                // Expand/Collapse vernacular names
+                // Expand/Collapse common names
                 Vector expand = new Vector();
                 expand.addElement("sort");
                 expand.addElement("ascendency");

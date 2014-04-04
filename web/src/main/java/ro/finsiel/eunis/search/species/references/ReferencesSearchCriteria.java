@@ -42,7 +42,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Main constructor, when doing initial search for scientific name.
-     * @param scientificName Scientific name or vernacular, depending which form we come from
+     * @param scientificName Scientific name or common, depending which form we come from
      * @param relationOp Relation used for search (starts, contains, is). Can be OPERATOR_IS/CONTAINS/STARTS
      */
     public ReferencesSearchCriteria(String scientificName, Integer relationOp) {

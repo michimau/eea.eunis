@@ -21,7 +21,7 @@ public class ReferencesBean extends AbstractFormBean {
     /** First form - Scientific name. */
     private String scientificName = null;
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse Common names. */
     private String expand = null;
 
     /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)

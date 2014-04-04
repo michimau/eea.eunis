@@ -21,7 +21,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     /** Used for search in results, to filter after the scientific name. */
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(2);
 
-    /** Used for search in results, to filter after the vernacular name. */
+    /** Used for search in results, to filter after the common name. */
     public static final Integer CRITERIA_NAME = new Integer(3);
 
     /** Used for search in results, to filter after the annex code. */
@@ -39,7 +39,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     /** Search in Scientific name or not. */
     private boolean useScientificName = false;
 
-    /** Search in Vernacular names or not. */
+    /** Search in Common names or not. */
     private boolean useVernacularName = false;
 
     /** Where to search: EUNIS or ANNEX I. */
@@ -67,7 +67,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
      * @param useScientificName
      *            Use scientific name in search
      * @param useVernacularName
-     *            Use vernacular name in search
+     *            Use common name in search
      * @param isExtra
      *            Is another main search criteria.
      */
@@ -337,7 +337,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 if (addOROperator) {
                     human.append(" / ");
                 }
-                human.append("Vernacular name");
+                human.append("Common name");
             }
             human = Utilities.prepareHumanString(human.toString(), searchString, relationOp);
         }

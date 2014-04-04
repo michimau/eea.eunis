@@ -21,7 +21,7 @@ public class GroupsBean extends AbstractFormBean {
     /** SCIENTIFIC NAME of the specified group. */
     private String groupName = null;
 
-    /** Expand or collapse vernacular names. Only will work if also showVernacularNames is set. */
+    /** Expand or collapse common names. Only will work if also showVernacularNames is set. */
     private String expand = null;
 
     /** Show / Hide Group column. */
@@ -36,7 +36,7 @@ public class GroupsBean extends AbstractFormBean {
     /** Show / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Show / Hide Vernacular names column. */
+    /** Show / Hide Common names column. */
     private String showVernacularNames = null;
 
     /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
@@ -201,7 +201,7 @@ public class GroupsBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for expand property - Expand / Collapse vernacular names column.
+     * Setter for expand property - Expand / Collapse common names column.
      * @return value of expand property
      */
     public String getExpand() {
@@ -209,7 +209,7 @@ public class GroupsBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for expand property - Expand / Collapse vernacular names column.
+     * Setter for expand property - Expand / Collapse common names column.
      * @param expand new value for expand property
      */
     public void setExpand(String expand) {
@@ -265,7 +265,7 @@ public class GroupsBean extends AbstractFormBean {
     }
 
     /**
-     * Getter for showVernacularNames property - Show / Hide Vernacular names column.
+     * Getter for showVernacularNames property - Show / Hide Common names column.
      * @return value of showVernacularNames
      */
     public String getShowVernacularNames() {
@@ -273,7 +273,7 @@ public class GroupsBean extends AbstractFormBean {
     }
 
     /**
-     * Setter for showVernacularNames - Show / Hide Vernacular names column.
+     * Setter for showVernacularNames - Show / Hide Common names column.
      * @param showVernacularNames new value for showVernacularNames
      */
     public void setShowVernacularNames(String showVernacularNames) {

@@ -11,7 +11,7 @@ var formFieldOperators2 = new Array(4);
 var booleans2 = new Array(4);
 var operators2 = new Array(4);
 
-attributesNames2[0] = "Vernacular name";
+attributesNames2[0] = "Common name";
 attributesNames2[1] = "Language";
 attributesNames2[2] = "";
 attributesNames2[3] = "";

@@ -145,7 +145,7 @@
                             <input id="checkbox2" title="<%=cm.cmsPhrase("Scientific name")%>" alt="<%=cm.cmsPhrase("Scientific name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox2"><%=cm.cmsPhrase("Scientific name")%></label>
                             <input id="checkbox3" title="<%=cm.cms("vernacular_names")%>" alt="<%=cm.cms("vernacular_names")%>" type="checkbox" name="showVernacularNames" value="true" checked="checked" />
-                              <label for="checkbox3"><%=cm.cmsPhrase("Vernacular names")%></label>
+                              <label for="checkbox3"><%=cm.cmsPhrase("Common names")%></label>
                               <%=cm.cmsTitle("vernacular_names")%>
                           </td>
                         </tr>

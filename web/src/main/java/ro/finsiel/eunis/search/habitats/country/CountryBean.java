@@ -31,7 +31,7 @@ public class CountryBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular name column. */
+    /** Display / Hide Common name column. */
     private String showVernacularName = null;
 
     /** Display / Hide Region column. */

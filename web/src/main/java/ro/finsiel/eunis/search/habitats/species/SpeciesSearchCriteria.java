@@ -26,7 +26,7 @@ public class SpeciesSearchCriteria extends AbstractSearchCriteria {
     /** Used for search in results, to filter after the scientific name. */
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(3);
 
-    /** Used for search in results, to filter after the vernacular name. */
+    /** Used for search in results, to filter after the common name. */
     public static final Integer CRITERIA_NAME = new Integer(4);
 
     /** Species scientific name -> Base criteria was started from species scientific name. */
@@ -35,7 +35,7 @@ public class SpeciesSearchCriteria extends AbstractSearchCriteria {
     /** Species scientific name -> Base criteria was started from species group. */
     public static final Integer SEARCH_GROUP = new Integer(6);
 
-    /** Species scientific name -> Base criteria was started from species vernacular name. */
+    /** Species scientific name -> Base criteria was started from species common name. */
     public static final Integer SEARCH_VERNACULAR = new Integer(7);
 
     /** Species scientific name -> Base criteria was started from species legal instruments. */
@@ -124,12 +124,12 @@ public class SpeciesSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_EUNIS_CODE, "EUNIS code ");
         humanMappings.put(CRITERIA_ANNEX_CODE, "ANNEX code ");
         humanMappings.put(CRITERIA_LEVEL, "Habitat level ");
-        humanMappings.put(CRITERIA_NAME, "Vernacular name ");
+        humanMappings.put(CRITERIA_NAME, "Common name ");
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "scientific name ");
 
         humanMappings.put(SEARCH_SCIENTIFIC_NAME, "species scientific name ");
         humanMappings.put(SEARCH_GROUP, "group species name ");
-        humanMappings.put(SEARCH_VERNACULAR, "species vernacular name ");
+        humanMappings.put(SEARCH_VERNACULAR, "species common name ");
         humanMappings.put(SEARCH_LEGAL_INSTRUMENTS, "legal instrument name ");
         humanMappings.put(SEARCH_COUNTRY, "country name ");
         humanMappings.put(SEARCH_REGION, "biogeographic region name ");

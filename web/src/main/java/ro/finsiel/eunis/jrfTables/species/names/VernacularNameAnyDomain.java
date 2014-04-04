@@ -35,7 +35,7 @@ import java.util.List;
  * @author finsiel
  * @version 1.0
  * @since 28.01.2003
- * Vernacular names in any language
+ * Common names in any language
  */
 public class VernacularNameAnyDomain extends AbstractDomain implements Paginable {
 

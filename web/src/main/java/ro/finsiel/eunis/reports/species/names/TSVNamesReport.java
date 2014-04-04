@@ -96,7 +96,7 @@ public class TSVNamesReport extends AbstractTSVReport {
     headers.addElement("Family");
     headers.addElement("Scientific name");
     headers.addElement("Valid name");
-    headers.addElement("Vernacular names");
+    headers.addElement("Common names");
     return headers;
   }
 
@@ -169,7 +169,7 @@ public class TSVNamesReport extends AbstractTSVReport {
           xmlRow.add(cellFamily);
           xmlRow.add(cellScientificName);
           xmlRow.add(cellValidName);
-          // Vernacular names (multiple rows)
+          // Common names (multiple rows)
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
           String xmlVernacularNames = "";
           if (vernNamesList.size() > 0) {
@@ -196,7 +196,7 @@ public class TSVNamesReport extends AbstractTSVReport {
                 if (!blankLine) {
                   // Language
                   aRow.addElement(aVernName.getLanguage());
-                  // Vernacular name
+                  // Common name
                   aRow.addElement(aVernName.getName());
                   blankLine = true;
                   writeRow(aRow);
@@ -209,7 +209,7 @@ public class TSVNamesReport extends AbstractTSVReport {
                   anotherRow.addElement("");
                   // Language
                   anotherRow.addElement(aVernName.getLanguage());
-                  // Vernacular name
+                  // Common name
                   anotherRow.addElement(aVernName.getName());
                   writeRow(anotherRow);
                 }

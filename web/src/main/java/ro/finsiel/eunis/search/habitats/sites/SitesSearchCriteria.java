@@ -27,7 +27,7 @@ public class SitesSearchCriteria extends AbstractSearchCriteria {
     /** Used for search in results, to filter after the scientific name. */
     public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(3);
 
-    /** Used for search in results, to filter after the vernacular name. */
+    /** Used for search in results, to filter after the common name. */
     public static final Integer CRITERIA_NAME = new Integer(4);
 
     /** Site name -> Base criteria was started from site name. */
@@ -115,7 +115,7 @@ public class SitesSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_EUNIS_CODE, "EUNIS code ");
         humanMappings.put(CRITERIA_ANNEX_CODE, "ANNEX I code ");
         humanMappings.put(CRITERIA_LEVEL, "Habitat level ");
-        humanMappings.put(CRITERIA_NAME, "Vernacular name ");
+        humanMappings.put(CRITERIA_NAME, "Common name ");
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
 
         humanMappings.put(SEARCH_NAME, "site name");

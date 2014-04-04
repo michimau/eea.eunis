@@ -105,7 +105,7 @@
                   <tr>
                     <td>
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-names.jsp" title="<%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
+                      <a href="species-names.jsp" title="<%=cm.cmsPhrase("Search species by scientific name (in Latin) or by common name (popular name)")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by common name (popular name)")%>

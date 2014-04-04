@@ -17,7 +17,7 @@ public class DictionarySearchCriteria extends AbstractSearchCriteria {
     /** Coming from first form (scientific name). */
     public static final Integer CRITERIA_SCIENTIFIC = new Integer(0);
 
-    /** Coming from second form (vernacular name). */
+    /** Coming from second form (common name). */
     public static final Integer CRITERIA_VERNACULAR = new Integer(1);
 
     /** Used in filters, filtering by Group. */
@@ -267,7 +267,7 @@ public class DictionarySearchCriteria extends AbstractSearchCriteria {
             break;
 
         case DictionaryBean.DICT_VERNACULAR_NAME:
-            ret = "Vernacular name";
+            ret = "Common name";
             break;
 
         case DictionaryBean.DICT_GROUP:
@@ -407,7 +407,7 @@ public class DictionarySearchCriteria extends AbstractSearchCriteria {
         }
         humanMappings = new Hashtable();
         humanMappings.put(CRITERIA_SCIENTIFIC, "Scientific name ");
-        humanMappings.put(CRITERIA_VERNACULAR, "Vernacular name ");
+        humanMappings.put(CRITERIA_VERNACULAR, "Common name ");
         humanMappings.put(CRITERIA_GROUP, "Group ");
         humanMappings.put(CRITERIA_ORDER, "Order ");
         humanMappings.put(CRITERIA_FAMILY, "Family ");

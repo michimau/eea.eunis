@@ -102,7 +102,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsPhrase("Number of vernacular names:")%>
+                      <%=cm.cmsPhrase("Number of common names:")%>
                     </td>
                     <td>
                       <%=nVernacularNames%>
@@ -110,7 +110,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                     <%=cm.cmsPhrase("Number of languages concerned in vernacular names search:")%>
+                     <%=cm.cmsPhrase("Number of languages concerned in common names search:")%>
                     </td>
                     <td>
                       <%=nLanguages%>
@@ -254,7 +254,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsPhrase("Number of vernacular names:")%>
+                      <%=cm.cmsPhrase("Number of common names:")%>
                     </td>
                     <td>
                       <%=nVernacularNamesByCountry%>
@@ -262,7 +262,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsPhrase("Number of languages concerned in vernacular names search:")%>
+                      <%=cm.cmsPhrase("Number of languages concerned in common names search:")%>
                     </td>
                     <td>
                       <%=nLanguagesByCountry%>

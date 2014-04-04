@@ -31,7 +31,7 @@ public class DictionaryBean extends AbstractFormBean {
     public static final int DICT_SCIENTIFIC_NAME = 0;
 
     /**
-     * Vernacular name.
+     * Common name.
      */
     public static final int DICT_VERNACULAR_NAME = 1;
 
@@ -108,10 +108,10 @@ public class DictionaryBean extends AbstractFormBean {
     /** Display / Hide Scientific name column. */
     private String showScientificName = null;
 
-    /** Display / Hide Vernacular names column. */
+    /** Display / Hide Common names column. */
     private String showVernacularNames = null;
 
-    /** Expand collapse vernacular names. */
+    /** Expand collapse Common names. */
     private String expand = null;
 
     /**

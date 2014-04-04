@@ -281,7 +281,7 @@
                   {
                     String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
                     SpeciesBooksPersist book = (SpeciesBooksPersist) it.next();
-                    // Sort this vernacular names in alphabetical order
+                    // Sort this common names in alphabetical order
                     String author = (book.getName() == null ? "" : book.getName());
                     int dc_id = book.getId();
                     String url = book.getUrl().replaceAll("#", "");

@@ -92,7 +92,7 @@
                                     <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                                     <input title="<%=cm.cms("valid_name")%>" id="checkbox6" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox6"><%=cm.cmsPhrase("Valid name")%></label>
                                       <%=cm.cmsTitle("valid_name")%>
-                                    <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" checked="checked" /><label for="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
+                                    <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" checked="checked" /><label for="checkbox5"><%=cm.cmsPhrase("Common Name")%></label>
                                       <%=cm.cmsTitle("vernacular_name")%>
                                   </td>
                                 </tr>
@@ -158,9 +158,9 @@
                         <input type="hidden" name="noSoundex" value="true" />
 
                           <h1>
-                              <%=cm.cmsPhrase("Vernacular Name")%>
+                              <%=cm.cmsPhrase("Common Name")%>
                           </h1>
-                          <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by vernacular name<br />(ex.: search for species with popular name <strong>red fox</strong>)")%>
+                          <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by common name<br />(ex.: search for species with popular name <strong>red fox</strong>)")%>
                            <br>
                            <br>
                           <table summary="layout" border="0" style="text-align:left; width: 100%;">
@@ -185,13 +185,13 @@
                                       <%--<input id="checkbox15" type="checkbox" name="showKingdom" value="true" checked="checked" /><label for="checkbox15"><%=cm.cmsPhrase("Kingdom")%></label>--%>
                                       <input title="<%=cm.cms("valid_name")%>" id="checkbox17" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox17"><%=cm.cmsPhrase("Valid name")%></label>
                                         <%=cm.cmsTitle("valid_name")%>
-                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="true" disabled="disabled" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("Vernacular names")%></label>
+                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="true" disabled="disabled" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("Common names")%></label>
                                         <%=cm.cmsTitle("vernacular_name")%>
                                     </td>
                                   </tr>
                                 </table>
                                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
-                                <label for="vernacularName"><%=cm.cmsPhrase("Vernacular Name")%></label>
+                                <label for="vernacularName"><%=cm.cmsPhrase("Common Name")%></label>
                                 <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" size="1" name="relationOp">
                                   <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
                                   <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>

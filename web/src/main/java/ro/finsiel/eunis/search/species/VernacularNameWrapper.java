@@ -5,7 +5,7 @@ import ro.finsiel.eunis.search.JavaSortable;
 
 
 /**
- * This class encapsulates an Vernacular name for the Species->Country/Region type of search
+ * This class encapsulates a Common name for the Species->Country/Region type of search
  * By implementing JavaSortable interface, this objects can be sortable after their language criteria,
  * so a bunch of these objects could be sorted ascending or descending.
  * @author finsiel

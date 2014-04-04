@@ -162,7 +162,7 @@ public class SpeciesFactsheet {
     /**
      * Species description as a human readable string in english language.
      *
-     * @return Description of species scientific an vernacular name and localization within Europe.
+     * @return Description of species scientific an common name and localization within Europe.
      */
     public String getSpeciesDescription() {
         String ret = "";
@@ -179,7 +179,7 @@ public class SpeciesFactsheet {
             ex.printStackTrace();
         }
 
-        // Vernacular name in English
+        // Commmon name in English
         try {
             // search also on synonyms
             Vector<Integer> synonyms = new Vector<Integer>();
@@ -217,7 +217,7 @@ public class SpeciesFactsheet {
 
             if (!verNameList.isEmpty()) {
                 vernacularName = verNameList.get(0).getValue() + ", ";
-                ret += " with the vernacular name " + vernacularName;
+                ret += " with the common name " + vernacularName;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

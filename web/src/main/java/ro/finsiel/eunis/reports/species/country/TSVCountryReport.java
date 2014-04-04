@@ -67,7 +67,7 @@ public class TSVCountryReport extends AbstractTSVReport
     headers.addElement("Country");
     headers.addElement("Biogeoregion");
     headers.addElement("Scientific name");
-    headers.addElement("Vernacular names");
+    headers.addElement("Common names");
     return headers;
   }
 
@@ -139,7 +139,7 @@ public class TSVCountryReport extends AbstractTSVReport
           xmlRow.addElement(cellBiogeoregion);
           aRow.addElement(cellScientificName);
           xmlRow.addElement(cellScientificName);
-          // Vernacular names (multiple rows)
+          // Common names (multiple rows)
           String xmlVernacularNames = "";
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
           if (vernNamesList.size() > 0) {
@@ -150,7 +150,7 @@ public class TSVCountryReport extends AbstractTSVReport
               if (!blankLine) {
                 // Language
                 aRow.addElement(aVernName.getLanguage());
-                // Vernacular name
+                // Common name
                 aRow.addElement(aVernName.getName());
                 blankLine = true;
                 writeRow(aRow);
@@ -162,14 +162,14 @@ public class TSVCountryReport extends AbstractTSVReport
                 anotherRow.addElement("");
                 // Language
                 anotherRow.addElement(aVernName.getLanguage());
-                // Vernacular name
+                // Common name
                 anotherRow.addElement(aVernName.getName());
                 writeRow(anotherRow);
               }
               xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
           } else {
-            // If vernacular names list is empty add something to fill the cell or table gets screwed
+            // If common names list is empty add something to fill the cell or table gets screwed
             aRow.addElement("-");
             writeRow(aRow);
           }

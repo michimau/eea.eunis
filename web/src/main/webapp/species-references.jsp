@@ -77,7 +77,7 @@
                               <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                                 <label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularName" value="true" />
-                                <label for="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
+                                <label for="checkbox5"><%=cm.cmsPhrase("Common Name")%></label>
                                 <%=cm.cmsTitle("vernacular_name")%>
                             </td>
                           </tr>

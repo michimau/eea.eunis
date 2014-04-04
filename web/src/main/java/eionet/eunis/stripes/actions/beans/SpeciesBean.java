@@ -115,4 +115,32 @@ public class SpeciesBean implements Comparable<SpeciesBean>{
             return EmptyLastComparator.getComparator().compare(thisGroup, otherGroup);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpeciesBean that = (SpeciesBean) o;
+
+        if (commonName != null ? !commonName.equals(that.commonName) : that.commonName != null) return false;
+        if (group != null ? !group.equals(that.group) : that.group != null) return false;
+        if (natura2000Code != null ? !natura2000Code.equals(that.natura2000Code) : that.natura2000Code != null) return false;
+        if (!scientificName.equals(that.scientificName)) return false;
+        if (speciesType != that.speciesType) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = scientificName.hashCode();
+        result = 31 * result + (commonName != null ? commonName.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
+        result = 31 * result + (natura2000Code != null ? natura2000Code.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (speciesType != null ? speciesType.hashCode() : 0);
+        return result;
+    }
 }

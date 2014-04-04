@@ -187,16 +187,22 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                 allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.SITE_SPECIFIC));
 
         } else {
-            for (Object s : factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000())
-                allSiteSpecies.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_LISTED));
+            for (Object s : factsheet.findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000()) {
+//              the query can return double resuls because of the
+                SpeciesBean sb = speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_LISTED);
+                if(!allSiteSpecies.contains(sb)) {
+                    allSiteSpecies.add(sb);
+                }
+            }
             protectedSpeciesCount = allSiteSpecies.size();
 
-            for (Object s : factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000())
-                allSiteSpecies.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_OTHER_MENTIONED));
-            for (Object s : factsheet.findNotEunisSpeciesListedAnnexesDirectives())
-                allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.NOT_EUNIS_LISTED));
-            for (Object s : factsheet.findNotEunisSpeciesOtherMentioned())
-                allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.NOT_EUNIS_OTHER));
+// other species - not to be displayed
+//            for (Object s : factsheet.findEunisSpeciesOtherMentionedForSitesNatura2000())
+//                allSiteSpecies.add(speciesBeanFromSitesSpeciesReportAttributes((SitesSpeciesReportAttributesPersist) s, SpeciesBean.SpeciesType.EUNIS_OTHER_MENTIONED));
+//            for (Object s : factsheet.findNotEunisSpeciesListedAnnexesDirectives())
+//                allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.NOT_EUNIS_LISTED));
+//            for (Object s : factsheet.findNotEunisSpeciesOtherMentioned())
+//                allSiteSpecies.add(speciesBeanFromSitesAttributes((Chm62edtSitesAttributesPersist) s, SpeciesBean.SpeciesType.NOT_EUNIS_OTHER));
         }
         totalSpeciesCount = allSiteSpecies.size();
 

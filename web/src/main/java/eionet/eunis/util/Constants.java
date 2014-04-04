@@ -93,6 +93,20 @@ public interface Constants {
     public static final String N2000_SPECIES_GROUP_LICHENS = "Lichens";
     public static final String N2000_SPECIES_GROUP_REPTILES = "Reptiles";
 
+    // the list of above values
+    // please update the list if new groups are added!
+    public static final String[] N2000_ALL_SPECIES_GROUPS =
+            {N2000_SPECIES_GROUP_BIRD,
+                    N2000_SPECIES_GROUP_MAMMAL,
+                    N2000_SPECIES_GROUP_AMPREP,
+                    N2000_SPECIES_GROUP_FISHES,
+                    N2000_SPECIES_GROUP_INVERT,
+                    N2000_SPECIES_GROUP_PLANT,
+                    N2000_SPECIES_GROUP_AMPHIBIANS,
+                    N2000_SPECIES_GROUP_FUNGI,
+                    N2000_SPECIES_GROUP_LICHENS,
+                    N2000_SPECIES_GROUP_REPTILES};
+
     // RDF datatypes
     public static final String XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal";
     public static final String XSD_INTEGER = "http://www.w3.org/2001/XMLSchema#integer";

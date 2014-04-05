@@ -409,10 +409,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (link.getName().toLowerCase().equals("unep-wcmc page")){
                 unepWcmcPageLink = link.getUrl();
             }
-            if(link.getName().toUpperCase().contains("NOBANIS:")){
-                nobanisLink = link;
-            } else if(link.getName().toUpperCase().contains("NOBANIS")){
+            if(link.getName().toUpperCase().contains("NOBANIS FACTSHEET")){
                 nobanisFactsheetLink = link;
+            } else if(link.getName().toUpperCase().contains("NOBANIS:")){
+                nobanisLink = link;
             }
 
         }

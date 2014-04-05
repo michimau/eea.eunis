@@ -2147,4 +2147,18 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         <modifyDataType tableName="dc_index" columnName="TITLE" newDataType="text COMMENT 'Document title'"/>
     </changeSet>
 
+    <changeSet id="rev-132" author="melisand" context="seedcontent">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+        SELECT COUNT(*) FROM chm62edt_nature_object_links WHERE ID_NATURE_OBJECT='13035' and LINKTEXT='NOBANIS factsheet'
+          ]]></sqlCheck>
+        </preConditions>
+        <comment>Adds missing NOBANIS links to some of the species. #17886</comment>
+        <loadData quotchar='"' separator="," file="db/17886_nobanis_factsheets.csv" tableName="chm62edt_nature_object_links">
+            <column name="ID_NATURE_OBJECT"/>
+            <column name="LINK"/>
+            <column name="LINKTEXT"/>
+        </loadData>
+    </changeSet>
+
 </databaseChangeLog>

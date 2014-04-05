@@ -102,13 +102,12 @@
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}
                             </li>
                             </c:if>
-                            <c:if test="${not empty actionBean.nobanisLink}">
+                            <c:if test="${not empty actionBean.nobanisFactsheetLink}">
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by')}
-                                <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span><c:if test="${not empty actionBean.nobanisFactsheetLink}">,
+                                <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span>,
                                 see also
                                 <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span>
-                                </c:if>
                             </li>
                             </c:if>
                         </ul>

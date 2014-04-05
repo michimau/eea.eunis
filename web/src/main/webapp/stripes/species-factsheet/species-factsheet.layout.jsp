@@ -64,7 +64,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 <div class="eea-accordion-panels non-exclusive collapsed-by-default">
 
                     <%-- Areas where this species has been reported --%>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="reported-accordion">
                     <h2 class="notoc eea-icon-right-container">Distribution</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
@@ -72,7 +72,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
 
                     <%-- Threat status and conservation status --%>
-                    <div class="eea-accordion-panel" style="clear: both;" >
+                    <div class="eea-accordion-panel" style="clear: both;" id="threat-accordion">
                         <a id="threat_status" ></a>
                         <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
                         <div class="pane" id="speciesStatusPane">
@@ -81,7 +81,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
 
                     <%-- This species is being protected in Europe --%>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="sites-accordion">
                         <a id="protected" ></a>
                         <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
                         <div class="pane" id="speciesSitesPane">
@@ -90,7 +90,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     </div>
 
                     <%-- Species is mentioned by the following legal instruments --%>
-                <div class="eea-accordion-panel" style="clear: both;">
+                <div class="eea-accordion-panel" style="clear: both;" id="references-accordion">
                     <a id="legal_status" ></a>
                     <h2 class="notoc eea-icon-right-container">Legal status</h2>
                     <div class="pane">
@@ -99,7 +99,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 </div>
 
                     <%-- Synonyms and common names --%>
-                <div class="eea-accordion-panel" style="clear: both;">
+                <div class="eea-accordion-panel" style="clear: both;" id="synonyms-accordion">
                     <h2 class="notoc eea-icon-right-container">Common names and synonyms</h2>
                     <div class="pane">
                         <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
@@ -107,7 +107,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                 </div>
 
                 <%--Other resources--%>
-                <div class="eea-accordion-panel" style="clear: both;">
+                <div class="eea-accordion-panel" style="clear: both;" id="other-accordion">
                     <h2 class="notoc eea-icon-right-container">Other resources</h2>
                     <div class="pane">
                         <stripes:layout-render name="/stripes/species-factsheet/species-other-resources.jsp"/>

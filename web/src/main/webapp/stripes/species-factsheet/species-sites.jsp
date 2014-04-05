@@ -8,9 +8,9 @@
     <a name="protected"></a>
 
     <c:choose>
-        <c:when test="${fn:length(actionBean.speciesSitesTable) gt 0 or fn:length(actionBean.subSpeciesSitesTable) gt 0}">
+        <c:when test="${fn:length(actionBean.speciesSitesTable) gt 0}">
 
-                    <div id="protected_sites_table" class="left-area protected-sites" style="height:460px">
+                <div id="protected_sites_table" class="left-area protected-sites" style="height:460px">
 
                     <h3>Protected in the following Natura 2000 sites</h3>
                     <div class="scroll-auto" style="height: 404px">
@@ -73,6 +73,9 @@
     </c:when>
         <c:otherwise>
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+            <script>
+                $("#sites-accordion").addClass("nodata");
+            </script>
         </c:otherwise>
     </c:choose>
                 

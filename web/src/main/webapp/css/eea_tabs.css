@@ -64,3 +64,8 @@ margin-left: 466px;
     text-shadow: 1px 1px 1px #FFF;
     background-color: #F3F3F3;
 }
+
+
+.nodata > h2 {
+    color: gray;
+}

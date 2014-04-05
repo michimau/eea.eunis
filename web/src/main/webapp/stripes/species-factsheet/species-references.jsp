@@ -75,6 +75,9 @@
             </c:when>
             <c:otherwise>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Not listed in legal texts')}
+                <script>
+                    $("#references-accordion").addClass("nodata");
+                </script>
             </c:otherwise>
         </c:choose>
 </stripes:layout-definition>

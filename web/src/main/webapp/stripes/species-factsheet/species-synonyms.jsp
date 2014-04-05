@@ -116,6 +116,11 @@
 
 </div>
 
+<c:if test="${actionBean.synonymsCount eq 0 and actionBean.vernNamesCount eq 0}">
+    <script>
+        $("#synonyms-accordion").addClass("nodata");
+    </script>
+</c:if>
 
 <!-- END synonyms -->
 </stripes:layout-definition>

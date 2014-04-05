@@ -104,8 +104,11 @@
                             </c:if>
                             <c:if test="${not empty actionBean.nobanisLink}">
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by')}:
-                                <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span>
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by')}
+                                <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span><c:if test="${not empty actionBean.nobanisFactsheetLink}">,
+                                see also
+                                <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span>
+                                </c:if>
                             </li>
                             </c:if>
                         </ul>

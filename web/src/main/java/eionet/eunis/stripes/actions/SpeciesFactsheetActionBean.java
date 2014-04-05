@@ -411,15 +411,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
             if(link.getName().toUpperCase().contains("NOBANIS:")){
                 nobanisLink = link;
+            } else if(link.getName().toUpperCase().contains("NOBANIS")){
+                nobanisFactsheetLink = link;
             }
+
         }
 
     }
 
     LinkDTO nobanisLink = null;
+    LinkDTO nobanisFactsheetLink = null;
 
     public LinkDTO getNobanisLink(){
         return nobanisLink;
+    }
+
+    public LinkDTO getNobanisFactsheetLink() {
+        return nobanisFactsheetLink;
     }
 
     /**

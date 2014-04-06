@@ -70,8 +70,11 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                     <%-- Areas where this species has been reported --%>
                     <div class="eea-accordion-panel" style="clear: both;" id="reported-accordion">
                     <h2 class="notoc eea-icon-right-container">Distribution</h2>
-                        <div class="pane">
+                        <div class="pane" id="distributionPane">
                             <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+                            <script>
+                                addReloadOnDisplay("distributionPane", null, null, init);
+                            </script>
                         </div>
                     </div>
 

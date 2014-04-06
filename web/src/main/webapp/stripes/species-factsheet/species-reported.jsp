@@ -260,7 +260,7 @@
 					}
 				}
 			}
-			dojo.addOnLoad(init);
+//			dojo.addOnLoad(init);
 		//]]>
 		</script>
 
@@ -345,15 +345,12 @@
 								<!-- TODO: All Natura 2000 sites
 								Protected areas - all Natura 2000 sites [Permalink to latest version 52E54BF3-ACDB-4959-9165-F3E4469BE610]
 								-->
-	
-                               
+
 							</fieldset>
                     </div>
 
-
                     <div class="right-area reported-areas-map">
-                        <div class="map-view" id="report-map" style="width:470px; height:400px;">
-                        </div>
+                        <div id="report-map" class="claro" style="width:470px; height:400px; border:1px solid #000; margin: 1em 0.5em 1em 0"></div>
                     </div>
                 </div>
                 <!-- END species reported -->

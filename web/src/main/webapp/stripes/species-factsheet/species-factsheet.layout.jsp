@@ -17,6 +17,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 <stripes:layout-render name="/stripes/common/template.jsp" hideMenu="true" pageTitle="${title}" btrail="<%= btrail %>">
     <stripes:layout-component name="head">
         <link rel="stylesheet" type="text/css" href="/css/temp_gallery.css">
+        <link rel="stylesheet" type="text/css" href="${actionBean.context.distributionArcgisCSS}"/>
         <!-- Custom js needed for Species page -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/temp_gallery.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
@@ -32,6 +33,12 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
         }
         </style>
 
+        <style>
+            #content table {
+                display: table;
+            }
+        </style>
+
 
         <link rel="alternate" type="application/rdf+xml" title="RDF"
             href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}/rdf" />
@@ -41,9 +48,6 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
         <!-- MAIN CONTENT -->
         <c:choose>
             <c:when test="${eunis:exists(actionBean.factsheet)}">
-
-<!-- TODO documentActions - PDF link ?? -->
-<!-- TODO the old template added "Upload pictures" menu item to the left menu for logged in users -->
 
                 <%-- Species breadcrumb --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>

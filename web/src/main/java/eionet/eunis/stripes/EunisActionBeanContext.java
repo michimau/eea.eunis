@@ -147,4 +147,56 @@ public class EunisActionBeanContext extends ActionBeanContext {
         return getInitParameter("DOMAIN_NAME");
     }
 
+    public String getDistributionCDDALayer() {
+        return getApplicationProperty("DIST_CDDA_LAYER");
+    }
+
+    public String getDistributionBioRegionsLayer() {
+        return getApplicationProperty("DIST_BIO_REGIONS_LAYER");
+    }
+
+    public String getDistributionRiverBasinLayer() {
+        return getApplicationProperty("DIST_RIVER_BASIN_LAYER");
+    }
+
+    public String getDistributionSpeciesLayer() {
+        return getApplicationProperty("DIST_SPECIES_LAYER");
+    }
+
+    public String getDistributionHabitatsLayer() {
+        return getApplicationProperty("DIST_HABITATS_LAYER");
+    }
+
+    public String getDistributionHabitatsInitDistLayer() {
+        return getApplicationProperty("DIST_HABITATS_INIT_DIST_LAYER");
+    }
+
+    public String getDistributionHabitatsInitRangeLayer() {
+        return getApplicationProperty("DIST_HABITATS_INIT_RANGE_LAYER");
+    }
+
+    public String getDistributionHabitatsN2000Layer() {
+        return getApplicationProperty("DIST_HABITATS_N2000_LAYER");
+    }
+
+    public String getDistributionHabitatsN2000QueryLayer() {
+        return getApplicationProperty("DIST_HABITATS_N2000_QUERY_LAYER");
+    }
+
+    public String getDistributionSpeciesN2000Layer() {
+        return getApplicationProperty("DIST_SPECIES_N2000_LAYER");
+    }
+
+    public String getDistributionSpeciesN2000QueryLayer() {
+        return getApplicationProperty("DIST_SPECIES_N2000_QUERY_LAYER");
+    }
+
+    public String getDistributionArcgisScript(){
+        return getApplicationProperty("DIST_ARCGIS_SCRIPT");
+    }
+
+    public String getDistributionArcgisCSS(){
+        return getApplicationProperty("DIST_ARCGIS_CSS");
+    }
+
 }

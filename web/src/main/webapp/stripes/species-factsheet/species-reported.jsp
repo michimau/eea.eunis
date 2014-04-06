@@ -3,7 +3,7 @@
 <stripes:layout-definition>
 
 <script type="text/javascript">djConfig = { parseOnLoad:true };</script>
-<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
+<script type="text/javascript" src="${actionBean.context.distributionArcgisScript}"></script>
 
 
 
@@ -94,12 +94,12 @@
 
 			    n2000layer = new esri.layers.GraphicsLayer();
 
-                cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer");
+                cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionCDDALayer}");
 
-                bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/BioRegions/Biogeographicalregions_Dyna_WM/MapServer");
+                bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionBioRegionsLayer}");
                 bio_regions_layer.opacity = 0.5;
 
-                river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://water.discomap.eea.europa.eu/arcgis/rest/services/Water/WFDRiverBasinDistrictInfo_Dyna_WM/MapServer");
+                river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionRiverBasinLayer}");
                 river_basin_districts_layer.opacity = 0.6;
 
                 //Add species parameter to filter Natura 2000
@@ -119,7 +119,7 @@
 	                imageParameters_dist.layerIds = [4];
 	                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 	                imageParameters_dist.transparent = true;
-	                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_dist});
+	                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionSpeciesLayer}", {"imageParameters":imageParameters_dist});
                 }
 
                 // Species Range layer
@@ -132,7 +132,7 @@
 	                imageParameters_range.layerIds = [1];
 	                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 	                imageParameters_range.transparent = true;
-	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://bio.discomap.eea.europa.eu/arcgis/rest/services/Article17/Article17_Distribution_WM/MapServer", {"imageParameters":imageParameters_range});
+	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionSpeciesLayer}", {"imageParameters":imageParameters_range});
                 }
                 report_map.addLayer(gbifLayer);
 			}
@@ -142,7 +142,7 @@
             var objIDs;
 		    function filterNatura2000(specie){
 		        //build query task
-                var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/9");
+                var queryTask = new esri.tasks.QueryTask("${actionBean.context.distributionSpeciesN2000Layer}");
 
                 //build query filter
                 var query = new esri.tasks.Query();
@@ -154,7 +154,7 @@
                 dojo.connect(queryTask, "onComplete", function(featureSet) {
                     dojo.forEach(featureSet.features,function(feature){
 
-                        var speciesTable = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/9");
+                        var speciesTable = new esri.tasks.QueryTask("${actionBean.context.distributionSpeciesN2000Layer}");
 
                         var relatedQuery = new esri.tasks.RelationshipQuery();
                         relatedQuery.outFields = ["OBJECTID"];
@@ -199,7 +199,7 @@
 		    	    new dojo.Color([255,0,0,0.75]));
 
 		    function addGraphics(objIDs){
-		        var queryTask = new esri.tasks.QueryTask("http://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000_Dyna_WM/MapServer/11");
+		        var queryTask = new esri.tasks.QueryTask("${actionBean.context.distributionSpeciesN2000QueryLayer}");
 
 		        var relatedQuery = new esri.tasks.RelationshipQuery();
 		        relatedQuery.outFields = ["SITECODE", "SITENAME"];

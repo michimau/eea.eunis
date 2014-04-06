@@ -1,14 +1,17 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
+
+    <c:choose>
+        <c:when test="${not empty actionBean.consStatus}">
                 <!-- species status -->
                 <a name="species-status"></a>
                 <%--<h2 class="visualClear">How is this species doing?</h2>--%>
 
                 <div class="left-area">
                     <div class="threat-status-indicator width-12">
-                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red list status of threatened species')}</h3>
-                        <p>The Threat Status' concept in IUCN Red lists assess the distance from extinction.</p>
+                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
+                        <p>The Threat Status' concept in IUCN Red List assess the distance from extinction.</p>
                         <c:if test="${not empty actionBean.consStatus}">
 
                             <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
@@ -27,15 +30,14 @@
                                                 <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
                                             </c:otherwise>
                                         </c:choose>
-                                            <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusWO.statusDesc}">
+                                            <div class="text-right">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
                                                 <p class="threat-status-label small-text">${actionBean.consStatusWO.statusName}</p>
-                                                <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusWO.reference)}</p>
                                             </div>
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the world')}">
+                                        <div class="text-right">
                                             <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
                                             <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                         </div>
@@ -56,15 +58,14 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             <%--<a href="references/${actionBean.consStatusEU.idDc}">--%>
-                                                <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusEU.statusDesc}">
+                                                <div class="text-right">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
                                                     <p class="threat-status-label small-text">${actionBean.consStatusEU.statusName}</p>
-                                                    <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusEU.reference)}</p>
                                                 </div>
                                             </a>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the Europe')}">
+                                            <div class="text-right">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
                                                 <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                             </div>
@@ -84,15 +85,14 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <%--<a href="references/${actionBean.consStatusE25.idDc}">--%>
-                                                    <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusE25.statusDesc}">
+                                                    <div class="text-right">
                                                         <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
                                                         <p class="threat-status-label small-text">${actionBean.consStatusE25.statusName}</p>
-                                                        <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusE25.reference)}</p>
                                                     </div>
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the EU')}">
+                                                <div class="text-right">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
                                                     <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                                 </div>
@@ -103,48 +103,38 @@
                             </div>
                         </c:if>
                     </div>
-                    <div class="footer">
-                        <c:if test="${not empty actionBean.consStatus}">
-                            <!-- Table definition dropdown example -->
-                            <div class="table-definition contain-float">
-                                <div class="width-12 contain-float">
-                                    <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right standardButton">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a>
-                                </div>
-                            </div>
-                        </c:if>
-
-                        <!-- Threat status other resources overlay -->
-                        <div class="overlay" id="threat-status-overlay">
-
-                            <p>
-                                <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">${eunis:cmsPhrase(actionBean.contentManagement, 'European Red List (by European Commission)')}</a>
-                            </p>
-
-
-                        </div>
-
-                    </div>
                     <fieldset>
                         <legend><strong>IUCN Red List Category</strong></legend>
                         <table class="legend-table" style="width: 100%;">
-                        <tr class="discreet">
-                            <td><div class="threat-status-dd legend-color"> </div> Data deficient</td>
-                            <td><div class="threat-status-lc legend-color"> </div> Least Concern</td>
-                            <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
-                            <td><div class="threat-status-vu legend-color"> </div> Vulnerable</td>
-                        </tr>
-                        <tr class="discreet">
-                            <td><div class="threat-status-en legend-color"> </div> Endangered</td>
-                            <td><div class="threat-status-cr legend-color"> </div> Critically endangered</td>
-                            <td><div class="threat-status-ew legend-color"> </div> Extinct in the wild</td>
-                            <td><div class="threat-status-ex legend-color"> </div> Extinct</td>
-                        </tr>
+                            <tr class="discreet">
+                                <td><div class="threat-status-dd legend-color"> </div> Data deficient</td>
+                                <td><div class="threat-status-lc legend-color"> </div> Least Concern</td>
+                                <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
+                                <td><div class="threat-status-vu legend-color"> </div> Vulnerable</td>
+                            </tr>
+                            <tr class="discreet">
+                                <td><div class="threat-status-en legend-color"> </div> Endangered</td>
+                                <td><div class="threat-status-cr legend-color"> </div> Critically endangered</td>
+                                <td><div class="threat-status-ew legend-color"> </div> Extinct in the wild</td>
+                                <td><div class="threat-status-ex legend-color"> </div> Extinct</td>
+                            </tr>
                         </table>
                     </fieldset>
+                    <div class="discreet">
+                        Sources:
+                        <ul>
+                            <li>
+                                <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">European Red List</a>
+                            </li>
+                            <li>
+                                <a href="http://www.iucnredlist.org/technical-documents/categories-and-criteria">IUCN Red List Categories and Criteria</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="right-area conservation-status">
-                    <h3>EU's conservation status by biogeographical regions</h3>
+                    <h3>EU's conservation status</h3>
                     <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
                     <div class="map-view" style="border:1px solid #050505;">
                         <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
@@ -213,5 +203,14 @@
                         </div>
                     </div>
                 </div>
+        </c:when>
+        <c:otherwise>
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'This species has not yet been assessed for the IUCN Red List')}
+            <script>
+                $("#threat-accordion").addClass("nodata");
+            </script>
+        </c:otherwise>
+    </c:choose>
+
                 <!-- END species status -->
 </stripes:layout-definition>

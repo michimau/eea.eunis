@@ -5,7 +5,8 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">conservationstatusBio conservationstatusCountry</entry>
+  <!--<entry key="queries">conservationstatusBio conservationstatusCountry</entry>-->
+  <entry key="queries">conservationstatusCountry</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->

@@ -4,11 +4,35 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import eionet.eunis.dto.TaxonomyTreeDTO;
+import eionet.eunis.util.Constants;
 
 public class EunisUtil {
+
+    /**
+     * Map for default picture (if there is no other picture in the DB)
+     */
+    static final Map<String, String> defaultPictures = new HashMap<String, String>();
+
+    static {
+        defaultPictures.put("Algae","005");
+        defaultPictures.put("Amphibians","003");
+        defaultPictures.put("Birds","018");
+        defaultPictures.put("Conifers","020");
+        defaultPictures.put("Ferns","007");
+        defaultPictures.put("Fishes","006");
+        defaultPictures.put("Flowering Plants","009");
+        defaultPictures.put("Fungi","013");
+        defaultPictures.put("Invertebrates","001");
+        defaultPictures.put("Mammals","015");
+        defaultPictures.put("Mosses & Liverworts","010");
+        defaultPictures.put("Protists","019");
+        defaultPictures.put("Reptiles","008");
+    }
 
     /**
      * Encode a string for XML or HTML.
@@ -426,6 +450,15 @@ public class EunisUtil {
         text = text.replace("'","''");
 
         return text;
+    }
+
+    /**
+     * Returns the link to the default (abstract) picture of a species, by group
+     * @param group The species group
+     * @return The link to the abstract picture, relative path from /images/species/
+     */
+    public static String getDefaultPicture(String group){
+        return "default/abstract" + defaultPictures.get(group) + ".jpg";
     }
 
 }

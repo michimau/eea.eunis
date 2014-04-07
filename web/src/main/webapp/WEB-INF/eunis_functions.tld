@@ -340,4 +340,17 @@
 			${mapHabitatsRelations(">")}
 		</example>
 	</function>
+
+
+    <function>
+        <description>
+            Calls HabitatsFactsheet.mapHabitatsRelations
+        </description>
+        <name>getDefaultPicture</name>
+        <function-class>eionet.eunis.util.JstlFunctions</function-class>
+        <function-signature>java.lang.String getDefaultPicture(java.lang.String)</function-signature>
+        <example>
+            ${getDefaultPicture("Birds")}
+        </example>
+    </function>
 </taglib>

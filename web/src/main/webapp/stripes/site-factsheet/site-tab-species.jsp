@@ -58,11 +58,11 @@
 
             <c:forEach items="${actionBean.allSiteSpecies}" var="specie">
                 <div class="photoAlbumEntry">
-                    <a href="javascript:void(0);">
+                    <a href="/species/${specie.source.idSpecies}">
 		                <span class="photoAlbumEntryWrapper">
 		                    <c:choose>
 		                        <c:when test="${specie.speciesTypeId == 1 || specie.speciesTypeId == 3 || specie.speciesTypeId == 4}">
-		                            <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg"/>
+		                            <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg" onerror="this.src='images/species/${eunis:getDefaultPicture(specie.group)}';"/>
                                 </c:when>
                                 <c:otherwise>
                                     <img src="images/sites/${specie.source.idSite}/thumbnail.jpg"/>

@@ -111,6 +111,9 @@
     </c:when>
     <c:otherwise>
         ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
+        <script>
+            $("#tab-species-accordion").addClass("nodata");
+        </script>
     </c:otherwise>
 </c:choose>
 </stripes:layout-definition>

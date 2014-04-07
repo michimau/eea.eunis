@@ -54,6 +54,9 @@
     </c:when>
     <c:otherwise>
         ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+        <script>
+            $("#species-accordion").addClass("nodata");
+        </script>
     </c:otherwise>
 </c:choose>
 </stripes:layout-definition>

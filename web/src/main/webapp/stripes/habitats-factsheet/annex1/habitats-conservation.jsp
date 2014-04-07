@@ -2,4 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
 <%--todo--%>
+    <script>
+        $("#conservation-accordion").addClass("nodata");
+    </script>
 </stripes:layout-definition>

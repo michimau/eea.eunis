@@ -1,7 +1,8 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-    <c:if test="${!empty actionBean.factsheet.otherClassifications}">
+    <c:choose>
+    <c:when test="${!empty actionBean.factsheet.otherClassifications}">
         <h3>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}
         </h3>
@@ -47,7 +48,14 @@
                 </c:forEach>
             </tbody>
         </table>
-    </c:if>
+    </c:when>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+        <script>
+            $("#other-classifications-accordion").addClass("nodata");
+        </script>
+    </c:otherwise>
+    </c:choose>
     <c:if test="${not actionBean.factsheet.annexI}">
         ${eunis:cmsPhrase(actionBean.contentManagement, 'For relation to plant communities (syntaxa), see Vegetation types')}
     </c:if>

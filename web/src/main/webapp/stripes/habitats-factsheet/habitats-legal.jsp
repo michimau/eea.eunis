@@ -43,6 +43,9 @@
         </c:when>
         <c:otherwise>
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+            <script>
+                $("#legal-accordion").addClass("nodata");
+            </script>
         </c:otherwise>
     </c:choose>
 

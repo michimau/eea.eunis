@@ -10,7 +10,10 @@
         <stripes:layout-render name="/stripes/site-factsheet/site-tab-designations-cdda.jsp"/>
     </c:when>
     <c:otherwise>
-        No information reported
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+        <script>
+            $("#tab-designations-accordion").addClass("nodata");
+        </script>
     </c:otherwise>
 </c:choose>
 </stripes:layout-definition>

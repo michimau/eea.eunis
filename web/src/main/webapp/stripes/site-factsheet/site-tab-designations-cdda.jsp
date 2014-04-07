@@ -76,6 +76,9 @@ Agency.
     <c:otherwise>
         ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
     </c:otherwise>
+    <script>
+        $("#tab-designations-accordion").addClass("nodata");
+    </script>
 </c:choose>
 
 </stripes:layout-definition>

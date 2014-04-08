@@ -131,25 +131,23 @@ public class EUNISLegalDomain extends AbstractDomain implements Paginable {
   private StringBuffer _prepareWhereSort() {
     StringBuffer filterSQL = null;
     try {
-      filterSQL = new StringBuffer();
-      boolean useSort = false;
-      if (sortCriteria.length > 0) {
-        int i = 0;
-        do {
-          if (i > 0) filterSQL.append(", ");
-          AbstractSortCriteria criteria = sortCriteria[i]; // Notice the upcast here
-          if (!criteria.getCriteriaAsString().equals("none")) {// Do not add if criteria is sort to NOT SORT
-            if (!criteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
-              filterSQL.append(criteria.toSQL());
-              useSort = true;
+        filterSQL = new StringBuffer();
+        boolean useSort = false;
+
+        for (AbstractSortCriteria aSortCriteria : sortCriteria) {
+            if (!aSortCriteria.getCriteriaAsString().equals("none")) { // Do not add if criteria is sort to NOT SORT
+                if (!aSortCriteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
+                    if (useSort) {
+                        filterSQL.append(", ");
+                    }
+                    filterSQL.append(aSortCriteria.toSQL());
+                    useSort = true;
+                }
             }
-          }
-          i++;
-        } while (i < sortCriteria.length);
-      }
-      if (useSort) {// If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
-        filterSQL.insert(0, " ORDER BY ");
-      }
+        }
+        if (useSort) { // If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
+            filterSQL.insert(0, " ORDER BY ");
+        }
     } catch (InitializationException e) {
       e.printStackTrace();  //To change body of catch statement use Options | File Templates.
     } finally {

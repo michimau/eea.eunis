@@ -85,6 +85,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** NCBI number */
     private String ncbi;
     private ArrayList<LinkDTO> links;
+
+    LinkDTO nobanisLink = null;
+    LinkDTO nobanisFactsheetLink = null;
+    LinkDTO conservationStatusPDF = null;
+    LinkDTO conservationStatus = null;
+
     /** List of conservation statuses. */
     private List<NationalThreatWrapper> consStatus;
     /** Conservation status on World level. */
@@ -393,13 +399,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             } else if(link.getName().toUpperCase().contains("NOBANIS:")){
                 nobanisLink = link;
             }
+            if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+                conservationStatusPDF = link;
+            } else if (link.getName().equalsIgnoreCase("Conservation status 2006 (art. 17)")){
+                conservationStatus = link;
+            }
 
         }
 
     }
 
-    LinkDTO nobanisLink = null;
-    LinkDTO nobanisFactsheetLink = null;
+    public LinkDTO getConservationStatusPDF() {
+        return conservationStatusPDF;
+    }
+
+    public LinkDTO getConservationStatus() {
+        return conservationStatus;
+    }
 
     public LinkDTO getNobanisLink(){
         return nobanisLink;

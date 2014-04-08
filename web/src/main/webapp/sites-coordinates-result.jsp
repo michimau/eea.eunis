@@ -351,10 +351,10 @@
             if ( showCoord )
             {
           %>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_LONG%>&amp;ascendency=<%=formBean.changeAscendency(sortLong, null == sortLong)%>"><%=Utilities.getSortImageTag(sortLong)%><%=cm.cmsPhrase("Longitude")%></a>
                         </th>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                             <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_LAT%>&amp;ascendency=<%=formBean.changeAscendency(sortLat, null == sortLat)%>"><%=Utilities.getSortImageTag(sortLat)%><%=cm.cmsPhrase("Latitude")%></a>
                         </th>
           <%
@@ -362,13 +362,13 @@
             if ( showSize )
             {
           %>
-                        <th scope="col" style="text-align : right;">
+                        <th class="nosort" scope="col" style="text-align : right;">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Area(ha)")%></a>
                         </th>
           <%
             }
           %>
-                        <th scope="col" style="text-align : right;">
+                        <th class="nosort" scope="col" style="text-align : right;">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                         </th>
                       </tr>
@@ -480,10 +480,10 @@
             if ( showCoord )
             {
           %>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Longitude")%>
                         </th>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Latitude")%>
                         </th>
           <%
@@ -491,13 +491,13 @@
             if ( showSize )
             {
           %>
-                        <th scope="col" style="text-align : right;">
+                        <th class="nosort" scope="col" style="text-align : right;">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Area(ha)")%></a>
                         </th>
           <%
             }
           %>
-                        <th scope="col" style="text-align : right;">
+                        <th class="nosort" scope="col" style="text-align : right;">
                           <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CoordinatesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                         </th>
                       </tr>

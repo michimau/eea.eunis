@@ -315,7 +315,7 @@
                   <%
                     }
                   %>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Species scientific name")%>
                       </th>
                     </tr>
@@ -500,7 +500,7 @@
                   <%
                     }
                   %>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Species scientific name")%>
                       </th>
                     </tr>

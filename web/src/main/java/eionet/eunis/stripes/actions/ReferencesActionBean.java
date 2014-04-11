@@ -38,13 +38,14 @@ import eionet.eunis.util.Pair;
  *
  * @author Risto Alt
  */
-@UrlBinding("/references/{idref}")
+@UrlBinding("/references/{idref}/{section}")
 public class ReferencesActionBean extends AbstractStripesAction {
 
     /** */
     public final static String DEFAULT_FILTER_VALUE = "Search reference by author or title here ...";
 
     private String idref;
+    private String section;
     private CustomPaginatedList<ReferenceDTO> refs;
     private DcIndexDTO dcIndex;
     private List<AttributeDto> dcAttributes;
@@ -121,6 +122,18 @@ public class ReferencesActionBean extends AbstractStripesAction {
             setMetaDescription("references");
         }
         setBtrail(btrail);
+
+        // check that the linked section actually exists
+        if(section.equals("species") && speciesByName.size() == 0){
+            section = "";
+        }
+        if(section.equals("habitats") && habitats.size() == 0){
+            section = "";
+        }
+
+        if(!(section.equals("") || section.equals("species") || section.equals("habitats"))){
+            section = "";
+        }
 
         return new ForwardResolution(forwardPage);
     }
@@ -213,4 +226,11 @@ public class ReferencesActionBean extends AbstractStripesAction {
         this.speciesByName = speciesByName;
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
 }

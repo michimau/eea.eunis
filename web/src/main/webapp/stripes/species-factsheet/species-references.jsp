@@ -47,7 +47,7 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${not empty legal.description}">
-                                            <a href="references/${ legal.idDc }">${ legal.description }</a>
+                                            <a href="references/${ legal.idDc }/species">${ legal.description }</a>
                                         </c:when>
                                         <c:otherwise>
                                             ${legal.detailedReference}

@@ -17,6 +17,8 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.names.NameSearchCriteria;
 import ro.finsiel.eunis.search.species.names.NameSortCriteria;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 
@@ -389,21 +391,20 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         StringBuffer filterSQL = new StringBuffer();
 
         try {
-            int added = 0;
+            boolean useSort = false;
 
             for (AbstractSortCriteria aSortCriteria : sortCriteria) {
-                NameSortCriteria criteria = (NameSortCriteria) aSortCriteria; // Notice the upcast here
-                if (!criteria.getCriteriaAsString().equals("none")) { // Do not add if criteria is sort to NOT SORT
-                    if (!criteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
-                        if (added > 0) {
+                if (!aSortCriteria.getCriteriaAsString().equals("none")) { // Do not add if criteria is sort to NOT SORT
+                    if (!aSortCriteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
+                        if (useSort) {
                             filterSQL.append(", ");
                         }
-                        filterSQL.append(criteria.toSQL());
-                        added++;
+                        filterSQL.append(aSortCriteria.toSQL());
+                        useSort = true;
                     }
                 }
             }
-            if (added > 0) { // If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
+            if (useSort) { // If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {

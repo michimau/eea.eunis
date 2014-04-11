@@ -136,25 +136,25 @@
                 <br/>
                 <div>
                     <div class="eea-accordion-panels non-exclusive collapsed-by-default">
-                        <div class="eea-accordion-panel" style="clear: both;">
+                        <div class="eea-accordion-panel" style="clear: both;" id="tab-species-accordion">
                             <h2 class="notoc eea-icon-right-container">Species</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-species.jsp"/>
                             </div>
                         </div>
-                        <div class="eea-accordion-panel" style="clear: both;">
+                        <div class="eea-accordion-panel" style="clear: both;" id="tab-habitats-accordion">
                             <h2 class="notoc eea-icon-right-container">Habitat types</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-habitats.jsp"/>
                             </div>
                         </div>
-                        <div class="eea-accordion-panel" style="clear: both;">
+                        <div class="eea-accordion-panel" style="clear: both;" id="tab-designations-accordion">
                             <h2 class="notoc eea-icon-right-container">Designation info</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-designations.jsp"/>
                             </div>
                         </div>
-                        <div class="eea-accordion-panel" style="clear: both;">
+                        <div class="eea-accordion-panel" style="clear: both;" id="tab-interactivemap-accordion">
                             <a id="interactive_map" ></a>
                             <h2 class="notoc eea-icon-right-container">Interactive map</h2>
                             <div class="pane" id="sitesMapPane">
@@ -168,7 +168,7 @@
                                 addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://discomap.eea.europa.eu/map/EEAGalleryBasicViewer/?appid=341d4e5b87a044f89cd3544f4d93a295&group=accf98b78d894ecba22dc13e6bd88ae4&embed=true");
                             </script>
                         </div>
-                        <div class="eea-accordion-panel" style="clear: both;">
+                        <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">
                             <h2 class="notoc eea-icon-right-container">Other resources</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-other-resources.jsp"/>

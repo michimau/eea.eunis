@@ -400,10 +400,10 @@
             if ( showCoord )
             {
           %>
-                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                         <%=cm.cmsPhrase("Longitude")%>
                       </th>
-                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                         <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
@@ -411,7 +411,7 @@
             if ( showSize )
             {
           %>
-                      <th scope="col" style="text-align : right">
+                      <th class="nosort" scope="col" style="text-align : right">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                       </th>
           <%
@@ -419,7 +419,7 @@
             if ( showYear )
             {
           %>
-                      <th scope="col" style="text-align : right">
+                      <th class="nosort" scope="col" style="text-align : right">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                       </th>
           <%
@@ -539,10 +539,10 @@
             if ( showCoord )
             {
           %>
-                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                         <%=cm.cmsPhrase("Longitude")%>
                       </th>
-                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                         <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
@@ -550,7 +550,7 @@
             if ( showSize )
             {
           %>
-                      <th scope="col" style="text-align : right">
+                      <th class="nosort" scope="col" style="text-align : right">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                       </th>
           <%
@@ -558,7 +558,7 @@
             if ( showYear )
             {
           %>
-                      <th scope="col" style="text-align : right">
+                      <th class="nosort" scope="col" style="text-align : right">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                       </th>
           <%

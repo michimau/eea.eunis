@@ -147,8 +147,25 @@
                     <div class="footer">
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
-                            <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right standardButton">Other resources</a>
+                            <div class="discreet" style="float:right;">
+                                <c:if test="${not empty actionBean.conservationStatusPDF or not empty actionBean.conservationStatus}">
+                                Sources:
+                                <ul>
+                                    <c:if test="${not empty actionBean.conservationStatusPDF}">
+                                        <li>
+                                            <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2006 – summary (pdf)</a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${not empty actionBean.conservationStatus}">
+                                        <li>
+                                            <a href="${actionBean.conservationStatus.url}">Conservation status 2006 - expert table</a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                                </c:if>
+                            </div>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
+
                                 <span class="table-definition-target standardButton float-left">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
                                 </span>
@@ -187,20 +204,7 @@
                             </c:if>
                         </div>
                         <!-- Conservation status other resources overlay -->
-                        <div class="overlay" id="conservation-status-overlay">
-                            <c:forEach items="${actionBean.links}" var="link" varStatus="loop">
-                                <p>
-                                    <c:choose>
-                                        <c:when test="${!empty link.url}">
-                                            <a href="${eunis:treatURLSpecialCharacters(link.url)}">${link.name}</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${link.name}
-                                        </c:otherwise>
-                                    </c:choose>
-                                </p>
-                            </c:forEach>
-                        </div>
+
                     </div>
                 </div>
         </c:when>

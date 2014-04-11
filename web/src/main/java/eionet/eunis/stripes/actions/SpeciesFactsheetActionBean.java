@@ -26,6 +26,7 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -84,6 +85,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** NCBI number */
     private String ncbi;
     private ArrayList<LinkDTO> links;
+
+    LinkDTO nobanisLink = null;
+    LinkDTO nobanisFactsheetLink = null;
+    LinkDTO conservationStatusPDF = null;
+    LinkDTO conservationStatus = null;
+
     /** List of conservation statuses. */
     private List<NationalThreatWrapper> consStatus;
     /** Conservation status on World level. */
@@ -163,28 +170,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectViewDTO> speciesSitesTable;
     private List<SitesByNatureObjectViewDTO> subSpeciesSitesTable;
     private String scientificNameUrlEncoded;
-
-    /**
-     * Map for default picture (if there is no other picture in the DB)
-     */
-    static final Map<String, String> defaultPictures = new HashMap<String, String>();
-
-    static {
-        defaultPictures.put("Algae","005");
-        defaultPictures.put("Amphibians","003");
-        defaultPictures.put("Birds","018");
-        defaultPictures.put("Conifers","020");
-        defaultPictures.put("Ferns","007");
-        defaultPictures.put("Fishes","006");
-        defaultPictures.put("Flowering plants","009");
-        defaultPictures.put("Fungi","013");
-        defaultPictures.put("Invertebrates","001");
-        defaultPictures.put("Mammals","015");
-        defaultPictures.put("Mosses & Liverworts","010");
-        defaultPictures.put("Protists","019");
-        defaultPictures.put("Reptiles","008");
-    }
-
 
     /**
      * Default Stripes handler
@@ -329,7 +314,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             String group = factsheet.getSpeciesGroup();
 
             PictureDTO pic = new PictureDTO();
-            pic.setFilename("default/abstract" + defaultPictures.get(group) + ".jpg");
+            pic.setFilename(EunisUtil.getDefaultPicture(group));
             pic.setDescription("No photo available for this species");
             pic.setSource("Paco Sánchez Aguado");
             pic.setPath(picturePath);
@@ -414,13 +399,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             } else if(link.getName().toUpperCase().contains("NOBANIS:")){
                 nobanisLink = link;
             }
+            if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+                conservationStatusPDF = link;
+            } else if (link.getName().equalsIgnoreCase("Conservation status 2006 (art. 17)")){
+                conservationStatus = link;
+            }
 
         }
 
     }
 
-    LinkDTO nobanisLink = null;
-    LinkDTO nobanisFactsheetLink = null;
+    public LinkDTO getConservationStatusPDF() {
+        return conservationStatusPDF;
+    }
+
+    public LinkDTO getConservationStatus() {
+        return conservationStatus;
+    }
 
     public LinkDTO getNobanisLink(){
         return nobanisLink;

@@ -287,10 +287,10 @@
               if (showCoord)
               {
             %>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Longitude")%>
                         </th>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Latitude")%>
                         </th>
             <%
@@ -459,10 +459,10 @@
               if (showCoord)
               {
             %>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Longitude")%>
                         </th>
-                        <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <th class="nosort" scope="col" style="text-align : center; white-space:nowrap;">
                           <%=cm.cmsPhrase("Latitude")%>
                         </th>
             <%

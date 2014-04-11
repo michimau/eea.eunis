@@ -447,4 +447,13 @@ public class JstlFunctions {
         return HabitatsFactsheet.mapHabitatsRelations(relation);
     }
 
+    /**
+     * Checks if the given species has photos
+     * @param speciesGroup The Species group
+     * @return True if at least one photo is found
+     */
+    public static String getDefaultPicture(String speciesGroup){
+        return EunisUtil.getDefaultPicture(speciesGroup);
+    }
+
 }

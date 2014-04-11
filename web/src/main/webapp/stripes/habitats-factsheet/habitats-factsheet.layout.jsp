@@ -41,38 +41,38 @@
             <%--Accordion--%>
             <div>
                 <div class="eea-accordion-panels non-exclusive collapsed-by-default">
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="legal-accordion">
                         <a id="legal" ></a>
                         <h2 class="notoc eea-icon-right-container">Legal instruments</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-legal.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="vegetation-accordion">
                         <h2 class="notoc eea-icon-right-container">Vegetation types</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-vegetation.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="species-accordion">
                         <h2 class="notoc eea-icon-right-container">Species mentioned in habitat description</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-species.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="other-classifications-accordion">
                         <h2 class="notoc eea-icon-right-container">Other classifications</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-classifications.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="history-accordion">
                         <h2 class="notoc eea-icon-right-container">History</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-history.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;">
+                    <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">
                         <h2 class="notoc eea-icon-right-container">Other resources</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-resources.jsp"/>

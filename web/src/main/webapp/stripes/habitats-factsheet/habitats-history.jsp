@@ -1,7 +1,8 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-    <c:if test="${!empty actionBean.history}">
+    <c:choose>
+    <c:when test="${!empty actionBean.history}">
         <table class="listing fullwidth" style="display: table">
             <col style="width:30%"/>
             <col style="width:15%"/>
@@ -44,6 +45,13 @@
                 </c:forEach>
             </tbody>
         </table>
-    </c:if>
+    </c:when>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}
+        <script>
+            $("#other-resources-accordion").addClass("nodata");
+        </script>
+    </c:otherwise>
+    </c:choose>
 
 </stripes:layout-definition>

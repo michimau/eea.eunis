@@ -226,7 +226,7 @@
             if (showDesignationYear)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, null == sortDesignationYear)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsPhrase("Designation year")%></a>
                       </th>
           <%
@@ -234,10 +234,10 @@
             if (showCoordinates)
             {
           %>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Longitude")%>
                       </th>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
@@ -245,7 +245,7 @@
             if (showSize)
             {
           %>
-                      <th scope="col" style="text-align : right;">
+                      <th class="nosort" scope="col" style="text-align : right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                       </th>
           <%
@@ -277,7 +277,7 @@
             if (showMeanAltitude)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_MEAN_ALTITUDE%>&amp;ascendency=<%=formBean.changeAscendency(sortMeanAltitude, null == sortMeanAltitude)%>"><%=Utilities.getSortImageTag(sortMeanAltitude)%><%=cm.cmsPhrase("Mean altiude(m)")%></a>
                       </th>
           <%
@@ -285,7 +285,7 @@
             if (showRespondent)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_RESPONDENT%>&amp;ascendency=<%=formBean.changeAscendency(sortRespondent, null == sortRespondent)%>"><%=Utilities.getSortImageTag(sortRespondent)%><%=cm.cmsPhrase("Respondent")%></a>
                       </th>
           <%
@@ -293,7 +293,7 @@
             if (showManager)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_MANAGER%>&amp;ascendency=<%=formBean.changeAscendency(sortManager, null == sortManager)%>"><%=Utilities.getSortImageTag(sortManager)%><%=cm.cms("manager")%></a>
                       </th>
           <%
@@ -301,7 +301,7 @@
             if (showOwnership)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_OWNERSHIP%>&amp;ascendency=<%=formBean.changeAscendency(sortOwnership, null == sortOwnership)%>"><%=Utilities.getSortImageTag(sortOwnership)%><%=cm.cms("sites_advanced_results_ownership")%></a>
                       </th>
           <%
@@ -309,7 +309,7 @@
             if (showCharacter)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_CHARACTER%>&amp;ascendency=<%=formBean.changeAscendency(sortCharacter, null == sortCharacter)%>"><%=Utilities.getSortImageTag(sortCharacter)%><%=cm.cms("sites_advanced_results_character")%></a>
                       </th>
           <%
@@ -317,7 +317,7 @@
             if (showCompilationDate)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COMPILATION_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortCompilationDate, null == sortCompilationDate)%>"><%=Utilities.getSortImageTag(sortCompilationDate)%><%=cm.cms("sites_advanced_results_compilation")%></a>
                       </th>
           <%
@@ -325,7 +325,7 @@
             if (showProposedDate)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_PROPOSED_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortProposedDate, null == sortProposedDate)%>"><%=Utilities.getSortImageTag(sortProposedDate)%><%=cm.cms("sites_advanced_results_proposeddate")%></a>
                       </th>
           <%
@@ -555,7 +555,7 @@
             if (showDesignationYear)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, null == sortDesignationYear)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsPhrase("Designation year")%></a>
                       </th>
           <%
@@ -563,10 +563,10 @@
             if (showCoordinates)
             {
           %>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Longitude")%>
                       </th>
-                      <th scope="col" style="text-align : center;">
+                      <th class="nosort" scope="col" style="text-align : center;">
                         <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
@@ -574,7 +574,7 @@
             if (showSize)
             {
           %>
-                      <th scope="col" style="text-align : right;">
+                      <th class="nosort" scope="col" style="text-align : right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                       </th>
           <%
@@ -606,7 +606,7 @@
             if (showMeanAltitude)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_MEAN_ALTITUDE%>&amp;ascendency=<%=formBean.changeAscendency(sortMeanAltitude, null == sortMeanAltitude)%>"><%=Utilities.getSortImageTag(sortMeanAltitude)%><%=cm.cmsPhrase("Mean altiude(m)")%></a>
                       </th>
           <%
@@ -614,7 +614,7 @@
             if (showRespondent)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_RESPONDENT%>&amp;ascendency=<%=formBean.changeAscendency(sortRespondent, null == sortRespondent)%>"><%=Utilities.getSortImageTag(sortRespondent)%><%=cm.cmsPhrase("Respondent")%></a>
                       </th>
           <%
@@ -622,7 +622,7 @@
             if (showManager)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_MANAGER%>&amp;ascendency=<%=formBean.changeAscendency(sortManager, null == sortManager)%>"><%=Utilities.getSortImageTag(sortManager)%><%=cm.cms("manager")%></a>
                       </th>
           <%
@@ -630,7 +630,7 @@
             if (showOwnership)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_OWNERSHIP%>&amp;ascendency=<%=formBean.changeAscendency(sortOwnership, null == sortOwnership)%>"><%=Utilities.getSortImageTag(sortOwnership)%><%=cm.cms("sites_advanced_results_ownership")%></a>
                       </th>
           <%
@@ -638,7 +638,7 @@
             if (showCharacter)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_CHARACTER%>&amp;ascendency=<%=formBean.changeAscendency(sortCharacter, null == sortCharacter)%>"><%=Utilities.getSortImageTag(sortCharacter)%><%=cm.cms("sites_advanced_results_character")%></a>
                       </th>
           <%
@@ -646,7 +646,7 @@
             if (showCompilationDate)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COMPILATION_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortCompilationDate, null == sortCompilationDate)%>"><%=Utilities.getSortImageTag(sortCompilationDate)%><%=cm.cms("sites_advanced_results_compilation")%></a>
                       </th>
           <%
@@ -654,7 +654,7 @@
             if (showProposedDate)
             {
           %>
-                      <th scope="col" style="text-align: right;">
+                      <th class="nosort" scope="col" style="text-align: right;">
                         <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_PROPOSED_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortProposedDate, null == sortProposedDate)%>"><%=Utilities.getSortImageTag(sortProposedDate)%><%=cm.cms("sites_advanced_results_proposeddate")%></a>
                       </th>
           <%

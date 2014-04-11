@@ -37,7 +37,12 @@
         </tbody>
         </table>
     </c:when>
-    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}</c:otherwise>
+    <c:otherwise>
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'No information reported')}
+        <script>
+            $("#tab-habitats-accordion").addClass("nodata");
+        </script>
+    </c:otherwise>
 
 </c:choose>
 

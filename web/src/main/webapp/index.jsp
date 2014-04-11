@@ -103,7 +103,6 @@
 String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welcome to EUNIS Database" );
 %>
 <c:set var="title" value="<%= title%>"></c:set>
-
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
     <stripes:layout-component name="head">
         <link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
@@ -125,16 +124,16 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 			<%=cm.cmsPhrase( "Welcome to EUNIS, the European Nature Information System - find species, habitat types and sites across Europe" )%>
 		</h1>
 		<div class="visualClear"><!--&nbsp; --></div>
-          <div style="position: relative;height: 380px;">
-			<div class="figure-right" style="display:inline; position: absolute; right:0; top:0;">
+    <div class="homepage-content">
+			<div class="figure-right">
 				<div class="figure">
                      <img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="<%=request.getContextPath()%>/images/intros/<%=Utilities.getIntroImage( application )%>" />
 				</div>
 			</div>
-			<div style="float:left; position: absolute; left:0; top:0; padding-right: 250px;">
+			<div style="float:left">
 				<!-- MAIN CONTENT -->
 				<br />
-				<form name="species_qs" action="species-names-result.jsp" method="post" onsubmit="return validateQS( 'species' ); ">
+				<form name="species_qs" class="portlet species_qs" action="species-names-result.jsp" method="post" onsubmit="return validateQS( 'species' ); ">
 					<input type="hidden" name="comeFromQuickSearch" value="true" />
 					<input type="hidden" name="showGroup" value="true" />
 					<input type="hidden" name="showOrder" value="true" />
@@ -149,19 +148,20 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
 					<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 
-					<label for="scientificName">
+					<label for="scientificName" class="portlet-label">
 						<%=cm.cmsPhrase( "Species" )%>
 					</label>&nbsp;
 					<input title="<%=cm.cmsPhrase("Species name")%>" id="scientificName" name="scientificName" size="24" />
 					<input id="search_species" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search species")%>" />
 					<br />
-					<a title="<%=cm.cmsPhrase("Go to Species search tools")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a>
+					
 					<div class="search_details">
 						<%=cm.cmsPhrase( "Information about species and subspecies in Europe." )%>
 					</div>
+          <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Species search tools")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>
 				<br />
-				<form name="habitats_qs" action="habitats-names-result.jsp" method="post" onsubmit="return validateQS( 'habitats' );">
+				<form name="habitats_qs" class="portlet habitats_qs" action="habitats-names-result.jsp" method="post" onsubmit="return validateQS( 'habitats' );">
 					<input type="hidden" name="showLevel" value="true" />
 					<input type="hidden" name="showCode" value="true" />
 					<input type="hidden" name="showScientificName" value="true" />
@@ -172,19 +172,20 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="useVernacular" value="true" />
 					<input type="hidden" name="fuzzySearch" value="true" />
 					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-					<label for="searchString">
+					<label for="searchString" class="portlet-label">
 						<%=cm.cmsPhrase( "Habitat types" )%>
 					</label>&nbsp;
 					<input title="<%=cm.cmsPhrase("Habitat type name")%>" id="searchString" name="searchString" size="24" />
 					<input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search habitat types")%>" />
 					<br />	
-					<a title="<%=cm.cmsPhrase("Go to Habitat types search tools")%>" href="habitats.jsp"><%=cm.cmsPhrase("Search tools")%></a>
+					
 					<div class="search_details">
 						<%=cm.cmsPhrase( "Information about the EUNIS habitat types classification and Habitats Directive Annex I habitats " )%>
 					</div>
+          <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Habitat types search tools")%>" href="habitats.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>
 				<br />
-				<form name="sites_qs" action="sites-names-result.jsp" method="post" onsubmit="return validateQS( 'sites' );">
+				<form name="sites_qs" class="portlet sites_qs" action="sites-names-result.jsp" method="post" onsubmit="return validateQS( 'sites' );">
 					<input type="hidden" name="showSourceDB" value="true" />
 					<input type="hidden" name="showCountry" value="true" />
 					<input type="hidden" name="showDesignationTypes" value="true" />
@@ -200,21 +201,25 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<%--<input type="hidden" name="DB_EMERALD" value="ON" />--%>
 					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
 					<input type="hidden" name="fuzzySearch" value="true" />
-					<label for="englishName">
+					<label for="englishName" class="portlet-label">
 						<%=cm.cmsPhrase( "Sites" )%>
 					</label>&nbsp;
 					<input title="<%=cm.cmsPhrase("Site name")%>" id="englishName" name="englishName" size="24" />
 					<input id="search_sites" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase( "Search sites" )%>" />
 					<br />
-					<a title="<%=cm.cmsPhrase("Go to Sites search tools")%>" href="sites.jsp"><%=cm.cmsPhrase("Search tools")%></a>
-					<div class="search_details" style="margin-bottom: 20px;">
+					
+					<div class="search_details">
 						<%=cm.cmsPhrase( "Information collected from various databases regarding sites" )%>
 					</div>
+          <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Sites search tools")%>" href="sites.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>
-				<a href="combined-search.jsp"><strong><%=cm.cmsPhrase( "Combined search" )%></strong></a>
-				<div class="search_details" style="margin-bottom: 20px;">
-					<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
-				</div>
+        
+        <div class="combined-search-area">
+          <a href="combined-search.jsp"><strong><%=cm.cmsPhrase( "Combined search" )%></strong></a>
+          <div class="search_details not-inline" style="margin-bottom: 20px;">
+            <%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
+          </div>
+        </div>
                 <!-- END MAIN CONTENT -->
               </div>
           </div>

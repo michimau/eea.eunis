@@ -77,8 +77,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
         String defaultPageSize = getContext().getApplicationProperty("default.page.size");
         
-//        System.out.println("Listing: "+listing);
-
         if (!StringUtils.isBlank(idref) && EunisUtil.isNumber(idref)) {
             forwardPage = "/stripes/reference.jsp";
 
@@ -98,16 +96,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 speciesByName = refDomain.getSpeciesForAReference(idref);
 
                 habitats = refDomain.getHabitatsForAReferences(idref);
-
-//                LegalSearchCriteria[] legalSearchCriterias = { new LegalSearchCriteria("any", "%",dcIndex.getTitle(),2) };
-//                LegalSortCriteria[] legalSortCriterias = {new LegalSortCriteria(2,1)};
-//
-//                EUNISLegalDomain habitatDomain = new EUNISLegalDomain(legalSearchCriterias, legalSortCriterias);
-//
-//                List habitats2 = habitatDomain.getResults(0,1000,legalSortCriterias);
-//
-//                System.out.println(habitats2.size());
-
             } catch (CriteriaMissingException e) {
                 e.printStackTrace();
             }
@@ -123,16 +111,17 @@ public class ReferencesActionBean extends AbstractStripesAction {
         }
         setBtrail(btrail);
 
-        // check that the linked section actually exists
-        if(section.equals("species") && speciesByName.size() == 0){
-            section = "";
-        }
-        if(section.equals("habitats") && habitats.size() == 0){
-            section = "";
-        }
-
-        if(!(section.equals("") || section.equals("species") || section.equals("habitats"))){
-            section = "";
+        if(section!=null){
+            // check that the linked section actually exists
+            if(section.equals("species") && speciesByName.size() == 0){
+                section = "";
+            }
+            if(section.equals("habitats") && habitats.size() == 0){
+                section = "";
+            }
+            if(!(section.equals("") || section.equals("species") || section.equals("habitats"))){
+                section = "";
+            }
         }
 
         return new ForwardResolution(forwardPage);

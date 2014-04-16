@@ -37,6 +37,8 @@
         <h1>
           <%=cm.cmsPhrase("Species taxonomic classification")%>
         </h1>
+        <%=cm.cmsPhrase("This is not a comprehensive classification. It only reflects the species included on this information system")%>
+
 <!-- MAIN CONTENT -->
                 <%
 	            String expand = Utilities.formatString( request.getParameter( "expand" ), "" );

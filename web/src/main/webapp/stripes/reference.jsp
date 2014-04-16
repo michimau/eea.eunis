@@ -11,10 +11,10 @@
         <!-- MAIN CONTENT -->
         <h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
 
-        <div class="eea-accordion-panels non-exclusive">
+        <div class="eea-accordion-panels non-exclusive collapsed-by-default">
             <div class="eea-accordion-panel" style="clear: both;">
 
-                <h2 class="notoc eea-icon-right-container">Reference information</h2>
+                <h2 class="notoc eea-icon-right-container<c:if test="${empty actionBean.section}"> current</c:if>">Reference information</h2>
 
                 <div class="pane">
                     <table width="90%" class="datatable">
@@ -95,7 +95,7 @@
             </div>
             <c:if test="${not empty actionBean.speciesByName}">
                 <div class="eea-accordion-panel" style="clear: both;">
-                    <h2 class="notoc eea-icon-right-container">Species related to this reference</h2>
+                    <h2 class="notoc eea-icon-right-container<c:if test="${actionBean.section eq 'species'}"> current</c:if>">Species related to this reference</h2>
 
                     <div class="pane">
 
@@ -138,7 +138,7 @@
             </c:if>
             <c:if test="${not empty actionBean.habitats}">
                 <div class="eea-accordion-panel" style="clear: both;">
-                    <h2 class="notoc eea-icon-right-container">Habitats related to this reference</h2>
+                    <h2 class="notoc eea-icon-right-container<c:if test="${actionBean.section eq 'habitats'}"> current</c:if>">Habitats related to this reference</h2>
 
                     <div class="pane">
                         <ol>

@@ -27,7 +27,7 @@
                     </c:if>
                 </li>
                 <li>
-                    <a href="${ actionBean.pageUrl }#sites" onclick="openSection('species');"><span class="bold">${fn:length(actionBean.speciesForHabitats)}</span></a> characteristic species
+                    Priority habitat: <span class="bold"><c:choose><c:when test="${!empty actionBean.factsheet.priority && actionBean.factsheet.priority == 1}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></span>
                 </li>
                 <li>
                     Protected in

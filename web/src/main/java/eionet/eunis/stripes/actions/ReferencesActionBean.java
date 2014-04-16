@@ -38,13 +38,14 @@ import eionet.eunis.util.Pair;
  *
  * @author Risto Alt
  */
-@UrlBinding("/references/{idref}")
+@UrlBinding("/references/{idref}/{section}")
 public class ReferencesActionBean extends AbstractStripesAction {
 
     /** */
     public final static String DEFAULT_FILTER_VALUE = "Search reference by author or title here ...";
 
     private String idref;
+    private String section;
     private CustomPaginatedList<ReferenceDTO> refs;
     private DcIndexDTO dcIndex;
     private List<AttributeDto> dcAttributes;
@@ -76,8 +77,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
         String defaultPageSize = getContext().getApplicationProperty("default.page.size");
         
-//        System.out.println("Listing: "+listing);
-
         if (!StringUtils.isBlank(idref) && EunisUtil.isNumber(idref)) {
             forwardPage = "/stripes/reference.jsp";
 
@@ -97,16 +96,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 speciesByName = refDomain.getSpeciesForAReference(idref);
 
                 habitats = refDomain.getHabitatsForAReferences(idref);
-
-//                LegalSearchCriteria[] legalSearchCriterias = { new LegalSearchCriteria("any", "%",dcIndex.getTitle(),2) };
-//                LegalSortCriteria[] legalSortCriterias = {new LegalSortCriteria(2,1)};
-//
-//                EUNISLegalDomain habitatDomain = new EUNISLegalDomain(legalSearchCriterias, legalSortCriterias);
-//
-//                List habitats2 = habitatDomain.getResults(0,1000,legalSortCriterias);
-//
-//                System.out.println(habitats2.size());
-
             } catch (CriteriaMissingException e) {
                 e.printStackTrace();
             }
@@ -121,6 +110,19 @@ public class ReferencesActionBean extends AbstractStripesAction {
             setMetaDescription("references");
         }
         setBtrail(btrail);
+
+        if(section!=null){
+            // check that the linked section actually exists
+            if(section.equals("species") && speciesByName.size() == 0){
+                section = "";
+            }
+            if(section.equals("habitats") && habitats.size() == 0){
+                section = "";
+            }
+            if(!(section.equals("") || section.equals("species") || section.equals("habitats"))){
+                section = "";
+            }
+        }
 
         return new ForwardResolution(forwardPage);
     }
@@ -213,4 +215,11 @@ public class ReferencesActionBean extends AbstractStripesAction {
         this.speciesByName = speciesByName;
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
 }

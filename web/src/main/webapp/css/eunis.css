@@ -482,31 +482,31 @@ div.overlay .formControls a {
   margin-top: 0;
 }
 
-#scientificName,
-#searchString,
-#englishName {
+.homepage-content #scientificName,
+.homepage-content #searchString,
+.homepage-content #englishName {
   height: 28px;
   min-width: 380px;
 }
 
-#scientificName {
+.homepage-content #scientificName {
   width: 442px;
 }
 
-#searchString {
+.homepage-content #searchString {
   width: 398px;
 }
 
-#englishName {
+.homepage-content #englishName {
   width: 463px;
 }
 
-.portlet-label {
+.homepage-content .portlet-label {
   display: inline-block;
   font-size: 14px;
 }
 
-.figure-right .figure {
+.homepage-content .figure-right .figure {
   margin-top: 20px;
 }
 
@@ -523,17 +523,17 @@ div.overlay .formControls a {
   margin-bottom: 0;
 }
 
-.search_details.not-inline {
+.homepage-content .search_details.not-inline {
   display: block;
 }
 
-.species_qs,
-.habitats_qs,
-.sites_qs {
+.homepage-content .species_qs,
+.homepage-content .habitats_qs,
+.homepage-content .sites_qs {
   width: 600px;
 }
 
-.combined-search-area {
+.homepage-content .combined-search-area {
   padding: 20px;
 }
 

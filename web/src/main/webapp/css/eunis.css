@@ -551,3 +551,7 @@ div.overlay .formControls a {
 #content .threat-status-indicator .threat-status-label {
   margin-bottom: 10px;
 }
+
+.iucn-red-list-area .threat-status-region {
+  font-size: 12px;
+}

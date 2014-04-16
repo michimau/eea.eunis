@@ -11,7 +11,7 @@
                 <div class="left-area iucn-red-list-area">
                   <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
                   <p>The Threat Status' concept in IUCN Red List assess the distance from extinction.</p>
-                    <div class="threat-status-indicator width-12">
+                    <div class="threat-status-indicator width-14">
                         <c:if test="${not empty actionBean.consStatus}">
 
                             <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
@@ -32,20 +32,20 @@
                                         </c:choose>
                                             <div class="text-right">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
-                                                <p class="threat-status-label small-text">${actionBean.consStatusWO.statusName}</p>
+                                                <p class="threat-status-label x-small-text">${actionBean.consStatusWO.statusName}</p>
                                             </div>
                                         </a>
                                     </c:when>
                                     <c:otherwise>
                                         <div class="text-right">
                                             <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
-                                            <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                            <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                         </div>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <%--EU status--%>
-                                <div class="threat-status-${statusCodeEU} roundedCorners width-11">
+                                <div class="threat-status-${statusCodeEU} roundedCorners width-12">
                                     <c:choose>
                                         <c:when test="${not empty actionBean.consStatusEU and !(statusCodeEU eq 'un')}">
 
@@ -60,20 +60,20 @@
                                             <%--<a href="references/${actionBean.consStatusEU.idDc}">--%>
                                                 <div class="text-right">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
-                                                    <p class="threat-status-label small-text">${actionBean.consStatusEU.statusName}</p>
+                                                    <p class="threat-status-label x-small-text">${actionBean.consStatusEU.statusName}</p>
                                                 </div>
                                             </a>
                                         </c:when>
                                         <c:otherwise>
                                             <div class="text-right">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
-                                                <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                                <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
 
                                     <%--E25 status--%>
-                                    <div class="threat-status-${statusCodeE25} roundedCorners width-9">
+                                    <div class="threat-status-${statusCodeE25} roundedCorners width-11">
                                         <c:choose>
                                             <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'un')}">
                                                 <c:choose>
@@ -87,14 +87,14 @@
                                                 <%--<a href="references/${actionBean.consStatusE25.idDc}">--%>
                                                     <div class="text-right">
                                                         <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
-                                                        <p class="threat-status-label small-text">${actionBean.consStatusE25.statusName}</p>
+                                                        <p class="threat-status-label x-small-text">${actionBean.consStatusE25.statusName}</p>
                                                     </div>
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
                                                 <div class="text-right">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
-                                                    <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                                    <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>

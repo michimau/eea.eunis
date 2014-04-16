@@ -9,9 +9,9 @@
                 <%--<h2 class="visualClear">How is this species doing?</h2>--%>
 
                 <div class="left-area iucn-red-list-area">
+                  <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
+                  <p>The Threat Status' concept in IUCN Red List assess the distance from extinction.</p>
                     <div class="threat-status-indicator width-12">
-                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
-                        <p>The Threat Status' concept in IUCN Red List assess the distance from extinction.</p>
                         <c:if test="${not empty actionBean.consStatus}">
 
                             <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>

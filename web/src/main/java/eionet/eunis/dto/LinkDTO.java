@@ -12,7 +12,7 @@ import org.simpleframework.xml.Root;
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @Root
-public class LinkDTO implements Serializable {
+public class LinkDTO implements Serializable, Comparable<LinkDTO> {
 
     /**
      * serial.
@@ -21,6 +21,7 @@ public class LinkDTO implements Serializable {
 
     private String name;
     private String url;
+    private String description;
 
     public String getName() {
         return name;
@@ -38,4 +39,16 @@ public class LinkDTO implements Serializable {
         this.url = url;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public int compareTo(LinkDTO o) {
+        return getName().compareTo(o.getName());
+    }
 }

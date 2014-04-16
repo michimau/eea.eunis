@@ -154,32 +154,32 @@ h2 {
 
 /* Least Concern threat status */
 .threat-status-lc {
-  background-color: #F9DFDE;
+  background-color: #61C250;
 }
 
 /* Near Threatened threat status */
 .threat-status-nt {
-  background-color: #F2BFBB;
+  background-color: #C9DD03;
 }
 
 /* Vulnerable threat status */
 .threat-status-vu {
-  background-color: #EE9B93;
+  background-color: #FAE700;
 }
 
 /* Endangered threat status */
 .threat-status-en {
-  background-color: #E2665C;
+  background-color: #FF7F45;
 }
 
 /* Critically endangered threat status */
 .threat-status-cr {
-  background-color: #D52C27;
+  background-color: #D52B1E;
 }
 
 /* Extinct in the Wild threat status */
 .threat-status-ew {
-  background-color: #A21D22;
+  background-color: #53284F;
 }
 
 /* Extinct threat status */
@@ -482,31 +482,31 @@ div.overlay .formControls a {
   margin-top: 0;
 }
 
-#scientificName,
-#searchString,
-#englishName {
+.homepage-content #scientificName,
+.homepage-content #searchString,
+.homepage-content #englishName {
   height: 28px;
   min-width: 380px;
 }
 
-#scientificName {
+.homepage-content #scientificName {
   width: 442px;
 }
 
-#searchString {
+.homepage-content #searchString {
   width: 398px;
 }
 
-#englishName {
+.homepage-content #englishName {
   width: 463px;
 }
 
-.portlet-label {
+.homepage-content .portlet-label {
   display: inline-block;
   font-size: 14px;
 }
 
-.figure-right .figure {
+.homepage-content .figure-right .figure {
   margin-top: 20px;
 }
 
@@ -523,16 +523,35 @@ div.overlay .formControls a {
   margin-bottom: 0;
 }
 
-.search_details.not-inline {
+.homepage-content .search_details.not-inline {
   display: block;
 }
 
-.species_qs,
-.habitats_qs,
-.sites_qs {
+.homepage-content .species_qs,
+.homepage-content .habitats_qs,
+.homepage-content .sites_qs {
   width: 600px;
 }
 
-.combined-search-area {
+.homepage-content .combined-search-area {
   padding: 20px;
+}
+
+
+/* IUCN Red List on species profile #19228 */
+#content .threat-status-indicator .roundedCorners {
+  border-width: 1px;
+  border-color: #999;
+}
+
+#content .iucn-red-list-area fieldset {
+  border-color: #DDD;
+}
+
+#content .threat-status-indicator .threat-status-label {
+  margin-bottom: 10px;
+}
+
+.iucn-red-list-area .threat-status-region {
+  font-size: 12px;
 }

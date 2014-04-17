@@ -66,8 +66,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<ClassificationDTO> classifications;
     private List<String> breadcrumbClassificationExpands;
     private String authorDate;
-    private String gbifLink;
-    private String gbifLink2;
+
     private String kingdomname;
     /** IUCN Redlist number */
     private String redlistLink;
@@ -388,23 +387,105 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalStatuses.add(legalStatus);
         }
 
-        links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
+        List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
+        links = new ArrayList<LinkDTO>();
 
-        for (LinkDTO link : links){
+        for (LinkDTO link : natureLinks){
+            boolean addToLinks = true;     // hidden by http://taskman.eionet.europa.eu/issues/18633
             if (link.getName().toLowerCase().equals("unep-wcmc page")){
                 unepWcmcPageLink = link.getUrl();
             }
+
             if(link.getName().toUpperCase().contains("NOBANIS FACTSHEET")){
                 nobanisFactsheetLink = link;
+                addToLinks = false;
             } else if(link.getName().toUpperCase().contains("NOBANIS:")){
                 nobanisLink = link;
+                addToLinks = false;
             }
             if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
                 conservationStatusPDF = link;
+                addToLinks = false;
             } else if (link.getName().equalsIgnoreCase("Conservation status 2006 (art. 17)")){
                 conservationStatus = link;
+                addToLinks = false;
             }
 
+            if(link.getName().equalsIgnoreCase("Invasive species information")){
+                addToLinks = false;
+            }
+            if(link.getName().contains("Bug guide")){
+                addToLinks = false;
+            }
+
+            if(addToLinks){
+                transformLinkData(link);
+                links.add(link);
+            }
+        }
+
+        LinkDTO gbifLink = new LinkDTO();
+        links.add(gbifLink);
+        gbifLink.setDescription("Global Biodiversity Information Facility");
+        gbifLink.setName("GBIF");
+
+        String gbifId = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
+        if(Utilities.isEmptyString(gbifId)){
+            try {
+                gbifLink.setUrl("http://data.gbif.org/species/" + URLEncoder.encode(specie.getScientificName().replaceAll("\\.", ""), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            gbifLink.setUrl("http://data.gbif.org/species/" + gbifId);
+        }
+
+        if(!Utilities.isEmptyString(wormsid)){
+            LinkDTO wormsLink = new LinkDTO();
+            wormsLink.setUrl("http://www.marinespecies.org/aphia.php?p=taxdetails&id=" + wormsid);
+            wormsLink.setName("WoRMS");
+            wormsLink.setDescription("World Register of Marine Species");
+            links.add(wormsLink);
+        }
+
+        if(!Utilities.isEmptyString(faeu)){
+            // todo: for kingdomname=Animals you can also search http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=${actionBean.specie.genus}&amp;species=${actionBean.speciesName}
+            LinkDTO faunaLink = new LinkDTO();
+            faunaLink.setUrl("http://www.faunaeur.org/full_results.php?id=" + faeu);
+            faunaLink.setName("Fauna Europaea");
+            faunaLink.setDescription("Fauna Europaea");
+            links.add(faunaLink);
+        }
+
+        if(!Utilities.isEmptyString(ncbi)){
+            LinkDTO faunaLink = new LinkDTO();
+            faunaLink.setUrl("http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + ncbi);
+            faunaLink.setName("NCBI");
+            faunaLink.setDescription("National Center for Biotechnology Information");
+            links.add(faunaLink);
+        }
+
+        Collections.sort(links);
+    }
+
+    /**
+     * Temporary transform to check the design
+     *
+     * todo: move data to DB
+     *
+     * @param link
+     */
+    private void transformLinkData(LinkDTO link){
+        if(link.getUrl().contains("catalogueoflife")){
+            link.setDescription("Catalogue of Life");
+        } else if (link.getUrl().contains("sovon.nl")){
+            link.setDescription("European Bird Census Council's Atlas of Breeding Birds");
+        } else if (link.getUrl().contains("eol.org")){
+            link.setDescription("Encyclopedia of Life");
+        } else if (link.getUrl().contains("blx1.bto.org")){
+            link.setDescription("European bird-ringing");
+        } else if (link.getUrl().contains("gbif.org")){
+            link.setDescription("Global Biodiversity Information Facility");
         }
 
     }
@@ -533,10 +614,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-            gbifLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF); // specie.getScientificName();
-            gbifLink2 = specie.getScientificName();
-            gbifLink2 = gbifLink2.replaceAll("\\.", "");
-            gbifLink2 = URLEncoder.encode(gbifLink2, "UTF-8");
 
             String sn = scientificName;
 
@@ -801,17 +878,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for(ForeignDataQueryDTO queryDTO : queries){
                 fd.executeQuery(queryDTO.getId(), idSpecies);
                 Query q = new Query(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
-                allQueries.add(q);
+                if(q.getResultRows() != null && q.getResultRows().size() > 0)
+                    allQueries.add(q);
             }
-
-//            if (!StringUtils.isBlank(query)) {
-//
-//                fd.executeQuery(query, idSpecies);
-//                queryResultCols = fd.getCols();
-//                queryResultRows = fd.getRows();
-//
-//                attribution = fd.getAttribution();
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1002,22 +1071,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setAuthorDate(String authorDate) {
         this.authorDate = authorDate;
-    }
-
-    public String getGbifLink() {
-        return gbifLink;
-    }
-
-    public void setGbifLink(String gbifLink) {
-        this.gbifLink = gbifLink;
-    }
-
-    public String getGbifLink2() {
-        return gbifLink2;
-    }
-
-    public void setGbifLink2(String gbifLink2) {
-        this.gbifLink2 = gbifLink2;
     }
 
     public String getKingdomname() {

@@ -127,29 +127,15 @@ h2 {
   line-height: 1.2em;
 }
 
+/* Not Evaluated threat status */
+.threat-status-ne {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+}
+
 /* Unknown and Data Deficient threat status */
 .threat-status-un, .threat-status-dd {
   background-color: #D4D8D7;
-}
-
-/* Lower risk threat status */
-.threat-status-lr {
-  background-color: #ffb7b7;
-}
-
-/* Lower risk least concerned threat status */
-.threat-status-lrl {
-  background-color: #F9DFDE;
-}
-
-/* Lower risk near threatened threat status */
-.threat-status-lrn {
-  background-color: #F2BFBB;
-}
-
-/* Lower risk conservation dependent threat status */
-.threat-status-lrc {
-  background-color: #F2BFBB;
 }
 
 /* Least Concern threat status */

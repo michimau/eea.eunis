@@ -127,6 +127,12 @@ h2 {
   line-height: 1.2em;
 }
 
+/* Not Evaluated threat status */
+.threat-status-ne {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+}
+
 /* Unknown and Data Deficient threat status */
 .threat-status-un, .threat-status-dd {
   background-color: #D4D8D7;

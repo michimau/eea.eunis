@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Tries to update the given site data from the SDFs at
- * http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=ES0000024&release=2&form=Clean
+ * http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=ES0000024&release=4&form=Clean
  */
 @UrlBinding("/updatesite/{idsite}")
 public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
@@ -27,7 +27,7 @@ public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
         Date d1 = new Date();
         // downloads the data and runs the import
         try {
-            URL url = new URL("http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=" + idsite + "&release=2&form=Clean");
+            URL url = new URL("http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=" + idsite + "&release=4&form=Clean");
 
             System.out.println(d1 + " Trying to update SDF for site " + idsite + " from URL " + url);
 

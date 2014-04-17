@@ -22,19 +22,17 @@
                     <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</span>
                     <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')})</span>
                 </li>
-                <li>
-                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected by')}:
-                    <c:choose>
-                        <c:when test="${not empty actionBean.protectedBy}">
-                            <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');">
-                            <c:forEach items="${actionBean.protectedBy}" var="legal" varStatus="stat">
-                                <span class="bold">${legal}</span><c:if test="${not stat.last}">, </c:if>
-                            </c:forEach>
-                            </a>
-                        </c:when>
-                        <c:otherwise><span class="bold">Not available</span></c:otherwise>
-                    </c:choose>
-                </li>
+                <c:if test="${actionBean.resolution4}">
+                    <li>
+                        <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> used for selection of Emerald sites (Bern Convention)
+                    </li>
+                </c:if>
+
+                <c:if test="${actionBean.habitatsDirective}">
+                    <li>
+                        Relation to one or more <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Annex I habitat types</span></a> (EU Habitats Directive)
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>

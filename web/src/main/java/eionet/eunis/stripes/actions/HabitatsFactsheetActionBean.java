@@ -543,6 +543,13 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return false;
     }
 
+    public boolean isResolution4() {
+        for(String s : getProtectedBy()) {
+            if(s.contains("Bern Convention Res. No. 4 1996")) return true;
+        }
+        return false;
+    }
+
     public String getEquivalentEUHabitats() {
         String result = "";
         for(HabitatLegalPersist h : getLegalInfo()) {

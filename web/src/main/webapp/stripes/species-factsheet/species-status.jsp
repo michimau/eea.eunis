@@ -39,7 +39,7 @@
                                     <c:otherwise>
                                         <div class="text-right">
                                             <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
-                                            <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                            <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not evaluated')}</p>
                                         </div>
                                     </c:otherwise>
                                 </c:choose>
@@ -67,7 +67,7 @@
                                         <c:otherwise>
                                             <div class="text-right">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
-                                                <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                                <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not evaluated')}</p>
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -94,7 +94,7 @@
                                             <c:otherwise>
                                                 <div class="text-right">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
-                                                    <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
+                                                    <p class="threat-status-label x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not evaluated')}</p>
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>
@@ -107,7 +107,7 @@
                         <legend><strong>IUCN Red List Category</strong></legend>
                         <table class="legend-table" style="width: 100%;">
                             <tr class="discreet">
-                                <td><div class="threat-status-ne legend-color"> </div> Not Evaluated</td>
+                                <td><div class="threat-status-un legend-color"> </div> Not Evaluated</td>
                                 <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
                                 <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
                             </tr>

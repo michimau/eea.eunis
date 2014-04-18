@@ -52,7 +52,7 @@
                                         <c:when test="${not empty actionBean.consStatusEU.statusName}">
                                             ${actionBean.consStatusEU.statusName}
                                         </c:when>
-                                        <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</c:otherwise>
+                                        <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not evaluated')}</c:otherwise>
                                     </c:choose>
                                 </span>
                                 </a>

@@ -1,7 +1,4 @@
 User-agent: *
 Disallow: /reports/
-Disallow: /habitats-factsheet-pdf.jsp
-Disallow: /sites-factsheet-pdf.jsp
-Disallow: /species-factsheet-pdf.jsp
 Disallow: /species-taxonomic-browser.jsp
 Sitemap: http://eunis.eea.europa.eu/sitemap-index.jsp

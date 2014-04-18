@@ -135,7 +135,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                             + idHabitat + "'";
 
             getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
+            return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
         }
 
         // set metadescription and page title

@@ -128,12 +128,12 @@ h2 {
 }
 
 /* Not Evaluated threat status */
-.threat-status-un {
+.threat-status-ne {
   background-color: #FFF;
   border: 1px solid #DDD;
 }
 
-/* Data Deficient threat status */
+/*  Data Deficient threat status */
 .threat-status-dd {
   background-color: #D4D8D7;
 }

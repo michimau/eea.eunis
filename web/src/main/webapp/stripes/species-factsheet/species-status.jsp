@@ -14,14 +14,14 @@
                     <div class="threat-status-indicator width-14">
                         <c:if test="${not empty actionBean.consStatus}">
 
-                            <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
-                            <c:set var="statusCodeEU" value="${(not empty actionBean.consStatusEU and not empty actionBean.consStatusEU.threatCode) ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'un' }"></c:set>
-                            <c:set var="statusCodeE25" value="${(not empty actionBean.consStatusE25 and not empty actionBean.consStatusE25.threatCode) ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'un' }"></c:set>
+                            <c:set var="statusCodeWO" value="${(not empty actionBean.consStatusWO and not empty actionBean.consStatusWO.threatCode) ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'ne'}"></c:set>
+                            <c:set var="statusCodeEU" value="${(not empty actionBean.consStatusEU and not empty actionBean.consStatusEU.threatCode) ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'ne' }"></c:set>
+                            <c:set var="statusCodeE25" value="${(not empty actionBean.consStatusE25 and not empty actionBean.consStatusE25.threatCode) ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'ne' }"></c:set>
 
                             <div class="threat-status-${statusCodeWO} roundedCorners">
                                 <%--World status--%>
                                 <c:choose>
-                                    <c:when test="${!empty actionBean.consStatusWO and !(statusCodeWO eq 'un')}">
+                                    <c:when test="${!empty actionBean.consStatusWO and !(statusCodeWO eq 'ne')}">
                                         <c:choose>
                                             <c:when test="${!empty actionBean.redlistLink}">
                                                 <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">
@@ -47,10 +47,10 @@
                                 <%--EU status--%>
                                 <div class="threat-status-${statusCodeEU} roundedCorners width-12">
                                     <c:choose>
-                                        <c:when test="${not empty actionBean.consStatusEU and !(statusCodeEU eq 'un')}">
+                                        <c:when test="${not empty actionBean.consStatusEU and !(statusCodeEU eq 'ne')}">
 
                                             <c:choose>
-                                                <c:when test="${!empty actionBean.redlistLink and !(statusCodeEU eq 'un')}">
+                                                <c:when test="${!empty actionBean.redlistLink and !(statusCodeEU eq 'ne')}">
                                                     <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
                                                 </c:when>
                                                 <c:otherwise>
@@ -75,7 +75,7 @@
                                     <%--E25 status--%>
                                     <div class="threat-status-${statusCodeE25} roundedCorners width-11">
                                         <c:choose>
-                                            <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'un')}">
+                                            <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'ne')}">
                                                 <c:choose>
                                                     <c:when test="${!empty actionBean.redlistLink}">
                                                         <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
@@ -107,7 +107,7 @@
                         <legend><strong>IUCN Red List Category</strong></legend>
                         <table class="legend-table" style="width: 100%;">
                             <tr class="discreet">
-                                <td><div class="threat-status-un legend-color"> </div> Not Evaluated</td>
+                                <td><div class="threat-status-ne legend-color"> </div> Not Evaluated</td>
                                 <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
                                 <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
                             </tr>

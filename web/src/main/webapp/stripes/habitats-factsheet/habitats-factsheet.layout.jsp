@@ -72,12 +72,12 @@
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-history.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">
-                        <h2 class="notoc eea-icon-right-container">Other resources</h2>
-                        <div class="pane">
-                            <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-resources.jsp"/>
-                        </div>
-                    </div>
+                    <%--<div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">--%>
+                        <%--<h2 class="notoc eea-icon-right-container">Other resources</h2>--%>
+                        <%--<div class="pane">--%>
+                            <%--<stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-resources.jsp"/>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                </div>
            </div>
         </c:otherwise>

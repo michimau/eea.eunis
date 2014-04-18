@@ -90,6 +90,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /** The site's external links. */
     private ArrayList<LinkDTO> links;
+    private LinkDTO conservationStatusPDF;
+    private LinkDTO conservationStatus;
 
     /** Conservation status tab specifics. */
     private List<ForeignDataQueryDTO> conservationStatusQueries;
@@ -272,7 +274,24 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
 
             // Set the site's external links.
-            links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(factsheet.idNatureObject);
+            List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(factsheet.idNatureObject);
+
+            // filters the links
+            links = new ArrayList<LinkDTO>();
+            for(LinkDTO link : natureLinks){
+                boolean addToLinks = true;
+                if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+                    conservationStatusPDF = link;
+                    addToLinks = false;
+                } else if (link.getName().equalsIgnoreCase("Conservation status 2006 (art. 17)")){
+                    conservationStatus = link;
+                    addToLinks = false;
+                }
+                if(addToLinks){
+                    links.add(link);
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -634,5 +653,21 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      */
     public int getDescriptionThreshold(){
         return DESCRIPTION_THRESHOLD;
+    }
+
+    /**
+     * Returns the conservation status PDF link
+     * @return Object containing the link
+     */
+    public LinkDTO getConservationStatusPDF() {
+        return conservationStatusPDF;
+    }
+
+    /**
+     * Returns the conservation status link
+     * @return Object containing the link
+     */
+    public LinkDTO getConservationStatus() {
+        return conservationStatus;
     }
 }

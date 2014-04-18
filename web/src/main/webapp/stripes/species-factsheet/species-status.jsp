@@ -107,7 +107,7 @@
                         <legend><strong>IUCN Red List Category</strong></legend>
                         <table class="legend-table" style="width: 100%;">
                             <tr class="discreet">
-                                <td><div class="threat-status-un legend-color"> </div> Not Evaluated</td>
+                                <td><div class="threat-status-ne legend-color"> </div> Not Evaluated</td>
                                 <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
                                 <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
                             </tr>

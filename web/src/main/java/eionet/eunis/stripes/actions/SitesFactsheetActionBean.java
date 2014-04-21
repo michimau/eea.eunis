@@ -18,6 +18,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
 import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
@@ -314,7 +315,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             habit2NotEunis = factsheet.findHabit2NotEunis();
 
             for(SiteHabitatsPersist shp : habit2Eunis){
-                String cover = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes()).getValue();
+                Chm62edtReportAttributesPersist attributesPersist = factsheet.findSiteAttributes("COVER", shp.getIdReportAttributes());
+                String cover = "";
+                if(attributesPersist!= null){
+                    cover = attributesPersist.getValue();
+                }
                 HabitatsBean h = new HabitatsBean(shp, cover);
                 habitats.add(h);
             }

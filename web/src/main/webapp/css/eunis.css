@@ -523,6 +523,10 @@ div.overlay .formControls a {
   padding: 20px;
 }
 
+.documentFirstHeading {
+  padding-right: 0;
+}
+
 
 /* IUCN Red List on species profile #19228 */
 #content .threat-status-indicator .roundedCorners {

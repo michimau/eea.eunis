@@ -1,11 +1,8 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-    <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'External links')}</h3>
+    <%--<h3>${eunis:cmsPhrase(actionBean.contentManagement, 'External links')}</h3>--%>
     <div id="linkcollection">
-        <div>
-            <a href="http://www.google.com/search?q=${actionBean.factsheet.habitat.scientificName}">${eunis:cmsPhrase(actionBean.contentManagement, 'Search on Google')}</a>
-        </div>
         <c:if test="${!empty actionBean.art17link}">
             <div>
                 <a href="${actionBean.art17link}">${eunis:cmsPhrase(actionBean.contentManagement, 'Article 17 Summary')}</a>

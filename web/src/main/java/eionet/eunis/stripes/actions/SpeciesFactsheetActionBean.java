@@ -478,14 +478,38 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private void transformLinkData(LinkDTO link){
         if(link.getUrl().contains("catalogueoflife")){
             link.setDescription("Catalogue of Life");
+            link.setName(link.getName().replace(": "," (") + ")");
         } else if (link.getUrl().contains("sovon.nl")){
             link.setDescription("European Bird Census Council's Atlas of Breeding Birds");
         } else if (link.getUrl().contains("eol.org")){
             link.setDescription("Encyclopedia of Life");
+            link.setName("EoL");
         } else if (link.getUrl().contains("blx1.bto.org")){
             link.setDescription("European bird-ringing");
         } else if (link.getUrl().contains("gbif.org")){
             link.setDescription("Global Biodiversity Information Facility");
+        } else if (link.getUrl().contains("fishbase.se")){
+            link.setDescription("FishBase");
+            link.setName("FishBase");
+        } else if (link.getUrl().contains("itis.gov")){
+            link.setDescription("Interagency Taxonomic Information System");
+            if(link.getName().contains("(valid)")){
+                link.setName("ITIS (Valid name)");
+            } else if (link.getName().contains("(accepted)")) {
+                link.setName("ITIS (accepted)");
+            } else if (link.getName().contains("(not accepted)")) {
+                link.setName("ITIS (not accepted)");
+            } else if (link.getName().contains("(invalid)")) {
+                link.setName("ITIS (invalid)");
+            }
+        } else if (link.getUrl().contains("eu-nomen.eu")){
+            link.setDescription("Pan-European Species directories Infrastructure");
+        } else if (link.getUrl().contains("unep-wcmc-apps.org")){
+            link.setDescription("Species+ by UNEP-WCMC");
+            link.setName("Species+");
+        } else if (link.getUrl().contains("wikipedia")){
+            link.setDescription("Wikipedia");
+            link.setName("Wikipedia");
         }
 
     }

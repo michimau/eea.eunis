@@ -7,6 +7,7 @@ public class RestrictionsRow {
     private String species;
     private String legalText;
     private String restriction;
+    private int priority = 0;
 
     public String getSpecies() {
         return species;
@@ -30,6 +31,14 @@ public class RestrictionsRow {
 
     public void setRestriction(String restriction) {
         this.restriction = restriction;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     @Override

@@ -1,52 +1,77 @@
 package ro.finsiel.eunis.dataimport.legal;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Bean to keep the Species read from an Excel row
+ */
 public class SpeciesRow {
     private String speciesName;
 
-    private String habitatsD;
-    private String habitatsIIPriority;
-    private String habitatsRestrictions;
-    private String habitatsName;
+    // single values, read from the Excel columns
 
-    private String birdsD;
-    private String birdsName;
+    private String habitatsD = "";
+    private String habitatsIIPriority = "";
+    private String habitatsRestrictions = "";
+    private String habitatsName = "";
 
-    private String bernConvention;
-    private String bernRestrictions;
-    private String bernName;
+    private String birdsD = "";
+    private String birdsName = "";
 
-    private String emeraldR6;
-    private String emeraldRestrictions;
-    private String emeraldName;
+    private String bernConvention = "";
+    private String bernRestrictions = "";
+    private String bernName = "";
 
-    private String bonnConvention;
-    private String bonnRestrictions;
-    private String bonnName;
+    private String emeraldR6 = "";
+    private String emeraldRestrictions = "";
+    private String emeraldName = "";
 
-    private String cites;
-    private String euTrade;
-    private String aewa;
-    private String eurobats;
-    private String accobams;
-    private String ascobams;
-    private String wadden;
-    private String spa;
-    private String ospar;
-    private String helcom;
-    private String redList;
-    private String redListName;
+    private String bonnConvention = "";
+    private String bonnRestrictions = "";
+    private String bonnName = "";
 
+    private String cites = "";
+    private String euTrade = "";
+    private String aewa = "";
+    private String eurobats = "";
+    private String accobams = "";
+    private String ascobans = "";
+    private String wadden = "";
+    private String spa = "";
+    private String spaName = "";
+    private String ospar = "";
+    private String helcom = "";
+    private String redList = "";
+    private String redListName = "";
+
+    // identification data, read from the database
     private String idSpecies;
     private String idNatureObject;
 
-    private String[] habitatsDAnnex;
-    private String[] birdsDAnnex;
-    private String[] bernConventionAnnex;
-    private String[] bonnConventionAnnex;
-    private String[] citesAnnex;
-    private String[] euTradeAnnex;
+    // lists of annexes, where they can be more (populated when the columns are set)
+    private String[] habitatsDAnnex = new String[0];
+    private String[] birdsDAnnex = new String[0];
+    private String[] bernConventionAnnex = new String[0];
+    private String[] bonnConventionAnnex = new String[0];
+    private String[] citesAnnex = new String[0];
+    private String[] euTradeAnnex = new String[0];
+    private String[] spaAnnex = new String[0];
+
+    // restrictions mapped by legal document
+    private Map<String, RestrictionsRow> restrictionsMap = new HashMap<String, RestrictionsRow>();
+
+    // the Excel row number, for logging/debugging purpose
+    private int excelRow;
+
+    public Map<String, RestrictionsRow> getRestrictionsMap() {
+        return restrictionsMap;
+    }
+
+    public String[] getSpaAnnex() {
+        return spaAnnex;
+    }
 
     public String[] getEuTradeAnnex() {
         return euTradeAnnex;
@@ -85,15 +110,6 @@ public class SpeciesRow {
     public void setHabitatsD(String habitatsD) {
         this.habitatsD = habitatsD;
         habitatsDAnnex = explode(habitatsD, ",");
-    }
-
-    private String[] explode(String list, String separator){
-        String[] exploded = list.split(separator);
-
-        for(int i=0;i<exploded.length;i++){
-            exploded[i] = exploded[i].trim();
-        }
-        return exploded;
     }
 
     public String[] getHabitatsDAnnex() {
@@ -261,12 +277,12 @@ public class SpeciesRow {
         this.accobams = accobams;
     }
 
-    public String getAscobams() {
-        return ascobams;
+    public String getAscobans() {
+        return ascobans;
     }
 
-    public void setAscobams(String ascobams) {
-        this.ascobams = ascobams;
+    public void setAscobans(String ascobans) {
+        this.ascobans = ascobans;
     }
 
     public String getWadden() {
@@ -283,6 +299,7 @@ public class SpeciesRow {
 
     public void setSpa(String spa) {
         this.spa = spa;
+        spaAnnex = explode(spa, ",");
     }
 
     public String getOspar() {
@@ -333,48 +350,39 @@ public class SpeciesRow {
         this.idSpecies = idSpecies;
     }
 
-    public String toInitialString() {
-        return "SpeciesRow{" +
-                "speciesName='" + speciesName + '\'' +
-                ", habitatsD='" + habitatsD + '\'' +
-                ", habitatsIIPriority='" + habitatsIIPriority + '\'' +
-                ", habitatsRestrictions='" + habitatsRestrictions + '\'' +
-                ", habitatsName='" + habitatsName + '\'' +
-                ", birdsD='" + birdsD + '\'' +
-                ", birdsName='" + birdsName + '\'' +
-                ", bernConvention='" + bernConvention + '\'' +
-                ", bernRestrictions='" + bernRestrictions + '\'' +
-                ", bernName='" + bernName + '\'' +
-                ", emeraldR6='" + emeraldR6 + '\'' +
-                ", emeraldRestrictions='" + emeraldRestrictions + '\'' +
-                ", emeraldName='" + emeraldName + '\'' +
-                ", bonnConvention='" + bonnConvention + '\'' +
-                ", bonnRestrictions='" + bonnRestrictions + '\'' +
-                ", bonnName='" + bonnName + '\'' +
-                ", cites='" + cites + '\'' +
-                ", euTrade='" + euTrade + '\'' +
-                ", aewa='" + aewa + '\'' +
-                ", eurobats='" + eurobats + '\'' +
-                ", accobams='" + accobams + '\'' +
-                ", ascobams='" + ascobams + '\'' +
-                ", wadden='" + wadden + '\'' +
-                ", spa='" + spa + '\'' +
-                ", ospar='" + ospar + '\'' +
-                ", helcom='" + helcom + '\'' +
-                ", redList='" + redList + '\'' +
-                ", redListName='" + redListName + '\'' +
-                '}';
+    public int getExcelRow() {
+        return excelRow;
     }
 
-    public String toAnnexString() {
-        return "SpeciesRow{" +
-                "habitatsDAnnex=" + (habitatsDAnnex == null ? null : Arrays.asList(habitatsDAnnex)) +
-                ", birdsDAnnex=" + (birdsDAnnex == null ? null : Arrays.asList(birdsDAnnex)) +
-                ", bernConventionAnnex=" + (bernConventionAnnex == null ? null : Arrays.asList(bernConventionAnnex)) +
-                ", bonnConventionAnnex=" + (bonnConventionAnnex == null ? null : Arrays.asList(bonnConventionAnnex)) +
-                ", citesAnnex=" + (citesAnnex == null ? null : Arrays.asList(citesAnnex)) +
-                ", euTradeAnnex=" + (euTradeAnnex == null ? null : Arrays.asList(euTradeAnnex)) +
-                '}';
+    public void setExcelRow(int excelRow) {
+        this.excelRow = excelRow;
+    }
+
+    public String getSpaName() {
+        return spaName;
+    }
+
+    public void setSpaName(String spaName) {
+        this.spaName = spaName;
+    }
+
+    /**
+     * Splits the list by the given separator, trimming the result. If the parameter is empty returns an empty array.
+     * @param list The string to be split
+     * @param separator The separator used for splitting
+     * @return An array of the split values, trimmed.
+     */
+    private String[] explode(String list, String separator){
+        if(list.isEmpty()){
+            return new String[0];
+        } else {
+            String[] exploded = list.split(separator);
+
+            for(int i=0;i<exploded.length;i++){
+                exploded[i] = exploded[i].trim();
+            }
+            return exploded;
+        }
     }
 
     @Override
@@ -401,7 +409,7 @@ public class SpeciesRow {
                 ", aewa='" + aewa + '\'' +
                 ", eurobats='" + eurobats + '\'' +
                 ", accobams='" + accobams + '\'' +
-                ", ascobams='" + ascobams + '\'' +
+                ", ascobans='" + ascobans + '\'' +
                 ", wadden='" + wadden + '\'' +
                 ", spa='" + spa + '\'' +
                 ", ospar='" + ospar + '\'' +

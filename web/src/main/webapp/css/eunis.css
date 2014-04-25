@@ -138,6 +138,11 @@ h2 {
   background-color: #D4D8D7;
 }
 
+/* Not applicable threat status */
+.threat-status-na {
+    background-color: #C1BCA5;
+}
+
 /* Least Concern threat status */
 .threat-status-lc {
   background-color: #61C250;
@@ -163,6 +168,11 @@ h2 {
   background-color: #D52B1E;
 }
 
+/* Regionally Extinct threat status */
+.threat-status-re {
+    background-color: #9B4F96;
+}
+
 /* Extinct in the Wild threat status */
 .threat-status-ew {
   background-color: #53284F;
@@ -186,7 +196,8 @@ h2 {
 /* set white for threat statuses with darker backgrounds */
 #content .threat-status-cr a,
 #content .threat-status-ew a,
-#content .threat-status-ex a {
+#content .threat-status-ex a,
+#content .threat-status-re a {
   color: #FFF;
 }
 
@@ -199,7 +210,8 @@ h2 {
    is too strong */
 #content .threat-status-cr a:hover,
 #content .threat-status-ew a:hover,
-#content .threat-status-ex a:hover {
+#content .threat-status-ex a:hover,
+#content .threat-status-re a:hover {
   color: #F9DFDE !important;
 }
 

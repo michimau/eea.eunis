@@ -109,17 +109,21 @@
                             <tr class="discreet">
                                 <td><div class="threat-status-ne legend-color"> </div> Not Evaluated</td>
                                 <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
-                                <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
+                                <td><div class="threat-status-re legend-color"> </div> Regionally Extinct</td>
                             </tr>
                             <tr class="discreet">
-                                <td><div class="threat-status-dd legend-color"> </div> Data Deficient</td>
+                                <td><div class="threat-status-na legend-color"> </div> Not Apllicable</td>
                                 <td><div class="threat-status-vu legend-color"> </div> Vulnerable</td>
                                 <td><div class="threat-status-ew legend-color"> </div> Extinct in the Wild</td>
                             </tr>
                             <tr class="discreet">
-                                <td><div class="threat-status-lc legend-color"> </div> Least Concern</td>
+                                <td><div class="threat-status-dd legend-color"> </div> Data Deficient</td>
                                 <td><div class="threat-status-en legend-color"> </div> Endangered</td>
                                 <td><div class="threat-status-ex legend-color"> </div> Extinct</td>
+                            </tr>
+                            <tr class="discreet">
+                                <td><div class="threat-status-lc legend-color"> </div> Least Concern</td>
+                                <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
                             </tr>
                         </table>
                     </fieldset>

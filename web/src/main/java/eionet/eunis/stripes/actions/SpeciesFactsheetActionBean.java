@@ -6,6 +6,7 @@ import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
 import eionet.eunis.util.Constants;
+import eionet.eunis.util.JstlFunctions;
 import eionet.sparqlClient.helpers.ResultValue;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -433,6 +434,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if(Utilities.isEmptyString(gbifId)){
             try {
                 gbifLink.setUrl("http://data.gbif.org/species/" + URLEncoder.encode(specie.getScientificName().replaceAll("\\.", ""), "UTF-8"));
+                gbifLink.setName("GBIF search");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -449,20 +451,45 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         if(!Utilities.isEmptyString(faeu)){
-            // todo: for kingdomname=Animals you can also search http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=${actionBean.specie.genus}&amp;species=${actionBean.speciesName}
             LinkDTO faunaLink = new LinkDTO();
             faunaLink.setUrl("http://www.faunaeur.org/full_results.php?id=" + faeu);
             faunaLink.setName("Fauna Europaea");
             faunaLink.setDescription("Fauna Europaea");
             links.add(faunaLink);
+        } else if(getKingdomname().equalsIgnoreCase("Animals")) {
+            LinkDTO faunaSearchLink = new LinkDTO();
+            faunaSearchLink.setUrl("http://www.faunaeur.org/index.php?show_what=search%20results&genus=" + getSpecie().getGenus()
+                    + "&species=" + getSpeciesName());
+            faunaSearchLink.setName("Fauna Europaea search");
+            faunaSearchLink.setDescription("Fauna Europaea");
+            links.add(faunaSearchLink);
         }
 
         if(!Utilities.isEmptyString(ncbi)){
-            LinkDTO faunaLink = new LinkDTO();
-            faunaLink.setUrl("http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + ncbi);
-            faunaLink.setName("NCBI");
-            faunaLink.setDescription("National Center for Biotechnology Information");
-            links.add(faunaLink);
+            LinkDTO ncbiLink = new LinkDTO();
+            ncbiLink.setUrl("http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + ncbi);
+            ncbiLink.setName("NCBI");
+            ncbiLink.setDescription("National Center for Biotechnology Information");
+            links.add(ncbiLink);
+        } else {
+            LinkDTO ncbiSearchLink = new LinkDTO();
+            ncbiSearchLink.setUrl("http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?" +
+                    "doptcmdl=ExternalLink&cmd=Search&db=taxonomy" +
+                    "&term=" + JstlFunctions.treatURLSpecialCharacters(getSpecie().getScientificName()));
+            ncbiSearchLink.setName("NCBI search");
+            ncbiSearchLink.setDescription("National Center for Biotechnology Information");
+            links.add(ncbiSearchLink);
+        }
+
+        if(Utilities.isEmptyString(itisTSN)){
+            LinkDTO itisSearchLink = new LinkDTO();
+            itisSearchLink.setUrl("http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=Scientific_Name&" +
+                    "search_kingdom=every&search_span=exactly_for&" +
+                    "search_value=" + JstlFunctions.treatURLSpecialCharacters(getSpecie().getScientificName()) +
+                    "&categories=All&source=html&search_credRating=All");
+            itisSearchLink.setName("ITIS search");
+            itisSearchLink.setDescription("Interagency Taxonomic Information System");
+            links.add(itisSearchLink);
         }
 
         Collections.sort(links);
@@ -504,7 +531,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
         } else if (link.getUrl().contains("eu-nomen.eu")){
             link.setDescription("Pan-European Species directories Infrastructure");
-        } else if (link.getUrl().contains("unep-wcmc-apps.org")){
+            link.setName(link.getName().replaceAll(" page", ""));
+        } else if (link.getUrl().contains("speciesplus.net")){
             link.setDescription("Species+ by UNEP-WCMC");
             link.setName("Species+");
         } else if (link.getUrl().contains("wikipedia")){

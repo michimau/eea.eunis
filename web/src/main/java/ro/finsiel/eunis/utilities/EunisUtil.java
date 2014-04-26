@@ -19,19 +19,19 @@ public class EunisUtil {
     static final Map<String, String> defaultPictures = new HashMap<String, String>();
 
     static {
-        defaultPictures.put("Algae","005");
-        defaultPictures.put("Amphibians","003");
-        defaultPictures.put("Birds","018");
-        defaultPictures.put("Conifers","020");
-        defaultPictures.put("Ferns","007");
-        defaultPictures.put("Fishes","006");
-        defaultPictures.put("Flowering Plants","009");
-        defaultPictures.put("Fungi","013");
-        defaultPictures.put("Invertebrates","001");
-        defaultPictures.put("Mammals","015");
-        defaultPictures.put("Mosses & Liverworts","010");
-        defaultPictures.put("Protists","019");
-        defaultPictures.put("Reptiles","008");
+        defaultPictures.put("Algae","Algae");
+        defaultPictures.put("Amphibians","Amphibians");
+        defaultPictures.put("Birds","Birds");
+        defaultPictures.put("Conifers","Conifers");
+        defaultPictures.put("Ferns","Ferns");
+        defaultPictures.put("Fishes","Fishes");
+        defaultPictures.put("Flowering Plants","Flowering-plants");
+        defaultPictures.put("Fungi","Fungi");
+        defaultPictures.put("Invertebrates","Invertebrates");
+        defaultPictures.put("Mammals","Mammals");
+        defaultPictures.put("Mosses & Liverworts","Mosses-and-liverworths");
+        defaultPictures.put("Protists","Protists");
+        defaultPictures.put("Reptiles","Reptiles");
     }
 
     /**
@@ -458,7 +458,7 @@ public class EunisUtil {
      * @return The link to the abstract picture, relative path from /images/species/
      */
     public static String getDefaultPicture(String group){
-        return "default/abstract" + defaultPictures.get(group) + ".jpg";
+        return "default/" + defaultPictures.get(group) + ".jpg";
     }
 
 }

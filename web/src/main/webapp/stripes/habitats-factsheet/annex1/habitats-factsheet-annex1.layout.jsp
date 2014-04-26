@@ -74,6 +74,7 @@
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="legal-accordion">
+                            <a id="legal" ></a>
                             <h2 class="notoc eea-icon-right-container">Legal status</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/habitats-factsheet/habitats-legal.jsp"/>

@@ -19,13 +19,15 @@ import java.util.ResourceBundle;
  */
 public class SpeciesReportsImporter {
 
+    private boolean debug = false;
+
     private ExcelReader excelReader;
     private SQLUtilities sqlUtilities;
 
-    private static final String GEOSCOPE_EU = "80";
-    private static final String GEOSCOPE_WORLD = "263";
-    private static final String GEOSCOPE_EU27 = "287";
-    private static final String GEOSCOPE_EU25 = "67";
+    private static final String ID_GEOSCOPE_EU = "80";
+    private static final String ID_GEOSCOPE_WORLD = "263";
+    private static final String ID_GEOSCOPE_EU27 = "287";
+    private static final String ID_GEOSCOPE_EU25 = "67";
 
     private static Map<String, String> habitatsMap = new HashMap<String, String>();
     private static Map<String, String> birdsMap = new HashMap<String, String>();
@@ -41,7 +43,7 @@ public class SpeciesReportsImporter {
     private static final String ACCOBAMS = "1802";
     private static final String ASCOBANS = "1803";
     private static final String WADDEN = "2451";
-    private static final String OSPAR = "1832"; // todo: this is annex V, there are more annexes but none Annex I
+    private static final String OSPAR = "1832"; // this is generic OSPAR annex V, there are more annexes but none Annex I
     private static final String HELCOM = "2455";
     private static final String RED_LIST = "2408";   // for reports table
     private static final String RED_LIST_CATEGORIES = "2407"; // from conservation_status table
@@ -53,9 +55,11 @@ public class SpeciesReportsImporter {
         habitatsMap.put("V", "2327");
 
         birdsMap.put("I", "2441");
-        birdsMap.put("II A", "2456");    // annex II
+        birdsMap.put("II", "2456");    // annex II
+        birdsMap.put("II A", "2456");
         birdsMap.put("II B", "2456");
-        birdsMap.put("III A", "2457");   // annex III
+        birdsMap.put("III", "2457");   // annex III
+        birdsMap.put("III A", "2457");
         birdsMap.put("III B", "2457");
 
         bernMap.put("I", "1565");
@@ -74,19 +78,20 @@ public class SpeciesReportsImporter {
         euTradeMap.put("C", "2458");
         euTradeMap.put("D", "2459");
 
-
         spaMap.put("II", "1818");
         spaMap.put("III", "1819");
     }
 
-    PreparedStatement deleteReportTypePs;
-    PreparedStatement deleteReportAttributesPs;
-    PreparedStatement deleteReportPs;
-    PreparedStatement selectToDeletePs;
-    PreparedStatement insertReportAttributePs;
-    PreparedStatement insertReportTypePs;
-    PreparedStatement insertReportPs;
-    PreparedStatement insertLegalStatusPs;
+    private PreparedStatement deleteReportTypePs;
+    private PreparedStatement deleteReportAttributesPs;
+    private PreparedStatement deleteReportPs;
+    private PreparedStatement selectToDeletePs;
+    private PreparedStatement insertReportAttributePs;
+    private PreparedStatement insertReportTypePs;
+    private PreparedStatement insertReportPs;
+    private PreparedStatement insertLegalStatusPs;
+    private PreparedStatement selectToDeleteRedListPs;
+
 
     Map<String, Integer> conservationStatusCode;
 
@@ -112,16 +117,16 @@ public class SpeciesReportsImporter {
             return;
         }
 
-        boolean allFound = true;
+        boolean allFilesFound = true;
         for(String fileName : args){
             File file = new File(fileName);
             if(!file.exists()){
                 System.out.println("The file " + fileName + " could not be found!");
-                allFound = false;
+                allFilesFound = false;
             }
         }
 
-        if(!allFound) {
+        if(!allFilesFound) {
             return;
         }
 
@@ -137,9 +142,15 @@ public class SpeciesReportsImporter {
 
         SpeciesReportsImporter vi = new SpeciesReportsImporter(sqlUtilities);
 
-        vi.importFile(args);
+        vi.importFiles(args);
+
+        vi.close();
     }
 
+    /**
+     * Constructor for the importer
+     * @param sqlUtilities SQL utilities object
+     */
     public SpeciesReportsImporter(SQLUtilities sqlUtilities){
 
         this.sqlUtilities = sqlUtilities;
@@ -148,12 +159,16 @@ public class SpeciesReportsImporter {
             connection = sqlUtilities.getConnection();
             connection.setAutoCommit(false);
 
-            String deleteReportType = "DELETE FROM chm62edt_report_type WHERE id_report_type=? AND id_lookup=? AND  lookup_type='LEGAL_STATUS'";
+            String deleteReportType = "DELETE FROM chm62edt_report_type WHERE id_report_type=? AND id_lookup=? AND lookup_type=?";
             String deleteReportAttributes = "DELETE FROM chm62edt_report_attributes WHERE id_report_attributes=?";
             String deleteReport = "DELETE FROM chm62edt_reports WHERE id_nature_object=? AND id_report_type=? AND id_report_attributes=?";
             String selectToDelete = "SELECT DISTINCT r.id_report_type, id_lookup, id_report_attributes " +
                     "FROM chm62edt_reports r, chm62edt_report_type rt " +
                     "WHERE r.ID_REPORT_TYPE=rt.id_report_type AND lookup_type='LEGAL_STATUS' AND id_nature_object=?";
+
+            String selectToDeleteRedList = "SELECT DISTINCT r.id_report_type, id_lookup, id_report_attributes " +
+                    "FROM chm62edt_reports r, chm62edt_report_type rt " +
+                    "WHERE r.ID_REPORT_TYPE=rt.id_report_type AND lookup_type='CONSERVATION_STATUS' AND id_nature_object=? AND id_geoscope=?";
 
             deleteReportTypePs = connection.prepareStatement(deleteReportType);
             deleteReportAttributesPs = connection.prepareStatement(deleteReportAttributes);
@@ -164,15 +179,16 @@ public class SpeciesReportsImporter {
             insertReportPs = connection.prepareStatement("INSERT INTO chm62edt_reports VALUES(?,?,?,?,?,?)");
             insertLegalStatusPs = connection.prepareStatement("INSERT INTO chm62edt_legal_status VALUES(?,?,?,?,?)");
 
-            // prepared statement for another connection!
+            // prepared statement using another connection!
             selectToDeletePs = sqlUtilities.getConnection().prepareStatement(selectToDelete);
+            selectToDeleteRedListPs = sqlUtilities.getConnection().prepareStatement(selectToDeleteRedList);
 
             // get the max ids so we can insert over, as the tables don't have autoincrement
             lastLegalStatusId = new Integer(sqlUtilities.ExecuteSQL("select max(id_legal_status) from chm62edt_legal_status")) + 1;
             lastReportTypeId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_type) from chm62edt_report_type")) + 1;
             lastIdReportAttributesId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_attributes) from chm62edt_report_attributes")) + 1;
 
-            System.out.println("Last IDs: id_legal_status=" + lastLegalStatusId + "  id_report_type=" + lastReportTypeId + "  id_report_attributes="  + lastIdReportAttributesId);
+            if(debug) System.out.println("Last IDs: id_legal_status=" + lastLegalStatusId + "  id_report_type=" + lastReportTypeId + "  id_report_attributes="  + lastIdReportAttributesId);
 
             // populate the red list codes
             populateRedListCodes();
@@ -186,9 +202,9 @@ public class SpeciesReportsImporter {
      * Import an Excel file
      * @param excelFiles Array of files
      */
-    public void importFile(String[] excelFiles){
+    public void importFiles(String[] excelFiles){
         try {
-            // todo: clean the existing data also by document
+
             int totalImportedCount=0, totalFoundBySynonyms=0, totalNotFound=0;
             for(String excelFile : excelFiles){
                 excelReader = new ExcelReader(excelFile);
@@ -203,7 +219,7 @@ public class SpeciesReportsImporter {
                 totalNotFound += notFoundCount;
                 System.out.println("Import for " + excelFile + " finished, " + importedCount + " species imported, " + foundBySynonyms + " identified as synonyms, "+ notFoundCount + " species not found.");
             }
-            // todo: clean orphans (if any)
+
             System.out.println("Full import finished, " + totalImportedCount + " species imported, " + totalFoundBySynonyms + " identified as synonyms, "+ totalNotFound + " species not found.");
 
         } catch (IOException e) {
@@ -233,7 +249,12 @@ public class SpeciesReportsImporter {
             System.out.println("WARNING: Species '" + speciesRow.getSpeciesName() + "' (Excel row " + speciesRow.getExcelRow() + ") not found!");
         } else {
             try {
-                System.out.println("Species '" + speciesRow.getSpeciesName() + "' (id_species=" + speciesRow.getIdSpecies() + ", id_nature_object=" + speciesRow.getIdNatureObject() + ", Excel row=" + speciesRow.getExcelRow() +")");
+                System.out.println("Species '" + speciesRow.getSpeciesName() + "' " +
+                        "(id_species=" + speciesRow.getIdSpecies() + ", " +
+                        "id_nature_object=" + speciesRow.getIdNatureObject() + ", " +
+                        "Excel row=" + speciesRow.getExcelRow() +")" +
+                        (speciesRow.getSpeciesName().equals(speciesRow.getDatabaseName())?"":" synonym of " + speciesRow.getDatabaseName())
+                        );
 
                 cleanExistingData(speciesRow);
                 importNewData(speciesRow);
@@ -254,13 +275,13 @@ public class SpeciesReportsImporter {
     private void identifySpecies(SpeciesRow speciesRow){
         String idLink = null;
 
-        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 5);
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 6);
 
         idLink = populateSpeciesIds(speciesRow, speciesList);
 
         if(speciesRow.getIdSpecies() == null && idLink != null) {
             // extract the parent species
-            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species from chm62edt_species where id_species='"+ idLink + "'", 5);
+            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name from chm62edt_species where id_species='"+ idLink + "'", 6);
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
         }
@@ -282,6 +303,7 @@ public class SpeciesReportsImporter {
                 // is valid name
                 speciesRow.setIdSpecies(l2.getColumnsValues().get(0).toString());
                 speciesRow.setIdNatureObject(l2.getColumnsValues().get(1).toString());
+                speciesRow.setDatabaseName(l2.getColumnsValues().get(5).toString());
             } else {
                 // extract the valid species link from the synonym
                 if( l2.getColumnsValues().get(4).toString().startsWith("Synonym")) {
@@ -309,6 +331,7 @@ public class SpeciesReportsImporter {
 
             deleteReportTypePs.setString(1, rs.getString(1));
             deleteReportTypePs.setString(2, rs.getString(2));
+            deleteReportTypePs.setString(3, "LEGAL_STATUS");
             del += deleteReportTypePs.executeUpdate();
 
             deleteReportPs.setString(1, speciesRow.getIdNatureObject());
@@ -316,7 +339,8 @@ public class SpeciesReportsImporter {
             deleteReportPs.setString(3, rs.getString(3));
             del += deleteReportPs.executeUpdate();
         }
-        System.out.println(" deleted " + del + " records");
+        if(debug) System.out.println(" deleted " + del + " records");
+        rs.close();
     }
 
     /**
@@ -325,24 +349,23 @@ public class SpeciesReportsImporter {
      */
     private void importNewData(SpeciesRow speciesRow){
 
-        // todo import other names
-        multipleInsertReport("Habitats D", speciesRow.getHabitatsDAnnex(), habitatsMap, GEOSCOPE_EU, "HD", speciesRow);
-        multipleInsertReport("Birds D", speciesRow.getBirdsDAnnex(), birdsMap, GEOSCOPE_EU, null, speciesRow);
-        multipleInsertReport("Bern Convention", speciesRow.getBernConventionAnnex(), bernMap, GEOSCOPE_EU, "Bern", speciesRow);
-        singleInsertReport("Emerald Network R6", speciesRow.getEmeraldR6(), "I", EMERALD_R6, GEOSCOPE_EU, "Emerald R. 6", speciesRow);
-        multipleInsertReport("Bonn Convention", speciesRow.getBonnConventionAnnex(), bonnMap, GEOSCOPE_WORLD, "Bonn", speciesRow);
-        multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, GEOSCOPE_WORLD, null, speciesRow);
-        multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, GEOSCOPE_EU, null, speciesRow);
-        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, GEOSCOPE_WORLD, null, speciesRow);
-        singleInsertReport("EuroBats", speciesRow.getEurobats(), "I", EUROBATS, GEOSCOPE_EU, null, speciesRow);
-        singleInsertReport("ACCOBAMS", speciesRow.getAccobams(), "I", ACCOBAMS, GEOSCOPE_WORLD, null, speciesRow);
-        singleInsertReport("ASCOBANS", speciesRow.getAscobans(), "Yes", ASCOBANS, GEOSCOPE_WORLD, null, speciesRow);
-        singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, GEOSCOPE_EU, null, speciesRow);
-        multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, GEOSCOPE_EU, null, speciesRow);
-        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, GEOSCOPE_EU, null, speciesRow);
-        singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, GEOSCOPE_EU, null, speciesRow);
+        multipleInsertReport("Habitats D", speciesRow.getHabitatsDAnnex(), habitatsMap, ID_GEOSCOPE_EU, "HD", speciesRow.getHabitatsName(), speciesRow);
+        multipleInsertReport("Birds D", speciesRow.getBirdsDAnnex(), birdsMap, ID_GEOSCOPE_EU, null, speciesRow.getBirdsName(), speciesRow);
+        multipleInsertReport("Bern Convention", speciesRow.getBernConventionAnnex(), bernMap, ID_GEOSCOPE_EU, "Bern", speciesRow.getBernName(), speciesRow);
+        singleInsertReport("Emerald Network R6", speciesRow.getEmeraldR6(), "I", EMERALD_R6, ID_GEOSCOPE_EU, "Emerald R. 6", speciesRow.getEmeraldName(), speciesRow);
+        multipleInsertReport("Bonn Convention", speciesRow.getBonnConventionAnnex(), bonnMap, ID_GEOSCOPE_WORLD, "Bonn", speciesRow.getBonnName(), speciesRow);
+        multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, ID_GEOSCOPE_WORLD, null, speciesRow);
+        multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow);
+        singleInsertReport("EuroBats", speciesRow.getEurobats(), "I", EUROBATS, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("ACCOBAMS", speciesRow.getAccobams(), "I", ACCOBAMS, ID_GEOSCOPE_WORLD, null, speciesRow);
+        singleInsertReport("ASCOBANS", speciesRow.getAscobans(), "Yes", ASCOBANS, ID_GEOSCOPE_WORLD, null, speciesRow);
+        singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, ID_GEOSCOPE_EU, null, speciesRow);
+        multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
 
-        insertRedListReport(GEOSCOPE_EU25, speciesRow);
+        insertRedListReport(ID_GEOSCOPE_EU, speciesRow);
     }
 
     /**
@@ -352,7 +375,34 @@ public class SpeciesReportsImporter {
      */
     private void insertRedListReport(String idGeoscope, SpeciesRow speciesRow){
 
-        // todo: clean red list
+        // clean the EU Red List first
+        try {
+            selectToDeleteRedListPs.setString(1, speciesRow.getIdNatureObject());
+            selectToDeleteRedListPs.setString(2, idGeoscope);
+
+            ResultSet rs = selectToDeleteRedListPs.executeQuery();
+            int del = 0;
+            while (rs.next()){
+                deleteReportAttributesPs.setString(1, rs.getString(3));
+                del += deleteReportAttributesPs.executeUpdate();
+
+                deleteReportTypePs.setString(1, rs.getString(1));
+                deleteReportTypePs.setString(2, rs.getString(2));
+                deleteReportTypePs.setString(3, "CONSERVATION_STATUS");
+                del += deleteReportTypePs.executeUpdate();
+
+                deleteReportPs.setString(1, speciesRow.getIdNatureObject());
+                deleteReportPs.setString(2, rs.getString(1));
+                deleteReportPs.setString(3, rs.getString(3));
+                del += deleteReportPs.executeUpdate();
+            }
+            if(debug) System.out.println(" deleted " + del + " EU Red List records");
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         if(!speciesRow.getRedList().isEmpty()) {
             try {
@@ -360,10 +410,11 @@ public class SpeciesReportsImporter {
                 if(idConservationStatus != null) {
 
                     int idReportType = insertReportType(idConservationStatus, "CONSERVATION_STATUS");
+                    int idReportAttributes = insertRedListReportAttribute(speciesRow.getRedListName());
 
-                    insertReport(speciesRow.getIdNatureObject(), RED_LIST, idGeoscope, -1, idReportType);
+                    insertReport(speciesRow.getIdNatureObject(), RED_LIST, idGeoscope, idReportAttributes, idReportType);
 
-                    System.out.println(" Inserted conservation status code " + speciesRow.getRedList());
+                    if(debug) System.out.println(" Inserted conservation status code " + speciesRow.getRedList());
                 } else {
                     System.out.println("WARNING: Red List code " + speciesRow.getRedList() + " not identified");
                 }
@@ -371,6 +422,13 @@ public class SpeciesReportsImporter {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Wrapper for the singleInsertReport without name in document
+     */
+    private void singleInsertReport(String name, String annex, String expectedValue, String idDc, String geoscope, String restrictionPrefix, SpeciesRow speciesRow){
+        singleInsertReport(name, annex, expectedValue, idDc, geoscope, restrictionPrefix, "", speciesRow);
     }
 
     /**
@@ -383,7 +441,7 @@ public class SpeciesReportsImporter {
      * @param restrictionPrefix
      * @param speciesRow
      */
-    private void singleInsertReport(String name, String annex, String expectedValue, String idDc, String geoscope, String restrictionPrefix, SpeciesRow speciesRow){
+    private void singleInsertReport(String name, String annex, String expectedValue, String idDc, String geoscope, String restrictionPrefix, String nameInDocument, SpeciesRow speciesRow){
         if(annex.equals(expectedValue)){
 
             RestrictionsRow restriction = null;
@@ -399,7 +457,7 @@ public class SpeciesReportsImporter {
                 priority = restriction.getPriority();
             }
 
-            insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex);
+            insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
         } else {
             if(!annex.isEmpty())
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
@@ -407,15 +465,22 @@ public class SpeciesReportsImporter {
     }
 
     /**
-     * Insert the report data for a multiple-annex report
-     * @param name
-     * @param annexes
-     * @param values
-     * @param geoscope
-     * @param restrictionPrefix
-     * @param speciesRow
+     * Wrapper for multipleInsertReport without nameInDocument
      */
     private void multipleInsertReport(String name, String[] annexes, Map<String, String> values, String geoscope, String restrictionPrefix, SpeciesRow speciesRow){
+        multipleInsertReport(name, annexes,values, geoscope, restrictionPrefix, "", speciesRow);
+    }
+
+        /**
+         * Insert the report data for a multiple-annex report
+         * @param name
+         * @param annexes
+         * @param values
+         * @param geoscope
+         * @param restrictionPrefix
+         * @param speciesRow
+         */
+    private void multipleInsertReport(String name, String[] annexes, Map<String, String> values, String geoscope, String restrictionPrefix, String nameInDocument, SpeciesRow speciesRow){
 
         for(String annex : annexes){
             String idDc = values.get(annex);
@@ -433,7 +498,7 @@ public class SpeciesReportsImporter {
             }
 
             if(idDc != null) {
-                insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex);
+                insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
             } else {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
             }
@@ -476,9 +541,9 @@ public class SpeciesReportsImporter {
      * @param priority
      * @param annex
      */
-    private void insertLegalStatusReport(String idSpecies, String idNatureObject, String idDc, String idGeoscope, String restrictionText, int priority, String annex) {
+    private void insertLegalStatusReport(String idSpecies, String idNatureObject, String idDc, String idGeoscope, String restrictionText, int priority, String annex, String nameInDocument) {
         try {
-            int idReportAttributes = insertReportAttribute(idDc, idSpecies);
+            int idReportAttributes = insertLegalReportAttribute(idDc, idSpecies, nameInDocument);
 
             int idLegalStatus = -1;
             if(restrictionText != null || priority == 1){
@@ -489,7 +554,7 @@ public class SpeciesReportsImporter {
 
             insertReport(idNatureObject, idDc, idGeoscope, idReportAttributes, idReportType);
 
-            System.out.println(" Inserted legal report for idDc=" + idDc);
+            if(debug) System.out.println(" Inserted legal report with idDc=" + idDc);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -536,27 +601,52 @@ public class SpeciesReportsImporter {
      * Insert report attributes data
      * @param idDc
      * @param speciesCode
+     * @param nameInDocument The name in the legal document; can be eplty if none specified
      * @return
      * @throws SQLException
      */
-    private int insertReportAttribute(String idDc, String speciesCode) throws SQLException {
+    private int insertLegalReportAttribute(String idDc, String speciesCode, String nameInDocument) throws SQLException {
         int idReportAttributes = lastIdReportAttributesId++;
-        insertReportAttributePs.setInt(1, idReportAttributes);
-        insertReportAttributePs.setString(2, "ID_DC");
-        insertReportAttributePs.setString(3, "NUMBER");
-        insertReportAttributePs.setString(4, idDc);
-        insertReportAttributePs.executeUpdate();
-        insertReportAttributePs.clearParameters();
 
-
-        insertReportAttributePs.setInt(1, idReportAttributes);
-        insertReportAttributePs.setString(2, "SPECIES_CODE");
-        insertReportAttributePs.setString(3, "TEXT");
-        insertReportAttributePs.setString(4, speciesCode);
-        insertReportAttributePs.executeUpdate();
-        insertReportAttributePs.clearParameters();
+        insertReportAttribute(idReportAttributes, "ID_DC", "NUMBER", idDc);
+        insertReportAttribute(idReportAttributes, "SPECIES_CODE", "TEXT", speciesCode);
+        if(!nameInDocument.isEmpty()){
+            insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
+        }
 
         return idReportAttributes;
+    }
+
+    /**
+     * Insert red list attribute for NAME_IN_DOUCMENT; only written if the name is not empty
+     * @param nameInDocument The name of the species in the Red List document
+     * @return The ID of the inserted record; if the nameInDocument parameter is null returns -1
+     * @throws SQLException
+     */
+    private int insertRedListReportAttribute(String nameInDocument) throws SQLException {
+        int idReportAttributes = -1;
+        if(!nameInDocument.isEmpty()){
+            idReportAttributes = lastIdReportAttributesId++;
+            insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
+        }
+        return idReportAttributes;
+    }
+
+    /**
+     * Inserts a generic report_attributes record
+     * @param idReportAttributes The record ID
+     * @param name The record name
+     * @param type The record type
+     * @param value The record value
+     * @throws SQLException
+     */
+    private void insertReportAttribute(int idReportAttributes, String name, String type, String value) throws SQLException {
+        insertReportAttributePs.setInt(1, idReportAttributes);
+        insertReportAttributePs.setString(2, name);
+        insertReportAttributePs.setString(3, type);
+        insertReportAttributePs.setString(4, value);
+        insertReportAttributePs.executeUpdate();
+        insertReportAttributePs.clearParameters();
     }
 
     /**
@@ -572,6 +662,29 @@ public class SpeciesReportsImporter {
             conservationStatusCode.put(l2.getColumnsValues().get(1).toString(), new Integer(l2.getColumnsValues().get(0).toString()));
         }
 
+        // fix for CR/PE (Critically Endangered, Possibly Extinct) - should be treated as Critically Endangered (CR)
+        conservationStatusCode.put("CR/PE", conservationStatusCode.get("CR"));
+    }
+
+
+    /**
+     * Closes all resources
+     */
+    private void close() {
+        try {
+            deleteReportTypePs.close();
+            deleteReportAttributesPs.close();
+            deleteReportPs.close();
+            selectToDeletePs.close();
+            insertReportAttributePs.close();
+            insertReportTypePs.close();
+            insertReportPs.close();
+            insertLegalStatusPs.close();
+            selectToDeleteRedListPs.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

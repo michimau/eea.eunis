@@ -65,6 +65,9 @@ public class SpeciesRow {
     // the Excel row number, for logging/debugging purpose
     private int excelRow;
 
+    // flag if it is a synonym
+    private String databaseName;
+
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
     }
@@ -89,10 +92,19 @@ public class SpeciesRow {
         return bernConventionAnnex;
     }
 
+    /**
+     * Checks that the row is actually a species or something else using the species name
+     * A species name should have at least two names and not start with "Order", "Phylum", "Phyllum", "Class"
+     * @return
+     */
     public boolean isSpecies(){
         return speciesName != null
             && speciesName.contains(" ")
-            && !(speciesName.contains("("));
+            && !(speciesName.contains("("))
+            && !speciesName.startsWith("Order ")
+            && !speciesName.startsWith("Phyllum ")
+            && !speciesName.startsWith("Phylum ")
+            && !speciesName.startsWith("Class ");
     }
 
     public String getSpeciesName() {
@@ -364,6 +376,14 @@ public class SpeciesRow {
 
     public void setSpaName(String spaName) {
         this.spaName = spaName;
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
     }
 
     /**

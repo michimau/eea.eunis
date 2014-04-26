@@ -48,9 +48,8 @@
 
                 <div class="right-area protected-sites-map">
                     <h3>Protected sites</h3>
-                    <div id="sites-map" class="map-view" style="border:1px solid #050505;">
+                    <div id="sites-map" class="map-border">
                     	<iframe id="protectionMap" src="" width="100%" height="400"></iframe>
-                    
                     </div>
                 </div>
                 <script>

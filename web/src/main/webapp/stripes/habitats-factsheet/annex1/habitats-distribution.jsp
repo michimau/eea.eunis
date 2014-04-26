@@ -223,7 +223,7 @@
         }
     </style>
 	<div style="position:relative; width: 100%; height:400px;">
-		<div id="map" class="claro" style="float:left; width:600px; height:400px; border:1px solid #000; margin: 1em 0.5em 1em 0"></div>
+		<div id="map" class="claro map-border" style="float:left; width:600px; height:400px; margin: 1em 0.5em 1em 0"></div>
 		<div style="float:left; width:220px;">
 			<br />
 			<b>Additional layers:</b><br />

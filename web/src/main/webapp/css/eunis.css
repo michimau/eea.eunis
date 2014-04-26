@@ -557,3 +557,7 @@ div.overlay .formControls a {
 .iucn-red-list-area .threat-status-region {
   font-size: 12px;
 }
+
+.map-border {
+    border: 1px solid #999;
+}

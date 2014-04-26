@@ -350,7 +350,7 @@
                     </div>
 
                     <div class="right-area reported-areas-map">
-                        <div id="report-map" class="claro" style="width:470px; height:400px; border:1px solid #000; margin: 1em 0.5em 1em 0"></div>
+                        <div id="report-map" class="claro map-border" style="width:470px; height:400px; margin: 1em 0.5em 1em 0"></div>
                     </div>
                 </div>
                 <!-- END species reported -->

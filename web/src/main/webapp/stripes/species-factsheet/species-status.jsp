@@ -143,7 +143,7 @@
                 <div class="right-area conservation-status">
                     <h3>EU's conservation status</h3>
                     <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
-                    <div class="map-view" style="border:1px solid #050505;">
+                    <div class="map-border">
                         <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
                     </div>
 

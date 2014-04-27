@@ -29,8 +29,7 @@
                         <c:forEach items="${actionBean.sites}" var="site" varStatus="loop">
                             <tr>
                                 <td>${ site.IDSite }</td>
-                                <%--todo: country link incorrect--%>
-                                <td><a href="/countries/${ site.eunisAreaCode }" title="Open factsheet for ${ site.areaNameEn }">${ site.areaNameEn }</a></td>
+                                <td>${ site.areaNameEn }</td>
                                 <td><a href="/sites/${ site.IDSite }" title="Open site factsheet">${ site.name }</a></td>
                                 <td>
                                     <a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">Map</a>

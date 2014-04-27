@@ -31,7 +31,7 @@
 								
 								
 								<td>${ site.IDSite }</td>
-                            	<td><a href="${ site.areaUrl }" title="Open factsheet for ${ site.areaNameEn }">${ site.areaNameEn }</a></td>
+                            	<td>${ site.areaNameEn }</td>
                             	<td><a href="${ site.siteNameUrl }" title="Open site factsheet">${ site.name }</a></td>
                             	<td>
 									<a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">Map</a>

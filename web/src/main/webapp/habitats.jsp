@@ -83,7 +83,7 @@
                     <tr>
                       <td>
                         <img alt="<%=cm.cms("names_and_descriptions")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("names_and_descriptions")%>
-                        <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsPhrase("Names and Descriptions")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsPhrase("Names and descriptions")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_namesDesc")%>
                       </td>
                       <td>
@@ -93,71 +93,11 @@
                     <tr>
                       <td>
                         <img alt="<%=cm.cms("legal_instruments")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("legal_instruments")%>
-                        <a title="<%=cm.cms("habitats_main_legalDesc")%>"  href="habitats-legal.jsp"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_legalDesc")%>" href="habitats-legal.jsp"><strong><%=cm.cmsPhrase("Legal instruments")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_legalDesc")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Search EUNIS habitat types under legal designation at European level")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("country_biogeographic_region_location")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("country_biogeographic_region_location")%>
-                        <a title="<%=cm.cms("habitats_main_countryDesc")%>"  href="habitats-country.jsp"><strong><%=cm.cmsPhrase("Country/Biogeographic region")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_countryDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find habitat types located within a country and/or biogeographic region")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("code_classifications")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("code_classifications")%>
-                        <a title="<%=cm.cms("habitats_main_codeDesc")%>"  href="habitats-code.jsp"><strong><%=cm.cmsPhrase("Code/Classifications")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_codeDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find habitat types by their relations with one of the linked classifications")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("pick_habitat_types_show_species")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_species")%>
-                        <a title="<%=cm.cms("habitats_main_showSpeciesDesc")%>"  href="species-habitats.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show species")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_showSpeciesDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find species characterising a specific habitat type")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("pick_habitat_types_show_sites")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_sites")%>
-                        <a title="<%=cm.cms("habitats_main_showSitesDesc")%>"  href="sites-habitats.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show sites")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_showSitesDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find sites containing a particular habitat type")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("habitats_main_showReferences")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_showReferences")%>
-                        <a title="<%=cm.cms("habitats_main_showReferencesDesc")%>"  href="habitats-books.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show references")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_showReferencesDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find books, articles which refer to a habitat type")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img alt="<%=cm.cms("pick_references_show_habitat_types")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_references_show_habitat_types")%>
-                        <a title="<%=cm.cms("habitats_main_showHabitatsDesc")%>"  href="habitats-references.jsp"><strong><%=cm.cmsPhrase("Pick references, show habitat types")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_showHabitatsDesc")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Find habitat types referred by books, articles etc.")%>
                       </td>
                     </tr>
                     <tr>

@@ -81,152 +81,22 @@
             <col>
         </colgroup>
 
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by name")%>" href="sites-names.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Name")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by name")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by size")%>" href="sites-size.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Size (Area/Length)")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by size")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by geographical coordinates")%>" href="sites-coordinates.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Coordinates")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by geographical coordinates")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by country location")%>" href="sites-country.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Country")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by country location")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by the year of designation")%>" href="sites-year.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Designation year")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by the year of designation")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Identify species located within sites")%>" href="species-sites.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Pick sites, show species")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Identify species located within sites")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Identify habitat types located within sites ")%>" href="habitats-sites.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Pick sites, show habitat types")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Identify habitat types located within sites")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites by legal instruments")%>" href="sites-designated-codes.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Pick designation types, show sites")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search sites by legal instruments ")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search designation types")%>" href="sites-designations.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Designation types")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Search designation types")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>" href="sites-neighborhood.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Site neighborhood")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td abbr="Site neighborhood">
-                            <%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Sites tree browser")%>" href="sites-tree.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Sites tree browser")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Sites tree browser")%>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <tbody>
+                <tr>
+                  <td>
+                    <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                    <a title="<%=cm.cmsPhrase("Search sites by name")%>" href="sites-names.jsp">
+                      <strong>
+                        <%=cm.cmsPhrase("Name")%>
+                      </strong>
+                    </a>
+                  </td>
+                  <td>
+                    <%=cm.cmsPhrase("Search sites by name")%>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
         </div>
         </div>
         <div class="eea-accordion-panel" style="clear: both;">
@@ -335,6 +205,10 @@
                   </tbody>
                 </table>
 <!-- END MAIN CONTENT -->
+            </div>
+        </div>
+    </div>
+
 
     </stripes:layout-component>
 </stripes:layout-render>

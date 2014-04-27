@@ -39,8 +39,10 @@
 			<li>
 			    ${eunis:cmsPhrase(actionBean.contentManagement, 'Region:')}
 			    <c:choose>
-                <c:when test="${not empty actionBean.regionCode}">
-                    <span class="bold">${ actionBean.regionName }</span> <span class="discreet">(${ actionBean.regionCode})<span></span>
+                <c:when test="${not empty actionBean.regions}">
+                    <c:forEach var="region" items="${actionBean.regions}" varStatus="status">
+                        <span class="bold">${ region.value }</span> <span class="discreet">(${ region.name })</span><c:if test="${not status.last}">,</c:if>
+                    </c:forEach>
 			    </c:when>
 			    <c:otherwise><span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</span></c:otherwise>
                 </c:choose>

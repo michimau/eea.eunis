@@ -103,6 +103,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private List habit2NotEunis;
 
     private List<HabitatsBean> habitats;
+    private List<Chm62edtSitesAttributesPersist> regions;
 
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
@@ -589,6 +590,13 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private void prepareRegion(){
         this.regionCode = factsheet.getSiteObject().getNuts();
         this.regionName = factsheet.getRegionName();
+
+        // extract the list from the sites attributes
+        regions = factsheet.findSiteRegions();
+        for(Chm62edtSitesAttributesPersist region : regions){
+            region.setName(region.getName().replace("NUTS_",""));
+            // todo identify the region by NUTS code in the chm62edt_region_codes and display that region name, not the one in SDF
+        }
     }
 
     /**
@@ -720,5 +728,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return habitats;
     }
 
-
+    public List<Chm62edtSitesAttributesPersist> getRegions() {
+        return regions;
+    }
 }

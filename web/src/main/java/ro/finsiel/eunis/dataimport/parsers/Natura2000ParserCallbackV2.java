@@ -132,7 +132,6 @@ public class Natura2000ParserCallbackV2 {
         System.out.println("Finished site " + siteCode);
         // exceptions during load
         // add the site id at the top of the exceptions list
-        // todo add the local errors to the list?
         if(exceptions.size() > 0){
             try {
                 if (siteCode != null) {
@@ -216,13 +215,13 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementSiteInsert.setString(5, updateDate);
         preparedStatementSiteInsert.setString(6, parseDate(values.get("sdfs.sdf.siteIdentification.spaClassificationDate")));
         preparedStatementSiteInsert.setString(7, values.get("sdfs.sdf.siteIdentification.respondent.addressUnstructured"));
-        preparedStatementSiteInsert.setString(8, values.get("sdfs.sdf.siteIdentification.Description"));   // todo: missing
+        preparedStatementSiteInsert.setString(8, values.get("sdfs.sdf.siteIdentification.Description"));   // missing
         preparedStatementSiteInsert.setString(9, values.get("sdfs.sdf.siteLocation.latitude"));
         preparedStatementSiteInsert.setString(10, values.get("sdfs.sdf.siteLocation.longitude"));
         preparedStatementSiteInsert.setString(11, values.get("sdfs.sdf.siteLocation.area"));
-        preparedStatementSiteInsert.setString(12, values.get("sdfs.sdf.siteLocation.Altitude_Min"));    // todo: missing
-        preparedStatementSiteInsert.setString(13, values.get("sdfs.sdf.siteLocation.Altitude_Max"));    // todo: missing
-        preparedStatementSiteInsert.setString(14, values.get("sdfs.sdf.siteLocation.Altitude_Mean"));   // todo: missing
+        preparedStatementSiteInsert.setString(12, values.get("sdfs.sdf.siteLocation.Altitude_Min"));    // missing
+        preparedStatementSiteInsert.setString(13, values.get("sdfs.sdf.siteLocation.Altitude_Max"));    // missing
+        preparedStatementSiteInsert.setString(14, values.get("sdfs.sdf.siteLocation.Altitude_Mean"));   // missing
         preparedStatementSiteInsert.setString(15, "NATURA2000");
         preparedStatementSiteInsert.setString(16, "80");
         preparedStatementSiteInsert.setString(17, siteDesignation);
@@ -233,7 +232,7 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementSiteInsert.setString(22, parseDate(values.get("sdfs.sdf.siteIdentification.sciConfirmationDate")));
         preparedStatementSiteInsert.setString(23, parseDate(values.get("sdfs.sdf.siteIdentification.sacDesignationDate")));
         // NUTS code
-        // todo: there is actually a list of region codes
+        // there is actually a list of region codes, the NUTS field only keeps the last one - the others are found in the attributes
         preparedStatementSiteInsert.setString(24, values.get("sdfs.sdf.siteLocation.adminRegions.region.code"));
 
         String lengthKm = values.get("sdfs.sdf.siteLocation.siteLength");
@@ -261,6 +260,18 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementNatObjectGeoscope.executeUpdate();
 
         insertSiteAttribute(siteCode, "TYPE", "TEXT", siteType, "sdfxml");
+    }
+
+    /**
+     * Add all administrative regions as Site attribute "NUTS"
+     * @param path
+     * @param values
+     * @throws Exception
+     */
+    @SaxCallback("sdfs.sdf.siteLocation.adminRegions.region")
+    public void callAdminRegion(String path, Values values) throws Exception {
+        insertSiteAttribute(siteCode, "NUTS_" + values.getFromCurrent("code"), "TEXT", values.getFromCurrent("name") , "sdfxml");
+        // todo check that the region exists in chm62edt_region_codes; if not, insert it
     }
 
     /**
@@ -892,8 +903,6 @@ public class Natura2000ParserCallbackV2 {
 
     private void insertSiteDescriptionHabitatClasses(String code, String siteId, String cover) throws Exception {
         if (code != null && code.length() > 0) {
-        //todo: there is no description in the XML
-//            insertSiteAttribute(siteId, "HABITAT_NAME_EN_" + code, "TEXT", desc, "habit2");
             insertSiteAttribute(siteId, "HABITAT_COVER_" + code, "NUMBER", cover, "habit2");
             insertSiteAttribute(siteId, "HABITAT_CODE_" + code, "TEXT", code, "habit2");
         }

@@ -2496,4 +2496,23 @@ public class SiteFactsheet {
         }
         return resultList;
     }
+
+    /**
+     * Lists the NUTS administrative regions
+     *
+     * @return Attributes list with NUTS code and name in the SDF
+     */
+    public List<Chm62edtSitesAttributesPersist> findSiteRegions() {
+        List<Chm62edtSitesAttributesPersist> result = new ArrayList<Chm62edtSitesAttributesPersist>();
+
+        try {
+            result =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND NAME like 'NUTS_%'");
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+
+        return result;
+    }
 }

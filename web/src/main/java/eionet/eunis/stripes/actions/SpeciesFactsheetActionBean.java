@@ -375,7 +375,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalStatus.setLegalText(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus.getLegalText())));
             legalStatus.setComments(Utilities.treatURLSpecialCharacters(legalStatus.getComments()));
 
-            if (null != legalStatus.getUrl().replaceAll("#", "")) {
+            if (null != legalStatus.getUrl()) {
                 String sFormattedURL = Utilities.formatString(legalStatus.getUrl()).replaceAll("#", "");
                 if (sFormattedURL.length() > 50) {
                     sFormattedURL = sFormattedURL.substring(0, 50) + "...";

@@ -299,6 +299,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             Date spaDate = parseDate(factsheet.getSiteObject().getSpaDate());
             Date sacDate = parseDate(factsheet.getSiteObject().getSacDate());
             Date proposedDate = parseDate(factsheet.getSiteObject().getProposedDate());
+            Date confirmedDate = parseDate(factsheet.getSiteObject().getConfirmedDate());
 
             this.siteDesignationDateDisplayValue = least(least(spaDate, sacDate), proposedDate);
         } else if (isTypeCDDA()){
@@ -704,7 +705,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         return parseDate(factsheet.getSiteObject().getSacDate());
     }
 
-    public Date getProposedDate(){
+    public Date getSciProposedDate(){
         return parseDate(factsheet.getSiteObject().getProposedDate());
     }
 
@@ -730,5 +731,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public List<Chm62edtSitesAttributesPersist> getRegions() {
         return regions;
+    }
+
+    public Date getSciConfirmedDate(){
+        return parseDate(factsheet.getSiteObject().getConfirmedDate());
     }
 }

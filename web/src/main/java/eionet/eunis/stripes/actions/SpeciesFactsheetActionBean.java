@@ -349,7 +349,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                         if (consStatusEU == null || consStatusEU.getReferenceYear() < threat.getReferenceYear()) {
                             consStatusEU = threat;
                         }
-                    } else if ("E25".equals(threat.getEunisAreaCode())) {
+                    } else if ("E25".equals(threat.getEunisAreaCode()) || "E27".equals(threat.getEunisAreaCode())) {
                         if (consStatusE25 == null || consStatusE25.getReferenceYear() < threat.getReferenceYear()) {
                             consStatusE25 = threat;
                         }

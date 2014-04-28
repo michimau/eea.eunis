@@ -114,7 +114,7 @@
                             </li>
                             </c:if>
                             <c:if test="${!empty actionBean.n2000id}">
-                                <li>
+                                <li class="discreet">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}
                                 </li>
                             </c:if>

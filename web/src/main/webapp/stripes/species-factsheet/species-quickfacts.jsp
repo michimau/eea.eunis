@@ -82,7 +82,7 @@
                                 </c:choose>
                             </li>
                             <li>
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}:
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}
                                 <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}.
                             </li>
@@ -110,13 +110,13 @@
                                 <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span>
                             </li>
                             </c:if>
+                            <c:if test="${!empty actionBean.n2000id}">
+                                <li>
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}
+                                </li>
+                            </c:if>
                         </ul>
 
-                        <c:if test="${!empty actionBean.n2000id}">
-                            <p class="discreet">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}
-                            </p>
-                        </c:if>
                     </div>
                 </div>
 

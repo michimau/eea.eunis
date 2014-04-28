@@ -43,6 +43,21 @@ import java.util.*;
 @UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
+    // List of Habitats and Birds annexes
+    private static Set<Integer> habitatsDirectiveIdDc = new HashSet<Integer>();
+    private static Set<Integer> birdsDirectiveIdDc = new HashSet<Integer>();
+
+    static {
+        habitatsDirectiveIdDc.add(2324);
+        habitatsDirectiveIdDc.add(2325);
+        habitatsDirectiveIdDc.add(2326);
+        habitatsDirectiveIdDc.add(2327);
+
+        birdsDirectiveIdDc.add(2441);
+        birdsDirectiveIdDc.add(2456);
+        birdsDirectiveIdDc.add(2457);
+    }
+
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
     private int idSpeciesLink;
@@ -170,6 +185,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectViewDTO> speciesSitesTable;
     private List<SitesByNatureObjectViewDTO> subSpeciesSitesTable;
     private String scientificNameUrlEncoded;
+
+    private boolean habitatsDirective = false;
+    private boolean birdsDirective = false;
+
+    private int otherAgreements = 0;
 
     /**
      * Default Stripes handler
@@ -386,6 +406,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             legalStatuses.add(legalStatus);
+
+            if(habitatsDirectiveIdDc.contains(legalStatus.getIdDc())){
+                habitatsDirective = true;
+            } else if(birdsDirectiveIdDc.contains(legalStatus.getIdDc())){
+                birdsDirective = true;
+            } else {
+                otherAgreements++;
+            }
         }
 
         List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
@@ -923,8 +951,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             queries = fd.getQueryObjects();
 
             // runs all the queries
-            // todo: this is only to demo the way to display data
-
             allQueries = new ArrayList<Query>();
 
             for(ForeignDataQueryDTO queryDTO : queries){
@@ -1550,7 +1576,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Lists the habitats for the species
-     * todo: implement http://taskman.eionet.europa.eu/issues/17887
+     * todo: implement http://taskman.eionet.europa.eu/issues/19215
      * @return
      */
     public List<String> getHabitats(){
@@ -1558,11 +1584,35 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * todo: implement http://taskman.eionet.europa.eu/issues/17887
+     * Is protected by EU Directives (Birds/Habitats)
      * @return
      */
     public boolean isProtectedByEUDirectives(){
-        return false;
+        return isHabitatsDirective() || isBirdsDirective();
+    }
+
+    /**
+     * Checks if the species is in Habitats Directive
+     * @return
+     */
+    public boolean isHabitatsDirective(){
+        return habitatsDirective;
+    }
+
+    /**
+     * Checks if the species is in Birds Directive
+     * @return
+     */
+    public boolean isBirdsDirective(){
+        return birdsDirective;
+    }
+
+    /**
+     * Number of other agreements (not Birds / Habitats)
+     * @return
+     */
+    public int getOtherAgreements() {
+        return otherAgreements;
     }
 }
 

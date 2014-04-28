@@ -59,17 +59,20 @@
                             </li>
                             <li>
                                 <c:choose>
-                                    <c:when test="${actionBean.protectedByEUDirectives or fn:length(actionBean.legalStatuses)>0}">
+                                    <c:when test="${actionBean.protectedByEUDirectives or actionBean.otherAgreements > 0}">
                                         Protected by
-                                        <c:if test="${actionBean.protectedByEUDirectives}">
-                                            <span class="bold">EU Nature Directives</span>
+                                        <c:if test="${actionBean.habitatsDirective}">
+                                            <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">EU Habitats Directive</span></a>
                                         </c:if>
-                                        <c:if test="${actionBean.protectedByEUDirectives and fn:length(actionBean.legalStatuses)>0}">and</c:if>
-                                        <c:if test="${fn:length(actionBean.legalStatuses)>0}">
-                                            <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ fn:length(actionBean.legalStatuses) }</span></a>
-                                            <c:if test="${actionBean.protectedByEUDirectives and fn:length(actionBean.legalStatuses)>0}">other</c:if>
+                                        <c:if test="${actionBean.birdsDirective}">
+                                            <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">EU Birds Directive</span></a>
+                                        </c:if>
+                                        <c:if test="${actionBean.protectedByEUDirectives and actionBean.otherAgreements>0}">and</c:if>
+                                        <c:if test="${actionBean.otherAgreements > 0}">
+                                            <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ actionBean.otherAgreements }</span></a>
+                                            <c:if test="${actionBean.protectedByEUDirectives and actionBean.otherAgreements > 0}">other</c:if>
                                             <c:choose>
-                                                <c:when test="${fn:length(actionBean.legalStatuses)>1}">
+                                                <c:when test="${actionBean.otherAgreements > 1}">
                                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'international agreements')}
                                                 </c:when>
                                                 <c:otherwise>

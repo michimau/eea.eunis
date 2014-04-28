@@ -7,7 +7,8 @@ species and natural habitats of Community importance within the Union. It consis
 sites classified under the Birds Directive and the Habitats Directive (the Nature Directives).
 
 <h3>NATURA 2000 site under</h3>
-<table style="width: 600px">
+<table style="width: 600px" class="designations-table">
+    <colgroup><col/><col style=" text-align: right;"/></colgroup>
     <tr><td style="width: 400px">Birds Directive <span class="discreet">2009/147/EC</span>     (SPA)</td>
         <td>
             <c:choose>

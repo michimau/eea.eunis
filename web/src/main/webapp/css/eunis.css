@@ -568,3 +568,7 @@ div.overlay .formControls a {
 .map-border {
     border: 1px solid #999;
 }
+
+/*Sites Designations table, to display the second column aligned to the right */
+.designations-table tbody td { text-align: right }
+.designations-table tbody td:first-child { text-align: left }

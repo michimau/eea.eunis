@@ -121,7 +121,6 @@
       <%--<label for="EMERALD"><%=dbEmerald%></label>--%>
     <%--</td>--%>
     <td>
-      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>
       <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>
   </tr>

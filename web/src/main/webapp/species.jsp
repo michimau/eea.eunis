@@ -54,7 +54,7 @@
 <!-- MAIN CONTENT -->
 
               <div class="documentDescription">
-                 <%=cm.cmsPhrase( "Access information about species of interest for biodiversity and nature protection" )%>
+                 <%=cm.cmsPhrase( "Access information about species in Europe, particularly species mentioned in legal texts" )%>
               </div>
 
               <div id="qs" style="padding-left : 10px; width : 90%; vertical-align : middle;text-align:center">
@@ -105,7 +105,7 @@
                   <tr>
                     <td>
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-names.jsp" title="<%=cm.cmsPhrase("Search species by scientific name (in Latin) or by common name (popular name)")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
+                      <a href="species-names.jsp"><strong><%=cm.cmsPhrase("Names")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by common name (popular name)")%>
@@ -114,7 +114,7 @@
                   <tr>
                     <td>
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-groups.jsp" title="<%=cm.cmsPhrase("Species &amp; subspecies by Group (Invertebrates, Mammals etc.)")%>"><strong><%=cm.cmsPhrase("Groups")%></strong></a>
+                      <a href="species-groups.jsp"><strong><%=cm.cmsPhrase("Groups")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species &amp; subspecies by Group (Invertebrates, Mammals etc.)")%>

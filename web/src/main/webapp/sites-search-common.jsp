@@ -143,7 +143,7 @@ The following fields are declared below:
       <label for="DB_DIPLOMA"><%=cm.cmsPhrase("European Diploma")%></label>
     </td>
     <td>
-      <a href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>
+
     </td>
   </tr>
 </table>

@@ -36,7 +36,7 @@
         </h1>
 <!-- MAIN CONTENT -->
                 <div class="documentDescription">
-                  <%=cm.cmsPhrase("Access information about sites of interest for biodiversity and nature protection")%>
+                  <%=cm.cmsPhrase("Access information about protected and other designated sites relevant for fauna, flora and habitat protection in Europe")%>
                 </div>
                 <div style="text-align : center; padding-left : 10px; width : 90%; vertical-align : middle;">
                   <form name="quick_search" id="quick_search" action="sites-names-result.jsp" method="post" onsubmit="return validateQS();">
@@ -85,14 +85,14 @@
                 <tr>
                   <td>
                     <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                    <a title="<%=cm.cmsPhrase("Search sites by name")%>" href="sites-names.jsp">
+                    <a href="sites-names.jsp">
                       <strong>
                         <%=cm.cmsPhrase("Name")%>
                       </strong>
                     </a>
                   </td>
                   <td>
-                    <%=cm.cmsPhrase("Search sites by name")%>
+                    <%=cm.cmsPhrase("Search sites by name and type")%>
                   </td>
                 </tr>
               </tbody>
@@ -112,7 +112,7 @@
                         <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Search sites information using more complex filtering capabilities")%>" href="sites-advanced.jsp?natureobject=Sites">
+                            <a href="sites-advanced.jsp?natureobject=Sites">
                               <strong>
                                 <%=cm.cmsPhrase("Advanced Search")%>
                               </strong>
@@ -125,7 +125,7 @@
                         <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Help on sites Advanced Search")%>" href="advanced-help.jsp">
+                            <a href="advanced-help.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("How to use Advanced search")%>
                               </strong>
@@ -152,7 +152,7 @@
                         <tr>
                           <td>
                             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Find statistical data about sites")%>" href="sites-statistical.jsp">
+                            <a href="sites-statistical.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Number/Total area")%>
                               </strong>
@@ -179,7 +179,7 @@
                     <tr>
                       <td>
                         <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <a title="<%=cm.cmsPhrase("How to use Easy search")%>" href="easy-help.jsp">
+                        <a href="easy-help.jsp">
                           <strong>
                             <%=cm.cmsPhrase("How to use Easy search")%>
                           </strong>
@@ -192,7 +192,7 @@
                     <tr>
                       <td>
                         <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <a title="<%=cm.cmsPhrase("Sites online help")%>" href="sites-help.jsp">
+                        <a href="sites-help.jsp">
                           <strong>
                             <%=cm.cmsPhrase("How to use")%>
                           </strong>

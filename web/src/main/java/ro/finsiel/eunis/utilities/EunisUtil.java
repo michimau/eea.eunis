@@ -34,6 +34,24 @@ public class EunisUtil {
         defaultPictures.put("Reptiles","Reptiles");
     }
 
+    // species groups as a list for SQL IN, to determine if a species is in Natura or just other species
+    public static String SPECIES_GROUPS;
+
+    // initialize the species groups list
+    static {
+        StringBuilder groups = new StringBuilder();
+        for(String s : Constants.N2000_ALL_SPECIES_GROUPS){
+            groups.append("'").append(s).append("'");
+            groups.append(", ");
+        }
+
+        if(groups.length()>2){
+            groups.replace(groups.length()-2, groups.length(),"");
+        }
+        SPECIES_GROUPS = groups.toString();
+    }
+
+
     /**
      * Encode a string for XML or HTML.
      *

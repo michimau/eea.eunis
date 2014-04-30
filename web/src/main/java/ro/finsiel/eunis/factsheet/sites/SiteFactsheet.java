@@ -29,22 +29,6 @@ import eionet.eunis.dto.PictureDTO;
  */
 public class SiteFactsheet {
 
-    // species groups as a list for SQL IN
-    private static String SPECIES_GROUPS;
-
-    // initialize the species groups list
-    static {
-        StringBuilder groups = new StringBuilder();
-        for(String s : Constants.N2000_ALL_SPECIES_GROUPS){
-            groups.append("'").append(s).append("'");
-            groups.append(", ");
-        }
-
-        if(groups.length()>2){
-            groups.replace(groups.length()-2, groups.length(),"");
-        }
-        SPECIES_GROUPS = groups.toString();
-    }
 
     /**
      * Define a site of type NATURA 2000.
@@ -211,7 +195,7 @@ public class SiteFactsheet {
             results =
                     new SitesSpeciesReportAttributesDomain().findWhere("A.ID_NATURE_OBJECT='"
                             + getSiteObject().getIdNatureObject()
-                            + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE IN (" + SPECIES_GROUPS + ")");
+                            + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE IN (" + EunisUtil.SPECIES_GROUPS + ")");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();

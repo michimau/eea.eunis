@@ -13,6 +13,7 @@ import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtAreaLegalTextDomain;
@@ -325,8 +326,11 @@ public class SpeciesFactsheet {
                         + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
                         + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE A.ID_NATURE_OBJECT IN ( "
-                        + synonymsIDs + " )" + " GROUP BY C.ID_NATURE_OBJECT";
+                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                        + " LEFT JOIN CHM62EDT_REPORT_ATTRIBUTES AS F ON F.ID_REPORT_ATTRIBUTES = B.ID_REPORT_ATTRIBUTES "
+                        + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) "
+                        + " AND F.NAME='SOURCE_TABLE' AND F.VALUE IN (" + EunisUtil.SPECIES_GROUPS + ")"
+                        + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);
@@ -767,8 +771,12 @@ public class SpeciesFactsheet {
             Integer IdNatureObjectSpecie = getSpeciesNatureObject().getIdNatureObject();
             Integer IdSpecie = getSpeciesNatureObject().getIdSpecies();
 
+
             String synonymsIDs = getSpeciesSynonymsCommaSeparated(IdNatureObjectSpecie, IdSpecie);
             // System.out.println("synonymsIDs = " + synonymsIDs);
+
+// todo: debug only!!! Remove on prod until the data is moved
+            synonymsIDs = IdNatureObjectSpecie.toString();
 
             List<Chm62edtReportsPersist> list =
                     new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + synonymsIDs
@@ -778,7 +786,7 @@ public class SpeciesFactsheet {
                     LegalStatusWrapper legalStatus = new LegalStatusWrapper();
 
                     populateLegalStatusWrapper(legalStatus, report);
-
+                    System.out.println(legalStatus);
                     if (!results.contains(legalStatus)) {
                         results.add(legalStatus);
                     }
@@ -861,7 +869,7 @@ public class SpeciesFactsheet {
         IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
 
         // only searches in the first 5, so it doesn't cycle if incorrect data
-        for(int i=0;i<5;i++){
+        for(int i=0;i<1;i++){
             List<AttributeDto> dtoAttributes = dao.getDcAttributes(idDc);
             boolean foundParent = false;
             for(AttributeDto dtoA : dtoAttributes){

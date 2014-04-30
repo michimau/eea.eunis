@@ -295,9 +295,10 @@
                             <c:if test="${actionBean.rangeLayer}">
                                     <label for="range">
                                         <input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
-                                        Species range (2012, IUCN Red List)
+                                        Species range (2006, reported by EU Member States under Habitats Directive 92/43/EEC)
                                     </label>
-                                <p class="discreet">The species range marks roughly where the species could be found. Data source: <a href="http://www.iucnredlist.org/technical-documents/spatial-data">IUCN</a></p>
+                                <p class="discreet">
+                                    Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">Article 17 database</a>.</p>
                             </c:if>
 
                             <c:if test="${not empty actionBean.gbifCode}">

@@ -142,7 +142,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="showVernacularNames" value="true" />
 					<input type="hidden" name="showValidName" value="true" />
 					<input type="hidden" name="showOtherInfo" value="true" />
-                      <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_IS%>" />
+                      <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
 					<input type="hidden" name="searchVernacular" value="true" />
 					<input type="hidden" name="searchSynonyms" value="true" />
 					<input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
@@ -171,7 +171,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="useScientific" value="true" />
 					<input type="hidden" name="useVernacular" value="true" />
 					<input type="hidden" name="fuzzySearch" value="true" />
-					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
 					<label for="searchString" class="portlet-label">
 						<%=cm.cmsPhrase( "Habitat types" )%>
 					</label>&nbsp;
@@ -193,13 +193,13 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="showCoordinates" value="true" />
 					<input type="hidden" name="showSize" value="true" />
 					<input type="hidden" name="showDesignationYear" value="true" />
-                      <input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_NAME%>" />
+                      <input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_RELEVANCE%>" />
 					<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 					<input type="hidden" name="DB_NATURA2000" value="ON" />
 					<input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
 					<input type="hidden" name="DB_DIPLOMA" value="ON" />
 					<%--<input type="hidden" name="DB_EMERALD" value="ON" />--%>
-					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+					<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
 					<input type="hidden" name="fuzzySearch" value="true" />
 					<label for="englishName" class="portlet-label">
 						<%=cm.cmsPhrase( "Sites" )%>

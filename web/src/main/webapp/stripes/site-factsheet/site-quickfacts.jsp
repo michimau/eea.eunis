@@ -6,22 +6,35 @@
 		<div>
 		    <ul>
             <li>
-                <span class="bold">${ actionBean.typeTitle } site</span> <span class="discreet">(code ${ actionBean.idsite })</span>
+                <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
+                <span class="bold">${ actionBean.typeTitle }</span>
+                </a>
+                <span class="discreet">(code ${ actionBean.idsite })</span>
             </li>
             <c:if test="${ actionBean.typeNatura2000 and not empty actionBean.siteType}">
             <li>
-                Under:
-                <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}"><span class="bold">Birds Directive</span></c:if>
+                Under
+                <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
+                <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
+                <span class="bold">Birds Directive</span>
+                </a>
+                </c:if>
                 <c:if test="${actionBean.siteType eq 'C'}">and</c:if>
-                <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}"><span class="bold">Habitats Directive</span></c:if>
+                <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
+                <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
+                <span class="bold">Habitats Directive</span>
+                </a>
+                </c:if>
             </li>
             </c:if>
             <li>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Since:')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Since')}
               <span class="bold">
                   <c:choose>
                    <c:when test="${not empty actionBean.siteDesignationDateDisplayValue}">
+                      <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
                        <fmt:formatDate value="${ (actionBean.siteDesignationDateDisplayValue) }" pattern="${actionBean.dateFormat}"/>
+                      </a>
                    </c:when>
                    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                   </c:choose>
@@ -64,7 +77,7 @@
                         <c:when test="${not empty actionBean.marineAreaPercentage and actionBean.marineAreaPercentage != 0}">
                             ${actionBean.marineAreaPercentage}%
                         </c:when>
-                        <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'No')}</c:otherwise>
+                        <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                     </c:choose>
                 </span>
             </li>
@@ -86,10 +99,18 @@
 
             <c:if test="${ actionBean.typeNatura2000 }">
             <li>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.protectedSpeciesCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')}
+                <a href="${ actionBean.pageUrl }#tab-species" onclick="openSection('tab-species');">
+                    <span class="bold">${ (actionBean.protectedSpeciesCount) }</span>
+                </a>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}
             </li>
             <li>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')} <span class="bold">${ (actionBean.habitatsCount) }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')}
+                <a href="${ actionBean.pageUrl }#tab-habitats" onclick="openSection('tab-habitats');">
+                    <span class="bold">${ (actionBean.habitatsCount) }</span>
+                </a>
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}
             </li>
             </c:if>
           </ul>

@@ -20,6 +20,12 @@
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
 
+        <script>
+            function openSection(sectionName) {
+                if($('#' + sectionName + ' ~ h2').attr('class').indexOf('current')==-1)
+                    $('#' + sectionName + ' ~ h2').click();
+            }
+        </script>
 
         <style>
 	        .cell-title {
@@ -137,18 +143,21 @@
                 <div>
                     <div class="eea-accordion-panels non-exclusive collapsed-by-default">
                         <div class="eea-accordion-panel" style="clear: both;" id="tab-species-accordion">
+                            <a id="tab-species"></a>
                             <h2 class="notoc eea-icon-right-container">Species</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-species.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="tab-habitats-accordion">
+                            <a id="tab-habitats"></a>
                             <h2 class="notoc eea-icon-right-container">Habitat types</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-habitats.jsp"/>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="tab-designations-accordion">
+                            <a id="tab-designations" ></a>
                             <h2 class="notoc eea-icon-right-container">Designation info</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-designations.jsp"/>
@@ -169,6 +178,7 @@
                             </script>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">
+                            <a id="other-resources" ></a>
                             <h2 class="notoc eea-icon-right-container">Other resources</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-other-resources.jsp"/>

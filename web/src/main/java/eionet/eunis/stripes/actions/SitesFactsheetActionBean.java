@@ -53,12 +53,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         biogeographicRegionTitles.put("pontic", "Black Sea");
         biogeographicRegionTitles.put("steppic", "Steppic");
 
-        sourceDBTitles.put("NATURA2000", "Natura 2000");
-        sourceDBTitles.put("CORINE", "Corine");
-        sourceDBTitles.put("CDDA_NATIONAL", "CDDA National");
-        sourceDBTitles.put("EMERALD", "Emerald");
-        sourceDBTitles.put("DIPLOMA", "Diploma");
-        sourceDBTitles.put("BIOGENETIC", "Biogenetic");
+        sourceDBTitles.put("NATURA2000", "Natura 2000 site");
+        sourceDBTitles.put("CORINE", "Corine site");
+        sourceDBTitles.put("CDDA_NATIONAL", "Nationally designated area");
+        sourceDBTitles.put("EMERALD", "Emerald site");
+        sourceDBTitles.put("DIPLOMA", "Diploma site");
+        sourceDBTitles.put("BIOGENETIC", "Biogenetic site");
 
     }
 

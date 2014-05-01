@@ -443,7 +443,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if(link.getName().equalsIgnoreCase("Invasive species information")){
                 addToLinks = false;
             }
-            if(link.getName().contains("Bug guide")){
+            if(link.getName().toLowerCase().contains("bug guide")){
                 addToLinks = false;
             }
 

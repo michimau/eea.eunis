@@ -46,7 +46,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-        <c:if test="${actionBean.totalSpeciesCount>24}"></div></c:if>
+        <c:if test="${actionBean.totalSpeciesCount>18}"></div></c:if>
 
 
 	</div>

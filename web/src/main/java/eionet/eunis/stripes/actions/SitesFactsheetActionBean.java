@@ -57,7 +57,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         sourceDBTitles.put("CORINE", "Corine site");
         sourceDBTitles.put("CDDA_NATIONAL", "Nationally designated area");
         sourceDBTitles.put("EMERALD", "Emerald site");
-        sourceDBTitles.put("DIPLOMA", "Diploma site");
+        sourceDBTitles.put("DIPLOMA", "European Diploma of Protected Areas");
         sourceDBTitles.put("BIOGENETIC", "Biogenetic site");
 
     }
@@ -156,7 +156,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         }
 
         // Forward to the factsheet layout page.
-        return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
+        if(isTypeDiploma()) {
+            return new ForwardResolution("/stripes/site-factsheet/site-factsheet-diploma.layout.jsp");
+        } else {
+            return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
+        }
     }
 
     /**
@@ -304,6 +308,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             this.siteDesignationDateDisplayValue = least(least(spaDate, sacDate), proposedDate);
         } else if (isTypeCDDA()){
             this.siteDesignationDateDisplayValue = parseDate(factsheet.getSiteObject().getDesignationDate());
+        } else if (isTypeDiploma()){
+            this.siteDesignationDateDisplayValue = parseDate(factsheet.getSiteObject().getDesignationDate());
         }
     }
 
@@ -447,6 +453,10 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     public boolean isTypeCorine() {
         return factsheet.getType() == SiteFactsheet.TYPE_CORINE;
+    }
+
+    public boolean isTypeDiploma() {
+        return factsheet.getType() == SiteFactsheet.TYPE_DIPLOMA;
     }
 
     public boolean isTypeNatura2000(){

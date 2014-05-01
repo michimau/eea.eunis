@@ -125,6 +125,9 @@
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Nationally designated areas (CDDA)')}
                 </a></p>
             </c:if>
+            <c:if test="${actionBean.typeDiploma}">
+                <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source and more information')}: <a href="http://www.coe.int/t/dg4/cultureheritage/nature/diploma/default_en.asp" target="_BLANK">${eunis:cmsPhrase(actionBean.contentManagement, 'Council of Europe')}</a></p>
+            </c:if>
 		</div>
 	</div>
 </stripes:layout-definition>

@@ -108,7 +108,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List legalInfo = null;
     private Set<String> protectedBy = null;
 
-    private List annex1Species = null;
     private String englishDescription = null;
 
     private List speciesForHabitats = null;
@@ -599,10 +598,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      * @return List of species for this habitat
      */
     public List getSpecies() {
-        if(annex1Species == null){
-            annex1Species = factsheet.getSpeciesForHabitats();
+        if(speciesForHabitats == null) {
+            speciesForHabitats = factsheet.getSpeciesForHabitats();
         }
-        return annex1Species;
+        return speciesForHabitats;
     }
 
     private List habitatSintaxa = null;
@@ -620,16 +619,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
         return habitatSintaxa;
-    }
-
-    /**
-     * The list of species
-     */
-    public List getSpeciesForHabitats(){
-        if(speciesForHabitats == null) {
-            speciesForHabitats = factsheet.getSpeciesForHabitats();
-        }
-        return speciesForHabitats;
     }
 
     /**

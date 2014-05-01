@@ -21,6 +21,8 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
     private Integer idSpeciesLink = null;
     private String speciesScientificName = null;
     private Integer IdReportType = null;
+    private String groupName = null;
+    private Integer idNatureObjectSpecies = null;
 
     public HabitatsNatureObjectReportTypeSpeciesPersist() {
         super();
@@ -112,5 +114,21 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
 
     public void setIdReportType(Integer idReportType) {
         IdReportType = idReportType;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public Integer getIdNatureObjectSpecies() {
+        return idNatureObjectSpecies;
+    }
+
+    public void setIdNatureObjectSpecies(Integer idNatureObjectSpecies) {
+        this.idNatureObjectSpecies = idNatureObjectSpecies;
     }
 }

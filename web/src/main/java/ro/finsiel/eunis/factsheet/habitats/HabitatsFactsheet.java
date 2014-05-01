@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sf.jrf.exceptions.DatabaseException;
 
 import org.apache.log4j.Logger;
@@ -76,6 +77,8 @@ import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTyp
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
+import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
 import eionet.eunis.dto.PictureDTO;
 
@@ -2037,36 +2040,29 @@ public class HabitatsFactsheet {
      */
     public List getSpeciesForHabitats() {
         Vector results = new Vector();
-        List species = null;
+        List speciesList = null;
 
         try {
-            species = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
+            speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
                     + " GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
-            if (species != null) {
-                for (int i = 0; i < species.size(); i++) {
-                    HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) species.get(
-                            i);
-                    String abundance = findReportTypeValue(
-                            specie.getIdReportType(), "ABUNDANCE");
-                    String frequencies = findReportTypeValue(
-                            specie.getIdReportType(), "FREQUENCIES");
-                    String faithfulness = findReportTypeValue(
-                            specie.getIdReportType(), "FAITHFULNESS");
-                    String speciesStatus = findReportTypeValue(
-                            specie.getIdReportType(), "SPECIES_STATUS");
-                    String comment = findReportAttributesValue(
-                            specie.getIdReportAttributes(), "comment");
-                    String geoscope = CountryUtil.findBiogeoregionByIDGeoscope(
-                            specie.getIdGeoscope());
+            if (speciesList != null) {
+                for (Object specy : speciesList) {
+                    HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;
+                    List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
+                    String englishName = "";
+                    for (VernacularNameWrapper vernName : vernNames) {
+                        if (vernName.getLanguageCode().toLowerCase().equals("en")) {
+                            englishName = vernName.getName();
+                            break;
+                        }
+                    }
 
-                    results.addElement(
-                            new HabitatsSpeciesWrapper(specie.getIdSpecies(),
-                                    specie.getIdSpeciesLink(),
-                                    specie.getSpeciesScientificName(), geoscope,
-                                    abundance, frequencies, faithfulness, speciesStatus,
-                                    comment));
+                    SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
+                            englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());
+
+                    results.add(speciesBean);
                 }
             }
         } catch (Exception _ex) {

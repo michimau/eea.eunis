@@ -74,6 +74,13 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
         species.addJoinColumn(
                 new StringJoinColumn("SCIENTIFIC_NAME",
                 "setSpeciesScientificName"));
+        species.addJoinColumn(
+                new IntegerJoinColumn("ID_NATURE_OBJECT",
+                "setIdNatureObjectSpecies"));
         natureObjectReportType.addJoinTable(species);
+
+        JoinTable group = new JoinTable("CHM62EDT_GROUP_SPECIES", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        group.addJoinColumn(new StringJoinColumn("COMMON_NAME", "setGroupName"));
+        species.addJoinTable(group);
     }
 }

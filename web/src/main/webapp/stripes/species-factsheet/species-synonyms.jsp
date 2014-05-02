@@ -110,7 +110,7 @@
         </div>
     </c:when>
         <c:otherwise>
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'The species has no synonyms')}
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'No synonyms available.')}
         </c:otherwise>
     </c:choose>
 

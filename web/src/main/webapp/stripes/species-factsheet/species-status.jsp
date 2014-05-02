@@ -10,7 +10,7 @@
 
                 <div class="left-area iucn-red-list-area">
                   <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
-                  <p>The Threat Status' concept in IUCN Red List assess the distance from extinction.</p>
+                  <p>The Threat Status' concept in IUCN Red List assess the risk of extinction.</p>
                     <div class="threat-status-indicator width-14">
                         <c:if test="${not empty actionBean.consStatus}">
 
@@ -143,7 +143,7 @@
 
                 <div class="right-area conservation-status">
                     <h3>EU's conservation status</h3>
-                    <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
+                    <p>EU's conservation status assesses every six years the distance from a defined favorable situation as described in the Habitats Directive.</p>
                     <div class="map-border">
                         <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
                     </div>
@@ -166,7 +166,7 @@
                                     </c:if>
                                     <c:if test="${not empty actionBean.conservationStatus}">
                                         <li>
-                                            <a href="${actionBean.conservationStatus.url}">Conservation status 2006 - expert table</a>
+                                            <a href="${actionBean.conservationStatus.url}">Conservation status 2006 - Experts web tool</a>
                                         </li>
                                     </c:if>
                                 </ul>

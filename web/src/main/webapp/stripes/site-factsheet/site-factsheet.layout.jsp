@@ -158,7 +158,7 @@
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="tab-designations-accordion">
                             <a id="tab-designations" ></a>
-                            <h2 class="notoc eea-icon-right-container">Designation info</h2>
+                            <h2 class="notoc eea-icon-right-container">Designation information</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/site-factsheet/site-tab-designations.jsp"/>
                             </div>

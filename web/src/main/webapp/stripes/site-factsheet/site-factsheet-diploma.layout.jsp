@@ -41,7 +41,9 @@
 
                 <h1>${actionBean.siteName}</h1>
                 <%-- Site map --%>
-                <stripes:layout-render name="/stripes/site-factsheet/site-map.jsp"/>
+                <div class="left-area">
+                    <img src="images/LogoDiplomaSites_en.png" style="width: 350px; height: 346px;">
+                </div>
 
                 <%-- Quick facts --%>
                 <stripes:layout-render name="/stripes/site-factsheet/site-quickfacts.jsp"/>

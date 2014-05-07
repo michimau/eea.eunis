@@ -50,7 +50,7 @@
                 </span>
             </li>
 			<li>
-			    ${eunis:cmsPhrase(actionBean.contentManagement, 'Region:')}
+			    ${eunis:cmsPhrase(actionBean.contentManagement, 'Administrative region:')}
 			    <c:choose>
                 <c:when test="${not empty actionBean.regions}">
                     <c:forEach var="region" items="${actionBean.regions}" varStatus="status">

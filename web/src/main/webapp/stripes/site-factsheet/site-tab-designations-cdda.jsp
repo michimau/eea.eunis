@@ -17,6 +17,9 @@ Agency.
     <thead>
     <tr>
         <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Code')}
+        </th>
+        <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name (Original)')}
         </th>
         <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}" style="text-align: left;">
@@ -34,6 +37,9 @@ Agency.
 
     <c:forEach items="${actionBean.sitesDesigc}" var="desig">
         <tr>
+            <td>
+                <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.idDesignation}</a>
+            </td>
             <td>
                 <a href="designations/${desig.idGeoscope}:${desig.idDesignation}?fromWhere=en">${desig.description}</a>
             </td>

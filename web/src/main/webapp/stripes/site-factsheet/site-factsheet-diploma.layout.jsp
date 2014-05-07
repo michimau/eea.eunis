@@ -42,7 +42,7 @@
                 <h1>${actionBean.siteName}</h1>
                 <%-- Site map --%>
                 <div class="left-area">
-                    <img src="images/LogoDiplomaSites_en.png" style="width: 350px; height: 346px;">
+                    <img src="images/LogoDiplomaSites_en.png" style="width: 250px; height: 247px;">
                 </div>
 
                 <%-- Quick facts --%>

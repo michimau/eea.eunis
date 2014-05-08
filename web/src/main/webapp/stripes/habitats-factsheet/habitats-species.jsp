@@ -81,7 +81,7 @@
                     <tr>
                         <%--<th scope="col">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000')}</th>--%>
                         <th scope="col">${eunis:cmsPhrase(actionBean.contentManagement, 'Species scientific name')}</th>
-                        <th scope="col">${eunis:cmsPhrase(actionBean.contentManagement, 'Common name')}</th>
+                        <th scope="col">${eunis:cmsPhrase(actionBean.contentManagement, 'English common name')}</th>
                         <th scope="col">${eunis:cmsPhrase(actionBean.contentManagement, 'Species group')}</th>
                     </tr>
                     </thead>

@@ -543,9 +543,15 @@ div.overlay .formControls a {
 }
 
 .documentFirstHeading {
-  padding-right: 0;
+  border-bottom: 0;
+  margin-bottom: 0px;
 }
 
+.documentSecondHeading {
+  color: #888;
+  margin-top: 0px;
+  padding-top: 0;
+}
 
 /* IUCN Red List on species profile #19228 */
 #content .threat-status-indicator .roundedCorners {

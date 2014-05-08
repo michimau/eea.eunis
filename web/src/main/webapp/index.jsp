@@ -121,8 +121,11 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 		</jsp:include>
 		<a name="documentContent"></a>
 		<h1 class="documentFirstHeading">
-			<%=cm.cmsPhrase( "Welcome to EUNIS, the European Nature Information System - find species, habitat types and sites across Europe" )%>
+			<%=cm.cmsPhrase( "Welcome to EUNIS, the European Nature Information System" )%>
 		</h1>
+		<h2 class="documentSecondHeading">
+			<%=cm.cmsPhrase( "Find species, habitat types and protected sites across Europe" )%>
+		</h2>
 		<div class="visualClear"><!--&nbsp; --></div>
     <div class="homepage-content">
 			<div class="figure-right">
@@ -156,7 +159,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<br />
 					
 					<div class="search_details">
-						<%=cm.cmsPhrase( "Information about species and subspecies in Europe." )%>
+						<%=cm.cmsPhrase( "Information about species in Europe, particularly species mentioned in legal texts" )%>
 					</div>
           <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Species search tools")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>
@@ -180,7 +183,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<br />	
 					
 					<div class="search_details">
-						<%=cm.cmsPhrase( "Information about the EUNIS habitat types classification and Habitats Directive Annex I habitats " )%>
+						<%=cm.cmsPhrase( "Information about the EUNIS habitat classification and the EU Habitats Directive Annex I habitat types" )%>
 					</div>
           <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Habitat types search tools")%>" href="habitats.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>
@@ -209,7 +212,7 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<br />
 					
 					<div class="search_details">
-						<%=cm.cmsPhrase( "Information collected from various databases regarding sites" )%>
+						<%=cm.cmsPhrase( "Information about protected and other designated sites in Europe" )%>
 					</div>
           <a class="search-tools-link" title="<%=cm.cmsPhrase("Go to Sites search tools")%>" href="sites.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 				</form>

@@ -16,7 +16,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
 %>
 <stripes:layout-render name="/stripes/common/template.jsp" hideMenu="true" pageTitle="${title}" btrail="<%= btrail %>">
     <stripes:layout-component name="head">
-        <link rel="stylesheet" type="text/css" href="/css/temp_gallery.css">
+        <link rel="stylesheet" type="text/css" href="css/temp_gallery.css">
         <link rel="stylesheet" type="text/css" href="${actionBean.context.distributionArcgisCSS}"/>
         <!-- Custom js needed for Species page -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/temp_gallery.js"></script>

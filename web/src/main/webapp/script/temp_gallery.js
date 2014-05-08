@@ -628,13 +628,20 @@ if (typeof Object.create !== 'function') {
                 var self = this,
                     dom = this.dom;
 
+                var overlayText = '';
+                if ( typeof self.gvImages[i].attrs.title !== 'undefined') {
+                    overlayText = '<h4>' + self.gvImages[i].attrs.title + '</h4>';
+                }
+                if ( typeof self.gvImages[i].attrs.description !== 'undefined') {
+                    overlayText = overlayText + '<p>' + self.gvImages[i].attrs.description + '</p>';
+                }
                 if(this.overlayVisible) {
                     this.hideOverlay(null,function(){
-                        dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
+                        dom.gv_overlay.html(overlayText);
                         self.showOverlay();
                     });
                 } else {
-                    dom.gv_overlay.html('<h4>'+self.gvImages[i].attrs.title+'</h4><p>'+self.gvImages[i].attrs.description+'</p>');
+                    dom.gv_overlay.html(overlayText);
                     dom.gv_overlay.css(this.opts.overlay_position,-1 * dom.gv_overlay.outerHeight());
                 }
 
@@ -917,7 +924,7 @@ if (typeof Object.create !== 'function') {
                 this.$el = $(el);
                 this.id = el.id;
                 this.iterator = this.frameIterator = this.opts.start_frame - 1;
-                this.overlayVisible = false;
+                this.overlayVisible = true;
                 this.playing = false;
                 this.scrolling = false;
                 this.isMouseDown = false;

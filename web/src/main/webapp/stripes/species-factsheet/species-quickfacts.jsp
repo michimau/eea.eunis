@@ -23,11 +23,13 @@
                         <%--<li><img src="monkey-with-makeup/image_large" /></li>--%>
                     <%--</ul>--%>
                     <%----%>
-                    <ul id="speciesGallery" class="galleryViewss">
+                    <ul id="speciesGallery" class="galleryViewss" style="display: none;">
                             <c:forEach items="${actionBean.pics}" var="pic" varStatus="loop">
                                 <li>
                                     <img src="${pic.path}/${pic.filename}"
+                                    <c:if test="${not empty pic.source && not pic.source.toLowerCase().contains('saxifraga')}">
                                     title="${pic.description}"
+                                    </c:if>
                                      style="display: none;"
                                      data-description="${pic.source}"
                                      />

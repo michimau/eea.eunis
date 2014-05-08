@@ -6,25 +6,29 @@
 		<div>
 		    <ul>
             <li>
+              <c:if test="${not actionBean.typeDiploma}">
                 <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
+              </c:if>
                 <span class="bold">${ actionBean.typeTitle }</span>
+              <c:if test="${not actionBean.typeDiploma}">
                 </a>
+              </c:if>
                 <span class="discreet">(code ${ actionBean.idsite })</span>
             </li>
             <c:if test="${ actionBean.typeNatura2000 and not empty actionBean.siteType}">
             <li>
                 Under
-                <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
+              <c:if test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
                 <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
                 <span class="bold">Birds Directive</span>
                 </a>
-                </c:if>
+              </c:if>
                 <c:if test="${actionBean.siteType eq 'C'}">and</c:if>
-                <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
+              <c:if test="${actionBean.siteType eq 'B' or actionBean.siteType eq 'C'}">
                 <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
                 <span class="bold">Habitats Directive</span>
                 </a>
-                </c:if>
+              </c:if>
             </li>
             </c:if>
             <li>
@@ -32,9 +36,13 @@
               <span class="bold">
                   <c:choose>
                    <c:when test="${not empty actionBean.siteDesignationDateDisplayValue}">
+	                 <c:if test="${not actionBean.typeDiploma}">
                       <a href="${ actionBean.pageUrl }#tab-designations" onclick="openSection('tab-designations');">
+                     </c:if>
                        <fmt:formatDate value="${ (actionBean.siteDesignationDateDisplayValue) }" pattern="${actionBean.dateFormat}"/>
+	                 <c:if test="${not actionBean.typeDiploma}">
                       </a>
+                     </c:if>
                    </c:when>
                    <c:otherwise>${eunis:cmsPhrase(actionBean.contentManagement, 'Not available')}</c:otherwise>
                   </c:choose>

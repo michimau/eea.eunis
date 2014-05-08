@@ -40,11 +40,12 @@
             <c:when test="${eunis:exists(actionBean.factsheet)}">
 
                 <h1>${actionBean.siteName}</h1>
-                <%-- Site map --%>
-                <div class="left-area">
-                    <img src="images/LogoDiplomaSites_en.png" style="width: 250px; height: 247px;">
-                </div>
-
+                <%-- Logo instead of site map for diploma sites --%>
+		        <div class="left-area text-center">
+		          <img src="images/LogoDiplomaSites_en.png" style="width: 250px; height: 247px;">
+                  <div style="width:99.0%; height:20px;"></div>
+                  <a class="interactive-map-more discreet" href="http://maps.google.com/maps?ll=${actionBean.factsheet.siteObject.latitude},${actionBean.factsheet.siteObject.longitude}&amp;z=13">View in Google Maps</a>
+		        </div>
                 <%-- Quick facts --%>
                 <stripes:layout-render name="/stripes/site-factsheet/site-quickfacts.jsp"/>
 

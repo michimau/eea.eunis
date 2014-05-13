@@ -52,6 +52,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         biogeographicRegionTitles.put("pannonic", "Pannonian");
         biogeographicRegionTitles.put("pontic", "Black Sea");
         biogeographicRegionTitles.put("steppic", "Steppic");
+        biogeographicRegionTitles.put("marineAtlantic", "Marine Atlantic");
+        biogeographicRegionTitles.put("marineBaltic", "Marine Baltic");
+        biogeographicRegionTitles.put("marineBlackSea", "Marine Black Sea");
+        biogeographicRegionTitles.put("marineMacaronesian", "Marine Macaronesian");
+        biogeographicRegionTitles.put("marineMediterranean", "Marine Mediterranean");
 
         sourceDBTitles.put("NATURA2000", "Natura 2000 site");
         sourceDBTitles.put("CORINE", "Corine site");
@@ -381,32 +386,39 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                 boolean alpine = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ALPINE"), false);
                 boolean anatol1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ANATOL"), false);
                 boolean anatol2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ANATOLIAN"), false);
-                boolean anatol = anatol1 || anatol2;
+
                 boolean arctic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ARCTIC"), false);
                 boolean atlantic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ATLANTIC"), false);
                 boolean boreal = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BOREAL"), false);
                 boolean continent1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENT"), false);
                 boolean continent2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENTAL"), false);
-                boolean continent = continent1 || continent2;
+
                 boolean macarones1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONES"), false);
                 boolean macarones2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONESIAN"), false);
-                boolean macarones = macarones1 || macarones2;
+
                 boolean mediterranean1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANIAN"), false);
                 boolean mediterranean2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANEAN"), false);
-                boolean mediterranean = mediterranean1 || mediterranean2;
+
                 boolean pannonic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIC"), false);
                 boolean pannonic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIAN"), false);
-                boolean pannonic = pannonic1 || pannonic2;
+
                 boolean pontic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PONTIC"), false);
                 boolean pontic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BLACK SEA"), false);
-                boolean pontic = pontic1 || pontic2;
+                boolean pontic3 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BLACKSEA"), false);
+
                 boolean steppic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("STEPPIC"), false);
+
+                boolean marineAtlantic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MARINEATLANTIC"), false);
+                boolean marineBaltic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MARINEBALTIC"), false);
+                boolean marineBlackSea = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MARINEBLACKSEA"), false);
+                boolean marineMacaronesian = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MARINEMACARONESIAN"), false);
+                boolean marineMediterranean = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MARINEMEDITERRANEAN"), false);
 
                 if (alpine) {
                     bioRegionsMap.put("alpine", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("alpine"));
                 }
-                if (anatol) {
+                if (anatol1 || anatol2) {
                     bioRegionsMap.put("anatol", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("anatol"));
                 }
@@ -422,29 +434,49 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                     bioRegionsMap.put("boreal", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("boreal"));
                 }
-                if (continent) {
+                if (continent1 || continent2) {
                     bioRegionsMap.put("continent", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("continent"));
                 }
-                if (macarones) {
+                if (macarones1 || macarones2) {
                     bioRegionsMap.put("macarones", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("macarones"));
                 }
-                if (mediterranean) {
+                if (mediterranean1 || mediterranean2) {
                     bioRegionsMap.put("mediterranean", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("mediterranean"));
                 }
-                if (pannonic) {
+                if (pannonic1 || pannonic2) {
                     bioRegionsMap.put("pannonic", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("pannonic"));
                 }
-                if (pontic) {
+                if (pontic1 || pontic2 || pontic3) {
                     bioRegionsMap.put("pontic", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("pontic"));
                 }
                 if (steppic) {
                     bioRegionsMap.put("steppic", "");
                     biogeographicRegion.add(biogeographicRegionTitles.get("steppic"));
+                }
+                if(marineAtlantic) {
+                    bioRegionsMap.put("marineAtlantic","");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("marineAtlantic"));
+                }
+                if(marineBaltic) {
+                    bioRegionsMap.put("marineBaltic","");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("marineBaltic"));
+                }
+                if(marineBlackSea) {
+                    bioRegionsMap.put("marineBlackSea","");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("marineBlackSea"));
+                }
+                if(marineMacaronesian) {
+                    bioRegionsMap.put("marineMacaronesian","");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("marineMacaronesian"));
+                }
+                if(marineMediterranean) {
+                    bioRegionsMap.put("marineMediterranean","");
+                    biogeographicRegion.add(biogeographicRegionTitles.get("marineMediterranean"));
                 }
             }
         }

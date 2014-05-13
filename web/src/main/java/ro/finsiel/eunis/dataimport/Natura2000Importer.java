@@ -3,6 +3,7 @@ package ro.finsiel.eunis.dataimport;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,17 +54,16 @@ public class Natura2000Importer {
                     fis = new FileInputStream(f);
                     bis = new BufferedInputStream(fis);
 
-                    System.out.print(cnt + ". Importing file: " + f.getName());
+                    System.out.print(cnt + ". Importing file: " + f.getName() + " (start at " + new Date() + ")  ");
 
                     try{
                         Natura2000ParserCallbackV2 callback = new Natura2000ParserCallbackV2(sqlUtilities);
                         CallbackSAXParser parser = new CallbackSAXParser(callback);
                         parser.setDebug(false);
                         List<Exception> file_errors = parser.execute(bis);
-                        for(Exception e : errors) e.printStackTrace();
-                        bis.close();
+                        for(Exception e : file_errors) e.printStackTrace();
 
-                        if (file_errors != null && file_errors.size() > 0) {
+                        if (file_errors.size() > 0) {
                             System.out.println(" - import failed.");
                             errors.addAll(file_errors);
                         } else {
@@ -71,12 +71,12 @@ public class Natura2000Importer {
                         }
                     } catch (Exception e){
                         e.printStackTrace();
+                    } finally {
+                        cnt++;
+                        bis.close();
                     }
-
-                    cnt++;
-                    bis.close();
                 }
-                if (errors != null && errors.size() > 0) {
+                if (errors.size() > 0) {
                     System.out.println("Error(s) occured during import:");
                     for (Exception error : errors) {
                         System.out.println(error);

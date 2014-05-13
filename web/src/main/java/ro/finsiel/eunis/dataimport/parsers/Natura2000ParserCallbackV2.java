@@ -828,8 +828,7 @@ public class Natura2000ParserCallbackV2 {
 
     private boolean bioregionExists(String bioRegionCode) {
         boolean ret = false;
-        String query = "SELECT ID_BIOGEOREGION FROM chm62edt_biogeoregion WHERE UPPER(NAME) = '"
-                + EunisUtil.replaceTags(bioRegionCode.toUpperCase()) + "'";
+        String query = "SELECT ID_BIOGEOREGION FROM chm62edt_biogeoregion WHERE CODE_SDF = '" + bioRegionCode + "'";
         String brId = sqlUtilities.ExecuteSQL(query);
 
         if (brId != null && brId.length() > 0) {

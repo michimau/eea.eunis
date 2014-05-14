@@ -166,7 +166,7 @@
                                     </c:if>
                                     <c:if test="${not empty actionBean.conservationStatus}">
                                         <li>
-                                            <a href="${actionBean.conservationStatus.url}">Conservation status 2006 - Experts web tool</a>
+                                            <a href="${actionBean.conservationStatus.url}">${actionBean.conservationStatus.name}</a>
                                         </li>
                                     </c:if>
                                 </ul>

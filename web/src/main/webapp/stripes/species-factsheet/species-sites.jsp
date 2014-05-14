@@ -53,14 +53,14 @@
                     </div>
                 </div>
                 <script>
-                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SpeciesName=${actionBean.scientificNameUrlEncoded}");
+                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&SpeciesCode=${actionBean.n2000id}");
                 </script>
 
 
 		        <script type="text/javascript">
 
 		            function setMapSiteId(sitecode){
-		            	document.getElementById('protectionMap').src='http://discomap.eea.europa.eu/map/Filtermap/?webmap=0b2680c2bc544431a9a97119aa63d707&SiteCode='+sitecode+'&SpeciesName=${actionBean.scientificNameUrlEncoded}';
+		            	document.getElementById('protectionMap').src='http://discomap.eea.europa.eu/map/Filtermap/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&zoomto=True&SiteCode='+sitecode+'&SpeciesCode=${actionBean.n2000id}';
 		            }
 
 		        </script>

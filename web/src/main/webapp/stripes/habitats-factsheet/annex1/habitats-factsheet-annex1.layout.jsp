@@ -55,7 +55,7 @@
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="conservation-accordion">
                             <h2 class="notoc eea-icon-right-container">Conservation status</h2>
-                            <div class="pane">
+                            <div class="pane" id="conservationPane">
                                 <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-conservation.jsp"/>
                             </div>
                         </div>

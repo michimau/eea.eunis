@@ -149,7 +149,7 @@
                     </div>
 
                     <script>
-                        addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=7ddade4a57384b48ae2f4f020b6a813b&speciesname=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}");
+                        addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=f50de51b438446499382664f9620081f&Code=${actionBean.n2000id}");
                     </script>
 
                     <div class="footer">

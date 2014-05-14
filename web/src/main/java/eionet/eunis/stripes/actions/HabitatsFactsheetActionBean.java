@@ -280,7 +280,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
                     conservationStatusPDF = link;
                     addToLinks = false;
-                } else if (link.getName().equalsIgnoreCase("Conservation status 2006 (art. 17)")){
+                } else if (link.getName().equalsIgnoreCase("Conservation status 2012 - Experts web tool")){
                     conservationStatus = link;
                     addToLinks = false;
                 }

@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import eionet.eunis.dao.IReferencesDao;
+import eionet.eunis.dto.*;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -15,6 +17,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
+import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
@@ -23,11 +26,6 @@ import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTyp
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.ForeignDataQueryDTO;
-import eionet.eunis.dto.HabitatFactsheetOtherDTO;
-import eionet.eunis.dto.LinkDTO;
-import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
@@ -546,8 +544,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public Set<String> getProtectedBy() {
         if(protectedBy == null){
             Set<String> s = new HashSet<String>();
-            for(HabitatLegalPersist h : getLegalInfo()) {
-                s.add(h.getLegalName());
+            for(LegalStatusWrapper h : getLegalInfo()) {
+                s.add(h.getLegalPersist().getLegalName());
             }
             protectedBy = s;
         }
@@ -568,11 +566,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return false;
     }
 
+    /**
+     * todo: to be changed to reflect the changes in legal status
+     * @deprecated
+     * @return
+     */
     public String getEquivalentEUHabitats() {
         String result = "";
-        for(HabitatLegalPersist h : getLegalInfo()) {
-            if(h.getLegalName().contains("EU Habitats Directive"))
-                result = h.getTitle();
+        for(LegalStatusWrapper h : getLegalInfo()) {
+            if(h.getLegalPersist().getLegalName().contains("EU Habitats Directive"))
+                result = h.getLegalPersist().getTitle();
         }
 
         return result;
@@ -582,15 +585,66 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      * Returns the legal info list
      * @return List of HabitatLegalPersist objects
      */
-    public List<HabitatLegalPersist> getLegalInfo() {
+    public List<LegalStatusWrapper> getLegalInfo() {
         if(legalInfo == null){
             try {
-                legalInfo = factsheet.getHabitatLegalInfo();
+                legalInfo = new ArrayList<LegalStatusWrapper>();
+                List li = factsheet.getHabitatLegalInfo();
+                for(Object hlp : li) {
+                    LegalStatusWrapper legalStatusWrapper = new LegalStatusWrapper((HabitatLegalPersist)hlp);
+                    legalInfo.add(legalStatusWrapper);
+
+                    IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+                    DcIndexDTO annex = dao.getDcIndex(legalStatusWrapper.getLegalPersist().getIdDc().toString());
+                    legalStatusWrapper.setAnnexTitle(annex.getTitle());
+                    legalStatusWrapper.setAnnexLink(annex.getUrl());
+
+                    List<AttributeDto> annexAttributes = dao.getDcAttributes(legalStatusWrapper.getLegalPersist().getIdDc().toString());
+                    for(AttributeDto a : annexAttributes){
+//                        if(a.getName().equals("description"))
+//                            legalStatus.setDescription(a.getObjectLabel());
+                        if(a.getName().equals("isPartOf")) {
+                            // populate parent data
+                            DcIndexDTO dto = findParent(a.getValue());
+                            legalStatusWrapper.setParentTitle(dto.getTitle());
+                            legalStatusWrapper.setParentLink(dto.getUrl());
+                            legalStatusWrapper.setParentAlternative(dto.getAlternative());
+                        }
+                    }
+                }
             } catch (InitializationException e) {
                 legalInfo = new ArrayList<HabitatLegalPersist>();
             }
         }
         return legalInfo;
+    }
+
+    /**
+     * Returns the parent (top level) DC for the given reference; returns current object if no parent found
+     * @param idDc reference id
+     * @return parent object
+     */
+    DcIndexDTO findParent(String idDc){
+        IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+
+        // only searches in the first 5, so it doesn't cycle if incorrect data
+        for(int i=0;i<1;i++){
+            List<AttributeDto> dtoAttributes = dao.getDcAttributes(idDc);
+            boolean foundParent = false;
+            for(AttributeDto dtoA : dtoAttributes){
+                if(dtoA.getName().equals("isPartOf")){
+                    idDc = dtoA.getValue();
+                    foundParent = true;
+                    break;
+                }
+            }
+            if(!foundParent) {
+                // top level
+                break;
+            }
+        }
+
+        return dao.getDcIndex(idDc);
     }
 
     /**

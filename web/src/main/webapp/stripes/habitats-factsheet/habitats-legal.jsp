@@ -4,20 +4,29 @@
 
     <c:choose>
         <c:when test="${not empty actionBean.legalInfo}">
-            <h3>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Covered by the following habitat types in international legal instruments and agreements')}
-            </h3>
+            <%--<h3>--%>
+                <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Covered by the following habitat types in international legal instruments and agreements')}--%>
+            <%--</h3>--%>
             <table summary="${eunis:cms(actionBean.contentManagement, 'habitat_type_legal_instruments')}" class="listing fullwidth">
                 <thead>
                 <tr>
                     <th width="30%" style="text-align: left;">
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Legal Instrument')}
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Legal text')}
+                    </th>
+                    <th width="30%" style="text-align: left;">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                     </th>
                     <th width="50%" style="text-align: left;">
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type legal name')}
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Name in legal text')}
                     </th>
                     <th width="20%" style="text-align: left;">
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type legal code')}
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Code in legal text')}
+                    </th>
+                    <th width="20%" style="text-align: left;">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type<br> relationship')}
+                    </th>
+                    <th width="20%" style="text-align: left;">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
                     </th>
                 </tr>
                 </thead>
@@ -25,16 +34,20 @@
 
                 <c:forEach items="${actionBean.legalInfo}" var="legal">
                     <tr>
+                        <td><a href="${legal.parentLink}">${legal.parentTitle}</a></td>
                         <td>
-                               <a href="/references/${legal.idDc}">
-                                ${legal.legalName}
-                               </a>
+                           <a href="/references/${legal.legalPersist.idDc}">
+                                ${legal.annexTitle}
+                           </a>
                         </td>
                         <td>
-                                ${legal.title}
+                                ${legal.legalPersist.title}
                         </td>
                         <td>
-                                ${legal.code}
+                                ${legal.legalPersist.code}
+                        </td>
+                        <td>${legal.relationTypeString}</td>
+                        <td><a href="${legal.annexLink}">${legal.annexLink}</a>
                         </td>
                     </tr>
                 </c:forEach>

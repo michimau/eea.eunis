@@ -153,6 +153,18 @@
                     </script>
 
                     <div class="footer">
+                        <table>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: A species is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: for situations where a change in management or policy is required to return the species to favourable status but there is no danger of extinction in the foreseeable future</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: for species in serious danger of becoming extinct (at least regionally)</td></tr>
+                            <tr>
+                                <td class="discreet"><div class="legend-color conservation-legend-unknown" style="width: 8px; height: 8px;"> </div> <span class="bold">Unknown</span></td>
+                                <td class="discreet"><div class="legend-color conservation-legend-nodata"> </div> <span class="bold">No data</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="footer">
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
                             <div class="discreet" style="float:right;">

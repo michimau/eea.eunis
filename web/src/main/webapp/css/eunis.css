@@ -582,3 +582,21 @@ div.overlay .formControls a {
 /*Sites Designations table, to display the second column aligned to the right */
 .designations-table tbody td { text-align: right }
 .designations-table tbody td:first-child { text-align: left }
+
+/*Conservation legend colors #19618*/
+.conservation-legend-favorable {
+    background-color: #B7E937;
+}
+.conservation-legend-inadequate {
+    background-color: #DBC833;
+}
+.conservation-legend-bad {
+    background-color: #99541C;
+}
+.conservation-legend-unknown {
+    background-color: white;
+    border: 1px solid #DDD;
+}
+.conservation-legend-nodata {
+    background-color: #EDEDED;
+}

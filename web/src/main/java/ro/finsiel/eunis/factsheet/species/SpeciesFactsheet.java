@@ -771,22 +771,14 @@ public class SpeciesFactsheet {
             Integer IdNatureObjectSpecie = getSpeciesNatureObject().getIdNatureObject();
             Integer IdSpecie = getSpeciesNatureObject().getIdSpecies();
 
-
-            String synonymsIDs = getSpeciesSynonymsCommaSeparated(IdNatureObjectSpecie, IdSpecie);
-            // System.out.println("synonymsIDs = " + synonymsIDs);
-
-// todo: debug only!!! Remove on prod until the data is moved
-            synonymsIDs = IdNatureObjectSpecie.toString();
-
             List<Chm62edtReportsPersist> list =
-                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + synonymsIDs
+                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + IdNatureObjectSpecie.toString()
                             + ")");
 
                 for (Chm62edtReportsPersist report : list) {
                     LegalStatusWrapper legalStatus = new LegalStatusWrapper();
 
                     populateLegalStatusWrapper(legalStatus, report);
-                    System.out.println(legalStatus);
                     if (!results.contains(legalStatus)) {
                         results.add(legalStatus);
                     }

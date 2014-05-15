@@ -68,22 +68,22 @@ function addReloadOnDisplay(paneId, mapId, link, optionalInitFunction) {
     loadHandler = function loadSpeciesMapWorkaround(event) {
         if (event == "style") {   // Modern browsers
             if (document.getElementById(paneId).style.display == "block" && !document.getElementById(paneId).loaded) {
+                document.getElementById(paneId).loaded = true;  // only loaded once
                 if (undefined === optionalInitFunction) {
                     document.getElementById(mapId).src = link;
                 } else {
                     optionalInitFunction();
                 }
-                document.getElementById(paneId).loaded = true;  // only loaded once
             }
         }
         else if (event && event.propertyName == "style.display") {  // IE8
             if (document.getElementById(paneId).style.display == "block") {
+                document.getElementById(paneId).loaded = true;  // only loaded once
                 if (undefined === optionalInitFunction) {
                     document.getElementById(mapId).src = link;
                 } else {
                     optionalInitFunction();
                 }
-                document.getElementById(paneId).loaded = true;  // only loaded once
             }
         }
     }

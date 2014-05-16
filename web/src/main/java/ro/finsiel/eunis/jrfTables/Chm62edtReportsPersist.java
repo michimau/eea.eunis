@@ -18,6 +18,7 @@ public class Chm62edtReportsPersist extends PersistentObject {
     private Integer reference = null;
     private String source;
     private String created;
+    private String alternative;
 
     public Integer getReference() {
         return reference;
@@ -178,5 +179,13 @@ public class Chm62edtReportsPersist extends PersistentObject {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getAlternative() {
+        return alternative;
+    }
+
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
     }
 }

@@ -857,6 +857,7 @@ public class SpeciesFactsheet {
             legalStatus.setDescription("");
             legalStatus.setDetailedReference("");
             legalStatus.setParentUrl(legalStatus.getUrl());
+            legalStatus.setParentAlternative(report.getAlternative());
         }
     }
 

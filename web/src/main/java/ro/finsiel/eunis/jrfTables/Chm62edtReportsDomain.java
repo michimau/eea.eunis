@@ -67,6 +67,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
         dcIndex.addJoinColumn(new IntegerJoinColumn("REFCD", "getReference", "setRefcd"));
         dcIndex.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         dcIndex.addJoinColumn(new StringJoinColumn("CREATED", "created", "setCreated"));
+        dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
         this.addJoinTable(dcIndex);
     }
 }

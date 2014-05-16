@@ -56,6 +56,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         birdsDirectiveIdDc.add(2441);
         birdsDirectiveIdDc.add(2456);
         birdsDirectiveIdDc.add(2457);
+        birdsDirectiveIdDc.add(2440);
     }
 
     /** The argument given. Can be a species number or scientific name */

@@ -62,6 +62,9 @@ public class SpeciesReportsImporter {
         birdsMap.put("III A", "2457");
         birdsMap.put("III B", "2457");
 
+        // the Birds Directive
+        birdsMap.put("Other", "2440");
+
         bernMap.put("I", "1565");
         bernMap.put("II", "1566");
         bernMap.put("III", "1567");
@@ -275,13 +278,13 @@ public class SpeciesReportsImporter {
     private void identifySpecies(SpeciesRow speciesRow){
         String idLink = null;
 
-        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 6);
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 7);
 
         idLink = populateSpeciesIds(speciesRow, speciesList);
 
         if(speciesRow.getIdSpecies() == null && idLink != null) {
             // extract the parent species
-            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name from chm62edt_species where id_species='"+ idLink + "'", 6);
+            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where id_species='"+ idLink + "'", 7);
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
         }
@@ -304,6 +307,7 @@ public class SpeciesReportsImporter {
                 speciesRow.setIdSpecies(l2.getColumnsValues().get(0).toString());
                 speciesRow.setIdNatureObject(l2.getColumnsValues().get(1).toString());
                 speciesRow.setDatabaseName(l2.getColumnsValues().get(5).toString());
+                speciesRow.setIdGroup(l2.getColumnsValues().get(6).toString());
             } else {
                 // extract the valid species link from the synonym
                 if( l2.getColumnsValues().get(4).toString().startsWith("Synonym")) {
@@ -350,6 +354,11 @@ public class SpeciesReportsImporter {
     private void importNewData(SpeciesRow speciesRow){
 
         multipleInsertReport("Habitats D", speciesRow.getHabitatsDAnnex(), habitatsMap, ID_GEOSCOPE_EU, "HD", speciesRow.getHabitatsName(), speciesRow);
+        if(speciesRow.getIdGroup().equals("5") && speciesRow.getBirdsDAnnex().length == 0) {
+            // bird species not mentioned in Birds Directive annex, has to be associated with the Birds Directive directly
+            speciesRow.setBirdsD("Other");
+            System.out.println("Bird species added in Birds Directive");
+        }
         multipleInsertReport("Birds D", speciesRow.getBirdsDAnnex(), birdsMap, ID_GEOSCOPE_EU, null, speciesRow.getBirdsName(), speciesRow);
         multipleInsertReport("Bern Convention", speciesRow.getBernConventionAnnex(), bernMap, ID_GEOSCOPE_EU, "Bern", speciesRow.getBernName(), speciesRow);
         singleInsertReport("Emerald Network R6", speciesRow.getEmeraldR6(), "I", EMERALD_R6, ID_GEOSCOPE_EU, "Emerald R. 6", speciesRow.getEmeraldName(), speciesRow);

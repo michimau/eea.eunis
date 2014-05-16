@@ -850,6 +850,14 @@ public class SpeciesFactsheet {
                 legalStatus.setComments(legal_status.getComment());
             }
         }
+
+        if(legalStatus.getParentName().isEmpty()) {
+            // no parent, set the annex data as parent
+            legalStatus.setParentName(legalStatus.getDetailedReference());
+            legalStatus.setDescription("");
+            legalStatus.setDetailedReference("");
+            legalStatus.setParentUrl(legalStatus.getUrl());
+        }
     }
 
     /**

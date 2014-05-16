@@ -67,6 +67,8 @@ public class SpeciesRow {
 
     // flag if it is a synonym
     private String databaseName;
+    // the group ID, to identify Birds (id group = 5)
+    private String idGroup;
 
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
@@ -384,6 +386,14 @@ public class SpeciesRow {
 
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
+    }
+
+    public void setIdGroup(String idGroup) {
+        this.idGroup = idGroup;
+    }
+
+    public String getIdGroup() {
+        return idGroup;
     }
 
     /**

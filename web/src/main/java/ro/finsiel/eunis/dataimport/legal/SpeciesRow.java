@@ -69,6 +69,8 @@ public class SpeciesRow {
     private String databaseName;
     // the group ID, to identify Birds (id group = 5)
     private String idGroup;
+    private String citesName = "";
+    private String euTradeName = "";
 
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
@@ -453,5 +455,21 @@ public class SpeciesRow {
                 ", citesAnnex=" + (citesAnnex == null ? null : Arrays.asList(citesAnnex)) +
                 ", euTradeAnnex=" + (euTradeAnnex == null ? null : Arrays.asList(euTradeAnnex)) +
                 '}';
+    }
+
+    public void setCitesName(String citesName) {
+        this.citesName = citesName;
+    }
+
+    public String getCitesName() {
+        return citesName;
+    }
+
+    public void setEuTradeName(String euTradeName) {
+        this.euTradeName = euTradeName;
+    }
+
+    public String getEuTradeName() {
+        return euTradeName;
     }
 }

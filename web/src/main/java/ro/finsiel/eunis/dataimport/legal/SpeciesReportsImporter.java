@@ -363,14 +363,14 @@ public class SpeciesReportsImporter {
         multipleInsertReport("Bern Convention", speciesRow.getBernConventionAnnex(), bernMap, ID_GEOSCOPE_EU, "Bern", speciesRow.getBernName(), speciesRow);
         singleInsertReport("Emerald Network R6", speciesRow.getEmeraldR6(), "I", EMERALD_R6, ID_GEOSCOPE_EU, "Emerald R. 6", speciesRow.getEmeraldName(), speciesRow);
         multipleInsertReport("Bonn Convention", speciesRow.getBonnConventionAnnex(), bonnMap, ID_GEOSCOPE_WORLD, "Bonn", speciesRow.getBonnName(), speciesRow);
-        multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, ID_GEOSCOPE_WORLD, null, speciesRow);
-        multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, ID_GEOSCOPE_EU, null, speciesRow);
+        multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, ID_GEOSCOPE_WORLD, null, speciesRow.getCitesName(), speciesRow);
+        multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, ID_GEOSCOPE_EU, null, speciesRow.getEuTradeName(), speciesRow);
         singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("EuroBats", speciesRow.getEurobats(), "I", EUROBATS, ID_GEOSCOPE_EU, null, speciesRow);
         singleInsertReport("ACCOBAMS", speciesRow.getAccobams(), "I", ACCOBAMS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("ASCOBANS", speciesRow.getAscobans(), "Yes", ASCOBANS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, ID_GEOSCOPE_EU, null, speciesRow);
-        multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow);
+        multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow.getSpaName(), speciesRow);
         singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow);
         singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
 

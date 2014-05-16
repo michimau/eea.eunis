@@ -37,17 +37,20 @@ public class ExcelRowFactory {
         r.setBonnRestrictions(getCellValue(row, "O"));
         r.setBonnName(getCellValue(row, "P"));
         r.setCites(getCellValue(row, "Q"));
-        r.setEuTrade(getCellValue(row, "R"));
-        r.setAewa(getCellValue(row, "S"));
-        r.setEurobats(getCellValue(row, "T"));
-        r.setAccobams(getCellValue(row, "U"));
-        r.setAscobans(getCellValue(row, "V"));
-        r.setWadden(getCellValue(row, "W"));
-        r.setSpa(getCellValue(row, "X"));
-        r.setOspar(getCellValue(row, "Y"));
-        r.setHelcom(getCellValue(row, "Z"));
-        r.setRedList(getCellValue(row, "AA"));
-        r.setRedListName(getCellValue(row, "AB"));
+        r.setCitesName(getCellValue(row, "R"));
+        r.setEuTrade(getCellValue(row, "S"));
+        r.setEuTradeName(getCellValue(row, "T"));
+        r.setAewa(getCellValue(row, "U"));
+        r.setEurobats(getCellValue(row, "V"));
+        r.setAccobams(getCellValue(row, "W"));
+        r.setAscobans(getCellValue(row, "X"));
+        r.setWadden(getCellValue(row, "Y"));
+        r.setSpa(getCellValue(row, "Z"));
+        r.setSpaName(getCellValue(row, "AA"));
+        r.setOspar(getCellValue(row, "AB"));
+        r.setHelcom(getCellValue(row, "AC"));
+        r.setRedList(getCellValue(row, "AD"));
+        r.setRedListName(getCellValue(row, "AE"));
 
         r.setExcelRow(row.getRowNum() + 1);
 

@@ -13,16 +13,6 @@
 
                <!--  Gallery on left -->
                 <div class="left-area species">
-
-
-                    <%--<ul id="galleryView2" class="galleryView js-noFilmstrip">--%>
-                        <%--<li>--%>
-                            <%--<span class="panel-overlay">Overlay text goes here</span>--%>
-                            <%--<img src="mr-monkey/image_large" />--%>
-                        <%--</li>--%>
-                        <%--<li><img src="monkey-with-makeup/image_large" /></li>--%>
-                    <%--</ul>--%>
-                    <%----%>
                     <ul id="speciesGallery" class="galleryViewss" style="display: none;">
                             <c:forEach items="${actionBean.pics}" var="pic" varStatus="loop">
                                 <li>
@@ -39,6 +29,21 @@
                     <p class="text-right">
                         <a href="http://images.google.com/images?q=${eunis:replaceTags(actionBean.scientificName)}">Images from the web</a>
                     </p>
+
+                    <script>
+                        $('.galleryViewss').galleryView({
+                            enable_overlays: true,
+                            panel_scale: 'fit',
+                            show_filmstrip: false,
+                            show_filmstrip_nav: false,
+                            show_captions: true,
+                            autoplay: ${fn:length(actionBean.pics)>1?"true":"false"},
+                            frame_width: 50,
+                            frame_height: 50,
+                            frame_scale: 'fit',
+                            show_infobar: false,
+                        });
+                    </script>
                 </div>
 
                 <!-- Textual facts on right -->

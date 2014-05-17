@@ -1606,6 +1606,7 @@ public class SpeciesFactsheet {
         String where = "";
         where += " ID_OBJECT='" + getSpeciesObject().getIdSpecies() + "'";
         where += " AND NATURE_OBJECT_TYPE='Species'";
+        where += " AND SOURCE LIKE 'Saxifraga%'";
         if (mainPic) {
             where += " AND MAIN_PIC = 1";
         }

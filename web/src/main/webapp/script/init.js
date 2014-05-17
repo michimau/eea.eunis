@@ -34,26 +34,6 @@
 
             });
         });
-
-
-//        galleryView override
-        if ($.fn.galleryView !== undefined) {
-
-            $('.galleryViewss').galleryView({
-                enable_overlays: true,
-                panel_scale: 'fit',
-                show_filmstrip: false,
-                show_filmstrip_nav: false,
-                show_captions: true,
-                autoplay: true,
-                frame_width: 50,
-                frame_height: 50,
-                frame_scale: 'fit',
-                show_infobar: false,
-            });
-
-        }
-
     });
 
     function showDefinition(context) {

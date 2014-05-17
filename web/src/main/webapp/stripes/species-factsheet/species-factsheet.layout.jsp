@@ -49,80 +49,88 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
         <c:choose>
             <c:when test="${eunis:exists(actionBean.factsheet)}">
 
-                <%-- Species breadcrumb --%>
-                <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>
+                <c:choose>
+                    <c:when test="${actionBean.seniorSpecies != null}">
+                        <stripes:layout-render name="/stripes/species-factsheet/synonym.jsp"/>
+                    </c:when>
+                    <c:otherwise>
 
-                <h1><c:if test="${not empty actionBean.englishName}">${actionBean.englishName} -</c:if> <span class="italics">${actionBean.scientificName}</span> ${actionBean.author}
-                    <c:if test="${actionBean.seniorSpecies != null}">
-                        <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
-                    </c:if>
-                </h1>
+                        <%-- Species breadcrumb --%>
+                        <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>
 
-                <%-- Quick facts --%>
-                <div>
-                    <stripes:layout-render name="/stripes/species-factsheet/species-quickfacts.jsp"/>
-                </div>
+                        <h1><c:if test="${not empty actionBean.englishName}">${actionBean.englishName} -</c:if> <span class="italics">${actionBean.scientificName}</span> ${actionBean.author}
+                            <c:if test="${actionBean.seniorSpecies != null}">
+                                <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
+                            </c:if>
+                        </h1>
 
-                <div>
-                <%--Accordion for the other data--%>
-                <div class="eea-accordion-panels non-exclusive collapsed-by-default">
-
-                    <%-- Areas where this species has been reported --%>
-                    <div class="eea-accordion-panel" style="clear: both;" id="reported-accordion">
-                    <h2 class="notoc eea-icon-right-container">Distribution</h2>
-                        <div class="pane" id="distributionPane">
-                            <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
-                            <script>
-                                addReloadOnDisplay("distributionPane", null, null, init);
-                            </script>
+                        <%-- Quick facts --%>
+                        <div>
+                            <stripes:layout-render name="/stripes/species-factsheet/species-quickfacts.jsp"/>
                         </div>
-                    </div>
 
-                    <%-- Threat status and conservation status --%>
-                    <div class="eea-accordion-panel" style="clear: both;" id="threat-accordion">
-                        <a id="threat_status" ></a>
-                        <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
-                        <div class="pane" id="speciesStatusPane">
-                            <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
+                        <div>
+                                <%--Accordion for the other data--%>
+                            <div class="eea-accordion-panels non-exclusive collapsed-by-default">
+
+                                    <%-- Areas where this species has been reported --%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="reported-accordion">
+                                    <h2 class="notoc eea-icon-right-container">Distribution</h2>
+                                    <div class="pane" id="distributionPane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+                                        <script>
+                                            addReloadOnDisplay("distributionPane", null, null, init);
+                                        </script>
+                                    </div>
+                                </div>
+
+                                    <%-- Threat status and conservation status --%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="threat-accordion">
+                                    <a id="threat_status" ></a>
+                                    <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
+                                    <div class="pane" id="speciesStatusPane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
+                                    </div>
+                                </div>
+
+                                    <%-- This species is being protected in Europe --%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="sites-accordion">
+                                    <a id="protected" ></a>
+                                    <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
+                                    <div class="pane" id="speciesSitesPane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
+                                    </div>
+                                </div>
+
+                                    <%-- Species is mentioned by the following legal instruments --%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="references-accordion">
+                                    <a id="legal_status" ></a>
+                                    <h2 class="notoc eea-icon-right-container">Legal status</h2>
+                                    <div class="pane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
+                                    </div>
+                                </div>
+
+                                    <%-- Synonyms and common names --%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="synonyms-accordion">
+                                    <h2 class="notoc eea-icon-right-container">Common names and synonyms</h2>
+                                    <div class="pane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
+                                    </div>
+                                </div>
+
+                                    <%--Other resources--%>
+                                <div class="eea-accordion-panel" style="clear: both;" id="other-accordion">
+                                    <h2 class="notoc eea-icon-right-container">Other resources</h2>
+                                    <div class="pane">
+                                        <stripes:layout-render name="/stripes/species-factsheet/species-other-resources.jsp"/>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-
-                    <%-- This species is being protected in Europe --%>
-                    <div class="eea-accordion-panel" style="clear: both;" id="sites-accordion">
-                        <a id="protected" ></a>
-                        <h2 class="notoc eea-icon-right-container">Natura 2000 sites</h2>
-                        <div class="pane" id="speciesSitesPane">
-                            <stripes:layout-render name="/stripes/species-factsheet/species-sites.jsp"/>
-                        </div>
-                    </div>
-
-                    <%-- Species is mentioned by the following legal instruments --%>
-                <div class="eea-accordion-panel" style="clear: both;" id="references-accordion">
-                    <a id="legal_status" ></a>
-                    <h2 class="notoc eea-icon-right-container">Legal status</h2>
-                    <div class="pane">
-                        <stripes:layout-render name="/stripes/species-factsheet/species-references.jsp"/>
-                    </div>
-                </div>
-
-                    <%-- Synonyms and common names --%>
-                <div class="eea-accordion-panel" style="clear: both;" id="synonyms-accordion">
-                    <h2 class="notoc eea-icon-right-container">Common names and synonyms</h2>
-                    <div class="pane">
-                        <stripes:layout-render name="/stripes/species-factsheet/species-synonyms.jsp"/>
-                    </div>
-                </div>
-
-                <%--Other resources--%>
-                <div class="eea-accordion-panel" style="clear: both;" id="other-accordion">
-                    <h2 class="notoc eea-icon-right-container">Other resources</h2>
-                    <div class="pane">
-                        <stripes:layout-render name="/stripes/species-factsheet/species-other-resources.jsp"/>
-                    </div>
-                </div>
-
-                </div>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
             </c:when>
             <c:otherwise>

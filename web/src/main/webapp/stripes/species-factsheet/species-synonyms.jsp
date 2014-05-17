@@ -46,7 +46,7 @@
                     <c:if test="${!empty vern.idDc}">
                         <c:set var="ref" value="${vern.idDc}"></c:set>
                     </c:if>
-                    <tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+                    <tr>
                         <td xml:lang="${vern.languageCode}">
                                 ${eunis:treatURLSpecialCharacters(vern.name)}
                         </td>
@@ -96,7 +96,7 @@
                 <tbody>
 
                 <c:forEach items="${actionBean.factsheet.synonymsIterator}" var="synonym" varStatus="loop">
-                    <tr ${loop.index % 2 == 1 ? '' : 'class="zebraeven"'}>
+                    <tr>
                         <td>
                             <a href="${pageContext.request.contextPath}/species/${synonym.idSpecies}">${eunis:treatURLSpecialCharacters(synonym.scientificName)}</a>
                         </td>

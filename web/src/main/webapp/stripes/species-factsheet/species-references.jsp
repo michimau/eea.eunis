@@ -6,7 +6,6 @@
     <a name="legal-instruments"></a>
     <%--<h2 class="visualClear" id="legal-status">Legal status</h2>--%>
 
-    <%--todo: change the table according to http://taskman.eionet.europa.eu/issues/15649--%>
         <c:choose>
             <c:when test="${fn:length(actionBean.legalStatuses) gt 0}">
                 <div class='detailed-reference'>

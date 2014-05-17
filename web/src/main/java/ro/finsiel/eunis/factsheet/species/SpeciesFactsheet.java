@@ -816,6 +816,8 @@ public class SpeciesFactsheet {
                 }
             }
 
+            legalStatus.setIdReportAttributes(report.getIdReportAttributes());
+
         } else {
             legalStatus.setReference("-1");
             legalStatus.setRefcd("-1");

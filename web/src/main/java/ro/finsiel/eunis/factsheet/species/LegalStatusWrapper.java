@@ -21,6 +21,8 @@ public class LegalStatusWrapper {
     private String parentName = "";
     private String parentAlternative;
 
+    private int idReportAttributes = -1;
+
 
     /**
      * Create a new LegalStatusWrapper object.
@@ -272,4 +274,11 @@ public class LegalStatusWrapper {
         return parentAlternative;
     }
 
+    public int getIdReportAttributes() {
+        return idReportAttributes;
+    }
+
+    public void setIdReportAttributes(int idReportAttributes) {
+        this.idReportAttributes = idReportAttributes;
+    }
 }

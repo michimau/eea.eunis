@@ -16,10 +16,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.factsheet.species.*;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
-import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.UniqueVector;
@@ -192,6 +189,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private int otherAgreements = 0;
 
+    private String parentN2k;
+    private List<LegalStatusWrapper> parentLegal;
+
     /**
      * Default Stripes handler
      * @return Stripes resolution
@@ -261,6 +261,29 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // populates the external data
             linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
+
+            // it is a synonym, populate the synonym fields
+            if (mainIdSpecies != seniorIdSpecies) {
+                SpeciesFactsheet parent = new SpeciesFactsheet(seniorIdSpecies, seniorIdSpecies);
+
+                parentN2k = parent.getSpeciesNatureObject().getNatura2000Code();
+
+                List<LegalStatusWrapper> parentLegalTemp = parent.getLegalStatus();
+                parentLegal = new ArrayList<LegalStatusWrapper>();
+
+                // search parentLegal for the synonym names
+                for(LegalStatusWrapper legalStatusWrapper : parentLegalTemp) {
+                    List<Chm62edtReportAttributesPersist> results = new Chm62edtReportAttributesDomain().findCustom("SELECT *" +
+                            " FROM CHM62EDT_REPORT_ATTRIBUTES AS F" +
+                            " WHERE F.NAME = 'NAME_IN_DOCUMENT' AND F.ID_REPORT_ATTRIBUTES='" + legalStatusWrapper.getIdReportAttributes() + "'");
+
+                    for(Chm62edtReportAttributesPersist p : results){
+                        if(p.getValue().contains(scientificName)){
+                            parentLegal.add(legalStatusWrapper);
+                        }
+                    }
+                }
+            }
 
             // Sets country level and biogeo conservation status
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
@@ -1618,6 +1641,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     public int getOtherAgreements() {
         return otherAgreements;
+    }
+
+    public String getParentN2k() {
+        return parentN2k;
+    }
+
+    public List<LegalStatusWrapper> getParentLegal() {
+        return parentLegal;
     }
 }
 

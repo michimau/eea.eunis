@@ -594,8 +594,7 @@ div.overlay .formControls a {
     background-color: #99541C;
 }
 .conservation-legend-unknown {
-    background-color: white;
-    border: 1px solid #DDD;
+    background-color: #8C8C8C;
 }
 .conservation-legend-nodata {
     background-color: #EDEDED;

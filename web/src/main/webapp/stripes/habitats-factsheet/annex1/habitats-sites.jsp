@@ -51,14 +51,14 @@
                 </div>
             </div>
             <script>
-                addReloadOnDisplay("habitatsSitesPane", "protectionMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&HabitatCode=${actionBean.factsheet.code2000}");
+                addReloadOnDisplay("habitatsSitesPane", "protectionMap", "http://maps.eea.europa.eu/Filtermap/v1/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&HabitatCode=${actionBean.factsheet.code2000}");
             </script>
 
 
             <script type="text/javascript">
 
                 function setMapSiteId(sitecode){
-                    document.getElementById('protectionMap').src='http://discomap.eea.europa.eu/map/Filtermap/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&HabitatCode=${actionBean.factsheet.code2000}&SiteCode='+sitecode;
+                    document.getElementById('protectionMap').src='http://maps.eea.europa.eu/Filtermap/v1/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&HabitatCode=${actionBean.factsheet.code2000}&zoomtofeat=SITECODE='+sitecode;
                 }
 
             </script>

@@ -10,7 +10,7 @@
 
                 <div class="left-area iucn-red-list-area">
                   <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
-                  <p>The Threat Status' concept in IUCN Red List assess the risk of extinction.</p>
+                  <p>The IUCN Red List threat status assesses the risk of extinction.</p>
                     <div class="threat-status-indicator width-14">
                         <c:if test="${not empty actionBean.consStatus}">
 
@@ -142,8 +142,8 @@
                 </div>
 
                 <div class="right-area conservation-status">
-                    <h3>EU's conservation status</h3>
-                    <p>EU's conservation status assesses every six years the distance from a defined favorable situation as described in the Habitats Directive.</p>
+                    <h3>EU conservation status</h3>
+                    <p>Conservation status assesses every six years and for each biogeographical region the condition of habitats and species compared to the favourable status as described in the Habitats Directive. The map shows the 2013 assessments.</p>
                     <div class="map-border">
                         <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
                     </div>
@@ -185,10 +185,10 @@
                                 </c:if>
                             </div>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
-
-                                <span class="table-definition-target standardButton float-left">
-                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
-                                </span>
+                                <%-- Hidden by #19431 --%>
+                                <%--<span class="table-definition-target standardButton float-left">--%>
+                                    <%--${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}--%>
+                                <%--</span>--%>
                                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
                                     <div class="table-definition-body visualClear">
                                         <div style="margin-top:20px">

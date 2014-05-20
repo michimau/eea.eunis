@@ -126,7 +126,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         factsheet = new SiteFactsheet(idsite);
 
         // Set the site's meta-description and page title.
-        if (factsheet.getIDNatureObject() != null) {
+        if (factsheet.getIDNatureObject() != null && factsheet.exists()) {
             metaDescription = factsheet.getDescription();
             pageTitle =
                     getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Site factsheet for") + " "
@@ -158,14 +158,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             populateDesignationArea();
             prepareRegion();
+
+            // Forward to the factsheet layout page.
+            if(isTypeDiploma()) {
+                return new ForwardResolution("/stripes/site-factsheet/site-factsheet-diploma.layout.jsp");
+            }
         }
 
-        // Forward to the factsheet layout page.
-        if(isTypeDiploma()) {
-            return new ForwardResolution("/stripes/site-factsheet/site-factsheet-diploma.layout.jsp");
-        } else {
-            return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
-        }
+        return new ForwardResolution("/stripes/site-factsheet/site-factsheet.layout.jsp");
     }
 
     /**

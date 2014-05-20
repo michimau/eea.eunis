@@ -10,6 +10,7 @@
                 <c:if test="actionBean.typeNatura2000">
                     <p><a href="http://www.eea.europa.eu/data-and-maps/data/natura-3" target="_BLANK">Data download</a></p>
                 </c:if>
+                <p><a href="http://www.eea.europa.eu/data-and-maps/explore-interactive-maps/european-protected-areas" target="_BLANK">European protected sites</a></p>
             </div>
         </c:when>
         <c:otherwise>

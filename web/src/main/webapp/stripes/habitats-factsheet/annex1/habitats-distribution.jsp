@@ -75,11 +75,11 @@
 	        if (processedLayers == 0) {
 	          layersWithData.push('distribution');
 	        } else if (processedLayers == 1) {
-	          layersWithData.push('range');
+//	          layersWithData.push('range');
 	        }
 	      }
 	      if (processedLayers == 1) {
-	        layersWithData.push('natura');
+//	        layersWithData.push('natura');
 	        layersWithData.push('cdda');
 	        layersWithData.push('bio_regions');
 	        layersWithData.push('river_basin');

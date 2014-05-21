@@ -134,7 +134,11 @@
 	                imageParameters_range.transparent = true;
 	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("${actionBean.context.distributionSpeciesLayer}", {"imageParameters":imageParameters_range});
                 }
-                report_map.addLayer(gbifLayer);
+                if(isDistributionLayerExist) {
+                    report_map.addLayer(layer_dist);
+                } else {
+                    report_map.addLayer(gbifLayer);
+                }
 			}
 
 			///////////////////
@@ -278,7 +282,7 @@
 			    
 							<c:if test="${actionBean.distributionLayer}">
 								<label for="distribution">
-										<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
+										<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');" checked="checked"/>
 										Species distribution (2006, reported by EU Member States under Habitats Directive 92/43/EEC)
 								</label>
 								<p class="discreet">Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">Article 17 database</a>.</p>
@@ -303,17 +307,18 @@
 
                             <c:if test="${not empty actionBean.gbifCode}">
 								<label for="gbif">
-									<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
+									<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');"/>
 									Single observations (GBIF, Global Biodiversity Information Facility)
 								</label>
 								<p class="discreet">Layer show observations of this species are given by museum collections and other scientific databases. Data source: <a href="http://data.gbif.org/species/${actionBean.gbifCode}">GBIF</a></p>
 							</c:if>
 
-							<label for="natura">
-								<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
-								Protected sites (2011, Natura 2000 network)
-							</label>
-							<p class="discreet">Layer shows protected sites aiming to protect this species at the European level. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/natura-2">Natura 2000 database</a>.</p>
+                            <%--Hidden by #19773--%>
+							<%--<label for="natura">--%>
+								<%--<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>--%>
+								<%--Protected sites (2011, Natura 2000 network)--%>
+							<%--</label>--%>
+							<%--<p class="discreet">Layer shows protected sites aiming to protect this species at the European level. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/natura-2">Natura 2000 database</a>.</p>--%>
 							</fieldset>
 							
 							

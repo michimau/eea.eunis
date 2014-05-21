@@ -167,7 +167,7 @@
                             <a id="interactive_map" ></a>
                             <h2 class="notoc eea-icon-right-container">Interactive map</h2>
                             <div class="pane" id="sitesMapPane">
-                                The interactive map of EUNIS sites is currently under development. Meanwhile, use for example the Natura 2000 viewer below. For Natura 2000 sites, click on the binocular icon at the top right and copy in the site name or the site code. Nationally designated areas can be activated from the list of Layers and searched by location. Other relevant map viewers are listed below in Other resources panel.
+                                The interactive map of EUNIS sites is currently under development. Meanwhile, use for example European protected areas viewer below. To activate and deactivate a layer, please go to Layers at the top right. Other relevant map viewers are listed below in Other resources panel.
                                 <iframe id="interactive-map-iframe" class="map-border" height="600" width="100%" src=""></iframe>
                                 <p>
                                     <a class="standardButton" target="_blank" href="http://discomap.eea.europa.eu/map/EEABasicviewer/?appid=8c6ce24548b344ae852ab6308ac3c50a">Full screen mode</a>

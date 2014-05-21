@@ -111,14 +111,14 @@
                 <a href="${ actionBean.pageUrl }#tab-species" onclick="openSection('tab-species');">
                     <span class="bold">${ (actionBean.protectedSpeciesCount) }</span>
                 </a>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ species')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'species of the Nature Directives')}
             </li>
             <li>
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'It protects')}
                 <a href="${ actionBean.pageUrl }#tab-habitats" onclick="openSection('tab-habitats');">
                     <span class="bold">${ (actionBean.habitatsCount) }</span>
                 </a>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Nature Directives’ habitat types')}
+                ${eunis:cmsPhrase(actionBean.contentManagement, 'habitat types of the Habitats Directive')}
             </li>
             </c:if>
           </ul>

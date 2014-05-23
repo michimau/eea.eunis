@@ -10,22 +10,22 @@
             <table summary="${eunis:cms(actionBean.contentManagement, 'habitat_type_legal_instruments')}" class="listing fullwidth">
                 <thead>
                 <tr>
-                    <th width="30%" style="text-align: left;">
+                    <th width="30%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Legal text')}
                     </th>
-                    <th width="30%" style="text-align: left;">
+                    <th width="30%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                     </th>
-                    <th width="50%" style="text-align: left;">
+                    <th width="50%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Name in legal text')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Code in legal text')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type<br> relationship')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
                     </th>
                 </tr>

@@ -27,7 +27,7 @@
                     </c:if>
                 </li>
                 <li>
-                    Priority habitat: <span class="bold"><c:choose><c:when test="${!empty actionBean.factsheet.priority && actionBean.factsheet.priority == 1}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></span>
+                    Priority habitat type: <span class="bold"><c:choose><c:when test="${!empty actionBean.factsheet.priority && actionBean.factsheet.priority == 1}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></span>
                 </li>
                 <li>
                     Protected in

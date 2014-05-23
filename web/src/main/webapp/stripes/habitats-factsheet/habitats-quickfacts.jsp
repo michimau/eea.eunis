@@ -24,7 +24,7 @@
                 </li>
                 <c:if test="${actionBean.resolution4}">
                     <li>
-                        <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> used for selection of Emerald sites (Bern Convention)
+                        <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> used for designation of Emerald sites (Bern Convention)
                     </li>
                 </c:if>
 

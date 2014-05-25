@@ -16,7 +16,9 @@
 
         <span id="breadcrumbs-${fn:length(actionBean.classifications)+1}" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Genus')}:
-            ${actionBean.specie.genus}
+            <a href="species-taxonomic-browser.jsp?expand=${actionBean.breadcrumbClassificationExpands[fn:length(actionBean.classifications)-1]}&genus=${actionBean.specie.genus}#level_${actionBean.specie.genus}">
+                ${actionBean.specie.genus}
+            </a>
             <span class="breadcrumbSeparator">
                 &gt;
             </span>

@@ -42,7 +42,8 @@
 <!-- MAIN CONTENT -->
                 <%
 	            String expand = Utilities.formatString( request.getParameter( "expand" ), "" );
-	
+	            String genus = Utilities.formatString( request.getParameter( "genus" ), "" );
+
 	            String SQL_DRV = application.getInitParameter("JDBC_DRV");
 	            String SQL_URL = application.getInitParameter("JDBC_URL");
 	            String SQL_USR = application.getInitParameter("JDBC_USR");
@@ -59,7 +60,7 @@
               		con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 	            %>
 	
-	            	<%=Utilities.generateSpeciesTaxonomicTree("", expand, true, con, sqlc, cm)%>
+	            	<%=Utilities.generateSpeciesTaxonomicTree("", expand, genus, true, con, sqlc, cm)%>
 	            	<%=cm.cmsTitle("Show sublevels")%>
                 	<%=cm.br()%>
                 	<%=cm.cmsTitle("Hide sublevels")%>

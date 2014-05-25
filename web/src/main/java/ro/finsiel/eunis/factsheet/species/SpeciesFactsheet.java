@@ -814,6 +814,10 @@ public class SpeciesFactsheet {
                     legalStatus.setParentUrl(dto.getUrl());
                     legalStatus.setParentAlternative(dto.getAlternative());
                 }
+                // populate the more info section from the annex links
+                if(a.getName().equalsIgnoreCase("foaf:page")) {
+                    legalStatus.addMoreInfo(a.getValue());
+                }
             }
 
             legalStatus.setIdReportAttributes(report.getIdReportAttributes());

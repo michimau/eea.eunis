@@ -456,4 +456,15 @@ public class JstlFunctions {
         return EunisUtil.getDefaultPicture(speciesGroup);
     }
 
+    /**
+     * Shortens an URL (to display as a link title, when none available)
+     * @param url
+     * @return
+     */
+    public static String shortenURL(String url){
+        if(url != null && url.length() > 55)
+            return url.substring(0,28) + "..." + url.substring(url.length()-20);
+        return url;
+    }
+
 }

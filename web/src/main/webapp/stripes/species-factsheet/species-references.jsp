@@ -46,10 +46,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${not empty legal.description}">
-                                            <a href="references/${ legal.idDc }/species">${ legal.description }</a>
+                                            <a href="/references/${ legal.idDc }/species">${ legal.description }</a>
                                         </c:when>
                                         <c:otherwise>
-                                            ${legal.detailedReference}
+                                            <a href="/references/${ legal.idDc }/species">${legal.detailedReference}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -57,10 +57,12 @@
 		              				${ legal.comments }
 		        				</td>
 		        				<td>
-		        				    <c:if test="${oldLink !=  legal.url}">
-		        					<a href="${ legal.url }" title="${ legal.url }">${ legal.formattedUrl }</a>
-                                    </c:if>
-                                    <c:set var="oldLink" value="${legal.url}"/>
+                                    <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
+                                        <c:if test="${oldLink != link}">
+                                            <a href="${ link }">${eunis:shortenURL(link)}</a> <c:if test="${not status.last}"><br></c:if>
+                                        </c:if>
+                                        <c:set var="oldLink" value="${link}"/>
+                                    </c:forEach>
                                 </td>
 							</tr>
 						</c:forEach>

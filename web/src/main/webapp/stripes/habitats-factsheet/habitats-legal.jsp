@@ -47,7 +47,13 @@
                                 ${legal.legalPersist.code}
                         </td>
                         <td>${legal.relationTypeString}</td>
-                        <td><a href="${legal.annexLink}">${legal.annexLink}</a>
+                        <td>
+                            <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
+                                <c:if test="${oldLink != link}">
+                                    <a href="${ link }">${eunis:shortenURL(link)}</a> <c:if test="${not status.last}"><br></c:if>
+                                </c:if>
+                                <c:set var="oldLink" value="${link}"/>
+                            </c:forEach>
                         </td>
                     </tr>
                 </c:forEach>

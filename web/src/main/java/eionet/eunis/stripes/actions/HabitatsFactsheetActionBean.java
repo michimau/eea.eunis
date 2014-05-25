@@ -610,6 +610,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                             legalStatusWrapper.setParentLink(dto.getUrl());
                             legalStatusWrapper.setParentAlternative(dto.getAlternative());
                         }
+
+                        // populate the more info section from the annex links
+                        if(a.getName().equalsIgnoreCase("foaf:page")) {
+                            legalStatusWrapper.addMoreInfo(a.getValue());
+                        }
                     }
                 }
             } catch (InitializationException e) {

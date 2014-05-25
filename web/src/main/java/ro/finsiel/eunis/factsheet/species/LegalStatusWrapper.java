@@ -1,5 +1,8 @@
 package ro.finsiel.eunis.factsheet.species;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Wrapper for legal information about species, used in species factsheet.
  *
@@ -22,6 +25,8 @@ public class LegalStatusWrapper {
     private String parentAlternative;
 
     private int idReportAttributes = -1;
+
+    private List<String> moreInfo = new ArrayList<String>();
 
 
     /**
@@ -280,5 +285,13 @@ public class LegalStatusWrapper {
 
     public void setIdReportAttributes(int idReportAttributes) {
         this.idReportAttributes = idReportAttributes;
+    }
+
+    public void addMoreInfo(String value) {
+        moreInfo.add(value);
+    }
+
+    public List<String> getMoreInfo() {
+        return moreInfo;
     }
 }

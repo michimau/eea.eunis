@@ -39,8 +39,17 @@
             </c:choose>
         </title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css" />
-        <%--<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css"/>--%>
-        <%--<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>--%>
+        <script>
+            // all the non-local links should display on a new tab; this script sets target=_blank for all non-local links
+            $(document).ready(function() {
+                $("a").each(function(){
+                    h = $(this).attr("href");
+                    if(h && h.indexOf("http") != -1 && h.indexOf("<%=application.getInitParameter("DOMAIN_NAME")%>") == -1) {
+                        $(this).attr("target", "_blank");
+                    }
+                });
+            });
+        </script>
 
         <stripes:layout-component name="head"/>
     </head>

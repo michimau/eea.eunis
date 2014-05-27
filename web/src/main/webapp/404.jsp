@@ -35,6 +35,7 @@
                 <%=cm.cmsText("generic_404_01")%>
                 <br />
                 <br />
+                Page message:
                 <strong>
                   Resource not found.
                 </strong>

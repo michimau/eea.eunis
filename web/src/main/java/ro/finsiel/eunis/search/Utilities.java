@@ -2616,9 +2616,6 @@ public final class Utilities {
                     int iRnd;
 
                     iRnd = rnd.nextInt(files.length);
-                    if (iRnd == 0) {
-                        iRnd = 1;
-                    }
                     ret = files[ iRnd ].getName();
                 }
             } else {

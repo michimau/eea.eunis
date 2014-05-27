@@ -427,6 +427,11 @@
 
     <servlet-mapping>
         <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/images/intros/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
         <url-pattern>/rdf/*</url-pattern>
     </servlet-mapping>
 

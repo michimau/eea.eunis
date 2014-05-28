@@ -11,7 +11,8 @@
             </p>
         </c:if>
 
-        <c:if test="${actionBean.factsheet.annexI}">
+    <c:choose>
+        <c:when test="${actionBean.factsheet.annexI}">
             <span class="discreet">
             <c:forEach items="${actionBean.descriptions}" var="desc" varStatus="loop">
                 <c:if test="${!empty desc.idDc && idDc != -1}">
@@ -25,6 +26,15 @@
                 </c:if>
             </c:forEach>
             </span>
-        </c:if>
+        </c:when>
+        <c:otherwise>
+            <p>
+                <span class="discreet">
+                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+                    <a href="http://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">EUNIS habitat classification</a>
+                </span>
+            </p>
+        </c:otherwise>
+    </c:choose>
     </div>
 </stripes:layout-definition>

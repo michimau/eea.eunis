@@ -1255,6 +1255,8 @@ public class HabitatsFactsheet {
         }
     }
 
+    private String description = "";
+
     /**
      * Retrieve description &amp; owner information for a habitat (from chm62edt_habitat_description) using
      * Chm62edtHabitatDescriptionDomain.
@@ -1282,6 +1284,8 @@ public class HabitatsFactsheet {
                             new DescriptionWrapper(habitatDescr.getDescription(),
                                     habitatDescr.getLanguageName(),
                                     habitatDescr.getOwnerText(), habitatDescr.getIdDc()));
+
+                    description = description + habitatDescr.getDescription();
                 }
             }
         } catch (Exception ex) {
@@ -2043,6 +2047,12 @@ public class HabitatsFactsheet {
         List speciesList = null;
 
         try {
+
+            if(description.isEmpty()) {
+                // initialize the description, for filtering
+                getDescrOwner();
+            }
+
             speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
@@ -2050,19 +2060,23 @@ public class HabitatsFactsheet {
             if (speciesList != null) {
                 for (Object specy : speciesList) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;
-                    List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
-                    String englishName = "";
-                    for (VernacularNameWrapper vernName : vernNames) {
-                        if (vernName.getLanguageCode().toLowerCase().equals("en")) {
-                            englishName = vernName.getName();
-                            break;
+                    // #19430 show only the species that are in the habitat descriptions
+                    if(description.contains(specie.getSpeciesScientificName())) {
+
+                        List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
+                        String englishName = "";
+                        for (VernacularNameWrapper vernName : vernNames) {
+                            if (vernName.getLanguageCode().toLowerCase().equals("en")) {
+                                englishName = vernName.getName();
+                                break;
+                            }
                         }
+
+                        SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
+                                englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());
+
+                        results.add(speciesBean);
                     }
-
-                    SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
-                            englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());
-
-                    results.add(speciesBean);
                 }
             }
         } catch (Exception _ex) {

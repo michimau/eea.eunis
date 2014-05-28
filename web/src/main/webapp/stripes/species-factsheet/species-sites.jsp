@@ -15,7 +15,7 @@
                     <h3>Protected in the following Natura 2000 sites</h3>
                     <div class="scroll-auto" style="height: 404px">
 
-                    <table id="listItem" summary="List of sites" class="sortable listing">
+                    <table id="listItem" summary="List of sites" class="sortable listing" style="width: 450px;">
                         <thead>
                         <tr>
                             <th class="dt_sortable">Sitecode</th>

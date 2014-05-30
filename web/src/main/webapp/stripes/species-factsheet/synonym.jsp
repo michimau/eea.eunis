@@ -11,14 +11,32 @@
     <c:if test="${fn:length(actionBean.parentLegal) gt 0}">
         Mentioned in the following international legal instruments and agreements:
         <ul>
+            <c:set var="lastLabel" value="${''}"/>
             <c:forEach var="legal" items="${actionBean.parentLegal}">
-                <li>
-                    ${legal.parentName}
-                    <c:if test="${not empty legal.parentAlternative}">(${legal.parentAlternative})</c:if>
-                    <c:if test="${not empty legal.detailedReference}"><br>${legal.detailedReference}</c:if>
+                <c:choose>
+                    <c:when test="${not empty legal.parentAlternative}">
+                        <c:set var="currentLabel" value="${legal.parentAlternative}"/>
+                    </c:when>
+                    <c:otherwise><c:set var="currentLabel" value="${legal.parentName}"/></c:otherwise>
+                </c:choose>
+
+                    <c:if test="${lastLabel != currentLabel}">
+                        <c:if test="${not empty lastLabel}">
+                            </ul></li>
+                        </c:if>
+                        <li>
+                        ${currentLabel}
+                        <ul>
+                        <c:set var="lastLabel" value="${currentLabel}"/>
+                    </c:if>
+
+
+                    <c:if test="${not empty legal.detailedReference}">
+                        <li>${legal.detailedReference}</li>
+                    </c:if>
                 </li>
             </c:forEach>
-        </ul>
+        </ul></li></ul>
         <c:if test="${not empty actionBean.parentN2k}">
             <p>Natura 2000 code: <span class="bold">${actionBean.parentN2k}</span></p>
         </c:if>

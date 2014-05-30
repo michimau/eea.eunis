@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  */
 public class SpeciesReportsImporter {
 
-    private boolean debug = false;
+    private boolean debug = true;
 
     private ExcelReader excelReader;
     private SQLUtilities sqlUtilities;
@@ -111,7 +111,7 @@ public class SpeciesReportsImporter {
 
     /**
      * Runs the import
-     * @param args
+     * @param args Main arguments: list of Excel files
      */
     public static void main(String[] args){
 
@@ -278,16 +278,29 @@ public class SpeciesReportsImporter {
     private void identifySpecies(SpeciesRow speciesRow){
         String idLink = null;
 
-        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 7);
+        List speciesList = selectSpeciesByName(speciesRow.getSpeciesName());
 
         idLink = populateSpeciesIds(speciesRow, speciesList);
 
         if(speciesRow.getIdSpecies() == null && idLink != null) {
             // extract the parent species
-            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where id_species='"+ idLink + "'", 7);
+            List speciesFullList = selectSpeciesById(idLink);
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
         }
+    }
+
+    private String speciesColumns = "id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species";
+    private int speciesColumnsNumber = 7;
+
+    private List selectSpeciesByName(String scientificName) {
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select " + speciesColumns + " from chm62edt_species where scientific_name='"+ scientificName + "'", speciesColumnsNumber);
+        return speciesList;
+    }
+
+    private List selectSpeciesById(String idSpecies) {
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select " + speciesColumns + " from chm62edt_species where id_species='"+ idSpecies + "'", speciesColumnsNumber);
+        return speciesList;
     }
 
     /**
@@ -563,6 +576,45 @@ public class SpeciesReportsImporter {
 
             insertReport(idNatureObject, idDc, idGeoscope, idReportAttributes, idReportType);
 
+            // check that nameInDocument is synonym
+            if(isSynonymName(nameInDocument)){
+                System.out.println("Searching for synonyms: " + nameInDocument);
+
+                // find in DB
+                String[] names = nameInDocument.split(";");
+                for(String name : names) {
+                    if(!name.trim().isEmpty()) {
+                        List l = selectSpeciesByName(name.trim());
+                        if(debug) System.out.println(name.trim());
+                        // check it's a synonym
+                        if(l.size() == 0) {
+                            if(debug) System.out.println(" Not found");
+                            // todo add it ?
+                        } else if (l.size() == 1) {
+                            if(debug) System.out.println(" Found 1");
+                            // check it's synonym or original species
+
+                            String idSpeciesSynonym = ((TableColumns)l.get(0)).getColumnsValues().get(0).toString();
+                            String validName = ((TableColumns)l.get(0)).getColumnsValues().get(2).toString();
+                            String link = ((TableColumns)l.get(0)).getColumnsValues().get(3).toString();
+                            String related = ((TableColumns)l.get(0)).getColumnsValues().get(4).toString();
+
+                            if(validName.equals("0") && related.equalsIgnoreCase("synonym") && link.equalsIgnoreCase(idSpecies)) {
+                                if(debug) System.out.println(" Synonym ok");
+                            } else if(idSpeciesSynonym.trim().equalsIgnoreCase(idSpecies.trim())) {
+                                if(debug) System.out.println(" Same species!");
+                            } else {
+                                System.out.println("WARNING: idSpecies=" + idSpeciesSynonym +" valid name=" + validName + " link=" + link + " related=" + related);
+                            }
+
+                        } else if (l.size() > 1) {
+                            if(debug) System.out.println(" Found too many (" + l.size() + ")");
+                            // todo still check
+                        }
+                    }
+                }
+            }
+
             if(debug) System.out.println(" Inserted legal report with idDc=" + idDc);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -673,6 +725,16 @@ public class SpeciesReportsImporter {
 
         // fix for CR/PE (Critically Endangered, Possibly Extinct) - should be treated as Critically Endangered (CR)
         conservationStatusCode.put("CR/PE", conservationStatusCode.get("CR"));
+    }
+
+    /**
+     * Synonym as defined in #19506
+     * @param name
+     * @return
+     */
+    private boolean isSynonymName(String name){
+        if(name == null) return false;
+        return !(name.isEmpty() || name.contains("species") || name.contains("spp.") || name.contains("sp. plur."));
     }
 
 

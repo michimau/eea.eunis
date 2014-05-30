@@ -11,5 +11,9 @@ public class JstlFunctionsTest {
         // Note the accent over the 'n'
         assertEquals("Cańis sp.", JstlFunctions.bracketsToItalics("Cańis sp."));
         assertEquals("<i>XX</i> <i>Canis</i> <i>sp.</i>", JstlFunctions.bracketsToItalics("[XX] [Canis] [sp.]"));
+        assertEquals("<i>Test</i>", JstlFunctions.bracketsToItalics("[Test"));
+        assertEquals("Test</i>", JstlFunctions.bracketsToItalics("Test]"));
     }
+
+
 }

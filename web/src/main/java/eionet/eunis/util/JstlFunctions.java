@@ -173,6 +173,11 @@ public class JstlFunctions {
     public static String bracketsToItalics(String inStr) {
         if (inStr.contains("[") || inStr.contains("]")) {
             inStr = inStr.replaceAll("\\[","<i>").replaceAll("]","</i>");
+
+            // last closed is before last opened, so close one more
+            if(inStr.lastIndexOf("</i>")<inStr.lastIndexOf("<i>") && inStr.lastIndexOf("<i>") >= 0){
+                inStr = inStr + "</i>";
+            }
         }
         return inStr;
     }

@@ -71,6 +71,8 @@ public class SpeciesRow {
     private String idGroup;
     private String citesName = "";
     private String euTradeName = "";
+    private String aewaName = "";
+    private String osparName = "";
 
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
@@ -471,5 +473,21 @@ public class SpeciesRow {
 
     public String getEuTradeName() {
         return euTradeName;
+    }
+
+    public void setAewaName(String aewaName) {
+        this.aewaName = aewaName;
+    }
+
+    public String getAewaName() {
+        return aewaName;
+    }
+
+    public void setOsparName(String osparName) {
+        this.osparName = osparName;
+    }
+
+    public String getOsparName() {
+        return osparName;
     }
 }

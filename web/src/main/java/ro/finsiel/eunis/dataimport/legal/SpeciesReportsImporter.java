@@ -378,13 +378,13 @@ public class SpeciesReportsImporter {
         multipleInsertReport("Bonn Convention", speciesRow.getBonnConventionAnnex(), bonnMap, ID_GEOSCOPE_WORLD, "Bonn", speciesRow.getBonnName(), speciesRow);
         multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, ID_GEOSCOPE_WORLD, null, speciesRow.getCitesName(), speciesRow);
         multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, ID_GEOSCOPE_EU, null, speciesRow.getEuTradeName(), speciesRow);
-        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow);
+        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow.getAewaName(), speciesRow);
         singleInsertReport("EuroBats", speciesRow.getEurobats(), "I", EUROBATS, ID_GEOSCOPE_EU, null, speciesRow);
         singleInsertReport("ACCOBAMS", speciesRow.getAccobams(), "I", ACCOBAMS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("ASCOBANS", speciesRow.getAscobans(), "Yes", ASCOBANS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, ID_GEOSCOPE_EU, null, speciesRow);
         multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow.getSpaName(), speciesRow);
-        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow.getOsparName(), speciesRow);
         singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
 
         insertRedListReport(ID_GEOSCOPE_EU, speciesRow);
@@ -493,15 +493,15 @@ public class SpeciesReportsImporter {
         multipleInsertReport(name, annexes,values, geoscope, restrictionPrefix, "", speciesRow);
     }
 
-        /**
-         * Insert the report data for a multiple-annex report
-         * @param name
-         * @param annexes
-         * @param values
-         * @param geoscope
-         * @param restrictionPrefix
-         * @param speciesRow
-         */
+    /**
+     * Insert the report data for a multiple-annex report
+     * @param name
+     * @param annexes
+     * @param values
+     * @param geoscope
+     * @param restrictionPrefix
+     * @param speciesRow
+     */
     private void multipleInsertReport(String name, String[] annexes, Map<String, String> values, String geoscope, String restrictionPrefix, String nameInDocument, SpeciesRow speciesRow){
 
         for(String annex : annexes){

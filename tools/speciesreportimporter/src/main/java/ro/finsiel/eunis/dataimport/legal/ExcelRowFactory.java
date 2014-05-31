@@ -41,16 +41,18 @@ public class ExcelRowFactory {
         r.setEuTrade(getCellValue(row, "S"));
         r.setEuTradeName(getCellValue(row, "T"));
         r.setAewa(getCellValue(row, "U"));
-        r.setEurobats(getCellValue(row, "V"));
-        r.setAccobams(getCellValue(row, "W"));
-        r.setAscobans(getCellValue(row, "X"));
-        r.setWadden(getCellValue(row, "Y"));
-        r.setSpa(getCellValue(row, "Z"));
-        r.setSpaName(getCellValue(row, "AA"));
-        r.setOspar(getCellValue(row, "AB"));
-        r.setHelcom(getCellValue(row, "AC"));
-        r.setRedList(getCellValue(row, "AD"));
-        r.setRedListName(getCellValue(row, "AE"));
+        r.setAewaName(getCellValue(row, "V"));
+        r.setEurobats(getCellValue(row, "W"));
+        r.setAccobams(getCellValue(row, "X"));
+        r.setAscobans(getCellValue(row, "Y"));
+        r.setWadden(getCellValue(row, "Z"));
+        r.setSpa(getCellValue(row, "AA"));
+        r.setSpaName(getCellValue(row, "AB"));
+        r.setOspar(getCellValue(row, "AC"));
+        r.setOsparName(getCellValue(row, "AD"));
+        r.setHelcom(getCellValue(row, "AE"));
+        r.setRedList(getCellValue(row, "AF"));
+        r.setRedListName(getCellValue(row, "AG"));
 
         r.setExcelRow(row.getRowNum() + 1);
 

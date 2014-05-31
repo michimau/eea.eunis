@@ -167,16 +167,23 @@ public class JstlFunctions {
      * and descriptions, where there is a convention to display species names
      * in italics.
      *
+     * The italics are automatically closed at the end of the paragraph.
+     *
      * @param inStr - input string
      * @return - string with replacements.
      */
     public static String bracketsToItalics(String inStr) {
         if (inStr.contains("[") || inStr.contains("]")) {
-            inStr = inStr.replaceAll("\\[","<i>").replaceAll("]","</i>");
+            int initial = inStr.length();
 
-            // last closed is before last opened, so close one more
-            if(inStr.lastIndexOf("</i>")<inStr.lastIndexOf("<i>") && inStr.lastIndexOf("<i>") >= 0){
-                inStr = inStr + "</i>";
+            inStr = inStr.replaceAll("\\[", "<i>");
+            int opened = (inStr.length() - initial)/2;
+            initial = inStr.length();
+
+            inStr = inStr.replaceAll("]", "</i>");
+            int closed = (inStr.length() - initial)/3;
+            while(opened > closed) {
+                inStr = inStr + "</i>";  closed++;
             }
         }
         return inStr;

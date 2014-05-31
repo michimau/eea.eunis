@@ -14,12 +14,18 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
             <c:choose>
                 <c:when test="${actionBean.siteType eq 'A' or actionBean.siteType eq 'C'}">
                     <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Birds directive">
-                    </td></tr><tr><td><ul><li>Date classified as Special Protection Area (SPA)</li></ul></td>
-                     <td><fmt:formatDate value="${actionBean.spaDate}" pattern="${actionBean.dateFormat}"/>
                 </c:when>
                 <c:otherwise>
                     <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Birds directive">
                 </c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
+    <tr><td><ul><li>Date classified as Special Protection Area (SPA)</li></ul></td>
+        <td>
+            <c:choose>
+                <c:when test="${not empty actionBean.spaDate}"><fmt:formatDate value="${actionBean.spaDate}" pattern="${actionBean.dateFormat}"/></c:when>
+                <c:otherwise>Not available</c:otherwise>
             </c:choose>
         </td>
     </tr>
@@ -29,46 +35,58 @@ sites classified under the Birds Directive and the Habitats Directive (the Natur
     <tr><td style="padding-top: 4px;">Habitats Directive <span class="discreet">92/43/EEC</span> (SCI)</td>
         <td style="padding-top: 4px;">
             <c:choose>
-                <c:when test="${(actionBean.siteType eq 'B' or actionBean.siteType eq 'C') and (not empty actionBean.sciProposedDate or not empty actionBean.sciConfirmedDate)}">
+                <c:when test="${(actionBean.siteType eq 'B' or actionBean.siteType eq 'C')}">
                     <img width="15" height="16" title="Yes" style="vertical-align:middle" src="images/mini/check_green.gif" alt="Under Habitats directive">
-                    </td></tr><tr><td><ul><li>
-                      Date proposed as Site of Community Importance (SCI)</li></ul></td>
-                        <td><fmt:formatDate value="${actionBean.sciProposedDate}" pattern="${actionBean.dateFormat}"/></td>
-                    <c:if test="${not empty actionBean.sciConfirmedDate}">
-                    </tr><tr><td><ul><li>
-                      Date confirmed as Site of Community Importance</li></ul></td>
-                        <td><fmt:formatDate value="${actionBean.sciConfirmedDate}" pattern="${actionBean.dateFormat}"/></td>
-                    </c:if>
                 </c:when>
                 <c:otherwise>
                     <img width="15" height="16" title="No" style="vertical-align:middle" src="images/mini/invalid.gif" alt="Not under Habitats directive">
                 </c:otherwise>
             </c:choose>
         </td>
+     </tr>
+     <tr><td><ul><li>
+        Date proposed as Site of Community Importance (SCI)</li></ul></td>
+        <td>
+            <c:choose>
+                <c:when test="${not empty actionBean.sciProposedDate}"><fmt:formatDate value="${actionBean.sciProposedDate}" pattern="${actionBean.dateFormat}"/></c:when>
+                <c:otherwise>Not available</c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
+    <tr><td><ul><li>
+        Date confirmed as Site of Community Importance</li></ul></td>
+        <td>
+            <c:choose>
+                <c:when test="${not empty actionBean.sciConfirmedDate}"><fmt:formatDate value="${actionBean.sciConfirmedDate}" pattern="${actionBean.dateFormat}"/></c:when>
+                <c:otherwise>Not available</c:otherwise>
+            </c:choose>
+        </td>
     </tr>
 
     <tr><td colspan="2" style="border-bottom: solid 1px #ECECEC;"><div style="height:4px; overflow: hidden;">&nbsp;</div></td></tr>
 
-    <c:if test="${not empty actionBean.sacDate}">
-        <tr>
-            <td style="padding-top: 4px;">Date designated as Special Area of Conservation (SAC)</td>
-            <td style="padding-top: 4px;"><fmt:formatDate value="${actionBean.sacDate}" pattern="${actionBean.dateFormat}"/></td>
-        </tr>
+    <tr>
+        <td style="padding-top: 4px;">Date designated as Special Area of Conservation (SAC)</td>
+        <td style="padding-top: 4px;">
+            <c:choose>
+                <c:when test="${not empty actionBean.sacDate}"><fmt:formatDate value="${actionBean.sacDate}" pattern="${actionBean.dateFormat}"/></c:when>
+                <c:otherwise>Not available</c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
 
-        <tr><td colspan="2" style="border-bottom: solid 1px #ECECEC;"><div style="height:4px; overflow: hidden;">&nbsp;</div></td></tr>
-
-    </c:if>
+    <tr><td colspan="2" style="border-bottom: solid 1px #ECECEC;"><div style="height:4px; overflow: hidden;">&nbsp;</div></td></tr>
 
     <tr>
         <td style="padding-top: 4px;">Date of Standard data form update</td>
-        <td style="padding-top: 4px;"><fmt:formatDate value="${actionBean.updateDate}" pattern="${actionBean.dateFormat}"/></td>
+        <td style="padding-top: 4px;">
+            <c:choose>
+                <c:when test="${not empty actionBean.updateDate}"><fmt:formatDate value="${actionBean.updateDate}" pattern="${actionBean.dateFormat}"/></c:when>
+                <c:otherwise>Not available</c:otherwise>
+            </c:choose>
+        </td>
     </tr>
 
 </table>
-<%--<br>--%>
-<%--<table style="width: 600px">--%>
-
-<%--</table>--%>
-
 
 </stripes:layout-definition>

@@ -1999,4 +1999,36 @@ public class SpeciesFactsheet {
 
         return false;
     }
+
+    public boolean isSubspeciesName(){
+        return speciesObject.getTypeRelatedSpecies().equalsIgnoreCase("subspecies")
+            && speciesObject.getScientificName().length() >= speciesObject.getScientificName().replaceAll(" ","").length() + 2;
+    }
+
+    /**
+     * Returns the valid species ID for subspecies
+     * The species is found by the binomen
+     * @return id_species; null if could not found
+     */
+    public Integer getValidSpeciesId(){
+        if(isSubspeciesName()) {
+            List<Chm62edtSpeciesPersist> speciesList;
+            String nameToSearch = getParentSpeciesName();
+            speciesList = new Chm62edtSpeciesDomain().findWhere("SCIENTIFIC_NAME = '" + nameToSearch + "' AND VALID_NAME=1 ");
+            if(speciesList.size() != 0) {
+                return speciesList.get(0).getIdSpecies();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get the parent species of a subspecies
+     * @return Returns the first two names
+     */
+    public String getParentSpeciesName(){
+        String nameToSearch = speciesObject.getScientificName().trim();
+        String[] names = nameToSearch.split(" ");
+        return names[0].trim() + " " + names[1].trim();
+    }
 }

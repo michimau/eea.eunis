@@ -122,6 +122,12 @@
                                 <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span>
                             </li>
                             </c:if>
+                            <c:if test="${not empty actionBean.factsheet.validSpeciesId}">
+                                <li>
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Valid parent species: ')}
+                                    <span class="bold italics"><a href="/species/${actionBean.factsheet.validSpeciesId}">${actionBean.factsheet.parentSpeciesName}</a></span>
+                                </li>
+                            </c:if>
                             <c:if test="${!empty actionBean.n2000id}">
                                 <li class="discreet">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}

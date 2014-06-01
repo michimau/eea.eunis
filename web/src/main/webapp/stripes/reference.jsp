@@ -121,7 +121,7 @@
                             <c:forEach items="${actionBean.speciesByName}" var="spe" varStatus="loop">
                                 <tr>
                                     <td>
-                                        <a href="species/${spe.id}">${spe.name}<c:if test="${not empty spe.author}">, ${spe.author}</c:if></a>
+                                        <a href="species/${spe.id}"><span class="italics">${spe.name}</span><c:if test="${not empty spe.author}"> ${spe.author}</c:if></a>
                                     </td>
                                     <td>
                                             ${spe.groupCommonName}

@@ -71,7 +71,7 @@
         <div class="eea-accordion-panels non-exclusive">
 
         <div class="eea-accordion-panel" style="clear: both;">
-        <h2 class="notoc eea-icon-right-container"><%= cm.cms("easy_search") %></h2>
+        <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Predefined searches") %></h2>
         <div class="pane">
         <h4><%=cm.cmsPhrase("A set of predefined functions to search the database") %></h4>
         <table class="fullwidth">
@@ -135,7 +135,7 @@
             </div>
             </div>
             <div class="eea-accordion-panel" style="clear: both;">
-            <h2 class="notoc eea-icon-right-container"><%=cm.cms("advanced_searches")%></h2>
+            <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Advanced search") %></h2>
             <div class="pane">
                 <h4><%=cm.cmsPhrase("Search habitat type information using more complex filtering capabilities") %></h4>
                 <table class="fullwidth">
@@ -169,39 +169,44 @@
             </div>
             </div>
             <div class="eea-accordion-panel" style="clear: both;">
-            <h2 class="notoc eea-icon-right-container"><%=cm.cms("help")%></h2>
-            <div class="pane">
-            <h4><%=cm.cmsPhrase("General information on EUNIS application") %></h4>
-            <table class="fullwidth">
-            <colgroup>
-                <col style="width: 310px; white-space: nowrap;">
-                <col>
-            </colgroup>
-                    <tbody>
-                      <tr>
-                        <td width="40%">
-                          <img alt="<%=cm.cms("habitats_main_easyHelp")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_easyHelp")%>
-                          <a href="easy-help.jsp"><strong><%=cm.cmsPhrase("How to use Easy searches")%></strong></a>
-                          <%=cm.cmsTitle("habitats_main_easyHelpDesc")%>
-                        </td>
-                        <td width="60%">
-                          <%=cm.cmsPhrase("Help on habitat types <strong>Easy Searches</strong>")%>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img alt="<%=cm.cms("how_to_use")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use")%>
-                          <a href="habitats-help.jsp"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
-                          <%=cm.cmsTitle("habitats_main_howToDesc")%>
-                        </td>
-                        <td>
-                          <%=cm.cmsPhrase("Help on EUNIS Database habitat types module search tools")%>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-          </div>
+                <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Downloads") %></h2>
+                <div class="pane">
+                    <table summary="layout" class="listing fullwidth">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="http://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">
+                                    <%=cm.cmsPhrase("EUNIS habitat classification")%>
+                                </a>
+                            </td>
+                            <td>
+                                <%=cm.cmsPhrase("The classification covers all types of habitat types from natural to artificial, from terrestrial to freshwater and marine.")%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">
+                                    <%=cm.cmsPhrase("Conservation status of habitat types and species")%>
+                                </a>
+                            </td>
+                            <td>
+                                <%=cm.cmsPhrase("All EU Member States are requested by the Habitats Directive to monitor habitat types considered to be of Community interest")%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5">
+                                    <%=cm.cmsPhrase("Natura 2000 data")%>
+                                </a>
+                            </td>
+                            <td>
+                                <%=cm.cmsPhrase("Natura 2000 is the European Union network of protected sites")%>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
       </div>
 
 

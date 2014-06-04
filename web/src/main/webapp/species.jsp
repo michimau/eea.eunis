@@ -93,7 +93,7 @@
       <div class="eea-accordion-panels non-exclusive">
 
           <div class="eea-accordion-panel" style="clear: both;">
-          <h2 class="notoc eea-icon-right-container">Easy search</h2>
+          <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Predefined searches") %></h2>
           <div class="pane">
               <h4><%=cm.cmsPhrase("A set of predefined functions to search the database") %></h4>
               <table class="fullwidth">
@@ -145,7 +145,7 @@
           </div>
           </div>
           <div class="eea-accordion-panel" style="clear: both;">
-          <h2 class="notoc eea-icon-right-container">Advanced search</h2>
+          <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Advanced search") %></h2>
           <div class="pane">
               <h4><%=cm.cmsPhrase("A flexible search tool to build your own query") %></h4>
               <table summary="layout" class="fullwidth">
@@ -178,74 +178,42 @@
           </div>
           </div>
           <div class="eea-accordion-panel" style="clear: both;">
-          <h2 class="notoc eea-icon-right-container">Statistical data</h2>
+          <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Downloads") %></h2>
           <div class="pane">
-              <h4><%=cm.cmsPhrase( "A search tool to build aggregated data" ) %></h4>
-              <table summary="layout" class="fullwidth">
-                  <colgroup>
-                      <col style="width: 310px; white-space: nowrap">
-                      <col>
-                  </colgroup>
+              <table summary="layout" class="listing fullwidth">
                 <tbody>
                   <tr>
                     <td>
-                      <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                      <a href="species-statistics-module.jsp">
-                        <strong>
-                          <%=cm.cmsPhrase("Statistical data")%>
-                        </strong>
+                      <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">
+                          <%=cm.cmsPhrase("Conservation status of habitat types and species")%>
                       </a>
                     </td>
                     <td>
-                      <%=cm.cmsPhrase("Find statistical data about species")%>
+                      <%=cm.cmsPhrase("All EU Member States are requested by the Habitats Directive to monitor species considered to be of Community interest")%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="http://www.eea.europa.eu/data-and-maps/data/european-red-lists-2">
+                          <%=cm.cmsPhrase("European Red Lists")%>
+                      </a>
+                    </td>
+                    <td>
+                      <%=cm.cmsPhrase("The European Red List is a review of the conservation status of c.6,000 European species according to IUCN regional Red Listing guidelines")%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5">
+                          <%=cm.cmsPhrase("Natura 2000 data")%>
+                      </a>
+                    </td>
+                    <td>
+                      <%=cm.cmsPhrase("Natura 2000 is the European Union network of protected sites")%>
                     </td>
                   </tr>
                 </tbody>
               </table>
-          </div>
-          </div>
-          <div class="eea-accordion-panel" style="clear: both;">
-          <h2 class="notoc eea-icon-right-container">Help</h2>
-          <div class="pane">
-              <h4><%=cm.cmsPhrase( "General information on EUNIS application" ) %></h4>
-              <table summary="layout" class="fullwidth">
-                  <colgroup>
-                      <col style="width: 310px; white-space: nowrap">
-                      <col>
-                  </colgroup>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                        <a href="easy-help.jsp"><strong><%=cm.cmsPhrase("How to use Easy search")%></strong></a>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Help on species <strong>Easy Searches</strong>")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                        <a href="http://biodiversity-chm.eea.europa.eu/search_html">
-                            <strong><%=cm.cmsPhrase("Browse")%></strong></a>
-                        <%=cm.cmsTitle("generic_information_tools_on_species")%>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Generic information tools on Species diversity")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                        <a href="species-help.jsp"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Help on EUNIS Database species module search tools")%>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
           </div>
           </div>
       </div>

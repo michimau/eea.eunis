@@ -72,7 +72,7 @@
         <div class="eea-accordion-panels non-exclusive">
 
         <div class="eea-accordion-panel" style="clear: both;">
-        <h2 class="notoc eea-icon-right-container"><%= cm.cms("easy_search") %></h2>
+        <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Predefined searches") %></h2>
         <div class="pane">
         <h4><%=cm.cmsPhrase("A set of predefined functions to search the database") %></h4>
         <table class="fullwidth">
@@ -100,7 +100,7 @@
         </div>
         </div>
         <div class="eea-accordion-panel" style="clear: both;">
-        <h2 class="notoc eea-icon-right-container"><%=cm.cms("advanced_searches")%></h2>
+        <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Advanced search") %></h2>
         <div class="pane">
         <h4><%=cm.cmsPhrase("A flexible search tool to build your own query") %></h4>
         <table class="fullwidth">
@@ -140,71 +140,42 @@
         </div>
         </div>
         <div class="eea-accordion-panel" style="clear: both;">
-        <h2 class="notoc eea-icon-right-container">Statistical data</h2>
-        <div class="pane">
-        <h4><%=cm.cmsPhrase("A search tool to build aggregated data") %></h4>
-        <table class="fullwidth">
-        <colgroup>
-            <col style="width: 310px; white-space: nowrap;">
-            <col>
-        </colgroup>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a href="sites-statistical.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Number/Total area")%>
-                              </strong>
+            <h2 class="notoc eea-icon-right-container"><%= cm.cmsPhrase("Downloads") %></h2>
+            <div class="pane">
+                <table summary="layout" class="listing fullwidth">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5">
+                                <%=cm.cmsPhrase("Natura 2000 data")%>
                             </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Find statistical data about sites")%>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-        </div>
-        </div>
-        <div class="eea-accordion-panel" style="clear: both;">
-        <h2 class="notoc eea-icon-right-container"><%=cm.cms("help")%></h2>
-        <div class="pane">
-        <h4><%=cm.cmsPhrase("General information on EUNIS application") %></h4>
-        <table class="fullwidth">
-        <colgroup>
-            <col style="width: 310px; white-space: nowrap;">
-            <col>
-        </colgroup>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <a href="easy-help.jsp">
-                          <strong>
-                            <%=cm.cmsPhrase("How to use Easy search")%>
-                          </strong>
-                        </a>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Help on sites <strong>Easy Searches</strong>")%>
-                      </td>
+                        </td>
+                        <td>
+                            <%=cm.cmsPhrase("Natura 2000 is the European Union network of protected sites")%>
+                        </td>
                     </tr>
                     <tr>
-                      <td>
-                        <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <a href="sites-help.jsp">
-                          <strong>
-                            <%=cm.cmsPhrase("How to use")%>
-                          </strong>
-                        </a>
-                      </td>
-                      <td>
-                        <%=cm.cmsPhrase("Sites online help")%>
-                      </td>
+                        <td>
+                            <a href="http://www.eea.europa.eu/data-and-maps/data/nationally-designated-areas-national-cdda-8">
+                                <%=cm.cmsPhrase("Nationally designated areas (CDDA)")%>
+                            </a>
+                        </td>
+                        <td>
+                            <%=cm.cmsPhrase("The European inventory about protected areas and the national legislative instruments, which directly or indirectly create protected areas")%>
+                        </td>
                     </tr>
-                  </tbody>
+                    <tr>
+                        <td>
+                            <a href="http://www.eea.europa.eu/data-and-maps/data/biogeographical-regions-europe-1">
+                                <%=cm.cmsPhrase("Biogeographical regions")%>
+                            </a>
+                        </td>
+                        <td>
+                            <%=cm.cmsPhrase("The biogeographical regions of Europe")%>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
-<!-- END MAIN CONTENT -->
             </div>
         </div>
     </div>

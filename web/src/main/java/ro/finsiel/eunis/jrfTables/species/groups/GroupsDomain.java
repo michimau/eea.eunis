@@ -132,7 +132,7 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
         filterSQL.append(
                 Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME",
                 showEUNISInvalidatedSpecies));
-        // filterSQL.append(" AND B.LEVEL='FAMILY' AND C.LEVEL='ORDER' ");
+        filterSQL.append(" AND A.TYPE_RELATED_SPECIES='Species' ");
 
         if (sortCriteria.length > 0) {
             filterSQL.append(DBUtilities.prepareWhereSort(this.sortCriteria));
@@ -181,6 +181,7 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
         sql.append(
                 Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME",
                 showEUNISInvalidatedSpecies));
+        sql.append(" AND A.TYPE_RELATED_SPECIES='Species' ");
         Long ret = findLong(sql.toString());
 
         if (null == ret) {

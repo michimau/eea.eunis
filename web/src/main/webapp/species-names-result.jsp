@@ -727,6 +727,15 @@
                           									</th>
             								<%
                         								}
+
+                                                        if (showVernacularNames ){
+                                            %>
+                                                          <th scope="col" class="nosort">
+                                                              <%=cm.cmsPhrase("Common name")%>
+                                                          </th>
+                                            <%
+                                                        }
+
                         								if (showValidName){
                         									if(newName){
                         					%>
@@ -743,13 +752,7 @@
             								<%
                         									}
                         								}
-                        								if (showVernacularNames ){
-            								%>
-                          									<th scope="col" class="nosort">
-                            									<%=cm.cmsPhrase("Common name")%>
-                          									</th>
-            								<%
-                        								}
+
             								%>
                         							</tr>
                         						</thead>

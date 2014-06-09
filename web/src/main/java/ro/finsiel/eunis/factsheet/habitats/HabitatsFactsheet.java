@@ -1,10 +1,7 @@
 package ro.finsiel.eunis.factsheet.habitats;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sf.jrf.exceptions.DatabaseException;
@@ -68,6 +65,7 @@ import ro.finsiel.eunis.jrfTables.DcIndexPersist;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
@@ -1504,6 +1502,7 @@ public class HabitatsFactsheet {
             result = new OtherClassificationDomain().findWhere(
                     "ID_HABITAT='" + idHabitat
                     + "' AND LEGAL=0  AND current_data=1 ORDER BY SORT_ORDER");
+            sourceOnTop(result);
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             result = new Vector();
@@ -1528,11 +1527,26 @@ public class HabitatsFactsheet {
             result = new OtherClassificationDomain().findWhere(
                     "ID_HABITAT='" + idHabitat
                             + "' AND LEGAL=0 AND current_data=0 ORDER BY SORT_ORDER");
+            sourceOnTop(result);
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
-            result = new Vector();
         }
         return result;
+    }
+
+    /**
+     * Makes the source to be on top
+     * @param list
+     */
+    private void sourceOnTop(List<OtherClassificationPersist> list){
+        Collections.sort(list, new Comparator<OtherClassificationPersist>() {
+            @Override
+            public int compare(OtherClassificationPersist o1, OtherClassificationPersist o2) {
+                if(o1.getRelationType().equalsIgnoreCase("s")) return -1;
+                if(o2.getRelationType().equalsIgnoreCase("s")) return 1;
+                return o1.getSortOrder().compareTo(o2.getSortOrder());
+            }
+        });
     }
 
     /**

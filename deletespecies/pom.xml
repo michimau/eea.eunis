@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eionet.eunis</groupId>
+        <artifactId>eunis</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>deletespecies</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <main.basedir>${project.basedir}/..</main.basedir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>eionet.eunis</groupId>
+            <artifactId>web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <compilerVersion>${java_version}</compilerVersion>
+                    <source>${java_version}</source>
+                    <target>${java_version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>2.0</wtpversion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>eionet.eunis.scripts.DeleteSpecies</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <id>copy files</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <loadproperties srcFile="${project.parent.basedir}/${env}.properties" />
+                                <copy todir="${scripts.dir}" file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"/>
+                                <!-- Copy supporting scripts -->
+                                <copy todir="${scripts.dir}" overwrite="true">
+                                    <fileset dir="src/main/scripts"></fileset>
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="JARFILE" value="${project.build.finalName}-jar-with-dependencies.jar" />
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

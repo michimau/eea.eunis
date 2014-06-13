@@ -13,7 +13,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <env>local</env>
-        <checkstyle.config.location>${basedir}/docs/checkstyle.xml</checkstyle.config.location>
+        <checkstyle.config.location>${project.basedir}/docs/checkstyle.xml</checkstyle.config.location>
+        <main.basedir>${project.basedir}/..</main.basedir>
     </properties>
 
     <parent>
@@ -89,50 +90,8 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <loadproperties srcFile="${env}.properties" />
-
-                                <!-- Copy supporting scripts -->
-                                <copy todir="${scripts.dir}"
-                                    overwrite="true">
-                                    <fileset dir="src/main/scripts"></fileset>
-                                    <filterchain>
-                                        <replacetokens>
-                                            <token key="WEBAPP.HOME"
-                                                value="${webapp.home}" />
-                                            <token key="MYSQL.JAR"
-                                                value="${maven.dependency.mysql.mysql-connector-java.jar.path}" />
-                                            <token key="LOG4J.JAR"
-                                                value="${maven.dependency.log4j.log4j.jar.path}" />
-                                            <token key="JRF.JAR"
-                                                value="${maven.dependency.jrf.jrf.jar.path}" />
-                                            <token key="XML-APIS.JAR"
-                                                value="${maven.dependency.xml-apis.xml-apis.jar.path}" />
-                                            <token key="XML-PARSER.JAR"
-                                                value="${maven.dependency.xerces.xmlParserAPIs.jar.path}" />
-                                            <token key="COMMONS-LANG.JAR"
-                                                value="${maven.dependency.commons-lang.commons-lang.jar.path}" />
-                                            <token key="COMMONS-LOGGING.JAR"
-                                                value="${maven.dependency.commons-logging.commons-logging.jar.path}" />
-                                            <token key="COMMONS-CODEC.JAR"
-                                                value="${maven.dependency.commons-codec.commons-codec.jar.path}" />
-                                            <token
-                                                key="COMMONS-HTTPCLIENT.JAR"
-                                                value="${maven.dependency.commons-httpclient.commons-httpclient.jar.path}" />
-                                            <token key="SLF4J.JAR"
-                                                value="${maven.dependency.org.slf4j.slf4j-log4j12.jar.path}" />
-                                            <token key="SLF4J-API.JAR"
-                                                value="${maven.dependency.org.slf4j.slf4j-api.jar.path}" />
-                                            <token key="SPARQL-CLIENT.JAR"
-                                                value="${maven.dependency.eionet.sparql-client.jar.path}" />
-                                            <token key="SESAME.JAR"
-                                                value="${maven.dependency.org.openrdf.openrdf-sesame.jar.path}" />
-                                            <token key="RDF-EXPORTER.JAR"
-                                                value="${maven.dependency.eionet.rdf-export.rdf-exporter.jar.path}" />
-                                        </replacetokens>
-                                    </filterchain>
-                                </copy>
-                                <copy todir="${app.home}/rdf"
-                                    overwrite="true">
+                                <loadproperties srcFile="${project.parent.basedir}/${env}.properties" />
+                                <copy todir="${app.home}/rdf" overwrite="true">
                                     <fileset dir="src/main/webapp/rdf"></fileset>
                                 </copy>
                             </tasks>
@@ -165,7 +124,7 @@
                 <version>2.1.1</version>
                 <configuration>
                     <filters>
-                        <filter>${basedir}/${env}.properties</filter>
+                        <filter>${main.basedir}/${env}.properties</filter>
                     </filters>
                     <webResources>
                         <resource>
@@ -246,7 +205,7 @@
 
         <!-- filters for src/main/resources and src/test/resources -->
         <filters>
-            <filter>${env}.properties</filter>
+            <filter>${main.basedir}/${env}.properties</filter>
         </filters>
 
         <!-- Define resource specific filtering -->

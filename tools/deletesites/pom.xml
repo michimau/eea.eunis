@@ -5,15 +5,15 @@
 
     <parent>
         <groupId>eionet.eunis</groupId>
-        <artifactId>eunis</artifactId>
+        <artifactId>tools</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>linkeddataqueries</artifactId>
+    <artifactId>deletesites</artifactId>
     <packaging>jar</packaging>
 
     <properties>
-        <main.basedir>${project.basedir}/..</main.basedir>
+        <main.basedir>${project.basedir}/../..</main.basedir>
     </properties>
 
     <dependencies>
@@ -26,16 +26,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <compilerVersion>${java_version}</compilerVersion>
-                    <source>${java_version}</source>
-                    <target>${java_version}</target>
-                </configuration>
-            </plugin>
+        <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -46,6 +37,7 @@
                     <wtpversion>2.0</wtpversion>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -56,7 +48,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>eionet.eunis.scripts.LinkedDataQueriesScript</mainClass>
+                            <mainClass>eionet.eunis.scripts.DeleteSites</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -83,7 +75,7 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <loadproperties srcFile="${project.parent.basedir}/${env}.properties" />
+                                <loadproperties srcFile="${main.basedir}/${env}.properties" />
                                 <copy todir="${scripts.dir}" file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"/>
                                 <!-- Copy supporting scripts -->
                                 <copy todir="${scripts.dir}" overwrite="true">

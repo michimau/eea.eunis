@@ -1,0 +1,24 @@
+JRF Version 2 contains implementations of javax.sql.PooledConnection 
+and javax.sql.ConnectionPoolDataSource.  While most applications will probably 
+use alternative DataSource implementations, the implementations 
+provided in JRF are working versions, which may be used if needed.  
+See the documentation in jrf.properties for information on setting up
+the DataSource.
+
+Java version 1.4 introduces new methods to java.sql.Connection.  The 
+1.4 version of "SimplePooledConnection" simply wraps calls of these methods 
+over the actual physical Connection.  These wrapped methods have not been
+completely tested.
+
+The build process will automatically detect whether you are running 
+version 1.4.  However, if you want to use the suite of "Simple" data source 
+implementations under version 1.4, you must change the following in jrf.properties:
+
+localdatasourcegeneratorimpl=net.sf.jrf.sql.java13.SimpleDataSourceGenerator
+
+to:
+
+localdatasourcegeneratorimpl=net.sf.jrf.sql.java14.SimpleDataSourceGenerator
+
+Running javadoc under version 1.4 will generate many warnings. 
+These warnings will eventually be eliminated.

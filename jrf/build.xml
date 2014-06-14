@@ -1,0 +1,487 @@
+<?xml version="1.0" ?>
+
+<!--
+   Ant buildfile for the jRelationalFramework.
+
+   To download Ant go to:
+   http://jakarta.apache.org/ant/
+   (This requires version 1.2 or later)
+  -->
+
+<project name="jRelationalFramework" default="jar" basedir=".">
+
+
+  <!-- =================================================================== -->
+  <!-- Set the following property to the directory of your database vendor -->
+  <!-- jar or jars.							   -->
+  <!-- =================================================================== -->
+  <!-- Allow user to set up a customized driver directory.  Replace "lib"  -->
+  <!-- with something like:						   -->
+  <!-- <property name="dbvendorjardir" value="${user.home}/dbjardir"/>     -->
+  <!-- =================================================================== -->
+
+  <property name="dbvendorjardir" value="lib"/> 
+
+  <!-- Disallow compile of java14 and java13 directories for compile-base -->
+  <property name="javaVersionExcludes"  value="net/sf/jrf/sql/java1*/*.java"/>
+ 
+  <!-- =================================================================== -->
+  <!-- Database and other property values are in jrf.properties file       -->
+  <!-- =================================================================== -->
+  <property file="jrf.properties" />
+  <property name="jrfVersion"   value="jrf-2.0-beta4" /> 
+
+  <property name="junitJar"     value="lib/junit.jar" />
+  <property name="log4jJar"     value="lib/log4j-core.jar" />
+  <property name="jrfJar"       value="lib/jrf.jar" />
+  <property name="examplesJar"  value="lib/jrf-examples.jar" />
+  <property name="testnoreflectJar"  value="lib/jrf-testnoreflection.jar" />
+  <property name="testsJar"     value="lib/jrf-tests.jar" />
+  <property name="testgenJar"   value="lib/jrf-testgen.jar" />
+  <property name="extrasJar"    value="lib/jrf-extras.jar" />
+  <property name="jdbc20extJar" value="lib/jdbc2_0-stdext.jar" />
+
+  <property name="jrfdir"	value="."/>
+  <property name="javadoc.linkbase" value="http://java.sun.com/j2se/1.3/docs/api"/>
+  <property name="javadoc.linkj2ee" value="http://java.sun.com/j2ee/sdk_1.3/techdocs/api"/>
+  <property name="javadoc.linklog4j" value="http://jakarta.apache.org/log4j/docs/api"/>
+
+  <property name="debug" value="on"/>
+  <property name="deprecation" value="yes"/>
+  <!-- If we don't set this to on, 138 warnings will result from deprecated
+       constructors in column specs -->
+  <property name="nowarn" value="on"/>
+
+  <!-- =================================================================== -->
+  <!-- Define the basic classpath                                          -->
+  <!-- =================================================================== -->
+  <path id="basic.class.path">
+    <fileset dir="lib">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${dbvendorjardir}">
+      <include name="**/*.jar"/>
+      <include name="**/*.zip"/>
+    </fileset>
+    <pathelement path="." />    
+    <pathelement path="conf" />
+  </path>
+  <target name="setenv" >
+	<!-- Determine whether we are running java 1.4 or java 1.3 -->
+	<available classname="java.sql.Savepoint" property="java14.is.running"/>
+  </target>
+
+  <target name="init">
+    <mkdir dir="bld" /> <!-- For temporary build related files -->
+    <mkdir dir="bld/classes" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Undo the actions of compile, dist, and run targets                  -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="cleanHSQL"
+          description="remove class files, backups, and distribution zip">
+    <delete dir="bld" />
+    <delete dir="dist" />
+    <delete dir="testgenerated"/>
+    <delete dir="srcgenerated"/>
+    <delete dir="genlogs"/>
+    <delete dir="doc/api"/>
+    <delete dir="logs" />
+    <delete verbose="true">
+      <fileset dir="." includes="**/*~" defaultexcludes="no"/>
+      <fileset dir="." includes="**/*.java.marks"/>
+      <fileset dir = "." includes="*.zip" />
+      <fileset dir = "." includes="*.jar" />
+      <fileset dir = "." includes="*.log" />
+      <fileset dir = "." includes="lib/jrf*.jar" />
+    </delete>
+  </target>
+
+  <target name="cleanHSQL" description="Cleans up all files created by HSQL for testing.">
+    <delete verbose="true">
+      <fileset dir = "." includes="test-hsql.*" />
+      <fileset dir = "." includes=".script" />
+      <fileset dir = "." includes=".backup" />
+      <fileset dir = "." includes=".data" />
+      <fileset dir = "." includes=".properties" />
+    </delete>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Hook to compile database-specific files (e.g. dbpolicies/oracle etc.)-->
+  <!-- (Not yet implemented)						   -->
+  <!-- =================================================================== -->
+
+  <!-- =================================================================== -->
+  <!-- Convert carriage-returns/line-feeds for current OS type             -->
+  <!-- =================================================================== -->
+  <target name="fixcrlf" description="fix carriage returns for OS type">
+    <fixcrlf srcdir="." includes="**/*.txt,*.xml,*.properties,**/*.java" />
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Compile the framework, extras, examples, and tests                  -->
+  <!-- =================================================================== -->
+  <target name="compile-base" 
+					description="compile base source code">
+    <mkdir dir="bld/classes/" />
+    <javac srcdir="source" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+           excludes="**/old/**,test/**,${javaVersionExcludes}"
+           destdir="bld/classes">
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+  <target name="compile-test" description="compile test source code">
+    <mkdir dir="bld/classes/" />
+    <javac srcdir="source" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+                 includes="test/**"
+           excludes="**/old/**"
+           destdir="bld/classes">
+      <classpath refid="basic.class.path" />
+    </javac>
+    <javac srcdir="examples" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+           destdir="bld/classes"
+           includes="videoStore/*.java" >
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+
+  <target name="compile-java13" unless="java14.is.running" >
+    <javac srcdir="source" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+           includes="net/sf/jrf/sql/java13/*.java"
+           destdir="bld/classes">
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+
+  <target name="compile-java14" if="java14.is.running" >
+    <javac srcdir="source" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+           includes="net/sf/jrf/sql/java14/*.java"
+           destdir="bld/classes">
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+
+  <target name="setExcludes-java14" unless="java14.is.running" >
+	   <property name="exclude.javadoc.packages" value="net/sf/jrf/sql/java14"/>
+  </target>
+
+  <target name="setExcludes-java13" if="java14.is.running" >
+	   <property name="exclude.javadoc.packages" value="net/sf/jrf/sql/java13"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Jar the framework, extras, examples, tests                          -->
+  <!-- =================================================================== -->
+  <target name="jar" depends="jarbase,buildXMLTest,jartest,jar-test-no-reflection">
+  </target>
+  <target name="jarbase" depends="setenv,compile-base,compile-java13,compile-java14" 
+          description="generate all base jRF jar files">
+    <jar jarfile="${jrfJar}">
+      <fileset dir="bld/classes">
+        <include name="net/sf/jrf/**/*.class"/>
+        <exclude name="net/sf/jrf/codegen/*.class"/>
+      </fileset>
+    </jar>
+    <jar jarfile="${extrasJar}">
+      <fileset dir="bld/classes">
+        <include name="net/sf/jrf/codegen/*.class"/>
+        <include name="org/exolab/**/*.class"/>
+        <include name="org/vmguys/**/*.class"/>
+      </fileset>
+    </jar>
+  </target>
+  <target name="jartest" depends="compile-test" >
+    <jar jarfile="${testsJar}">
+      <fileset dir="bld/classes">
+        <include name="test/*.class"/>
+        <include name="srcgenerated/**"/>
+      </fileset>
+    </jar>
+    <jar jarfile="${examplesJar}">
+      <fileset dir="bld/classes">
+        <include name="videoStore/*.class"/>
+      </fileset>
+    </jar>
+  </target>
+
+
+  <!-- Won't work if called directly. -->
+  <target name="jar-test-no-reflection" depends="test-no-reflection-compile" >
+    <sleep seconds="2" />
+    <jar jarfile="${testnoreflectJar}">
+      <fileset dir="bld/classes">
+        <include name="**/generated/**"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Zip up a distribution file of all sources excluding libs and docs   -->
+  <!-- =================================================================== -->
+  <target name="distlite" depends="clean" description="Create a zip without doc or libs">
+    <property name="distName" value="${jrfVersion}" />
+    <delete dir="${distName}" />
+    <mkdir dir="${distName}" />
+    <mkdir dir="dist"/>
+    <copy todir="${distName}" includeEmptyDirs="no">
+      <fileset dir="." excludes="${distName},lib/**,doc/**" />
+    </copy>
+    <zip zipfile="dist/${distName}-lite.zip" basedir="." includes="${distName}/**" />
+    <jar jarfile="dist/${distName}-lite.jar" basedir="." includes="${distName}/**" />
+    <delete dir="${distName}" />
+   </target>
+
+  <!-- =================================================================== -->
+  <!-- Zip up a distribution file of all sources, docs, and jars           -->
+  <!-- =================================================================== -->
+  <target name="dist" depends="clean"
+          description="Create a distribution zip file of sources,jars">
+    <property name="distName" value="${jrfVersion}" />
+    <mkdir dir="dist"/>
+    <delete dir="${distName}" />
+    <mkdir dir="${distName}" />
+    <copy todir="${distName}" includeEmptyDirs="yes">
+      <fileset dir="." excludes="${distName}" />
+    </copy>
+    <zip zipfile="dist/${distName}.zip" basedir="." includes="${distName}/**" />
+    <jar jarfile="dist/${distName}.jar" basedir="." includes="${distName}/**" />
+    <delete dir="${distName}" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Generate the framework API documentation                            -->
+  <!-- =================================================================== -->
+  <target name="javadoc" depends="setenv,setExcludes-java14,setExcludes-java13">
+    <mkdir dir="doc/api" />
+    <echo message="Excluding ${exclude.javadoc.packages}"/>
+    <javadoc packagenames="net.sf.jrf.*"
+             sourcepath="source"
+	     excludepackagenames="${exclude.javadoc.packages}"
+             destdir="doc/api"
+             bottom="&lt;i&gt;copyright &#169; 2000-2001 is.com and Jonathan Carlson&lt;i&gt;"
+             windowTitle="jRelationalFramework API"
+             docTitle="jRelationalFramework API">
+           <classpath refid = "basic.class.path"/>
+                   <link href="${javadoc.linkbase}"/>
+                   <link href="${javadoc.linkj2ee}"/>
+                   <link href="${javadoc.linklog4j}"/>
+                </javadoc>
+  </target>
+
+  <target name="checkforgensource-before">
+        <available file="srcgenerated" type="dir" property="srcgen.exists"/>
+  </target>
+
+  <target name="buildXMLTest" depends="generateFromXML" >
+    <mkdir dir="bld/classes/" />
+     <javac srcdir="srcgenerated" nowarn="${nowarn}" deprecation="${deprecation}" debug="${debug}"
+          destdir="bld/classes">
+      <classpath refid="basic.class.path" />
+    </javac>
+    <sleep seconds="2" />
+    <jar jarfile="${testgenJar}">
+      <fileset dir="bld/classes">
+        <include name="**/testgen/**"/>
+      </fileset>
+    </jar>
+    <!-- Sleep exists for linux implementation problems; without it javac core dumps.-->
+    <sleep seconds="2" />
+  </target>
+  <!-- =================================================================== -->
+  <!-- Test new code generator from XML	                                   -->
+  <!-- =================================================================== -->
+  <target name="generateFromXML" depends="checkforgensource-before" unless="srcgen.exists">
+                <delete dir="genlogs"/>
+                <mkdir dir="genlogs"/>
+         <mkdir dir="logs" />
+                <mkdir dir="srcgenerated/testgen/base/domains"/>
+                <mkdir dir="srcgenerated/testgen/comp/domains"/>
+             <copy  file="${jrfdir}/source/org/vmguys/dtd/JRFBaseSchema.dtd" tofile="source/xml/JRFBaseSchema.dtd"/>
+             <copy  file="${jrfdir}/source/org/vmguys/dtd/Embedded.dtd" tofile="source/xml/Embedded.dtd"/>
+                <java classname="org.vmguys.appgen.jrf.BaseGenerator" fork="yes">
+                        <arg value="source/xml/genbase.properties" />
+                        <arg value="source/xml/testdb.xml" />
+                <classpath>
+                           <pathelement path="source/xml"/>
+                        <pathelement path="${jrfdir}/lib/jrf.jar" />
+                        <pathelement path="${jrfdir}/lib/jrf-extras.jar" />
+                        <pathelement path="${jrfdir}/lib/xerces.jar" />
+                        <pathelement path="${jrfdir}/lib/log4j-core.jar" />
+                        <pathelement path="${jrfdir}/lib/log4j.jar" />
+                </classpath>
+                </java>
+                <java classname="org.vmguys.appgen.jrf.EmbeddedGenerator" fork="yes">
+                        <arg value="source/xml/gencomp.properties" />
+                        <arg value="source/xml/testcomp.xml" />
+                <classpath>
+                           <pathelement path="source/xml"/>
+                        <pathelement path="${jrfdir}/lib/jrf.jar" />
+                        <pathelement path="${jrfdir}/lib/jrf-extras.jar" />
+                        <pathelement path="${jrfdir}/lib/xerces.jar" />
+                        <pathelement path="${jrfdir}/lib/log4j-core.jar" />
+                        <pathelement path="${jrfdir}/lib/log4j.jar" />
+                </classpath>
+                </java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Run the examples and generate sources                               -->
+  <!-- =================================================================== -->
+  <target name="runExamples" depends="jar">
+    <antcall target="test">
+      <param name="test" value="ExampleTEST" />
+    </antcall>
+  </target>
+
+  <target name="generateSource" depends="jar"
+        description="generate source code from JDBC metadata" >
+    <mkdir dir="logs" />
+    <java classname="net.sf.jrf.codegen.SourceGen" fork="yes">
+      <jvmarg value="-Djava.compiler=NONE" />
+      <classpath refid="basic.class.path" />
+    </java>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Run the JUnit tests.                                                -->
+  <!-- By default, the test target will run all tests.                     -->
+  <!-- You can run a single test using the -Dtest=MyClassTEST argument     -->
+  <!--    execute example:  ant test -Dtest=MyClassTEST                    -->
+  <!-- =================================================================== -->
+  <target name="test" depends="jar,cleanHSQL"
+          description="run the unit tests. 'ant test -Dtest=MyClassTEST' runs just one">
+    <delete dir="bld/testoutput" quiet="yes" />
+    <mkdir dir="bld/testoutput" />
+    <mkdir dir="logs" />
+    <echo message=" === The results will go to bld/testoutput/ ===" />
+    <antcall target="onetest" />
+    <antcall target="alltest" />
+  </target>
+
+
+  <!-- Never use this target directly -->
+  <target name="onetest" if="test">
+    <junit printsummary="yes" fork="yes">
+      <jvmarg value="-classic" />
+      <jvmarg value="-DjrfPropertiesFile=jrf" /> <!-- jrf is default -->
+      <classpath>
+        <path refid="basic.class.path" />
+        <pathelement path="bld/classes" />
+      </classpath>
+      <formatter type="plain" />
+      <batchtest fork="yes" todir="bld/testoutput">
+        <fileset dir="bld/classes">
+          <!-- include the test classes in classes/com/**. -->
+          <include name="**/${test}.class" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+
+  <!-- Never use this target directly -->
+  <target name="alltest" unless="test">
+    <junit printsummary="yes" fork="yes">
+      <jvmarg value="-classic" />
+      <jvmarg value="-DjrfPropertiesFile=jrf" /> <!-- jrf is default -->
+      <classpath>
+        <path refid="basic.class.path" />
+        <pathelement path="bld/classes" />
+      </classpath>
+      <formatter type="plain" />
+      <batchtest fork="yes" todir="bld/testoutput">
+        <fileset dir="bld/classes">
+          <!-- include the test classes in bld/classes/com/** -->
+          <include name="test/*TEST.class" />
+          <include name="videoStore/*TEST.class" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Test the database connection                                        -->
+  <!-- =================================================================== -->
+  <target name="testConnection" depends="jar,cleanHSQL">
+    <mkdir dir="logs" />
+    <java classname="junit.textui.TestRunner" fork="yes">
+      <arg value="test.ConnectionTEST" />
+      <jvmarg value="-DjrfPropertiesFile=jrf" />
+      <classpath>
+        <path refid="basic.class.path" />
+        <pathelement location="${testsJar}" />
+      </classpath>
+    </java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Build no reflection testing stuff.		                         -->
+  <!-- =================================================================== -->
+  <target name="test-no-reflection-compile" depends="checkforgensource-after,test-no-reflection-codegenerate">
+    <javac srcdir="testgenerated"	debug="${debug}"
+           destdir="bld/classes"
+           includes="**/generated/**" >
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+
+  <target name="checkforgensource-after">
+        <available file="testgenerated" type="dir" property="testgen.exist"/>
+  </target>
+
+  <!-- Purposely, instrument only a few of the test classes with no
+       reflection so that both reflection and non-reflection can
+          be tested -->
+  <target name="test-no-reflection-codegenerate" unless="testgen.exist">
+    <mkdir dir="testgenerated"/>
+    <mkdir dir="logs" />
+    <java classname="net.sf.jrf.codegen.GetterSetterBuilder" fork="yes">
+         <arg value="testgenerated" />
+         <arg value="-classlist" />
+      <arg value="videoStore.Media,videoStore.Genre" />
+      <classpath>
+        <path refid="basic.class.path" />
+      </classpath>
+        </java>
+    <java classname="net.sf.jrf.codegen.GetterSetterBuilder" fork="yes">
+         <arg value="testgenerated" />
+         <arg value="-sourcedir" />
+      <arg value="source/test" />
+         <arg value="-packagename" />
+      <arg value="test" />
+      <classpath>
+        <path refid="basic.class.path" />
+      </classpath>
+        </java>
+  </target>
+
+  <!-- Set up a default dummy bfile property to be overriden by user       -->
+  <property name="bfile" value="XX/NN"/>
+  <!-- =================================================================== -->
+  <!-- Run the source code beautifier.  AKA PrettyPrinter from jRefactory  -->
+  <!-- The directory base will be assumed.  				   -->
+  <!--  execute example:  					           -->
+  <!--   ant beautify -Dbfile=source/net/sf/jrf/util/PropertiesHelper.java       -->
+  <!-- =================================================================== -->
+  <target name="beautify" depends="init"
+          description="Run the source code formatter/beautifier">
+    <property name="beautify.outfile" location="bld/beautify.out" />
+
+    <java classname="PrettyPrinter" output="${beautify.outfile}">
+      <sysproperty key="jrefactory.home" value="${basedir}/lib"/><!--.Refactory subdir-->
+      <!--arg value="-quiet" /-->
+      <arg value="${basedir}/${bfile}" />
+      <classpath>
+        <pathelement location="lib/jrefactory.jar"/>
+      </classpath>
+    </java>
+
+    <echo message="Output was sent to ${beautify.outfile}" />
+  </target>
+
+</project>

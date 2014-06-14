@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eionet.eunis</groupId>
+        <artifactId>eunis</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jrf</artifactId>
+    <version>2.0-beta4</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <main.basedir>${project.basedir}/..</main.basedir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.2</version>
+            <!--
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/commons-beanutils.jar</systemPath>
+            -->
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+            <!--
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/commons-collections.jar</systemPath>
+            -->
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>hsqld</groupId>
+            <artifactId>hsqld</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/hsqldb.jar</systemPath>
+        </dependency>
+-->
+        <dependency>
+            <groupId>javax.sql</groupId>
+            <artifactId>jdbc-stdext</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jrf-testgen</groupId>
+            <artifactId>jrf-testgen</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jrf-testgen.jar</systemPath>
+        </dependency>
+
+<!--
+        <dependency>
+            <groupId>jdbc2_0-stdext</groupId>
+            <artifactId>jdbc2_0-stdext</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jdbc2_0-stdext.jar</systemPath>
+        </dependency>
+-->
+        <!--
+        <dependency>
+            <groupId>jrefactory</groupId>
+            <artifactId>jrefactory</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/jrefactory.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j-core</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/log4j-core.jar</systemPath>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+            <!--
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/log4j.jar</systemPath>
+            -->
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xerces</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/xerces.jar</systemPath>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <excludes>
+                        <exclude>net/sf/jrf/sql/java13/*.java</exclude>
+                        <exclude>net/sf/jrf/sql/java14/*.java</exclude>
+                    </excludes>
+                    <encoding>UTF-8</encoding>
+                    <verbose>false</verbose>
+                    <fork>false</fork>
+                    <compilerVersion>${java_version}</compilerVersion>
+                    <source>${java_version}</source>
+                    <target>${java_version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <includes>
+                        <include>**/*TEST.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

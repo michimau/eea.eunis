@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+<!DOCTYPE Schema SYSTEM "JRFBaseSchema.dtd">
+
+
+<Schema databaseName="test">
+	<Table tableName="DOWTestKey" 
+		description="DOW testing table 1.">
+		<Column name="DOW"
+			objectName="DOW"
+			jrfImpl="DayOfWeekColumnSpec"
+			isPrimaryKey="true"
+			size="15"
+			description="Primary key identifier day of week."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="DOWTestNull" 
+		description="DOW testing table 2.">
+		<Column name="Code"
+			objectName="Code"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="15"
+			description="Primary key identifier."
+		/>
+		<Column name="DOW"
+			objectName="DOW"
+			jrfImpl="DayOfWeekColumnSpec"
+			size="15"
+			nullable="true"
+			description="identifier day of week."
+		/>
+	</Table>
+	<Table tableName="Names" 
+			description="Names table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="Places" 
+					description="Places table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="Master" 
+					description="Master table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="GeneralTest" 
+					description="General Test">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="LongColumnSpec"
+			isPrimaryKey="true"
+			description="Primary key identifier."
+		/>
+		<Column name="GroupID"
+			objectName="GroupID"
+			jrfImpl="LongColumnSpec"
+			description="Other ID."
+		/>
+		<Column name="SomeDate"
+			objectName="SomeDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="25"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="DateCompound" 
+			description="Date compound test">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="LongColumnSpec"
+			isSeq="true"
+			seqName="datecompseq"
+			isPrimaryKey="true"
+			description="Primary key identifier."
+		/>
+		<Column name="Date1"
+			objectName="Date1"
+			jrfImpl="SQLDateColumnSpec"
+			isPrimaryKey="true"
+			description="A date."
+		/>
+		<Column name="Date2"
+			objectName="Date2"
+			jrfImpl="SQLDateColumnSpec"
+			isPrimaryKey="true"
+			description="A date."
+		/>
+	</Table>
+	<Table tableName="Detail" 
+					description="Detail table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="Master2" 
+					description="Master2 table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+		<Column name="ANumber"
+			objectName="ANumber"
+			jrfImpl="IntegerColumnSpec"
+			maxValue="new Integer(25)"
+			minValue="new Integer(5)"
+			description="Number test."
+		/>
+	</Table>
+	<Table tableName="Detail2" 
+					description="Detail table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="Master3" 
+					description="Master3 table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+	<Table tableName="Detail3" 
+					description="Detail table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Description"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Description."
+		/>
+	</Table>
+
+	<Table tableName="GroupTypes" 
+					description="Group table">
+		<Column name="GroupName" 
+			objectName="GroupName"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			nullable="false"
+			isPrimaryKey="true"
+			description="Name of the group."
+		/>
+		<Column name="ModifyDate" 
+			objectName="ModifyDate"
+			jrfImpl="DateColumnSpec"
+			nullable="false"
+			description="Last validation time."
+			default="ColumnSpec.DEFAULT_TO_NOW"
+		/>
+	</Table>
+	<Table tableName="Persons" 
+					description="Persons of a group">
+		<Column name="PersonName" 
+			objectName="PersonName"
+			isPrimaryKey="true"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			nullable="false"
+			description="Name of person."
+		/>
+		<Column name="GroupName"
+			objectName="GroupName"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Foreign key to group"
+		/>
+		<Column name="Version" 
+			objectName="Version"
+			jrfImpl="ShortColumnSpec"
+			nullable="false"
+			optimisticLock="true"
+			description="version (optimistic lock column value)."
+		/>
+	</Table>
+	<Table tableName="LOVTest" 
+					description="List of values test table">
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="50"
+			description="Primary key identifier."
+		/>
+		<Column name="Value"
+			objectName="Description"
+			jrfImpl="StringColumnSpec"
+			size="15"
+			description="Description."
+		>
+		 <ListOfValues value="ABC"/>
+		 <ListOfValues value="DEF"/>
+		 <ListOfValues value="GHI"/>
+		</Column>
+	</Table>
+	<Table tableName="CompoundSeqTest1" 
+					description="Compound sequence test table.">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isSeq="true"
+			isPrimaryKey="true"
+			description="Embedded compound sequence."
+		/>
+		<Column name="SecondCode"
+			objectName="SecondCode"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+			description="Second key."
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Name"
+		/>
+	</Table>
+	<Table tableName="DbCheckTest" objectName="DbCheckBase" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			jrfImpl="DoubleColumnSpec"
+			precision="10"
+			scale="2"
+			nullable="false"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			nullable="true"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- Subtract out "Field1" -->
+	<Table tableName="DbCheckTest" objectName="DbCheckMissingCol" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			nullable="true"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- Add "Field2 -->
+	<Table tableName="DbCheckTest" objectName="DbCheckNewCol" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			nullable="false"
+			jrfImpl="DoubleColumnSpec"
+			precision="10"
+			default="new Double(1.2)"
+			maxValue="new Double(6.1)"
+			minValue="new Double(4.3)"
+			scale="2"
+			description="Just a test"
+		/>
+		<Column name="Field2"
+			objectName="Field2"
+			jrfImpl="IntegerColumnSpec"
+			maxValue="new Integer(14)"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			nullable="true"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Name"
+		>
+		 <ListOfValues value="John"/>
+		 <ListOfValues value="Marcia"/>
+		 <ListOfValues value="Susan"/>
+		</Column>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- Change "ID" from integer to string -->
+	<Table tableName="DbCheckTest" objectName="DbCheckTypeChange" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="StringColumnSpec"
+			isPrimaryKey="true"
+			size="75"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			jrfImpl="DoubleColumnSpec"
+			precision="10"
+			scale="2"
+			nullable="false"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			nullable="true"
+			jrfImpl="StringColumnSpec"
+			size="75"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- "Field1" is no nullable -->
+	<Table tableName="DbCheckTest" objectName="DbCheckNullChange" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			jrfImpl="DoubleColumnSpec"
+			nullable="true"
+			precision="10"
+			scale="2"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			nullable="true"
+			size="75"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- Decrease name's size to 65 -->
+	<Table tableName="DbCheckTest" objectName="DbCheckSizeChange" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			jrfImpl="DoubleColumnSpec"
+			precision="10"
+			scale="2"
+			nullable="false"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			nullable="true"
+			size="65"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+	<!-- Change Field1 scale from 2 to 3 -->
+	<Table tableName="DbCheckTest" objectName="DbCheckScaleChange" description="DbCheckTest">
+		<Column name="ID"
+			objectName="ID"
+			jrfImpl="IntegerColumnSpec"
+			isPrimaryKey="true"
+		/>
+		<Column name="Field1"
+			objectName="Field1"
+			jrfImpl="DoubleColumnSpec"
+			precision="10"
+			scale="3"
+			nullable="false"
+			description="Just a test"
+		/>
+		<Column name="Name"
+			objectName="Name"
+			jrfImpl="StringColumnSpec"
+			nullable="true"
+			size="75"
+			description="Name"
+		/>
+		<Column name="createDate"
+			objectName="CreateDate"
+			jrfImpl="DateColumnSpec"
+			description="A date."
+			writeOnce="true"
+		/>
+	</Table>
+</Schema>
+

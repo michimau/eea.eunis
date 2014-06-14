@@ -1,0 +1,228 @@
+<body>
+	This package contains the core classes of the JRF framework for constructing  
+	Java objects with attributes that map to data stored in an SQL database and 
+	for the management of those objects.  A first time user of the framework should 
+	start by examining the classes this package before attempting to examine any 
+	other JRF package.
+	<p>
+	To use JRF, a user must sub-class the two principal classes in 
+	the entire framework that are in this package: <code>PersistentObject</code>,
+	the class that contains the attributes and <code>AbstractDomain</code>, the class
+	that is responsible for managing <code>PersistentObject</code> instances.  A 
+	<code>PersistentObject</code> sub-class is an <i>application</i> <i>bean</i> entity 
+	with attributes that map to SQL database tables. <i>Application</i> is emphasized 
+	to disabuse a user of wrongly assuming that a <code>PersistentObject</code> sub-class
+	is always a Java representation of a single SQL database table.  While it is possible to construct such
+	objects, a <code>PersistentObject</code> instance may contain other types of attributes 
+	to suit the needs of an application. Furthermore, the application code that uses
+	<code>PersistentObject</code> instances does not and <b>should not</b> "know"
+	how any attribute is mapped to the database.  Such an approach is a stark contrast
+	to other mappings tools, where application code definitely
+	needs to know about the database mappings through use of <i>OSQL</i> or something else.
+	<p>
+	A <code>PersistentObject</code> sub-class may contain the following types of attributes:
+	<ol>
+		<li> An attribute that maps directly to a column in an SQL database table.
+		<li> An attribute that is computed from one or more column attribute types.
+		<li> An attribute that is another <code>PersisentObject</code> sub-class or an 
+		     aggregate of <code>PersistentObjects</code> using a variety of storage
+		     mechanisms. (e.g. hash table, array and so forth).
+       </ol>		
+       You can see that it is possible to construct considerably complex object
+       graphs with multiple nesting levels of <code>PersistentObject</code> instances.  The extent of the 
+       complexity of the object is entirely up to the application developer.
+       <p>
+       The application code that manages values a <code>PersistentObject</code> subclass instance needs a 
+       mechanism to locate, save, and delete instances and an <code>AbtractDomain</code> sub-class serves as 
+       that mechanism. <code>AbstractDomain</code> sub-classes contain all the requisite information to properly 
+       process one particular <code>PersistentObject</code> sub-classes type.  <code>AbstractDomain</code> 
+       sub-class instances not only have information on how to store and retrieve <code>PersistentObject</code> 
+	  attributes that map to an SQL database table, they also know about any nested <code>PersistentObject</code> 
+	  sub-classes and the <code>AbstractDomain</code> sub-class instances that handle them.  In fact, only 
+       one line of application code is required to update the database with a given 
+       <code>PersistentObject</code> sub-class, irrespective of its complexity:
+
+       <pre>
+	       SomeTypeOfPersistentObjectDomain y;
+	       SomeTypeOfPersistentObject x;	// An object graph of some sort
+	       .
+	       . // Initialization code.
+	       .
+	       X.setSomething(aValue1);
+	       X.getListOfSomething[2].setNestedValue(aValue2);
+	       .			// Other Code that update attributes, nested and otherwise.
+	       .
+	       .
+	       y.update(X);	// One line will do it all.
+	</pre>
+       	
+	The <code>y.update(X)</code> will "x" and any embedded objects of "x".
+	<p>
+	<h3>Persistent Object States</h3>
+	A <code>PersistentObject</code> instance may have one of the following states:
+	<p>
+	<table border=4>
+	<thead>
+	<tr align='left' bgcolor='gold'>
+	   <th>State</th><th>Description</th><th>Usual change-of-state Context</th>
+	</tr>
+	</thead> 
+	<tbody>
+	<tr align='left'>	
+		<th>Current</th>
+				<th>Java instance values are up to date with underlying databases values.</th> 
+				<th>Set by <code>AbstractDomain.update()</code> unless <code>Timestamp</code>
+					values exist. </th>
+	</tr>
+	<tr align='left'>	
+	
+		<th>Modified</th>
+				<th>Java instance values are not up to date with underlying databases values.</th> 
+				<th>Set by calling set methods on the object that have direct mappings to SQL database columns.</th>
+	</tr>
+	<tr align='left'>	
+		<th>New</th>
+				<th>Java instance has no underlying representation in the database.</th> 
+				<th>Set by constructing a new instance of the object (e.g. default value).</th>
+	</tr>
+	<tr align='left'>	
+		<th>Deleted</th><th>Java instance is marked to be deleted for the next call to <code>update</code>. 
+				</th> 
+				<th>Set explicitly in application code for embedded objects. Simple <code>PersistentObject</code>
+					instances that have no embedded objects may call <code>AbstractDomain.delete()</code>
+					as an alternative.</th>
+	</tr>
+	<tr align='left'>	
+		<th>Dead</th><th>Java instance contains <code>Timestamp</code> values that are not current
+				with the database.</th> 
+				<th>Set by <code>AbstractDomain.update()</code> when <code>Timestamp</code>
+					values exist. </th>
+	 </tr>
+	<tbody>
+     </table>
+	<p>
+
+	See documentation for <code>PersistentObject</code> and <code>PersistentState</code> for more details.
+	<h3>Implementing setup() for AbstractDomain</h3>
+	 To be added.
+
+	<h3>Designing Composite PersistentObjects</h3>
+	 To be added.
+
+	<h3>Application Usage Patterns of AbstractDomains and PersistentObjects</h3>
+
+	Given the two basic classes of this package, a pertinent question to ask is how to use sub-classe implementation in
+	an application.  The following
+	discussion presents a group of usage patterns for an application.  There are two general usage issues: how to
+	sub-class an <code>AbstractDomain</code> and how to use <code>AbstractDomain</code>s in the context of the application.
+	<p>
+	For the first issue, you can take the approach of always creating <code>PersistentObject</code> and associated
+	<code>AbstractDomain</code> with <em>all</em> <code>PersistentObject</code> attributes mapping to a single
+	SQL table. In other words, the bean does not contain any embedded objects, join table fields or additional bean
+	methods for non-database field functionality.    You would then sub-class both the <code>PersistentObject</code>
+	and <code>AbstractDomain</code> to create more complex objects.  Consider this approach as a three-level sub-classing pattern: 
+	1) abstract object (<code>PersistentObject</code>/<code>AbstractDomain</code>) - 2) one-to-one table mapping object - 
+	3) complex object.
+	 
+	<p>
+	The alternative approach to is to use a two level subclassing pattern: simply the abstract object and single sub-class that
+	may include join columns and embedded objects.  A simple one-to-one mapping sub-class may not necessarily exist for
+	some tables. The two approaches are illustrated below for the same tables:
+	<pre>
+	  create table Master {
+			code Integer not null,
+			description varchar(25) not null
+			primary key (code)
+	 )
+	 create table Detail (
+			code Integer not null,
+			instancedate date not null,
+			detailinfo varchar(10) not null,
+			primary key (code,instancedate)
+	)
+	</pre>
+	Approach one:
+	<pre>
+		public class Master extends PersistentObject {
+				private Integer code;
+				private String description;
+				.
+				.
+				// getters and setters.
+
+		}	
+		public class MasterDomain extends AbstractDomain {
+				
+				setup() {
+					.
+					. // Set up for code and description columns
+				}
+		}
+
+		public class MasterWithDetail extends Master {
+			ArrayList detailInfo;
+			.
+			.	
+
+		}
+
+		public class MasterWithDetailDomain extends MasterDomain {
+			setup() {
+				super.setup();
+				// set up information to fill detainInfo;
+			}	
+
+		}
+	</pre>
+	Approach two:
+	<pre>
+		public class Master extends PersistentObject {
+				private Integer code;
+				private String description;
+				private ArrayList detailInfo;
+				.
+				.
+				// getters and setters.
+
+		}	
+		public class MasterDomain extends AbstractDomain {
+				
+				setup() {
+					// setup up for base and detail table information.
+				}
+		}
+	
+	</pre>
+	Which approach is better? Usually the first one, particularly since the single table-to-object versions
+	can be code-generasted.  For most cases, there will be multiple complex objects
+	required for an application off a single database table. The second approach is good usually when there is
+	only single application object required based on the underlying table.
+	<p>
+ 	The principal context issue in using <code>AbstractDomain</code> instances is pooling.  <code>AbstractDomain</code> 
+	subclasses are fairly heavyweight objects (i.e. soak up system resources with several instance variables).  Furthermore,
+ 	instantiation of an <code>AbstractDomain</code> instance is a relatively costly operation, considering all the 
+	additions of metadata instances objects and analysis of those objects.
+	Therefore, the following usage pattern is not particularly desirable in an application:
+	<pre>
+	public List getSomething() {
+		return new SomethingDomain().findAll();
+	}
+	</pre>
+	Consistent use of such patterns in an application lead to considerable object proliferation and force the garbage
+	collector to work overtime.  The alternative is to use pooling: either the domains themselves can be pooled or a service
+	class that contains one or more domains can be pooled.  The pooling apparatus can be a generic one or the service
+	class itself could be a <code>Java Session Bean</code> which are automatically "poolable".
+
+			
+	
+	<ol>
+	<li>	 Implement database access application methods (e.g. search parameters and so forth) 
+		 inside the domain itself; application code that must access database information
+		 sees the domain directly.
+	<li>  Implement database acess application methods inside a service class that encapsulates one or more domains.
+		 Application code that must access database information only sees the service class.  
+	</ol>  
+
+	More to come . . .
+ 
+</body>

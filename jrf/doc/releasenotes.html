@@ -1,0 +1,581 @@
+<body>
+<h1>JRF Version 2.0 Release Notes</h1>
+<h2>Overview</h2>
+This version includes modifications that overlap four broad categories: functionality improvements, speed enhancements,
+architectural changes, and code generation.  The architectural changes, although extensive, do not 
+violate the original design paradigm of JRF, which centers around <code>PersistentObject</code> instances and 
+the <code>AbstractDomain</code> sub-classes that manipulate these instances.  However, the architectural changes included
+in this release will require application code modifications.  The most significant change to JRF architecturally is the elimination
+of the <code>JDBCHelper</code> class from the framework.   The functionality and much of the code of <code>JDBCHelper</code> 
+still exists in smaller, task-specific classes.  If an application does not make extensive use of direct <code>JDBCHelper</code>
+calls in <code>AbstractDomain</code> contexts, code modifications will be fairly minimal.  
+See <em>Modifying Existing Code with JDBCHelper Arguments</em> for complete details on how to modify existing JRF applications.
+<p>
+Code generation is no longer an ancillary piece of JRF, it is now a central part of the framework.  While it is certainly
+possible to hand-write most of your <code>PersistentObject</code>s and <code>AbstractDomains</code>, you no longer have to do this.
+Two code generators are provided, one for generating base direct table-to-object mappings and one for generating composite objects
+that may include detail tables, join columns or both.  These generators are extensible in several ways.
+First, since the code generators read XML files for the information, you can add more values in the DTD (Document Type Definition) 
+files to expand the functionality.  You can also sub-class the code generation entity handling classes for table, column 
+and so forth.  Finally, you can sub-class the generators themselves if you want even more control.
+<p>
+A short term "todo" is to write a program that will read the database metadata and generate a skeletal XML file that may 
+be used by the base generator.
+<h2>Functionality Improvements</h2>
+<ul>
+	<li>	 <em>Application row handlers and application determination of data storage mechanism for queries</em>.  Under
+		 previous versions of JRF, the framework returned data from an SQL <code>SELECT</code> statement in only
+		 two formats: a single <code>PersistentObject</code> instance for primary key fetches or a <code>java.util.List</code> of
+		 <code>PersistentObject</code>s for multiple row fetches.  Under this version, application developers may implement
+		 an interface called <code>ApplicationRowHandler</code>, which will allow them to store data in any format 
+		 they choose and even abort a large multi-row fetch if desired.  This interface is basically one level of abstraction
+		 up from the existing protected <code>RowHandler</code> interface in <code>AbstractDomain</code>.  Whereas 
+		 <code>RowHandler</code> requires a sub-class of <code>AbstractDomain</code> to process a <code>java.sql.ResultSet</code>, 
+		 <code>ApplicationRowHandler</code> can be implemented outside the domain and processes a 
+		 <code>PersistentObject</code> instance already constructed by the framework.  Some convenient default implementations of
+		 <code>ApplicationRowHandler</code> are provided in the framework.
+	<li>	 <em>Column Options</em>.   Constructors for the implementations of <code>ColumnSpec</code> have been streamlined with the
+		 introduction of class <code>net.sf.jrf.column.ColumnOption</code>.   Introducing this class has eliminated the need 
+		 for multiple constructors in the specification class implementations.   For example, this following:
+		 <pre>
+			this.addSubtypeColumnSpec(
+			        new StringColumnSpec(
+			            "DepartmentCode",      // column name
+			            "getDepartmentCode",   // getter
+			            "setDepartmentCode",   // setter
+			            ColumnSpec.DEFAULT_TO_EMPTY_STRING,
+			            ColumnSpec.REQUIRED));
+		 </pre>
+		 should be replaced with:
+		 <pre>
+			this.addSubtypeColumnSpec(
+			        new StringColumnSpec(
+			            "DepartmentCode",      // column name
+					   new RequiredColumnOption(),
+			            "getDepartmentCode",   // getter
+			            "setDepartmentCode",   // setter
+			            ColumnSpec.DEFAULT_TO_EMPTY_STRING);
+		 </pre>
+		 <code>ColumnOption</code> is simply a wrapper for the existing options:
+		 <pre>
+			public abstract class ColumnOption
+			{
+
+			  protected boolean i_required = false;
+			  protected boolean i_primaryKey = false;
+			  protected boolean i_sequencedPrimaryKey = false;
+			  protected boolean i_naturalPrimaryKey = false;
+			  protected boolean i_unique = false;
+			  protected boolean i_subtypeIdentifier = false;
+			  protected boolean i_optimisticLock = false;
+			  .
+			  .
+		 </pre>
+		 Sub-classes of <code>ColumnOption</code> provide various combinations of the boolean values under one general description.
+		 The hierarchy is:
+		 <pre>
+				ColumnOption
+					NullableColumnOption
+					RequiredColumnOption
+						OptimisticLockColumnOption
+						PrimaryKeyColumnOption
+							NaturalPrimaryKeyColumnOption
+							SequencedPrimaryKeyColumnOption 
+						UniqueColumnOption 
+					SubtypeColumnOption
+		 </pre>
+	<li>	 <em>Primitive Attribute Support</em>.  This version allows a user to specify primitives for <code>PersistentObject</code> 
+		 attributes.  For all practical purposes, however, you will need to use the new code generators to implement primitives. 
+	<li>	 <em>Expanded Caching Support</em>.  This verson expands upon the original caching mechanism of <code>AbstractStaticDomain</code>
+		 to allow both the caching of all records and the caching of a maximum value of records through an LRU (least-recently-used)
+		 mechanism.  The implementation of the LRU cache is provided by the <code>Apache</code> <em>Collections</em> project; the 
+		 <code>common-collections.jar</code> is included in the release.  The most important feature introduced is
+		 the capability of ensuring that the cache is kept up-to-date with database changes.  The limitation, of course, is that
+		 the cache will only be valid if all updates are done though the same JVM instance.  Caching of composite objects is
+		 supported in a limited way. (Future versions will overcome this limitation).
+	<li>  <em>New column specifications</em>.  The following new implementations of <code>ColumnSpec</code> exist:
+		 <ul>
+		  <li><code>BinaryStreamColumnSpec</code> 
+		  <li><code>ByteArrayColumnSpec</code> 
+		  <li><code>DateColumnSpec</code> (Stored as a date in the database, seen as java.util.Date in the Java space)
+		  <li><code>ClobColumnSpec</code> 
+		  <li><code>BlobColumnSpec</code> 
+		  <li><code>DayOfWeekColumnSpec</code> (Stored as a locale-specific string in database, 
+			seen as <code>Calendar.SUNDAY</code> etc. in Java space).
+		  <li><code>SerializableObjectColumnSpec</code> 
+		  <li><code>BooleanColumnSpecChar1</code> (Store in database as CHAR(1) "Y/N", "T/F" etc., seen as a boolean 
+			in Java space).
+		 </ul>
+		 Applications that use <code>BinaryStreamColumnSpec</code>, <code>ClobColumnSpec</code>,
+		 and <code>BlobColumnSpec</code> <strong>must</strong> use an <code>ApplicationRowHandler</code> implementation to
+		 manipulate data from a query.  Once <code>java.sql.ResultSet.next()</code> is called, most JDBC drivers will 
+		 close all streams on the current row.  Thus applications have to be able to access the current row before <code>next()</code> 
+		 is called by the framework.
+     <li>	 <em>Full support for all vendor-specific column expressions required for <code>CREATE TABLE</code> statements</em>.  
+		 For applications that use <code>AbstractDomain.createTable()</code>, this version now supports optimal column 
+		 definition expressions statements for <code>CREATE TABLE</code>.  There were two general changes made in order
+		 to successfully implement this feature: 
+		 <ol>
+		 <li> Added <code>DatabasePolicy</code> methods to construct the correct
+		 	 SQL column expressions for binary, text and numeric columns given an appropriate set of parameters.  See
+			 <code>DatabasePolicy</code> for description and parameter requirements of these methods.
+		 <li> Added parameters and reorganized the class hierarchy of applicable <code>ColumnSpec</code>
+			 implementations. 
+		 </ol>
+            The class hierarchy from <code>AbstractColumnSpec</code> is now:
+		 <ul>
+			<li><code>AbstractColumnSpec</code>
+			<ul>
+				<li><code>SizedColumnSpec</code> (Column types that have a maximum size. A zero value denotes no maximum. 
+				      Maximum will be restricted to the database vendor's limits)
+				 <ul>
+				  <li><code>TextColumnSpec</code> (Stores text data)
+				    <ul>
+				      <li><code>StringColumnSpec</code>
+				      <li><code>StringArrayColumnSpec</code>
+				      <li><code>ClobColumnSpec</code>
+				   </ul>
+				  <li><code>BinaryColumnSpec</code> (Stores binary data)
+				    <ul>
+				      <li><code>BinaryStreamColumnSpec</code>
+				      <li><code>ByteArrayColumnSpec</code>
+				      <li><code>SerializableObjectColumnSpec</code>
+				      <li><code>BlobColumnSpec</code>
+				    </ul>
+				 </ul>
+			     <li><code>NumericColumnSpec</code> (Stored numeric data with precision and scale)
+				   <ul>
+				      <li><code>IntegerColumnSpec</code>
+				      <li><code>LongColumnSpec</code>
+				      <li><code>DoubleColumnSpec</code>
+				      <li><code>FloatColumnSpec</code>
+				      <li><code>BooleanColumnSpec</code>
+				      <li><code>NullableBooleanColumnSpec</code>
+				   </ul>
+			    </ul>
+			</ul>
+	<li>	 <em>Expanded support for CREATE TABLE</em>.  Methods to create database tables from domains have been 
+		 expanded to include all required parameters: foreign keys and database storage requirements.   The full implementation
+		 for all databases is still a job to be done.  (see <code>org.vmguys.appgen.jrf.GenerateDatabase</code>).
+	<li>	 <em>Simultaneous Multiple Database Support</em>.  The singleton <code>DatabasePolicy</code> instance no longer exists in the 
+		 framework.  It is now possible for applications to construct <code>AbstractDomain</code>s that connect to 
+		 to different database vendors seamlessly.  See <em>Architectural Changes</em> for more details.  Also please
+		 examine the documentation if <code>jrf.properties</code> to see how to set up multiple connections.
+	<li>  <em>Robust Connection Management</em>. The JDBC connection management of JRF has been completely overhauled.
+		 See <em>Architectural Changes</em> for more details.
+	<li>  <em>Streamlined Transaction Support</em>.  In addition to streamlining transaction control, support for
+		 handling transactions across multiple databases in now supported.  While JRF does not attempt to be  
+		 <code>JTA</code> compliant, some functionality does exist to handle transactions across databases without using
+		 a <code>JTA</code> implementation.  See <em>Architectural Changes</em> for more details.
+	<li>  <em>User defined Prepared Statements</em>.  An application can define their own prepared statement queries
+		 and the <code>AbstractDomain</code> will handle them. (see <em>Speed Enhancements</em>).
+	<li>  <em>Validation Enhancements</em>.  Four additional validations are performed in 
+		  <code>AbstractDomain.validate()</code>.  
+                  <code>ColumnSpec.validateValue()</code> has been added to check for 1) <code>Strings</code> that exceed 
+		   the maximum column length in the database (always); 2) Values that exceed a given maximum value 
+		   (optional); 3) Values that are less than a given minimum value (optional) 
+		   and 4) values that do not match a set of mandatory values (optional).
+	<li>  <em>Explicit embedded <code>PersistentObject</code> support in <code>AbstractDomain</code></em>.  It has always been
+		 possible to construct quite complex <code>PersistentObject</code> instances that may include embedded
+		 <code>PersistentObject</code>s.  However, application code needed implementations of <code>postFind</code>, 
+		 <code>postSave</code> and so forth to effectively construct <code>PersistentObject</code> for a fetch operation or 
+		  deconstruct one for a save operation.  
+		 In a sense, embedded <code>PersistentObject</code> support was implicit.  Support for embedded objects is now
+		 explicit in this version.  A method now exists in <code>AbstractDomain</code> to support the saving both the 
+		 master domain object and all embedded objects.  See <em>Architectural Changes</em> for more details.
+	<li>  <em>Change of behavior for the return saved object methodology in <code>AbstractDomain</code></em>.  In the previous
+	 	 version of JRF, the default behavior was to refetch the saved object.  This functionality was definitely a
+		 performance detractor and the default behavior now is to <strong>not</strong> return the saved object.  Modifications
+		 to the framework have been made to make every effort to populate the <code>PersistentObject</code> instance passed
+		 in for the update with recent values for: 1) sequenced columns;  2) Integer optimistic lock columns.  Eventually
+		 the framework may be changed to always return something and never <code>null</code>.  
+		 However, this change has been avoided since it may break the logic of many existing applications.
+	<li>  <em>Split <code>TimeStampColumnSpec</code> into two implementions</em>.   The time stamp column for JDBC is
+		 a bit confusing and an attempt has been made in the framework to clarify between two separate <em>application</em> 
+		 uses of a <code>java.sql.Timestamp</code> column: one where the application (client or server) determines the value 
+		 and one where the database <em><strong>always</strong></em> determines the value through its system timestamp function. 
+		 The former use has the current class name and the latter uses the name <code>TimeStampColumnSpecDbGen</code>.   
+		 All timestamp optimistic lock columns should use the new column specification.
+	<li>  <em>Clarification of Sequence Support</em>.  Sequence handling and definitions in <code>DatabasePolicy</code> and 
+		 <code>AbstractDomain</code> have been considerably clarified. See the javadoc for <code>DatabasePolicy</code> 
+		  for more information.  Also, see <em>Embedded Persistent Objects</em> section below.
+	<li>  <em>Aliasing no longer required</em>.  Table/Column aliasing is supported, but no longer required by the framework.
+		 The only purpose of aliasing is to resolve conflicts between columns of the same name in different tables through a 
+		 join construct.  Since the framework now uses the column index <code>java.sql.ResultSet</code> accessor methods rather 
+		 than the column name methods, aliasing is no longer necessary.  The usage of column indexes rather than column names for 
+		 <code>java.sql.ResultSet</code> accessors also provides a slight performance increase.
+	<li>	 <em>Sybase</em>.  JRF now correctly supports Sybase.  <code>SQLServerSybaseDatabasePolicy</code> has been renamed
+		 to <code>SQLServerDatabasePolicy</code>.
+	<li>	 <em>Firebird</em>.  JRF now supports Firebird.
+	<li>	 <em>PersistentObject.getEncodedKey()</em>.  A method now exists on <code>PersistentObject</code> to return the 
+		 encoded key of the object (e.g. the same value that would be returned by <code>AbstractDomain.encodePrimaryKey()</code>.
+		 This method was added to support application's need of using the keys without instantiating or using an 
+		 <code>AbstractDomain</code> implementation.  Code generators provided will generated the code for this method.
+
+</ul> 
+<h2>Speed Enhancements</h2>
+Considerable effort was undertaken to make JRF an effective server utility for high speed transaction processing.  The
+author of these enhancements gained considerable experience in the past by suffering through the task of forcing server applications  
+to meet sub-second response times.  The ideas from that experience have been applied to the JRF framework.
+<p>Changes to enhance speed include:
+	<ul>
+	<li>	<em>Reflection optimization and elimination</em>.  Using reflection to translate from <code>PersistentObject</code> to
+	      SQL constructs and vice versa was a considerable performance detractor.   Applications that use this version of JRF 
+		 may either use the reflection optimization code or eliminate reflection altogether.  An interface called 
+		 <code>GetterSetter</code> contains methods to get a particular attribute value from a <code>PersistentObject</code> 
+		 and conversely set an 
+		 attribute in the <code>PersistentObject</code>.  Each instance of <code>ColumnSpec</code> contains an implementation
+		 of <code>GetterSetter</code>.  Manually writing such implementations is of course utterly impractical.  A simple 
+		 code generator exists to generate implementations for a particular instance of <code>PersisentObject</code>.
+		 (see <code>net.sf.jrf.codegen.GetterSetterBuilder</code>).
+		 In fact, existing applications can use the generator to construct implementations and <code>AbstractDomain</code>
+		 will automatically use these implementations without any application code changes.
+		 
+	<li>	<em>PreparedStatement usage</em>.  <code>AbstractDomain</code> now exclusively uses <code>java.sql.PreparedStatement</code>s
+		 to save, delete and fetch by primary key value; static SQL is restricted to ad-hoc queries 
+		 (e.g. <code>findWhereOrderBy()</code>).  Consistent use of static SQL detracts from 
+		 performance on two levels.  First, the SQL strings doing standard operations of save and delete must be re-built every time, 
+		 iterating through the list of column specifications and making decisions on the requirements of those specifications.
+		 Second, many database engines such as Oracle and Sybase support a 'parse-once-execute-many' concept where  
+		 parameterized SQL is parsed only once and executed numerous times.  For such databases, the performance boost of 
+		 using prepared statements is considerable.  Using prepared statements in domains poises the JRF framework to properly 
+	      handle the JDBC Version 3.0 functionality of pooled prepared statements (See specification for JDBC Version 3.0 on the 
+		 Sun website).    
+	<li>  <em>Dedicated Connections</em>.  An application may mark an <code>AbstractDomain</code> instance to use a dedicated
+		 connection thus persisting any prepared statements to the connection.  Once JDBC Version 3.0 statement pooling is
+		 in place, using dedicated connections will probably not be necessary.
+	<li>	<em>Object persistence in <code>AbstractDomain</code></em>.   Some of the more "heavy-weight" objects in 
+		 <code>AbstractDomain</code> are now built only once and reused (for example the <code>SQLSelectBuilder</code> instance). 
+		 From a larger perspective, <code>AbstractDomain</code> sub-classes themselves have always been rather heavy-weight objects with 
+		 considerable constructor overhead cost.   With the addition of more features, they are even more heavy-weight.
+		 However, if instantiated once in the constructor of some service class, performance should not suffer. For example the 
+		 following:
+		 <pre>
+		 public class MyService {
+			private DomainOne domain1;
+			private DomainTwo domain2;
+		
+			public MyService() {
+				domain1 = new DomainOne();
+				domain2 = new DomainTwo();
+			}	
+			public PersistentObject findSomethingOne(String data) {
+				return domain1.find(data);	
+			}
+		</pre>
+		is preferable to:
+		 <pre>
+		 public class MyService {
+			public MyService() {
+			}	
+			public PersistentObject findSomethingOne(String data) {
+				return new DomainOne().find(data);	
+			}
+		</pre>
+		<p>
+		 Applications should generally either pool a service with wrapped domains or pool the domains themselves.
+     <li>  <em>Duplicate Key Error Handling</em>.  In previous versions, the methodology used to check for duplicate key insertions
+		 was to "pre-select" by key on the table before insert (see <code>AbstractDomain.validate()</code>). 
+		 While this methodology still exists, an alternative faster way of handling duplicate keys has been 
+		 introduced.  Most commercial database vendors return a specific error code for duplicate key inserts.  A 
+		 <code>DatabasePolicy</code> method has been added to return this value.  <code>AbstractDomain</code> will now 
+		 check the error code of <code>SQLException</code> and return the existing <code>DuplicateRowException</code> for
+		 duplicate key insert operations (e.g. <code>save()</code>).  For database vendors that do not supply error codes,
+		 specific error text can be specified in the <code>DatabasePolicy</code> to implement duplicate key error handling.
+		 For example, from Postgres:
+		 <pre>
+		 public String getDuplicateKeyErrorText() {
+			return "Cannot insert a duplicate key into unique index"; 
+	 	 } 
+		</pre>
+			
+ 	</ul> 
+<h2>Architectural Changes</h2>
+The Architectural changes fall into two areas: connection management overhaul and the introduction of 
+embedded <code>PersistentObject</code> support in <code>AbtractDomain</code>.
+<h3>Connection Management Overhaul</h3>
+The management of connections in the JRF framework is considerably different from previous versions.  The most dramatic change is the 
+elimination of the <code>JDBCHelper</code> class.  <code>JDBCHelper</code> is bit of a catch-all, non-object-oriented utility class. 
+It handled connections, pooling (with <code>JDBCHelperPool</code>), statement execution and result set management. While useful for 
+general utilities, it becomes up a bit unwieldy when used with <code>AbstractDomain</code> leads to such limitations as
+lack of handling multiple result sets.
+<p>
+The SQL management and database connection functionality of <code>JDBCHelper</code> has been broken into smaller classes 
+and pooling now is reserved only to implementations of <code>javax.sql.DataSource</code> or 
+<code>javax.sql.ConnectionPoolDataSource</code>.   
+The JRF framework now contains a default implementation of <code>javax.sql.ConnectionPoolDataSource</code>.  Applications may use 
+this implementation or one of the many commercial or open source versions that exist.  The design approach for the 
+new connection management was to center on the needs of <code>AbstractDomain</code>. 
+A class called <code>JRFConnection</code> encapsulates connection information in JRF in this version.  
+An <code>AbstractDomain</code> sub-class will contain a single instance of this class.  Unlike previous versions,
+applications have no direct control over the setting the connection handling for <code>AbstractDomain</code>s.
+Rather, applications have indirect control over the connection mechanism through
+one of three ways (this text is replicated in the javadocs for <code>AbstractDomain</code>):
+ <ol>
+ <li> An application does not call any method on the domain to set up connection handling.  When 
+	  a connection to the database is required by the domain, the 
+       no-argument version <code>JRFConnectionFactory.create()</code> will instantiate a
+	  <code>JRFConnection</code> instance based on the JRF system <code>Properties</code> instance.
+	  This way of handling connections should suit the majority of applications.
+ <li> An application explicitly sets the connection <code>Properties</code> instance to use
+	  for creating a <code>JRFConnection</code> instance via a call to <code>AbstractDomain.setProperties()</code>.
+	  The domain will then use the <code>JRFConnectionFactory.create(Properties)</code> version
+	  to obtain a <code>JRFConnection</code> instance.  This factory method will use whatever
+	  properties exist in the supplied argument and fallback on the JRF system <code>Properties</code>
+	  for any property value it does not find. See 
+	  the documentation for <code>JRFConnectionFactory</code> for more details on this behavior.
+ <li> An application may set a <code>DataSource</code> instance to use via a call to <code>setDataSource</code>. 
+ 	  This methodology will suit applications where properties to instantiate a <code>DataSource</code> are 
+      not known at program start up.  For example, an application server may receive a message with the requisite
+	  parameters for obtaining a <code>DataSource</code> through <code>JNDI</code>.
+ </ol>
+<p>
+<b>Transaction Management</b>
+<p>
+The handling of transactions in this version is considerably different from previous versions.  For a single 
+<code>AbstractDomain</code> instance the transaction handling is automatic (much in the way it was before
+except that now transactions including embedded objects are supported - see <em>Embedded Persistent Objects</em>).  
+For applications that wish to support transactions using multiple domains, the approach has been streamlined.  
+Previously, a multiple domain manual transaction was implemented rather indirectly:
+
+<pre>
+	JDBCHelper helper;
+	ADomain domainA;
+	BDomain domainB;
+	.
+	.
+	domainA.setJDBCHelper(helper);
+	domainB.setJDBCHelper(helper);
+	try {
+		domainA.beginTransaction(); // Both use same JDBCHelper
+		.
+		// set some values.
+		domainA.save(...);
+		//etc.
+	}
+	catch ( ....
+	//etc.
+</pre>
+The approach for multiple domains for this version is to use a class called <code>JRFWriteTransacton</code>:
+<pre>
+	ADomain domainA ;
+	BDomain domainB;
+	JRFWriteTransaction wt = new JRFWriteTransaction();
+	.
+	.
+	MyConstructor() {
+		wt.addDomain(domainA);
+		wt.addDomain(domainB);
+		.
+		.
+	}
+	.
+	.
+	.
+	wt.beginTransaction();
+	try {
+		// set some values.
+		domainA.save(...);
+		//etc.
+	}
+	catch (Exception ex) {
+		wt.abortTransaction();
+	}
+	wt.endTransaction();		
+</pre>
+In the previous version both domains had to use the same connection. In this version connection management 
+is of no concern to the application; domainA could point to Sybase and domainB could point to Oracle.
+
+<h3>Embedded Persistent Objects</h3>
+In previous versions, support for embedded <code>PersistentObject</code>s in 
+<code>AbstractDomain</code> was implicit.  A user could populate embedded fields and objects by implementing the 
+suite of protected methods that have no implementation in the base class (
+(e.g. <code>preSave(),postValidate(),postFind()</code>).   
+<p>
+This version now explicitly handles the "pieces". The protected methods
+are still supported, but an application can move away from these methods to handle embedded <code>PersistentObject</code>s
+by implementing a class called
+<code>EmbeddedPersistentObjectHandler</code>.   Since a single save operation may update many embedded objects,
+a new <code>PersistentState</code> of <code>DeletedPersistentState</code> was added.  By using this state, 
+an application can pass a complex object graph back to the domain to have only portions of the object deleted.
+See <code>EmbeddedPersistentObjectHandler</code> and <code>AbstractDomain</code> javadocs for more information. 
+<p>
+Use the code generator <code>EmbeddedGenerator</code> to generate the embedded objects.
+
+<h3>Code Generation</h3>
+Complete documentation for the code generators is forthcoming.  The following preliminary guide is provided 
+until a formal document can be written.
+<h4>Basic Overview</h4>
+<ul>
+<li> Examine DTD files and documentation in <code>source/org/vmguys/dtd</code>.
+<li> Examine test/source/xml properties files, which are documented.
+<li> Examine the test/source/xml xml example files used for the JUNIT tests.
+</ul>
+<h4>Setting Up</h4>
+<ul>
+<li> Examine the log4j.properties file in test/source/xml. Note the 
+     designation of "genlogs" directory.
+<li> Examine build.xml target "generateFromXML".  Note how the
+	instructions here match the properties files:
+	<ul>
+	<li> "genlogs" directory is created for logging
+	<li> Package directories are created.
+	<li> The DTD files are copied into the xml directory so the 
+		parser can find them.
+	<li> Two arguments are the same for both generators: the first
+		is the properties file and the second is the XML file.
+	</ul>
+</ul>
+<h4>Abstract Base Generator</h4>
+All generators sub-class <code>org.vmguys.appgen.Generator</code>. Examine
+the protected constructor in this file which does the following:
+<ul>
+<li> Parses the XML file and sets up protected instance variables to the
+	document.
+<li> Reads the properties file and calls the appropriate setter methods
+     for each parameter in the file (e.g. "SourceOutputDbObj=srcgenerated/testgen/base" 
+	in the file is converted to this.setSourceOutputDbObj("srcgenerated/testgen/base") in
+	the class.
+</ul>
+There is a static class name variable in this base file so that only one "main()" method
+is required for any generator (pattern of evocation is always "java X propertiesfile xmlfile")
+<h4>Template Basics</h4>
+One of the primitive concepts of the code generator is the use of templates with markers tokens to distinguish the
+variables.  For example:
+<pre>
+private static final String classTemplate = 
+	"public class $classNameObj$ extends PersistentObject $interfaces$ {\n"+
+	.
+	.
+</pre>
+<p>
+The two tokens enclosed in the "$" would be replaced in the generated code might be:
+<pre>
+	public class Name extends PersistentObject implements PersonEntity {
+	.
+	.
+</pre>
+<h4>Generator Basic Concepts</h4>
+For each XML element defined in the DTD, there is a corresponding java class that subclasses the
+abstract class <code>org.vmguys.appgen.SourceGenXMLEntity</code>.  At a minimum, this class 
+contains a hash map of all element attributes.  Sub-classes may also have some setter methods if desired.
+To handle these classes, a meta data class exists called <code>org.vmguys.appgen.SourceGenXMLEntityMetaData</code>.
+It is in this class the all the magic happens.   The generators build a hierarchy of these meta classes and
+call a single static method to map the contents of the parsed XML document into a tree of <code>
+SourceGenXMLEntity</code> nodes.  Examine the static method <code>createEntityTreeFromXML()</code>.  
+For each element, the hash map of element attributes is filled, any setter methods are invoked 
+(<code>XMLReadHandler.elementToObject()</code>) and finally, an abstract method implementation (<code>resolveImpliedKeys()</code>)
+is called to allow the <code>SourceGenXMLEntity</code> sub-class to sort out any issues with "implied"
+elements. 
+<p> 
+To see a simple example of the tree creation process, examine the constructor of <code>BaseGenerator.java</code>.  For
+a complex example, examine the constructor of <code>EmbeddedGenerator</code>.java.   One of the key concepts here
+is that the constructors will instantiate the <code>SourceGenXMLEntity</code> sub-classes for table, column and so forth 
+from names specified in the properties files.  If no names are specified the default base versions are used.  You can
+sub-class these base versions to perform all sorts of tricks specific to an application.
+<h4>Sub-classing the Generators</h4>
+In combination with sub-classing the XMLEntity classes, you sub-class both generators and implement the protected methods 
+to provide additional functionality.  Examine the 
+protected methods and their context in both <code>BaseGenerator.java</code> and <code>EmbeddedGenerator.java</code>.
+<h4>Common Techiques</h4>
+One of the more common techniques to use in the code generator is to generate implementations of methods based on
+whether the objects implement certain interfaces.  Comma-separated lists of interfaces are part of the base DTD.
+If you sub-class the generator, you may accomplish this generation with some like:
+<pre>
+
+	/** Allows a sub-class to add additional code for embedded object <code>AbstractDomain</code>.
+	 * @param current current <code>CompositeObjectXMLEntity</code>.
+	* @return any additional code to place at the end of generated <code>AbstractDomain</code>.
+	*/
+	public String getAdditionalDomainCode(CompositeObjectXMLEntity current) {
+		String interfaces = current.getTransientKeys().get("interfaces");
+		if (interfaces.indexOf("PersonEntity") != -1) { 
+			return "	public void preValidate( ... 
+		}
+	}
+</pre> 
+The above example suggests a different approach providing implementations of the protected <code>AbstractDomain</code> methods.
+Rather than manually implementing these methods, let the code generator handle this task.
+
+
+<h3>Modifying Existing Code with JDBCHelper Arguments</h3>
+<ol>
+<li> <code>postFind()</code>.  Modify all implementations to the following signature:
+	<pre>
+		protected void postFind(PersistentObject aPO,JRFResultSet baseFindResultSet)
+	</pre>
+	<code>JRFResultSet</code> has all the methods that <code>JDBCHelper</code> has to obtain result set data so all you 
+	need to do is change the signature.  If you have to execute a query here use:
+	<pre>
+		JRFResultSet other = this.getJRFConnection().getStatementExecuter().executeQuery(" ....");
+	</pre>
+<li>  <code>preValidatate(),preSave()</code> etc.	Modify all with the following signatures:
+	<pre>
+	protected void preValidate(PersistentObject aPO, StatementExecuter stmtExecuter)
+	protected void preSave(PersistentObject aPO, StatementExecuter stmtExecuter)
+	protected void postSave(PersistentObject aPO, StatementExecuter stmtExecuter)
+	protected void preDelete(PersistentObject aPO, StatementExecuter stmtExecuter)
+	protected void postDelete(PersistentObject aPO, StatementExecuter stmtExecuter)
+	</pre>
+	You can use <code>StatementExecuter</code> to process any SQL statement.  Furthermore, you many process as many result sets
+	as you choose.
+<li>  Eliminate all calls to <code>getJDBCHelper</code> and <code>setJDBCHelper</code>; they will generate runtime exceptions.
+<li> <code>protected int executeSQLUpdate(String sql, JDBCHelper aJDBCHelper)</code> will still work but the helper argument
+	will be ignored.
+<li> <code>protected void executeSQLQuery(String sql, RowHandler aRowHandler, JDBCHelper aJDBCHelper)</code> will work 
+	but the helper argument will be ignored.
+<li> All of the <code>find...(X, JDBCHelper)</code> methods will work but the helper argument will be ignored.
+<li> All of overloads of these methods with <code>JDBCHelper</code> will work but the <code>JDBCHelper</code> argument will be ignored: 
+	<code>save(),delete(),validate(),findLong(),findInteger(),findTimestamp()</code>.
+<li> All versions of <code>beginTransaction</code> and <code>endTransaction</code> now do nothing.
+<li> If you have implemented the protected <code>RowHandler</code> interface, the signature for the single method is now:
+	<pre>
+	public void handleRow(JRFResultSet resultSet)
+	</pre>
+</ol>
+<h3>Miscellaneous Code Changes</h3>
+<ol>
+<li>	Modify all timestamped optimistic lock columns from <code>TimestampColumnSpec</code> to <code>TimestampColumnSpecDbGen</code>.
+<li> <code>AbstractStaticDomain</code> is now deprecated.  The same functionality exists by using <code>AbstractDomain</code> and
+     calling <code>setCacheAll(true)</code>.
+<li> Since there is no longer a single instance of <code>DatabasePolicy</code>, the method
+	<code>public static DatabasePolicy getDatabasePolicy()</code> is no longer supported.  If you need to obtain the default
+	<code>DatabasePolicy</code> instance, do the following:
+
+	<pre>
+	JRFConnection conn = JRFConnectionFactory.create();
+	DatabasePolicy policy = conn.getDatabasePolicy();
+	</pre>
+<li>	Encoding compound primary keys now uses <code>StreamTokenizer</code> instead of StringTokenizer to format the encoded string.
+	If your code manually examines this key, you will have to make changes:
+	<pre>
+	Old version:  1|MFG
+	New version:  1|"MFG"
+	</pre>
+	<code>StreamTokenizer</code> is used so that quotes and bars ('|') may be embedded in a <code>String</code> key value.
+
+</ol>
+
+<h2>Short-term TO DO List</h2>
+<ol>
+	<li>	Fix incorrect and incomplete DatabasePolicy implementation methods.  
+	<li>	Create new DBtype-Readme (e.g. postgres-readMe.txt) files for each database type supported.
+	<li>	Expand CompositeTEST.java with more tests.
+	<li>	Test EJB example directory.
+	<li>	Clean up documentation in jrf.properties.
+	<li> 	Update existing user guide documentation. 
+	<li>	Generate a skeletal XML file from reading the database schema.
+	<li>	Expand CacheTEST.java with more tests.
+	<li>    Full testing and potential changes to BLOB and CLOB column specifications.
+	<li>	Clean-up of all javadoc.  Minimally, the following needs to be done:	
+		<ul>
+		<li> Class description for <code>AbstractColumnSpec</code>.
+		</ul>	 
+	<li>	<code>GenerateDatabase</code> has been successfully run on only
+		Postgres and MySql.  Other databases need to be tested.  DatabasePolicy methods
+		for obtaining create index formats may need to be abandoned.
+	<li>	Documentation for XML creation.
+	<li>	Add policy method to get SQL for dropping sequences.
+	
+</ol>
+</body>

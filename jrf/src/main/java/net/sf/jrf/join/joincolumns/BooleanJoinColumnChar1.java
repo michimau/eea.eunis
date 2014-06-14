@@ -1,0 +1,129 @@
+/*
+ *
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations under
+ * the License.
+ *
+ * The Original Code is jRelationalFramework.
+ *
+ * The Initial Developer of the Original Code is is.com.
+ * Portions created by is.com are Copyright (C) 2000 is.com.
+ * All Rights Reserved.
+ *
+ * Contributor: James Evans (jevans@vmguys.com)
+ * Contributor: ____________________________________
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * the GNU General Public License (the "GPL") or the GNU Lesser General
+ * Public license (the "LGPL"), in which case the provisions of the GPL or
+ * LGPL are applicable instead of those above.  If you wish to allow use of
+ * your version of this file only under the terms of either the GPL or LGPL
+ * and not to allow others to use your version of this file under the MPL,
+ * indicate your decision by deleting the provisions above and replace them
+ * with the notice and other provisions required by either the GPL or LGPL
+ * License.  If you do not delete the provisions above, a recipient may use
+ * your version of this file under either the MPL or GPL or LGPL License.
+ *
+ */
+package net.sf.jrf.join.joincolumns;
+
+import java.sql.SQLException;
+import net.sf.jrf.column.GetterSetter;
+import net.sf.jrf.join.*;
+
+import net.sf.jrf.sql.JRFResultSet;
+
+/**
+ *  This subclass of JoinColumn represents an Boolean column as (char(1)) we want joined
+ *  from another table.
+ */
+public class BooleanJoinColumnChar1
+     extends JoinColumn
+{
+
+    /* ===============  Static Variables  =============== */
+    protected static Class s_class = Boolean.class;
+
+    /** True value string. */
+    protected String trueValue = "Y";
+
+    /* ===============  Constructors  =============== */
+    /**
+     * Construct an instance that is ready to be used.
+     *
+     * @param columnName  a value of type 'String' - can include the alias
+     *                   like this: "Name PersonName"
+     * @param setterName  a value of type 'String'
+     */
+    public BooleanJoinColumnChar1(String columnName, String setterName)
+    {
+        super(columnName, setterName);
+    }
+
+    /**
+     * Construct an instance that is ready to be used.
+     *
+     * @param columnName   a value of type 'String'
+     * @param columnAlias  a value of type 'String'
+     * @param setterName   a value of type 'String'
+     */
+    public BooleanJoinColumnChar1(String columnName, String columnAlias, String setterName)
+    {
+        super(columnName, columnAlias, setterName);
+    }
+
+    /**
+     * Constructs instance using column name and getter setter impl.
+     *
+     * @param columnName        name of the column.
+     * @param getterSetterImpl  implementation of <code>GetterSetter</code> for the column.
+     */
+    public BooleanJoinColumnChar1(String columnName, GetterSetter getterSetterImpl)
+    {
+        super(columnName, getterSetterImpl);
+    }
+
+
+    /**
+     * Sets the value to use to denote <code>true</code>.  Default is "Y" (Yes).
+     *
+     * @param trueValue  single character value to use to denote <code>true</code>.
+     * @see              #trueValue
+     */
+    public void setTrueValue(char trueValue)
+    {
+        this.trueValue = new String(new char[]{trueValue});
+    }
+
+    /**
+     * Returns the Boolean column value from the result set.
+     *
+     * @param jrfResultSet      a value of type 'JRFResultSet'
+     * @return                  a value of type 'Object'
+     * @exception SQLException  if an error occurs
+     */
+    public Object getColumnValueFrom(JRFResultSet jrfResultSet)
+        throws SQLException
+    {
+        return net.sf.jrf.column.columnspecs.BooleanColumnSpecChar1.getColumnValueFrom(jrfResultSet, i_columnIdx, trueValue);
+    }
+
+
+    /**
+     * Gets the columnClass attribute of the BooleanJoinColumnChar1 object
+     *
+     * @return   The columnClass value
+     */
+    public Class getColumnClass()
+    {
+        return s_class;
+    }
+
+}// BooleanJoinColumnChar1

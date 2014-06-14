@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+                    
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                    
+  <meta name="Author" content="Jonathan Carlson">
+                    
+  <meta name="GENERATOR" content="Mozilla/4.7 [en] (WinNT; I) [Netscape]">
+  <title>jRelationalFramework</title>
+                                    
+  <style type="text/css">
+      BODY {font-family: Times New Roman,Times,serif;}
+      TD   {font-family: Times New Roman,Times,serif;}
+      B    {font-family: Helvetica,Arial,sans-serif;}
+      H1   {font-family: Helvetica,Arial,sans-serif;}
+      H2   {font-family: Helvetica,Arial,sans-serif;}
+      H3   {font-family: Helvetica,Arial,sans-serif;}
+   </style>
+</head>
+  <body text="#000000" bgcolor="#ffffff" link="#000000" vlink="#990099" alink="#ff0000">
+<a name="Top"></a>
+<table border="0" cellspacing="0" cellpadding="15" cols="2" width="100%">
+  <tbody>
+    <tr>
+      <td align="Center" valign="CENTER" width="125" height="90" bgcolor="#ccff33"><br>
+      <img src="version1/images/jrf-logo.gif" nosave="" border="0" alt="jRF logo" width="114" height="68">
+<!-- height=80 width=100--></td>
+      <td align="Center" valign="CENTER">
+      <h1>jRelationalFramework version 2.0</h1>
+     Copyright &copy; 2000,2001 is.com<br>
+    2001, 2002 vmguys.com<br>
+      </td>
+    </tr>
+    <tr>
+      <td align="Left" valign="Top" bgcolor="#0099cc" width="125">
+      <form method="Get" action="http://jrf.sourceforge.net.master.com/texis/master/search/mysite.html"><input name="q" value="" size="9"><input type="submit" value="Search"></form>
+      <b><a href="version1/index.html">Version 1 docs<br>
+      </a>
+      <br>
+      <a href="https://sf.net/project/showfiles.php?group_id=8796">download 
+ 2.0 beta</a>
+      <br>
+      </b>
+      <p><b><a href="version1/gettingStarted.html">getting started</a>
+      </b></p>
+      <p><b><a href="version1/faq.html">faq</a>
+      </b></p>
+      <p><b><a href="tutorial.html">tutorial</a>
+      </b></p>
+      <p><b><a href="version1/advancedTopics.html">advanced</a>
+      </b></p>
+      <p><b><a href="version1/examples.html">examples</a>
+      </b></p>
+      <p><b><a href="version1/ejb.html">jRF and EJB</a>
+      </b></p>
+      <p><b><a href="api/">javadoc api</a>
+      </b></p>
+      <p><b><a href="http://www.mozilla.org/MPL/MPL-1.1.html">license</a>
+      </b></p>
+      <p><b><a href="http://www.sourceforge.net/projects/jrf/">sourceforge</a>
+      </b></p>
+      <p><b>feedback:</b><br>
+    &nbsp; <b><a href="http://www.quicktopic.com/7/H/ZnWbbMh3UuUD">user comments</a>
+      </b><br>
+    &nbsp; <b><a href="http://lists.sourceforge.net/mailman/listinfo/jrf-user">
+    join mailing list</a>
+      </b><br>
+    &nbsp; <b><a href="http://sourceforge.net/bugs/?func=addbug&amp;group_id=8796">
+    submit a bug</a>
+      </b><br>
+    &nbsp; <b><a href="http://sourceforge.net/patch/?func=addpatch&amp;group_id=8796">
+    submit a patch</a>
+      </b></p>
+      <p><a href="http://www.sf.net"><img src="http://www.sf.net/sflogo.php?group_id=8796" width="88" height="31" border="0" alt="SourceForge Logo">
+&nbsp;</a>
+      </p>
+      <p><a href="http://www.jfind.com/vote.php3?id=1139"><img src="./version1/images/jFind-vote.gif" border="0" alt="Vote for me on jFind!" width="100" height="43">
+      </a>
+      </p>
+      <p><a href="http://www.jars.com"><img src="version1/images/jars-top25percent.gif" border="0" alt="Jars.com top 25%" width="104" height="56">
+      </a>
+      </p>
+      </td>
+      <td><b> The first official beta for version 2 is now available</b>.
+ &nbsp;There are a <u>lot</u> of changes and improvements. &nbsp;The release
+ notes and upgrade instructions are <a href="version2/releasenotes.html">
+ here</a>
+    . <br>
+      <hr>  This free java SQL framework is intended to abstract out the
+SQL database code so the important business logic doesn't get lost in the
+trivial and distracting database access code.&nbsp; Taking a little time
+to learn to use it will pay off in simpler database code that is easier to
+maintain and understand.&nbsp;                             
+      <p>This framework is <i>not</i> intended to completely shield the developer 
+  from needing to understand basic SQL constructs.&nbsp; It is a lightweight 
+  framework that was written to automate the most tedious 80% of relational 
+  database access coding and leave the other 20% to the developer.&nbsp; If
+ we attempted to automate the last 20%, the size of this framework would
+ grow  dramatically...&nbsp; not to mention the fact that "java coders love
+ to code"  -- so if we removed all the coding involved it wouldn't be any
+fun to learn  and use.&nbsp; </p>
+      <p>The <b>Standard Behaviors</b> provided by this framework are:&nbsp; 
+        </p>
+      <ul>
+        <li> Object-to-relational mapping for:</li>
+        <ul>
+          <li> Sequenced primary key tables - the primary key is assigned
+ by the framework  (with help from the database).</li>
+          <li> Natural primary key tables - the primary key is assigned by
+ the application.</li>
+          <li> Compound primary key tables - multiple columns make up the
+ primary  key.</li>
+        </ul>
+        <li>Use either PreparedStatements or regular Statements.<br>
+        </li>
+        <li> Insertion of a new object instance into the database.&nbsp;
+(In other  words: Insertion of a new row into a table).</li>
+        <li> Updating of existing object instances.</li>
+        <li> Deleting of existing object instances.</li>
+        <li> Finding of persistent instances by primary key.</li>
+        <li> Finding all persistent instances.&nbsp; (Finding all rows in
+ a table).</li>
+        <li> Finding of a portion of persistent instances that match an application-specific
+  criteria.</li>
+        <li> Augmentation of persistent object instances with columns from
+ other  tables (Joining of tables).</li>
+        <li> Aggregation - creation of multiple objects from one result set.</li>
+        <li> Flexibility to define custom SQL queries for specialized searches.</li>
+        <li> Database independent validation of objects based on the metadata
+ defined  in the AbstractDomain subclass. (i.e. REQUIRED and UNIQUE field
+constraints).</li>
+        <li> Database independent defaulting of attribute values when updating 
+ and selecting from the database.</li>
+        <li> Optimistic locking of an object/row using a Timestamp or Integer
+ column.&nbsp;  When conflicts occur, an ObjectHasChanged exception is thrown
+ by the framework.</li>
+        <li> Linking of related objects at retrieval time through the use
+ of a postFind()  method.</li>
+        <li> Plenty of "hooks" by which you can customize your object before
+ saving,  after saving, after finding, etc...</li>
+        <li> Compatible with database triggers that change the tables.</li>
+        <li> Generation of basic PersistentObject and AbstractDomain subclasses
+  from an existing database (using the jrf-extras jar).</li>
+        <li> Connection pooling (Either via the included JDBCHelperPool or
+ via your  application server pooling).</li>
+        <li><em>(As of version 1.7)</em> Supertype/Subtype tables are now
+ supported.            <a href="./advancedTopics.html#SubtypeTables">more</a>
+        </li>
+      </ul>
+      <a name="BehaviorsNotDirectlySupported"></a>
+      <b>Behaviors not directly supported</b> (However, most of these can
+ be done with custom code in the domain subclass):&nbsp;                
+            
+      <ul>
+        <li>Primitive field datatypes (int,float,boolean,etc.) are not supported
+  by the framework.  Only the Object wrappers of these (Integer,Float,Boolean,etc.)
+   are supported.  Primitives do not fit with the very important object-oriented
+  concept of polymorphism.  (That is, each type of primitive has to be treated
+  specially.  While this could be done, it would add too much complexity
+to   the code and hence decreases the maintainability).  <i>However, as long
+as  you have Object wrapper field getters and setters you can do whatever
+you  want with primitives inside the PersistentObject subclass.</i></li>
+        <li>Updating of columns from a joined table.&nbsp; It is necessary
+ to update  the joined table through its own AbstractDomain subclass or else 
+ add custom update code.</li>
+        <li>Multi-column uniqueness validation is not directly supported,
+ but could  be added in a later release.</li>
+        <li>BLOBs (Binary Large OBjects) -- This is something that is currently
+  being looking into (April 2001).</li>
+      </ul>
+      <b>Database Support</b>
+      <blockquote>This framework has been tested on Oracle, Sybase/SQLServer,
+          <a href="http://hsqldb.sf.net">HypersonicSQL</a>
+    , and <a href="http://instantdb.enhydra.org">InstantDB</a>
+    , and <a href="http://www.mysql.com">MySQL</a>
+    .&nbsp; It supports these through the use of the DatabasePolicy interface.&nbsp;
+  This interface defines methods that return database-specific information.&nbsp;
+  It is a <i>relatively</i> simple task to support another ANSI-compliant
+database  by implementing this interface.&nbsp; If you do, <a href="http://sourceforge.net/patch/?func=addpatch&amp;group_id=8796">
+    please share it</a>
+    .</blockquote>
+        <b>EJB Support</b>
+        <blockquote>This framework has been very effectively used in Session
+  beans in a couple of EJB applications built by is.com. <a href="version1/ejb.html">
+    See the short white-paper</a>
+     that covers some of what we have learned about scalable EJB architectures.
+   Also see the September 2000 issue of JavaReport (p. 98) for an article
+that  describes a technique similar to this.  The jRF solution combines the
+best  features of the first two solutions presented while removing or minimizing
+  their inherent disadvantages.                                         
+   
+          <p><b> EJB/J2EE patterns</b> - jRelational Framework is an implementation
+  of the <a href="http://java.sun.com/j2ee/blueprints/design_patterns/dao/index.html" target="_blank">
+    Data Access Object</a>
+     pattern.  While jRF can be used for Bean-Managed-Persistence, it is
+better   used from a Session Bean because it populates and returns lists
+of Value  objects.           </p>
+          </blockquote>
+          <b>JVM Support</b>
+          <blockquote>This framework requires Java 2 (JDK 1.2) or higher
+since it uses Lists, Iterators, and Maps instead of Vectors, Enumerators,
+and Hashtables.  If you must use this with JDK1.1, then you would need to
+ convert these in the source.</blockquote>
+            <b>License</b>
+            <blockquote>This code is subject to the <a href="http://www.mozilla.org/MPL/MPL-1.1.html">
+    Mozilla Public License Version 1.1</a>
+     (the "License"); you may not use this code except in compliance with 
+the  License. You may obtain a copy of the License at <a href="http://www.mozilla.org/MPL/">
+    http://www.mozilla.org/MPL/</a>
+              <p>Software distributed under the License is distributed on
+  an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+  See the License for the specific language governing rights and limitations
+  under the License. <b>This library has an option for you to convert the
+license  to the GNU GPL or LPGL</b>.</p>
+              </blockquote>
+              <b>Contributors</b> - if we missed you, please <a href="mailto:joncrlsn_at_users.sf.net">
+    let us know</a>
+    .                                                             
+              <ul>
+                <li><a href="mailto:jevans_at_vmguys.com">Jay Evans</a>
+     - Refactored and added lots (an understatement) for version 2.</li>
+                <li><a href="mailto:%20etennant_at_cariboulake.com">Erik
+Tennant</a>
+     - Contributed features, helped commit bug fixes and tested Jays code 
+on  Oracle.</li>
+                <li><a href="mailto:joncrlsn_at_users.sf.net">Jonathan Carlson</a>
+     - Original author of the 1.x versions.<br>
+                </li>
+              </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </body>
+        </html>

@@ -11,6 +11,7 @@
 
     <artifactId>tools</artifactId>
     <packaging>pom</packaging>
+    <name>Command-line tools</name>
 
     <modules>
         <module>deletesites</module>

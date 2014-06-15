@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE Schema SYSTEM "Embedded.dtd">
+
+<Schema>
+	<CompositeObject classNameObj="GroupPersons" 
+				  baseClassNameObj="GroupTypes"
+				  description="Composite object with master group table and detail table of persons.">
+		<EmbeddedInfo 
+				classNameObj="Persons"
+				fieldName="Persons"
+				description="Person information"
+				see=""
+				whereClause="GroupName = ?"
+				orderBy=""
+				>
+			<JoinFields 
+					parentFieldGetter="getGroupName"
+					childFieldName="GroupName"
+					columnSpec="net.sf.jrf.column.columnspecs.StringColumnSpec"
+            />
+		</EmbeddedInfo>
+	</CompositeObject>	
+	<CompositeObject classNameObj="MasterComposite" 
+				  baseClassNameObj="Master"
+				  description="Composite object to test cache errors.">
+		<EmbeddedInfo 
+				classNameObj="Detail"
+				fieldName="Detail"
+				description="A detail table for test"
+				see=""
+				whereClause="Name = ?"
+				orderBy="Name"
+				>
+			<JoinFields 
+					parentFieldGetter="getName"
+					childFieldName="Name"
+					columnSpec="net.sf.jrf.column.columnspecs.StringColumnSpec"
+            />
+		</EmbeddedInfo>
+	</CompositeObject>	
+	<CompositeObject classNameObj="MasterTestColIdx" 
+				  baseClassNameObj="Master2"
+				  description="Composite object to test column indexing across joins.">
+		<JoinTable
+				tableName="Detail2"
+				innerJoin="true"
+				mainColumnNames="Name"
+				joinColumnNames="Name"
+			>
+			<JoinColumn
+				description="test join"
+				columnName="Description"
+				fieldName="DescriptionD2"
+				fieldClassName="java.lang.String"
+	  			joinColumnSpec="StringJoinColumn"
+				/>
+			<JoinTable
+				tableName="Detail3"
+				innerJoin="true"
+				mainColumnNames="Name"
+				joinColumnNames="Name"
+				>
+				<JoinColumn
+					description="test join"
+					columnName="Description"
+					fieldName="DescriptionD3"
+					fieldClassName="java.lang.String"
+	  				joinColumnSpec="StringJoinColumn"
+					/>
+			</JoinTable>			
+		</JoinTable>			
+		<JoinTable
+				tableName="Master3"
+				innerJoin="true"
+				mainColumnNames="Name"
+				joinColumnNames="Name"
+			>
+			<JoinColumn
+				description="test join2"
+				columnName="Description"
+				fieldName="DescriptionM3"
+				fieldClassName="java.lang.String"
+  				joinColumnSpec="StringJoinColumn"
+				/>
+		</JoinTable>
+	</CompositeObject>	
+
+</Schema>

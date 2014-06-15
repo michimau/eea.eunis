@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>javax.xml.messaging</groupId>
+  <artifactId>jaxm-runtime</artifactId>
+  <versioning>
+    <release>ver.unknown</release>
+    <versions>
+      <version>ver.unknown</version>
+    </versions>
+    <lastUpdated>20140615075802</lastUpdated>
+  </versioning>
+</metadata>

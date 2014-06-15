@@ -25,6 +25,26 @@
         <main.basedir>${project.basedir}/..</main.basedir>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>project-local</id>
+            <name>Project-local repository</name>
+            <layout>default</layout>
+            <url>file:///${project.basedir}/lib</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>project-local</id>
+            <name>Project-local repository</name>
+            <url>file:///${project.basedir}/lib</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -44,38 +64,21 @@
             <systemPath>${basedir}/lib/commons-collections.jar</systemPath>
             -->
         </dependency>
-        <!--
-        <dependency>
-            <groupId>hsqld</groupId>
-            <artifactId>hsqld</artifactId>
-            <version>1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/hsqldb.jar</systemPath>
-        </dependency>
--->
+
         <dependency>
             <groupId>javax.sql</groupId>
             <artifactId>jdbc-stdext</artifactId>
             <version>2.0</version>
         </dependency>
 
+        <!-- This library is built from XMl sources in the project. Look at the the build.xml -->
         <dependency>
             <groupId>jrf-testgen</groupId>
             <artifactId>jrf-testgen</artifactId>
             <version>1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/jrf-testgen.jar</systemPath>
+            <scope>test</scope>
         </dependency>
 
-<!--
-        <dependency>
-            <groupId>jdbc2_0-stdext</groupId>
-            <artifactId>jdbc2_0-stdext</artifactId>
-            <version>1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/jdbc2_0-stdext.jar</systemPath>
-        </dependency>
--->
         <!--
         <dependency>
             <groupId>jrefactory</groupId>
@@ -103,10 +106,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.12</version>
-            <!--
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/log4j.jar</systemPath>
-            -->
         </dependency>
         <!--
         <dependency>
@@ -123,6 +122,25 @@
             <version>2.3.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-mxj</artifactId>
+            <version>5.0.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-mxj-db-files</artifactId>
+            <version>5.0.12</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

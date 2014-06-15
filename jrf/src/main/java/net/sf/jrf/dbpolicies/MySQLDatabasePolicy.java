@@ -322,7 +322,7 @@ public class MySQLDatabasePolicy
      */
     public String timestampColumnType()
     {
-        return "TIMESTAMP";
+        return "DATETIME";
     }
 
     /**

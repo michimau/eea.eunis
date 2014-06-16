@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <env>local</env>
-        <java_version>1.6</java_version>
+        <java_version>1.7</java_version>
         <main.basedir>${project.basedir}</main.basedir>
         <checkstyle.config.location>${main.basedir}/docs/checkstyle.xml</checkstyle.config.location>
     </properties>

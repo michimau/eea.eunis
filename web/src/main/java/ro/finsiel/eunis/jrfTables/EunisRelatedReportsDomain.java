@@ -10,7 +10,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for EUNIS_RELATED_REPORTS.
+ * JRF table for eunis_related_reports.
  * @author finsiel
  **/
 public class EunisRelatedReportsDomain extends AbstractDomain {
@@ -30,7 +30,7 @@ public class EunisRelatedReportsDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("EUNIS_RELATED_REPORTS");
+        this.setTableName("eunis_related_reports");
         this.addColumnSpec(
                 new StringColumnSpec("FILE_NAME", "getFileName", "setFileName",
                 DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY, REQUIRED));

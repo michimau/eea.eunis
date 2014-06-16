@@ -158,7 +158,7 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
             noIds = getNOIds();
             classCodesLegal = getClassCodeLegal();
 
-            String query = "INSERT INTO CHM62EDT_HABITAT_CLASS_CODE (ID_HABITAT, ID_CLASS_CODE, TITLE, RELATION_TYPE, CODE) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO chm62edt_habitat_class_code (ID_HABITAT, ID_CLASS_CODE, TITLE, RELATION_TYPE, CODE) VALUES (?,?,?,?,?)";
 
             this.preparedStatement = con.prepareStatement(query);
 
@@ -202,7 +202,7 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
 
         try {
 
-            String query = "DELETE FROM CHM62EDT_HABITAT_CLASS_CODE";
+            String query = "DELETE FROM chm62edt_habitat_class_code";
 
             ps = con.prepareStatement(query);
             ps.executeUpdate();
@@ -223,7 +223,7 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_NATURE_OBJECT, ID_HABITAT FROM CHM62EDT_HABITAT";
+            String query = "SELECT ID_NATURE_OBJECT, ID_HABITAT FROM chm62edt_habitat";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();
@@ -254,7 +254,7 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT LEGAL, ID_CLASS_CODE FROM CHM62EDT_CLASS_CODE";
+            String query = "SELECT LEGAL, ID_CLASS_CODE FROM chm62edt_class_code";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();

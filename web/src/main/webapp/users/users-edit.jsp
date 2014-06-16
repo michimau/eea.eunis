@@ -36,7 +36,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
    // All users list
    List ListUsers = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
-              " FROM EUNIS_USERS ORDER BY USERNAME ");
+              " FROM eunis_users ORDER BY USERNAME ");
    if(ListUsers != null && ListUsers.size() > 0)
    {
 %>
@@ -373,7 +373,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
                // Users names list
                List users = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
-              " FROM EUNIS_USERS ORDER BY USERNAME ");
+              " FROM eunis_users ORDER BY USERNAME ");
                 if(users != null && users.size() > 0)
                 {
                   for(int i=0;i<users.size();i++)

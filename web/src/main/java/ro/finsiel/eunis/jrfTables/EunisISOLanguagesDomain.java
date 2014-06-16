@@ -27,7 +27,7 @@ public class EunisISOLanguagesDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("EUNIS_ISO_LANGUAGES");
+        this.setTableName("eunis_iso_languages");
         this.addColumnSpec(
                 new StringColumnSpec("NAME", "getName", "setName",
                 DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY));

@@ -11,19 +11,19 @@ import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 
 /**
  SELECT
- CHM62EDT_HABITAT.ID_HABITAT,
- CHM62EDT_HABITAT.SCIENTIFIC_NAME,
- CHM62EDT_COUNTRY.AREA_NAME,
- CHM62EDT_BIOGEOREGION.NAME,
- CHM62EDT_REPORTS.ID_GEOSCOPE, ID_GEOSCOPE_LINK
+ chm62edt_habitat.ID_HABITAT,
+ chm62edt_habitat.SCIENTIFIC_NAME,
+ chm62edt_country.AREA_NAME,
+ chm62edt_biogeoregion.NAME,
+ chm62edt_reports.ID_GEOSCOPE, ID_GEOSCOPE_LINK
 
- FROM CHM62EDT_HABITAT
+ FROM chm62edt_habitat
 
- INNER JOIN CHM62EDT_REPORTS ON  CHM62EDT_HABITAT.ID_NATURE_OBJECT = CHM62EDT_REPORTS.ID_NATURE_OBJECT
- INNER JOIN CHM62EDT_COUNTRY ON CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE
- INNER JOIN CHM62EDT_BIOGEOREGION ON CHM62EDT_REPORTS.ID_GEOSCOPE_LINK = CHM62EDT_BIOGEOREGION.ID_GEOSCOPE
- WHERE CHM62EDT_REPORTS.ID_GEOSCOPE = 10
- AND CHM62EDT_REPORTS.ID_GEOSCOPE_LINK = 257
+ INNER JOIN chm62edt_reports ON  chm62edt_habitat.ID_NATURE_OBJECT = chm62edt_reports.ID_NATURE_OBJECT
+ INNER JOIN chm62edt_country ON chm62edt_reports.ID_GEOSCOPE = chm62edt_country.ID_GEOSCOPE
+ INNER JOIN chm62edt_biogeoregion ON chm62edt_reports.ID_GEOSCOPE_LINK = chm62edt_biogeoregion.ID_GEOSCOPE
+ WHERE chm62edt_reports.ID_GEOSCOPE = 10
+ AND chm62edt_reports.ID_GEOSCOPE_LINK = 257
  */
 public class HabitatCountryDomain extends AbstractDomain {
   public PersistentObject newPersistentObject() {
@@ -36,7 +36,7 @@ public class HabitatCountryDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -52,16 +52,16 @@ public class HabitatCountryDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getLevel", "setLevel", DEFAULT_TO_NULL));
 
-    JoinTable reports = new JoinTable("CHM62EDT_REPORTS B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable reports = new JoinTable("chm62edt_reports B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     reports.addJoinColumn(new IntegerJoinColumn("ID_REPORT_ATTRIBUTES", "setIdReportAttributes"));
     this.addJoinTable(reports);
 
-    JoinTable country = new JoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    JoinTable country = new JoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
     country.addJoinColumn(new StringJoinColumn("ISO_2L", "setIso2L"));
     reports.addJoinTable(country);
 
-    JoinTable biogeoregion = new JoinTable("CHM62EDT_BIOGEOREGION D", "ID_GEOSCOPE_LINK", "ID_GEOSCOPE");
+    JoinTable biogeoregion = new JoinTable("chm62edt_biogeoregion D", "ID_GEOSCOPE_LINK", "ID_GEOSCOPE");
     biogeoregion.addJoinColumn(new StringJoinColumn("NAME", "setBiogeoregionName"));
     reports.addJoinTable(biogeoregion);
   }

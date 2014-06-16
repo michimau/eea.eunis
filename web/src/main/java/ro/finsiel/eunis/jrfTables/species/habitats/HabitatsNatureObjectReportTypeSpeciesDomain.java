@@ -29,7 +29,7 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("H");
 
@@ -52,7 +52,7 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
                 DEFAULT_TO_NULL));
 
         JoinTable natureObjectReportType = new JoinTable(
-                "CHM62EDT_NATURE_OBJECT_REPORT_TYPE A", "ID_NATURE_OBJECT",
+                "chm62edt_nature_object_report_type A", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT_LINK");
 
         natureObjectReportType.addJoinColumn(
@@ -64,7 +64,7 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
                 new IntegerJoinColumn("ID_REPORT_TYPE", "setIdReportType"));
         this.addJoinTable(natureObjectReportType);
 
-        JoinTable species = new JoinTable("CHM62EDT_SPECIES C",
+        JoinTable species = new JoinTable("chm62edt_species C",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
 
         species.addJoinColumn(
@@ -79,7 +79,7 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
                 "setIdNatureObjectSpecies"));
         natureObjectReportType.addJoinTable(species);
 
-        JoinTable group = new JoinTable("CHM62EDT_GROUP_SPECIES", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        JoinTable group = new JoinTable("chm62edt_group_species", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         group.addJoinColumn(new StringJoinColumn("COMMON_NAME", "setGroupName"));
         species.addJoinTable(group);
     }

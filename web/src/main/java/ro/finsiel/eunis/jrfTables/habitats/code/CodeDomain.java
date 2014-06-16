@@ -18,9 +18,9 @@ import ro.finsiel.eunis.search.habitats.code.CodeSortCriteria;
 import java.util.List;
 
 /**
- * SELECT * FROM CHM62EDT_HABITAT AS A
- * INNER JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT=B.ID_HABITAT
- * INNER JOIN CHM62EDT_CLASS_CODE AS C ON B.ID_CLASS_CODE=C.ID_CLASS_CODE
+ * SELECT * FROM chm62edt_habitat AS A
+ * INNER JOIN chm62edt_habitat_class_code AS B ON A.ID_HABITAT=B.ID_HABITAT
+ * INNER JOIN chm62edt_class_code AS C ON B.ID_CLASS_CODE=C.ID_CLASS_CODE
  * WHERE CODE LIKE 'E2.1' OR EUNIS_HABITAT_CODE LIKE 'E2.1' OR CODE_ANNEX1 LIKE 'E2.1';
  */
 
@@ -63,7 +63,7 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -79,11 +79,11 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
 
-    JoinTable habClassCode = new JoinTable("CHM62EDT_HABITAT_CLASS_CODE B", "ID_HABITAT", "ID_HABITAT");
+    JoinTable habClassCode = new JoinTable("chm62edt_habitat_class_code B", "ID_HABITAT", "ID_HABITAT");
     habClassCode.addJoinColumn(new StringJoinColumn("CODE", "setCode"));
     this.addJoinTable(habClassCode);
 
-    JoinTable classCode = new JoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
+    JoinTable classCode = new JoinTable("chm62edt_class_code C", "ID_CLASS_CODE", "ID_CLASS_CODE");
     habClassCode.addJoinTable(classCode);
   }
 
@@ -135,9 +135,9 @@ public class CodeDomain extends AbstractDomain implements Paginable {
   private Long _rawCount() throws CriteriaMissingException {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
-    sql.append("SELECT COUNT(DISTINCT B.ID_HABITAT) FROM CHM62EDT_HABITAT AS A " +
-            "INNER JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT = B.ID_HABITAT " +
-            "INNER JOIN CHM62EDT_CLASS_CODE AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE WHERE ");
+    sql.append("SELECT COUNT(DISTINCT B.ID_HABITAT) FROM chm62edt_habitat AS A " +
+            "INNER JOIN chm62edt_habitat_class_code AS B ON A.ID_HABITAT = B.ID_HABITAT " +
+            "INNER JOIN chm62edt_class_code AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE WHERE ");
     // Apply WHERE CLAUSE
     sql.append(_prepareWhereSearch().toString());
     // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...

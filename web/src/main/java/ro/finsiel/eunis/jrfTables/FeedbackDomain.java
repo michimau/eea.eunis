@@ -10,7 +10,7 @@ import net.sf.jrf.column.columnoptions.SequencedPrimaryKeyColumnOption;
 
 
 /**
- * JRF table for EUNIS_FEEDBACK.
+ * JRF table for eunis_feedback.
  * @author finsiel
  **/
 public class FeedbackDomain extends AbstractDomain {
@@ -27,7 +27,7 @@ public class FeedbackDomain extends AbstractDomain {
      * Implements setup from AbstractDomain.
      */
     public void setup() {
-        this.setTableName("EUNIS_FEEDBACK");
+        this.setTableName("eunis_feedback");
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_FEEDBACK",
                 new SequencedPrimaryKeyColumnOption(), "getIDFeedback",

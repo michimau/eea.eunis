@@ -66,7 +66,7 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("C");
 
@@ -83,10 +83,10 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("LONGITUDE", "getLongitude", "setLongitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     // Joined tables
-    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE I", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("chm62edt_nature_object_geoscope I", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY J", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable country = new OuterJoinTable("chm62edt_country J", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
     country.addJoinColumn(new StringJoinColumn("ISO_2L", "setIso2L"));
     natureObjectGeoscope.addJoinTable(country);
@@ -143,9 +143,9 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
     // Prepare the WHERE clause   put search Criteria
     StringBuffer filterSQL = _prepareWhereSearch();
     Long tempList = this.findLong("SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) " +
-            "FROM CHM62EDT_SITES C " +
-            "LEFT OUTER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE I ON C.ID_NATURE_OBJECT=I.ID_NATURE_OBJECT " +
-            "LEFT OUTER JOIN CHM62EDT_COUNTRY J ON I.ID_GEOSCOPE=J.ID_GEOSCOPE WHERE " + filterSQL);
+            "FROM chm62edt_sites C " +
+            "LEFT OUTER JOIN chm62edt_nature_object_geoscope I ON C.ID_NATURE_OBJECT=I.ID_NATURE_OBJECT " +
+            "LEFT OUTER JOIN chm62edt_country J ON I.ID_GEOSCOPE=J.ID_GEOSCOPE WHERE " + filterSQL);
     if (null != tempList) return tempList;
     return new Long(0);
   }

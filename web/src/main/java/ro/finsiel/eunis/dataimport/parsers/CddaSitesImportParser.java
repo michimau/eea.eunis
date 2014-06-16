@@ -250,7 +250,7 @@ public class CddaSitesImportParser extends DefaultHandler {
             deleteOldGeoscopeRecords();
 
             maxNoIdInt = getMaxId(
-                    "SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
+                    "SELECT MAX(ID_NATURE_OBJECT) FROM chm62edt_nature_object");
             natObjectIds = getNatObjectIds();
             geoscopeIds = getGeoscopeIds();
             geoscopeIdsSites = getGeoscopeIdsSites();

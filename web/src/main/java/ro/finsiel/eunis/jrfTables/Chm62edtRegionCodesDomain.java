@@ -7,7 +7,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_REGION_CODES.
+ * JRF table for chm62edt_region_codes.
  * @author finsiel
  **/
 public class Chm62edtRegionCodesDomain extends AbstractDomain {
@@ -27,7 +27,7 @@ public class Chm62edtRegionCodesDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_REGION_CODES");
+        this.setTableName("chm62edt_region_codes");
         this.setReadOnly(true);
 
         this.addColumnSpec(

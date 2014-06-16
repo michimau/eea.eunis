@@ -274,7 +274,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 // search parentLegal for the synonym names
                 for(LegalStatusWrapper legalStatusWrapper : parentLegalTemp) {
                     List<Chm62edtReportAttributesPersist> results = new Chm62edtReportAttributesDomain().findCustom("SELECT *" +
-                            " FROM CHM62EDT_REPORT_ATTRIBUTES AS F" +
+                            " FROM chm62edt_report_attributes AS F" +
                             " WHERE F.NAME = 'NAME_IN_DOCUMENT' AND F.ID_REPORT_ATTRIBUTES='" + legalStatusWrapper.getIdReportAttributes() + "'");
 
                     for(Chm62edtReportAttributesPersist p : results){

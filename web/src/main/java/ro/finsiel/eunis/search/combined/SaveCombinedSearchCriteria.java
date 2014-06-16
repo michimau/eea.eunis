@@ -95,7 +95,7 @@ public class SaveCombinedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL1 = "SELECT * " + " FROM EUNIS_COMBINED_SEARCH " + " WHERE ID_SESSION = '" + idSession + "' ";
+            SQL1 = "SELECT * " + " FROM eunis_combined_search " + " WHERE ID_SESSION = '" + idSession + "' ";
 
             rs = ps.executeQuery(SQL1);
 
@@ -138,7 +138,7 @@ public class SaveCombinedSearchCriteria {
             Connection con3 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             Statement ps3 = con3.createStatement();
 
-            SQL1 = "SELECT * " + " FROM EUNIS_COMBINED_SEARCH_CRITERIA " + " WHERE ID_SESSION = '" + idSession + "' "
+            SQL1 = "SELECT * " + " FROM eunis_combined_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
                     + " ORDER BY ID_NODE";
 
             ResultSet rs3 = ps3.executeQuery(SQL1);
@@ -334,7 +334,7 @@ public class SaveCombinedSearchCriteria {
     }
 
     /**
-     * Return value of node type field from EUNIS_COMBINED_SEARCH table.
+     * Return value of node type field from eunis_combined_search table.
      * @param idsession id session
      * @param natureobject nature object
      * @param idnode id node
@@ -352,7 +352,7 @@ public class SaveCombinedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT NODE_TYPE " + " FROM EUNIS_COMBINED_SEARCH " + " WHERE ID_SESSION='" + idsession + "' "
+            SQL = "SELECT NODE_TYPE " + " FROM eunis_combined_search " + " WHERE ID_SESSION='" + idsession + "' "
                     + " AND NATURE_OBJECT='" + natureobject + "' " + " AND ID_NODE='" + idnode + "'";
 
             rs = ps.executeQuery(SQL);
@@ -390,7 +390,7 @@ public class SaveCombinedSearchCriteria {
             ps = con.createStatement();
 
             // for first natureobject
-            SQL = "SELECT * " + " FROM EUNIS_COMBINED_SEARCH_CRITERIA " + " WHERE ID_SESSION='" + idSession + "' "
+            SQL = "SELECT * " + " FROM eunis_combined_search_criteria " + " WHERE ID_SESSION='" + idSession + "' "
                     + " AND NATURE_OBJECT='" + natureObject + "' " + " ORDER BY ID_NODE";
 
             rs = ps.executeQuery(SQL);
@@ -452,7 +452,7 @@ public class SaveCombinedSearchCriteria {
             ps = con.createStatement();
 
             // for others natureobject
-            SQL = "SELECT * " + " FROM EUNIS_COMBINED_SEARCH_CRITERIA " + " WHERE ID_SESSION='" + idSession + "' "
+            SQL = "SELECT * " + " FROM eunis_combined_search_criteria " + " WHERE ID_SESSION='" + idSession + "' "
                     + " AND NATURE_OBJECT<>'" + natureObject + "' " + " ORDER BY NATURE_OBJECT,ID_NODE";
 
             rs = ps.executeQuery(SQL);
@@ -580,7 +580,7 @@ public class SaveCombinedSearchCriteria {
     }
 
     /**
-     * Insert data from EUNIS_SAVE_COMBINED_SEARCH table in EUNIS_COMBINED_SEARCH table;
+     * Insert data from EUNIS_SAVE_COMBINED_SEARCH table in eunis_combined_search table;
      * used to load data from saved searches in input fields from jsp page.
      * @param idsession id session
      * @param criterianame criteria name
@@ -622,7 +622,7 @@ public class SaveCombinedSearchCriteria {
                             Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                             Statement ps1 = con1.createStatement();
 
-                            String SQL1 = "INSERT INTO EUNIS_COMBINED_SEARCH";
+                            String SQL1 = "INSERT INTO eunis_combined_search";
 
                             SQL1 += "(ID_SESSION, NATURE_OBJECT, ID_NODE, NODE_TYPE)";
                             SQL1 += " VALUES(";
@@ -639,7 +639,7 @@ public class SaveCombinedSearchCriteria {
                         Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                         Statement ps1 = con1.createStatement();
 
-                        String SQL1 = "INSERT INTO EUNIS_COMBINED_SEARCH";
+                        String SQL1 = "INSERT INTO eunis_combined_search";
 
                         SQL1 += "(ID_SESSION, NATURE_OBJECT, ID_NODE, NODE_TYPE)";
                         SQL1 += " VALUES(";
@@ -664,7 +664,7 @@ public class SaveCombinedSearchCriteria {
     }
 
     /**
-     * Insert data from EUNIS_SAVE_COMBINED_SEARCH_CRITERIA table in EUNIS_COMBINED_SEARCH_CRITERIA table;
+     * Insert data from EUNIS_SAVE_COMBINED_SEARCH_CRITERIA table in eunis_combined_search_criteria table;
      * used to load data from saved searches in input fields from jsp page.
      * @param idsession id session
      * @param criterianame criteria name
@@ -706,7 +706,7 @@ public class SaveCombinedSearchCriteria {
                             Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                             Statement ps1 = con1.createStatement();
 
-                            String SQL1 = "INSERT INTO EUNIS_COMBINED_SEARCH_CRITERIA";
+                            String SQL1 = "INSERT INTO eunis_combined_search_criteria";
 
                             SQL1 += "(ID_SESSION, NATURE_OBJECT, ID_NODE, ATTRIBUTE, OPERATOR, FIRST_VALUE, LAST_VALUE)";
                             SQL1 += " VALUES(";
@@ -726,7 +726,7 @@ public class SaveCombinedSearchCriteria {
                         Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                         Statement ps1 = con1.createStatement();
 
-                        String SQL1 = "INSERT INTO EUNIS_COMBINED_SEARCH_CRITERIA";
+                        String SQL1 = "INSERT INTO eunis_combined_search_criteria";
 
                         SQL1 += "(ID_SESSION, NATURE_OBJECT, ID_NODE, ATTRIBUTE, OPERATOR, FIRST_VALUE, LAST_VALUE)";
                         SQL1 += " VALUES(";

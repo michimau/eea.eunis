@@ -26,7 +26,7 @@ public class HabitatNatureObjectReportTypeDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("H");
 
@@ -65,7 +65,7 @@ public class HabitatNatureObjectReportTypeDomain extends AbstractDomain {
                 DEFAULT_TO_NULL));
 
         JoinTable joinTable = new JoinTable(
-                "CHM62EDT_NATURE_OBJECT_REPORT_TYPE A", "ID_NATURE_OBJECT",
+                "chm62edt_nature_object_report_type A", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT_LINK");
 
         joinTable.addJoinColumn(
@@ -74,7 +74,7 @@ public class HabitatNatureObjectReportTypeDomain extends AbstractDomain {
         this.addJoinTable(joinTable);
 
         OuterJoinTable Geo = new OuterJoinTable(
-                "CHM62EDT_NATURE_OBJECT_GEOSCOPE B", "ID_NATURE_OBJECT_LINK",
+                "chm62edt_nature_object_geoscope B", "ID_NATURE_OBJECT_LINK",
                 "ID_NATURE_OBJECT_LINK");
 
         joinTable.addJoinColumn(
@@ -82,7 +82,7 @@ public class HabitatNatureObjectReportTypeDomain extends AbstractDomain {
                 "setidNatObjLink"));
         joinTable.addJoinTable(Geo);
 
-        JoinTable joinSpecies = new JoinTable("CHM62EDT_SPECIES AAA",
+        JoinTable joinSpecies = new JoinTable("chm62edt_species AAA",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
 
         joinTable.addJoinTable(joinSpecies);

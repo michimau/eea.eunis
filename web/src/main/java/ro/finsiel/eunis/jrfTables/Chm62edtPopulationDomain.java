@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_POPULATION.
+ * JRF table for chm62edt_population.
  * @author finsiel
  **/
 public class Chm62edtPopulationDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtPopulationDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_POPULATION");
+        this.setTableName("chm62edt_population");
         this.addColumnSpec(
                 new StringColumnSpec("ID_POPULATION", "getIdPopulation",
                 "setIdPopulation", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY));

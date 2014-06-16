@@ -31,7 +31,7 @@ public class NatureObjectDcSourceDomain extends AbstractDomain {
 
         JoinTable Index = null;
 
-        this.setTableName("CHM62EDT_NATURE_OBJECT");
+        this.setTableName("chm62edt_nature_object");
 
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject",
@@ -39,7 +39,7 @@ public class NatureObjectDcSourceDomain extends AbstractDomain {
         this.addColumnSpec(new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("TYPE", "getType", "setType", DEFAULT_TO_EMPTY_STRING, REQUIRED));
 
-        Index = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+        Index = new JoinTable("dc_index", "ID_DC", "ID_DC");
         Index.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         Index.addJoinColumn(new StringJoinColumn("EDITOR", "editor", "setEditor"));
         Index.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));

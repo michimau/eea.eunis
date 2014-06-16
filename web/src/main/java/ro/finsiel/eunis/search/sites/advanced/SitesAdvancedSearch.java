@@ -180,7 +180,7 @@ public class SitesAdvancedSearch {
             if (idcolumn == null || idcolumn.length() == 0) {
                 idcolumn = "ID_" + table.toUpperCase();
             }
-            SQL = "SELECT " + idcolumn + " FROM CHM62EDT_" + table.toUpperCase();
+            SQL = "SELECT " + idcolumn + " FROM chm62edt_" + table.toLowerCase();
             SQL += " WHERE " + valuecolumn + "='" + value + "'";
 
             if (SQL.length() > 0) {
@@ -226,7 +226,7 @@ public class SitesAdvancedSearch {
                 sValueMax = (String) this.MaxValues.elementAt(i);
 
                 if (sTable.equalsIgnoreCase("Name")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
@@ -240,11 +240,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " WHERE NAME REGEXP '" + sValueMin + "'";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Code")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites";
                     if (sOperand.equalsIgnoreCase("Contains")) {
                         sitesSQL += " WHERE ID_SITE LIKE '%" + sValueMin + "%'";
                     }
@@ -259,11 +259,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND ID_SITE < '" + sValueMax + "'";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("DesignationYear")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " LEFT(DESIGNATION_DATE,4) = '" + sValueMin + "'";
                     }
@@ -278,11 +278,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND RIGHT(DESIGNATION_DATE,4) <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Area")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " AREA = " + sValueMin;
                     }
@@ -297,11 +297,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND AREA <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Size")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " AREA = " + sValueMin;
                     }
@@ -316,11 +316,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND AREA <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Length")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " 'LENGTH' = " + sValueMin;
                     }
@@ -335,11 +335,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND 'LENGTH' <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Longitude")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " LONGITUDE = " + sValueMin;
                     }
@@ -354,11 +354,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND LONGITUDE <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Latitude")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " LATITUDE = " + sValueMin;
                     }
@@ -373,11 +373,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND LATITUDE <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("MinimumAltitude")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " ALT_MIN = " + sValueMin;
                     }
@@ -392,11 +392,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND ALT_MIN <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("MaximumAltitude")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " ALT_MAX = " + sValueMin;
                     }
@@ -411,11 +411,11 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND ALT_MAX <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("MeanAltitude")) {
-                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ";
+                    sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ";
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         sitesSQL += " ALT_MEAN = " + sValueMin;
                     }
@@ -430,120 +430,120 @@ public class SitesAdvancedSearch {
                         sitesSQL += " AND ALT_MEAN <= " + sValueMax;
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Designation")) {
-                    sitesSQL = "SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                    sitesSQL += " FROM CHM62EDT_SITES ";
-                    sitesSQL += " INNER JOIN `CHM62EDT_DESIGNATIONS` ON (`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION` = `CHM62EDT_SITES`.`ID_DESIGNATION` AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = `CHM62EDT_SITES`.`ID_GEOSCOPE`)";
+                    sitesSQL = "SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                    sitesSQL += " FROM chm62edt_sites ";
+                    sitesSQL += " INNER JOIN `chm62edt_designations` ON (`chm62edt_designations`.`ID_DESIGNATION` = `chm62edt_sites`.`ID_DESIGNATION` AND `chm62edt_designations`.`ID_GEOSCOPE` = `chm62edt_sites`.`ID_GEOSCOPE`)";
                     sitesSQL += " WHERE";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        sitesSQL += " (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` LIKE '%" + sValueMin + "%')";
+                        sitesSQL += " (`chm62edt_designations`.`DESCRIPTION` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        sitesSQL += " (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` = '" + sValueMin + "')";
+                        sitesSQL += " (`chm62edt_designations`.`DESCRIPTION` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        sitesSQL += " (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` REGEXP '" + sValueMin + "')";
+                        sitesSQL += " (`chm62edt_designations`.`DESCRIPTION` REGEXP '" + sValueMin + "')";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("HumanActivity")) {
-                    sitesSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    sitesSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    sitesSQL += " INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_SITES`.`ID_NATURE_OBJECT`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_HUMAN_ACTIVITY` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_HUMAN_ACTIVITY`.`ID_HUMAN_ACTIVITY`)";
-                    sitesSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'HUMAN_ACTIVITY')";
+                    sitesSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    sitesSQL += " FROM `chm62edt_nature_object_report_type`";
+                    sitesSQL += " INNER JOIN `chm62edt_sites` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_sites`.`ID_NATURE_OBJECT`)";
+                    sitesSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    sitesSQL += " INNER JOIN `chm62edt_human_activity` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_human_activity`.`ID_HUMAN_ACTIVITY`)";
+                    sitesSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'HUMAN_ACTIVITY')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        sitesSQL += " AND (`CHM62EDT_HUMAN_ACTIVITY`.`NAME` = '" + sValueMin + "')";
+                        sitesSQL += " AND (`chm62edt_human_activity`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        sitesSQL += " AND (`CHM62EDT_HUMAN_ACTIVITY`.`NAME` REGEXP '" + sValueMin + "')";
+                        sitesSQL += " AND (`chm62edt_human_activity`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        sitesSQL += " AND (`CHM62EDT_HUMAN_ACTIVITY`.`NAME` LIKE '%" + sValueMin + "%')";
+                        sitesSQL += " AND (`chm62edt_human_activity`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        sitesSQL += " AND (`CHM62EDT_HUMAN_ACTIVITY`.`ID_HUMAN_ACTIVITY` >= "
+                        sitesSQL += " AND (`chm62edt_human_activity`.`ID_HUMAN_ACTIVITY` >= "
                                 + GetID(sValueMin, "HUMAN_ACTIVITY", "", "") + ")";
-                        sitesSQL += " AND (`CHM62EDT_HUMAN_ACTIVITY`.`ID_HUMAN_ACTIVITY` <= "
+                        sitesSQL += " AND (`chm62edt_human_activity`.`ID_HUMAN_ACTIVITY` <= "
                                 + GetID(sValueMax, "HUMAN_ACTIVITY", "", "") + ")";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Motivation")) {
-                    sitesSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    sitesSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    sitesSQL += " INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_SITES`.`ID_NATURE_OBJECT`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_MOTIVATION` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_MOTIVATION`.`ID_MOTIVATION`)";
-                    sitesSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'MOTIVATION')";
+                    sitesSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    sitesSQL += " FROM `chm62edt_nature_object_report_type`";
+                    sitesSQL += " INNER JOIN `chm62edt_sites` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_sites`.`ID_NATURE_OBJECT`)";
+                    sitesSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    sitesSQL += " INNER JOIN `chm62edt_motivation` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_motivation`.`ID_MOTIVATION`)";
+                    sitesSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'MOTIVATION')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        sitesSQL += " AND (`CHM62EDT_MOTIVATION`.`NAME` = '" + sValueMin + "')";
+                        sitesSQL += " AND (`chm62edt_motivation`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        sitesSQL += " AND (`CHM62EDT_MOTIVATION`.`NAME` REGEXP '" + sValueMin + "')";
+                        sitesSQL += " AND (`chm62edt_motivation`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        sitesSQL += " AND (`CHM62EDT_MOTIVATION`.`NAME` LIKE '%" + sValueMin + "%')";
+                        sitesSQL += " AND (`chm62edt_motivation`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        sitesSQL += " AND (`CHM62EDT_MOTIVATION`.`ID_MOTIVATION` >= " + GetID(sValueMin, "MOTIVATION", "", "") + ")";
-                        sitesSQL += " AND (`CHM62EDT_MOTIVATION`.`ID_MOTIVATION` <= " + GetID(sValueMax, "MOTIVATION", "", "") + ")";
+                        sitesSQL += " AND (`chm62edt_motivation`.`ID_MOTIVATION` >= " + GetID(sValueMin, "MOTIVATION", "", "") + ")";
+                        sitesSQL += " AND (`chm62edt_motivation`.`ID_MOTIVATION` <= " + GetID(sValueMax, "MOTIVATION", "", "") + ")";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Country")) {
-                    sitesSQL = "SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                    sitesSQL += " FROM `CHM62EDT_SITES`";
-                    sitesSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT_GEOSCOPE` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT_GEOSCOPE`.`ID_NATURE_OBJECT`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_COUNTRY` ON (`CHM62EDT_NATURE_OBJECT_GEOSCOPE`.`ID_GEOSCOPE` = `CHM62EDT_COUNTRY`.`ID_GEOSCOPE`)";
+                    sitesSQL = "SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                    sitesSQL += " FROM `chm62edt_sites`";
+                    sitesSQL += " INNER JOIN `chm62edt_nature_object_geoscope` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `chm62edt_nature_object_geoscope`.`ID_NATURE_OBJECT`)";
+                    sitesSQL += " INNER JOIN `chm62edt_country` ON (`chm62edt_nature_object_geoscope`.`ID_GEOSCOPE` = `chm62edt_country`.`ID_GEOSCOPE`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        sitesSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` = '" + sValueMin + "')";
+                        sitesSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        sitesSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
+                        sitesSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        sitesSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` LIKE '%" + sValueMin + "%')";
+                        sitesSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` LIKE '%" + sValueMin + "%')";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("RegionCode")) {
-                    sitesSQL = "SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                    sitesSQL += " FROM `CHM62EDT_SITES`";
-                    sitesSQL += " INNER JOIN `CHM62EDT_SITE_ATTRIBUTES` ON (`CHM62EDT_SITES`.`ID_SITE` = `CHM62EDT_SITE_ATTRIBUTES`.`ID_SITE`)";
-                    sitesSQL += " INNER JOIN `CHM62EDT_REGION_CODES` ON (`CHM62EDT_SITE_ATTRIBUTES`.`VALUE` = `CHM62EDT_REGION_CODES`.`ID_REGION_CODE`)";
+                    sitesSQL = "SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                    sitesSQL += " FROM `chm62edt_sites`";
+                    sitesSQL += " INNER JOIN `chm62edt_site_attributes` ON (`chm62edt_sites`.`ID_SITE` = `chm62edt_site_attributes`.`ID_SITE`)";
+                    sitesSQL += " INNER JOIN `chm62edt_region_codes` ON (`chm62edt_site_attributes`.`VALUE` = `chm62edt_region_codes`.`ID_REGION_CODE`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        sitesSQL += " WHERE (`CHM62EDT_REGION_CODES`.`NAME` = '" + sValueMin + "')";
+                        sitesSQL += " WHERE (`chm62edt_region_codes`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        sitesSQL += " WHERE (`CHM62EDT_REGION_CODES`.`NAME` REGEXP '" + sValueMin + "')";
+                        sitesSQL += " WHERE (`chm62edt_region_codes`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        sitesSQL += " WHERE (`CHM62EDT_REGION_CODES`.`NAME` LIKE '%" + sValueMin + "%')";
+                        sitesSQL += " WHERE (`chm62edt_region_codes`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (SourceDB != null && !SourceDB.equalsIgnoreCase("")) {
-                        sitesSQL += " AND `CHM62EDT_SITES`.`SOURCE_DB` IN (" + SourceDB + ")";
+                        sitesSQL += " AND `chm62edt_sites`.`SOURCE_DB` IN (" + SourceDB + ")";
                     }
                 }
                 // execute every attribute query
@@ -552,7 +552,7 @@ public class SitesAdvancedSearch {
             } // end for
             sitesFilter = " WHERE 1=1 " + attributesFilter;
             // execute final query
-            sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SITES";
+            sitesSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_sites";
             sitesSQL += sitesFilter;
             // removed WHERE because is added automatically by JRF (findWere())
             filter += " ID_NATURE_OBJECT IN (" + ExecuteSQL(sitesSQL, "'") + ")";

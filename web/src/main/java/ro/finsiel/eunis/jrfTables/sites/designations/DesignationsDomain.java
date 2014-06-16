@@ -68,7 +68,7 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_DESIGNATIONS");
+    this.setTableName("chm62edt_designations");
     this.setTableAlias("J");
     this.setReadOnly(true);
 
@@ -85,11 +85,11 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("ID_DESIGNATION", "getAbbreviation", "setAbbreviation", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("ORIGINAL_DATASOURCE", "getSourceDb", "setSourceDb", null));
 
-    JoinTable J4 = new OuterJoinTable("CHM62EDT_SITES S", "ID_DESIGNATION", "ID_DESIGNATION");
+    JoinTable J4 = new OuterJoinTable("chm62edt_sites S", "ID_DESIGNATION", "ID_DESIGNATION");
     J4.addJoinColumn(new StringJoinColumn("SOURCE_DB", "setDataSet"));
     this.addJoinTable(J4);
 
-    OuterJoinTable J3 = new OuterJoinTable("CHM62EDT_COUNTRY I", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable J3 = new OuterJoinTable("chm62edt_country I", "ID_GEOSCOPE", "ID_GEOSCOPE");
     J3.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setCountry"));
     this.addJoinTable(J3);
 
@@ -121,9 +121,9 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
 
     //List tempList = this.findWhere(filterSQL.toString());
     List tempList = this.findCustom("SELECT J.ID_DESIGNATION, J.ID_GEOSCOPE,J.DESCRIPTION,J.DESCRIPTION_EN,J.DESCRIPTION_FR,J.ID_DESIGNATION,J.ORIGINAL_DATASOURCE,S.SOURCE_DB,I.AREA_NAME_EN " +
-            "FROM CHM62EDT_DESIGNATIONS J "
-            + "INNER JOIN CHM62EDT_SITES S ON (J.ID_DESIGNATION=S.ID_DESIGNATION AND J.ID_GEOSCOPE=S.ID_GEOSCOPE) "
-            + "LEFT OUTER JOIN CHM62EDT_COUNTRY I ON J.ID_GEOSCOPE=IF(I.ID_GEOSCOPE='',NULL,I.ID_GEOSCOPE) "
+            "FROM chm62edt_designations J "
+            + "INNER JOIN chm62edt_sites S ON (J.ID_DESIGNATION=S.ID_DESIGNATION AND J.ID_GEOSCOPE=S.ID_GEOSCOPE) "
+            + "LEFT OUTER JOIN chm62edt_country I ON J.ID_GEOSCOPE=IF(I.ID_GEOSCOPE='',NULL,I.ID_GEOSCOPE) "
             + "WHERE  " + filterSQL.toString());
     _resultCount = new Long(-1);// After each query, reset the _resultCount, so countResults do correct numbering.
     return tempList;
@@ -159,9 +159,9 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
 
     //List tempList = this.findWhere(filterSQL.toString());
     List tempList = this.findCustom("SELECT J.ID_DESIGNATION, J.ID_GEOSCOPE,J.DESCRIPTION,J.DESCRIPTION_EN,J.DESCRIPTION_FR,J.ID_DESIGNATION,J.ORIGINAL_DATASOURCE,S.SOURCE_DB,I.AREA_NAME_EN " +
-            "FROM CHM62EDT_DESIGNATIONS J "
-            + "INNER JOIN CHM62EDT_SITES S ON (J.ID_DESIGNATION=S.ID_DESIGNATION AND J.ID_GEOSCOPE=S.ID_GEOSCOPE) "
-            + "LEFT OUTER JOIN CHM62EDT_COUNTRY I ON J.ID_GEOSCOPE=IF(I.ID_GEOSCOPE='',NULL,I.ID_GEOSCOPE) "
+            "FROM chm62edt_designations J "
+            + "INNER JOIN chm62edt_sites S ON (J.ID_DESIGNATION=S.ID_DESIGNATION AND J.ID_GEOSCOPE=S.ID_GEOSCOPE) "
+            + "LEFT OUTER JOIN chm62edt_country I ON J.ID_GEOSCOPE=IF(I.ID_GEOSCOPE='',NULL,I.ID_GEOSCOPE) "
             + "WHERE  " + filterSQL.toString());
     if (null != tempList)
       return new Long(tempList.size());

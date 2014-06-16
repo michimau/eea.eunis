@@ -25,7 +25,7 @@ public class DesignationsSitesRelatedDesignationsDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_DESIGNATIONS");
+        this.setTableName("chm62edt_designations");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -84,7 +84,7 @@ public class DesignationsSitesRelatedDesignationsDomain extends AbstractDomain {
                 new StringColumnSpec("REMARK_SOURCE", "getRemarkSource",
                 "setRemarkSource", null));
 
-        JoinTable J = new JoinTable("CHM62EDT_SITES_RELATED_DESIGNATIONS I",
+        JoinTable J = new JoinTable("chm62edt_sites_related_designations I",
                 "ID_DESIGNATION", "ID_DESIGNATION");
 
         J.addJoinColumn(new StringJoinColumn("OVERLAP", "setOverlap"));

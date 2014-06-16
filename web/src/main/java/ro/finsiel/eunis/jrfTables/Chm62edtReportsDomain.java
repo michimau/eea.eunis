@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_REPORTS inner join CHM62EDT_REPORT_TYPE inner join DC_INDEX.
+ * JRF table for chm62edt_reports inner join chm62edt_report_type inner join dc_index.
  * @author finsiel
  **/
 public class Chm62edtReportsDomain extends AbstractDomain {
@@ -30,7 +30,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
      */
     @Override
     public void setup() {
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
         this.setReadOnly(true);
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
@@ -51,7 +51,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
                                                                         "getIdReportAttributes", "setIdReportAttributes",
                                                                         DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY)));
 
-        JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE",
+        JoinTable reportType = new JoinTable("chm62edt_report_type",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         reportType.addJoinColumn(
@@ -61,7 +61,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
                 new StringJoinColumn("ID_LOOKUP", "IDLookup", "setIDLookup"));
         this.addJoinTable(reportType);
 
-        JoinTable dcIndex = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+        JoinTable dcIndex = new JoinTable("dc_index", "ID_DC", "ID_DC");
 
         dcIndex.addJoinColumn(new IntegerJoinColumn("REFERENCE", "getReference","setReference"));
         dcIndex.addJoinColumn(new IntegerJoinColumn("REFCD", "getReference", "setRefcd"));

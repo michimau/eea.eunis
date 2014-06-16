@@ -9,7 +9,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_GEOSCOPE.
+ * JRF table for chm62edt_geoscope.
  * @author finsiel
  **/
 public class Chm62edtGeoscopeDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtGeoscopeDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_GEOSCOPE");
+        this.setTableName("chm62edt_geoscope");
         this.setReadOnly(true);
 
         this.addColumnSpec(

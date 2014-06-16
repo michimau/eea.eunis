@@ -196,8 +196,8 @@ public class SaveSearchCriteria {
             for (int i = 0; i < numberCriteria; i++) {
                 con1[i] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-                SQL = "INSERT INTO EUNIS_GROUP_SEARCH_CRITERIA "
-                        + "(CRITERIA_NAME,ID_EUNIS_GROUP_SEARCH_CRITERIA,CRITERIA_ATTRIBUTE,CRITERIA_FORM_FIELD_ATTRIBUTE,"
+                SQL = "INSERT INTO eunis_group_search_criteria "
+                        + "(CRITERIA_NAME,ID_eunis_group_search_criteria,CRITERIA_ATTRIBUTE,CRITERIA_FORM_FIELD_ATTRIBUTE,"
                         + "CRITERIA_OPERATOR,CRITERIA_FORM_FIELD_OPERATOR,CRITERIA_FIRST_VALUE,CRITERIA_LAST_VALUE,CRITERIA_BOOLEAN)"
                         + "VALUES(?,?,?,?,?,?,?,?,?)";
                 ps1[i] = con1[i].prepareStatement(SQL);
@@ -224,7 +224,7 @@ public class SaveSearchCriteria {
 
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "INSERT INTO EUNIS_GROUP_SEARCH (CRITERIA_NAME,DESCRIPTION,USERNAME,FROM_WHERE)VALUES(?,?,?,?)";
+            SQL = "INSERT INTO eunis_group_search (CRITERIA_NAME,DESCRIPTION,USERNAME,FROM_WHERE)VALUES(?,?,?,?)";
 
             ps = con.prepareStatement(SQL);
 
@@ -276,7 +276,7 @@ public class SaveSearchCriteria {
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
-                    + " FROM EUNIS_GROUP_SEARCH" + " WHERE USERNAME = '" + user + "'";
+                    + " FROM eunis_group_search" + " WHERE USERNAME = '" + user + "'";
 
             st = con1.createStatement();
             rs = st.executeQuery(SQL1);
@@ -815,13 +815,13 @@ public class SaveSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_GROUP_SEARCH WHERE CRITERIA_NAME='" + criteriaName + "'";
+            SQL = "DELETE FROM eunis_group_search WHERE CRITERIA_NAME='" + criteriaName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
             ps.close();
             con.close();
 
-            SQL = "DELETE FROM EUNIS_GROUP_SEARCH_CRITERIA WHERE CRITERIA_NAME='" + criteriaName + "'";
+            SQL = "DELETE FROM eunis_group_search_criteria WHERE CRITERIA_NAME='" + criteriaName + "'";
             ps1 = con1.prepareStatement(SQL);
             ps1.execute();
             ps1.close();
@@ -847,7 +847,7 @@ public class SaveSearchCriteria {
         try {
 
             List criterias = new CriteriasForUsersDomain().findWhere(
-                    "USERNAME='" + userName + "' AND FROM_WHERE='" + pageName + "' AND EUNIS_GROUP_SEARCH.CRITERIA_NAME='"
+                    "USERNAME='" + userName + "' AND FROM_WHERE='" + pageName + "' AND eunis_group_search.CRITERIA_NAME='"
                     + criteriaName + "'");
 
             if (criterias != null && criterias.size() > 0) {

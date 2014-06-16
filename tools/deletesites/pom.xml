@@ -11,6 +11,7 @@
 
     <artifactId>deletesites</artifactId>
     <packaging>jar</packaging>
+    <name>Delete sites</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>

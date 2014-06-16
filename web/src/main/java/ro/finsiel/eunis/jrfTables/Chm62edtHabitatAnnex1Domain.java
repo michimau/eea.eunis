@@ -7,7 +7,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_ANNEX1.
+ * JRF table for chm62edt_habitat_ANNEX1.
  * @author finsiel
  **/
 public class Chm62edtHabitatAnnex1Domain extends AbstractDomain {
@@ -27,7 +27,7 @@ public class Chm62edtHabitatAnnex1Domain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_ANNEX1");
+        this.setTableName("chm62edt_habitat_ANNEX1");
         this.setReadOnly(true);
 
         this.addColumnSpec(

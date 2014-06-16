@@ -86,7 +86,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL1 = "SELECT * " + " FROM EUNIS_ADVANCED_SEARCH " + " WHERE ID_SESSION = '" + idSession + "' "
+            SQL1 = "SELECT * " + " FROM eunis_advanced_search " + " WHERE ID_SESSION = '" + idSession + "' "
                     + " AND NATURE_OBJECT = '" + natureObject + "'";
             rs = ps.executeQuery(SQL1);
 
@@ -101,7 +101,7 @@ public class SaveAdvancedSearchCriteria {
                     Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
-                    String SQL = "INSERT INTO EUNIS_SAVE_ADVANCED_SEARCH";
+                    String SQL = "INSERT INTO eunis_save_advanced_search";
 
                     SQL += "(CRITERIA_NAME,NATURE_OBJECT,ID_NODE,NODE_TYPE,DESCRIPTION,USERNAME,FROM_WHERE)";
                     SQL += " VALUES(";
@@ -129,7 +129,7 @@ public class SaveAdvancedSearchCriteria {
             Connection con3 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             Statement ps3 = con3.createStatement();
 
-            SQL1 = "SELECT * " + " FROM EUNIS_ADVANCED_SEARCH_CRITERIA " + " WHERE ID_SESSION = '" + idSession + "' "
+            SQL1 = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
                     + " AND NATURE_OBJECT = '" + natureObject + "' " + " ORDER BY ID_NODE";
             ResultSet rs3 = ps3.executeQuery(SQL1);
 
@@ -139,7 +139,7 @@ public class SaveAdvancedSearchCriteria {
                     Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
-                    String SQL = "INSERT INTO EUNIS_SAVE_ADVANCED_SEARCH_CRITERIA";
+                    String SQL = "INSERT INTO eunis_save_advanced_search_criteria";
 
                     SQL += "(CRITERIA_NAME,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
                     SQL += " VALUES(";
@@ -168,7 +168,7 @@ public class SaveAdvancedSearchCriteria {
     }
 
     /**
-     * Return value of node type field from EUNIS_ADVANCED_SEARCH table.
+     * Return value of node type field from eunis_advanced_search table.
      * @param idsession id session
      * @param natureobject nature object
      * @param idnode id node
@@ -186,7 +186,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT NODE_TYPE " + " FROM EUNIS_ADVANCED_SEARCH " + " WHERE ID_SESSION='" + idsession + "' "
+            SQL = "SELECT NODE_TYPE " + " FROM eunis_advanced_search " + " WHERE ID_SESSION='" + idsession + "' "
                     + " AND NATURE_OBJECT='" + natureobject + "' " + " AND ID_NODE='" + idnode + "'";
             rs = ps.executeQuery(SQL);
 
@@ -219,7 +219,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT * " + " FROM EUNIS_ADVANCED_SEARCH_CRITERIA " + " WHERE ID_SESSION='" + idSession + "' "
+            SQL = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION='" + idSession + "' "
                     + " AND NATURE_OBJECT='" + natureObject + "' " + " ORDER BY ID_NODE";
 
             rs = ps.executeQuery(SQL);
@@ -277,7 +277,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT * " + " FROM EUNIS_SAVE_ADVANCED_SEARCH " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
+            SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
                     + fromWhere + "' " + " GROUP BY CRITERIA_NAME, NATURE_OBJECT";
 
             rs = ps.executeQuery(SQL);
@@ -304,7 +304,7 @@ public class SaveAdvancedSearchCriteria {
     }
 
     /**
-     * Insert data from EUNIS_SAVE_ADVANCED_SEARCH table in EUNIS_ADVANCED_SEARCH table;
+     * Insert data from eunis_save_advanced_search table in eunis_advanced_search table;
      * used to load data from saved searches in input fields from jsp page.
      * @param idsession id session
      * @param criterianame criteria name
@@ -331,7 +331,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT * " + " FROM EUNIS_SAVE_ADVANCED_SEARCH " + " WHERE CRITERIA_NAME='" + criterianame + "' "
+            SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE CRITERIA_NAME='" + criterianame + "' "
                     + " AND NATURE_OBJECT='" + natureobject + "'";
 
             rs = ps.executeQuery(SQL);
@@ -342,7 +342,7 @@ public class SaveAdvancedSearchCriteria {
                     Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
-                    String SQL1 = "INSERT INTO EUNIS_ADVANCED_SEARCH";
+                    String SQL1 = "INSERT INTO eunis_advanced_search";
 
                     SQL1 += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
                     SQL1 += " VALUES(";
@@ -366,7 +366,7 @@ public class SaveAdvancedSearchCriteria {
     }
 
     /**
-     * Insert data from EUNIS_SAVE_ADVANCED_SEARCH_CRITERIA table in EUNIS_ADVANCED_SEARCH_CRITERIA table;
+     * Insert data from eunis_save_advanced_search_criteria table in eunis_advanced_search_criteria table;
      * used to load data from saved searches in input fields from jsp page.
      * @param idsession id session
      * @param criterianame criteria name
@@ -393,7 +393,7 @@ public class SaveAdvancedSearchCriteria {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
-            SQL = "SELECT * " + " FROM EUNIS_SAVE_ADVANCED_SEARCH_CRITERIA " + " WHERE CRITERIA_NAME='" + criterianame + "' "
+            SQL = "SELECT * " + " FROM eunis_save_advanced_search_criteria " + " WHERE CRITERIA_NAME='" + criterianame + "' "
                     + " AND NATURE_OBJECT='" + natureobject + "'";
 
             rs = ps.executeQuery(SQL);
@@ -404,7 +404,7 @@ public class SaveAdvancedSearchCriteria {
                     Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
-                    String SQL1 = "INSERT INTO EUNIS_ADVANCED_SEARCH_CRITERIA";
+                    String SQL1 = "INSERT INTO eunis_advanced_search_criteria";
 
                     SQL1 += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
                     SQL1 += " VALUES(";
@@ -448,7 +448,7 @@ public class SaveAdvancedSearchCriteria {
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
-                    + " FROM EUNIS_SAVE_ADVANCED_SEARCH" + " WHERE USERNAME = '" + user + "'";
+                    + " FROM eunis_save_advanced_search" + " WHERE USERNAME = '" + user + "'";
 
             st = con1.createStatement();
             rs = st.executeQuery(SQL1);

@@ -2926,7 +2926,7 @@ public class PDFSitesFactsheet {
                         ActivityIntensity = humanActivityAttribute.getAttributeValue();
                         // System.out.println("ActivityIntensity = " + ActivityIntensity);
                         ActivityIntensity = sqlc.ExecuteSQL(
-                                "SELECT NAME FROM CHM62EDT_ACTIVITY_INTENSITY WHERE ID_ACTIVITY_INTENSITY = '"
+                                "SELECT NAME FROM chm62edt_activity_intensity WHERE ID_ACTIVITY_INTENSITY = '"
                                 + ActivityIntensity + "'");
                         if (ActivityIntensity.length() == 0) {
                             ActivityIntensity = Utilities.formatString(
@@ -2961,7 +2961,7 @@ public class PDFSitesFactsheet {
                         ActivityInfluence = humanActivityAttribute.getAttributeValue();
                         // System.out.println("ActivityInfluence = " + ActivityInfluence);
                         ActivityInfluence = sqlc.ExecuteSQL(
-                                "SELECT NAME FROM CHM62EDT_ACTIVITY_INFLUENCE WHERE ID_ACTIVITY_INFLUENCE = '"
+                                "SELECT NAME FROM chm62edt_activity_influence WHERE ID_ACTIVITY_INFLUENCE = '"
                                 + ActivityInfluence + "'");
                         if (ActivityInfluence.length() == 0) {
                             ActivityInfluence = Utilities.formatString(
@@ -3083,7 +3083,7 @@ public class PDFSitesFactsheet {
                         ActivityIntensity = humanActivityAttribute.getAttributeValue();
                         // System.out.println("ActivityIntensity = " + ActivityIntensity);
                         ActivityIntensity = sqlc.ExecuteSQL(
-                                "SELECT NAME FROM CHM62EDT_ACTIVITY_INTENSITY WHERE ID_ACTIVITY_INTENSITY = '"
+                                "SELECT NAME FROM chm62edt_activity_intensity WHERE ID_ACTIVITY_INTENSITY = '"
                                 + ActivityIntensity + "'");
                     }
                     cell = new Cell(
@@ -3119,7 +3119,7 @@ public class PDFSitesFactsheet {
                         ActivityInfluence = humanActivityAttribute.getAttributeValue();
                         // System.out.println("ActivityInfluence = " + ActivityInfluence);
                         ActivityInfluence = sqlc.ExecuteSQL(
-                                "SELECT NAME FROM CHM62EDT_ACTIVITY_INFLUENCE WHERE ID_ACTIVITY_INFLUENCE = '"
+                                "SELECT NAME FROM chm62edt_activity_influence WHERE ID_ACTIVITY_INFLUENCE = '"
                                 + ActivityInfluence + "'");
                     }
                     cell = new Cell(

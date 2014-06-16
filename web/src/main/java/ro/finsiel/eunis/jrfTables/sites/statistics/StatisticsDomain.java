@@ -22,7 +22,7 @@ public class StatisticsDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("A");
     this.addColumnSpec(new StringColumnSpec("ID_SITE", "getIdSite", "setIdSite", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
@@ -57,10 +57,10 @@ public class StatisticsDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable country = new OuterJoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
     natureObjectGeoscope.addJoinTable(country);
   }

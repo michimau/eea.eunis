@@ -21,7 +21,7 @@ public class ReferencesTest {
         DbHelper.handleSetUpOperation("seed-four-species-habitats.xml");
         SQLUtilities sqlUtils = DbHelper.getSqlUtilities();
         // The created date isn't set in the seed. We set it manually.
-        sqlUtils.UpdateSQL("UPDATE DC_INDEX SET CREATED='2013'");
+        sqlUtils.UpdateSQL("UPDATE dc_index SET CREATED='2013'");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ReferencesTest {
 
         ReferencesDomain instance = new ReferencesDomain(searchCriteria, sortCriteria);
         assertNotNull("Instantiation failed", instance);
-        // there is only one CHM62EDT_REPORTS in the seed
+        // there is only one chm62edt_reports in the seed
         assertEquals(1, instance.getSpeciesForAReference("2409").size());
     }
 
@@ -42,7 +42,7 @@ public class ReferencesTest {
 
         ReferencesDomain instance = new ReferencesDomain(searchCriteria, sortCriteria);
         assertNotNull("Instantiation failed", instance);
-        // there is only one CHM62EDT_REPORTS in the seed
+        // there is only one chm62edt_reports in the seed
         assertEquals(1, instance.getSpeciesForAReferenceByGroup("2409").size());
     }
 

@@ -50,7 +50,7 @@
     root.Attribute.add("xmlns:rdfs","http://www.w3.org/2000/01/rdf-schema#");
     root.Attribute.add("xmlns:dwc","http://rs.tdwg.org/dwc/terms/");
 
-    String strSQL = "SELECT a.ID_SPECIES,a.SCIENTIFIC_NAME,a.GENUS, a.AUTHOR FROM CHM62EDT_SPECIES AS a";
+    String strSQL = "SELECT a.ID_SPECIES,a.SCIENTIFIC_NAME,a.GENUS, a.AUTHOR FROM chm62edt_species AS a";
     strSQL = strSQL + " WHERE VALID_NAME=1";
     strSQL = strSQL + " LIMIT " + start_from + "," + nr;
 

@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_NATURE_OBJECT.
+ * JRF table for chm62edt_nature_object.
  * @author finsiel
  **/
 public class Chm62edtNatureObjectDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtNatureObjectDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_NATURE_OBJECT");
+        this.setTableName("chm62edt_nature_object");
         this.setReadOnly(true);
 
         this.addColumnSpec(

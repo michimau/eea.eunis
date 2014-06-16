@@ -8,7 +8,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 
 /**
- * JRF table for CHM62EDT_NATURE_OBJECT_PICTURE.
+ * JRF table for chm62edt_nature_object_picture.
  * 
  * @author finsiel
  **/
@@ -30,7 +30,7 @@ public class Chm62edtNatureObjectPictureDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_NATURE_OBJECT_PICTURE");
+        this.setTableName("chm62edt_nature_object_picture");
         this.addColumnSpec(new CompoundPrimaryKeyColumnSpec(new StringColumnSpec("ID_OBJECT", "getIdObject", "setIdObject",
                 DEFAULT_TO_NULL), new StringColumnSpec("NATURE_OBJECT_TYPE", "getNatureObjectType", "setNatureObjectType",
                 DEFAULT_TO_NULL, REQUIRED), new StringColumnSpec("NAME", "getName", "setName", DEFAULT_TO_NULL, REQUIRED),

@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_SPECIES inner join CHM62EDT_NATURE_OBJECT inner join DC_INDEX.
+ * JRF table for chm62edt_species inner join chm62edt_nature_object inner join dc_index.
  * @author finsiel
  **/
 public class SpeciesNatureObjectDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class SpeciesNatureObjectDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -76,18 +76,18 @@ public class SpeciesNatureObjectDomain extends AbstractDomain {
                 new StringColumnSpec("CODE_2000", "getNatura2000Code", "setNatura2000Code",
                 DEFAULT_TO_NULL));
 
-        JoinTable natureObject = new JoinTable("CHM62EDT_NATURE_OBJECT",
+        JoinTable natureObject = new JoinTable("chm62edt_nature_object",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
 
         natureObject.addJoinColumn(
                 new IntegerJoinColumn("ID_DC", "idDublinCore", "setIdDublinCore"));
         this.addJoinTable(natureObject);
 
-        // JoinTable dcIndex = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+        // JoinTable dcIndex = new JoinTable("dc_index", "ID_DC", "ID_DC");
         // dcIndex.addJoinColumn(new IntegerJoinColumn("REFERENCE", "getReference", "setReference"));
         // dcIndex.addJoinColumn(new IntegerJoinColumn("REFCD", "getRefcd", "setRefcd"));
         // natureObject.addJoinTable(dcIndex);
-        OuterJoinTable dcIndex = new OuterJoinTable("DC_INDEX", "ID_DC", "ID_DC");
+        OuterJoinTable dcIndex = new OuterJoinTable("dc_index", "ID_DC", "ID_DC");
 
         dcIndex.addJoinColumn(
                 new IntegerJoinColumn("REFERENCE", "getReference",

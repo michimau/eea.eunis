@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_AREA_LEGAL_TEXT outer join CHM62EDT_LEGAL_AREA_EVENT inner join CHM62EDT_COUNTRY.
+ * JRF table for chm62edt_area_legal_text outer join chm62edt_legal_area_event inner join chm62edt_country.
  * @author finsiel
  **/
 public class Chm62edtAreaLegalTextDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtAreaLegalTextDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_AREA_LEGAL_TEXT");
+        this.setTableName("chm62edt_area_legal_text");
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
                         new IntegerColumnSpec("ID_GEOSCOPE", "getIdGeoscope",
@@ -53,13 +53,13 @@ public class Chm62edtAreaLegalTextDomain extends AbstractDomain {
                 "setInputDate", DEFAULT_TO_NULL));
 
         OuterJoinTable legalAreaEvent = new OuterJoinTable(
-                "CHM62EDT_LEGAL_AREA_EVENT", "ID_LEGAL_AREA_EVENT",
+                "chm62edt_legal_area_event", "ID_LEGAL_AREA_EVENT",
                 "ID_LEGAL_AREA_EVENT");
 
         legalAreaEvent.addJoinColumn(new StringJoinColumn("NAME", "setName"));
         this.addJoinTable(legalAreaEvent);
 
-        JoinTable country = new JoinTable("CHM62EDT_COUNTRY", "ID_GEOSCOPE",
+        JoinTable country = new JoinTable("chm62edt_country", "ID_GEOSCOPE",
                 "ID_GEOSCOPE");
 
         country.addJoinColumn(

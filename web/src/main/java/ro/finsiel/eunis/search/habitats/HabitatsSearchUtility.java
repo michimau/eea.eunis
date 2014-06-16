@@ -201,7 +201,7 @@ public class HabitatsSearchUtility {
         List results = new Vector();
 
         try {
-            results = new Chm62edtClassCodeDomain().findCustom("SELECT * FROM CHM62EDT_CLASS_CODE WHERE LEGAL = 1 GROUP BY NAME");
+            results = new Chm62edtClassCodeDomain().findCustom("SELECT * FROM chm62edt_class_code WHERE LEGAL = 1 GROUP BY NAME");
             if (null == results) {
                 results = new Vector();
             }
@@ -215,9 +215,9 @@ public class HabitatsSearchUtility {
 
 
     /**
-     * Return the name of the language by its ID from the CHM62EDT_LANGUAGE.
+     * Return the name of the language by its ID from the chm62edt_language.
      * @param id ID of the language.
-     * @return String with the name of the language in english (NAME_EN from CHM62EDT_LANGUAGE).
+     * @return String with the name of the language in english (NAME_EN from chm62edt_language).
      */
     public static String GetLanguage(Integer id) {
         String lang = "";
@@ -230,7 +230,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find all the clasifications available in database (from CHM62EDT_CLASS_CODE table).
+     * Find all the clasifications available in database (from chm62edt_class_code table).
      * @return An non-null list with all the classif objects (Chm62edtClassCodePersist objects)
      */
     public static List getDatabaseClassifications() {
@@ -250,7 +250,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find all the clasifications available in database (from CHM62EDT_CLASS_CODE table).
+     * Find all the clasifications available in database (from chm62edt_class_code table).
      * @param id ID_CLASS_CODE
      * @return An non-null list with all the classif objects (Chm62edtClassCodePersist objects)
      */
@@ -269,7 +269,7 @@ public class HabitatsSearchUtility {
 
     /**
      * Try to find some examples of codes from a given classification.
-     * @param idClassification The classification code to retrieve (CHM62EDT_CLASS_CODE.ID_CLASS_CODE). If idClassCode = -1
+     * @param idClassification The classification code to retrieve (chm62edt_class_code.ID_CLASS_CODE). If idClassCode = -1
      * it means that the search is done in current classification.
      * @param codePartSQL - Code parameter (for example CODE LIKE 'B2%')
      * @param database Possible values are: CodeDomain.SEARCH_BOTH/CodeDomain.SEARCH_EUNIS/CodeDomain.SEARCH_ANNEX).
@@ -283,8 +283,8 @@ public class HabitatsSearchUtility {
 
         if (-1 == idClassification) // Current classification
         {
-            sql = "SELECT * FROM CHM62EDT_HABITAT WHERE (1 = 1) ";
-            sql += " AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+            sql = "SELECT * FROM chm62edt_habitat WHERE (1 = 1) ";
+            sql += " AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
             if (database != CodeDomain.SEARCH_BOTH.intValue()) {
                 if (database == CodeDomain.SEARCH_EUNIS.intValue()) {
                     sql += " AND EUNIS_HABITAT_CODE " + codePartSQL;
@@ -318,8 +318,8 @@ public class HabitatsSearchUtility {
         } else {
             sql = "SELECT A.ID_HABITAT,A.ID_NATURE_OBJECT,A.SCIENTIFIC_NAME,A.DESCRIPTION,A.CODE_2000, "
                     + "A.CODE_ANNEX1,A.PRIORITY,A.EUNIS_HABITAT_CODE,A.CLASS_REF,A.CODE_PART_2,A.LEVEL,B.CODE "
-                    + " FROM CHM62EDT_HABITAT AS A ";
-            sql += " INNER JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE (1 = 1) ";
+                    + " FROM chm62edt_habitat AS A ";
+            sql += " INNER JOIN chm62edt_habitat_class_code AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE (1 = 1) ";
             sql += " AND IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
             if (database != CodeDomain.SEARCH_BOTH.intValue()) {
                 if (database == CodeDomain.SEARCH_EUNIS.intValue()) {
@@ -591,7 +591,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find the name of a classification (from CHM62EDT_CLASS_CODE) giving its id (ID_CLASS_CODE).
+     * Find the name of a classification (from chm62edt_class_code) giving its id (ID_CLASS_CODE).
      * @param idClassification ID_CLASS_CODE.
      * @return Associated name (or "" if not found).
      */
@@ -613,7 +613,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find a habitat's name by giving its code (EUNIS_HABITAT_CODE from CHM62EDT_HABITAT).
+     * Find a habitat's name by giving its code (EUNIS_HABITAT_CODE from chm62edt_habitat).
      * @param eunisCode EUNIS_HABITAT_CODE.
      * @return Scientific name (or "" if not found).
      */
@@ -635,7 +635,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find a habitat's name by giving its id (ID_HABITAT from CHM62EDT_HABITAT).
+     * Find a habitat's name by giving its id (ID_HABITAT from chm62edt_habitat).
      * @param habId ID_HABITAT.
      * @return Scientific name (or "" if not found).
      */
@@ -674,7 +674,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * This method finds the code of the current classification from <code>CHM62EDT_CLASS_CODE</code> table.
+     * This method finds the code of the current classification from <code>chm62edt_class_code</code> table.
      * It takes all the rows that have <code>CURRENT_CLASSIFICATION = 1</code> and does a match on the name of the
      * classification so it contains the <code>classification</code> string parameter. For example if you want to find
      * the current classification for EUNIS database you would write:<br />
@@ -709,7 +709,7 @@ public class HabitatsSearchUtility {
     }
 
     /**
-     * Find a habitat from CHM62EDT_HABITAT table after its ID.
+     * Find a habitat from chm62edt_habitat table after its ID.
      * @param idHabitat ID of the habitat.
      * @return English name or empty string if exception ocurred or habitat not found.
      */

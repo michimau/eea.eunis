@@ -56,7 +56,7 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setTableAlias("E");
 
         /** Table's columns specifications */
@@ -86,28 +86,28 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         JoinTable groupSpecies = null;
 
         // table join: "TABLE_NAME ALIAS", "MAIN_TABLE_COLUMN", "SECOND_TABLE_COLUMN");
-        reports = new JoinTable("CHM62EDT_REPORTS A", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        reports = new JoinTable("chm62edt_reports A", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
         reports.addJoinColumn(new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObjReports", "setIdNatureObjectReports"));
         reports.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportTypeRep", "setIdReportTypeRep"));
         reports.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDcRep", "setIdDcRep"));
         this.addJoinTable(reports);
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+        reportType = new JoinTable("chm62edt_report_type B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
         reportType.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType", "setIdReportType"));
         reports.addJoinTable(reportType);
 
-        legalStatus = new JoinTable("CHM62EDT_LEGAL_STATUS C", "ID_LOOKUP", "ID_LEGAL_STATUS");
+        legalStatus = new JoinTable("chm62edt_legal_status C", "ID_LOOKUP", "ID_LEGAL_STATUS");
         legalStatus.addJoinColumn(new StringJoinColumn("ANNEX", "annex", "setAnnex"));
         legalStatus.addJoinColumn(new StringJoinColumn("COMMENT", "comment", "setComment"));
         reportType.addJoinTable(legalStatus);
 
-        dcIndex = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        dcIndex = new JoinTable("dc_index D", "ID_DC", "ID_DC");
         dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "Alternative", "setAlternative"));
         dcIndex.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
         dcIndex.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
         reports.addJoinTable(dcIndex);
 
-        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies = new JoinTable("chm62edt_group_species F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         this.addJoinTable(groupSpecies);
     }
@@ -224,12 +224,12 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(*) FROM CHM62EDT_SPECIES AS E "
-                + "INNER JOIN  CHM62EDT_REPORTS AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                + "INNER JOIN CHM62EDT_LEGAL_STATUS AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
-                + "INNER JOIN DC_INDEX AS D ON A.ID_DC = D.ID_DC "
-                + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
+                "SELECT COUNT(*) FROM chm62edt_species AS E "
+                + "INNER JOIN  chm62edt_reports AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
+                + "INNER JOIN chm62edt_report_type AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN chm62edt_legal_status AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
+                + "INNER JOIN dc_index AS D ON A.ID_DC = D.ID_DC "
+                + "INNER JOIN chm62edt_group_species AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
                 + "WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());

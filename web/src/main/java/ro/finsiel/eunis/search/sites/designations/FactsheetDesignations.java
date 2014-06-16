@@ -34,8 +34,8 @@ public class FactsheetDesignations {
         Chm62edtDesignationsPersist result = null;
 
         try {
-            sql = "TRIM(CHM62EDT_DESIGNATIONS.ID_DESIGNATION)=TRIM('" + idDesign + "') "
-                    + "AND TRIM(CHM62EDT_DESIGNATIONS.ID_GEOSCOPE)=TRIM('" + geoscope + "')";
+            sql = "TRIM(chm62edt_designations.ID_DESIGNATION)=TRIM('" + idDesign + "') "
+                    + "AND TRIM(chm62edt_designations.ID_GEOSCOPE)=TRIM('" + geoscope + "')";
 
             List list = new Chm62edtDesignationsDomain().findWhere(sql);
 

@@ -26,7 +26,7 @@ public class SiteHabitatsDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_NATURE_OBJECT_REPORT_TYPE");
+    this.setTableName("chm62edt_nature_object_report_type");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -41,16 +41,16 @@ public class SiteHabitatsDomain extends AbstractDomain {
     this.addColumnSpec(new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("ID_GEOSCOPE", "getIdGeoscope", "setIdGeoscope", DEFAULT_TO_NULL));
 
-    JoinTable sites = new JoinTable("CHM62EDT_SITES", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable sites = new JoinTable("chm62edt_sites", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(sites);
 
-    JoinTable habitat = new JoinTable("CHM62EDT_HABITAT", "ID_NATURE_OBJECT_LINK", "ID_NATURE_OBJECT");
+    JoinTable habitat = new JoinTable("chm62edt_habitat", "ID_NATURE_OBJECT_LINK", "ID_NATURE_OBJECT");
     habitat.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setHabitatDescription"));
     habitat.addJoinColumn(new StringJoinColumn("ID_HABITAT", "setIdHabitat"));
     habitat.addJoinColumn(new StringJoinColumn("CODE_2000", "setCode2000"));
     this.addJoinTable(habitat);
 
-    JoinTable att = new JoinTable("CHM62EDT_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
+    JoinTable att = new JoinTable("chm62edt_report_attributes", "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
     this.addJoinTable(att);
 
   }

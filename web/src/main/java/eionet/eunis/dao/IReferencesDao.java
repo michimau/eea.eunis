@@ -30,14 +30,14 @@ public interface IReferencesDao {
     CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir, String likeSearch);
 
     /**
-     * Returns all attributes from DC_ATTRIBUTES table for given ID_DC
+     * Returns all attributes from dc_attributes table for given ID_DC
      * @param idDc
      * @return List<AttributeDto>
      */
     List<AttributeDto> getDcAttributes(String idDc);
 
     /**
-     * Returns content of table DC_INDEX
+     * Returns content of table dc_index
      * @param id_dc
      * @return DcIndexDTO
      */

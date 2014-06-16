@@ -69,7 +69,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL = "DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             if (NatureObject.equalsIgnoreCase("Species")) {
                 SQL += " AND ID_NATURE_OBJECT_SPECIES > 0";
@@ -110,7 +110,7 @@ public class CombinedSearch {
             ps = con.createStatement();
             StringTokenizer tokenizer = new StringTokenizer(IdNatureObject, ",");
 
-            SQL.append("ALTER TABLE EUNIS_COMBINED_SEARCH_RESULTS DISABLE KEYS");
+            SQL.append("ALTER TABLE eunis_combined_search_results DISABLE KEYS");
             ps.execute(SQL.toString());
 
             int poscount = tokenizer.countTokens();
@@ -122,7 +122,7 @@ public class CombinedSearch {
 
             SQL = new StringBuffer();
             SQL.ensureCapacity(65000);
-            SQL.append("INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS");
+            SQL.append("INSERT INTO eunis_combined_search_results");
             SQL.append(" (ID_SESSION,ID_NATURE_OBJECT,");
             SQL.append(
                     " ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
@@ -160,7 +160,7 @@ public class CombinedSearch {
 
                     SQL = new StringBuffer();
                     SQL.ensureCapacity(65000);
-                    SQL.append("INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS");
+                    SQL.append("INSERT INTO eunis_combined_search_results");
                     SQL.append(" (ID_SESSION,ID_NATURE_OBJECT,");
                     SQL.append(
                             " ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
@@ -196,7 +196,7 @@ public class CombinedSearch {
             }
 
             SQL = new StringBuffer();
-            SQL.append("ALTER TABLE EUNIS_COMBINED_SEARCH_RESULTS ENABLE KEYS");
+            SQL.append("ALTER TABLE eunis_combined_search_results ENABLE KEYS");
             ps.execute(SQL.toString());
             ps.close();
 
@@ -223,7 +223,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH";
+            SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='" + Criteria + "'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -254,7 +254,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET ATTRIBUTE='" + Attribute + "'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -285,7 +285,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET OPERATOR='" + Operator + "'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -295,7 +295,7 @@ public class CombinedSearch {
             ps.execute();
 
             if (Operator.equalsIgnoreCase("Between")) {
-                SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+                SQL = "UPDATE eunis_combined_search_criteria";
                 SQL += " SET LAST_VALUE='enter value here...'";
                 SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
                 SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -305,7 +305,7 @@ public class CombinedSearch {
                 ps.execute();
 
             } else {
-                SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+                SQL = "UPDATE eunis_combined_search_criteria";
                 SQL += " SET LAST_VALUE=''";
                 SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
                 SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -338,7 +338,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET FIRST_VALUE='" + FirstValue + "'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -369,7 +369,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET LAST_VALUE='" + LastValue + "'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -401,7 +401,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "SELECT * FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
             SQL += " AND ID_NODE = '" + IdNode + "'";
@@ -488,7 +488,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "SELECT * FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
             SQL += " AND ID_NODE = '" + IdNode + "'";
@@ -534,7 +534,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
             SQL += " AND ID_NODE LIKE '" + IdNode + "%'";
@@ -542,7 +542,7 @@ public class CombinedSearch {
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
             SQL += " AND ID_NODE LIKE '" + IdNode + "%'";
@@ -580,14 +580,14 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
 
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
 
@@ -624,14 +624,14 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
 
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
 
@@ -674,13 +674,13 @@ public class CombinedSearch {
 
             // obtin ultimul nod child al nodului curent
             if (IdNode.length() == 1) {
-                SQL = "SELECT * FROM EUNIS_COMBINED_SEARCH";
+                SQL = "SELECT * FROM eunis_combined_search";
                 SQL += " WHERE ID_SESSION = '" + IdSession + "'";
                 SQL += " AND NATURE_OBJECT = '" + NatureObject + "'";
                 SQL += " AND LENGTH(ID_NODE) = " + IdNode.length();
                 SQL += " ORDER BY ID_NODE DESC";
             } else {
-                SQL = "SELECT * FROM EUNIS_COMBINED_SEARCH";
+                SQL = "SELECT * FROM eunis_combined_search";
                 SQL += " WHERE ID_NODE LIKE '"
                         + IdNode.substring(0, IdNode.length() - 1) + "%'";
                 SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -720,7 +720,7 @@ public class CombinedSearch {
                             + LastNumber.toString();
                 }
 
-                SQL = "INSERT INTO EUNIS_COMBINED_SEARCH";
+                SQL = "INSERT INTO eunis_combined_search";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
                 SQL += " VALUES(";
                 SQL += "'" + IdSession + "',";
@@ -731,7 +731,7 @@ public class CombinedSearch {
                 ps = con.prepareStatement(SQL);
                 ps.execute();
 
-                SQL = "INSERT INTO EUNIS_COMBINED_SEARCH_CRITERIA";
+                SQL = "INSERT INTO eunis_combined_search_criteria";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
                 SQL += " VALUES(";
                 SQL += "'" + IdSession + "',";
@@ -771,7 +771,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH";
+            SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='All'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -780,7 +780,7 @@ public class CombinedSearch {
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "INSERT INTO EUNIS_COMBINED_SEARCH";
+            SQL = "INSERT INTO eunis_combined_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
             SQL += " VALUES(";
             SQL += "'" + IdSession + "',";
@@ -791,7 +791,7 @@ public class CombinedSearch {
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "UPDATE EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET ID_NODE='" + IdNode + ".1'";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
             SQL += " AND ID_SESSION = '" + IdSession + "'";
@@ -823,21 +823,21 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
             SQL += " AND NATURE_OBJECT='" + NatureObject + "'";
 
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
             SQL += " AND NATURE_OBJECT='" + NatureObject + "'";
 
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "INSERT INTO EUNIS_COMBINED_SEARCH";
+            SQL = "INSERT INTO eunis_combined_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
             SQL += " VALUES(";
             SQL += "'" + IdSession + "',";
@@ -848,7 +848,7 @@ public class CombinedSearch {
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "INSERT INTO EUNIS_COMBINED_SEARCH";
+            SQL = "INSERT INTO eunis_combined_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
             SQL += " VALUES(";
             SQL += "'" + IdSession + "',";
@@ -859,7 +859,7 @@ public class CombinedSearch {
             ps = con.prepareStatement(SQL);
             ps.execute();
 
-            SQL = "INSERT INTO EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "INSERT INTO eunis_combined_search_criteria";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
             SQL += " VALUES(";
             SQL += "'" + IdSession + "',";
@@ -908,24 +908,24 @@ public class CombinedSearch {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "SELECT ";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH`.`ID_NODE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH`.`NODE_TYPE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA`.`ATTRIBUTE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA`.`OPERATOR`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA`.`FIRST_VALUE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA`.`LAST_VALUE` ";
+            SQLModelStart += "`eunis_combined_search`.`ID_NODE`,";
+            SQLModelStart += "`eunis_combined_search`.`NODE_TYPE`,";
+            SQLModelStart += "`eunis_combined_search_criteria`.`ATTRIBUTE`,";
+            SQLModelStart += "`eunis_combined_search_criteria`.`OPERATOR`,";
+            SQLModelStart += "`eunis_combined_search_criteria`.`FIRST_VALUE`,";
+            SQLModelStart += "`eunis_combined_search_criteria`.`LAST_VALUE` ";
             SQLModelStart += "FROM ";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH` ";
-            SQLModelStart += "LEFT OUTER JOIN `EUNIS_COMBINED_SEARCH_CRITERIA` ON (`EUNIS_COMBINED_SEARCH`.`ID_SESSION` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_SESSION`) AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`NATURE_OBJECT`) AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='"
+            SQLModelStart += "`eunis_combined_search` ";
+            SQLModelStart += "LEFT OUTER JOIN `eunis_combined_search_criteria` ON (`eunis_combined_search`.`ID_SESSION` = `eunis_combined_search_criteria`.`ID_SESSION`) AND (`eunis_combined_search`.`NATURE_OBJECT` = `eunis_combined_search_criteria`.`NATURE_OBJECT`) AND (`eunis_combined_search`.`ID_NODE` = `eunis_combined_search_criteria`.`ID_NODE`) ";
+            SQLModelStart += "WHERE (`eunis_combined_search`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='"
+            SQLModelStart += "AND (`eunis_combined_search`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
-            SQLModelEnd += "`EUNIS_COMBINED_SEARCH`.`ID_NODE` ";
+            SQLModelEnd += "`eunis_combined_search`.`ID_NODE` ";
 
             SQL = SQLModelStart;
-            SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE`='0') ";
+            SQL += "AND (`eunis_combined_search`.`ID_NODE`='0') ";
             SQL += SQLModelEnd;
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -935,8 +935,8 @@ public class CombinedSearch {
             rs.close();
 
             SQL = SQLModelStart;
-            SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=1) ";
-            SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE`<>'0') ";
+            SQL += "AND (LENGTH(`eunis_combined_search`.`ID_NODE`)=1) ";
+            SQL += "AND (`eunis_combined_search`.`ID_NODE`<>'0') ";
             SQL += SQLModelEnd;
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -949,8 +949,8 @@ public class CombinedSearch {
                     where += "#" + IdNode + "#";
                 } else {
                     SQL = SQLModelStart;
-                    SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                    SQL += "AND (LENGTH(`eunis_combined_search`.`ID_NODE`)=3) ";
+                    SQL += "AND (`eunis_combined_search`.`ID_NODE` LIKE '"
                             + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
@@ -965,8 +965,8 @@ public class CombinedSearch {
                                 where += "#" + IdNode + "#";
                             } else {
                                 SQL = SQLModelStart;
-                                SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                                SQL += "AND (LENGTH(`eunis_combined_search`.`ID_NODE`)=5) ";
+                                SQL += "AND (`eunis_combined_search`.`ID_NODE` LIKE '"
                                         + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
@@ -981,8 +981,8 @@ public class CombinedSearch {
                                             where += "#" + IdNode + "#";
                                         } else {
                                             SQL = SQLModelStart;
-                                            SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                                            SQL += "AND (LENGTH(`eunis_combined_search`.`ID_NODE`)=7) ";
+                                            SQL += "AND (`eunis_combined_search`.`ID_NODE` LIKE '"
                                                     + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
@@ -1097,33 +1097,33 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQLModelStart = "DELETE FROM EUNIS_COMBINED_SEARCH_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='"
+            SQLModelStart = "DELETE FROM eunis_combined_search_temp";
+            SQLModelStart += " WHERE (`eunis_combined_search_temp`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+            SQLModelStart += " AND (`eunis_combined_search_temp`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
-            SQLModelStart = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='"
+            SQLModelStart = "DELETE FROM eunis_combined_search_criteria_temp";
+            SQLModelStart += " WHERE (`eunis_combined_search_criteria_temp`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='"
+            SQLModelStart += " AND (`eunis_combined_search_criteria_temp`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
             // System.out.println("delete done");
 
-            SQLModelStart = "SELECT * FROM EUNIS_COMBINED_SEARCH";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='"
+            SQLModelStart = "SELECT * FROM eunis_combined_search";
+            SQLModelStart += " WHERE (`eunis_combined_search`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='"
+            SQLModelStart += " AND (`eunis_combined_search`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
             while (rs.next()) {
-                SQL = "INSERT INTO EUNIS_COMBINED_SEARCH_TEMP";
+                SQL = "INSERT INTO eunis_combined_search_temp";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
                 SQL += " VALUES(";
                 SQL += "'" + rs.getString("ID_SESSION") + "',";
@@ -1136,15 +1136,15 @@ public class CombinedSearch {
             }
             rs.close();
 
-            SQLModelStart = "SELECT * FROM EUNIS_COMBINED_SEARCH_CRITERIA";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_SESSION`='"
+            SQLModelStart = "SELECT * FROM eunis_combined_search_criteria";
+            SQLModelStart += " WHERE (`eunis_combined_search_criteria`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA`.`NATURE_OBJECT`='"
+            SQLModelStart += " AND (`eunis_combined_search_criteria`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
             while (rs.next()) {
-                SQL = "INSERT INTO EUNIS_COMBINED_SEARCH_CRITERIA_TEMP";
+                SQL = "INSERT INTO eunis_combined_search_criteria_temp";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
                 SQL += " VALUES(";
                 SQL += "'" + rs.getString("ID_SESSION") + "',";
@@ -1163,24 +1163,24 @@ public class CombinedSearch {
             // System.out.println("populate done");
 
             SQLModelStart = "SELECT ";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_TEMP`.`NODE_TYPE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ATTRIBUTE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`OPERATOR`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`FIRST_VALUE`,";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`LAST_VALUE` ";
+            SQLModelStart += "`eunis_combined_search_temp`.`ID_NODE`,";
+            SQLModelStart += "`eunis_combined_search_temp`.`NODE_TYPE`,";
+            SQLModelStart += "`eunis_combined_search_criteria_temp`.`ATTRIBUTE`,";
+            SQLModelStart += "`eunis_combined_search_criteria_temp`.`OPERATOR`,";
+            SQLModelStart += "`eunis_combined_search_criteria_temp`.`FIRST_VALUE`,";
+            SQLModelStart += "`eunis_combined_search_criteria_temp`.`LAST_VALUE` ";
             SQLModelStart += "FROM ";
-            SQLModelStart += "`EUNIS_COMBINED_SEARCH_TEMP` ";
-            SQLModelStart += "LEFT OUTER JOIN `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP` ON (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`) AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`) AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='"
+            SQLModelStart += "`eunis_combined_search_temp` ";
+            SQLModelStart += "LEFT OUTER JOIN `eunis_combined_search_criteria_temp` ON (`eunis_combined_search_temp`.`ID_SESSION` = `eunis_combined_search_criteria_temp`.`ID_SESSION`) AND (`eunis_combined_search_temp`.`NATURE_OBJECT` = `eunis_combined_search_criteria_temp`.`NATURE_OBJECT`) AND (`eunis_combined_search_temp`.`ID_NODE` = `eunis_combined_search_criteria_temp`.`ID_NODE`) ";
+            SQLModelStart += "WHERE (`eunis_combined_search_temp`.`ID_SESSION`='"
                     + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+            SQLModelStart += "AND (`eunis_combined_search_temp`.`NATURE_OBJECT`='"
                     + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
-            SQLModelEnd += "`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` ";
+            SQLModelEnd += "`eunis_combined_search_temp`.`ID_NODE` ";
 
             SQL = SQLModelStart;
-            SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`='0') ";
+            SQL += "AND (`eunis_combined_search_temp`.`ID_NODE`='0') ";
             SQL += SQLModelEnd;
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -1190,8 +1190,8 @@ public class CombinedSearch {
             rs.close();
 
             SQL = SQLModelStart;
-            SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=1) ";
-            SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`<>'0') ";
+            SQL += "AND (LENGTH(`eunis_combined_search_temp`.`ID_NODE`)=1) ";
+            SQL += "AND (`eunis_combined_search_temp`.`ID_NODE`<>'0') ";
             SQL += SQLModelEnd;
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
@@ -1208,8 +1208,8 @@ public class CombinedSearch {
                     // System.out.println("snode = " + snode);
                 } else {
                     SQL = SQLModelStart;
-                    SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                    SQL += "AND (LENGTH(`eunis_combined_search_temp`.`ID_NODE`)=3) ";
+                    SQL += "AND (`eunis_combined_search_temp`.`ID_NODE` LIKE '"
                             + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
@@ -1229,8 +1229,8 @@ public class CombinedSearch {
                                 // System.out.println("snodea = " + snodea);
                             } else {
                                 SQL = SQLModelStart;
-                                SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                SQL += "AND (LENGTH(`eunis_combined_search_temp`.`ID_NODE`)=5) ";
+                                SQL += "AND (`eunis_combined_search_temp`.`ID_NODE` LIKE '"
                                         + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
@@ -1250,8 +1250,8 @@ public class CombinedSearch {
                                             // System.out.println("snodeb = " + snodeb);
                                         } else {
                                             SQL = SQLModelStart;
-                                            SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                            SQL += "AND (LENGTH(`eunis_combined_search_temp`.`ID_NODE`)=7) ";
+                                            SQL += "AND (`eunis_combined_search_temp`.`ID_NODE` LIKE '"
                                                     + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
@@ -1290,8 +1290,7 @@ public class CombinedSearch {
                                             rsc.close();
                                             // System.out.println("snodesc = " + snodesc);
                                             // create filter from this level criterias
-                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
-                                                    + NatureObject.toUpperCase();
+                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM chm62edt_" + NatureObject.toLowerCase();
                                             SQLnodes += " WHERE (" + snodesc
                                                     + ")";
                                             // System.out.println("SQLnodes = " + SQLnodes);
@@ -1320,8 +1319,7 @@ public class CombinedSearch {
                                 rsb.close();
                                 // System.out.println("snodesb = " + snodesb);
                                 // create filter from this level criterias
-                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
-                                        + NatureObject.toUpperCase();
+                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM chm62edt_" + NatureObject.toLowerCase();
                                 SQLnodes += " WHERE (" + snodesb + ")";
                                 // System.out.println("SQLnodes = " + SQLnodes);
                                 snodea = "ID_NATURE_OBJECT IN ("
@@ -1347,8 +1345,7 @@ public class CombinedSearch {
                     rsa.close();
                     // System.out.println("snodesa = " + snodesa);
                     // create filter from this level criterias
-                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
-                            + NatureObject.toUpperCase();
+                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM chm62edt_" + NatureObject.toLowerCase();
                     SQLnodes += " WHERE (" + snodesa + ")";
                     // System.out.println("SQLnodes = " + SQLnodes);
                     // System.out.println("ce se executa ca sa obtin snode = " + ExecuteFilterSQL(SQLnodes,""));
@@ -1545,7 +1542,7 @@ public class CombinedSearch {
             if (NatureObject.equalsIgnoreCase("Combination_3")) {
                 SQL = "SELECT ID_NATURE_OBJECT_COMBINATION_3";
             }
-            SQL += " FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL += " FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
             if (NatureObject.equalsIgnoreCase("Species")) {
                 SQL += " AND ID_NATURE_OBJECT_SPECIES>0";
@@ -1590,7 +1587,7 @@ public class CombinedSearch {
         return result;
     }
 
-    // we create a list from an already populated EUNIS_COMBINED_SEARCH column
+    // we create a list from an already populated eunis_combined_search column
     public String CreateSpecialList(String IdSession, int ColumnIndex) {
         String SQL = "";
         String result = "";
@@ -1611,7 +1608,7 @@ public class CombinedSearch {
             if (ColumnIndex == 2) {
                 SQL = "ID_NATURE_OBJECT_COMBINATION_2";
             }
-            SQL += " FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL += " FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
             if (ColumnIndex == 1) {
                 SQL += " AND ID_NATURE_OBJECT_COMBINATION_1>0";
@@ -1654,27 +1651,27 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL = " DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = " DELETE FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_TEMP";
+            SQL = " DELETE FROM eunis_combined_search_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = " DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP";
+            SQL = " DELETE FROM eunis_combined_search_criteria_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
@@ -1701,23 +1698,23 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL = " DELETE FROM eunis_combined_search_results";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH";
+            SQL = " DELETE FROM eunis_combined_search";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_TEMP";
+            SQL = " DELETE FROM eunis_combined_search_temp";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = " DELETE FROM eunis_combined_search_criteria";
             ps = con.createStatement();
             ps.execute(SQL);
 
-            SQL = " DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP";
+            SQL = " DELETE FROM eunis_combined_search_criteria_temp";
             ps = con.createStatement();
             ps.execute(SQL);
 
@@ -1744,7 +1741,7 @@ public class CombinedSearch {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH";
+            SQL = "SELECT COUNT(*) FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
 
             ps = con.prepareStatement(SQL);
@@ -1758,7 +1755,7 @@ public class CombinedSearch {
             }
             rs.close();
 
-            SQL = "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA";
+            SQL = "SELECT COUNT(*) FROM eunis_combined_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
 
             ps = con.prepareStatement(SQL);
@@ -1772,7 +1769,7 @@ public class CombinedSearch {
             }
             rs.close();
 
-            SQL = "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS";
+            SQL = "SELECT COUNT(*) FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
 
             ps = con.prepareStatement(SQL);

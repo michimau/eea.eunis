@@ -520,19 +520,19 @@
 
               if(!skip.equalsIgnoreCase(NatureObject)) {
                 SQL="SELECT ";
-                SQL+="EUNIS_COMBINED_SEARCH.ID_NODE,";
-                SQL+="EUNIS_COMBINED_SEARCH.NODE_TYPE,";
-                SQL+="EUNIS_COMBINED_SEARCH_CRITERIA.ATTRIBUTE,";
-                SQL+="EUNIS_COMBINED_SEARCH_CRITERIA.OPERATOR,";
-                SQL+="EUNIS_COMBINED_SEARCH_CRITERIA.FIRST_VALUE,";
-                SQL+="EUNIS_COMBINED_SEARCH_CRITERIA.LAST_VALUE ";
+                SQL+="eunis_combined_search.ID_NODE,";
+                SQL+="eunis_combined_search.NODE_TYPE,";
+                SQL+="eunis_combined_search_criteria.ATTRIBUTE,";
+                SQL+="eunis_combined_search_criteria.OPERATOR,";
+                SQL+="eunis_combined_search_criteria.FIRST_VALUE,";
+                SQL+="eunis_combined_search_criteria.LAST_VALUE ";
                 SQL+="FROM ";
-                SQL+="EUNIS_COMBINED_SEARCH ";
-                SQL+="LEFT OUTER JOIN EUNIS_COMBINED_SEARCH_CRITERIA ON (EUNIS_COMBINED_SEARCH.ID_SESSION = EUNIS_COMBINED_SEARCH_CRITERIA.ID_SESSION) AND (EUNIS_COMBINED_SEARCH.NATURE_OBJECT = EUNIS_COMBINED_SEARCH_CRITERIA.NATURE_OBJECT) AND (EUNIS_COMBINED_SEARCH.ID_NODE = EUNIS_COMBINED_SEARCH_CRITERIA.ID_NODE) ";
-                SQL+="WHERE (EUNIS_COMBINED_SEARCH.ID_SESSION='"+IdSession+"') ";
-                SQL+="AND (EUNIS_COMBINED_SEARCH.NATURE_OBJECT='"+NatureObject+"') ";
+                SQL+="eunis_combined_search ";
+                SQL+="LEFT OUTER JOIN eunis_combined_search_criteria ON (eunis_combined_search.ID_SESSION = eunis_combined_search_criteria.ID_SESSION) AND (eunis_combined_search.NATURE_OBJECT = eunis_combined_search_criteria.NATURE_OBJECT) AND (eunis_combined_search.ID_NODE = eunis_combined_search_criteria.ID_NODE) ";
+                SQL+="WHERE (eunis_combined_search.ID_SESSION='"+IdSession+"') ";
+                SQL+="AND (eunis_combined_search.NATURE_OBJECT='"+NatureObject+"') ";
                 SQL+="ORDER BY ";
-                SQL+="EUNIS_COMBINED_SEARCH.ID_NODE ";
+                SQL+="eunis_combined_search.ID_NODE ";
 
                 ps = con.prepareStatement(SQL);
                 rs = ps.executeQuery();
@@ -1032,13 +1032,13 @@
                   tsas.DeleteResults(IdSession,NatureObject);
 
                   if(NatureObject.equalsIgnoreCase("Species")) {
-                    str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ("+str+")";
+                    str="SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE ("+str+")";
                   }
                   if(NatureObject.equalsIgnoreCase("Habitat")) {
-                    str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT WHERE ("+str+")";
+                    str="SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE ("+str+")";
                   }
                   if(NatureObject.equalsIgnoreCase("Sites")) {
-                    str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ("+str+")";
+                    str="SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ("+str+")";
                   }
                   String query = tsas.ExecuteFilterSQL(str,"");
                   out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
@@ -1050,7 +1050,7 @@
                     ps_exec=con.createStatement();
 
                     //delete previous results
-                    SQL="DELETE FROM EUNIS_COMBINED_SEARCH_RESULTS";
+                    SQL="DELETE FROM eunis_combined_search_results";
                     SQL+=" WHERE ID_SESSION = '"+IdSession+"'";
                     SQL+=" AND ID_NATURE_OBJECT > 0";
 
@@ -1088,8 +1088,8 @@
                       System.out.println("An unusual combination was entered");
                       //now we deal with Species-Habitats and inser the final results in ID_NATURE_OBJECT
                       String speciesHabitatsSQL="";
-                      speciesHabitatsSQL=" SELECT DISTINCT CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT";
-                      speciesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      speciesHabitatsSQL=" SELECT DISTINCT chm62edt_nature_object_report_type.ID_NATURE_OBJECT";
+                      speciesHabitatsSQL+=" FROM chm62edt_nature_object_report_type";
                       speciesHabitatsSQL+=" WHERE ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                       speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
@@ -1099,7 +1099,7 @@
                         ps = con.prepareStatement(speciesHabitatsSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)";
                           SQL+=" VALUES(";
@@ -1122,7 +1122,7 @@
                       // now we deal with Habitats - Sites
                       String habitatsSitesSQL="";
                       habitatsSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                      habitatsSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      habitatsSitesSQL+=" FROM chm62edt_nature_object_report_type";
                       habitatsSitesSQL+=" WHERE 1=1";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1133,7 +1133,7 @@
                         ps = con.prepareStatement(habitatsSitesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)";
                           SQL+=" VALUES(";
@@ -1157,7 +1157,7 @@
                       // now we deal with Sites - Species
                       String speciesSitesSQL="";
                       speciesSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                      speciesSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      speciesSitesSQL+=" FROM chm62edt_nature_object_report_type";
                       speciesSitesSQL+=" WHERE 1=1";
                       speciesSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       speciesSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
@@ -1168,7 +1168,7 @@
                         ps = con.prepareStatement(speciesSitesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)";
                           SQL+=" VALUES(";
@@ -1191,61 +1191,61 @@
 //        System.out.println("SearchType = " + SearchType);
                       String combinedSQL="";
                       if(SearchType.equalsIgnoreCase("SpeciesHabitatsHabitatsSites")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SPECIES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_1`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_species`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_species`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
                       }
                       if(SearchType.equalsIgnoreCase("SpeciesSitesSitesHabitats")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SPECIES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_species`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_species`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
                       }
                       if(SearchType.equalsIgnoreCase("SpeciesHabitatsHabitatsSitesSitesSpecies")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SPECIES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_species`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_species`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
                       if(SearchType.equalsIgnoreCase("HabitatsSitesSitesSpecies")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_HABITAT`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_habitat`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
                       }
                       if(SearchType.equalsIgnoreCase("HabitatsSpeciesSpeciesSites")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_HABITAT`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_habitat`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
                       if(SearchType.equalsIgnoreCase("HabitatsSitesSitesSpeciesSpeciesHabitats")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_HABITAT`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_habitat`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
                       if(SearchType.equalsIgnoreCase("SitesSpeciesSpeciesHabitats")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SITES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_sites`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
                       if(SearchType.equalsIgnoreCase("SitesHabitatsHabitatsSpecies")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SITES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_2`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_sites`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
                       if(SearchType.equalsIgnoreCase("SitesSpeciesSpeciesHabitatsHabitatsSites")) {
-                        combinedSQL+=" SELECT DISTINCT `CHM62EDT_SITES`.`ID_NATURE_OBJECT`";
-                        combinedSQL+=" FROM `CHM62EDT_SITES`";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS`.`ID_NATURE_OBJECT_COMBINATION_3`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS1` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
-                        combinedSQL+=" INNER JOIN `EUNIS_COMBINED_SEARCH_RESULTS` `EUNIS_COMBINED_SEARCH_RESULTS2` ON (`CHM62EDT_SITES`.`ID_NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_RESULTS2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
+                        combinedSQL+=" SELECT DISTINCT `chm62edt_sites`.`ID_NATURE_OBJECT`";
+                        combinedSQL+=" FROM `chm62edt_sites`";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results`.`ID_NATURE_OBJECT_COMBINATION_3`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results1` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results1`.`ID_NATURE_OBJECT_COMBINATION_2`)";
+                        combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
 
                       Class.forName(SQL_DRV);
@@ -1257,7 +1257,7 @@
                         bResults=0;
                         while(rs.next()) {
                           bResults++;
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)";
                           SQL+=" VALUES(";
@@ -1309,8 +1309,8 @@
                       if(skip.equalsIgnoreCase("") || skip.equalsIgnoreCase("Sites")) {
                         String speciesHabitatsSQL="";
 
-                        speciesHabitatsSQL=" SELECT DISTINCT CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT";
-                        speciesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                        speciesHabitatsSQL=" SELECT DISTINCT chm62edt_nature_object_report_type.ID_NATURE_OBJECT";
+                        speciesHabitatsSQL+=" FROM chm62edt_nature_object_report_type";
                         speciesHabitatsSQL+=" WHERE 1=1";
                         speciesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                         speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1322,7 +1322,7 @@
                           ps = con.prepareStatement(speciesHabitatsSQL);
                           rs = ps.executeQuery();
                           while(rs.next()) {
-                            SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                            SQL="INSERT INTO eunis_combined_search_results(";
                             SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                             SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                             SQL+=" VALUES(";
@@ -1345,7 +1345,7 @@
                       if(skip.equalsIgnoreCase("") || skip.equalsIgnoreCase("Habitat")) {
                         String speciesSitesSQL="";
                         speciesSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                        speciesSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                        speciesSitesSQL+=" FROM chm62edt_nature_object_report_type";
                         speciesSitesSQL+=" WHERE 1=1";
                         speciesSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                         speciesSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
@@ -1359,7 +1359,7 @@
                           //System.out.println("Executing: "+SQL);
                           rs = ps.executeQuery();
                           while(rs.next()) {
-                            SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                            SQL="INSERT INTO eunis_combined_search_results(";
                             SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                             SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                             SQL+=" VALUES(";
@@ -1380,7 +1380,7 @@
 
                       String speciesSQL="";
                       speciesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                      speciesSQL+=" FROM CHM62EDT_SPECIES";
+                      speciesSQL+=" FROM chm62edt_species";
                       speciesSQL+=" WHERE 1=1";
                       if(skip.equalsIgnoreCase("")) {
                         speciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -1403,7 +1403,7 @@
                         bResults=0;
                         while(rs.next()) {
                           bResults++;
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                           SQL+=" VALUES(";
@@ -1453,7 +1453,7 @@
                       String habitatsSpeciesSQL="";
 
                       habitatsSpeciesSQL=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                      habitatsSpeciesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      habitatsSpeciesSQL+=" FROM chm62edt_nature_object_report_type";
                       habitatsSpeciesSQL+=" WHERE 1=1";
                       habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                       habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1465,7 +1465,7 @@
                         ps = con.prepareStatement(habitatsSpeciesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                           SQL+=" VALUES(";
@@ -1489,7 +1489,7 @@
                       System.out.println("Looking for Habitats - Skipping Species");
                       String habitatsSitesSQL="";
                       habitatsSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                      habitatsSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      habitatsSitesSQL+=" FROM chm62edt_nature_object_report_type";
                       habitatsSitesSQL+=" WHERE 1=1";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1501,7 +1501,7 @@
                         //System.out.println("Executing: "+SQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                           SQL+=" VALUES(";
@@ -1522,7 +1522,7 @@
 
                     String habitatsSQL="";
                     habitatsSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                    habitatsSQL+=" FROM CHM62EDT_HABITAT";
+                    habitatsSQL+=" FROM chm62edt_habitat";
                     habitatsSQL+=" WHERE 1=1";
                     if(skip.equalsIgnoreCase("")) {
                       habitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -1545,7 +1545,7 @@
                       bResults=0;
                       while(rs.next()) {
                         bResults++;
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1599,7 +1599,7 @@
                       String sitesSpeciesSQL="";
 
                       sitesSpeciesSQL=" SELECT DISTINCT ID_NATURE_OBJECT";
-                      sitesSpeciesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      sitesSpeciesSQL+=" FROM chm62edt_nature_object_report_type";
                       sitesSpeciesSQL+=" WHERE 1=1";
                       sitesSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       sitesSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
@@ -1611,7 +1611,7 @@
                         ps = con.prepareStatement(sitesSpeciesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                           SQL+=" VALUES(";
@@ -1635,7 +1635,7 @@
                       //System.out.println("Skiping Species");
                       String sitesHabitatsSQL="";
                       sitesHabitatsSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                      sitesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                      sitesHabitatsSQL+=" FROM chm62edt_nature_object_report_type";
                       sitesHabitatsSQL+=" WHERE 1=1";
                       sitesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       sitesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1648,7 +1648,7 @@
                         //System.out.println("Executing: "+sitesHabitatsSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
-                          SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                          SQL="INSERT INTO eunis_combined_search_results(";
                           SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                           SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)";
                           SQL+=" VALUES(";
@@ -1670,7 +1670,7 @@
 
                     String sitesSQL="";
                     sitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                    sitesSQL+=" FROM CHM62EDT_SITES";
+                    sitesSQL+=" FROM chm62edt_sites";
                     sitesSQL+=" WHERE 1=1";
                     if(skip.equalsIgnoreCase("")) {
                       sitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -1694,7 +1694,7 @@
                       bResults=0;
                       while(rs.next()) {
                         bResults++;
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1753,7 +1753,7 @@
                 tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
                 //delete previous results
-                SQL="DELETE FROM EUNIS_COMBINED_SEARCH_RESULTS";
+                SQL="DELETE FROM eunis_combined_search_results";
                 SQL+=" WHERE ID_SESSION = '"+IdSession+"'";
                 SQL+=" AND ID_NATURE_OBJECT > 0";
 
@@ -1772,8 +1772,8 @@
                 if(FirstNatureObject.equalsIgnoreCase("Species")) {
                   if(skip.equalsIgnoreCase("Sites")) {
                     String speciesHabitatsSQL="";
-                    speciesHabitatsSQL=" SELECT DISTINCT CHM62EDT_NATURE_OBJECT_GEOSCOPE.ID_NATURE_OBJECT";
-                    speciesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_GEOSCOPE";
+                    speciesHabitatsSQL=" SELECT DISTINCT chm62edt_nature_object_geoscope.ID_NATURE_OBJECT";
+                    speciesHabitatsSQL+=" FROM chm62edt_nature_object_geoscope";
                     speciesHabitatsSQL+=" WHERE 1=1";
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1784,7 +1784,7 @@
                       ps = con.prepareStatement(speciesHabitatsSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1803,8 +1803,8 @@
                       return;
                     }
 
-                    speciesHabitatsSQL=" SELECT DISTINCT CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT";
-                    speciesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    speciesHabitatsSQL=" SELECT DISTINCT chm62edt_nature_object_report_type.ID_NATURE_OBJECT";
+                    speciesHabitatsSQL+=" FROM chm62edt_nature_object_report_type";
                     speciesHabitatsSQL+=" WHERE 1=1";
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1816,7 +1816,7 @@
                       ps = con.prepareStatement(speciesHabitatsSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1839,7 +1839,7 @@
                   if(skip.equalsIgnoreCase("Habitat")) {
                     String speciesSitesSQL="";
                     speciesSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                    speciesSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    speciesSitesSQL+=" FROM chm62edt_nature_object_report_type";
                     speciesSitesSQL+=" WHERE 1=1";
                     speciesSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     speciesSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
@@ -1851,7 +1851,7 @@
                       //System.out.println("Executing: "+SQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1872,7 +1872,7 @@
 
                   String speciesSQL="";
                   speciesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                  speciesSQL+=" FROM CHM62EDT_SPECIES";
+                  speciesSQL+=" FROM chm62edt_species";
                   speciesSQL+=" WHERE 1=1";
                   if(skip.equalsIgnoreCase("Sites")) {
                     speciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -1889,7 +1889,7 @@
                     bResults=0;
                     while(rs.next()) {
                       bResults++;
-                      SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                      SQL="INSERT INTO eunis_combined_search_results(";
                       SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                       SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                       SQL+=" VALUES(";
@@ -1938,7 +1938,7 @@
                   if(skip.equalsIgnoreCase("Sites")) {
                     String habitatsSpeciesSQL="";
                     habitatsSpeciesSQL=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                    habitatsSpeciesSQL+=" FROM CHM62EDT_NATURE_OBJECT_GEOSCOPE";
+                    habitatsSpeciesSQL+=" FROM chm62edt_nature_object_geoscope";
                     habitatsSpeciesSQL+=" WHERE 1=1";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1950,7 +1950,7 @@
                       ps = con.prepareStatement(habitatsSpeciesSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -1970,7 +1970,7 @@
                     }
 
                     habitatsSpeciesSQL=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                    habitatsSpeciesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    habitatsSpeciesSQL+=" FROM chm62edt_nature_object_report_type";
                     habitatsSpeciesSQL+=" WHERE 1=1";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -1982,7 +1982,7 @@
                       ps = con.prepareStatement(habitatsSpeciesSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -2005,7 +2005,7 @@
                   if(skip.equalsIgnoreCase("Species")) {
                     String habitatsSitesSQL="";
                     habitatsSitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                    habitatsSitesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    habitatsSitesSQL+=" FROM chm62edt_nature_object_report_type";
                     habitatsSitesSQL+=" WHERE 1=1";
                     habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -2017,7 +2017,7 @@
                       //System.out.println("Executing: "+SQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -2038,7 +2038,7 @@
 
                   String habitatsSQL="";
                   habitatsSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                  habitatsSQL+=" FROM CHM62EDT_HABITAT";
+                  habitatsSQL+=" FROM chm62edt_habitat";
                   habitatsSQL+=" WHERE 1=1";
                   if(skip.equalsIgnoreCase("Sites")) {
                     habitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -2056,7 +2056,7 @@
                     bResults=0;
                     while(rs.next()) {
                       bResults++;
-                      SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                      SQL="INSERT INTO eunis_combined_search_results(";
                       SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                       SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                       SQL+=" VALUES(";
@@ -2107,7 +2107,7 @@
                   if(skip.equalsIgnoreCase("Habitat")) {
                     String sitesSpeciesSQL="";
                     sitesSpeciesSQL=" SELECT DISTINCT ID_NATURE_OBJECT";
-                    sitesSpeciesSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    sitesSpeciesSQL+=" FROM chm62edt_nature_object_report_type";
                     sitesSpeciesSQL+=" WHERE 1=1";
                     sitesSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     sitesSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
@@ -2119,7 +2119,7 @@
                       ps = con.prepareStatement(sitesSpeciesSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -2142,7 +2142,7 @@
                   if(skip.equalsIgnoreCase("Species")) {
                     String sitesHabitatsSQL="";
                     sitesHabitatsSQL+=" SELECT DISTINCT ID_NATURE_OBJECT_LINK";
-                    sitesHabitatsSQL+=" FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE";
+                    sitesHabitatsSQL+=" FROM chm62edt_nature_object_report_type";
                     sitesHabitatsSQL+=" WHERE 1=1";
                     sitesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     sitesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
@@ -2154,7 +2154,7 @@
                       //System.out.println("Executing: "+sitesHabitatsSQL);
                       rs = ps.executeQuery();
                       while(rs.next()) {
-                        SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                        SQL="INSERT INTO eunis_combined_search_results(";
                         SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                         SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                         SQL+=" VALUES(";
@@ -2175,7 +2175,7 @@
 
                   String sitesSQL="";
                   sitesSQL+=" SELECT DISTINCT ID_NATURE_OBJECT";
-                  sitesSQL+=" FROM CHM62EDT_SITES";
+                  sitesSQL+=" FROM chm62edt_sites";
                   sitesSQL+=" WHERE 1=1";
                   if(skip.equalsIgnoreCase("Habitat")) {
                     sitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_1")+")";
@@ -2193,7 +2193,7 @@
                     bResults=0;
                     while(rs.next()) {
                       bResults++;
-                      SQL="INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS(";
+                      SQL="INSERT INTO eunis_combined_search_results(";
                       SQL+="ID_SESSION,ID_NATURE_OBJECT,ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,";
                       SQL+="ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2)";
                       SQL+=" VALUES(";

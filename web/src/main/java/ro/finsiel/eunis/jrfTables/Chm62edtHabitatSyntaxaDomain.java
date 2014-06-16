@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_SYNTAXA inner join CHM62EDT_SYNTAXA inner join CHM62EDT_SYNTAXA_SOURCE.
+ * JRF table for chm62edt_habitat_syntaxa inner join chm62edt_syntaxa inner join chm62edt_syntaxa_source.
  * @author finsiel
  **/
 public class Chm62edtHabitatSyntaxaDomain extends AbstractDomain {
@@ -31,7 +31,7 @@ public class Chm62edtHabitatSyntaxaDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_SYNTAXA");
+        this.setTableName("chm62edt_habitat_syntaxa");
         this.setTableAlias("A");
         this.setReadOnly(true);
 
@@ -49,14 +49,14 @@ public class Chm62edtHabitatSyntaxaDomain extends AbstractDomain {
                 new StringColumnSpec("ID_SYNTAXA_SOURCE", "getIdSyntaxaSource",
                 "setIdSyntaxaSource", DEFAULT_TO_EMPTY_STRING, REQUIRED));
 
-        JoinTable syntaxa = new JoinTable("CHM62EDT_SYNTAXA B", "ID_SYNTAXA",
+        JoinTable syntaxa = new JoinTable("chm62edt_syntaxa B", "ID_SYNTAXA",
                 "ID_SYNTAXA");
 
         syntaxa.addJoinColumn(new StringJoinColumn("NAME", "setSyntaxaName"));
         syntaxa.addJoinColumn(new StringJoinColumn("AUTHOR", "setSyntaxaAuthor"));
         this.addJoinTable(syntaxa);
 
-        JoinTable syntaxasource = new JoinTable("CHM62EDT_SYNTAXA_SOURCE C",
+        JoinTable syntaxasource = new JoinTable("chm62edt_syntaxa_source C",
                 "ID_SYNTAXA_SOURCE", "ID_SYNTAXA_SOURCE");
 
         syntaxasource.addJoinColumn(new StringJoinColumn("SOURCE", "setSource"));

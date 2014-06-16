@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_NATURA2000_CONSERVATION_CODE.
+ * JRF table for chm62edt_natura2000_conservation_code.
  * @author finsiel
  **/
 public class Chm62edtNatura2000ConservationCodeDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtNatura2000ConservationCodeDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_NATURA2000_CONSERVATION_CODE");
+        this.setTableName("chm62edt_natura2000_conservation_code");
         this.addColumnSpec(
                 new StringColumnSpec("ID_CONSERVATION_CODE",
                 "getIdNatura2000ConservationCode",

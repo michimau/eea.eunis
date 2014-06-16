@@ -44,7 +44,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -61,10 +61,10 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
 
     // Add the join only if the search is also done in descriptions
-    OuterJoinTable habitatDescr = new OuterJoinTable("CHM62EDT_HABITAT_DESCRIPTION B", "ID_HABITAT", "ID_HABITAT");
+    OuterJoinTable habitatDescr = new OuterJoinTable("chm62edt_habitat_description B", "ID_HABITAT", "ID_HABITAT");
     this.addJoinTable(habitatDescr);
 
-    JoinTable advSearchResults = new JoinTable("EUNIS_ADVANCED_SEARCH_RESULTS", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable advSearchResults = new JoinTable("eunis_advanced_search_results", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(advSearchResults);
   }
 
@@ -77,7 +77,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
    */
   public List getResults(int offsetStart, int pageSize, AbstractSortCriteria[] sortCriteria) throws CriteriaMissingException {
     this.sortCriteria = sortCriteria;
-    String filterSQL = " 1=1 AND EUNIS_ADVANCED_SEARCH_RESULTS.ID_SESSION = '" + IdSession + "'";
+    String filterSQL = " 1=1 AND eunis_advanced_search_results.ID_SESSION = '" + IdSession + "'";
     // Add the LIMIT clause to return only the wanted results
     filterSQL += " GROUP BY A.ID_HABITAT ";
     // Add the ORDER BY clause to do the sorting
@@ -112,9 +112,9 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
    */
   private Long _rawCount() {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM CHM62EDT_HABITAT AS A " +
-            " LEFT OUTER JOIN CHM62EDT_HABITAT_DESCRIPTION B ON B.ID_HABITAT=A.ID_HABITAT " +
-            " INNER JOIN EUNIS_ADVANCED_SEARCH_RESULTS C ON A.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT" +
+    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM chm62edt_habitat AS A " +
+            " LEFT OUTER JOIN chm62edt_habitat_description B ON B.ID_HABITAT=A.ID_HABITAT " +
+            " INNER JOIN eunis_advanced_search_results C ON A.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT" +
             " WHERE 1=1 AND C.ID_SESSION='" + IdSession + "'");
     Long ret = findLong(sql.toString());
     if (null == ret) return new Long(0);

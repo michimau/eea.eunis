@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_LIGHT_INTENSITY.
+ * JRF table for chm62edt_light_intensity.
  * @author finsiel
  **/
 public class Chm62edtLightIntensityDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtLightIntensityDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_LIGHT_INTENSITY");
+        this.setTableName("chm62edt_light_intensity");
         this.setReadOnly(true);
 
         this.addColumnSpec(

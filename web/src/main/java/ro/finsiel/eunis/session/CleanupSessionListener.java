@@ -106,9 +106,9 @@ public class CleanupSessionListener implements HttpSessionListener {
         try {
             Class.forName(JDBC_DRV);
             conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
-            // System.out.println("Updating EUNIS_SESSION_LOG table.");
+            // System.out.println("Updating eunis_session_log table.");
             PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE EUNIS_SESSION_LOG SET START=START, END=? WHERE ID_SESSION=?");
+                    "UPDATE eunis_session_log SET START=START, END=? WHERE ID_SESSION=?");
 
             // Check MySQL manual (START=START because MySQL updates *only* first occurring timestamp *if* the value differs)
             ps.setTimestamp(1, new java.sql.Timestamp(longTime));

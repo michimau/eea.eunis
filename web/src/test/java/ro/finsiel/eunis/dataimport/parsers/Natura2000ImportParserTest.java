@@ -30,11 +30,11 @@ public class Natura2000ImportParserTest {
     }
 
     private static String[] tables = {"chm62edt_nature_object_report_type",
-        "CHM62EDT_NATURE_OBJECT_GEOSCOPE",
+        "chm62edt_nature_object_geoscope",
         "chm62edt_nature_object",
         "chm62edt_report_attributes",
         "chm62edt_site_attributes",
-        "CHM62EDT_SITES_SITES",
+        "chm62edt_sites_sites",
         "chm62edt_sites_related_designations",
         "chm62edt_report_type",
         "chm62edt_sites"};
@@ -234,7 +234,7 @@ public class Natura2000ImportParserTest {
         // add here text contained in the ingorable compare errors
         String[] toIgnore = {
         "ID_LOOKUP",
-        "CHM62EDT_SITES_SITES",
+        "chm62edt_sites_sites",
         "HABITAT_",
         "INTENSITY",
         "INFLUENCE",

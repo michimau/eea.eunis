@@ -45,7 +45,7 @@ public class CodeLevelWrapper {
 
     /**
      * Getter for idHabitat property.
-     * @return ID of the habitat (ID_HABITAT from CHM62EDT_HABITAT).
+     * @return ID of the habitat (ID_HABITAT from chm62edt_habitat).
      */
     public String getIdHabitat() {
         return idHabitat;
@@ -53,7 +53,7 @@ public class CodeLevelWrapper {
 
     /**
      * Setter for idHabitat property.
-     * @param idHabitat ID of the habitat (ID_HABITAT from CHM62EDT_HABITAT).
+     * @param idHabitat ID of the habitat (ID_HABITAT from chm62edt_habitat).
      */
     public void setIdHabitat(String idHabitat) {
         this.idHabitat = idHabitat;

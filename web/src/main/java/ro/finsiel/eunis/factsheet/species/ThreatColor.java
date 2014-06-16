@@ -27,7 +27,7 @@ public class ThreatColor {
 
     /**
      * This method nuances of colors for given threat status.
-     * @param status Vector of status names (NAME column from CHM62EDT_CONSERVATION_STATUS).
+     * @param status Vector of status names (NAME column from chm62edt_conservation_status).
      * @return Hashtabke of colors for each threat status (order is preserved).
      */
     private static Hashtable getColorsForMap(Vector status) {

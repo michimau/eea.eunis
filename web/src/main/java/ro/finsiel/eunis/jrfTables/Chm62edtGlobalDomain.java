@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_GLOBAL.
+ * JRF table for chm62edt_global.
  * @author finsiel
  **/
 public class Chm62edtGlobalDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtGlobalDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_GLOBAL");
+        this.setTableName("chm62edt_global");
         this.addColumnSpec(
                 new StringColumnSpec("ID_GLOBAL", "getIdGlobal", "setIdGlobal",
                 DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY));

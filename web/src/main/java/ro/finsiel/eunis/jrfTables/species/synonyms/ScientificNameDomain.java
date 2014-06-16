@@ -61,7 +61,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
         this.setTableAlias("C");
 
@@ -88,7 +88,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         // Joined tables
         JoinTable gSpecies = null;
 
-        gSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES E", "ID_GROUP_SPECIES",
+        gSpecies = new JoinTable("chm62edt_group_species E", "ID_GROUP_SPECIES",
                 "ID_GROUP_SPECIES");
         gSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "grName", "setGrName"));
@@ -96,7 +96,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
 
         JoinTable Species2 = null;
 
-        Species2 = new JoinTable("CHM62EDT_SPECIES D", "ID_SPECIES_LINK",
+        Species2 = new JoinTable("chm62edt_species D", "ID_SPECIES_LINK",
                 "ID_SPECIES_LINK");
         Species2.addJoinColumn(
                 new StringJoinColumn("SCIENTIFIC_NAME", "scName", "setScName"));
@@ -111,13 +111,13 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         this.addJoinTable(Species2);
 
         // OuterJoinTable taxCodeFamily = null;
-        // taxCodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY F", "ID_TAXONOMY", "ID_TAXONOMY");
+        // taxCodeFamily = new OuterJoinTable("chm62edt_taxonomy F", "ID_TAXONOMY", "ID_TAXONOMY");
         // taxCodeFamily.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameFamily", "setTaxonomicNameFamily"));
         // taxCodeFamily.addJoinColumn(new StringJoinColumn("LEVEL", "taxonomicLevel", "setTaxonomicLevel"));
         // this.addJoinTable(taxCodeFamily);
         //
         // OuterJoinTable taxCodeOrder = null;
-        // taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY G", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy G", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
         // taxCodeFamily.addJoinTable(taxCodeOrder);
 

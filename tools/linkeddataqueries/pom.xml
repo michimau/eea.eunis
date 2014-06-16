@@ -11,6 +11,7 @@
 
     <artifactId>linkeddataqueries</artifactId>
     <packaging>jar</packaging>
+    <name>Linked Data queries</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>

@@ -152,12 +152,12 @@ public class HabitatDescImportParser extends DefaultHandler {
             langIds = getLangIds();
             dcIds = getDCIds();
 
-            String queryHabitatDescription = "INSERT INTO CHM62EDT_HABITAT_DESCRIPTION (ID_HABITAT, ID_LANGUAGE, DESCRIPTION, OWNER_TEXT, ID_DC) VALUES (?,?,?,?,?)";
+            String queryHabitatDescription = "INSERT INTO chm62edt_habitat_description (ID_HABITAT, ID_LANGUAGE, DESCRIPTION, OWNER_TEXT, ID_DC) VALUES (?,?,?,?,?)";
 
             this.preparedStatement = con.prepareStatement(
                     queryHabitatDescription);
 
-            String queryUpdateNatureObject = "UPDATE CHM62EDT_NATURE_OBJECT SET ID_DC = ? WHERE ORIGINAL_CODE = ?";
+            String queryUpdateNatureObject = "UPDATE chm62edt_nature_object SET ID_DC = ? WHERE ORIGINAL_CODE = ?";
 
             this.preparedStatementNatureObject = con.prepareStatement(
                     queryUpdateNatureObject);
@@ -197,7 +197,7 @@ public class HabitatDescImportParser extends DefaultHandler {
 
         try {
 
-            String query = "DELETE FROM CHM62EDT_HABITAT_DESCRIPTION";
+            String query = "DELETE FROM chm62edt_habitat_description";
 
             ps = con.prepareStatement(query);
             ps.executeUpdate();
@@ -218,7 +218,7 @@ public class HabitatDescImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_LANGUAGE, CODE FROM CHM62EDT_LANGUAGE";
+            String query = "SELECT ID_LANGUAGE, CODE FROM chm62edt_language";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();
@@ -249,7 +249,7 @@ public class HabitatDescImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_DC, REFCD FROM DC_INDEX WHERE COMMENT = 'REFERENCES'";
+            String query = "SELECT ID_DC, REFCD FROM dc_index WHERE COMMENT = 'REFERENCES'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();

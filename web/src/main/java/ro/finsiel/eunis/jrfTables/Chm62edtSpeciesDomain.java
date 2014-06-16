@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_SPECIES.
+ * JRF table for chm62edt_species.
  * @author finsiel
  **/
 public class Chm62edtSpeciesDomain extends AbstractDomain {
@@ -31,7 +31,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -74,7 +74,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
     }
 
     /**
-     * Wrapper for SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE ID_GROUP_SPECIES=...
+     * Wrapper for SELECT COUNT(*) FROM chm62edt_species WHERE ID_GROUP_SPECIES=...
      * @param groupID ID_GROUP_SPECIES.
      * @return Number of species from that group.
      */
@@ -92,7 +92,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
     }
 
     /**
-     * Wrapper for SELECT DISTINCT * FROM CHM62EDT_SPECIES WHERE...
+     * Wrapper for SELECT DISTINCT * FROM chm62edt_species WHERE...
      * @param whereString WHERE condition.
      * @return List of Chm62edtSpeciesPersist objects.
      */

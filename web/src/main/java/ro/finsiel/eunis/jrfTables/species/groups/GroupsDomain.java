@@ -60,7 +60,7 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setTableAlias("A");
 
         this.addColumnSpec(
@@ -84,7 +84,7 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
 
         JoinTable groupSpecies;
 
-        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES D",
+        groupSpecies = new JoinTable("chm62edt_group_species D",
                 "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "commonName",
@@ -94,8 +94,8 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
         OuterJoinTable taxCodeFamily;
         OuterJoinTable taxCodeOrder;
 
-        // Join the table with CHM62EDT_TAXONOMY
-        taxCodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY B", "ID_TAXONOMY",
+        // Join the table with chm62edt_taxonomy
+        taxCodeFamily = new OuterJoinTable("chm62edt_taxonomy B", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         taxCodeFamily.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -112,8 +112,8 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
                 new StringJoinColumn("NAME", "taxonomicNameOrder",
                 "setTaxonomicNameOrder"));
         this.addJoinTable(taxCodeFamily);
-        // // Join the resulted table with CHM62EDT_TAXONOMY
-        // taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // // Join the resulted table with chm62edt_taxonomy
+        // taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy C", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
         // taxCodeFamily.addJoinTable(taxCodeOrder);
     }
@@ -173,9 +173,9 @@ public final class GroupsDomain extends AbstractDomain implements Paginable {
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(*) FROM CHM62EDT_SPECIES AS A "
-                        + "INNER JOIN CHM62EDT_TAXONOMY AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY AS C ON B.ID_TAXONOMY_LINK = C.ID_TAXONOMY WHERE ");
+                "SELECT COUNT(*) FROM chm62edt_species AS A "
+                        + "INNER JOIN chm62edt_taxonomy AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY "
+                        + "LEFT JOIN chm62edt_taxonomy AS C ON B.ID_TAXONOMY_LINK = C.ID_TAXONOMY WHERE ");
         // Apply WHERE CLAUSE
         sql.append(DBUtilities.prepareWhereSearch(searchCriteria));
         sql.append(

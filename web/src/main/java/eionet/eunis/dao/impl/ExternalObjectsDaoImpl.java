@@ -28,9 +28,9 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
         List<ExternalObjectDTO> ret = new ArrayList<ExternalObjectDTO>();
 
         // String query =
-        // "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame' ORDER BY E.RESOURCE LIMIT 300";
+        // "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM chm62edt_species S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame' ORDER BY E.RESOURCE LIMIT 300";
         String query =
-                "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, A1.OBJECT AS IDENTIFIER, A2.OBJECT AS GEO_NAME FROM CHM62EDT_SPECIES S, chm62edt_nature_object_attributes A1, "
+                "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, A1.OBJECT AS IDENTIFIER, A2.OBJECT AS GEO_NAME FROM chm62edt_species S, chm62edt_nature_object_attributes A1, "
                         + "chm62edt_nature_object_attributes A2 WHERE A1.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND A1.NAME = 'maybeSameSynonym' AND A2.ID_NATURE_OBJECT=A1.ID_NATURE_OBJECT AND A2.NAME = '_geospeciesScientificName' ORDER BY A1.OBJECT LIMIT 300";
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -94,7 +94,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
         try {
             con = getConnection();
             preparedStatement =
-                    con.prepareStatement("SELECT NAME, OBJECT, TYPE FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT=?");
+                    con.prepareStatement("SELECT NAME, OBJECT, TYPE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -123,7 +123,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
         try {
             con = getConnection();
             preparedStatement =
-                    con.prepareStatement("SELECT LINK, LINKTEXT FROM CHM62EDT_NATURE_OBJECT_LINKS WHERE ID_NATURE_OBJECT=?");
+                    con.prepareStatement("SELECT LINK, LINKTEXT FROM chm62edt_nature_object_links WHERE ID_NATURE_OBJECT=?");
             preparedStatement.setInt(1, idNatOb);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {

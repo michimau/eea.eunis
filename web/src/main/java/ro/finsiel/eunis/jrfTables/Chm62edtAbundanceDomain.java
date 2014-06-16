@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_ABUNDANCE.
+ * JRF table for chm62edt_abundance.
  * @author finsiel
  **/
 public class Chm62edtAbundanceDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtAbundanceDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_ABUNDANCE");
+        this.setTableName("chm62edt_abundance");
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_ABUNDANCE", "getIdAbundance",
                 "setIdAbundance", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));

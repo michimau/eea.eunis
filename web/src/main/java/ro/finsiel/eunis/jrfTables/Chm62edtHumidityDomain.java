@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_HUMIDITY.
+ * JRF table for chm62edt_humidity.
  * @author finsiel
  **/
 public class Chm62edtHumidityDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtHumidityDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HUMIDITY");
+        this.setTableName("chm62edt_humidity");
         this.setReadOnly(true);
 
         this.addColumnSpec(

@@ -58,7 +58,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
     public RDFHandlerObjects(Connection con) throws SQLException {
         this.con = con;
 
-        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
+        String query = "INSERT INTO chm62edt_nature_object_attributes (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
 
         preparedStatement = con.prepareStatement(query);
 
@@ -236,12 +236,12 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
 
         boolean ret = false;
 
-        String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
+        String query = "SELECT OBJECT FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT="
             + natob_id
             + " AND NAME IN ('sameSynonym', 'maybeSameSynonym', 'notSameSynonym') LIMIT 1";
 
         if (type != null && type.equals("sameSpecies")) {
-            query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
+            query = "SELECT OBJECT FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT="
                 + natob_id
                 + " AND NAME IN ('sameSpecies', 'maybeSameSpecies', 'notSameSpecies') LIMIT 1";
         }

@@ -26,7 +26,7 @@ public class SitesByNatureObjectDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SITES");
+        this.setTableName("chm62edt_sites");
         this.setReadOnly(true);
         this.setTableAlias("C");
 
@@ -45,7 +45,7 @@ public class SitesByNatureObjectDomain extends AbstractDomain {
         this.addColumnSpec(
                 new StringColumnSpec("LONGITUDE", "getLongitude", "setLongitude",
                 DEFAULT_TO_NULL));
-        // FROM CHM62EDT_COUNTRY
+        // FROM chm62edt_country
         this.addColumnSpec(
                 new StringColumnSpec("AREA_NAME_EN", "getAreaNameEn",
                 "setAreaNameEn", DEFAULT_TO_NULL));

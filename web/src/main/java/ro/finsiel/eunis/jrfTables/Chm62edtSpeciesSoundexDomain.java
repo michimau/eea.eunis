@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_SPECIES_SOUNDEX.
+ * JRF table for chm62edt_species_SOUNDEX.
  * @author finsiel
  **/
 public class Chm62edtSpeciesSoundexDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtSpeciesSoundexDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPECIES_SOUNDEX");
+        this.setTableName("chm62edt_species_SOUNDEX");
         this.addColumnSpec(
                 new StringColumnSpec("NAME", "getName", "setName",
                 DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY));

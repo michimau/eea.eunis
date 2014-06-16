@@ -208,17 +208,17 @@ public class HabitatImportParser extends DefaultHandler {
             natureObjectIds = getNatureObjectIds();
             deleteOldRecords();
 
-            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
-            maxDcId = getMaxId("SELECT MAX(ID_DC) FROM DC_INDEX");
+            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM chm62edt_nature_object");
+            maxDcId = getMaxId("SELECT MAX(ID_DC) FROM dc_index");
             if (classif != null && classif.length() > 0) {
                 insertClassification();
             }
 
-            String queryNatureObject = "INSERT INTO CHM62EDT_NATURE_OBJECT (ID_NATURE_OBJECT, ID_DC, ORIGINAL_CODE, TYPE) VALUES (?,?,?,'HABITAT')";
+            String queryNatureObject = "INSERT INTO chm62edt_nature_object (ID_NATURE_OBJECT, ID_DC, ORIGINAL_CODE, TYPE) VALUES (?,?,?,'HABITAT')";
 
             this.preparedStatementNatureObject = con.prepareStatement(queryNatureObject);
 
-            String queryHabitat = "INSERT INTO CHM62EDT_HABITAT (ID_HABITAT, ID_NATURE_OBJECT, SCIENTIFIC_NAME, DESCRIPTION, CODE_2000, CODE_ANNEX1, EUNIS_HABITAT_CODE, ORIGINALLY_PUBLISHED_CODE, CLASS_REF, CODE_PART_2, PRIORITY, LEVEL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String queryHabitat = "INSERT INTO chm62edt_habitat (ID_HABITAT, ID_NATURE_OBJECT, SCIENTIFIC_NAME, DESCRIPTION, CODE_2000, CODE_ANNEX1, EUNIS_HABITAT_CODE, ORIGINALLY_PUBLISHED_CODE, CLASS_REF, CODE_PART_2, PRIORITY, LEVEL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             this.preparedStatementHabitat = con.prepareStatement(queryHabitat);
 
@@ -278,12 +278,12 @@ public class HabitatImportParser extends DefaultHandler {
         PreparedStatement ps = null;
 
         try {
-            String query = "DELETE FROM CHM62EDT_HABITAT";
+            String query = "DELETE FROM chm62edt_habitat";
 
             ps = con.prepareStatement(query);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_NATURE_OBJECT WHERE TYPE = 'HABITAT'";
+            query = "DELETE FROM chm62edt_nature_object WHERE TYPE = 'HABITAT'";
             ps = con.prepareStatement(query);
             ps.executeUpdate();
 
@@ -303,7 +303,7 @@ public class HabitatImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ORIGINAL_CODE, ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT WHERE TYPE = 'HABITAT'";
+            String query = "SELECT ORIGINAL_CODE, ID_NATURE_OBJECT FROM chm62edt_nature_object WHERE TYPE = 'HABITAT'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();
@@ -335,7 +335,7 @@ public class HabitatImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "INSERT INTO DC_INDEX (ID_DC, SOURCE) VALUES (?,?)";
+            String query = "INSERT INTO dc_index (ID_DC, SOURCE) VALUES (?,?)";
 
             stmt = con.prepareStatement(query);
             stmt.setInt(1, maxDcId);

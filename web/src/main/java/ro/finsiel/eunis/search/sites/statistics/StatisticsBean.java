@@ -41,15 +41,15 @@ public class StatisticsBean extends SitesFormBean {
 
         try {
             sql =
-                    " SELECT COUNT(DISTINCT A.ID_SITE) FROM CHM62EDT_COUNTRY AS C "
-                            + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON C.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                            + " INNER JOIN CHM62EDT_SITES AS A ON B.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT ";
+                    " SELECT COUNT(DISTINCT A.ID_SITE) FROM chm62edt_country AS C "
+                            + " INNER JOIN chm62edt_nature_object_geoscope AS B ON C.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                            + " INNER JOIN chm62edt_sites AS A ON B.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT ";
             if ((null != designation && designation.trim().length() > 0 && !designation.trim().equalsIgnoreCase("null"))
                     || (null != designationCat && !designationCat.equalsIgnoreCase("any") && !designationCat.trim()
                             .equalsIgnoreCase("null")))
             {
                 sql +=
-                        " INNER JOIN CHM62EDT_DESIGNATIONS E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE)";
+                        " INNER JOIN chm62edt_designations E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE)";
             }
             sql += " WHERE " + sqlWhere;
 

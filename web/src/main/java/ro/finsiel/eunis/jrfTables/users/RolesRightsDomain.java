@@ -7,7 +7,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 /**
- * JRF table for EUNIS_ROLES inner join EUNIS_ROLES_RIGHTS inner join EUNIS_RIGHTS.
+ * JRF table for eunis_roles inner join eunis_roles_rights inner join eunis_rights.
  * @author finsiel
  **/
 public class RolesRightsDomain extends AbstractDomain {
@@ -27,15 +27,15 @@ public class RolesRightsDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("EUNIS_ROLES");
+    this.setTableName("eunis_roles");
     this.setTableAlias("A");
     this.addColumnSpec(new StringColumnSpec("ROLENAME", "getRoleName", "setRoleName", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
 
-    JoinTable rolesRights = new JoinTable("EUNIS_ROLES_RIGHTS C", "ROLENAME", "ROLENAME");
+    JoinTable rolesRights = new JoinTable("eunis_roles_rights C", "ROLENAME", "ROLENAME");
     rolesRights.addJoinColumn(new StringJoinColumn("RIGHTNAME", "setRightName"));
     this.addJoinTable(rolesRights);
 
-    JoinTable rights = new JoinTable("EUNIS_RIGHTS E", "RIGHTNAME", "RIGHTNAME");
+    JoinTable rights = new JoinTable("eunis_rights E", "RIGHTNAME", "RIGHTNAME");
     rights.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setRightDescription"));
     rolesRights.addJoinTable(rights);
   }

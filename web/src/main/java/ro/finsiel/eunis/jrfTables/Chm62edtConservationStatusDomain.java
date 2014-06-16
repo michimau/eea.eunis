@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_CONSERVATION_STATUS.
+ * JRF table for chm62edt_conservation_status.
  * @author finsiel
  **/
 public class Chm62edtConservationStatusDomain extends AbstractDomain {
@@ -34,7 +34,7 @@ public class Chm62edtConservationStatusDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_CONSERVATION_STATUS");
+        this.setTableName("chm62edt_conservation_status");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -60,7 +60,7 @@ public class Chm62edtConservationStatusDomain extends AbstractDomain {
                 new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
                 DEFAULT_TO_NULL));
 
-    JoinTable dcIndex = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+    JoinTable dcIndex = new JoinTable("dc_index", "ID_DC", "ID_DC");
 
     dcIndex.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
     this.addJoinTable(dcIndex);

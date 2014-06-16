@@ -19,7 +19,7 @@ public class HabitatsDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setReadOnly(true);
 
     this.addColumnSpec(new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject", "setIdNatureObject", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));

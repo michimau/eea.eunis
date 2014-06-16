@@ -229,26 +229,26 @@ public class References {
             SQL_REFERENCES = "SELECT DISTINCT ";
 
             if (fromWhere.equalsIgnoreCase("author")) {
-                SQL_REFERENCES += " `DC_INDEX`.`SOURCE`";
+                SQL_REFERENCES += " `dc_index`.`SOURCE`";
             }
             if (fromWhere.equalsIgnoreCase("date")) {
-                SQL_REFERENCES += " CONCAT(`DC_INDEX`.`CREATED`)";
+                SQL_REFERENCES += " CONCAT(`dc_index`.`CREATED`)";
             }
             if (fromWhere.equalsIgnoreCase("title")) {
-                SQL_REFERENCES += " `DC_INDEX`.`TITLE`";
+                SQL_REFERENCES += " `dc_index`.`TITLE`";
             }
             if (fromWhere.equalsIgnoreCase("editor")) {
-                SQL_REFERENCES += " `DC_INDEX`.`EDITOR`";
+                SQL_REFERENCES += " `dc_index`.`EDITOR`";
             }
             if (fromWhere.equalsIgnoreCase("publisher")) {
-                SQL_REFERENCES += " `DC_INDEX`.`PUBLISHER`";
+                SQL_REFERENCES += " `dc_index`.`PUBLISHER`";
             }
 
-            SQL_REFERENCES += " FROM  `DC_INDEX`";
+            SQL_REFERENCES += " FROM  `dc_index`";
             // !!added to get only references with species and habitats
-            SQL_REFERENCES += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
-            SQL_REFERENCES += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
-            SQL_REFERENCES += " AND `DC_INDEX`.`CREATED` > 1000";
+            SQL_REFERENCES += " INNER JOIN `chm62edt_nature_object` ON (`dc_index`.`ID_DC` = `chm62edt_nature_object`.`ID_DC`)";
+            SQL_REFERENCES += " WHERE `dc_index`.`COMMENT` = 'REFERENCES'";
+            SQL_REFERENCES += " AND `dc_index`.`CREATED` > 1000";
 
             if (sql.length() > 0) {
                 SQL_REFERENCES += " AND " + sql;

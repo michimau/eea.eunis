@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_LEGAL_AREA_EVENT.
+ * JRF table for chm62edt_legal_area_event.
  * @author finsiel
  **/
 public class Chm62edtLegalAreaEventDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtLegalAreaEventDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_LEGAL_AREA_EVENT");
+        this.setTableName("chm62edt_legal_area_event");
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_LEGAL_AREA_EVENT",
                 "getIdLegalAreaEvent", "setIdLegalAreaEvent", DEFAULT_TO_ZERO,

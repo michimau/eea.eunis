@@ -64,9 +64,9 @@ public class CountrySearchCriteria extends AbstractSearchCriteria {
 
     /** Counstruct an new object, providing countryIDGeoscope / regionIDGeoscope pair. It is advisable that you *do not*
      * pass null values for either countryIDGeoscope or regionIDGeoscope.
-     * @param countryIDGeoscope Country name (could be any name from CHM62EDT_COUNTRY.AREA_NAME_EN). You can pass
+     * @param countryIDGeoscope Country name (could be any name from chm62edt_country.AREA_NAME_EN). You can pass
      * 'any' here so that all countries should be searched.
-     * @param regionIDGeoscope Biogeoregion name (as stated in CHM62EDT_BIOGEOREGION.NAME). You can pass
+     * @param regionIDGeoscope Biogeoregion name (as stated in chm62edt_biogeoregion.NAME). You can pass
      * 'any' here so that all biogeoregions should be searched.
      * Note: Please note, again, that you should not pass here both countryIDGeoscope & regionIDGeoscope to value
      * 'any' as search will return 0 results. (The search is not done).
@@ -86,9 +86,9 @@ public class CountrySearchCriteria extends AbstractSearchCriteria {
 
     /** Counstruct an new object, providing countryIDGeoscope / regionIDGeoscope pair. It is advisable that you *do not*
      * pass null values for either countryIDGeoscope or regionIDGeoscope.
-     * @param countryIDGeoscope Country name (could be any name from CHM62EDT_COUNTRY.AREA_NAME_EN). You can pass
+     * @param countryIDGeoscope Country name (could be any name from chm62edt_country.AREA_NAME_EN). You can pass
      * 'any' here so that all countries should be searched.
-     * @param regionIDGeoscope Biogeoregion name (as stated in CHM62EDT_BIOGEOREGION.NAME). You can pass
+     * @param regionIDGeoscope Biogeoregion name (as stated in chm62edt_biogeoregion.NAME). You can pass
      * 'any' here so that all biogeoregions should be searched.
      * @param countryName Country name,
      * @param regionName Biogeographic region name.

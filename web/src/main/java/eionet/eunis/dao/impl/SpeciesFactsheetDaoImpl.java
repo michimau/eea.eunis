@@ -37,7 +37,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
             return 0;
         }
         String sql =
-                "SELECT ID_SPECIES FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME = '"
+                "SELECT ID_SPECIES FROM chm62edt_species WHERE SCIENTIFIC_NAME = '"
                         + StringEscapeUtils.escapeSql(StringEscapeUtils.unescapeHtml(idSpecies)) + "'";
         String result = ExecuteSQL(sql);
 
@@ -49,7 +49,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
      */
     @Override
     public String getScientificName(int idSpecies) {
-        String sql = "SELECT SCIENTIFIC_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
+        String sql = "SELECT SCIENTIFIC_NAME FROM chm62edt_species WHERE ID_SPECIES = " + idSpecies;
 
         return ExecuteSQL(sql);
     }
@@ -63,7 +63,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         if (idSpecies <= 0) {
             return 0;
         }
-        String synonymSQL = "SELECT ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
+        String synonymSQL = "SELECT ID_SPECIES_LINK FROM chm62edt_species WHERE ID_SPECIES = " + idSpecies;
         String result = ExecuteSQL(synonymSQL);
 
         return StringUtils.isNumeric(result) && StringUtils.isNotBlank(result) ? new Integer(result) : 0;
@@ -80,7 +80,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         if (idSpecies <= 0) {
             return null;
         }
-        String sql = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES WHERE ID_SPECIES_LINK = ? AND ID_SPECIES <> ?";
+        String sql = "SELECT ID_SPECIES FROM chm62edt_species WHERE ID_SPECIES_LINK = ? AND ID_SPECIES <> ?";
         List<Object> params = new LinkedList<Object>();
 
         params.add(idSpecies);
@@ -100,15 +100,15 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
      */
     @Override
     public List<String> getExpectedInSiteIds(int idNatureObject, int idSpecies, int limit) {
-        // String sql = "SELECT DISTINCT ID_SITE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE R " +
-        // "INNER JOIN CHM62EDT_SITES S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
+        // String sql = "SELECT DISTINCT ID_SITE FROM chm62edt_nature_object_report_type R " +
+        // "INNER JOIN chm62edt_sites S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
         // "WHERE ID_NATURE_OBJECT_LINK= ? ORDER BY ID_SITE ";
         String synonymsIDs = SpeciesFactsheet.getSpeciesSynonymsCommaSeparated(idNatureObject, idSpecies);
 
         String sql =
-                "SELECT C.ID_SITE " + " FROM CHM62EDT_SPECIES AS A "
-                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                "SELECT C.ID_SITE " + " FROM chm62edt_species AS A "
+                        + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                        + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) " + " GROUP BY C.ID_NATURE_OBJECT "
                         + " ORDER BY C.ID_SITE";
         List<Object> params = new LinkedList<Object>();

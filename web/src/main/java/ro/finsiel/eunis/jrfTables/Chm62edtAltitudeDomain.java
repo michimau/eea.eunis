@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_ALTITUDE.
+ * JRF table for chm62edt_altitude.
  * @author finsiel
  **/
 public class Chm62edtAltitudeDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtAltitudeDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_ALTITUDE");
+        this.setTableName("chm62edt_altitude");
         this.setReadOnly(true);
 
         this.addColumnSpec(

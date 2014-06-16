@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_INTERNATIONAL_NAME inner join CHM62EDT_LANGUAGE.
+ * JRF table for chm62edt_habitat_international_name inner join chm62edt_language.
  * @author finsiel
  **/
 public class Chm62edtHabitatInternationalNameDomain extends AbstractDomain {
@@ -31,7 +31,7 @@ public class Chm62edtHabitatInternationalNameDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_INTERNATIONAL_NAME");
+        this.setTableName("chm62edt_habitat_international_name");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -42,7 +42,7 @@ public class Chm62edtHabitatInternationalNameDomain extends AbstractDomain {
                                         "setIdLanguage", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY)));
         this.addColumnSpec(new StringColumnSpec("INTERNATIONAL_NAME", "getName", "setName",DEFAULT_TO_NULL));
 
-        JoinTable Language = new JoinTable("CHM62EDT_LANGUAGE A", "ID_LANGUAGE","ID_LANGUAGE");
+        JoinTable Language = new JoinTable("chm62edt_language A", "ID_LANGUAGE","ID_LANGUAGE");
 
         Language.addJoinColumn(new StringJoinColumn("NAME_EN", "getNameEn", "setNameEn"));
         Language.addJoinColumn(new StringJoinColumn("CODE", "getCode", "setCode"));

@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_REPORT_TYPE inner join CHM62EDT_HABITAT.
+ * JRF table for chm62edt_habitat_REPORT_TYPE inner join chm62edt_habitat.
  * @author finsiel
  **/
 public class Chm62edtHabitatReportTypeDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtHabitatReportTypeDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_REPORT_TYPE");
+        this.setTableName("chm62edt_habitat_REPORT_TYPE");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -46,7 +46,7 @@ public class Chm62edtHabitatReportTypeDomain extends AbstractDomain {
                 new StringColumnSpec("REPORT_VALUE", "getReportValue",
                 "setReportValue", DEFAULT_TO_NULL));
 
-        JoinTable joinTable = new JoinTable("CHM62EDT_REPORT_TYPE",
+        JoinTable joinTable = new JoinTable("chm62edt_report_type",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         joinTable.addJoinColumn(

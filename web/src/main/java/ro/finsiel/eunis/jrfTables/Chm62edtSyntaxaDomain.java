@@ -30,7 +30,7 @@ public class Chm62edtSyntaxaDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SYNTAXA");
+        this.setTableName("chm62edt_syntaxa");
         this.setReadOnly(true);
 
         this.addColumnSpec(

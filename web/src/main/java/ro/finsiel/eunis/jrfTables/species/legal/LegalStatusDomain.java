@@ -58,7 +58,7 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_LEGAL_STATUS");
+        this.setTableName("chm62edt_legal_status");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -85,30 +85,30 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         JoinTable species = null;
         JoinTable groupSpecies = null;
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE C", "ID_LEGAL_STATUS", "ID_LOOKUP");
+        reportType = new JoinTable("chm62edt_report_type C", "ID_LEGAL_STATUS", "ID_LOOKUP");
         reportType.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType", "setIdReportType"));
         reportType.addJoinColumn(new StringJoinColumn("LOOKUP_TYPE", "lookupType", "setLookupType"));
         this.addJoinTable(reportType);
 
-        reports = new JoinTable("CHM62EDT_REPORTS B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+        reports = new JoinTable("chm62edt_reports B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
         reports.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDc", "setIdDc"));
         reports.addJoinColumn(new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObject", "setIdNatureObject"));
         reportType.addJoinTable(reports);
 
-        dcIndex = new JoinTable("DC_INDEX A", "ID_DC", "ID_DC");
+        dcIndex = new JoinTable("dc_index A", "ID_DC", "ID_DC");
         dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
         dcIndex.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
         dcIndex.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
         reports.addJoinTable(dcIndex);
 
-        species = new JoinTable("CHM62EDT_SPECIES E", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        species = new JoinTable("chm62edt_species E", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
         species.addJoinColumn(new StringJoinColumn("SCIENTIFIC_NAME", "scientificName", "setScientificName"));
         species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES", "idSpecies", "setIdSpecies"));
         species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES_LINK", "idSpeciesLink", "setIdSpeciesLink"));
 
         reports.addJoinTable(species);
 
-        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies = new JoinTable("chm62edt_group_species F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         species.addJoinTable(groupSpecies);
 
@@ -228,12 +228,12 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(*) FROM CHM62EDT_LEGAL_STATUS AS D "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON D.ID_LEGAL_STATUS = C.ID_LOOKUP "
-                + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                + "INNER JOIN DC_INDEX AS A ON B.ID_DC = A.ID_DC "
-                + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT "
-                + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
+                "SELECT COUNT(*) FROM chm62edt_legal_status AS D "
+                + "INNER JOIN chm62edt_report_type AS C ON D.ID_LEGAL_STATUS = C.ID_LOOKUP "
+                + "INNER JOIN chm62edt_reports AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN dc_index AS A ON B.ID_DC = A.ID_DC "
+                + "INNER JOIN chm62edt_species AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT "
+                + "INNER JOIN chm62edt_group_species AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
                 + "WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());

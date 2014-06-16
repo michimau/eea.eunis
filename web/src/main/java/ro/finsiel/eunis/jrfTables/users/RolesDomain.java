@@ -5,7 +5,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 
 /**
- * JRF table for EUNIS_ROLES.
+ * JRF table for eunis_roles.
  * @author finsiel
  **/
 public class RolesDomain extends AbstractDomain {
@@ -26,7 +26,7 @@ public class RolesDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("EUNIS_ROLES");
+    this.setTableName("eunis_roles");
     this.setTableAlias("A");
     this.addColumnSpec(new StringColumnSpec("ROLENAME", "getRoleName", "setRoleName", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
     this.addColumnSpec(new StringColumnSpec("DESCRIPTION", "getDescription", "setDescription", DEFAULT_TO_EMPTY_STRING));

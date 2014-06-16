@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_TAXONOMY outer join CHM62EDT_TAXONOMY.
+ * JRF table for chm62edt_taxonomy outer join chm62edt_taxonomy.
  * @author finsiel
  **/
 public class Chm62edtTaxcodeLeftDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtTaxcodeLeftDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_TAXONOMY");
+        this.setTableName("chm62edt_taxonomy");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -54,7 +54,7 @@ public class Chm62edtTaxcodeLeftDomain extends AbstractDomain {
                 new StringColumnSpec("ID_TAXONOMY_LINK", "getIdTaxcodeLink",
                 "setIdTaxcodeLink", DEFAULT_TO_NULL));
 
-        OuterJoinTable oJoinTable = new OuterJoinTable("CHM62EDT_TAXONOMY",
+        OuterJoinTable oJoinTable = new OuterJoinTable("chm62edt_taxonomy",
                 "ID_TAXONOMY_LINK", "ID_TAXONOMY");
 
         oJoinTable.setTableAlias("a");

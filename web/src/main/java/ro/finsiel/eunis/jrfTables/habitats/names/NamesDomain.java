@@ -97,7 +97,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
 
         this.addColumnSpec(new StringColumnSpec("ID_HABITAT", "getIdHabitat", "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject", "setIdNatureObject", DEFAULT_TO_ZERO,
@@ -116,7 +116,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
         this.setTableAlias("A");
         this.setReadOnly(true);
         // Add the join only if the search is also done in descriptions
-        OuterJoinTable habitatDescr = new OuterJoinTable("CHM62EDT_HABITAT_DESCRIPTION B", "ID_HABITAT", "ID_HABITAT");
+        OuterJoinTable habitatDescr = new OuterJoinTable("chm62edt_habitat_description B", "ID_HABITAT", "ID_HABITAT");
         this.addJoinTable(habitatDescr);
     }
 
@@ -180,8 +180,8 @@ public class NamesDomain extends AbstractDomain implements Paginable {
     private Long _rawCount() throws CriteriaMissingException {
         StringBuffer sql = new StringBuffer();
         // Set the main QUERY
-        // sql.append("SELECT COUNT(*) FROM CHM62EDT_HABITAT AS A LEFT JOIN CHM62EDT_HABITAT_DESCRIPTION AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE ");
-        // sql.append("SELECT COUNT(DISTINCT A.SCIENTIFIC_NAME) FROM CHM62EDT_HABITAT AS A LEFT JOIN CHM62EDT_HABITAT_DESCRIPTION AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE ");
+        // sql.append("SELECT COUNT(*) FROM chm62edt_habitat AS A LEFT JOIN chm62edt_habitat_description AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE ");
+        // sql.append("SELECT COUNT(DISTINCT A.SCIENTIFIC_NAME) FROM chm62edt_habitat AS A LEFT JOIN chm62edt_habitat_description AS B ON A.ID_HABITAT = B.ID_HABITAT WHERE ");
         // Apply WHERE CLAUSE
 
         sql.append(_prepareWhereSearch().toString());

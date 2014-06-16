@@ -52,7 +52,7 @@ public class SpeciesCombinedDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SPECIES");
+    this.setTableName("chm62edt_species");
     this.setReadOnly(true);
     this.setTableAlias("A");
 
@@ -70,22 +70,22 @@ public class SpeciesCombinedDomain extends AbstractDomain implements Paginable {
 
     // Joined tables
     OuterJoinTable groupSpecies = null;
-    groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+    groupSpecies = new OuterJoinTable("chm62edt_group_species B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
     groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
     this.addJoinTable(groupSpecies);
 
     JoinTable taxCodeFamily = null;
-    taxCodeFamily = new JoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY", "ID_TAXONOMY");
+    taxCodeFamily = new JoinTable("chm62edt_taxonomy C", "ID_TAXONOMY", "ID_TAXONOMY");
     taxCodeFamily.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameFamily", "setTaxonomicNameFamily"));
     taxCodeFamily.addJoinColumn(new StringJoinColumn("LEVEL", "taxonomicLevel", "setTaxonomicLevel"));
     this.addJoinTable(taxCodeFamily);
 
     OuterJoinTable taxCodeOrder = null;
-    taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+    taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
     taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
     taxCodeFamily.addJoinTable(taxCodeOrder);
 
-    JoinTable advSearchResults = new JoinTable("EUNIS_COMBINED_SEARCH_RESULTS F", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable advSearchResults = new JoinTable("eunis_combined_search_results F", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(advSearchResults);
   }
 
@@ -134,11 +134,11 @@ public class SpeciesCombinedDomain extends AbstractDomain implements Paginable {
    */
   private Long _rawCount() {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT COUNT(DISTINCT A.ID_SPECIES) FROM CHM62EDT_SPECIES A " +
-            "LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES " +
-            "INNER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY " +
-            "LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY " +
-            "INNER JOIN EUNIS_COMBINED_SEARCH_RESULTS F ON A.ID_NATURE_OBJECT=F.ID_NATURE_OBJECT " +
+    sql.append("SELECT COUNT(DISTINCT A.ID_SPECIES) FROM chm62edt_species A " +
+            "LEFT OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES " +
+            "INNER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY " +
+            "LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY " +
+            "INNER JOIN eunis_combined_search_results F ON A.ID_NATURE_OBJECT=F.ID_NATURE_OBJECT " +
             "WHERE 1=1 AND F.ID_SESSION='" + sid + "'");
     Long ret = findLong(sql.toString());
     if (null == ret) return new Long(0);

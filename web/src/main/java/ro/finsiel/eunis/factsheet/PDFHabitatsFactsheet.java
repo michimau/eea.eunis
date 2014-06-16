@@ -800,11 +800,11 @@ public class PDFHabitatsFactsheet {
         // Sites for which this habitat is recorded.
         List sites = new SitesByNatureObjectDomain().findCustom(
                 "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                + " FROM chm62edt_habitat AS A "
+                + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
                 + " WHERE   " + isGoodHabitat
                 + " AND A.ID_NATURE_OBJECT ="
                 + factsheet.getHabitat().getIdNatureObject()
@@ -814,11 +814,11 @@ public class PDFHabitatsFactsheet {
         // Sites for habitat subtypes.
         List sitesForSubtypes = new SitesByNatureObjectDomain().findCustom(
                 "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                + " FROM chm62edt_habitat AS A "
+                + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
                 + " WHERE A.ID_NATURE_OBJECT ="
                 + factsheet.getHabitat().getIdNatureObject()
                 + (factsheet.isAnnexI()

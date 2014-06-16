@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_GROUP_SPECIES.
+ * JRF table for chm62edt_group_species.
  * @author finsiel
  **/
 public class Chm62edtGroupspeciesDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtGroupspeciesDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_GROUP_SPECIES");
+        this.setTableName("chm62edt_group_species");
         this.setReadOnly(true);
 
         this.addColumnSpec(

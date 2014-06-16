@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_SPATIAL.
+ * JRF table for chm62edt_spatial.
  * @author finsiel
  **/
 public class Chm62edtSpatialDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtSpatialDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPATIAL");
+        this.setTableName("chm62edt_spatial");
         this.setReadOnly(true);
 
         this.addColumnSpec(

@@ -20,7 +20,7 @@ public class FactsheetTaxcode {
 
   /**
    * Constructs an new FactsheetTaxcode object.
-   * @param id ID_TAXONOMY from CHM62EDT_TAXONOMY. Each species has a link to this table.
+   * @param id ID_TAXONOMY from chm62edt_taxonomy. Each species has a link to this table.
    */
   public FactsheetTaxcode(String id) {
     this.id = id;
@@ -28,7 +28,7 @@ public class FactsheetTaxcode {
 
   /**
    * Fills the whatCanFind property, depending on what information is available for the given ID_TAXONOMY.
-   * @return true if this id givent at initialization exists in CHM62EDT_TAXONOMY.
+   * @return true if this id givent at initialization exists in chm62edt_taxonomy.
    */
   private boolean setWhatCanFind() {
     boolean idTaxonomyExist = false;
@@ -248,7 +248,7 @@ public class FactsheetTaxcode {
 
   /**
    * Checks if a given class have a subclass.
-   * @param id ID_TAXONOMY_LINK from CHM62EDT_TAXONOMY.
+   * @param id ID_TAXONOMY_LINK from chm62edt_taxonomy.
    * @return true if has subclass.
    */
   private boolean classHaveSubclass(String id) {
@@ -259,7 +259,7 @@ public class FactsheetTaxcode {
   }
 
   /**
-   * Retrieve NAME column from CHM62EDT_TAXONOMY for a given ID_TAXONOMY.
+   * Retrieve NAME column from chm62edt_taxonomy for a given ID_TAXONOMY.
    * @param id ID_TAXONOMY.
    * @return Taxonomy name.
    */
@@ -280,7 +280,7 @@ public class FactsheetTaxcode {
   }
 
   /**
-   * Checks if a given ID_TAXONOMY exists in CHM62EDT_TAXONOMY.
+   * Checks if a given ID_TAXONOMY exists in chm62edt_taxonomy.
    * @param id Id.
    * @return true if exists.
    */
@@ -298,7 +298,7 @@ public class FactsheetTaxcode {
 
   /**
    * Retrieves ID_DC for taxonomy represented by this object.
-   * @return ID_DC from CHM62EDT_TAXONOMY.
+   * @return ID_DC from chm62edt_taxonomy.
    */
   public Integer IdDcTaxcode()
   {

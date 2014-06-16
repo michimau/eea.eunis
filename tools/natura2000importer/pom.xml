@@ -11,6 +11,7 @@
 
     <artifactId>natura2000importer</artifactId>
     <packaging>jar</packaging>
+    <name>Natura2000 importer</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>

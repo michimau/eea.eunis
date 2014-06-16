@@ -307,25 +307,25 @@ public class RedListsImportParser extends DefaultHandler {
         try {
 
             conservationStatuses = getConservationStatuses();
-            maxReportTypeId = getId("SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
-            maxReportAttributesId = getId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
-            euGeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'EU'");
-            eu25GeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E25'");
-            eu27GeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E27'");
-            worldGeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'WO'");
+            maxReportTypeId = getId("SELECT MAX(ID_REPORT_TYPE) FROM chm62edt_report_type");
+            maxReportAttributesId = getId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM chm62edt_report_attributes");
+            euGeoscopeId = getId("SELECT ID_GEOSCOPE FROM chm62edt_country WHERE EUNIS_AREA_CODE = 'EU'");
+            eu25GeoscopeId = getId("SELECT ID_GEOSCOPE FROM chm62edt_country WHERE EUNIS_AREA_CODE = 'E25'");
+            eu27GeoscopeId = getId("SELECT ID_GEOSCOPE FROM chm62edt_country WHERE EUNIS_AREA_CODE = 'E27'");
+            worldGeoscopeId = getId("SELECT ID_GEOSCOPE FROM chm62edt_country WHERE EUNIS_AREA_CODE = 'WO'");
 
             String queryReportType =
-                "INSERT INTO CHM62EDT_REPORT_TYPE (ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,'CONSERVATION_STATUS')";
+                "INSERT INTO chm62edt_report_type (ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,'CONSERVATION_STATUS')";
 
             this.preparedStatementReportType = con.prepareStatement(queryReportType);
 
             String queryReport =
-                "INSERT INTO CHM62EDT_REPORTS (ID_NATURE_OBJECT, ID_DC, ID_GEOSCOPE, ID_GEOSCOPE_LINK, ID_REPORT_TYPE, ID_REPORT_ATTRIBUTES) VALUES (?,?,?,-1,?,?)";
+                "INSERT INTO chm62edt_reports (ID_NATURE_OBJECT, ID_DC, ID_GEOSCOPE, ID_GEOSCOPE_LINK, ID_REPORT_TYPE, ID_REPORT_ATTRIBUTES) VALUES (?,?,?,-1,?,?)";
 
             this.preparedStatementReport = con.prepareStatement(queryReport);
 
             String queryReportAttributes =
-                "INSERT INTO CHM62EDT_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,'TEXT',?)";
+                "INSERT INTO chm62edt_report_attributes (ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,'TEXT',?)";
 
             this.preparedStatementReportAttributes = con.prepareStatement(queryReportAttributes);
 
@@ -384,7 +384,7 @@ public class RedListsImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_CONSERVATION_STATUS, CODE FROM CHM62EDT_CONSERVATION_STATUS WHERE ID_DC= ? ";
+            String query = "SELECT ID_CONSERVATION_STATUS, CODE FROM chm62edt_conservation_status WHERE ID_DC= ? ";
 
             stmt = con.prepareStatement(query);
             stmt.setInt(1, redlistCatIdDc.intValue());

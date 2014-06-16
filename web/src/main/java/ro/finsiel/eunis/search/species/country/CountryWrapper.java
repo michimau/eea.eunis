@@ -5,7 +5,7 @@ import ro.finsiel.eunis.jrfTables.JRFSortable;
 
 
 /**
- * This class wraps the characteristics of a Country. It encapsulates its name and code (see CHM62EDT_COUNTRY table,
+ * This class wraps the characteristics of a Country. It encapsulates its name and code (see chm62edt_country table,
  * column EUNIS_AREA_CODE. Implements JRFSortable interface so that you can sort objects of this type.
  * @author finsiel
  */
@@ -47,13 +47,13 @@ public class CountryWrapper implements JRFSortable {
     }
 
     /** Getter for country's code.
-     * @return Country code as stated in CHM62EDT_COUNTRY_BIOGEOREGION
+     * @return Country code as stated in chm62edt_country_biogeoregion
      */
     public String getCode() {
         return code;
     }
 
-    /** Setter for country code as stated in CHM62EDT_COUNTRY_BIOGEOREGION.
+    /** Setter for country code as stated in chm62edt_country_biogeoregion.
      * @param code New country code. Default is "".
      */
     public void setCode(String code) {

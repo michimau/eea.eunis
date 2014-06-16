@@ -38,7 +38,7 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
   String expandSearchCriteria = request.getParameter( "expandSearchCriteria" );
   List criterias = new CriteriasForUsersDomain().findWhere("USERNAME= '" + SessionManager.getUsername() + "' " +
           " AND FROM_WHERE= '" + pageName + "' " +
-          " GROUP BY EUNIS_GROUP_SEARCH_CRITERIA.CRITERIA_NAME");
+          " GROUP BY eunis_group_search_criteria.CRITERIA_NAME");
   if( criterias != null && criterias.size() > 0 )
   {
 %>

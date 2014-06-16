@@ -11,6 +11,7 @@
 
     <artifactId>rdfexporter</artifactId>
     <packaging>jar</packaging>
+    <name>RDF exporter</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>

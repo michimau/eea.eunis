@@ -31,7 +31,7 @@
   };
   String[] db = { "Natura2000","Corine","Diploma","CDDA_National","CDDA_International","Biogenetic","NatureNet","Emerald" };
   StringBuffer query = Utilities.prepareSQLOperator("NAME", searchString, operand);
-  query = Utilities.getConditionForSourceDB(query,source,db,"CHM62EDT_SITES");
+  query = Utilities.getConditionForSourceDB(query,source,db,"chm62edt_sites");
   query.append(" GROUP BY NAME ORDER BY NAME ASC ");
   if (!expandFullNames) { query.append(" LIMIT 0, " + Utilities.MAX_POPUP_RESULTS); }
   // Execute de query

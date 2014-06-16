@@ -78,7 +78,7 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
         OuterJoinTable TaxcodeOrder = null;
         OuterJoinTable TaxcodeFamily = null;
 
-        this.setTableName("CHM62EDT_COUNTRY");
+        this.setTableName("chm62edt_country");
         this.setTableAlias("J");
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_COUNTRY", "getIdCountry",
@@ -94,7 +94,7 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
                 "setAreaNameEnglish", DEFAULT_TO_NULL));
 
         // Create joined tables
-        Reports = new JoinTable("CHM62EDT_REPORTS B", "ID_GEOSCOPE",
+        Reports = new JoinTable("chm62edt_reports B", "ID_GEOSCOPE",
                 "ID_GEOSCOPE");
         Reports.addJoinColumn(
                 new IntegerJoinColumn("ID_NATURE_OBJECT", "IdNatureObjectRep",
@@ -104,7 +104,7 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
                 "setIdGeoscopeLink"));
         this.addJoinTable(Reports);
 
-        Species = new JoinTable("CHM62EDT_SPECIES C", "ID_NATURE_OBJECT",
+        Species = new JoinTable("chm62edt_species C", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT");
         Species.addJoinColumn(
                 new StringJoinColumn("SCIENTIFIC_NAME", "ScientificName",
@@ -116,14 +116,14 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
                 "setIdSpeciesLink"));
         Reports.addJoinTable(Species);
 
-        GroupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES D",
+        GroupSpecies = new OuterJoinTable("chm62edt_group_species D",
                 "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         GroupSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "CommonName",
                 "setCommonName"));
         Species.addJoinTable(GroupSpecies);
 
-        TaxcodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY E", "ID_TAXONOMY",
+        TaxcodeFamily = new OuterJoinTable("chm62edt_taxonomy E", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         TaxcodeFamily.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -141,7 +141,7 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
                 "setTaxonomicNameOrder"));
         Species.addJoinTable(TaxcodeFamily);
 
-        // TaxcodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY F", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // TaxcodeOrder = new OuterJoinTable("chm62edt_taxonomy F", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // TaxcodeOrder.addJoinColumn(new StringJoinColumn("NAME", "TaxonomicNameOrder", "setTaxonomicNameOrder"));
         // TaxcodeFamily.addJoinTable(TaxcodeOrder);
     }
@@ -203,12 +203,12 @@ public final class RegionDomain extends AbstractDomain implements Paginable {
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) FROM CHM62EDT_COUNTRY J "
-                        + "INNER JOIN CHM62EDT_REPORTS B ON J.ID_GEOSCOPE=B.ID_GEOSCOPE "
-                        + "INNER JOIN CHM62EDT_SPECIES C ON B.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT "
-                        + "LEFT JOIN CHM62EDT_GROUP_SPECIES D ON C.ID_GROUP_SPECIES=D.ID_GROUP_SPECIES "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY E ON C.ID_TAXONOMY=E.ID_TAXONOMY "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY F ON E.ID_TAXONOMY_LINK=F.ID_TAXONOMY WHERE ");
+                "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) FROM chm62edt_country J "
+                        + "INNER JOIN chm62edt_reports B ON J.ID_GEOSCOPE=B.ID_GEOSCOPE "
+                        + "INNER JOIN chm62edt_species C ON B.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT "
+                        + "LEFT JOIN chm62edt_group_species D ON C.ID_GROUP_SPECIES=D.ID_GROUP_SPECIES "
+                        + "LEFT JOIN chm62edt_taxonomy E ON C.ID_TAXONOMY=E.ID_TAXONOMY "
+                        + "LEFT JOIN chm62edt_taxonomy F ON E.ID_TAXONOMY_LINK=F.ID_TAXONOMY WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());
         // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...

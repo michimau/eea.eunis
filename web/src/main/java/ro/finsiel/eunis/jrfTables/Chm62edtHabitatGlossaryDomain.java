@@ -9,7 +9,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_GLOSSARY.
+ * JRF table for chm62edt_habitat_GLOSSARY.
  * @author finsiel
  **/
 public class Chm62edtHabitatGlossaryDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtHabitatGlossaryDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_GLOSSARY");
+        this.setTableName("chm62edt_habitat_GLOSSARY");
         this.setReadOnly(true);
 
         this.addColumnSpec(

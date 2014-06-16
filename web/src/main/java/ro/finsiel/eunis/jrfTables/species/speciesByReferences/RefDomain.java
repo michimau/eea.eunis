@@ -100,21 +100,21 @@ public class RefDomain extends AbstractDomain implements Paginable {
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
         SQL = "SELECT DISTINCT H.ID_SPECIES "
-            + "FROM DC_INDEX A "
-            + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
-            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+            + "FROM dc_index A "
+            + "INNER JOIN chm62edt_nature_object B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN chm62edt_species H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
             + "WHERE 1=1 " + condition + " UNION "
-            + "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
-            + "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
-            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+            + "SELECT DISTINCT H.ID_SPECIES " + "FROM dc_index A "
+            + "INNER JOIN chm62edt_reports B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+            + "INNER JOIN chm62edt_species H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
             + "WHERE 1=1 " + condition
             + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
             + "UNION "
             + "SELECT DISTINCT H.ID_SPECIES "
-            + "FROM DC_INDEX A "
-            + "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
-            + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
+            + "FROM dc_index A "
+            + "INNER JOIN chm62edt_taxonomy B ON A.ID_DC=B.ID_DC "
+            + "INNER JOIN chm62edt_species H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
             + "WHERE  1=1 " + condition;
         this.executeSQLQuery(SQL, new RowHandler() {
             public void handleRow(JRFResultSet rs) throws Exception {
@@ -146,9 +146,9 @@ public class RefDomain extends AbstractDomain implements Paginable {
             }
 
             SQL = "SELECT H.ID_SPECIES,H.ID_SPECIES_LINK,H.ID_NATURE_OBJECT,H.SCIENTIFIC_NAME,A.COMMON_NAME,B.NAME,B.LEVEL,B.TAXONOMY_TREE "
-                + "FROM CHM62EDT_SPECIES H "
-                + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-                + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+                + "FROM chm62edt_species H "
+                + "LEFT JOIN chm62edt_group_species A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+                + "LEFT JOIN chm62edt_taxonomy B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
                 + "WHERE 1=1 " + conditionIn + condition + sortOrderAndLimit;
             this.executeSQLQuery(SQL, new RowHandler() {
                 public void handleRow(JRFResultSet rs) throws Exception {
@@ -190,9 +190,9 @@ public class RefDomain extends AbstractDomain implements Paginable {
             }
 
 
-            String SQL = "SELECT count(ID_SPECIES) " + "FROM CHM62EDT_SPECIES H "
-            + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-            + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+            String SQL = "SELECT count(ID_SPECIES) " + "FROM chm62edt_species H "
+            + "LEFT JOIN chm62edt_group_species A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+            + "LEFT JOIN chm62edt_taxonomy B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
             + "WHERE 1=1 " + conditionIn + condition;
             this.executeSQLQuery(SQL, new RowHandler() {
                 public void handleRow(JRFResultSet rs) throws Exception {

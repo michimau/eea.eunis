@@ -123,24 +123,24 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL = "DELETE FROM EUNIS_USERS WHERE USERNAME='" + username + "'";
+            SQL = "DELETE FROM eunis_users WHERE USERNAME='" + username + "'";
 
             ps = con.prepareStatement(SQL);
             ps.execute();
             ps.close();
-            SQL = "DELETE FROM EUNIS_USERS_ROLES WHERE USERNAME='" + username + "'";
+            SQL = "DELETE FROM eunis_users_roles WHERE USERNAME='" + username + "'";
 
             ps1 = con1.prepareStatement(SQL);
             ps1.execute();
             ps1.close();
-            SQL = "SELECT * FROM EUNIS_SAVE_ADVANCED_SEARCH WHERE USERNAME='" + username + "'";
+            SQL = "SELECT * FROM eunis_save_advanced_search WHERE USERNAME='" + username + "'";
             st = con.createStatement();
             rs = st.executeQuery(SQL);
 
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    SQL1 = "DELETE FROM EUNIS_SAVE_ADVANCED_SEARCH_CRITERIA WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME")
+                    SQL1 = "DELETE FROM eunis_save_advanced_search_criteria WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME")
                             + "' " + " AND NATURE_OBJECT = '" + rs.getString("NATURE_OBJECT") + "'" + " AND ID_NODE = '"
                             + rs.getString("ID_NODE") + "'";
                     ps1 = con1.prepareStatement(SQL1);
@@ -149,25 +149,25 @@ public class UsersUtility {
                 }
             }
             st.close();
-            SQL = "DELETE FROM EUNIS_SAVE_ADVANCED_SEARCH WHERE USERNAME='" + username + "'";
+            SQL = "DELETE FROM eunis_save_advanced_search WHERE USERNAME='" + username + "'";
             ps1 = con1.prepareStatement(SQL);
             ps1.execute();
             ps1.close();
-            SQL = "SELECT * FROM EUNIS_GROUP_SEARCH WHERE USERNAME='" + username + "'";
+            SQL = "SELECT * FROM eunis_group_search WHERE USERNAME='" + username + "'";
             st = con.createStatement();
             rs = st.executeQuery(SQL);
 
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    SQL1 = "DELETE FROM EUNIS_GROUP_SEARCH_CRITERIA WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME") + "'";
+                    SQL1 = "DELETE FROM eunis_group_search_criteria WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME") + "'";
                     ps1 = con1.prepareStatement(SQL1);
                     ps1.execute();
                     ps1.close();
                 }
             }
             st.close();
-            SQL = "DELETE FROM EUNIS_GROUP_SEARCH WHERE USERNAME='" + username + "'";
+            SQL = "DELETE FROM eunis_group_search WHERE USERNAME='" + username + "'";
             ps1 = con1.prepareStatement(SQL);
             ps1.execute();
             ps1.close();
@@ -202,13 +202,13 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL = "DELETE FROM EUNIS_RIGHTS WHERE RIGHTNAME='" + rightname + "'";
+            SQL = "DELETE FROM eunis_rights WHERE RIGHTNAME='" + rightname + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
 
             ps.close();
             con.close();
-            SQL = "DELETE FROM EUNIS_ROLES_RIGHTS WHERE RIGHTNAME='" + rightname + "'";
+            SQL = "DELETE FROM eunis_roles_rights WHERE RIGHTNAME='" + rightname + "'";
             ps1 = con1.prepareStatement(SQL);
             ps1.execute();
             ps1.close();
@@ -250,7 +250,7 @@ public class UsersUtility {
     }
 
     /**
-     * Check if username exists in users roles table (EUNIS_USERS_ROLES).
+     * Check if username exists in users roles table (eunis_users_roles).
      * @param username username.
      * @return true if username exists in that table.
      */
@@ -273,7 +273,7 @@ public class UsersUtility {
     }
 
     /**
-     * Check if an righ exists in EUNIS_ROLES_RIGHTS table.
+     * Check if an righ exists in eunis_roles_rights table.
      * @param rightname right.
      * @return true if exists.
      */
@@ -296,7 +296,7 @@ public class UsersUtility {
     }
 
     /**
-     * Check if an role exists in users roles table (EUNIS_USERS_ROLES).
+     * Check if an role exists in users roles table (eunis_users_roles).
      * @param roleName role name.
      * @return true if exists.
      */
@@ -319,7 +319,7 @@ public class UsersUtility {
     }
 
     /**
-     * Check if an role exists in role's rights table (EUNIS_ROLES_RIGHTS).
+     * Check if an role exists in role's rights table (eunis_roles_rights).
      * @param roleName role name.
      * @return true if exists.
      */
@@ -511,7 +511,7 @@ public class UsersUtility {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             // System.out.println("2----------loginDate="+loginDate+"+");
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_USERS SET";
+            updateSQL += " UPDATE eunis_users SET";
             updateSQL += " USERNAME=?,";
             updateSQL += " FIRST_NAME=?,";
             updateSQL += " LAST_NAME=?,";
@@ -534,7 +534,7 @@ public class UsersUtility {
 
             // UPDATE USERS_ROLES
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_USERS_ROLES SET";
+            updateSQL += " UPDATE eunis_users_roles SET";
             updateSQL += " USERNAME=?";
             updateSQL += " WHERE USERNAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -547,9 +547,9 @@ public class UsersUtility {
             ps.execute();
             ps.close();
 
-            // UPDATE EUNIS_SAVE_ADVANCED_SEARCH
+            // UPDATE eunis_save_advanced_search
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_SAVE_ADVANCED_SEARCH SET";
+            updateSQL += " UPDATE eunis_save_advanced_search SET";
             updateSQL += " USERNAME=?";
             updateSQL += " WHERE USERNAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -562,9 +562,9 @@ public class UsersUtility {
             ps.execute();
             ps.close();
 
-            // UPDATE EUNIS_GROUP_SEARCH
+            // UPDATE eunis_group_search
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_GROUP_SEARCH SET";
+            updateSQL += " UPDATE eunis_group_search SET";
             updateSQL += " USERNAME=?";
             updateSQL += " WHERE USERNAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -583,7 +583,7 @@ public class UsersUtility {
             if (newRoles != null && oldRoles != null && oldRoles.size() > 0) {
                 for (int i = 0; i < oldRoles.size(); i++) {
                     if (!ObjectIsInVector(newRoles, (String) oldRoles.get(i))) {
-                        updateSQL = "DELETE FROM EUNIS_USERS_ROLES WHERE USERNAME='" + newUserName + "' AND ROLENAME='"
+                        updateSQL = "DELETE FROM eunis_users_roles WHERE USERNAME='" + newUserName + "' AND ROLENAME='"
                                 + (String) oldRoles.get(i) + "'";
                         ps = con.prepareStatement(updateSQL);
                         ps.execute();
@@ -594,7 +594,7 @@ public class UsersUtility {
             if (newRoles != null && oldRoles != null && newRoles.size() > 0) {
                 for (int i = 0; i < newRoles.size(); i++) {
                     if (!ObjectIsInVector(oldRoles, (String) newRoles.get(i))) {
-                        updateSQL = "INSERT INTO EUNIS_USERS_ROLES(USERNAME,ROLENAME) VALUES(";
+                        updateSQL = "INSERT INTO eunis_users_roles(USERNAME,ROLENAME) VALUES(";
                         updateSQL += "'" + newUserName + "',";
                         updateSQL += "'" + (String) newRoles.get(i) + "')";
                         ps = con.prepareStatement(updateSQL);
@@ -649,7 +649,7 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_ROLES SET";
+            updateSQL += " UPDATE eunis_roles SET";
             updateSQL += " ROLENAME=?,";
             updateSQL += " DESCRIPTION=?";
             updateSQL += " WHERE ROLENAME=?";
@@ -666,7 +666,7 @@ public class UsersUtility {
 
             // UPDATE USERS_ROLES
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_USERS_ROLES SET";
+            updateSQL += " UPDATE eunis_users_roles SET";
             updateSQL += " ROLENAME=?";
             updateSQL += " WHERE ROLENAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -681,7 +681,7 @@ public class UsersUtility {
 
             // UPDATE ROLES_RIGHTS
             updateSQL = "";
-            updateSQL += " UPDATE EUNIS_ROLES_RIGHTS SET";
+            updateSQL += " UPDATE eunis_roles_rights SET";
             updateSQL += " ROLENAME=?";
             updateSQL += " WHERE ROLENAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -696,7 +696,7 @@ public class UsersUtility {
 
             // DELETE ALL RIGHTS FOR ROLENAME
             SQL = "";
-            SQL += " DELETE FROM EUNIS_ROLES_RIGHTS";
+            SQL += " DELETE FROM eunis_roles_rights";
             SQL += " WHERE ROLENAME=?";
             ps = con.prepareStatement(SQL);
             ps.setString(1, rolename);
@@ -748,7 +748,7 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            updateSQL = "UPDATE EUNIS_RIGHTS SET";
+            updateSQL = "UPDATE eunis_rights SET";
             updateSQL += " DESCRIPTION=?";
             updateSQL += " WHERE RIGHTNAME=?";
             ps = con.prepareStatement(updateSQL);
@@ -787,7 +787,7 @@ public class UsersUtility {
         try {
             List users = new UserDomain().findCustom(
                     "SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL," + " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')"
-                    + " FROM EUNIS_USERS" + " WHERE USERNAME='" + username + "'");
+                    + " FROM eunis_users" + " WHERE USERNAME='" + username + "'");
 
             if (users != null && users.size() > 0) {
                 result = (UserPersist) users.get(0);
@@ -899,7 +899,7 @@ public class UsersUtility {
     }
 
     /**
-     * true if user role name exists in EUNIS_ROLES table.
+     * true if user role name exists in eunis_roles table.
      * @param rolename role name
      * @return true or false
      */
@@ -922,7 +922,7 @@ public class UsersUtility {
     }
 
     /**
-     * true if user right name exists in EUNIS_RIGHTS table.
+     * true if user right name exists in eunis_rights table.
      * @param rightname right name
      * @return true or false
      */
@@ -969,7 +969,7 @@ public class UsersUtility {
                 for (int i = 0; i < newRights.size(); i++) {
                     j++;
                     con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-                    SQL = "INSERT INTO EUNIS_ROLES_RIGHTS(ROLENAME,RIGHTNAME) VALUES(";
+                    SQL = "INSERT INTO eunis_roles_rights(ROLENAME,RIGHTNAME) VALUES(";
                     SQL += "'" + rolename + "',";
                     SQL += "'" + (String) newRights.get(i) + "')";
                     ps2[j] = con2[j].prepareStatement(SQL);
@@ -1046,17 +1046,17 @@ public class UsersUtility {
         try {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL = "DELETE FROM EUNIS_ROLES WHERE ROLENAME='" + roleName + "'";
+            SQL = "DELETE FROM eunis_roles WHERE ROLENAME='" + roleName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
             ps.close();
 
-            SQL = "DELETE FROM EUNIS_ROLES_RIGHTS WHERE ROLENAME='" + roleName + "'";
+            SQL = "DELETE FROM eunis_roles_rights WHERE ROLENAME='" + roleName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
             ps.close();
 
-            SQL = "DELETE FROM EUNIS_USERS_ROLES WHERE ROLENAME='" + roleName + "'";
+            SQL = "DELETE FROM eunis_users_roles WHERE ROLENAME='" + roleName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
             ps.close();
@@ -1127,7 +1127,7 @@ public class UsersUtility {
     }
 
     /**
-     * Check if a role_right object exist in EUNIS_ROLES_RIGHTS  table.
+     * Check if a role_right object exist in eunis_roles_rights  table.
      * @param roleName role name
      * @param rightName right name
      * @return true if exist
@@ -1174,7 +1174,7 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "SELECT * FROM EUNIS_GROUP_SEARCH WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
+            SQL = "SELECT * FROM eunis_group_search WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
                     + "' AND FROM_WHERE='" + pagename + "'";
             st = con1.createStatement();
             rs = st.executeQuery(SQL);
@@ -1182,7 +1182,7 @@ public class UsersUtility {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    SQL1 = "DELETE FROM EUNIS_GROUP_SEARCH_CRITERIA WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME") + "'";
+                    SQL1 = "DELETE FROM eunis_group_search_criteria WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME") + "'";
                     ps1 = con1.prepareStatement(SQL1);
                     ps1.execute();
                     ps1.close();
@@ -1191,7 +1191,7 @@ public class UsersUtility {
 
             st.close();
 
-            SQL = "DELETE FROM EUNIS_GROUP_SEARCH WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
+            SQL = "DELETE FROM eunis_group_search WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
                     + "' AND FROM_WHERE='" + pagename + "'";
 
             ps1 = con1.prepareStatement(SQL);
@@ -1228,7 +1228,7 @@ public class UsersUtility {
             Class.forName(SQL_DRV);
             con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            SQL = "SELECT * FROM EUNIS_SAVE_ADVANCED_SEARCH WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
+            SQL = "SELECT * FROM eunis_save_advanced_search WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
                     + criterianame + "' AND FROM_WHERE='" + pagename + "'";
             st = con1.createStatement();
             rs = st.executeQuery(SQL);
@@ -1236,7 +1236,7 @@ public class UsersUtility {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    SQL1 = "DELETE FROM EUNIS_SAVE_ADVANCED_SEARCH_CRITERIA WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME")
+                    SQL1 = "DELETE FROM eunis_save_advanced_search_criteria WHERE CRITERIA_NAME='" + rs.getString("CRITERIA_NAME")
                             + "' AND NATURE_OBJECT='" + natureobject + "'";
                     ps1 = con1.prepareStatement(SQL1);
                     ps1.execute();
@@ -1246,7 +1246,7 @@ public class UsersUtility {
 
             st.close();
 
-            SQL = "DELETE FROM EUNIS_SAVE_ADVANCED_SEARCH WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
+            SQL = "DELETE FROM eunis_save_advanced_search WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
                     + criterianame + "' AND FROM_WHERE='" + pagename + "'";
 
             ps1 = con1.prepareStatement(SQL);
@@ -1349,7 +1349,7 @@ public class UsersUtility {
                 Class.forName(SQL_DRV);
                 con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-                SQL = "INSERT INTO EUNIS_USERS(USERNAME,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) "
+                SQL = "INSERT INTO eunis_users(USERNAME,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) "
                         + " VALUES(?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
                 ps = con.prepareStatement(SQL);
                 ps.setString(1, username);
@@ -1397,7 +1397,7 @@ public class UsersUtility {
                 for (int i = 0; i < newRoles.size(); i++) {
                     j++;
                     con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-                    SQL = "INSERT INTO EUNIS_USERS_ROLES(USERNAME,ROLENAME) VALUES(";
+                    SQL = "INSERT INTO eunis_users_roles(USERNAME,ROLENAME) VALUES(";
                     SQL += "'" + username + "',";
                     SQL += "'" + (String) newRoles.get(i) + "')";
                     ps2[j] = con2[j].prepareStatement(SQL);

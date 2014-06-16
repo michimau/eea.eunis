@@ -24,7 +24,7 @@
   SQLUtilities sqlc = new SQLUtilities();
   sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-  List bookmarks = sqlc.ExecuteSQLReturnList("SELECT BOOKMARK,DESCRIPTION FROM EUNIS_BOOKMARKS WHERE USERNAME = '" + SessionManager.getUsername() + "'", 2);
+  List bookmarks = sqlc.ExecuteSQLReturnList("SELECT BOOKMARK,DESCRIPTION FROM eunis_bookmarks WHERE USERNAME = '" + SessionManager.getUsername() + "'", 2);
   int listSize = ( bookmarks == null ? 0 : bookmarks.size() );
 %>
 <%
@@ -125,7 +125,7 @@
                 {
                   String bookm = (request.getParameter("bookmarkNameHidden") == null ? "" : request.getParameter("bookmarkNameHidden"));
                   bookm = bookm.replaceAll("'","''");
-                  List bookmarksEdit = sqlc.ExecuteSQLReturnList("SELECT BOOKMARK,DESCRIPTION FROM EUNIS_BOOKMARKS WHERE USERNAME = '" + SessionManager.getUsername() + "' and BOOKMARK='"+bookm+"'", 2);
+                  List bookmarksEdit = sqlc.ExecuteSQLReturnList("SELECT BOOKMARK,DESCRIPTION FROM eunis_bookmarks WHERE USERNAME = '" + SessionManager.getUsername() + "' and BOOKMARK='"+bookm+"'", 2);
                   if( bookmarksEdit != null && bookmarksEdit.size() > 0 )
                   {
                     String bookmName = (String)((TableColumns)bookmarksEdit.get(0)).getColumnsValues().get(0);

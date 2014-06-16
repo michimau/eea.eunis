@@ -6,7 +6,7 @@ import ro.finsiel.eunis.jrfTables.JRFSortable;
 
 /**
  * This class wraps the characteristics of a Region.
- * It encapsulates its name and code (see CHM62EDT_COUNTRY table, column EUNIS_AREA_CODE.
+ * It encapsulates its name and code (see chm62edt_country table, column EUNIS_AREA_CODE.
  * It implements JRFSortable interface so that you can sort objects of this type.
  * @author finsiel
  */
@@ -15,7 +15,7 @@ public class RegionWrapper implements JRFSortable {
     /** Name of the region. */
     private String name = "";
 
-    /** Region's code as stated in CHM62EDT_COUNTRY_BIOGEOREGION.*/
+    /** Region's code as stated in chm62edt_country_biogeoregion.*/
     private String code = "";
 
     /** Region's ID_GEOSCOPE. */

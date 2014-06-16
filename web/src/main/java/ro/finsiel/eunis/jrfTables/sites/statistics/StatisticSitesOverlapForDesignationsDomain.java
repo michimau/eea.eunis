@@ -28,7 +28,7 @@ public class StatisticSitesOverlapForDesignationsDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("A");
     this.addColumnSpec(new StringColumnSpec("ID_SITE", "getIdSite", "setIdSite", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
@@ -63,21 +63,21 @@ public class StatisticSitesOverlapForDesignationsDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-    JoinTable natureObjectGeoscope = new JoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable natureObjectGeoscope = new JoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    JoinTable country = new JoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    JoinTable country = new JoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
     natureObjectGeoscope.addJoinTable(country);
 
-    JoinTable sites_sites = new JoinTable("CHM62EDT_SITES_SITES H", "ID_SITE", "ID_SITE");
+    JoinTable sites_sites = new JoinTable("chm62edt_sites_sites H", "ID_SITE", "ID_SITE");
     sites_sites.addJoinColumn(new BigDecimalJoinColumn("OVERLAP", "setOverlap"));
     this.addJoinTable(sites_sites);
 
-    JoinTable sites2 = new JoinTable("CHM62EDT_SITES I", "ID_SITE_LINK", "ID_SITE");
+    JoinTable sites2 = new JoinTable("chm62edt_sites I", "ID_SITE_LINK", "ID_SITE");
     sites_sites.addJoinTable(sites2);
 
-    JoinTable designations = new JoinTable("CHM62EDT_DESIGNATIONS E", "ID_DESIGNATION", "ID_DESIGNATION");
+    JoinTable designations = new JoinTable("chm62edt_designations E", "ID_DESIGNATION", "ID_DESIGNATION");
     this.addJoinTable(designations);
   }
 

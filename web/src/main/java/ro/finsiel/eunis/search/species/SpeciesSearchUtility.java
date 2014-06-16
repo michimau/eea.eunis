@@ -153,11 +153,11 @@ public class SpeciesSearchUtility {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            String SQL = "SELECT distinct e.scientific_name " + "FROM CHM62EDT_LEGAL_STATUS AS D "
-            + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON (D.ID_LEGAL_STATUS = C.ID_LOOKUP and C.LOOKUP_TYPE='LEGAL_STATUS') "
-            + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-            + "INNER JOIN DC_INDEX AS A ON B.ID_DC = A.ID_DC "
-            + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT ";
+            String SQL = "SELECT distinct e.scientific_name " + "FROM chm62edt_legal_status AS D "
+            + "INNER JOIN chm62edt_report_type AS C ON (D.ID_LEGAL_STATUS = C.ID_LOOKUP and C.LOOKUP_TYPE='LEGAL_STATUS') "
+            + "INNER JOIN chm62edt_reports AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+            + "INNER JOIN dc_index AS A ON B.ID_DC = A.ID_DC "
+            + "INNER JOIN chm62edt_species AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT ";
 
             if (groupID.equalsIgnoreCase("any")) {
                 SQL += " WHERE E.SCIENTIFIC_NAME LIKE '%" + scientificName + "%'";
@@ -220,7 +220,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * This method find a group ID after its name (COMMON_NAME). Consult CHM62EDT_GROUP_SPECIES table for this matter.
+     * This method find a group ID after its name (COMMON_NAME). Consult chm62edt_group_species table for this matter.
      * @param groupName Group name (fishes, invertebrates etc.)
      * @return An group ID or new Integer(-1) if that group is not found or exception occurrs
      */
@@ -253,7 +253,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_CONSERVATION_STATUS table.
+     * Find an id of an attribute from chm62edt_conservation_status table.
      * @param name Name of the abundance.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -286,7 +286,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_ABUNDANCE table.
+     * Find an id of an attribute from chm62edt_abundance table.
      * @param name Name of the attribute.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -318,7 +318,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_TRENDS table.
+     * Find an id of an attribute from chm62edt_trendS table.
      * @param name Name of the abundance.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -351,7 +351,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_DISTRIBUTION_STATUS table.
+     * Find an id of an attribute from chm62edt_distribution_status table.
      * @param name Name of the attribute.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -384,7 +384,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_SPECIES_STATUS table.
+     * Find an id of an attribute from chm62edt_species_status table.
      * @param name Name of the abundance.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -417,7 +417,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * Find an id of an attribute from CHM62EDT_INFO_QUALITY table.
+     * Find an id of an attribute from chm62edt_info_quality table.
      * @param name Name of the abundance.
      * @return ID of that abundance attribute or -1 if not found.
      */
@@ -450,7 +450,7 @@ public class SpeciesSearchUtility {
     }
 
     /**
-     * This method is used to find a group's common name (english) name giving it's group id. Consult CHM62EDT_GROUP_SPECIES
+     * This method is used to find a group's common name (english) name giving it's group id. Consult chm62edt_group_species
      * table for this
      * @param groupID ID_GROUP_SPECIES (group id)
      * @return The COMMON_NAME column coresponding to this id or "" if an invalid parameter was passed to this method
@@ -535,11 +535,11 @@ public class SpeciesSearchUtility {
 
             if (showInvalidatedSpecies == true) {
                 ret = finder.countWhere(
-                        "SELECT count(*) FROM CHM62EDT_SPECIES WHERE ID_GROUP_SPECIES = " + groupID
+                        "SELECT count(*) FROM chm62edt_species WHERE ID_GROUP_SPECIES = " + groupID
                         + " AND (TYPE_RELATED_SPECIES='species' OR TYPE_RELATED_SPECIES='subspecies')");
             } else {
                 ret = finder.countWhere(
-                        "SELECT count(*) FROM CHM62EDT_SPECIES WHERE ID_GROUP_SPECIES = " + groupID
+                        "SELECT count(*) FROM chm62edt_species WHERE ID_GROUP_SPECIES = " + groupID
                         + " AND VALID_NAME > 0 AND (TYPE_RELATED_SPECIES='species' OR TYPE_RELATED_SPECIES='subspecies')");
             }
         } catch (Exception ex) {
@@ -632,7 +632,7 @@ public class SpeciesSearchUtility {
 
     /**
      * Finds all the languages available (records from Chm62edtLanguageDomain).<br />
-     * Implements the query: SELECT * FROM CHM62EDT_LANGUAGE ORDER BY NAME.
+     * Implements the query: SELECT * FROM chm62edt_language ORDER BY NAME.
      * @return A list of Chm62edtLanguagePersist objects, encapsulating the languages
      */
     public static List findAllLanguages() {
@@ -674,17 +674,17 @@ public class SpeciesSearchUtility {
 
     /**
      * Return the national threat status information for a specified species in the specified country.
-     * @param specieID ID of the species (ID_SPECIES from CHM62EDT_SPECIES)
-     * @param countryName Name of the country (AREA_NANE_EN from CHM62EDT_COUNTRY)
+     * @param specieID ID of the species (ID_SPECIES from chm62edt_species)
+     * @param countryName Name of the country (AREA_NANE_EN from chm62edt_country)
      * @return List of Chm62edtConservationStatusPersist objects with threat information.
      */
     public static List getThreatNational(Integer specieID, String countryName) {
         List result = new Vector();
-        String sql = "SELECT H.* FROM CHM62EDT_SPECIES C INNER JOIN CHM62EDT_REPORTS E ON C.ID_NATURE_OBJECT=E.ID_NATURE_OBJECT";
+        String sql = "SELECT H.* FROM chm62edt_species C INNER JOIN chm62edt_reports E ON C.ID_NATURE_OBJECT=E.ID_NATURE_OBJECT";
 
-        sql += " INNER JOIN CHM62EDT_COUNTRY F ON E.ID_GEOSCOPE=F.ID_GEOSCOPE ";
-        sql += " INNER JOIN CHM62EDT_REPORT_TYPE G ON E.ID_REPORT_TYPE=G.ID_REPORT_TYPE ";
-        sql += " INNER JOIN CHM62EDT_CONSERVATION_STATUS H ON G.ID_LOOKUP=H.ID_CONSERVATION_STATUS ";
+        sql += " INNER JOIN chm62edt_country F ON E.ID_GEOSCOPE=F.ID_GEOSCOPE ";
+        sql += " INNER JOIN chm62edt_report_type G ON E.ID_REPORT_TYPE=G.ID_REPORT_TYPE ";
+        sql += " INNER JOIN chm62edt_conservation_status H ON G.ID_LOOKUP=H.ID_CONSERVATION_STATUS ";
         sql += " WHERE (G.LOOKUP_TYPE = 'CONSERVATION_STATUS') ";
         sql += " AND (C.ID_SPECIES=" + specieID + " AND F.AREA_NAME_EN='" + countryName + "') ";
         sql += " GROUP BY F.AREA_NAME_EN,H.NAME,H.CODE";
@@ -749,8 +749,8 @@ public class SpeciesSearchUtility {
             String sql = Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME", showEUNISInvalidatedSpecies);
 
             List species = new SpeciesGroupSpeciesDomain().findCustom(
-                    "SELECT A.ID_SPECIES,A.ID_SPECIES_LINK, " + "A.SCIENTIFIC_NAME,B.COMMON_NAME " + "FROM CHM62EDT_SPECIES AS A "
-                    + "LEFT JOIN CHM62EDT_GROUP_SPECIES AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES " + // "WHERE A.ID_TAXONOMY LIKE '" + findRadicalOfIdTaxonomy(idTaxonomy) + "%' " + sql +
+                    "SELECT A.ID_SPECIES,A.ID_SPECIES_LINK, " + "A.SCIENTIFIC_NAME,B.COMMON_NAME " + "FROM chm62edt_species AS A "
+                    + "LEFT JOIN chm62edt_group_species AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES " + // "WHERE A.ID_TAXONOMY LIKE '" + findRadicalOfIdTaxonomy(idTaxonomy) + "%' " + sql +
                     // "WHERE A.ID_TAXONOMY = '" + idTaxonomy + "' " + sql +
                     "WHERE " + whereC + sql + " GROUP BY A.ID_SPECIES");
 
@@ -914,9 +914,9 @@ public class SpeciesSearchUtility {
             SQLUtilities sqlc = new SQLUtilities();
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-            String sql = "SELECT DISTINCT NAME_EN " + "FROM CHM62EDT_LANGUAGE AS A "
-            + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON (A.ID_LANGUAGE = B.ID_LOOKUP AND B.LOOKUP_TYPE = 'LANGUAGE') "
-            + "INNER JOIN CHM62EDT_REPORTS AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
+            String sql = "SELECT DISTINCT NAME_EN " + "FROM chm62edt_language AS A "
+            + "INNER JOIN chm62edt_report_type AS B ON (A.ID_LANGUAGE = B.ID_LOOKUP AND B.LOOKUP_TYPE = 'LANGUAGE') "
+            + "INNER JOIN chm62edt_reports AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
             + "INNER JOIN `chm62edt_report_attributes` AS D ON (C.ID_REPORT_ATTRIBUTES = D.ID_REPORT_ATTRIBUTES AND D.NAME='VERNACULAR_NAME') "
             + "ORDER BY NAME_EN";
             List columns = sqlc.ExecuteSQLReturnList(sql, 1);

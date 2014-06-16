@@ -10,7 +10,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_SITES_SITES.
+ * JRF table for chm62edt_sites_sites.
  * @author finsiel
  **/
 public class Chm62edtSitesSitesDomain extends AbstractDomain {
@@ -31,7 +31,7 @@ public class Chm62edtSitesSitesDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SITES_SITES");
+        this.setTableName("chm62edt_sites_sites");
         this.setReadOnly(true);
 
         this.addColumnSpec(

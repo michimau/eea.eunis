@@ -51,7 +51,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("DC_INDEX");
+        this.setTableName("dc_index");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -134,19 +134,19 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
             + "H.SCIENTIFIC_NAME AS EDITOR, "
             + new Date(1998, 1, 1).getYear() + " AS DATE, "
             + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-            + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM chm62edt_species H "
+            + "INNER JOIN chm62edt_nature_object B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+            + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
             + "WHERE 1=1 "
             + condition + " GROUP BY H.SCIENTIFIC_NAME) " + "UNION "
             + "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
             + "H.SCIENTIFIC_NAME AS EDITOR, "
             + new Date(1998, 1, 1).getYear() + " AS DATE, "
             + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-            + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM chm62edt_species H "
+            + "INNER JOIN chm62edt_reports B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+            + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+            + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
             + "WHERE 1=1 "
             + condition
             + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
@@ -155,9 +155,9 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
             + "H.SCIENTIFIC_NAME AS EDITOR, "
             + new Date(1998, 1, 1).getYear() + " AS DATE, "
             + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-            + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
-            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM chm62edt_species H "
+            + "INNER JOIN chm62edt_taxonomy B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
+            + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
             + "WHERE  1=1 "
             + condition + " GROUP BY H.SCIENTIFIC_NAME) " + " ORDER BY NAME"
             + " LIMIT 0,"
@@ -219,18 +219,18 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
 
             String SQL = "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
                 + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
-                + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "FROM chm62edt_species H "
+                + "INNER JOIN chm62edt_nature_object B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
                 + "WHERE 1=1 " + condition
                 + " GROUP BY A.SOURCE,A.EDITOR,A.CREATED,A.TITLE,A.PUBLISHER "
                 + "UNION "
                 + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
                 + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
-                + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "FROM chm62edt_species H "
+                + "INNER JOIN chm62edt_reports B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
                 + "WHERE 1=1 " + condition
                 + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS',"
                 + "'SPECIES_STATUS','POPULATION_UNIT','TREND') "
@@ -238,9 +238,9 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
                 + "UNION "
                 + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
                 + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
-                + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "FROM chm62edt_species H "
+                + "INNER JOIN chm62edt_taxonomy B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
+                + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
                 + "WHERE  1=1 " + condition
                 + " GROUP BY A.SOURCE,A.EDITOR,A.CREATED,A.TITLE,A.PUBLISHER ";
 

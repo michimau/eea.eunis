@@ -33,7 +33,7 @@ public class ReferencesJoinDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("DC_INDEX");
+        this.setTableName("dc_index");
         this.setReadOnly(true);
 
         this.addColumnSpec(new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));

@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for DC_INDEX.
+ * JRF table for dc_index.
  * @author finsiel
  **/
 public class Chm62edtDcIndexDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtDcIndexDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("DC_INDEX");
+        this.setTableName("dc_index");
         this.setReadOnly(true);
 
         this.addColumnSpec(

@@ -15,7 +15,7 @@ public class NationalThreatWrapper {
     private int referenceYear = 0;
     private Integer idDc;
     private Integer idConsStatus = 0;
-    /** ID_DC in CHM62EDT_CONSERVATION_STATUS */
+    /** ID_DC in chm62edt_conservation_status */
     private Integer idDcConsStatus = 0;
     private String eunisAreaCode;
 

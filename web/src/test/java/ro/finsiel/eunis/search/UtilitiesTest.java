@@ -126,10 +126,10 @@ public class UtilitiesTest {
     public void getReferencesByIdDc() {
         SQLUtilities sqlUtils = DbHelper.getSqlUtilities();
         // The created date isn't set in the seed. We set it manually.
-        //sqlUtils.UpdateSQL("UPDATE DC_INDEX SET CREATED='2004' WHERE ID_DC = 2414");
+        //sqlUtils.UpdateSQL("UPDATE dc_index SET CREATED='2004' WHERE ID_DC = 2414");
 
         // Create a reference that has a source. The seed in setUpBeforeClass is not used.
-        sqlUtils.UpdateSQL("INSERT INTO DC_INDEX (ID_DC, TITLE, SOURCE, CREATED) VALUES (2500, 'atitle','source','2004')");
+        sqlUtils.UpdateSQL("INSERT INTO dc_index (ID_DC, TITLE, SOURCE, CREATED) VALUES (2500, 'atitle','source','2004')");
 
         String result = Utilities.getReferencesByIdDc("2500");
         String expected = "&lt;ul&gt;&lt;li&gt;Author : source&lt;/li&gt; &lt;li&gt;Title : atitle&lt;/li&gt; &lt;li&gt;Editor : &lt;/li&gt; &lt;li&gt;Publisher : &lt;/li&gt; &lt;li&gt;Date : 2004&lt;/li&gt; &lt;li&gt;Url : &lt;/li&gt;&lt;/ul&gt;";

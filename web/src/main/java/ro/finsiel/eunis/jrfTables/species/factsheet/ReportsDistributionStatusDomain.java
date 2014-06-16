@@ -31,7 +31,7 @@ public class ReportsDistributionStatusDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_NATURE_OBJECT_REPORT_TYPE");
+        this.setTableName("chm62edt_nature_object_report_type");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -53,7 +53,7 @@ public class ReportsDistributionStatusDomain extends AbstractDomain {
                 new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
                 DEFAULT_TO_NULL));
 
-        JoinTable joinTableGrid = new JoinTable("CHM62EDT_REPORT_TYPE B",
+        JoinTable joinTableGrid = new JoinTable("chm62edt_report_type B",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         joinTableGrid.addJoinColumn(
@@ -64,14 +64,14 @@ public class ReportsDistributionStatusDomain extends AbstractDomain {
 
         JoinTable Grid = null;
 
-        Grid = new JoinTable("CHM62EDT_GRID C", "ID_LOOKUP", "NAME");
+        Grid = new JoinTable("chm62edt_grid C", "ID_LOOKUP", "NAME");
         Grid.addJoinColumn(new StringJoinColumn("NAME", "setName"));
         Grid.addJoinColumn(new DoubleJoinColumn("LATITUDE", "setLatitude"));
         Grid.addJoinColumn(new DoubleJoinColumn("LONGITUDE", "setLongitude"));
         // Grid.addJoinColumn(new IntegerJoinColumn("ID_DC", "setIdDc"));
         joinTableGrid.addJoinTable(Grid);
 
-        JoinTable joinTableDist = new JoinTable("CHM62EDT_REPORT_TYPE D",
+        JoinTable joinTableDist = new JoinTable("chm62edt_report_type D",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         joinTableDist.addJoinColumn(
@@ -82,7 +82,7 @@ public class ReportsDistributionStatusDomain extends AbstractDomain {
 
         JoinTable Dist = null;
 
-        Dist = new JoinTable("CHM62EDT_DISTRIBUTION_STATUS E", "ID_LOOKUP",
+        Dist = new JoinTable("chm62edt_distribution_status E", "ID_LOOKUP",
                 "ID_DISTRIBUTION_STATUS");
         Dist.addJoinColumn(new StringJoinColumn("NAME", "setDistributionStatus"));
         joinTableDist.addJoinTable(Dist);

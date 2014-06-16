@@ -23,7 +23,7 @@ public class InfoQualityReportTypeDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_INFO_QUALITY");
+        this.setTableName("chm62edt_info_quality");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -36,7 +36,7 @@ public class InfoQualityReportTypeDomain extends AbstractDomain {
                 new StringColumnSpec("DESCRIPTION", "getDescription",
                 "setDescription", DEFAULT_TO_EMPTY_STRING, REQUIRED));
 
-        JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE",
+        JoinTable reportType = new JoinTable("chm62edt_report_type",
                 "ID_INFO_QUALITY", "ID_LOOKUP");
 
         this.addJoinTable(reportType);

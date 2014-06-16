@@ -25,7 +25,7 @@ public class SpeciesBookTest {
         DbHelper.handleSetUpOperation("seed-four-species.xml");
         SQLUtilities sqlUtils = DbHelper.getSqlUtilities();
         // The created date isn't set in the seed. We set it manually.
-        sqlUtils.UpdateSQL("UPDATE DC_INDEX SET CREATED='2004' WHERE ID_DC = 1835");
+        sqlUtils.UpdateSQL("UPDATE dc_index SET CREATED='2004' WHERE ID_DC = 1835");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class SpeciesBookTest {
         SpeciesBooksDomain instance = new SpeciesBooksDomain(searchCriteria, true);
         assertNotNull("Instantiation failed", instance);
         Long result = instance.countResults();
-        // results are grouped by DC_INDEX.* and both species in seed-four-species.xml are linked to the same DC_INDEX
+        // results are grouped by dc_index.* and both species in seed-four-species.xml are linked to the same dc_index
         assertEquals(Long.valueOf(1), result);
     }
 

@@ -230,13 +230,13 @@ public class ReferencesForSpecies {
                 SQL_REFERENCES += "PUBLISHER ";
             }
 
-            SQL_REFERENCES += "FROM DC_INDEX A ";
+            SQL_REFERENCES += "FROM dc_index A ";
 
 
             SQL = SQL_REFERENCES;
 
-            SQL += "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
+            SQL += "INNER JOIN chm62edt_nature_object B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN chm62edt_species H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
 
             SQL += "WHERE 1=1 ";
 
@@ -252,9 +252,9 @@ public class ReferencesForSpecies {
 
             SQL += SQL_REFERENCES;
 
-            SQL += "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
+            SQL += "INNER JOIN chm62edt_reports B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN chm62edt_species H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
 
             SQL += "WHERE 1=1 ";
 
@@ -273,8 +273,8 @@ public class ReferencesForSpecies {
 
             SQL += SQL_REFERENCES;
 
-            SQL += "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
-                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY ";
+            SQL += "INNER JOIN chm62edt_taxonomy B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN chm62edt_species H ON B.ID_TAXONOMY = H.ID_TAXONOMY ";
 
             SQL += "WHERE 1=1 ";
 

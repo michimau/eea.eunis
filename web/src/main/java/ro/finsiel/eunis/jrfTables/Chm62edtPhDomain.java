@@ -9,7 +9,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_PH.
+ * JRF table for chm62edt_ph.
  * @author finsiel
  **/
 public class Chm62edtPhDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtPhDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_PH");
+        this.setTableName("chm62edt_ph");
         this.setReadOnly(true);
 
         this.addColumnSpec(

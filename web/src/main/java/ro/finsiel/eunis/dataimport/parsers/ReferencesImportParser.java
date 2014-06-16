@@ -224,16 +224,16 @@ public class ReferencesImportParser extends DefaultHandler {
 
             dcIds = getDCIds();
             // deleteOldRecords();
-            maxDcId = getMaxId("SELECT MAX(ID_DC) FROM DC_INDEX");
+            maxDcId = getMaxId("SELECT MAX(ID_DC) FROM dc_index");
 
             // Insert statement
-            String query = "INSERT INTO DC_INDEX (ID_DC, REFERENCE, COMMENT, REFCD, "
+            String query = "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD, "
                 + "CREATED, TITLE, ALTERNATIVE, PUBLISHER, SOURCE, EDITOR, JOURNAL_TITLE, "
                 + "BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,?,'REFERENCES',?,?,?,?,?,?,?,?,?,?,?,?)";
             this.preparedStatementDcIndexInsert = con.prepareStatement(query);
 
             // Update statement
-            String queryDcIndexUpdate = "UPDATE DC_INDEX SET CREATED = ?, TITLE = ?, "
+            String queryDcIndexUpdate = "UPDATE dc_index SET CREATED = ?, TITLE = ?, "
                 + "ALTERNATIVE = ?, PUBLISHER = ?, SOURCE = ?, EDITOR = ?, JOURNAL_TITLE = ?, BOOK_TITLE = ?, "
                 + "JOURNAL_ISSUE = ?, ISBN = ?, URL = ? WHERE ID_DC = ?";
             this.preparedStatementDcIndexUpdate = con.prepareStatement(queryDcIndexUpdate);
@@ -281,7 +281,7 @@ public class ReferencesImportParser extends DefaultHandler {
                     int idDc = dcId.intValue();
 
                     ps = con.prepareStatement(
-                    "DELETE FROM DC_INDEX WHERE ID_DC = ?");
+                    "DELETE FROM dc_index WHERE ID_DC = ?");
                     ps.setInt(1, idDc);
                     ps.executeUpdate();
                 }
@@ -314,7 +314,7 @@ public class ReferencesImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_DC, REFCD FROM DC_INDEX WHERE COMMENT = 'REFERENCES'";
+            String query = "SELECT ID_DC, REFCD FROM dc_index WHERE COMMENT = 'REFERENCES'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();

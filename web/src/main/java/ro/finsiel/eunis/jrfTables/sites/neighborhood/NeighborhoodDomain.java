@@ -52,7 +52,7 @@ public class NeighborhoodDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
 
 
@@ -129,7 +129,7 @@ public class NeighborhoodDomain extends AbstractDomain implements Paginable {
   public Long countResults() throws CriteriaMissingException {
     if (-1 == _resultCount.longValue()) {
       StringBuffer filterSQL = new StringBuffer();
-      filterSQL.append(" SELECT COUNT(*) FROM CHM62EDT_SITES WHERE ");
+      filterSQL.append(" SELECT COUNT(*) FROM chm62edt_sites WHERE ");
       filterSQL.append(" ( LONGITUDE >= " + (originX - radius) + " AND LONGITUDE <= " + (originX + radius) + " ) ");
       filterSQL.append(" AND ");
       filterSQL.append(" ( LATITUDE  >= " + (originY - radius) + " AND LATITUDE  <= " + (originY + radius) + " ) ");

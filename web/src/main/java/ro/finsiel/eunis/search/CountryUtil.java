@@ -109,7 +109,7 @@ public class CountryUtil {
     }
 
     /**
-     * This method finds all country codes which contains at least one bioregion (from CHM62EDT_COUNTRY_BIOREGION).
+     * This method finds all country codes which contains at least one bioregion (from chm62edt_country_BIOREGION).
      * @return A non-null list of Chm62edtCountryBiogeoregionPersist objects, one for each country
      */
     protected List findAllCountriesCodes() {
@@ -141,7 +141,7 @@ public class CountryUtil {
     }
 
     /**
-     * Transform region code into region name (mapping got from CHM62EDT_BIOGEOREGION).
+     * Transform region code into region name (mapping got from chm62edt_biogeoregion).
      * @param regionCode Code of the region e.g. AT
      * @return The name of that region e.g. Atlantic
      */
@@ -167,7 +167,7 @@ public class CountryUtil {
     }
 
     /**
-     * Transform a country code into a country name by looking to CHM62EDT_COUNTRY table in EUNIS_AREA_CODE column.
+     * Transform a country code into a country name by looking to chm62edt_country table in EUNIS_AREA_CODE column.
      * @param code Country code.
      * @return Country name or "N/A" if not found or "null" of code was null.
      */
@@ -193,7 +193,7 @@ public class CountryUtil {
     }
 
     /**
-     * This method finds the ID_GEOSCOPE for a region (taken from CHM62EDT_BIOGEOREGION).
+     * This method finds the ID_GEOSCOPE for a region (taken from chm62edt_biogeoregion).
      * @param regionName Name of the region (NAME)
      * @return An integer with ID of the region.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
@@ -221,7 +221,7 @@ public class CountryUtil {
     }
 
     /**
-     * This method finds the ID_GEOSCOPE for a country (taken from CHM62EDT_COUNTRY) by using its AREA_NAME_ENGLISH.
+     * This method finds the ID_GEOSCOPE for a country (taken from chm62edt_country) by using its AREA_NAME_ENGLISH.
      * @param countryName Name of the country (AREA_NAME_ENGLISH).
      * @return An string with ID of the country.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
@@ -250,7 +250,7 @@ public class CountryUtil {
     }
 
     /**
-     * This method finds the ID_GEOSCOPE for a country (taken from CHM62EDT_COUNTRY) by using its EUNIS_AREA_CODE.
+     * This method finds the ID_GEOSCOPE for a country (taken from chm62edt_country) by using its EUNIS_AREA_CODE.
      * @param countryCode Country code (EUNIS_AREA_CODE).
      * @return A string with ID of the country.
      * @throws ro.finsiel.eunis.exceptions.RecordNotFoundException If no matching records were found.
@@ -281,7 +281,7 @@ public class CountryUtil {
     }
 
     /**
-     * Find country information by giving its english name (AREA_NAME_EN from CHM62EDT_COUNTRY).
+     * Find country information by giving its english name (AREA_NAME_EN from chm62edt_country).
      * Cached for better performance. The cache entries DO NOT REFRESH!
      * @param englishName Name of the country in english (EXACT MATCH)
      * @return null if nothing found, or the country object with data.
@@ -353,7 +353,7 @@ public class CountryUtil {
     }
 
     /**
-     * Find a region (from CHM62EDT_BIOGEOREGION).
+     * Find a region (from chm62edt_biogeoregion).
      * @param Name Region name.
      * @return Region JRF object.
      */
@@ -395,7 +395,7 @@ public class CountryUtil {
     }
 
     /**
-     * Find all objects that are countries, from (from CHM62EDT_COUNTRY).
+     * Find all objects that are countries, from (from chm62edt_country).
      * @return A list of Chm62edtCountryPersist objects.
      */
     public static List findAllCountries() {
@@ -437,7 +437,7 @@ public class CountryUtil {
         }
         try {
             ret = new Chm62edtCountryDomain().findCustom(
-                    "SELECT * FROM CHM62EDT_COUNTRY WHERE AREA_NAME_EN LIKE '%"
+                    "SELECT * FROM chm62edt_country WHERE AREA_NAME_EN LIKE '%"
                             + name
                             + "%' AND (ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0) GROUP BY AREA_NAME_EN ORDER BY AREA_NAME_EN");
         } catch (Exception _ex) {
@@ -475,7 +475,7 @@ public class CountryUtil {
     }
 
     /**
-     * Find a country by his ID_GEOSCOPE from CHM62EDT_COUNTRY.
+     * Find a country by his ID_GEOSCOPE from chm62edt_country.
      * @param idGeoscope Country's ID_GEOSCOPE.
      * @return Country name or '' if not found.
      */
@@ -502,7 +502,7 @@ public class CountryUtil {
     }
 
     /**
-     * Find ISO3L for a country (ISO_3L from CHM62EDT_COUNTRY).
+     * Find ISO3L for a country (ISO_3L from chm62edt_country).
      * @param name country name.
      * @return ISO_3L or null if not found.
      */
@@ -527,7 +527,7 @@ public class CountryUtil {
 
     /**
      * Find biogeoregion by its ID Geoscope.
-     * @param idGeoscope ID_GEOSCOPE (from CHM62EDT_BIOGEOREGION).
+     * @param idGeoscope ID_GEOSCOPE (from chm62edt_biogeoregion).
      * @return Region name.
      */
     public static String findBiogeoregionByIDGeoscope(Integer idGeoscope) {
@@ -633,32 +633,32 @@ public class CountryUtil {
                 whereCond += " and d.name = '" + region + "' ";
             }
 
-            sql = " select distinct a.id_nature_object FROM CHM62EDT_HABITAT AS A "
-                    + " INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT ";
+            sql = " select distinct a.id_nature_object FROM chm62edt_habitat AS A "
+                    + " INNER JOIN chm62edt_reports AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT ";
             if (null != country && country.trim().length() > 0) {
-                sql += " INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
+                sql += " INNER JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
                         + (null != region && region.trim().length() > 0
                         ? "INNER"
                                 : "LEFT OUTER")
-                                + " JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE where "
+                                + " JOIN chm62edt_biogeoregion AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE where "
                                 + whereCond;
             } else {
-                sql += " INNER JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
-                        + " LEFT OUTER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE where "
+                sql += " INNER JOIN chm62edt_biogeoregion AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
+                        + " LEFT OUTER JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE where "
                         + whereCond;
             }
         } else {
             // if is not country or region yet selected make un union
 
             sql = "select distinct a.id_nature_object "
-                    + "FROM CHM62EDT_HABITAT AS A "
-                    + "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
-                    + "INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
+                    + "FROM chm62edt_habitat AS A "
+                    + "INNER JOIN chm62edt_reports AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
+                    + "INNER JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
                     + "where C.AREA_NAME_EN is not null and trim(C.AREA_NAME_EN) != '' and C.AREA_NAME_EN != 'null' "
                     + dbCond + "union " + "select distinct a.id_nature_object "
-                    + "FROM CHM62EDT_HABITAT AS A "
-                    + "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
-                    + "INNER JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
+                    + "FROM chm62edt_habitat AS A "
+                    + "INNER JOIN chm62edt_reports AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
+                    + "INNER JOIN chm62edt_biogeoregion AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
                     + "where  D.NAME is not null and trim(D.NAME) != '' and D.NAME != 'null' "
                     + dbCond;
         }

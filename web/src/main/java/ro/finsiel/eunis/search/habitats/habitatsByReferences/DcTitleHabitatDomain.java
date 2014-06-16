@@ -49,7 +49,7 @@ public class DcTitleHabitatDomain extends AbstractDomain {
      *
      */
     public void setup() {
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("C");
 
@@ -58,12 +58,12 @@ public class DcTitleHabitatDomain extends AbstractDomain {
         // Joined tables
         JoinTable habitatReferences = null;
 
-        habitatReferences = new JoinTable("CHM62EDT_HABITAT_REFERENCES B", "ID_HABITAT", "ID_HABITAT");
+        habitatReferences = new JoinTable("chm62edt_habitat_references B", "ID_HABITAT", "ID_HABITAT");
         this.addJoinTable(habitatReferences);
 
         JoinTable Title = null;
 
-        Title = new JoinTable("DC_INDEX F", "ID_DC", "ID_DC");
+        Title = new JoinTable("dc_index F", "ID_DC", "ID_DC");
         Title.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
         Title.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
         habitatReferences.addJoinTable(Title);

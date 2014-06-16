@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_NATURE_OBJECT_REPORT_TYPE inner join CHM62EDT_REPORT_TYPE.
+ * JRF table for chm62edt_nature_object_report_type inner join chm62edt_report_type.
  * @author finsiel
  **/
 public class Chm62edtNatureObjectReportTypeDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtNatureObjectReportTypeDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_NATURE_OBJECT_REPORT_TYPE");
+        this.setTableName("chm62edt_nature_object_report_type");
         this.setTableAlias("A");
         this.setReadOnly(true);
         this.addColumnSpec(
@@ -56,7 +56,7 @@ public class Chm62edtNatureObjectReportTypeDomain extends AbstractDomain {
                 new IntegerColumnSpec("ID_GEOSCOPE", "getIdGeoscope",
                 "setIdGeoscope", DEFAULT_TO_NULL));
 
-        JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE B",
+        JoinTable reportType = new JoinTable("chm62edt_report_type B",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         reportType.addJoinColumn(

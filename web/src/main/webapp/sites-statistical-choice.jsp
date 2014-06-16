@@ -30,7 +30,7 @@
 //  String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
   StringBuffer sql = new StringBuffer();
   sql.append("DESCRIPTION LIKE '%" + name + "%'");
-  //sql = Utilities.getConditionForSourceDB(sql,source_db,db,"CHM62EDT_DESIGNATIONS");
+  //sql = Utilities.getConditionForSourceDB(sql,source_db,db,"chm62edt_designations");
   sql.append(" GROUP BY DESCRIPTION");
 
   List sites = SitesSearchUtility.findDesignationsWhere(sql.toString());

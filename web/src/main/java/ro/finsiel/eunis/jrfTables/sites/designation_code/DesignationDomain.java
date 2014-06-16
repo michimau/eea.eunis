@@ -69,7 +69,7 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("C");
 
@@ -85,17 +85,17 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("ID_DESIGNATION", "getIdDesign", "setIdDesign", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("ID_GEOSCOPE", "getGeoscope", "setGeoscope", DEFAULT_TO_NULL));
 
-    JoinTable J4 = new JoinTable("CHM62EDT_DESIGNATIONS J", "ID_DESIGNATION", "ID_DESIGNATION");
+    JoinTable J4 = new JoinTable("chm62edt_designations J", "ID_DESIGNATION", "ID_DESIGNATION");
     J4.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setDescriptionSites"));
     J4.addJoinColumn(new StringJoinColumn("DESCRIPTION_EN", "setDescriptionSitesEn"));
     J4.addJoinColumn(new StringJoinColumn("DESCRIPTION_FR", "setDescriptionSitesFr"));
     J4.addJoinColumn(new StringJoinColumn("ORIGINAL_DATASOURCE", "setDesignSourceDb"));
     this.addJoinTable(J4);
 
-    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY G", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable country = new OuterJoinTable("chm62edt_country G", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
     natureObjectGeoscope.addJoinTable(country);
 
@@ -155,10 +155,10 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     StringBuffer filterSQL = _prepareWhereSearch();
     String sql = "";
     sql = " SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) " +
-            " FROM CHM62EDT_SITES C " +
-            " INNER JOIN CHM62EDT_DESIGNATIONS J ON (C.ID_DESIGNATION=J.ID_DESIGNATION AND C.ID_GEOSCOPE=J.ID_GEOSCOPE) " +
-            " LEFT OUTER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE B ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT" +
-            " LEFT OUTER JOIN CHM62EDT_COUNTRY G ON B.ID_GEOSCOPE = G.ID_GEOSCOPE " +
+            " FROM chm62edt_sites C " +
+            " INNER JOIN chm62edt_designations J ON (C.ID_DESIGNATION=J.ID_DESIGNATION AND C.ID_GEOSCOPE=J.ID_GEOSCOPE) " +
+            " LEFT OUTER JOIN chm62edt_nature_object_geoscope B ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT" +
+            " LEFT OUTER JOIN chm62edt_country G ON B.ID_GEOSCOPE = G.ID_GEOSCOPE " +
             " WHERE " + filterSQL.toString();
     Long tempList = this.findLong(sql);
     if (null != tempList)

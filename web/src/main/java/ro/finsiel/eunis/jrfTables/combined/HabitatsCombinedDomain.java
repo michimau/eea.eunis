@@ -53,7 +53,7 @@ public class HabitatsCombinedDomain extends AbstractDomain implements Paginable 
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
 
     this.addColumnSpec(new StringColumnSpec("ID_HABITAT", "getIdHabitat", "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
     this.addColumnSpec(new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject", "setIdNatureObject", DEFAULT_TO_ZERO, REQUIRED));
@@ -70,10 +70,10 @@ public class HabitatsCombinedDomain extends AbstractDomain implements Paginable 
     this.setTableAlias("A");
     this.setReadOnly(true);
     // Add the join only if the search is also done in descriptions
-    OuterJoinTable habitatDescr = new OuterJoinTable("CHM62EDT_HABITAT_DESCRIPTION B", "ID_HABITAT", "ID_HABITAT");
+    OuterJoinTable habitatDescr = new OuterJoinTable("chm62edt_habitat_description B", "ID_HABITAT", "ID_HABITAT");
     this.addJoinTable(habitatDescr);
 
-    JoinTable advSearchResults = new JoinTable("EUNIS_COMBINED_SEARCH_RESULTS C", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable advSearchResults = new JoinTable("eunis_combined_search_results C", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(advSearchResults);
   }
 
@@ -122,9 +122,9 @@ public class HabitatsCombinedDomain extends AbstractDomain implements Paginable 
    */
   private Long _rawCount() {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM CHM62EDT_HABITAT AS A " +
-            " LEFT OUTER JOIN CHM62EDT_HABITAT_DESCRIPTION B ON B.ID_HABITAT=A.ID_HABITAT " +
-            " INNER JOIN EUNIS_COMBINED_SEARCH_RESULTS C ON A.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT" +
+    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM chm62edt_habitat AS A " +
+            " LEFT OUTER JOIN chm62edt_habitat_description B ON B.ID_HABITAT=A.ID_HABITAT " +
+            " INNER JOIN eunis_combined_search_results C ON A.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT" +
             " WHERE 1=1 AND C.ID_SESSION='" + sid + "'");
     Long ret = findLong(sql.toString());
     if (null == ret) return new Long(0);

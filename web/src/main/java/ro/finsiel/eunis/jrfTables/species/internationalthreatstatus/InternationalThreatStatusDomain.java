@@ -72,7 +72,7 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_GROUP_SPECIES");
+        this.setTableName("chm62edt_group_species");
         this.setReadOnly(true);
         this.setTableAlias("D");
 
@@ -95,7 +95,7 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
         // Joined tables
         JoinTable species = null;
 
-        species = new JoinTable("CHM62EDT_SPECIES C", "ID_GROUP_SPECIES",
+        species = new JoinTable("chm62edt_species C", "ID_GROUP_SPECIES",
                 "ID_GROUP_SPECIES");
         species.addJoinColumn(
                 new IntegerJoinColumn("ID_SPECIES", "IdSpecies", "setIdSpecies"));
@@ -111,13 +111,13 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
 
         JoinTable reports = null;
 
-        reports = new JoinTable("CHM62EDT_REPORTS E", "ID_NATURE_OBJECT",
+        reports = new JoinTable("chm62edt_reports E", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT");
         species.addJoinTable(reports);
 
         JoinTable country = null;
 
-        country = new JoinTable("CHM62EDT_COUNTRY F", "ID_GEOSCOPE",
+        country = new JoinTable("chm62edt_country F", "ID_GEOSCOPE",
                 "ID_GEOSCOPE");
         country.addJoinColumn(
                 new StringJoinColumn("AREA_NAME_EN", "areaNameEn",
@@ -128,13 +128,13 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
 
         JoinTable reporttype = null;
 
-        reporttype = new JoinTable("CHM62EDT_REPORT_TYPE G", "ID_REPORT_TYPE",
+        reporttype = new JoinTable("chm62edt_report_type G", "ID_REPORT_TYPE",
                 "ID_REPORT_TYPE");
         reports.addJoinTable(reporttype);
 
         JoinTable status = null;
 
-        status = new JoinTable("CHM62EDT_CONSERVATION_STATUS H", "ID_LOOKUP",
+        status = new JoinTable("chm62edt_conservation_status H", "ID_LOOKUP",
                 "ID_CONSERVATION_STATUS");
         status.addJoinColumn(
                 new StringJoinColumn("NAME", "defAbrev", "setDefAbrev"));
@@ -147,7 +147,7 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
 
         OuterJoinTable family = null;
 
-        family = new OuterJoinTable("CHM62EDT_TAXONOMY I", "ID_TAXONOMY",
+        family = new OuterJoinTable("chm62edt_taxonomy I", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         family.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -167,7 +167,7 @@ public class InternationalThreatStatusDomain extends AbstractDomain implements P
         species.addJoinTable(family);
 
         // OuterJoinTable order = null;
-        // order = new OuterJoinTable("CHM62EDT_TAXONOMY J", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // order = new OuterJoinTable("chm62edt_taxonomy J", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // order.addJoinColumn(new StringJoinColumn("NAME", "setOrder"));
         // family.addJoinTable(order);
 

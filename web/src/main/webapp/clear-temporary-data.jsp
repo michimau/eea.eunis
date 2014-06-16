@@ -105,25 +105,25 @@
 
       String SQL;
       // Find total number of rows containing temporary data detected in database
-      SQL = "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+      SQL = "SELECT COUNT(*) FROM eunis_advanced_search_results ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+      SQL += "SELECT COUNT(*) FROM eunis_advanced_search_results ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_TEMP ";
+      SQL += "SELECT COUNT(*) FROM eunis_advanced_search_temp ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA ";
+      SQL += "SELECT COUNT(*) FROM eunis_advanced_search_criteria ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP ";
+      SQL += "SELECT COUNT(*) FROM eunis_advanced_search_criteria_temp ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+      SQL += "SELECT COUNT(*) FROM eunis_combined_search_results ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+      SQL += "SELECT COUNT(*) FROM eunis_combined_search_results ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_TEMP ";
+      SQL += "SELECT COUNT(*) FROM eunis_combined_search_temp ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA ";
+      SQL += "SELECT COUNT(*) FROM eunis_combined_search_criteria ";
       SQL += " UNION ";
-      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP ";
+      SQL += "SELECT COUNT(*) FROM eunis_combined_search_criteria_temp ";
 
       ps = con.prepareStatement(SQL);
       rs = ps.executeQuery();

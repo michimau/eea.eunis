@@ -79,7 +79,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     /** Regions found in this country. */
     private Vector countryRegions;
 
-    /** Looks like a record in CHM62EDT_COUNTRY is not always a country, so this flag is true if it's indeed a country. */
+    /** Looks like a record in chm62edt_country is not always a country, so this flag is true if it's indeed a country. */
     private boolean isIndeedCountry;
 
     /** List of designations found for this country. */
@@ -189,7 +189,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         String[] db =
             {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
 
-        sql = Utilities.getConditionForSourceDB(sql, source, db, "CHM62EDT_COUNTRY_SITES_FACTSHEET");
+        sql = Utilities.getConditionForSourceDB(sql, source, db, "chm62edt_country_sites_factsheet");
 
         try {
             countrySitesFactsheets = new CountrySitesFactsheetDomain().findWhere(sql.toString());
@@ -339,10 +339,10 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
                             + " sum(SITES.AREA) as TOT_AREA , "
                             + " DESIG.* "
                             + " from "
-                            + " CHM62EDT_DESIGNATIONS as DESIG "
-                            + " inner join CHM62EDT_SITES as SITES on (DESIG.ID_DESIGNATION=SITES.ID_DESIGNATION and DESIG.ID_GEOSCOPE=SITES.ID_GEOSCOPE) "
-                            + " inner join CHM62EDT_NATURE_OBJECT_GEOSCOPE as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
-                            + " inner join CHM62EDT_COUNTRY as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) " + " where "
+                            + " chm62edt_designations as DESIG "
+                            + " inner join chm62edt_sites as SITES on (DESIG.ID_DESIGNATION=SITES.ID_DESIGNATION and DESIG.ID_GEOSCOPE=SITES.ID_GEOSCOPE) "
+                            + " inner join chm62edt_nature_object_geoscope as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
+                            + " inner join chm62edt_country as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) " + " where "
                             + statisticsBean.prepareSQLForFindSites() + " group by " + "DESIG.ID_DESIGNATION, DESIG.ID_GEOSCOPE;";
 
             ps = con.prepareStatement(sql);
@@ -391,7 +391,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "select OVERLAP from CHM62EDT_SITES_SITES WHERE OVERLAP > 0 LIMIT 1";
+            String sql = "select OVERLAP from chm62edt_sites_sites WHERE OVERLAP > 0 LIMIT 1";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             boolean hasOverlaps = rs.next();
@@ -409,12 +409,12 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
                     sql =
                             "select sum(gr.overlap) from "
                                     + " (SELECT SITES_SITES.OVERLAP FROM "
-                                    + " CHM62EDT_DESIGNATIONS as DESIG "
-                                    + " INNER JOIN CHM62EDT_SITES AS SITES ON (SITES.ID_DESIGNATION=DESIG.ID_DESIGNATION and SITES.ID_GEOSCOPE = DESIG.ID_GEOSCOPE AND SITES.AREA>0) "
-                                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
-                                    + " INNER JOIN CHM62EDT_COUNTRY as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) "
-                                    + " INNER JOIN CHM62EDT_SITES_SITES AS SITES_SITES ON (SITES.ID_SITE = SITES_SITES.ID_SITE AND SITES_SITES.OVERLAP>0) "
-                                    + " INNER JOIN CHM62EDT_SITES AS SITES2 ON (SITES_SITES.ID_SITE_LINK = SITES2.ID_SITE AND SITES2.AREA>0) "
+                                    + " chm62edt_designations as DESIG "
+                                    + " INNER JOIN chm62edt_sites AS SITES ON (SITES.ID_DESIGNATION=DESIG.ID_DESIGNATION and SITES.ID_GEOSCOPE = DESIG.ID_GEOSCOPE AND SITES.AREA>0) "
+                                    + " INNER JOIN chm62edt_nature_object_geoscope as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
+                                    + " INNER JOIN chm62edt_country as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) "
+                                    + " INNER JOIN chm62edt_sites_sites AS SITES_SITES ON (SITES.ID_SITE = SITES_SITES.ID_SITE AND SITES_SITES.OVERLAP>0) "
+                                    + " INNER JOIN chm62edt_sites AS SITES2 ON (SITES_SITES.ID_SITE_LINK = SITES2.ID_SITE AND SITES2.AREA>0) "
                                     + " where DESIG.ID_DESIGNATION='" + design.getIdDesignation() + "' "
                                     + " AND  DESIG.ID_GEOSCOPE = " + design.getIdGeoscope() + " AND "
                                     + statisticsBean.prepareSQLForFindSites()

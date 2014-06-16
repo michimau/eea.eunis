@@ -24,7 +24,7 @@ public class HabitatLegalDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -41,14 +41,14 @@ public class HabitatLegalDomain extends AbstractDomain {
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
 
     JoinTable natObjRepType = null;
-    natObjRepType = new JoinTable("CHM62EDT_HABITAT_CLASS_CODE B", "ID_HABITAT", "ID_HABITAT");
+    natObjRepType = new JoinTable("chm62edt_habitat_class_code B", "ID_HABITAT", "ID_HABITAT");
     natObjRepType.addJoinColumn(new StringJoinColumn("TITLE", "setTitle"));
     natObjRepType.addJoinColumn(new StringJoinColumn("RELATION_TYPE", "setRelationType"));
     natObjRepType.addJoinColumn(new StringJoinColumn("CODE", "setCode"));
     this.addJoinTable(natObjRepType);
 
     JoinTable repType = null;
-    repType = new JoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
+    repType = new JoinTable("chm62edt_class_code C", "ID_CLASS_CODE", "ID_CLASS_CODE");
     repType.addJoinColumn(new StringJoinColumn("NAME", "setLegalName"));
     repType.addJoinColumn(new IntegerJoinColumn("ID_DC", "setIdDc"));
     natObjRepType.addJoinTable(repType);

@@ -261,7 +261,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     private String getNatObjectId(String siteId) throws SQLException {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ID_SITE = '"
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ID_SITE = '"
             + siteId + "'";
         String natId = ExecuteSQL(query);
 
@@ -281,7 +281,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
         try {
             con = getConnection();
 
-            String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE SOURCE_DB = 'CDDA_NATIONAL'";
+            String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM chm62edt_sites WHERE SOURCE_DB = 'CDDA_NATIONAL'";
 
             ps = con.prepareStatement(query);
 
@@ -399,7 +399,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             ps.executeUpdate();
 
             ps = con.prepareStatement(
-            "SELECT DISTINCT SOURCE_DB FROM CHM62EDT_SITES WHERE SOURCE_DB IS NOT NULL");
+            "SELECT DISTINCT SOURCE_DB FROM chm62edt_sites WHERE SOURCE_DB IS NOT NULL");
             rs = ps.executeQuery();
             List<String> sources = new ArrayList<String>();
 
@@ -412,7 +412,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             }
 
             ps1 = con.prepareStatement(
-            "SELECT DISTINCT AREA_NAME_EN,SURFACE FROM CHM62EDT_COUNTRY WHERE ISO_2L<>'' AND ISO_2L IS NOT NULL AND AREA_NAME_EN IS NOT NULL");
+            "SELECT DISTINCT AREA_NAME_EN,SURFACE FROM chm62edt_country WHERE ISO_2L<>'' AND ISO_2L IS NOT NULL AND AREA_NAME_EN IS NOT NULL");
             rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 String areaName = rs1.getString("AREA_NAME_EN");
@@ -427,9 +427,9 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
                     // here we calculate no of sites
                     String sql = "SELECT Count(DISTINCT C.ID_NATURE_OBJECT) AS cnt "
-                        + "FROM CHM62EDT_COUNTRY AS A "
-                        + "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                        + "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                        + "FROM chm62edt_country AS A "
+                        + "INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                        + "INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
 
                     ps2 = con.prepareStatement(sql);
@@ -443,7 +443,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     }
 
                     // here we calculate no of species
-                    sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS E INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN CHM62EDT_SPECIES AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+                    sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM chm62edt_country AS E INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN chm62edt_species AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
                         + "WHERE E.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
                     ps2 = con.prepareStatement(sql);
                     ps2.setString(1, areaName);
@@ -456,7 +456,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     }
 
                     // here we calculate no of habitats
-                    sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS E INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN CHM62EDT_HABITAT AS H "
+                    sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM chm62edt_country AS E INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN chm62edt_habitat AS H "
                         + "ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT WHERE E.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
                     ps2 = con.prepareStatement(sql);
                     ps2.setString(1, areaName);
@@ -469,9 +469,9 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     }
 
                     // calculate area
-                    sql = "SELECT C.AREA AS AREA FROM CHM62EDT_COUNTRY AS A "
-                        + "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                        + "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                    sql = "SELECT C.AREA AS AREA FROM chm62edt_country AS A "
+                        + "INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                        + "INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND C.AREA IS NOT NULL AND C.AREA>0 "
                         + "GROUP BY C.ID_NATURE_OBJECT";
                     ps2 = con.prepareStatement(sql);
@@ -487,11 +487,11 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                         no = no + 1;
                     }
 
-                    sql = "SELECT H.OVERLAP AS OVERLAP FROM CHM62EDT_COUNTRY AS A"
-                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE"
-                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT"
-                        + " INNER JOIN CHM62EDT_SITES_SITES AS H ON C.ID_SITE = H.ID_SITE"
-                        + " INNER JOIN CHM62EDT_SITES AS I ON H.ID_SITE_LINK = I.ID_SITE"
+                    sql = "SELECT H.OVERLAP AS OVERLAP FROM chm62edt_country AS A"
+                        + " INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE"
+                        + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT"
+                        + " INNER JOIN chm62edt_sites_sites AS H ON C.ID_SITE = H.ID_SITE"
+                        + " INNER JOIN chm62edt_sites AS I ON H.ID_SITE_LINK = I.ID_SITE"
                         + " WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB =?"
                         + " AND H.OVERLAP>0 AND C.AREA>0 AND I.AREA>0 GROUP BY C.ID_SITE,I.ID_SITE,H.OVERLAP";
                     ps2 = con.prepareStatement(sql);
@@ -521,9 +521,9 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                         }
                     }
 
-                    sql = "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS A "
-                        + "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                        + "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                    sql = "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) AS cnt FROM chm62edt_country AS A "
+                        + "INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                        + "INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND "
                         + "((C.AREA IS NOT NULL AND C.AREA>0) OR (C.LENGTH IS NOT NULL AND C.LENGTH>0))";
                     ps2 = con.prepareStatement(sql);
@@ -542,9 +542,9 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                         procent = (noSitesWithSurfaceAvailable * 100) / noSites;
                     }
 
-                    sql = "SELECT C.AREA AS AREA FROM CHM62EDT_COUNTRY AS A "
-                        + "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                        + "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                    sql = "SELECT C.AREA AS AREA FROM chm62edt_country AS A "
+                        + "INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                        + "INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                         + "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND C.AREA IS NOT NULL AND C.AREA>0 "
                         + "GROUP BY C.ID_NATURE_OBJECT";
                     ps2 = con.prepareStatement(sql);
@@ -603,11 +603,11 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
         try {
             con = getConnection();
 
-            String updateDesignation = "UPDATE CHM62EDT_DESIGNATIONS SET CDDA_SITES='Y', TOTAL_NUMBER=? WHERE ID_DESIGNATION=?";
+            String updateDesignation = "UPDATE chm62edt_designations SET CDDA_SITES='Y', TOTAL_NUMBER=? WHERE ID_DESIGNATION=?";
 
             psUpdateDesignation = con.prepareStatement(updateDesignation);
 
-            String query = "SELECT ID_DESIGNATION FROM CHM62EDT_DESIGNATIONS WHERE SOURCE_DB = 'CDDA_NATIONAL'";
+            String query = "SELECT ID_DESIGNATION FROM chm62edt_designations WHERE SOURCE_DB = 'CDDA_NATIONAL'";
             String query2 = "";
 
             ps = con.prepareStatement(query);
@@ -616,7 +616,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 String idDesignation = rs.getString("ID_DESIGNATION");
 
                 if (idDesignation != null && idDesignation.length() > 0) {
-                    query2 = "SELECT COUNT(ID_SITE) AS CNT FROM CHM62EDT_SITES WHERE ID_DESIGNATION=?";
+                    query2 = "SELECT COUNT(ID_SITE) AS CNT FROM chm62edt_sites WHERE ID_DESIGNATION=?";
                     ps2 = con.prepareStatement(query2);
                     ps2.setString(1, idDesignation);
                     rs2 = ps2.executeQuery();

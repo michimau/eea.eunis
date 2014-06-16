@@ -26,7 +26,7 @@ public class SpeciesGroupSpeciesDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
 
         this.addColumnSpec(

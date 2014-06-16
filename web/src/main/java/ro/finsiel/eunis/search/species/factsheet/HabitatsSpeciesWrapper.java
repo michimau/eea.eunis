@@ -18,9 +18,9 @@ public class HabitatsSpeciesWrapper {
 
     /**
      * Ctor.
-     * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES.
-     * @param idSpeciesLink ID_SPECIES_LINK from CHM62EDT_SPECIES.
-     * @param scientificName SCIENTIFIC_NAME from CHM62EDT_SPECIES.
+     * @param idSpecies ID_SPECIES from chm62edt_species.
+     * @param idSpeciesLink ID_SPECIES_LINK from chm62edt_species.
+     * @param scientificName SCIENTIFIC_NAME from chm62edt_species.
      * @param geoscope ID_GEOSCOPE of the country.
      * @param abundance Abundance attribute value.
      * @param frequencies Frequencies attribute value.

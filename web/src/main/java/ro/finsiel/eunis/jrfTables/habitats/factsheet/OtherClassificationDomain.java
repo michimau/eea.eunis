@@ -27,7 +27,7 @@ public class OtherClassificationDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT_CLASS_CODE");
+    this.setTableName("chm62edt_habitat_class_code");
     this.setReadOnly(true);
     this.setTableAlias("A");
 
@@ -37,7 +37,7 @@ public class OtherClassificationDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("RELATION_TYPE", "getRelationType", "setRelationType", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("CODE", "getCode", "setCode", DEFAULT_TO_NULL));
 
-    JoinTable classCode = new JoinTable("CHM62EDT_CLASS_CODE B", "ID_CLASS_CODE", "ID_CLASS_CODE");
+    JoinTable classCode = new JoinTable("chm62edt_class_code B", "ID_CLASS_CODE", "ID_CLASS_CODE");
     classCode.addJoinColumn(new StringJoinColumn("NAME", "setName"));
     classCode.addJoinColumn(new IntegerJoinColumn("SORT_ORDER", "setSortOrder"));
     classCode.addJoinColumn(new IntegerJoinColumn("ID_DC", "setIdDc"));

@@ -64,7 +64,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             order = order + " " + dir.toUpperCase();
         }
 
-        String query = "SELECT ID_DC, TITLE, ALTERNATIVE, SOURCE, CREATED FROM DC_INDEX";
+        String query = "SELECT ID_DC, TITLE, ALTERNATIVE, SOURCE, CREATED FROM dc_index";
 
         String trimmedLike = "";
         boolean likeAdded = false;
@@ -121,7 +121,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     private int getReferencesCnt(String like) {
         int ret = 0;
         String trimmedLike = like == null ? StringUtils.EMPTY : like.trim();
-        String query = "SELECT COUNT(*) FROM DC_INDEX";
+        String query = "SELECT COUNT(*) FROM dc_index";
         if (trimmedLike.length() > 0 && !trimmedLike.equalsIgnoreCase(ReferencesActionBean.DEFAULT_FILTER_VALUE)) {
             query += " WHERE (TITLE LIKE ? OR SOURCE LIKE ?) ";
         }
@@ -185,9 +185,9 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             
             // Retrieving reference labels for objects of type "localref"
             preparedStatement = con.prepareStatement(
-                    "SELECT OBJECT AS ID_DC, COALESCE(TITLE, OBJECT) AS TITLE FROM DC_ATTRIBUTES"
-                    + " LEFT JOIN DC_INDEX ON DC_INDEX.ID_DC=DC_ATTRIBUTES.OBJECT"
-                    + " WHERE TYPE='localref' AND DC_ATTRIBUTES.ID_DC = ? ORDER BY TITLE");
+                    "SELECT OBJECT AS ID_DC, COALESCE(TITLE, OBJECT) AS TITLE FROM dc_attributes"
+                    + " LEFT JOIN dc_index ON dc_index.ID_DC=dc_attributes.OBJECT"
+                    + " WHERE TYPE='localref' AND dc_attributes.ID_DC = ? ORDER BY TITLE");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             
@@ -242,7 +242,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         DcIndexDTO object = null;
 
-        String query = "SELECT * FROM DC_INDEX WHERE ID_DC = ?";
+        String query = "SELECT * FROM dc_index WHERE ID_DC = ?";
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -289,7 +289,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         List<DcIndexDTO> ret = new ArrayList<DcIndexDTO>();
 
-        String query = "SELECT * FROM DC_INDEX";
+        String query = "SELECT * FROM dc_index";
 
         List<Object> values = new ArrayList<Object>();
         DcIndexDTOReader rsReader = new DcIndexDTOReader();
@@ -312,7 +312,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         Integer ret = null;
 
         if (source != null) {
-            int id_dc = getId("SELECT MAX(ID_DC) FROM DC_INDEX");
+            int id_dc = getId("SELECT MAX(ID_DC) FROM dc_index");
 
             id_dc++;
             ret = new Integer(id_dc);
@@ -367,9 +367,9 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         DesignationDcObjectDTO ret = null;
 
         String query =
-                "SELECT SOURCE, EDITOR, CREATED, TITLE, PUBLISHER " + "FROM CHM62EDT_DESIGNATIONS "
-                        + "INNER JOIN DC_INDEX ON (CHM62EDT_DESIGNATIONS.ID_DC = DC_INDEX.ID_DC) "
-                        + "WHERE CHM62EDT_DESIGNATIONS.ID_DESIGNATION = ? AND CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = ?";
+                "SELECT SOURCE, EDITOR, CREATED, TITLE, PUBLISHER " + "FROM chm62edt_designations "
+                        + "INNER JOIN dc_index ON (chm62edt_designations.ID_DC = dc_index.ID_DC) "
+                        + "WHERE chm62edt_designations.ID_DESIGNATION = ? AND chm62edt_designations.ID_GEOSCOPE = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -404,7 +404,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         List<PairDTO> ret = new ArrayList<PairDTO>();
 
         String query =
-                "SELECT I.ID_DC, I.SOURCE, I.TITLE " + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_INDEX AS I "
+                "SELECT I.ID_DC, I.SOURCE, I.TITLE " + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, dc_index AS I "
                         + "WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' "
                         + "AND R.ID_DC = I.ID_DC GROUP BY R.ID_DC ORDER BY I.TITLE";
 

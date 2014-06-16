@@ -202,11 +202,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         sites =
                 new SitesByNatureObjectDomain()
         .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE   "
+                + " FROM chm62edt_habitat AS A "
+                + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE   "
                 + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject()
                 + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
 
@@ -219,11 +219,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         sitesForSubtypes =
                 new SitesByNatureObjectDomain()
         .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                + " FROM chm62edt_habitat AS A "
+                + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
                 + " WHERE A.ID_NATURE_OBJECT ="
                 + factsheet.getHabitat().getIdNatureObject()
                 + (factsheet.isAnnexI() ? " and right(A.code_2000,2) <> '00' and length(A.code_2000) = 4 AND if(right(A.code_2000,1) = '0',left(A.code_2000,3),A.code_2000) like '"

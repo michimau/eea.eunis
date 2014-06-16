@@ -30,7 +30,7 @@ public class Chm62edtMotivationDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_MOTIVATION");
+        this.setTableName("chm62edt_motivation");
         this.setReadOnly(true);
 
         this.addColumnSpec(

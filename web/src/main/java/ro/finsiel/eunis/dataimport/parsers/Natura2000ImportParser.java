@@ -982,9 +982,9 @@ public class Natura2000ImportParser extends DefaultHandler {
         this.inputStream = inputStream;
 
         try {
-            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
-            maxReportAttributeId = getMaxId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
-            maxReportTypeId = getMaxId("SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
+            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM chm62edt_nature_object");
+            maxReportAttributeId = getMaxId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM chm62edt_report_attributes");
+            maxReportTypeId = getMaxId("SELECT MAX(ID_REPORT_TYPE) FROM chm62edt_report_type");
 
             String queryNatObject =
                 "INSERT INTO chm62edt_nature_object (ID_NATURE_OBJECT, ORIGINAL_CODE, ID_DC, TYPE) VALUES (?,?, -1, 'NATURA2000_SITES')";
@@ -1007,7 +1007,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                 + "VALUES (?,?,?,?,?,?)";
             this.preparedStatementNatObjectReportType = con.prepareStatement(insertNatObjectReportType);
 
-            String insertNatObjectGeoscope = "INSERT IGNORE INTO CHM62EDT_NATURE_OBJECT_GEOSCOPE "
+            String insertNatObjectGeoscope = "INSERT IGNORE INTO chm62edt_nature_object_geoscope "
                 + "(ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_DC, ID_GEOSCOPE, ID_REPORT_ATTRIBUTES) "
                 + "VALUES (?,-1,-1,?,-1)";
             this.preparedStatementNatObjectGeoscope = con.prepareStatement(insertNatObjectGeoscope);
@@ -1016,7 +1016,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                 + "(ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,?,?)";
             this.preparedStatementReportAttribute = con.prepareStatement(insertReportAttribute);
 
-            String insertSiteSites = "INSERT IGNORE INTO CHM62EDT_SITES_SITES "
+            String insertSiteSites = "INSERT IGNORE INTO chm62edt_sites_sites "
                 + "(ID_SITE, ID_SITE_LINK, SEQUENCE, RELATION_TYPE, WITHIN_PROJECT, SOURCE_TABLE) "
                 + "VALUES (?,?,-1,?,1,'sitrel')";
             this.preparedStatementSiteSites = con.prepareStatement(insertSiteSites);
@@ -1121,61 +1121,61 @@ public class Natura2000ImportParser extends DefaultHandler {
 
         try {
 
-            String query = "DELETE FROM CHM62EDT_SITE_ATTRIBUTES WHERE ID_SITE = ?";
+            String query = "DELETE FROM chm62edt_site_attributes WHERE ID_SITE = ?";
 
             ps = con.prepareStatement(query);
             ps.setString(1, siteCode);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_SITES_SITES WHERE ID_SITE = ?";
+            query = "DELETE FROM chm62edt_sites_sites WHERE ID_SITE = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteCode);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_SITES_RELATED_DESIGNATIONS WHERE ID_SITE = ?";
+            query = "DELETE FROM chm62edt_sites_related_designations WHERE ID_SITE = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteCode);
             ps.executeUpdate();
 
-            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS TT " +
+            query = "DELETE ST FROM chm62edt_report_attributes AS ST, chm62edt_nature_object_report_type AS TT " +
             "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE WHERE ID_NATURE_OBJECT = ?";
+            query = "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_NATURE_OBJECT_GEOSCOPE AS TT " +
+            query = "DELETE ST FROM chm62edt_report_attributes AS ST, chm62edt_nature_object_geoscope AS TT " +
             "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_NATURE_OBJECT_GEOSCOPE WHERE ID_NATURE_OBJECT = ?";
+            query = "DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_REPORTS AS TT " +
+            query = "DELETE ST FROM chm62edt_report_attributes AS ST, chm62edt_reports AS TT " +
             "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_REPORTS WHERE ID_NATURE_OBJECT = ?";
+            query = "DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_SITES WHERE ID_NATURE_OBJECT = ?";
+            query = "DELETE FROM chm62edt_sites WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
-            query = "DELETE FROM CHM62EDT_NATURE_OBJECT WHERE ID_NATURE_OBJECT = ?";
+            query = "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
@@ -1191,7 +1191,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     /*private String getGeoscopeIdEu() throws Exception {
         String ret = sqlUtilities.ExecuteSQL(
-        "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'EU' ORDER BY ID_GEOSCOPE");
+        "SELECT ID_GEOSCOPE FROM chm62edt_country WHERE EUNIS_AREA_CODE = 'EU' ORDER BY ID_GEOSCOPE");
 
         if (ret == null || ret.length() == 0) {
             ret = "-1";
@@ -1200,7 +1200,7 @@ public class Natura2000ImportParser extends DefaultHandler {
     }*/
 
     private String getGeoscopeId() {
-        String query = "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE ISO_2L = '"
+        String query = "SELECT ID_GEOSCOPE FROM chm62edt_country WHERE ISO_2L = '"
             + siteCode.substring(0, 2) + "' ORDER BY ID_GEOSCOPE";
         String geoId = sqlUtilities.ExecuteSQL(query);
 
@@ -1250,7 +1250,7 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getSpeciesNatObjectIdByName(String sciName) {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE SCIENTIFIC_NAME='"
             + EunisUtil.replaceTags(sciName) + "'";
         String noId = sqlUtilities.ExecuteSQL(query);
 

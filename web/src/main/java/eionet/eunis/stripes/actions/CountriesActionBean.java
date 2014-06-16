@@ -30,7 +30,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
 
 /**
- * An action bean that lists all the countries found in CHM62EDT_COUNTRY table.
+ * An action bean that lists all the countries found in chm62edt_country table.
  *
  * @author jaanus
  */

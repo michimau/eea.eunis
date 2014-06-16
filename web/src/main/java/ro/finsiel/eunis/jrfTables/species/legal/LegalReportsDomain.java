@@ -27,7 +27,7 @@ public class LegalReportsDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
 
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
@@ -54,12 +54,12 @@ public class LegalReportsDomain extends AbstractDomain {
         JoinTable legalStatus = null;
         JoinTable dcIndex = null;
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE B", "ID_REPORT_TYPE","ID_REPORT_TYPE");
+        reportType = new JoinTable("chm62edt_report_type B", "ID_REPORT_TYPE","ID_REPORT_TYPE");
         this.addJoinTable(reportType);
-        legalStatus = new JoinTable("CHM62EDT_LEGAL_STATUS C", "ID_LOOKUP", "ID_LEGAL_STATUS");
+        legalStatus = new JoinTable("chm62edt_legal_status C", "ID_LOOKUP", "ID_LEGAL_STATUS");
         legalStatus.addJoinColumn(new StringJoinColumn("ANNEX", "annex", "setAnnex"));
         reportType.addJoinTable(legalStatus);
-        dcIndex = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        dcIndex = new JoinTable("dc_index D", "ID_DC", "ID_DC");
         dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
         this.addJoinTable(dcIndex);
     }

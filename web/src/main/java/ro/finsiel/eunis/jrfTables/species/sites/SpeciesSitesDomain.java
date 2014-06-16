@@ -84,7 +84,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
         this.setTableAlias("C");
 
@@ -100,11 +100,11 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_SPECIES_LINK", "getIdSpeciesLink",
                 "setIdSpeciesLink", DEFAULT_TO_NULL));
-        // FROM CHM62EDT_GROUP_SPECIES
+        // FROM chm62edt_group_species
         this.addColumnSpec(
                 new StringColumnSpec("COMMON_NAME", "getCommonName",
                 "setCommonName", DEFAULT_TO_NULL));
-        // FROM CHM62EDT_TAXONOMY
+        // FROM chm62edt_taxonomy
         this.addColumnSpec(
                 new StringColumnSpec("NAME", "setTaxonomicNameFamily",
                 "setTaxonomicNameFamily", DEFAULT_TO_NULL));
@@ -121,7 +121,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
                 new StringColumnSpec("TAXONOMY_TREE", "taxonomyTree",
                 "setTaxonomyTree", DEFAULT_TO_NULL));
 
-        // FROM CHM62EDT_SITES
+        // FROM chm62edt_sites
         this.addColumnSpec(
                 new StringColumnSpec("NAME", "getSiteName", "setSiteName",
                 DEFAULT_TO_NULL));
@@ -387,7 +387,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
                 == SitesSearchCriteria.SEARCH_COUNTRY.intValue()) {
             try {
                 results = new Chm62edtCountryDomain().findCustom(
-                        "SELECT *" + " FROM CHM62EDT_COUNTRY AS E"
+                        "SELECT *" + " FROM chm62edt_country AS E"
                         + " WHERE  E.ISO_2L<>'' AND E.ISO_2L<>'null' AND E.ISO_2L IS NOT NULL AND E.SELECTION <> 0 "
                         + filter.toString() + " GROUP BY E.AREA_NAME_EN");
             } catch (Exception _ex) {
@@ -420,7 +420,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
                 == SitesSearchCriteria.SEARCH_REGION.intValue()) {
             try {
                 results = new Chm62edtBiogeoregionDomain().findCustom(
-                        "SELECT *" + " FROM CHM62EDT_BIOGEOREGION AS E"
+                        "SELECT *" + " FROM chm62edt_biogeoregion AS E"
                         + " WHERE  (1=1) " + filter.toString()
                         + " GROUP BY E.NAME");
             } catch (Exception _ex) {
@@ -463,17 +463,17 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
         String joinWithGroupSpeciesAndTaxonomy = "";
 
         if (!commingFromfindPopupLOV) {
-            joinWithGroupSpeciesAndTaxonomy = " LEFT JOIN CHM62EDT_GROUP_SPECIES AS I ON (H.ID_GROUP_SPECIES = I.ID_GROUP_SPECIES)"
-                    + " LEFT JOIN CHM62EDT_TAXONOMY AS J ON (H.ID_TAXONOMY = J.ID_TAXONOMY )";
-            // " LEFT JOIN CHM62EDT_TAXONOMY AS L ON (J.ID_TAXONOMY_LINK = L.ID_TAXONOMY )";
+            joinWithGroupSpeciesAndTaxonomy = " LEFT JOIN chm62edt_group_species AS I ON (H.ID_GROUP_SPECIES = I.ID_GROUP_SPECIES)"
+                    + " LEFT JOIN chm62edt_taxonomy AS J ON (H.ID_TAXONOMY = J.ID_TAXONOMY )";
+            // " LEFT JOIN chm62edt_taxonomy AS L ON (J.ID_TAXONOMY_LINK = L.ID_TAXONOMY )";
 
         }
         // If we search on habitat scientific name as main criteria
         if (searchAttribute.intValue()
                 == SitesSearchCriteria.SEARCH_NAME.intValue()) {
-            sql = "SELECT " + what + " FROM CHM62EDT_SITES AS C "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS G ON C.ID_NATURE_OBJECT = G.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_SPECIES AS H ON G.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+            sql = "SELECT " + what + " FROM chm62edt_sites AS C "
+                    + " INNER JOIN chm62edt_nature_object_report_type AS G ON C.ID_NATURE_OBJECT = G.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_species AS H ON G.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
                     + joinWithGroupSpeciesAndTaxonomy + " WHERE (1 = 1) "
                     + whereCondition;
         }
@@ -482,31 +482,31 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
                 == SitesSearchCriteria.SEARCH_SIZE.intValue()
                         || searchAttribute.intValue()
                                 == SitesSearchCriteria.SEARCH_LENGTH.intValue()) {
-            sql = "SELECT " + what + " FROM CHM62EDT_SITES AS C "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_SPECIES AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+            sql = "SELECT " + what + " FROM chm62edt_sites AS C "
+                    + " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_species AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
                     + joinWithGroupSpeciesAndTaxonomy + " WHERE (1 = 1) "
                     + whereCondition;
         }
         // If we search on habitats country as main criteria
         if (searchAttribute.intValue()
                 == SitesSearchCriteria.SEARCH_COUNTRY.intValue()) {
-            sql = "SELECT " + what + " FROM CHM62EDT_COUNTRY AS E "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
-                    + " INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_SPECIES AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+            sql = "SELECT " + what + " FROM chm62edt_country AS E "
+                    + " INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                    + " INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_species AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
                     + joinWithGroupSpeciesAndTaxonomy + " WHERE (1 = 1) "
                     + whereCondition;
         }
         // If we search on habitats country as main criteria
         if (searchAttribute.intValue()
                 == SitesSearchCriteria.SEARCH_REGION.intValue()) {
-            sql = "SELECT " + what + " FROM CHM62EDT_BIOGEOREGION AS E "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
-                    + " INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
-                    + " INNER JOIN CHM62EDT_SPECIES AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+            sql = "SELECT " + what + " FROM chm62edt_biogeoregion AS E "
+                    + " INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                    + " INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT "
+                    + " INNER JOIN chm62edt_species AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
                     + joinWithGroupSpeciesAndTaxonomy + " WHERE (1 = 1) "
                     + whereCondition;
         }

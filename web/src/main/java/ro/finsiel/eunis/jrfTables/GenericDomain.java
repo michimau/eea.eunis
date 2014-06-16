@@ -27,7 +27,7 @@ public class GenericDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SPECIES"); // Some table name should be specified so I choosed species.
+        this.setTableName("chm62edt_species"); // Some table name should be specified so I choosed species.
         this.setReadOnly(true);
 
         this.addColumnSpec(

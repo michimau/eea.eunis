@@ -30,11 +30,11 @@ public class EunisGroupSearchCriteriaDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("EUNIS_GROUP_SEARCH_CRITERIA");
+    this.setTableName("eunis_group_search_criteria");
 
     this.addColumnSpec(
             new CompoundPrimaryKeyColumnSpec(new StringColumnSpec("CRITERIA_NAME", "getNameCriteria", "setNameCriteria", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY),
-                    new StringColumnSpec("ID_EUNIS_GROUP_SEARCH_CRITERIA", "getIdGroupSearchCriteria()", "setIdGroupSearchCriteria", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY))
+                    new StringColumnSpec("ID_eunis_group_search_criteria", "getIdGroupSearchCriteria()", "setIdGroupSearchCriteria", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY))
     );
 
     this.addColumnSpec(new StringColumnSpec("CRITERIA_ATTRIBUTE", "getAttribute", "setAttribute", DEFAULT_TO_EMPTY_STRING, REQUIRED));

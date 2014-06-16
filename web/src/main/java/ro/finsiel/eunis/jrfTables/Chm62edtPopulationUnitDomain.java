@@ -9,7 +9,7 @@ import net.sf.jrf.join.JoinTable;
 
 
 /**
- * JRF table for CHM62EDT_POPULATION_UNIT.
+ * JRF table for chm62edt_population_unit.
  * @author finsiel
  **/
 public class Chm62edtPopulationUnitDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtPopulationUnitDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_POPULATION_UNIT");
+        this.setTableName("chm62edt_population_unit");
         this.setReadOnly(true);
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_POPULATION_UNIT",

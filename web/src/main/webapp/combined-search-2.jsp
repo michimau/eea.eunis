@@ -494,19 +494,19 @@
                   }
 
                   SQL = "SELECT ";
-                  SQL += "EUNIS_COMBINED_SEARCH.ID_NODE,";
-                  SQL += "EUNIS_COMBINED_SEARCH.NODE_TYPE,";
-                  SQL += "EUNIS_COMBINED_SEARCH_CRITERIA.ATTRIBUTE,";
-                  SQL += "EUNIS_COMBINED_SEARCH_CRITERIA.OPERATOR,";
-                  SQL += "EUNIS_COMBINED_SEARCH_CRITERIA.FIRST_VALUE,";
-                  SQL += "EUNIS_COMBINED_SEARCH_CRITERIA.LAST_VALUE ";
+                  SQL += "eunis_combined_search.ID_NODE,";
+                  SQL += "eunis_combined_search.NODE_TYPE,";
+                  SQL += "eunis_combined_search_criteria.ATTRIBUTE,";
+                  SQL += "eunis_combined_search_criteria.OPERATOR,";
+                  SQL += "eunis_combined_search_criteria.FIRST_VALUE,";
+                  SQL += "eunis_combined_search_criteria.LAST_VALUE ";
                   SQL += "FROM ";
-                  SQL += "EUNIS_COMBINED_SEARCH ";
-                  SQL += "LEFT OUTER JOIN EUNIS_COMBINED_SEARCH_CRITERIA ON (EUNIS_COMBINED_SEARCH.ID_SESSION = EUNIS_COMBINED_SEARCH_CRITERIA.ID_SESSION) AND (EUNIS_COMBINED_SEARCH.NATURE_OBJECT = EUNIS_COMBINED_SEARCH_CRITERIA.NATURE_OBJECT) AND (EUNIS_COMBINED_SEARCH.ID_NODE = EUNIS_COMBINED_SEARCH_CRITERIA.ID_NODE) ";
-                  SQL += "WHERE (EUNIS_COMBINED_SEARCH.ID_SESSION='" + IdSession + "') ";
-                  SQL += "AND (EUNIS_COMBINED_SEARCH.NATURE_OBJECT='" + NatureObject + "') ";
+                  SQL += "eunis_combined_search ";
+                  SQL += "LEFT OUTER JOIN eunis_combined_search_criteria ON (eunis_combined_search.ID_SESSION = eunis_combined_search_criteria.ID_SESSION) AND (eunis_combined_search.NATURE_OBJECT = eunis_combined_search_criteria.NATURE_OBJECT) AND (eunis_combined_search.ID_NODE = eunis_combined_search_criteria.ID_NODE) ";
+                  SQL += "WHERE (eunis_combined_search.ID_SESSION='" + IdSession + "') ";
+                  SQL += "AND (eunis_combined_search.NATURE_OBJECT='" + NatureObject + "') ";
                   SQL += "ORDER BY ";
-                  SQL += "EUNIS_COMBINED_SEARCH.ID_NODE ";
+                  SQL += "eunis_combined_search.ID_NODE ";
 
                   try {
                     ps = con.prepareStatement(SQL);
@@ -969,15 +969,15 @@
                     tsas.DeleteResults(IdSession, NatureObject);
 
                     if(NatureObject.equalsIgnoreCase("Species")) {
-                      str = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE (" + str + ")";
+                      str = "SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE (" + str + ")";
                     }
                     if(NatureObject.equalsIgnoreCase("Habitat")) {
 
-                      String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
-                      str = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT WHERE   " + isGoodHabitat + " AND (" + str + ")";
+                      String isGoodHabitat = " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
+                      str = "SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE   " + isGoodHabitat + " AND (" + str + ")";
                     }
                     if(NatureObject.equalsIgnoreCase("Sites")) {
-                      str = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE (" + str + ")";
+                      str = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE (" + str + ")";
                     }
                     String query = tsas.ExecuteFilterSQL(str, "");
                     out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");

@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_DESCRIPTION.
+ * JRF table for chm62edt_habitat_description.
  * @author finsiel
  **/
 public class Chm62edtHabitatDescriptionDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtHabitatDescriptionDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_DESCRIPTION");
+        this.setTableName("chm62edt_habitat_description");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -51,7 +51,7 @@ public class Chm62edtHabitatDescriptionDomain extends AbstractDomain {
                 new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
                 DEFAULT_TO_ZERO));
 
-        JoinTable langTable = new JoinTable("CHM62EDT_LANGUAGE", "ID_LANGUAGE",
+        JoinTable langTable = new JoinTable("chm62edt_language", "ID_LANGUAGE",
                 "ID_LANGUAGE");
 
         langTable.addJoinColumn(

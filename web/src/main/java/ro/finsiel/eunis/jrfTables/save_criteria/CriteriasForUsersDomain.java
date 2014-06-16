@@ -26,14 +26,14 @@ public class CriteriasForUsersDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("EUNIS_GROUP_SEARCH");
+    this.setTableName("eunis_group_search");
 
     this.addColumnSpec(new StringColumnSpec("CRITERIA_NAME", "getNameCriteria", "setNameCriteria", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
     this.addColumnSpec(new StringColumnSpec("DESCRIPTION", "getDescription", "setDescription", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("USERNAME", "getUsers", "setUsers", DEFAULT_TO_EMPTY_STRING, REQUIRED));
     this.addColumnSpec(new StringColumnSpec("FROM_WHERE", "getFromWhere", "setFromWhere", DEFAULT_TO_EMPTY_STRING, REQUIRED));
 
-    JoinTable join1 = new JoinTable("EUNIS_GROUP_SEARCH_CRITERIA", "CRITERIA_NAME", "CRITERIA_NAME");
+    JoinTable join1 = new JoinTable("eunis_group_search_criteria", "CRITERIA_NAME", "CRITERIA_NAME");
     join1.addJoinColumn(new StringJoinColumn("CRITERIA_FORM_FIELD_ATTRIBUTE", "setCriteriaFormFieldAttribute"));
     join1.addJoinColumn(new StringJoinColumn("CRITERIA_FORM_FIELD_OPERATOR", "setCriteriaFormFieldOperator"));
     join1.addJoinColumn(new StringJoinColumn("CRITERIA_ATTRIBUTE", "setCriteriaAttribute"));

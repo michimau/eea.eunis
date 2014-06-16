@@ -50,8 +50,8 @@
   out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
   out.print("<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\">" + "\n");
   try {
-    String strSQL = "SELECT a.ID_SPECIES,a.SCIENTIFIC_NAME,b.COMMON_NAME FROM CHM62EDT_SPECIES AS a";
-    strSQL = strSQL + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES b ON a.ID_GROUP_SPECIES = b.ID_GROUP_SPECIES";
+    String strSQL = "SELECT a.ID_SPECIES,a.SCIENTIFIC_NAME,b.COMMON_NAME FROM chm62edt_species AS a";
+    strSQL = strSQL + " LEFT OUTER JOIN chm62edt_group_species b ON a.ID_GROUP_SPECIES = b.ID_GROUP_SPECIES";
     strSQL = strSQL + " LIMIT " + start_from + "," + nr;
 
     ps = con.createStatement();
@@ -114,17 +114,17 @@
       psNames.close();
 
       //insert geographical distribution
-      String strSQLGeo = "SELECT DISTINCT CHM62EDT_COUNTRY.AREA_NAME_EN";
-      strSQLGeo = strSQLGeo + " FROM CHM62EDT_REPORTS, CHM62EDT_REPORT_TYPE, CHM62EDT_COUNTRY, CHM62EDT_SPECIES_STATUS, CHM62EDT_SPECIES";
-      strSQLGeo = strSQLGeo + " WHERE CHM62EDT_REPORTS.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'SPECIES_STATUS'";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORT_TYPE.ID_LOOKUP = CHM62EDT_SPECIES_STATUS.ID_SPECIES_STATUS";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_COUNTRY.AREA_NAME_EN NOT LIKE 'ospar%'";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_COUNTRY.AREA_NAME_EN IS NOT NULL";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORTS.ID_NATURE_OBJECT = CHM62EDT_SPECIES.ID_NATURE_OBJECT";
-      strSQLGeo = strSQLGeo + " AND CHM62EDT_SPECIES.ID_SPECIES = " + spec_id;
-      strSQLGeo = strSQLGeo + " ORDER BY CHM62EDT_COUNTRY.AREA_NAME_EN ASC";
+      String strSQLGeo = "SELECT DISTINCT chm62edt_country.AREA_NAME_EN";
+      strSQLGeo = strSQLGeo + " FROM chm62edt_reports, chm62edt_report_type, chm62edt_country, chm62edt_species_status, chm62edt_species";
+      strSQLGeo = strSQLGeo + " WHERE chm62edt_reports.ID_REPORT_TYPE = chm62edt_report_type.ID_REPORT_TYPE";
+      strSQLGeo = strSQLGeo + " AND chm62edt_reports.ID_GEOSCOPE = chm62edt_country.ID_GEOSCOPE";
+      strSQLGeo = strSQLGeo + " AND chm62edt_report_type.LOOKUP_TYPE = 'SPECIES_STATUS'";
+      strSQLGeo = strSQLGeo + " AND chm62edt_report_type.ID_LOOKUP = chm62edt_species_status.ID_SPECIES_STATUS";
+      strSQLGeo = strSQLGeo + " AND chm62edt_country.AREA_NAME_EN NOT LIKE 'ospar%'";
+      strSQLGeo = strSQLGeo + " AND chm62edt_country.AREA_NAME_EN IS NOT NULL";
+      strSQLGeo = strSQLGeo + " AND chm62edt_reports.ID_NATURE_OBJECT = chm62edt_species.ID_NATURE_OBJECT";
+      strSQLGeo = strSQLGeo + " AND chm62edt_species.ID_SPECIES = " + spec_id;
+      strSQLGeo = strSQLGeo + " ORDER BY chm62edt_country.AREA_NAME_EN ASC";
 
       psGeo = con.createStatement();
       rsGeo = psGeo.executeQuery(strSQLGeo);

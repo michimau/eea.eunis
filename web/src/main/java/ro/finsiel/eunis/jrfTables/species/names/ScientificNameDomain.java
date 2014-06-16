@@ -28,10 +28,10 @@ import java.util.List;
  * @since 23.01.2003
  *
  * QUERY IMPLEMENTED:
- * SELECT * FROM CHM62EDT_SPECIES AS A
- * INNER JOIN CHM62EDT_GROUP_SPECIES AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES
- * INNER JOIN CHM62EDT_TAXONOMY AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY
- * LEFT JOIN CHM62EDT_TAXONOMY AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY WHERE ...
+ * SELECT * FROM chm62edt_species AS A
+ * INNER JOIN chm62edt_group_species AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES
+ * INNER JOIN chm62edt_taxonomy AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY
+ * LEFT JOIN chm62edt_taxonomy AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY WHERE ...
  */
 public class ScientificNameDomain extends AbstractDomain implements Paginable {
 
@@ -85,7 +85,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -128,7 +128,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         // Joined tables
         OuterJoinTable groupSpecies;
 
-        groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B",
+        groupSpecies = new OuterJoinTable("chm62edt_group_species B",
                 "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "commonName",
@@ -137,7 +137,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
 
         OuterJoinTable taxCodeFamily;
 
-        taxCodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY",
+        taxCodeFamily = new OuterJoinTable("chm62edt_taxonomy C", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         taxCodeFamily.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -156,7 +156,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         this.addJoinTable(taxCodeFamily);
 
         // OuterJoinTable taxCodeOrder;
-        // taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
         // taxCodeFamily.addJoinTable(taxCodeOrder);
     }
@@ -194,10 +194,10 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                     + " C.NAME AS taxonomyName," + " C.LEVEL, "
                     + " C.TAXONOMY_TREE, " + " C.NAME AS taxonomicNameFamily, "
                     + " C.NAME AS taxonomicNameOrder"
-                    + " FROM CHM62EDT_SPECIES A LEFT"
-                    + " OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                    + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT"
-                    + " OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
+                    + " FROM chm62edt_species A LEFT"
+                    + " OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
+                    + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT"
+                    + " OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
                     + " WHERE " + where
                     + " ) UNION ( "
                     + " SELECT A.ID_SPECIES,"
@@ -211,13 +211,13 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                     + " C.NAME AS taxonomyName," + " C.LEVEL,"
                     + " C.TAXONOMY_TREE, " + " C.NAME AS taxonomicNameFamily, "
                     + " C.NAME AS taxonomicNameOrder"
-                    + " FROM CHM62EDT_REPORTS G"
-                    + " INNER JOIN CHM62EDT_REPORT_TYPE F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
-                    + " INNER JOIN CHM62EDT_SPECIES A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
-                    + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                    + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
-                    + " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
-                    + " INNER JOIN CHM62EDT_REPORT_ATTRIBUTES I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
+                    + " FROM chm62edt_reports G"
+                    + " INNER JOIN chm62edt_report_type F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
+                    + " INNER JOIN chm62edt_species A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
+                    + " LEFT OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
+                    + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
+                    + " LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
+                    + " INNER JOIN chm62edt_report_attributes I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
                     + " WHERE " + _prepareWhereSearchVernacular()
                     + " AND F.LOOKUP_TYPE = 'LANGUAGE'"
                     + " AND I.NAME ='VERNACULAR_NAME' "
@@ -273,20 +273,20 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
             sql.append(
                     " select count(idSpecies) from ("
                             + " SELECT A.ID_SPECIES As idSpecies"
-                            + " FROM CHM62EDT_SPECIES A"
-                            + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON"
+                            + " FROM chm62edt_species A"
+                            + " LEFT OUTER JOIN chm62edt_group_species B ON"
                             + " A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
                             + " WHERE " + _prepareWhereSearch().toString()
                             + " UNION" + " SELECT A.ID_SPECIES AS idSpecies"
-                            + " FROM CHM62EDT_REPORTS G"
-                            + " INNER JOIN CHM62EDT_REPORT_TYPE F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
-                            + " INNER JOIN CHM62EDT_SPECIES A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
-                            + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
-                            + " INNER JOIN CHM62EDT_REPORT_ATTRIBUTES I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
+                            + " FROM chm62edt_reports G"
+                            + " INNER JOIN chm62edt_report_type F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
+                            + " INNER JOIN chm62edt_species A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
+                            + " LEFT OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
+                            + " INNER JOIN chm62edt_report_attributes I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
                             + " WHERE " + _prepareWhereSearchVernacular()
                             + " AND F.LOOKUP_TYPE = 'LANGUAGE'"
                             + " AND I.NAME ='VERNACULAR_NAME'" + " ) AS H");
@@ -294,10 +294,10 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
 
         } else {
             sql.append(
-                    "SELECT COUNT(*) " + "FROM CHM62EDT_SPECIES AS A "
-                    + "LEFT JOIN CHM62EDT_GROUP_SPECIES AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES "
-                    + "LEFT JOIN CHM62EDT_TAXONOMY AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY "
-                    + "LEFT JOIN CHM62EDT_TAXONOMY AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY WHERE ");
+                    "SELECT COUNT(*) " + "FROM chm62edt_species AS A "
+                    + "LEFT JOIN chm62edt_group_species AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES "
+                    + "LEFT JOIN chm62edt_taxonomy AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY "
+                    + "LEFT JOIN chm62edt_taxonomy AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY WHERE ");
             // Apply WHERE CLAUSE
             sql.append(_prepareWhereSearch().toString());
             ret = findLong(sql.toString());

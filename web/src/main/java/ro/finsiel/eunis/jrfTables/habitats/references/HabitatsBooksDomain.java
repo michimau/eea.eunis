@@ -67,7 +67,7 @@ public class HabitatsBooksDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("C");
 
@@ -85,14 +85,14 @@ public class HabitatsBooksDomain extends AbstractDomain implements Paginable {
 
         // Joined tables
         JoinTable habitatReferences = null;
-        habitatReferences = new JoinTable("CHM62EDT_HABITAT_REFERENCES B", "ID_HABITAT", "ID_HABITAT");
+        habitatReferences = new JoinTable("chm62edt_habitat_references B", "ID_HABITAT", "ID_HABITAT");
         habitatReferences.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDC", "setIdDC"));
         habitatReferences.addJoinColumn(new ShortJoinColumn("HAVE_SOURCE", "haveSource", "setHaveSource"));
         habitatReferences.addJoinColumn(new ShortJoinColumn("HAVE_OTHER_REFERENCES", "haveOtherReferences", "setHaveOtherReferences"));
         this.addJoinTable(habitatReferences);
 
         JoinTable dc_index = null;
-        dc_index = new JoinTable("DC_INDEX J", "ID_DC", "ID_DC");
+        dc_index = new JoinTable("dc_index J", "ID_DC", "ID_DC");
         dc_index.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         dc_index.addJoinColumn(new StringJoinColumn("EDITOR", "editor", "setEditor"));
         dc_index.addJoinColumn(new StringJoinColumn("CREATED", "created", "setCreated"));

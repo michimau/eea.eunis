@@ -6,7 +6,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 
 /**
- * JRF table for EUNIS_USERS.
+ * JRF table for eunis_users.
  * @author finsiel
  **/
 public class UserDomain extends AbstractDomain {
@@ -27,7 +27,7 @@ public class UserDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("EUNIS_USERS");
+    this.setTableName("eunis_users");
     this.addColumnSpec(new StringColumnSpec("USERNAME", "getUsername", "setUsername", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
     this.addColumnSpec(new StringColumnSpec("FIRST_NAME", "getFirstName", "setFirstName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("LAST_NAME", "getLastName", "setLastName", DEFAULT_TO_EMPTY_STRING));

@@ -57,7 +57,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("DC_INDEX");
+        this.setTableName("dc_index");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -72,14 +72,14 @@ public class RefDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher", DEFAULT_TO_NULL));
 
         JoinTable habitatReferences = null;
-        habitatReferences = new JoinTable("CHM62EDT_HABITAT_REFERENCES B", "ID_DC", "ID_DC");
+        habitatReferences = new JoinTable("chm62edt_habitat_references B", "ID_DC", "ID_DC");
         habitatReferences.addJoinColumn(new StringJoinColumn("ID_HABITAT", "idHabitat", "setIdHabitat"));
         habitatReferences.addJoinColumn(new ShortJoinColumn("HAVE_SOURCE", "haveSource", "setHaveSource"));
         habitatReferences.addJoinColumn(new ShortJoinColumn("HAVE_OTHER_REFERENCES", "haveOtherReferences", "setHaveOtherReferences"));
         this.addJoinTable(habitatReferences);
 
         JoinTable habitat = null;
-        habitat = new JoinTable("CHM62EDT_HABITAT H", "ID_HABITAT", "ID_HABITAT");
+        habitat = new JoinTable("chm62edt_habitat H", "ID_HABITAT", "ID_HABITAT");
         habitat.addJoinColumn(new StringJoinColumn("SCIENTIFIC_NAME", "scName", "setScName"));
         habitat.addJoinColumn(new StringJoinColumn("EUNIS_HABITAT_CODE", "eunisCode", "setEunisCode"));
         habitat.addJoinColumn(new StringJoinColumn("CODE_ANNEX1", "annex1Code", "setAnnex1Code"));

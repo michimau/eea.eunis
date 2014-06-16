@@ -18,8 +18,8 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.names.NameSearchCriteria;
 
 /**
- * SELECT * FROM CHM62EDT_SITES AS A INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT INNER
- * JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE A.NAME="%Moor" AND C.AREA_NAME_EN='FRANCE' AND
+ * SELECT * FROM chm62edt_sites AS A INNER JOIN chm62edt_nature_object_geoscope AS B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT INNER
+ * JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE A.NAME="%Moor" AND C.AREA_NAME_EN='FRANCE' AND
  * LEFT(A.DESIGNATION_DATE,4)>=1997 AND LEFT(A.DESIGNATION_DATE,4)<=2000 AND ((A.SOURCE_DB = 'Nationally Designated Areas') OR
  * (A.SOURCE_DB='International Designated Areas') OR (A.SOURCE_DB = 'EMERALD') OR (A.SOURCE_DB='CORINE Biotopes') OR
  * (A.SOURCE_DB='Monitoring Sites'))
@@ -65,7 +65,7 @@ public class NameDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SITES");
+        this.setTableName("chm62edt_sites");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -105,10 +105,10 @@ public class NameDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new IntegerColumnSpec("MATCH_RELEVANCE", "getMatchRelevance", "setMatchRelevance", DEFAULT_TO_NULL));
 
         OuterJoinTable natureObjectGeoscope =
-                new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+                new OuterJoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
         this.addJoinTable(natureObjectGeoscope);
 
-        OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+        OuterJoinTable country = new OuterJoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
         country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
         country.addJoinColumn(new StringJoinColumn("ISO_2L", "setIso2L"));
         natureObjectGeoscope.addJoinTable(country);
@@ -189,9 +189,9 @@ public class NameDomain extends AbstractDomain implements Paginable {
         try {
             StringBuffer sql = new StringBuffer();
             // Set the main QUERY
-            sql.append("SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM CHM62EDT_SITES A "
-                    + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                    + " LEFT JOIN CHM62EDT_COUNTRY C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE");
+            sql.append("SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM chm62edt_sites A "
+                    + " LEFT JOIN chm62edt_nature_object_geoscope B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                    + " LEFT JOIN chm62edt_country C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE");
             // Apply WHERE CLAUSE
             sql.append(_prepareWhereSearch().toString());
             ret = findLong(sql.toString());

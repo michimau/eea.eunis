@@ -27,7 +27,7 @@ public class VernacularNamesDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -49,13 +49,13 @@ public class VernacularNamesDomain extends AbstractDomain {
         // Joined tables
         JoinTable reportTypeAttributes = null;
 
-        reportTypeAttributes = new JoinTable("CHM62EDT_REPORT_ATTRIBUTES F",
+        reportTypeAttributes = new JoinTable("chm62edt_report_attributes F",
                 "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
         reportTypeAttributes.addJoinColumn(
                 new StringJoinColumn("VALUE", "setValue"));
         this.addJoinTable(reportTypeAttributes);
 
-        JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE",
+        JoinTable reportType = new JoinTable("chm62edt_report_type",
                 "ID_REPORT_TYPE", "ID_REPORT_TYPE");
 
         reportType.addJoinColumn(
@@ -65,7 +65,7 @@ public class VernacularNamesDomain extends AbstractDomain {
                 new StringJoinColumn("ID_LOOKUP", "IDLookup", "setIDLookup"));
         this.addJoinTable(reportType);
 
-        JoinTable language = new JoinTable("CHM62EDT_LANGUAGE", "ID_LOOKUP",
+        JoinTable language = new JoinTable("chm62edt_language", "ID_LOOKUP",
                 "ID_LANGUAGE");
 
         language.addJoinColumn(

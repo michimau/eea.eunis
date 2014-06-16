@@ -1150,10 +1150,10 @@ public final class Utilities {
     }
 
     /**
-     * This method finds the COMMON_NAME field from CHM62EDT_GROUP_SPECIES, ginving its ID_GROUP_SPECIES.
+     * This method finds the COMMON_NAME field from chm62edt_group_species, ginving its ID_GROUP_SPECIES.
      *
      * @param idGroupSpecies the ID_GROUP_SPECIES field
-     * @return The COMMON_NAME associated with that ID_GROUP_SPECIES from the CHM62EDT_GROUP_SPECIES table
+     * @return The COMMON_NAME associated with that ID_GROUP_SPECIES from the chm62edt_group_species table
      */
     public static String getGroupName(String idGroupSpecies) {
         String ret = null;
@@ -1178,7 +1178,7 @@ public final class Utilities {
     }
 
     /**
-     * This method gets the NAME field from CHM62EDT_CONSERVATION_STATUS, giving the ID_CONSERVATION_STATUS
+     * This method gets the NAME field from chm62edt_conservation_status, giving the ID_CONSERVATION_STATUS
      * field.
      *
      * @param id the ID_CONSERVATION_STATUS field
@@ -1335,7 +1335,7 @@ public final class Utilities {
     }
 
     /**
-     * Translate the SOURCE_DB field from CHM62EDT_SITES in SQL compatible language.
+     * Translate the SOURCE_DB field from chm62edt_sites in SQL compatible language.
      *
      * @param sourceDB The source database in human language
      * @return The string identifying the DB within database (ie. CDDA National corresponds to CDDA_NATIONAL).
@@ -1563,7 +1563,7 @@ public final class Utilities {
     }
 
     /**
-     * Find a country name, searching by its ISO code. This method searches in CHM62EDT_COUNTRY and matches
+     * Find a country name, searching by its ISO code. This method searches in chm62edt_country and matches
      * iso with ISO_3L, returning the AREA_NAME_ENGLISH field
      *
      * @param iso ISO_3L for the country (3-letters ISO code)
@@ -1586,7 +1586,7 @@ public final class Utilities {
     }
 
     /**
-     * Find a country name, searching by its ID_GEOSCOPE code. This method searches in CHM62EDT_COUNTRY and matches
+     * Find a country name, searching by its ID_GEOSCOPE code. This method searches in chm62edt_country and matches
      * iso with ID_GEOSCOPE, returning the AREA_NAME_ENGLISH field
      *
      * @param idGeoscope ID_GEOSCOPE for the country
@@ -1608,7 +1608,7 @@ public final class Utilities {
     }
 
     /**
-     * Find a country name, searching by its ID_COUNTRY. This method searches in CHM62EDT_COUNTRY and matches
+     * Find a country name, searching by its ID_COUNTRY. This method searches in chm62edt_country and matches
      * idCountry with ID_COUNTRY, returning the AREA_NAME_ENGLISH field
      *
      * @param idCountry ID_COUNTRY for the country
@@ -2556,7 +2556,7 @@ public final class Utilities {
         sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
         List rez = sqlc.ExecuteSQLReturnList(
-                "SELECT LEVEL,NAME,TAXONOMY_TREE FROM CHM62EDT_SPECIES AS A INNER JOIN CHM62EDT_TAXONOMY AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY WHERE A.ID_SPECIES = "
+                "SELECT LEVEL,NAME,TAXONOMY_TREE FROM chm62edt_species AS A INNER JOIN chm62edt_taxonomy AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY WHERE A.ID_SPECIES = "
                         + idSpecies,
                         3);
 
@@ -2763,7 +2763,7 @@ public final class Utilities {
 
             // we display root nodes
             strSQL = "SELECT CONCAT(NAME,' ','(',LEVEL,')') AS TITLE, ID_TAXONOMY AS ID";
-            strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
+            strSQL = strSQL + " FROM chm62edt_taxonomy";
             if (isRoot) {
                 strSQL = strSQL
                         + " WHERE ID_TAXONOMY=ID_TAXONOMY_PARENT";

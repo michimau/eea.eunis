@@ -65,7 +65,7 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("C");
 
@@ -84,10 +84,10 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
 
     // Joined tables
-    JoinTable natureObjectGeoscope = new JoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE I", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable natureObjectGeoscope = new JoinTable("chm62edt_nature_object_geoscope I", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    JoinTable country = new JoinTable("CHM62EDT_COUNTRY J", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    JoinTable country = new JoinTable("chm62edt_country J", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
     country.addJoinColumn(new StringJoinColumn("ISO_2L", "setIso2L"));
     natureObjectGeoscope.addJoinTable(country);
@@ -145,9 +145,9 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     // Prepare the WHERE clause   put search Criteria
     StringBuffer filterSQL = _prepareWhereSearch();
     Long tempList = this.findLong("SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) " +
-            "FROM CHM62EDT_SITES C " +
-            "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE I ON C.ID_NATURE_OBJECT=I.ID_NATURE_OBJECT " +
-            "INNER JOIN CHM62EDT_COUNTRY J ON I.ID_GEOSCOPE=J.ID_GEOSCOPE WHERE " + filterSQL);
+            "FROM chm62edt_sites C " +
+            "INNER JOIN chm62edt_nature_object_geoscope I ON C.ID_NATURE_OBJECT=I.ID_NATURE_OBJECT " +
+            "INNER JOIN chm62edt_country J ON I.ID_GEOSCOPE=J.ID_GEOSCOPE WHERE " + filterSQL);
     if (null != tempList)
       return tempList;
     else

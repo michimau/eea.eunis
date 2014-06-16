@@ -175,7 +175,7 @@
 
 	<function>
 		<description>
-			Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language
+			Translate the SOURCE_DB field from chm62edt_sites in human readable language
 	 	</description>
 		<name>translateSourceDB</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>

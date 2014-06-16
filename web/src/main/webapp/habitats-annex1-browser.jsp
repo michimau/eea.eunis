@@ -66,7 +66,7 @@
 
               //we display root nodes
               strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
-              strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+              strSQL = strSQL + " FROM chm62edt_habitat";
               strSQL = strSQL + " WHERE LENGTH(CODE_2000)=1";
               strSQL = strSQL + " AND CODE_2000<>'-'";
               strSQL = strSQL + " ORDER BY CODE_2000 ASC";
@@ -94,7 +94,7 @@
                   //we begin to display the tree
 	              if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("CODE_2000").substring(0,1))) {
 	                strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
-	                strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                strSQL = strSQL + " FROM chm62edt_habitat";
 	                strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs.getString("CODE_2000").substring(0,1)+"%00'";
 	                strSQL = strSQL + " ORDER BY CODE_2000 ASC";
 	
@@ -125,7 +125,7 @@
 	
 	                   if(expand.length()>0 && Utilities.expandContains(expand,rs2.getString("CODE_2000").substring(0,2))) {
 	                     strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
-	                     strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                     strSQL = strSQL + " FROM chm62edt_habitat";
 	                     strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%0'";
 	                     strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%00'";
 	                     strSQL = strSQL + " ORDER BY CODE_2000 ASC";
@@ -156,7 +156,7 @@
 	                       }
 	                       if(expand.length()>0 && Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))) {
 	                         strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
-	                         strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                         strSQL = strSQL + " FROM chm62edt_habitat";
 	                         strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%'";
 	                         strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%0'";
 	                         strSQL = strSQL + " ORDER BY CODE_2000 ASC";

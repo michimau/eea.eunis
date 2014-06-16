@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_INFO_QUALITY.
+ * JRF table for chm62edt_info_quality.
  * @author finsiel
  **/
 public class Chm62edtInfoQualityDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtInfoQualityDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_INFO_QUALITY");
+        this.setTableName("chm62edt_info_quality");
         this.setReadOnly(true);
 
         this.addColumnSpec(

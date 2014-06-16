@@ -9,7 +9,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_AREA_LEGAL_TEXT outer join CHM62EDT_LEGAL_AREA_EVENT inner join CHM62EDT_COUNTRY.
+ * JRF table for chm62edt_area_legal_text outer join chm62edt_legal_area_event inner join chm62edt_country.
  * @author finsiel
  **/
 public class Chm62edtLifeFormDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtLifeFormDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_LIFE_FORM");
+        this.setTableName("chm62edt_life_form");
         this.setReadOnly(true);
 
         this.addColumnSpec(

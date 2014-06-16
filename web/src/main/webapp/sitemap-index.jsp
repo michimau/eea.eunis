@@ -40,7 +40,7 @@
     ps = con.createStatement();
 
     // Species
-    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE ID_SPECIES=ID_SPECIES_LINK");
+    rs = ps.executeQuery("SELECT COUNT(*) FROM chm62edt_species WHERE ID_SPECIES=ID_SPECIES_LINK");
     rs.first();
     start = 0;
     count = rs.getInt(1);
@@ -53,7 +53,7 @@
 
 
     // Sites
-    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_SITES");
+    rs = ps.executeQuery("SELECT COUNT(*) FROM chm62edt_sites");
     rs.first();
     start = 0;
     count = rs.getInt(1);
@@ -65,7 +65,7 @@
     }
     
  	// Habitats
-    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_HABITAT");
+    rs = ps.executeQuery("SELECT COUNT(*) FROM chm62edt_habitat");
     rs.first();
     start = 0;
     count = rs.getInt(1);

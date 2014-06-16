@@ -6,7 +6,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 
 /**
- * JRF table for CHM62EDT_ABUNDANCE.
+ * JRF table for chm62edt_abundance.
  * @author finsiel
  **/
 public class RolesRightsSimpleDomain extends AbstractDomain {
@@ -26,7 +26,7 @@ public class RolesRightsSimpleDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("EUNIS_ROLES_RIGHTS");
+    this.setTableName("eunis_roles_rights");
     this.setTableAlias("A");
     this.addColumnSpec(
             new CompoundPrimaryKeyColumnSpec(

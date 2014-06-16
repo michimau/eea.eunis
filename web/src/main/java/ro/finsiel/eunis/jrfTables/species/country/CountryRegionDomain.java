@@ -58,7 +58,7 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
         this.setTableAlias("B");
 
         // Faster performance
@@ -88,7 +88,7 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
         OuterJoinTable TaxcodeOrder = null;
         OuterJoinTable TaxcodeFamily = null;
 
-        Species = new JoinTable("CHM62EDT_SPECIES C", "ID_NATURE_OBJECT",
+        Species = new JoinTable("chm62edt_species C", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT");
         Species.addJoinColumn(
                 new StringJoinColumn("SCIENTIFIC_NAME", "ScientificName",
@@ -100,14 +100,14 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
                 "setIdSpeciesLink"));
         this.addJoinTable(Species);
 
-        GroupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES D",
+        GroupSpecies = new OuterJoinTable("chm62edt_group_species D",
                 "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         GroupSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "CommonName",
                 "setCommonName"));
         Species.addJoinTable(GroupSpecies);
 
-        TaxcodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY E", "ID_TAXONOMY",
+        TaxcodeFamily = new OuterJoinTable("chm62edt_taxonomy E", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         TaxcodeFamily.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -125,7 +125,7 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
                 "setTaxonomicNameOrder"));
         Species.addJoinTable(TaxcodeFamily);
 
-        // TaxcodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY F", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // TaxcodeOrder = new OuterJoinTable("chm62edt_taxonomy F", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // TaxcodeOrder.addJoinColumn(new StringJoinColumn("NAME", "TaxonomicNameOrder", "setTaxonomicNameOrder"));
         // TaxcodeFamily.addJoinTable(TaxcodeOrder);
     }
@@ -187,11 +187,11 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) FROM CHM62EDT_REPORTS B "
-                        + "INNER JOIN CHM62EDT_SPECIES C ON B.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT "
-                        + "LEFT JOIN CHM62EDT_GROUP_SPECIES D ON C.ID_GROUP_SPECIES=D.ID_GROUP_SPECIES "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY E ON C.ID_TAXONOMY=E.ID_TAXONOMY "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY F ON E.ID_TAXONOMY_LINK=F.ID_TAXONOMY WHERE ");
+                "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) FROM chm62edt_reports B "
+                        + "INNER JOIN chm62edt_species C ON B.ID_NATURE_OBJECT=C.ID_NATURE_OBJECT "
+                        + "LEFT JOIN chm62edt_group_species D ON C.ID_GROUP_SPECIES=D.ID_GROUP_SPECIES "
+                        + "LEFT JOIN chm62edt_taxonomy E ON C.ID_TAXONOMY=E.ID_TAXONOMY "
+                        + "LEFT JOIN chm62edt_taxonomy F ON E.ID_TAXONOMY_LINK=F.ID_TAXONOMY WHERE ");
 
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());

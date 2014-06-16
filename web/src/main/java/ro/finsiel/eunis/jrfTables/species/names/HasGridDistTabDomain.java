@@ -29,7 +29,7 @@ public class HasGridDistTabDomain extends AbstractDomain {
 
         JoinTable Species = null;
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
 
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject",
@@ -44,7 +44,7 @@ public class HasGridDistTabDomain extends AbstractDomain {
                 new StringColumnSpec("SCIENTIFIC_NAME", "getScientificName",
                 "setScientificName", DEFAULT_TO_EMPTY_STRING));
 
-        Species = new JoinTable("CHM62EDT_TAB_PAGE_SPECIES", "ID_NATURE_OBJECT",
+        Species = new JoinTable("chm62edt_tab_page_species", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT,GRID_DISTRIBUTION='Y'");
         this.addJoinTable(Species);
     

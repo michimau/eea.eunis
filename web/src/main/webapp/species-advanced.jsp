@@ -473,19 +473,19 @@ String rsn = (String)request.getParameter("siteName");
               }
 
               SQL="SELECT ";
-              SQL+="EUNIS_ADVANCED_SEARCH.ID_NODE,";
-              SQL+="EUNIS_ADVANCED_SEARCH.NODE_TYPE,";
-              SQL+="EUNIS_ADVANCED_SEARCH_CRITERIA.ATTRIBUTE,";
-              SQL+="EUNIS_ADVANCED_SEARCH_CRITERIA.OPERATOR,";
-              SQL+="EUNIS_ADVANCED_SEARCH_CRITERIA.FIRST_VALUE,";
-              SQL+="EUNIS_ADVANCED_SEARCH_CRITERIA.LAST_VALUE ";
+              SQL+="eunis_advanced_search.ID_NODE,";
+              SQL+="eunis_advanced_search.NODE_TYPE,";
+              SQL+="eunis_advanced_search_criteria.ATTRIBUTE,";
+              SQL+="eunis_advanced_search_criteria.OPERATOR,";
+              SQL+="eunis_advanced_search_criteria.FIRST_VALUE,";
+              SQL+="eunis_advanced_search_criteria.LAST_VALUE ";
               SQL+="FROM ";
-              SQL+="EUNIS_ADVANCED_SEARCH ";
-              SQL+="LEFT OUTER JOIN EUNIS_ADVANCED_SEARCH_CRITERIA ON (EUNIS_ADVANCED_SEARCH.ID_SESSION = EUNIS_ADVANCED_SEARCH_CRITERIA.ID_SESSION) AND (EUNIS_ADVANCED_SEARCH.NATURE_OBJECT = EUNIS_ADVANCED_SEARCH_CRITERIA.NATURE_OBJECT) AND (EUNIS_ADVANCED_SEARCH.ID_NODE = EUNIS_ADVANCED_SEARCH_CRITERIA.ID_NODE) ";
-              SQL+="WHERE (EUNIS_ADVANCED_SEARCH.ID_SESSION='"+IdSession+"') ";
-              SQL+="AND (EUNIS_ADVANCED_SEARCH.NATURE_OBJECT='"+NatureObject+"') ";
+              SQL+="eunis_advanced_search ";
+              SQL+="LEFT OUTER JOIN eunis_advanced_search_criteria ON (eunis_advanced_search.ID_SESSION = eunis_advanced_search_criteria.ID_SESSION) AND (eunis_advanced_search.NATURE_OBJECT = eunis_advanced_search_criteria.NATURE_OBJECT) AND (eunis_advanced_search.ID_NODE = eunis_advanced_search_criteria.ID_NODE) ";
+              SQL+="WHERE (eunis_advanced_search.ID_SESSION='"+IdSession+"') ";
+              SQL+="AND (eunis_advanced_search.NATURE_OBJECT='"+NatureObject+"') ";
               SQL+="ORDER BY ";
-              SQL+="EUNIS_ADVANCED_SEARCH.ID_NODE ";
+              SQL+="eunis_advanced_search.ID_NODE ";
 
               ps = con.prepareStatement(SQL);
               rs = ps.executeQuery();
@@ -731,7 +731,7 @@ String rsn = (String)request.getParameter("siteName");
 
                 tsas.DeleteResults(IdSession,NatureObject);
 
-                str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_"+NatureObject.toUpperCase()+" WHERE ("+str+")";
+                str="SELECT ID_NATURE_OBJECT FROM chm62edt_"+NatureObject.toLowerCase()+" WHERE ("+str+")";
                 String query = tsas.ExecuteFilterSQL(str,"");
                 out.println("<br /><strong>" + cm.cmsPhrase("Total species matching your combined criteria found in database:") + "  " + tsas.getResultCount() + "</strong><br />");
 

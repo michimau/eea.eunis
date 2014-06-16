@@ -125,11 +125,11 @@ public class SiteFactsheet {
     }
 
     /**
-     * Find site attributes from CHM62EDT_REPORT_ATTRIBUTES.
+     * Find site attributes from chm62edt_report_attributes.
      *
      * @param attributeName Name of the attribute (NAME column from table, ex. COVER, GLOBAL, POPULATION etc.)
      * @param idReportAttribute ID_REPORT_ATTRIBUTES for that nature object (ex.
-     *            CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_REPORT_ATTRIBUTES).
+     *            chm62edt_nature_object_report_type.ID_REPORT_ATTRIBUTES).
      * @return An Chm62edtReportAttributesPersist objects with this information.
      */
     public Chm62edtReportAttributesPersist findSiteAttributes(String attributeName, Integer idReportAttribute) {
@@ -337,7 +337,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * Retrieve values from CHM62EDT_GLOBAL.
+     * Retrieve values from chm62edt_global.
      *
      * @param id ID_GLOBAL
      * @return List of Chm62edtGlobalPersist objects
@@ -600,7 +600,7 @@ public class SiteFactsheet {
                     new SiteHabitatsDomain()
                             .findWhere("A.ID_NATURE_OBJECT='"
                                     + getSiteObject().getIdNatureObject()
-                                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit1'");
+                                    + "' and chm62edt_report_attributes.NAME='SOURCE_TABLE' and chm62edt_report_attributes.VALUE='habit1'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -726,7 +726,7 @@ public class SiteFactsheet {
                     new SiteHabitatsDomain()
                             .findWhere("A.ID_NATURE_OBJECT='"
                                     + getSiteObject().getIdNatureObject()
-                                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit2'");
+                                    + "' and chm62edt_report_attributes.NAME='SOURCE_TABLE' and chm62edt_report_attributes.VALUE='habit2'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -879,7 +879,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * This method checks if the given idSite does exist within database (there is a record with this ID_SITE in CHM62EDT_SITES).
+     * This method checks if the given idSite does exist within database (there is a record with this ID_SITE in chm62edt_sites).
      *
      * @return true if site exists, false if doesn't or exception occurrs.
      */
@@ -901,7 +901,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * Retrieve information about this site (from CHM62EDT_SITE table).
+     * Retrieve information about this site (from chm62edt_site table).
      *
      * @return null if error occurrs or else the persistent object corresponding from DB.
      * @throws InitializationException if idSite was null during object construction.
@@ -954,8 +954,8 @@ public class SiteFactsheet {
         try {
             List results =
                     new Chm62edtDesignationsDomain()
-                            .findCustom(" SELECT A.* FROM CHM62EDT_DESIGNATIONS AS A "
-                                    + " INNER JOIN CHM62EDT_SITES AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE) "
+                            .findCustom(" SELECT A.* FROM chm62edt_designations AS A "
+                                    + " INNER JOIN chm62edt_sites AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE) "
                                     + " WHERE B.ID_SITE='" + idSite + "'");
 
             if (null != results && results.size() > 0) {
@@ -981,7 +981,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * Retrieve sites attributes information (from CHM62EDT_SITE_ATTRIBUTES).
+     * Retrieve sites attributes information (from chm62edt_site_attributes).
      *
      * @return null if error occurrs or else the persistent object corresponding from DB.
      * @throws InitializationException if idSite was null during object construction.
@@ -1048,7 +1048,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DATE_FIRST_DESIGNATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DATE_FIRST_DESIGNATION'.
      *
      * @return A non-null list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1173,7 +1173,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REGION_CODE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REGION_CODE'.
      *
      * @return A non-null list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1210,7 +1210,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='AUTHOR'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='AUTHOR'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1237,7 +1237,7 @@ public class SiteFactsheet {
 
     /**
      * Extracts region from region code (NUTS)
-     * SELECT * FROM CHM62EDT_REGION_CODES WHERE ID_REGION_CODE = 'nuts';
+     * SELECT * FROM chm62edt_region_codes WHERE ID_REGION_CODE = 'nuts';
      * @return The name of the region
      */
     public Chm62edtRegionCodesPersist getRegionCodes(){
@@ -1269,7 +1269,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BIOGEOREGION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BIOGEOREGION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1286,7 +1286,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='HABITAT_CHARACTERIZATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='HABITAT_CHARACTERIZATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1310,7 +1310,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='FLORA_CHARACTERIZATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='FLORA_CHARACTERIZATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1334,7 +1334,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='FAUNA_CHARACTERIZATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='FAUNA_CHARACTERIZATION'.
      *
      * @return A of Chm62edtSitesAttributesPersist objects.
      */
@@ -1358,7 +1358,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_INTERNATIONAL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_INTERNATIONAL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1382,7 +1382,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_NATIONAL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_NATIONAL'.
      *
      * @return A non-null list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1405,7 +1405,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_REGIONAL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_REGIONAL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1428,7 +1428,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_LOCAL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONTACT_LOCAL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1451,7 +1451,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='POTENTIAL_VEGETATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='POTENTIAL_VEGETATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1475,7 +1475,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='GEOMORPHOLOGY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='GEOMORPHOLOGY'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1498,7 +1498,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='QUALITY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='QUALITY'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1521,7 +1521,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='VULNERABILITY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='VULNERABILITY'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1544,7 +1544,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DOCUMENTATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DOCUMENTATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1567,7 +1567,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='EDUCATIONAL_INTEREST'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='EDUCATIONAL_INTEREST'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1591,7 +1591,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CULTURAL_HERITAGE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CULTURAL_HERITAGE'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1614,7 +1614,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='JUSTIFICATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='JUSTIFICATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1637,7 +1637,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='METHODOLOGY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='METHODOLOGY'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1660,7 +1660,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BUDGET'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BUDGET'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1683,7 +1683,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='OFFICIAL_URL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='OFFICIAL_URL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1706,7 +1706,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='INTERESTING_URL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='INTERESTING_URL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1729,7 +1729,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='RESIDENT'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='RESIDENT'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1746,7 +1746,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BREEDING'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='BREEDING'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1763,7 +1763,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='WINTERING'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='WINTERING'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1780,7 +1780,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='STAGING'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='STAGING'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1797,7 +1797,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='POPULATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='POPULATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1814,7 +1814,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='TYPOLOGY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='TYPOLOGY'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1837,7 +1837,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REFERENCE_DOCUMENT_NUMBER'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REFERENCE_DOCUMENT_NUMBER'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1861,7 +1861,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REFERENCE_DOCUMENT_SOURCE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='REFERENCE_DOCUMENT_SOURCE'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1885,7 +1885,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONSERVATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='CONSERVATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1902,7 +1902,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='ISOLATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='ISOLATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1919,7 +1919,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='GLOBAL'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='GLOBAL'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1936,7 +1936,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_ID'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_ID'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1962,7 +1962,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_SCALE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_SCALE'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -1987,7 +1987,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_PROJECTION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_PROJECTION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2012,7 +2012,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_DETAILS'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='MAP_DETAILS'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2037,7 +2037,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_TYPE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_TYPE'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2062,7 +2062,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_NUMBER'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_NUMBER'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2087,7 +2087,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_LOCATION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_LOCATION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2112,7 +2112,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_DESCRIPTION'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_DESCRIPTION'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2137,7 +2137,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_DATE'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_DATE'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2162,7 +2162,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_AUTHOR'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='PHOTO_AUTHOR'.
      *
      * @return A list of Chm62edtSitesAttributesPersist objects.
      */
@@ -2208,7 +2208,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='XXXX' AND NAME like 'YYYY%'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='XXXX' AND NAME like 'YYYY%'.
      *
      * @param attrName name of the attribute.
      * @return A list of Chm62edtSitesAttributesPersist objects.
@@ -2234,7 +2234,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='XXXX' AND NAME='YYYY'.
+     * SELECT * FROM chm62edt_sites_ATTRIBUTES WHERE ID_SITE='XXXX' AND NAME='YYYY'.
      *
      * @param attrName name of the attribute.
      * @return A list of Chm62edtSitesAttributesPersist objects.
@@ -2359,12 +2359,12 @@ public class SiteFactsheet {
 
         try {
             String isGoodHabitat =
-                    " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+                    " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
 
             results =
                     new SiteHabitatsDomain().findWhere(isGoodHabitat + " AND A.ID_NATURE_OBJECT='"
                             + getSiteObject().getIdNatureObject()
-                            + "' GROUP BY CHM62EDT_HABITAT.ID_NATURE_OBJECT, CHM62EDT_SITES.ID_NATURE_OBJECT");
+                            + "' GROUP BY chm62edt_habitat.ID_NATURE_OBJECT, chm62edt_sites.ID_NATURE_OBJECT");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -2452,7 +2452,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * Returns the main pictures of this site,a s present in the CHM62EDT_NATURE_OBJECT_PICTURE table.
+     * Returns the main pictures of this site,a s present in the chm62edt_nature_object_picture table.
      *
      * @param limit - max number of pictures to return
      * @param mainPicOnly - only return the thumbnail.

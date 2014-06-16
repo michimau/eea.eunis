@@ -25,7 +25,7 @@ public class Chm62edtSyntaxaSourceDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SYNTAXA_SOURCE");
+        this.setTableName("chm62edt_syntaxa_source");
         this.addColumnSpec(
                 new StringColumnSpec("ID_SYNTAXA_SOURCE", "getIdSyntaxaSource",
                 "setIdSyntaxaSource", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));

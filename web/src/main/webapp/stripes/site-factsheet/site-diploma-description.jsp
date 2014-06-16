@@ -501,7 +501,7 @@
                 attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());
                 if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
                 {
-                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE='" + attribute.getValue() + "'" );
+                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM chm62edt_natura2000_conservation_code WHERE ID_CONSERVATION_CODE='" + attribute.getValue() + "'" );
             %>
             <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
             <%
@@ -517,7 +517,7 @@
                 attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());
                 if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
                 {
-                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_ISOLATION WHERE ID_ISOLATION='" + attribute.getValue() + "'" );
+                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM chm62edt_isolation WHERE ID_ISOLATION='" + attribute.getValue() + "'" );
             %>
             <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
             <%
@@ -533,7 +533,7 @@
                 attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());
                 if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
                 {
-                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL='" + attribute.getValue() + "'" );
+                    attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM chm62edt_global WHERE ID_GLOBAL='" + attribute.getValue() + "'" );
             %>
             <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
             <%
@@ -859,7 +859,7 @@
                 attribute = factsheet.findSiteAttributes("OTHER_MOTIVATION",specie.getIdReportAttributes());
                 String attVal = "";
                 if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                    attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute.getValue()+"'");
+                    attVal = sqlc.ExecuteSQL("SELECT NAME FROM chm62edt_natura2000_motivation_code WHERE ID_MOTIVATION_CODE ='"+attribute.getValue()+"'");
             %>
          <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
            <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
@@ -905,7 +905,7 @@
                 attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("MOTIVATION_"+specName);
                 String attVal = "";
                 if(!"".equals((null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""))
-                    attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute2.getValue()+"'");
+                    attVal = sqlc.ExecuteSQL("SELECT NAME FROM chm62edt_natura2000_motivation_code WHERE ID_MOTIVATION_CODE ='"+attribute2.getValue()+"'");
             %>
           <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
             <a href="#" onclick="return false;"><%=(null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""%></a>

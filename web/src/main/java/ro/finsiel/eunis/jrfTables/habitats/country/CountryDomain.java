@@ -21,19 +21,19 @@ import java.util.Vector;
 
 /**
  SELECT
- CHM62EDT_HABITAT.ID_HABITAT,
- CHM62EDT_HABITAT.SCIENTIFIC_NAME,
- CHM62EDT_COUNTRY.AREA_NAME,
- CHM62EDT_BIOGEOREGION.NAME,
- CHM62EDT_REPORTS.ID_GEOSCOPE, ID_GEOSCOPE_LINK
+ chm62edt_habitat.ID_HABITAT,
+ chm62edt_habitat.SCIENTIFIC_NAME,
+ chm62edt_country.AREA_NAME,
+ chm62edt_biogeoregion.NAME,
+ chm62edt_reports.ID_GEOSCOPE, ID_GEOSCOPE_LINK
 
- FROM CHM62EDT_HABITAT
+ FROM chm62edt_habitat
 
- INNER JOIN CHM62EDT_REPORTS ON  CHM62EDT_HABITAT.ID_NATURE_OBJECT = CHM62EDT_REPORTS.ID_NATURE_OBJECT
- INNER JOIN CHM62EDT_COUNTRY ON CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE
- INNER JOIN CHM62EDT_BIOGEOREGION ON CHM62EDT_REPORTS.ID_GEOSCOPE_LINK = CHM62EDT_BIOGEOREGION.ID_GEOSCOPE
- WHERE CHM62EDT_REPORTS.ID_GEOSCOPE = 10
- AND CHM62EDT_REPORTS.ID_GEOSCOPE_LINK = 257
+ INNER JOIN chm62edt_reports ON  chm62edt_habitat.ID_NATURE_OBJECT = chm62edt_reports.ID_NATURE_OBJECT
+ INNER JOIN chm62edt_country ON chm62edt_reports.ID_GEOSCOPE = chm62edt_country.ID_GEOSCOPE
+ INNER JOIN chm62edt_biogeoregion ON chm62edt_reports.ID_GEOSCOPE_LINK = chm62edt_biogeoregion.ID_GEOSCOPE
+ WHERE chm62edt_reports.ID_GEOSCOPE = 10
+ AND chm62edt_reports.ID_GEOSCOPE_LINK = 257
  */
 public class CountryDomain extends AbstractDomain implements Paginable {
   public static final Integer SEARCH_EUNIS = new Integer(0);
@@ -72,7 +72,7 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -88,12 +88,12 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getLevel", "setLevel", DEFAULT_TO_NULL));
 
-    JoinTable reports = new JoinTable("CHM62EDT_REPORTS B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable reports = new JoinTable("chm62edt_reports B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(reports);
-    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable country = new OuterJoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
     reports.addJoinTable(country);
-    OuterJoinTable biogeoregion = new OuterJoinTable("CHM62EDT_BIOGEOREGION D", "ID_GEOSCOPE_LINK", "ID_GEOSCOPE");
+    OuterJoinTable biogeoregion = new OuterJoinTable("chm62edt_biogeoregion D", "ID_GEOSCOPE_LINK", "ID_GEOSCOPE");
     biogeoregion.addJoinColumn(new StringJoinColumn("NAME", "region", "setRegion"));
     reports.addJoinTable(biogeoregion);
   }
@@ -169,10 +169,10 @@ public class CountryDomain extends AbstractDomain implements Paginable {
   private Long _rawCount() throws CriteriaMissingException {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
-    sql.append("SELECT COUNT(DISTINCT B.ID_NATURE_OBJECT,B.ID_GEOSCOPE,B.ID_GEOSCOPE_LINK) FROM CHM62EDT_HABITAT AS A " +
-            "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT " +
-            "LEFT JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE " +
-            "LEFT JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE " +
+    sql.append("SELECT COUNT(DISTINCT B.ID_NATURE_OBJECT,B.ID_GEOSCOPE,B.ID_GEOSCOPE_LINK) FROM chm62edt_habitat AS A " +
+            "INNER JOIN chm62edt_reports AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT " +
+            "LEFT JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE " +
+            "LEFT JOIN chm62edt_biogeoregion AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE " +
             "WHERE ");
     // Apply WHERE CLAUSE
     sql.append(_prepareWhereSearch().toString());

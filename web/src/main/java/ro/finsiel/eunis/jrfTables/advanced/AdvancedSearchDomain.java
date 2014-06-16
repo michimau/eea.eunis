@@ -60,7 +60,7 @@ public class AdvancedSearchDomain extends AbstractDomain {
     public void setup() {
         // Species
         if ("species".equalsIgnoreCase(natureObject)) {
-            this.setTableName("CHM62EDT_SPECIES");
+            this.setTableName("chm62edt_species");
             this.setTableAlias("A");
             this.setReadOnly(true);
 
@@ -78,24 +78,24 @@ public class AdvancedSearchDomain extends AbstractDomain {
 
             // Joined tables
             OuterJoinTable groupSpecies = null;
-            groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+            groupSpecies = new OuterJoinTable("chm62edt_group_species B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
             groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
             this.addJoinTable(groupSpecies);
 
             JoinTable taxCodeFamily = null;
-            taxCodeFamily = new JoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY", "ID_TAXONOMY");
+            taxCodeFamily = new JoinTable("chm62edt_taxonomy C", "ID_TAXONOMY", "ID_TAXONOMY");
             taxCodeFamily.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameFamily", "setTaxonomicNameFamily"));
             taxCodeFamily.addJoinColumn(new StringJoinColumn("LEVEL", "taxonomicLevel", "setTaxonomicLevel"));
             this.addJoinTable(taxCodeFamily);
 
             OuterJoinTable taxCodeOrder = null;
-            taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+            taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
             taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
             taxCodeFamily.addJoinTable(taxCodeOrder);
         }
         // Habitats
         if ("habitats".equalsIgnoreCase(natureObject)) {
-            this.setTableName("CHM62EDT_HABITAT");
+            this.setTableName("chm62edt_habitat");
             this.setTableAlias("A");
             this.setReadOnly(true);
 
@@ -112,11 +112,11 @@ public class AdvancedSearchDomain extends AbstractDomain {
             this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
 
             // Add the join only if the search is also done in descriptions
-            OuterJoinTable habitatDescr = new OuterJoinTable("CHM62EDT_HABITAT_DESCRIPTION B", "ID_HABITAT", "ID_HABITAT");
+            OuterJoinTable habitatDescr = new OuterJoinTable("chm62edt_habitat_description B", "ID_HABITAT", "ID_HABITAT");
             this.addJoinTable(habitatDescr);
         }
         if ("sites".equalsIgnoreCase(natureObject)) {
-            this.setTableName("CHM62EDT_SITES");
+            this.setTableName("chm62edt_sites");
             this.setTableAlias("A");
             this.setReadOnly(true);
 
@@ -153,18 +153,18 @@ public class AdvancedSearchDomain extends AbstractDomain {
             this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
             this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-            OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+            OuterJoinTable natureObjectGeoscope = new OuterJoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
             this.addJoinTable(natureObjectGeoscope);
 
-            OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+            OuterJoinTable country = new OuterJoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
             country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
             natureObjectGeoscope.addJoinTable(country);
 
-            OuterJoinTable designations = new OuterJoinTable("CHM62EDT_DESIGNATIONS E ", "ID_DESIGNATION", "ID_DESIGNATION");
+            OuterJoinTable designations = new OuterJoinTable("chm62edt_designations E ", "ID_DESIGNATION", "ID_DESIGNATION");
             designations.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setDesign"));
             this.addJoinTable(designations);
         }
-        JoinTable advSearchResults = new JoinTable("EUNIS_ADVANCED_SEARCH_RESULTS", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        JoinTable advSearchResults = new JoinTable("eunis_advanced_search_results", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
         this.addJoinTable(advSearchResults);
     }
 
@@ -203,11 +203,11 @@ public class AdvancedSearchDomain extends AbstractDomain {
      */
     private Long _rawCount() {
       StringBuffer sql = new StringBuffer();
-      sql.append("SELECT COUNT(DISTINCT A.ID_SITE, IF(B.ID_GEOSCOPE IS NULL, '', B.ID_GEOSCOPE)) FROM CHM62EDT_SITES A "
-            + " LEFT OUTER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-            + " LEFT OUTER JOIN CHM62EDT_COUNTRY C ON B.ID_GEOSCOPE=C.ID_GEOSCOPE "
-            + " LEFT OUTER JOIN CHM62EDT_DESIGNATIONS E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE) "
-            + " INNER JOIN EUNIS_ADVANCED_SEARCH_RESULTS F ON A.ID_NATURE_OBJECT=F.ID_NATURE_OBJECT "
+      sql.append("SELECT COUNT(DISTINCT A.ID_SITE, IF(B.ID_GEOSCOPE IS NULL, '', B.ID_GEOSCOPE)) FROM chm62edt_sites A "
+            + " LEFT OUTER JOIN chm62edt_nature_object_geoscope B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+            + " LEFT OUTER JOIN chm62edt_country C ON B.ID_GEOSCOPE=C.ID_GEOSCOPE "
+            + " LEFT OUTER JOIN chm62edt_designations E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE) "
+            + " INNER JOIN eunis_advanced_search_results F ON A.ID_NATURE_OBJECT=F.ID_NATURE_OBJECT "
             + " WHERE 1=1");
       // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...
       Long ret = findLong(sql.toString());

@@ -24,7 +24,7 @@ public class PicturesHelper {
     private static Logger logger = Logger.getLogger(PicturesHelper.class);
 
     /**
-     * Find species by their ID_SPECIES (from CHM62EDT_SPECIES).
+     * Find species by their ID_SPECIES (from chm62edt_species).
      * @param IDObject ID_SPECIES.
      * @return Scientific name.
      */
@@ -50,7 +50,7 @@ public class PicturesHelper {
     }
 
     /**
-     * Find sites by their ID_SITE (from CHM62EDT_SITES).
+     * Find sites by their ID_SITE (from chm62edt_sites).
      * @param IDObject ID_SITE.
      * @return Site name.
      */
@@ -76,7 +76,7 @@ public class PicturesHelper {
     }
 
     /**
-     * Find habitats by their ID_HABITAT (from CHM62EDT_HABITAT).
+     * Find habitats by their ID_HABITAT (from chm62edt_habitat).
      * @param IDObject ID_HABITAT.
      * @return Name.
      */
@@ -141,7 +141,7 @@ public class PicturesHelper {
     }
 
     /**
-     * Find the picture available for a specified species (in CHM62EDT_NATURE_OBJECT_PICTURE).
+     * Find the picture available for a specified species (in chm62edt_nature_object_picture).
      * @param idObject ID_SPECIES
      * @param natureObjectType 'Species'
      * @return A List of Chm62edtNatureObjectPicturePersist objects.

@@ -11,6 +11,7 @@
 
     <artifactId>deletespecies</artifactId>
     <packaging>jar</packaging>
+    <name>Delete species</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>

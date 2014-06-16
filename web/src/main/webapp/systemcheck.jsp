@@ -29,7 +29,7 @@
 <body>
 
 <%
-  String SQL = "SELECT * FROM EUNIS_WEB_CONTENT LIMIT 0,10";
+  String SQL = "SELECT * FROM eunis_web_content LIMIT 0,10";
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
   String SQL_USR = application.getInitParameter("JDBC_USR");

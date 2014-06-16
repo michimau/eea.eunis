@@ -67,7 +67,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
      */
     public RDFHandler(Connection con) throws SQLException {
         this.con = con;
-        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
+        String query = "INSERT INTO chm62edt_nature_object_attributes (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
 
         preparedStatement = con.prepareStatement(query);
 
@@ -213,7 +213,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
         String ret = null;
 
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE OBJECT='"
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE OBJECT='"
             + identifier + "' AND NAME='" + matching + "'";
 
         PreparedStatement ps = null;
@@ -241,7 +241,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
     public void deleteOldRecords() throws SQLException {
 
-        String query = "DELETE FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE NAME IN ";
+        String query = "DELETE FROM chm62edt_nature_object_attributes WHERE NAME IN ";
         StringBuffer whereClause = new StringBuffer("(");
 
         if (hasGBIF) {

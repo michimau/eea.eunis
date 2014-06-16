@@ -27,7 +27,7 @@ public class RegionsCodesDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
 
     this.addColumnSpec(new StringColumnSpec("ID_SITE", "getIdSite", "setIdSite", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
@@ -64,19 +64,19 @@ public class RegionsCodesDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-    JoinTable natureObjectReportType = new JoinTable("CHM62EDT_NATURE_OBJECT_REPORT_TYPE B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable natureObjectReportType = new JoinTable("chm62edt_nature_object_report_type B", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectReportType);
 
-    JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE C", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+    JoinTable reportType = new JoinTable("chm62edt_report_type C", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
     natureObjectReportType.addJoinTable(reportType);
 
-    JoinTable regionCodes = new JoinTable("CHM62EDT_REGION_CODES D", "ID_LOOKUP", "ID_REGION_CODE");
+    JoinTable regionCodes = new JoinTable("chm62edt_region_codes D", "ID_LOOKUP", "ID_REGION_CODE");
     regionCodes.addJoinColumn(new StringJoinColumn("ID_REGION_CODE", "setRegionCode"));
     regionCodes.addJoinColumn(new StringJoinColumn("NAME", "setRegionName"));
     regionCodes.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setRegionDescription"));
     reportType.addJoinTable(regionCodes);
 
-    JoinTable reportAttributes = new JoinTable("CHM62EDT_REPORT_ATTRIBUTES E", "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
+    JoinTable reportAttributes = new JoinTable("chm62edt_report_attributes E", "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
     reportAttributes.addJoinColumn(new StringJoinColumn("VALUE", "setRegionCover"));
     natureObjectReportType.addJoinTable(reportAttributes);
   }

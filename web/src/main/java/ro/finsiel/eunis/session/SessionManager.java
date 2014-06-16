@@ -420,17 +420,17 @@ public final class SessionManager implements java.io.Serializable {
 
                 if (user == null) {
                     ps = conn.prepareStatement(
-                            "INSERT INTO EUNIS_USERS (USERNAME) VALUES ('"
+                            "INSERT INTO eunis_users (USERNAME) VALUES ('"
                             + username + "')");
                     ps.execute();
                     ps = conn.prepareStatement(
-                            "INSERT INTO EUNIS_USERS_ROLES (USERNAME, ROLENAME) VALUES ('"
+                            "INSERT INTO eunis_users_roles (USERNAME, ROLENAME) VALUES ('"
                             + username + "','Guest')");
                     ps.execute();
                 }
 
                 ps = conn.prepareStatement(
-                "UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
+                "UPDATE eunis_users SET LOGIN_DATE=? WHERE USERNAME=?");
                 ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
                 ps.setString(2, username);
                 ps.execute();
@@ -447,7 +447,7 @@ public final class SessionManager implements java.io.Serializable {
                     Connection conn = DriverManager.getConnection(JDBC_URL,
                             JDBC_USR, JDBC_PWD);
                     PreparedStatement ps = conn.prepareStatement(
-                    "INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO eunis_session_log (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
 
                     ps.setString(1, sessionID);
                     ps.setString(2, username);
@@ -772,7 +772,7 @@ public final class SessionManager implements java.io.Serializable {
      * Return the current web content 'dictionary' for specified language.
      * @param language Language code
      * @return Content for that language, if not loaded application will try to
-     * load the specified language. If code not found in EUNIS_WEB_CONTENT table
+     * load the specified language. If code not found in eunis_web_content table
      * result will be null.
      */
     public WebContentManagement getWebContent(String language) {

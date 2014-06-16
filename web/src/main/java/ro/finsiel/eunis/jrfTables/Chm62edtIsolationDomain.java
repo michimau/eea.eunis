@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_ISOLATION.
+ * JRF table for chm62edt_isolation.
  * @author finsiel
  **/
 public class Chm62edtIsolationDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtIsolationDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_ISOLATION");
+        this.setTableName("chm62edt_isolation");
         this.addColumnSpec(
                 new StringColumnSpec("ID_ISOLATION", "getIdIsolation",
                 "setIdIsolation", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY));

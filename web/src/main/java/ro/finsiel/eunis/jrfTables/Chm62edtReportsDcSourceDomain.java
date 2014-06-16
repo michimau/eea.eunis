@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_REPORTS inner join DC_INDEX
+ * JRF table for chm62edt_reports inner join dc_index
  * @author finsiel
  **/
 public class Chm62edtReportsDcSourceDomain extends AbstractDomain {
@@ -34,7 +34,7 @@ public class Chm62edtReportsDcSourceDomain extends AbstractDomain {
 
         JoinTable Index = null;
 
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -56,7 +56,7 @@ public class Chm62edtReportsDcSourceDomain extends AbstractDomain {
                                                                         "getIdReportAttributes", "setIdReportAttributes",
                                                                         DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY)));
 
-        Index = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+        Index = new JoinTable("dc_index", "ID_DC", "ID_DC");
         Index.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         Index.addJoinColumn(new StringJoinColumn("EDITOR", "editor", "setEditor"));
         Index.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));
@@ -66,11 +66,11 @@ public class Chm62edtReportsDcSourceDomain extends AbstractDomain {
     }
 
     /**
-     * Wrapper for SELECT COUNT(*) FROM DC_INDEX
+     * Wrapper for SELECT COUNT(*) FROM dc_index
      * @param sqlWhere WHERE condition.
      * @return Long.
      */
     public Long countWhere(String sqlWhere) {
-        return this.findLong("SELECT count(*) FROM DC_INDEX " + sqlWhere);
+        return this.findLong("SELECT count(*) FROM dc_index " + sqlWhere);
     }
 }

@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_DEPTH.
+ * JRF table for chm62edt_depth.
  * @author finsiel
  **/
 public class Chm62edtDepthDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtDepthDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_DEPTH");
+        this.setTableName("chm62edt_depth");
         this.setReadOnly(true);
 
         this.addColumnSpec(

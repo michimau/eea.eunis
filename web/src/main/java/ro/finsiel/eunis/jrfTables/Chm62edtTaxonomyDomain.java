@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_TAXONOMY inner join CHM62EDT_TAXONOMY.
+ * JRF table for chm62edt_taxonomy inner join chm62edt_taxonomy.
  * @author finsiel
  **/
 public class Chm62edtTaxonomyDomain extends AbstractDomain {
@@ -31,7 +31,7 @@ public class Chm62edtTaxonomyDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_TAXONOMY");
+        this.setTableName("chm62edt_taxonomy");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -59,7 +59,7 @@ public class Chm62edtTaxonomyDomain extends AbstractDomain {
                 new StringColumnSpec("TAXONOMY_TREE", "getTaxonomyTree",
                 "setTaxonomyTree", DEFAULT_TO_NULL));
 
-        JoinTable joinTable = new JoinTable("CHM62EDT_TAXONOMY",
+        JoinTable joinTable = new JoinTable("chm62edt_taxonomy",
                 "ID_TAXONOMY_LINK", "ID_TAXONOMY");
 
         joinTable.setTableAlias("a");

@@ -31,7 +31,7 @@ public class HabitatDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("H");
 
@@ -80,7 +80,7 @@ public class HabitatDomain extends AbstractDomain {
         String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 
         return this.findInteger(
-                "SELECT max(hab_level) FROM CHM62EDT_HABITAT WHERE "
+                "SELECT max(hab_level) FROM chm62edt_habitat WHERE "
                         + isGoodHabitat + " AND " + sqlWhere);
     }
 }

@@ -27,7 +27,7 @@ public class HumanActivityDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
 
     this.addColumnSpec(new StringColumnSpec("ID_SITE", "getIdSite", "setIdSite", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
@@ -64,13 +64,13 @@ public class HumanActivityDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-    JoinTable nort = new JoinTable("CHM62EDT_NATURE_OBJECT_REPORT_TYPE", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    JoinTable nort = new JoinTable("chm62edt_nature_object_report_type", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(nort);
 
-    JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+    JoinTable reportType = new JoinTable("chm62edt_report_type", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
     nort.addJoinTable(reportType);
 
-    JoinTable humanActivities = new JoinTable("CHM62EDT_NATURA2000_ACTIVITY_CODE", "ID_LOOKUP", "ID_ACTIVITY_CODE");
+    JoinTable humanActivities = new JoinTable("chm62edt_natura2000_activity_code", "ID_LOOKUP", "ID_ACTIVITY_CODE");
     humanActivities.addJoinColumn(new StringJoinColumn("ID_ACTIVITY_CODE", "setActivityCode"));
     humanActivities.addJoinColumn(new StringJoinColumn("NAME", "setActivityName"));
     reportType.addJoinTable(humanActivities);

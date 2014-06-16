@@ -83,7 +83,7 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
      */
     protected void setup() {
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -107,13 +107,13 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
         // Joined tables
         OuterJoinTable groupSpecies;
 
-        groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies = new OuterJoinTable("chm62edt_group_species B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         this.addJoinTable(groupSpecies);
 
         OuterJoinTable taxCodeFamily;
 
-        taxCodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY", "ID_TAXONOMY");
+        taxCodeFamily = new OuterJoinTable("chm62edt_taxonomy C", "ID_TAXONOMY", "ID_TAXONOMY");
         taxCodeFamily.addJoinColumn(new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
         taxCodeFamily.addJoinColumn(new StringJoinColumn("LEVEL", "taxonomyLevel", "setTaxonomyLevel"));
         taxCodeFamily.addJoinColumn(new StringJoinColumn("TAXONOMY_TREE", "taxonomyTree", "setTaxonomyTree"));
@@ -130,21 +130,21 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
                             + " A.TEMPORARY_SELECT," + " A.SPECIES_MAP," + " A.ID_GROUP_SPECIES," + " A.ID_TAXONOMY,"
                             + " B.COMMON_NAME AS commonName," + " C.NAME AS taxonomyName," + " C.LEVEL, " + " C.TAXONOMY_TREE, "
                             + " C.NAME AS taxonomicNameFamily, " + " C.NAME AS taxonomicNameOrder"
-                            + " FROM CHM62EDT_SPECIES A LEFT"
-                            + " OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT"
-                            + " OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" + " WHERE <where>" + " UNION "
+                            + " FROM chm62edt_species A LEFT"
+                            + " OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT"
+                            + " OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" + " WHERE <where>" + " UNION "
                             + " SELECT A.ID_SPECIES," + " A.ID_NATURE_OBJECT," + " A.SCIENTIFIC_NAME AS scientificName,"
                             + " A.VALID_NAME AS validName," + " A.ID_SPECIES_LINK," + " A.TYPE_RELATED_SPECIES,"
                             + " A.TEMPORARY_SELECT," + " A.SPECIES_MAP," + " A.ID_GROUP_SPECIES," + " A.ID_TAXONOMY,"
                             + " B.COMMON_NAME AS commonName," + " C.NAME AS taxonomyName," + " C.LEVEL," + " C.TAXONOMY_TREE, "
-                            + " C.NAME AS taxonomicNameFamily, " + " C.NAME AS taxonomicNameOrder" + " FROM CHM62EDT_REPORTS G"
-                            + " INNER JOIN CHM62EDT_REPORT_TYPE F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
-                            + " INNER JOIN CHM62EDT_SPECIES A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
-                            + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
-                            + " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
-                            + " INNER JOIN CHM62EDT_REPORT_ATTRIBUTES I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
+                            + " C.NAME AS taxonomicNameFamily, " + " C.NAME AS taxonomicNameOrder" + " FROM chm62edt_reports G"
+                            + " INNER JOIN chm62edt_report_type F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE"
+                            + " INNER JOIN chm62edt_species A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT"
+                            + " LEFT OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY"
+                            + " LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY"
+                            + " INNER JOIN chm62edt_report_attributes I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES"
                             + " WHERE <whereVern>" + " AND F.LOOKUP_TYPE = 'LANGUAGE' AND I.NAME ='VERNACULAR_NAME'";
 
             results = getVeracularList(query);

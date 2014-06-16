@@ -32,7 +32,7 @@ try {
 // Users names list
 List usersList = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL," +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
-              " FROM EUNIS_USERS ORDER BY USERNAME");
+              " FROM eunis_users ORDER BY USERNAME");
 if(usersList != null && usersList.size() > 0)
   {
 %>

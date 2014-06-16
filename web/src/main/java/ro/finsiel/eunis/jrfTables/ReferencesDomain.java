@@ -92,16 +92,16 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
 
         String condition = (SQLfilter.length() > 0 ? " AND " + SQLfilter : "");
 
-        String SQL = " SELECT DISTINCT `DC_INDEX`.`SOURCE`,";
-        SQL += " `DC_INDEX`.`CREATED`,";
-        SQL += " `DC_INDEX`.`TITLE`,";
-        SQL += " `DC_INDEX`.`EDITOR`,";
-        SQL += " `DC_INDEX`.`PUBLISHER`,";
-        SQL += " `DC_INDEX`.`URL`, DC_INDEX.ID_DC ";
-        SQL += "  FROM  `DC_INDEX`";
+        String SQL = " SELECT DISTINCT `dc_index`.`SOURCE`,";
+        SQL += " `dc_index`.`CREATED`,";
+        SQL += " `dc_index`.`TITLE`,";
+        SQL += " `dc_index`.`EDITOR`,";
+        SQL += " `dc_index`.`PUBLISHER`,";
+        SQL += " `dc_index`.`URL`, dc_index.ID_DC ";
+        SQL += "  FROM  `dc_index`";
         // !!added to get only references with species and habitats
-        SQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
-        SQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
+        SQL += " INNER JOIN `chm62edt_nature_object` ON (`dc_index`.`ID_DC` = `chm62edt_nature_object`.`ID_DC`)";
+        SQL += " WHERE `dc_index`.`COMMENT` = 'REFERENCES'";
         SQL += condition;
         SQL += sortOrderAndLimit;
 
@@ -122,9 +122,9 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 
         String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME  ";
-        SQL += " FROM  DC_INDEX A ";
-        SQL += " INNER JOIN CHM62EDT_HABITAT_REFERENCES B ON (A.ID_DC = B.ID_DC) ";
-        SQL += " INNER JOIN CHM62EDT_HABITAT H ON (B.ID_HABITAT = H.ID_HABITAT) ";
+        SQL += " FROM  dc_index A ";
+        SQL += " INNER JOIN chm62edt_habitat_references B ON (A.ID_DC = B.ID_DC) ";
+        SQL += " INNER JOIN chm62edt_habitat H ON (B.ID_HABITAT = H.ID_HABITAT) ";
         SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = " + idDc;
 
         this.executeSQLQuery(SQL, new RowHandler() {
@@ -174,11 +174,11 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         String condition = " AND A.ID_DC = " + idDc;
 
         SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME   "
-                        + "FROM CHM62EDT_SPECIES H "
-                        + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                        + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                        + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                        + "INNER JOIN CHM62EDT_GROUP_SPECIES CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
+                        + "FROM chm62edt_species H "
+                        + "INNER JOIN chm62edt_reports B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                        + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                        + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
+                        + "INNER JOIN chm62edt_group_species CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
                         + "WHERE 1=1 "
                         + condition
                         + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
@@ -308,7 +308,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
     @Override
     protected void setup() {
         // This is just a silly implementation to make JRF happy, since the entire results are handled directly 
-        this.setTableName("DC_INDEX");
+        this.setTableName("dc_index");
         this.setReadOnly(true);
         this.addColumnSpec(new IntegerColumnSpec("ID", "getId", "setId", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
     }

@@ -33,7 +33,7 @@ public class TaxonomyTree {
      * @return Name
      */
     public static String TaxName(Object id) {
-        return "SELECT CONCAT('(',LEVEL,')',' ',NAME) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY=" + id.toString();
+        return "SELECT CONCAT('(',LEVEL,')',' ',NAME) FROM chm62edt_taxonomy WHERE ID_TAXONOMY=" + id.toString();
     }
 
     /**

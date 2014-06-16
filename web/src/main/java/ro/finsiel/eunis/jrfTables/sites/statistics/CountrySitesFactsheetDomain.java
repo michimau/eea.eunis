@@ -29,7 +29,7 @@ public class CountrySitesFactsheetDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_COUNTRY_SITES_FACTSHEET");
+    this.setTableName("chm62edt_country_sites_factsheet");
     this.setReadOnly(true);
 
 

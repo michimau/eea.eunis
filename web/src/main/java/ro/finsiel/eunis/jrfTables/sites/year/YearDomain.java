@@ -52,7 +52,7 @@ public class YearDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     this.setTableAlias("A");
 
@@ -90,10 +90,10 @@ public class YearDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("LATITUDE", "getLatitude", "setLatitude", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDB", "setSourceDB", DEFAULT_TO_NULL));
 
-    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("chm62edt_nature_object_geoscope B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(natureObjectGeoscope);
 
-    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY C", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    OuterJoinTable country = new OuterJoinTable("chm62edt_country C", "ID_GEOSCOPE", "ID_GEOSCOPE");
     country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "setAreaNameEn"));
     country.addJoinColumn(new StringJoinColumn("ISO_2L", "setIso2L"));
     natureObjectGeoscope.addJoinTable(country);
@@ -148,9 +148,9 @@ public class YearDomain extends AbstractDomain implements Paginable {
   private Long _rawCount() throws CriteriaMissingException {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
-    sql.append("SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM CHM62EDT_SITES AS A " +
-            "LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT " +
-            "LEFT JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE ");
+    sql.append("SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM chm62edt_sites AS A " +
+            "LEFT JOIN chm62edt_nature_object_geoscope AS B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT " +
+            "LEFT JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE WHERE ");
     // Apply WHERE CLAUSE
     sql.append(_prepareWhereSearch().toString());
     Long ret = findLong(sql.toString());

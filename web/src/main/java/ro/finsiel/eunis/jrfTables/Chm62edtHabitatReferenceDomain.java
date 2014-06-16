@@ -11,7 +11,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_REFERENCES.
+ * JRF table for chm62edt_habitat_references.
  **/
 public class Chm62edtHabitatReferenceDomain extends AbstractDomain {
 
@@ -30,7 +30,7 @@ public class Chm62edtHabitatReferenceDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_REFERENCES");
+        this.setTableName("chm62edt_habitat_references");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -42,7 +42,7 @@ public class Chm62edtHabitatReferenceDomain extends AbstractDomain {
         this.addColumnSpec(new StringColumnSpec("HAVE_SOURCE", "getHaveSource", "setHaveSource", DEFAULT_TO_ZERO));
         this.addColumnSpec(new StringColumnSpec("HAVE_OTHER_REFERENCES", "getHaveRef", "setHaveRef", DEFAULT_TO_ZERO));
 
-        JoinTable indexTable = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        JoinTable indexTable = new JoinTable("dc_index D", "ID_DC", "ID_DC");
         indexTable.addJoinColumn(new StringJoinColumn("SOURCE", "getSource", "setSource"));
         indexTable.addJoinColumn(new StringJoinColumn("TITLE", "getTitle", "setTitle"));
         this.addJoinTable(indexTable);

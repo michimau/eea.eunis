@@ -78,7 +78,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
     this.setReadOnly(true);
     this.setTableAlias("C");
 
@@ -90,7 +90,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("CODE_ANNEX1", "getCodeAnnex1", "setCodeAnnex1", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("EUNIS_HABITAT_CODE", "getEunisHabitatCode", "setEunisHabitatCode", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
-    // FROM CHM62EDT_SITES
+    // FROM chm62edt_sites
     this.addColumnSpec(new StringColumnSpec("NAME", "getSiteName", "setSiteName", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("SOURCE_DB", "getSourceDb", "setSourceDb", DEFAULT_TO_NULL));
   }
@@ -361,38 +361,38 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     // If we search on habitat scientific name as main criteria
     if (searchAttribute.intValue() == SitesSearchCriteria.SEARCH_NAME.intValue()) {
       sql = "SELECT " + what +
-              " FROM CHM62EDT_SITES AS C " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS G ON C.ID_NATURE_OBJECT = G.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_HABITAT AS H ON G.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
+              " FROM chm62edt_sites AS C " +
+              " INNER JOIN chm62edt_nature_object_report_type AS G ON C.ID_NATURE_OBJECT = G.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_habitat AS H ON G.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
               " WHERE (1 = 1) " + whereCondition;
     }
     // If we search on habitat legal instruments as main criteria
     if (searchAttribute.intValue() == SitesSearchCriteria.SEARCH_SIZE.intValue() ||
             searchAttribute.intValue() == SitesSearchCriteria.SEARCH_LENGTH.intValue()) {
       sql = "SELECT " + what +
-              " FROM CHM62EDT_SITES AS C " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_HABITAT AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
+              " FROM chm62edt_sites AS C " +
+              " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_habitat AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
               " WHERE (1 = 1) " + whereCondition;
     }
     // If we search on habitats country as main criteria
     if (searchAttribute.intValue() == SitesSearchCriteria.SEARCH_COUNTRY.intValue()) {
       sql = "SELECT " + what +
-              " FROM CHM62EDT_COUNTRY AS E " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
-              " INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_HABITAT AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
+              " FROM chm62edt_country AS E " +
+              " INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
+              " INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_habitat AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
               " WHERE (1 = 1) " + whereCondition;
     }
     // If we search on habitats country as main criteria
     if (searchAttribute.intValue() == SitesSearchCriteria.SEARCH_REGION.intValue()) {
       sql = "SELECT " + what +
-              " FROM CHM62EDT_BIOGEOREGION AS E " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
-              " INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
-              " INNER JOIN CHM62EDT_HABITAT AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
+              " FROM chm62edt_biogeoregion AS E " +
+              " INNER JOIN chm62edt_nature_object_geoscope AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
+              " INNER JOIN chm62edt_sites AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_nature_object_report_type AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT " +
+              " INNER JOIN chm62edt_habitat AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
               " WHERE (1 = 1) " + whereCondition;
     }
     return sql;

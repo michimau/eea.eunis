@@ -22,7 +22,7 @@ public class SpeciesDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SPECIES");
+    this.setTableName("chm62edt_species");
     this.setReadOnly(true);
 
     this.addColumnSpec(new StringColumnSpec("SCIENTIFIC_NAME", "getScientificName", "setScientificName", DEFAULT_TO_EMPTY_STRING));

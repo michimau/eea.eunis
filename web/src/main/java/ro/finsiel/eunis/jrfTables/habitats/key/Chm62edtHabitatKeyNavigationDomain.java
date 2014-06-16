@@ -20,7 +20,7 @@ public class Chm62edtHabitatKeyNavigationDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("CHM62EDT_HABITAT_KEY_NAVIGATION");
+    this.setTableName("chm62edt_habitat_key_navigation");
     this.setReadOnly(true);
     this.addColumnSpec(new CompoundPrimaryKeyColumnSpec(
             new IntegerColumnSpec("ID_PAGE", "getIdPage", "setIdPage", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY),

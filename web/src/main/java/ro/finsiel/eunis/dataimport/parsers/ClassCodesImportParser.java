@@ -154,7 +154,7 @@ public class ClassCodesImportParser extends DefaultHandler {
             deleteOldRecords();
             dcIds = getDCIds();
 
-            String query = "INSERT INTO CHM62EDT_CLASS_CODE (ID_CLASS_CODE, SORT_ORDER, NAME, UNVALIDATED_CODE, LEGAL, CURRENT_DATA, ID_DC) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO chm62edt_class_code (ID_CLASS_CODE, SORT_ORDER, NAME, UNVALIDATED_CODE, LEGAL, CURRENT_DATA, ID_DC) VALUES (?,?,?,?,?,?,?)";
 
             this.preparedStatement = con.prepareStatement(query);
 
@@ -187,7 +187,7 @@ public class ClassCodesImportParser extends DefaultHandler {
 
         try {
 
-            String query = "DELETE FROM CHM62EDT_CLASS_CODE";
+            String query = "DELETE FROM chm62edt_class_code";
 
             ps = con.prepareStatement(query);
             ps.executeUpdate();
@@ -208,7 +208,7 @@ public class ClassCodesImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_DC, REFCD FROM DC_INDEX WHERE COMMENT = 'REFERENCES'";
+            String query = "SELECT ID_DC, REFCD FROM dc_index WHERE COMMENT = 'REFERENCES'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();

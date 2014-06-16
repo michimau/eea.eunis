@@ -26,7 +26,7 @@ public class Chm62edtTaxcodeDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_TAXONOMY");
+        this.setTableName("chm62edt_taxonomy");
 
         this.addColumnSpec(new StringColumnSpec("ID_TAXONOMY", "getIdTaxcode", "setIdTaxcode", DEFAULT_TO_EMPTY_STRING,
                 NATURAL_PRIMARY_KEY));

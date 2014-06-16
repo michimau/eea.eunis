@@ -17,7 +17,7 @@ public class SitesDesignationsDomain extends AbstractDomain {
   /****/
   public void setup() {
 
-    this.setTableName("CHM62EDT_SITES");
+    this.setTableName("chm62edt_sites");
     this.setReadOnly(true);
     //sites-designations fields
     this.addColumnSpec(new StringColumnSpec("ID_SITE", "getIdSite", "setIdSite", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));

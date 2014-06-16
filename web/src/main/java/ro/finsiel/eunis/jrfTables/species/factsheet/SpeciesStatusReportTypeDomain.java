@@ -28,7 +28,7 @@ public class SpeciesStatusReportTypeDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES_STATUS");
+        this.setTableName("chm62edt_species_status");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -44,7 +44,7 @@ public class SpeciesStatusReportTypeDomain extends AbstractDomain {
                 new StringColumnSpec("STATUS_CODE", "getStatusCode",
                 "setStatusCode", DEFAULT_TO_NULL));
 
-        JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE",
+        JoinTable reportType = new JoinTable("chm62edt_report_type",
                 "ID_SPECIES_STATUS", "ID_LOOKUP");
 
         this.addJoinTable(reportType);

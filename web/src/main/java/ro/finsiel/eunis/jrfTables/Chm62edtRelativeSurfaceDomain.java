@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_ISOLATION.
+ * JRF table for chm62edt_isolation.
  * @author finsiel
  **/
 public class Chm62edtRelativeSurfaceDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtRelativeSurfaceDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_RELATIVE_SURFACE");
+        this.setTableName("chm62edt_relative_surface");
         this.addColumnSpec(
                 new StringColumnSpec("ID_RELATIVE_SURFACE",
                 "getIdRepresentativity", "setIdRepresentativity",

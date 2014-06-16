@@ -15,16 +15,16 @@ import java.util.Vector;
  *
  * Questions for LEVEL X.
  * SELECT DISTINCT ID_QUESTION, QUESTION_LABEL, ID_PAGE
- * FROM CHM62EDT_HABITAT_KEY_NAVIGATION
- * WHERE CHM62EDT_HABITAT_KEY_NAVIGATION.PAGE_LEVEL=1
+ * FROM chm62edt_habitat_key_navigation
+ * WHERE chm62edt_habitat_key_navigation.PAGE_LEVEL=1
  *
  * Answers for each question from level X
- * SELECT CHM62EDT_HABITAT_KEY_NAVIGATION.ID_ANSWER, CHM62EDT_HABITAT_KEY_NAVIGATION.ANSWER_LABEL,
- * CHM62EDT_HABITAT_KEY_NAVIGATION.ID_QUESTION_LINK, CHM62EDT_HABITAT_KEY_NAVIGATION.ID_HABITAT_LINK, PAGE_LEVEL
- * FROM CHM62EDT_HABITAT_KEY_NAVIGATION
- * WHERE CHM62EDT_HABITAT_KEY_NAVIGATION.PAGE_LEVEL=1
- * AND CHM62EDT_HABITAT_KEY_NAVIGATION.ID_QUESTION='- 006'
- * AND CHM62EDT_HABITAT_KEY_NAVIGATION.ID_PAGE=1.
+ * SELECT chm62edt_habitat_key_navigation.ID_ANSWER, chm62edt_habitat_key_navigation.ANSWER_LABEL,
+ * chm62edt_habitat_key_navigation.ID_QUESTION_LINK, chm62edt_habitat_key_navigation.ID_HABITAT_LINK, PAGE_LEVEL
+ * FROM chm62edt_habitat_key_navigation
+ * WHERE chm62edt_habitat_key_navigation.PAGE_LEVEL=1
+ * AND chm62edt_habitat_key_navigation.ID_QUESTION='- 006'
+ * AND chm62edt_habitat_key_navigation.ID_PAGE=1.
  * @author finsiel
  */
 public class KeyNavigation {
@@ -108,7 +108,7 @@ public class KeyNavigation {
 
     /**
      * This method extracts integer number from the ID of the question by removing the code part.
-     * See the definition of CHM62EDT_KEY_NAVIGATION for the reference of the column definition.
+     * See the definition of chm62edt_key_navigation for the reference of the column definition.
      * @param questionID ID of the question.
      * @return Numeric ID of the question.
      */

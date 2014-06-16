@@ -24,11 +24,11 @@ import java.util.List;
 
 
 // SELECT *
-// FROM CHM62EDT_REPORTS AS G
-// INNER JOIN CHM62EDT_SPECIES AS A ON G.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT
-// INNER JOIN CHM62EDT_GROUP_SPECIES AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES
-// INNER JOIN CHM62EDT_TAXONOMY AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY
-// LEFT JOIN CHM62EDT_TAXONOMY AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY
+// FROM chm62edt_reports AS G
+// INNER JOIN chm62edt_species AS A ON G.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT
+// INNER JOIN chm62edt_group_species AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES
+// INNER JOIN chm62edt_taxonomy AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY
+// LEFT JOIN chm62edt_taxonomy AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY
 // WHERE G.VERNACULAR_NAME LIKE "AAA%" GROUP BY A.ID_NATURE_OBJECT
 
 /**
@@ -77,7 +77,7 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_REPORTS");
+        this.setTableName("chm62edt_reports");
 
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
@@ -102,13 +102,13 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
 
         JoinTable reportType = null;
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE F", "ID_REPORT_TYPE",
+        reportType = new JoinTable("chm62edt_report_type F", "ID_REPORT_TYPE",
                 "ID_REPORT_TYPE");
         this.addJoinTable(reportType);
 
         JoinTable species = null;
 
-        species = new JoinTable("CHM62EDT_SPECIES A", "ID_NATURE_OBJECT",
+        species = new JoinTable("chm62edt_species A", "ID_NATURE_OBJECT",
                 "ID_NATURE_OBJECT");
         species.addJoinColumn(
                 new StringJoinColumn("SCIENTIFIC_NAME", "scientificName",
@@ -127,7 +127,7 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
 
         OuterJoinTable groupSpecies = null;
 
-        groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B",
+        groupSpecies = new OuterJoinTable("chm62edt_group_species B",
                 "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(
                 new StringJoinColumn("COMMON_NAME", "commonName",
@@ -136,7 +136,7 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
 
         OuterJoinTable taxCodeFamily = null;
 
-        taxCodeFamily = new OuterJoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY",
+        taxCodeFamily = new OuterJoinTable("chm62edt_taxonomy C", "ID_TAXONOMY",
                 "ID_TAXONOMY");
         taxCodeFamily.addJoinColumn(
                 new StringJoinColumn("NAME", "taxonomyName", "setTaxonomyName"));
@@ -155,14 +155,14 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
         species.addJoinTable(taxCodeFamily);
 
         // OuterJoinTable taxCodeOrder = null;
-        // taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        // taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         // taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
         // taxCodeFamily.addJoinTable(taxCodeOrder);
 
         // Joined tables
         JoinTable reportTypeAttributes = null;
 
-        reportTypeAttributes = new JoinTable("CHM62EDT_REPORT_ATTRIBUTES I",
+        reportTypeAttributes = new JoinTable("chm62edt_report_attributes I",
                 "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
         reportTypeAttributes.addJoinColumn(
                 new StringJoinColumn("VALUE", "setReportValue"));
@@ -224,13 +224,13 @@ public class VernacularNameAnyDomain extends AbstractDomain implements Paginable
 
         // Set the main QUERY
         sql.append(
-                "SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM CHM62EDT_REPORTS AS G "
-                        + "INNER JOIN CHM62EDT_REPORT_TYPE AS F ON G.ID_REPORT_TYPE = F.ID_REPORT_TYPE "
-                        + "INNER JOIN CHM62EDT_SPECIES AS A ON G.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
-                        + "LEFT JOIN CHM62EDT_GROUP_SPECIES AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY "
-                        + "INNER JOIN CHM62EDT_REPORT_ATTRIBUTES AS I ON G.ID_REPORT_ATTRIBUTES = I.ID_REPORT_ATTRIBUTES WHERE ");
+                "SELECT COUNT(DISTINCT A.ID_NATURE_OBJECT) FROM chm62edt_reports AS G "
+                        + "INNER JOIN chm62edt_report_type AS F ON G.ID_REPORT_TYPE = F.ID_REPORT_TYPE "
+                        + "INNER JOIN chm62edt_species AS A ON G.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
+                        + "LEFT JOIN chm62edt_group_species AS B ON A.ID_GROUP_SPECIES = B.ID_GROUP_SPECIES "
+                        + "LEFT JOIN chm62edt_taxonomy AS C ON A.ID_TAXONOMY = C.ID_TAXONOMY "
+                        + "LEFT JOIN chm62edt_taxonomy AS D ON C.ID_TAXONOMY_LINK = D.ID_TAXONOMY "
+                        + "INNER JOIN chm62edt_report_attributes AS I ON G.ID_REPORT_ATTRIBUTES = I.ID_REPORT_ATTRIBUTES WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());
         // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...

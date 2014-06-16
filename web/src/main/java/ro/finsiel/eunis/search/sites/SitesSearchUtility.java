@@ -80,7 +80,7 @@ public class SitesSearchUtility {
 
     /**
      * Retrieve the list of designation matching a criterion.<br />
-     * This method implements: SELECT * FROM CHM62EDT_DESIGNATIONS WHERE sql LIMIT 0, Utilities.MAX_POPUP_RESULTS.
+     * This method implements: SELECT * FROM chm62edt_designations WHERE sql LIMIT 0, Utilities.MAX_POPUP_RESULTS.
      *
      * @param where SQL where.
      * @return A list of Chm62edtDesignationsPersist objects.
@@ -240,7 +240,7 @@ public class SitesSearchUtility {
     }
 
     /**
-     * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
+     * Translate the SOURCE_DB field from chm62edt_sites in human readable language.
      *
      * @param sourceDB Source db.
      * @return Source database.
@@ -256,7 +256,7 @@ public class SitesSearchUtility {
     }
 
     /**
-     * Translate the SOURCE_DB field from CHM62EDT_SITES in SQL compatible language.
+     * Translate the SOURCE_DB field from chm62edt_sites in SQL compatible language.
      *
      * @param sourceDB The source database in human language
      * @return The string identifying the DB within database (ie. CDDA National corresponds to CDDA_NATIONAL).
@@ -319,7 +319,7 @@ public class SitesSearchUtility {
      * <br />
      * Implementing SQL is:
      * <br />
-     * SELECT * FROM CHM62EDT_DESIGNATIONS B" +
+     * SELECT * FROM chm62edt_designations B" +
      * WHERE B.ID_DESIGNATION='" + idDesignation + "' AND B.ID_GEOSCOPE=" + idGeoscope + " ORDER BY B.DESCRIPTION, B.DESCRIPTION_EN, B.DESCRIPTION_FR";
      *
      * @param idDesignation idDesignation of his designation.
@@ -331,7 +331,7 @@ public class SitesSearchUtility {
         String listFields = "ID_DESIGNATION,ID_GEOSCOPE,ID_DC,DESCRIPTION,DESCRIPTION_EN,DESCRIPTION_FR,ORIGINAL_DATASOURCE,"
                 + "CDDA_SITES,REFERENCE_AREA,TOTAL_AREA,NATIONAL_LAW,NATIONAL_CATEGORY,NATIONAL_LAW_REFERENCE,NATIONAL_LAW_AGENCY,"
                 + "DATA_SOURCE,TOTAL_NUMBER,REFERENCE_NUMBER,REFERENCE_DATE,REMARK,REMARK_SOURCE";
-        String sql = "SELECT " + listFields + " FROM CHM62EDT_DESIGNATIONS B" + " WHERE B.ID_DESIGNATION='" + idDesignation
+        String sql = "SELECT " + listFields + " FROM chm62edt_designations B" + " WHERE B.ID_DESIGNATION='" + idDesignation
                 + "' AND B.ID_GEOSCOPE=" + idGeoscope + " ORDER BY B.DESCRIPTION, B.DESCRIPTION_EN, B.DESCRIPTION_FR";
 
         try {
@@ -365,7 +365,7 @@ public class SitesSearchUtility {
         String listFields = "ID_DESIGNATION,ID_GEOSCOPE,ID_DC,DESCRIPTION,DESCRIPTION_EN,DESCRIPTION_FR,ORIGINAL_DATASOURCE,"
                 + "CDDA_SITES,REFERENCE_AREA,TOTAL_AREA,NATIONAL_LAW,NATIONAL_CATEGORY,NATIONAL_LAW_REFERENCE,NATIONAL_LAW_AGENCY,"
                 + "DATA_SOURCE,TOTAL_NUMBER,REFERENCE_NUMBER,REFERENCE_DATE,REMARK,REMARK_SOURCE";
-        String sql = "SELECT " + listFields + " FROM CHM62EDT_DESIGNATIONS B" + " WHERE B.ID_DESIGNATION='" + idDesignation
+        String sql = "SELECT " + listFields + " FROM chm62edt_designations B" + " WHERE B.ID_DESIGNATION='" + idDesignation
                 + "' AND B.ID_GEOSCOPE=" + idGeoscope + " ORDER BY B.DESCRIPTION, B.DESCRIPTION_EN, B.DESCRIPTION_FR";
 
         try {
@@ -429,9 +429,9 @@ public class SitesSearchUtility {
             List tempList = new SitesDesignationsDomain().findCustom(
                     "SELECT A.ID_SITE, A.ID_DESIGNATION,"
                             + " B.DESCRIPTION,B.DESCRIPTION_EN,B.DESCRIPTION_FR,C.AREA_NAME_EN,B.ORIGINAL_DATASOURCE,A.ID_GEOSCOPE, B.NATIONAL_CATEGORY"
-                            + " FROM CHM62EDT_SITES AS A"
-                            + " INNER JOIN CHM62EDT_DESIGNATIONS AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE)"
-                            + " INNER JOIN CHM62EDT_COUNTRY AS C ON (A.ID_GEOSCOPE = C.ID_GEOSCOPE)" + " WHERE A.ID_SITE = '"
+                            + " FROM chm62edt_sites AS A"
+                            + " INNER JOIN chm62edt_designations AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE)"
+                            + " INNER JOIN chm62edt_country AS C ON (A.ID_GEOSCOPE = C.ID_GEOSCOPE)" + " WHERE A.ID_SITE = '"
                             + idSite + "'" + " GROUP BY A.ID_DESIGNATION,C.AREA_NAME_EN,B.DESCRIPTION");
 
             if (tempList != null && tempList.size() > 0) {

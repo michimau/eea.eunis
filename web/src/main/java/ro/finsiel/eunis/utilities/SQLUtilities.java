@@ -32,7 +32,7 @@ public class SQLUtilities {
     private int SQL_LIMIT = 1000;
     private int resultCount = 0;
     private static final String INSERT_BOOKMARK =
-        "INSERT INTO EUNIS_BOOKMARKS( USERNAME, BOOKMARK, DESCRIPTION ) VALUES( ?, ?, ?)";
+        "INSERT INTO eunis_bookmarks( USERNAME, BOOKMARK, DESCRIPTION ) VALUES( ?, ?, ?)";
 
     /**
      * SQL used for soundex search
@@ -796,7 +796,7 @@ public class SQLUtilities {
         ResultSet rs = null;
 
         String SQL = "SELECT *";
-        SQL += " FROM CHM62EDT_TAB_PAGE_" + NatureObjectType.toUpperCase();
+        SQL += " FROM chm62edt_tab_page_" + NatureObjectType.toLowerCase();
         SQL += " WHERE ID_NATURE_OBJECT=" + idNatureObject;
 
         try {
@@ -896,7 +896,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_HABITAT FROM CHM62EDT_HABITAT";
+        String strSQL = "SELECT ID_HABITAT FROM chm62edt_habitat";
         strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE ?";
         strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)>?";
 
@@ -927,7 +927,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_HABITAT FROM CHM62EDT_HABITAT";
+        String strSQL = "SELECT ID_HABITAT FROM chm62edt_habitat";
         strSQL = strSQL + " WHERE CODE_2000 LIKE '" + idCode + "%'";
         strSQL = strSQL + " AND CODE_2000<>'" + idCodeParent + "'";
 
@@ -961,7 +961,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_TAXONOMY FROM CHM62EDT_TAXONOMY";
+        String strSQL = "SELECT ID_TAXONOMY FROM chm62edt_taxonomy";
         strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT = ?";
         strSQL = strSQL + " AND ID_TAXONOMY<>?";
 
@@ -997,7 +997,7 @@ public class SQLUtilities {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String strSQL = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES";
+        String strSQL = "SELECT ID_SPECIES FROM chm62edt_species";
         strSQL = strSQL + " WHERE ID_TAXONOMY = ?";
 
         try {
@@ -1223,7 +1223,7 @@ public class SQLUtilities {
             con = getConnection();
             message = EunisUtil.replaceTagsImport(message);
             ps =
-                con.prepareStatement("INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '" + message
+                con.prepareStatement("INSERT INTO eunis_import_log (MESSAGE, CUR_TIMESTAMP) values ( '" + message
                         + "', CURRENT_TIMESTAMP() ) ");
             ps.execute();
         } catch (Exception e) {
@@ -1247,7 +1247,7 @@ public class SQLUtilities {
             con = getConnection();
 
             ps =
-                con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
+                con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM eunis_import_log ORDER BY LOG_ID DESC LIMIT 100");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1271,7 +1271,7 @@ public class SQLUtilities {
 
     /**
      * Returns all URLs in the DB
-     * @return URLs from DC_INDEX, GLOSSARY, SITE_ATTRIBUTES, DESIGNATIONS
+     * @return URLs from dc_index, GLOSSARY, SITE_ATTRIBUTES, DESIGNATIONS
      */
     public List<String> getUrls() {
         List<String> ret = new ArrayList<String>();
@@ -1282,11 +1282,11 @@ public class SQLUtilities {
 
         List<String> statements = new ArrayList<String>();
 
-        statements.add("SELECT URL FROM DC_INDEX");
-        statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
+        statements.add("SELECT URL FROM dc_index");
+        statements.add("SELECT LINK_URL FROM chm62edt_glossary");
         // can also be https!
-        statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http%'");
-        statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http%'");
+        statements.add("SELECT VALUE FROM chm62edt_site_attributes WHERE VALUE LIKE 'http%'");
+        statements.add("SELECT DATA_SOURCE FROM chm62edt_designations WHERE DATA_SOURCE LIKE 'http%'");
 
         try {
             con = getConnection();
@@ -1365,7 +1365,7 @@ public class SQLUtilities {
         try {
             con = getConnection();
 
-            ps = con.prepareStatement("SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM CHM62EDT_TAXONOMY LIMIT 100");
+            ps = con.prepareStatement("SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM chm62edt_taxonomy LIMIT 100");
             rs = ps.executeQuery();
             while (rs.next()) {
                 String id = rs.getString("ID_TAXONOMY");
@@ -1376,7 +1376,7 @@ public class SQLUtilities {
                 tree = id + "*" + level + "*" + name;
                 do {
                     ps = con.prepareStatement(
-                    "SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY = ?");
+                    "SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM chm62edt_taxonomy WHERE ID_TAXONOMY = ?");
                     ps.setString(1, parent);
                     ResultSet rs2 = ps.executeQuery();
                     while (rs2.next()) {
@@ -1390,7 +1390,7 @@ public class SQLUtilities {
                 } while (!id.equals(parent));
 
                 // Update TAXONOMY_TREE
-                ps = con.prepareStatement("UPDATE CHM62EDT_TAXONOMY SET TAXONOMY_TREE = ? WHERE ID_TAXONOMY = ?");
+                ps = con.prepareStatement("UPDATE chm62edt_taxonomy SET TAXONOMY_TREE = ? WHERE ID_TAXONOMY = ?");
                 ps.setString(1, tree);
                 ps.setString(2, origId);
                 ps.executeUpdate();

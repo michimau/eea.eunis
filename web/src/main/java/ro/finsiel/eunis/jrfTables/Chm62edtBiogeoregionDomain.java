@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_BIOGEOREGION.
+ * JRF table for chm62edt_biogeoregion.
  * @author finsiel
  **/
 public class Chm62edtBiogeoregionDomain extends AbstractDomain {
@@ -32,7 +32,7 @@ public class Chm62edtBiogeoregionDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_BIOGEOREGION");
+        this.setTableName("chm62edt_biogeoregion");
         this.setReadOnly(true);
 
         this.addColumnSpec(

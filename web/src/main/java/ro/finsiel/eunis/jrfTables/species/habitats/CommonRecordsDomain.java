@@ -25,7 +25,7 @@ public class CommonRecordsDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_HABITAT");
+        this.setTableName("chm62edt_habitat");
         this.setReadOnly(true);
         this.setTableAlias("H");
 
@@ -63,7 +63,7 @@ public class CommonRecordsDomain extends AbstractDomain {
                 new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel",
                 DEFAULT_TO_NULL));
 
-        JoinTable joinTable = new JoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE A",
+        JoinTable joinTable = new JoinTable("chm62edt_nature_object_geoscope A",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT_LINK");
 
         joinTable.addJoinColumn(
@@ -72,7 +72,7 @@ public class CommonRecordsDomain extends AbstractDomain {
                 new IntegerJoinColumn("ID_DC", "idDC", "setidDC"));
         this.addJoinTable(joinTable);
 
-        JoinTable Rep = new JoinTable("CHM62EDT_NATURE_OBJECT_REPORT_TYPE B",
+        JoinTable Rep = new JoinTable("chm62edt_nature_object_report_type B",
                 "ID_NATURE_OBJECT_LINK", "ID_NATURE_OBJECT_LINK");
 
         Rep.addJoinColumn(
@@ -80,7 +80,7 @@ public class CommonRecordsDomain extends AbstractDomain {
                 "setidNOLink"));
         joinTable.addJoinTable(Rep);
 
-        JoinTable joinSpecies = new JoinTable("CHM62EDT_SPECIES AAA",
+        JoinTable joinSpecies = new JoinTable("chm62edt_species AAA",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
 
         joinTable.addJoinTable(joinSpecies);

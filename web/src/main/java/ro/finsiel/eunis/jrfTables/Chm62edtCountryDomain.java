@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_COUNTRY.
+ * JRF table for chm62edt_country.
  * @author finsiel
  **/
 public class Chm62edtCountryDomain extends AbstractDomain {
@@ -29,7 +29,7 @@ public class Chm62edtCountryDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_COUNTRY");
+        this.setTableName("chm62edt_country");
         this.setReadOnly(true);
 
         this.addColumnSpec(

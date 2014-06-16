@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_SUBSTRATE.
+ * JRF table for chm62edt_substrate.
  * @author finsiel
  **/
 public class Chm62edtSubstrateDomain extends AbstractDomain {
@@ -28,7 +28,7 @@ public class Chm62edtSubstrateDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_SUBSTRATE");
+        this.setTableName("chm62edt_substrate");
         this.setReadOnly(true);
 
         this.addColumnSpec(

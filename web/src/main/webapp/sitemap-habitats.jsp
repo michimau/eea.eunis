@@ -48,7 +48,7 @@
   out.println("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 
   try {
-    String strSQL = "SELECT ID_HABITAT FROM CHM62EDT_HABITAT";
+    String strSQL = "SELECT ID_HABITAT FROM chm62edt_habitat";
     strSQL = strSQL + " LIMIT " + start_from + "," + nr;
 
     ps = con.createStatement();

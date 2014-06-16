@@ -232,7 +232,7 @@ public class JstlFunctions {
     }
 
     /**
-     * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
+     * Translate the SOURCE_DB field from chm62edt_sites in human readable language.
      *
      * @param sourceDB Source db.
      * @return Source database.

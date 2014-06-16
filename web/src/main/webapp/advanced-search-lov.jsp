@@ -139,15 +139,15 @@
      lov.equalsIgnoreCase("Tidal")) {
 
    if(oper.equalsIgnoreCase("Equal")) {
-     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
+     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
    } else {
      if(oper.equalsIgnoreCase("Contains")) {
-       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
      } else {
        if(oper.equalsIgnoreCase("Between")) {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
        } else {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" ORDER BY ID_"+lov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" ORDER BY ID_"+lov.toUpperCase();
        }
      }
    }
@@ -172,15 +172,15 @@
      lov.equalsIgnoreCase("DistributionStatus") ||
      lov.equalsIgnoreCase("HumanActivity")) {
    if(oper.equalsIgnoreCase("Equal")) {
-     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+splitLov.toUpperCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+splitLov.toUpperCase();
+     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+splitLov.toLowerCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+splitLov.toUpperCase();
    } else {
      if(oper.equalsIgnoreCase("Contains")) {
-       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+splitLov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+splitLov.toUpperCase();
+       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+splitLov.toLowerCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+splitLov.toUpperCase();
      } else {
        if(oper.equalsIgnoreCase("Between")) {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+splitLov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+splitLov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+splitLov.toLowerCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+splitLov.toUpperCase();
        } else {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+splitLov.toUpperCase()+" ORDER BY ID_"+splitLov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+splitLov.toLowerCase()+" ORDER BY ID_"+splitLov.toUpperCase();
        }
      }
    }
@@ -188,45 +188,45 @@
 
   if(lov.equalsIgnoreCase("LegalInstrument")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `DC_INDEX` WHERE `TITLE`='"+ val + "' ORDER BY `TITLE`";
+      SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `dc_index` WHERE `TITLE`='"+ val + "' ORDER BY `TITLE`";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `DC_INDEX` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
+        SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `dc_index` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `DC_INDEX` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
+          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `dc_index` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
         } else {
-          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `DC_INDEX` ORDER BY `TITLE`";
+          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `dc_index` ORDER BY `TITLE`";
         }
       }
     }
   }
   if(lov.equalsIgnoreCase("InternationalThreatStatus")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME='"+ val + "' ORDER BY NAME";
+      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME='"+ val + "' ORDER BY NAME";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
         } else {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status ORDER BY NAME";
         }
       }
     }
   }
   if(lov.equalsIgnoreCase("ThreatStatus")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME='"+ val + "' ORDER BY NAME";
+      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME='"+ val + "' ORDER BY NAME";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
         } else {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status ORDER BY NAME";
         }
       }
     }
@@ -234,15 +234,15 @@
 
   if(lov.equalsIgnoreCase("LegalInstruments")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM CHM62EDT_CLASS_CODE WHERE NAME='"+ val + "' AND LEGAL<>0 ORDER BY NAME";
+      SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM chm62edt_class_code WHERE NAME='"+ val + "' AND LEGAL<>0 ORDER BY NAME";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM CHM62EDT_CLASS_CODE WHERE NAME LIKE '%"+ val + "%' AND LEGAL<>0 ORDER BY NAME";
+        SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM chm62edt_class_code WHERE NAME LIKE '%"+ val + "%' AND LEGAL<>0 ORDER BY NAME";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM CHM62EDT_CLASS_CODE WHERE NAME LIKE '%"+ val + "%' AND LEGAL<>0 ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM chm62edt_class_code WHERE NAME LIKE '%"+ val + "%' AND LEGAL<>0 ORDER BY NAME";
         } else {
-          SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM CHM62EDT_CLASS_CODE WHERE LEGAL<>0 ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME,ID_CLASS_CODE FROM chm62edt_class_code WHERE LEGAL<>0 ORDER BY NAME";
         }
       }
     }
@@ -250,15 +250,15 @@
 
   if(lov.equalsIgnoreCase("Abundance")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT DESCRIPTION,CODE FROM CHM62EDT_"+lov.toUpperCase()+" WHERE DESCRIPTION='"+ val + "' ORDER BY DESCRIPTION";
+      SQL="SELECT DISTINCT DESCRIPTION,CODE FROM chm62edt_"+lov.toLowerCase()+" WHERE DESCRIPTION='"+ val + "' ORDER BY DESCRIPTION";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT DESCRIPTION,CODE FROM CHM62EDT_"+lov.toUpperCase()+" WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
+        SQL="SELECT DISTINCT DESCRIPTION,CODE FROM chm62edt_"+lov.toLowerCase()+" WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT DESCRIPTION,CODE FROM CHM62EDT_"+lov.toUpperCase()+" WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
+          SQL="SELECT DISTINCT DESCRIPTION,CODE FROM chm62edt_"+lov.toLowerCase()+" WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
         } else {
-          SQL="SELECT DISTINCT DESCRIPTION,CODE FROM CHM62EDT_"+lov.toUpperCase()+" ORDER BY ID_"+lov.toUpperCase();
+          SQL="SELECT DISTINCT DESCRIPTION,CODE FROM chm62edt_"+lov.toLowerCase()+" ORDER BY ID_"+lov.toUpperCase();
         }
       }
     }
@@ -266,15 +266,15 @@
 
   if(lov.equalsIgnoreCase("InfoQuality")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_INFO_QUALITY WHERE DESCRIPTION='"+ val + "' ORDER BY ID_INFO_QUALITY";
+      SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_info_quality WHERE DESCRIPTION='"+ val + "' ORDER BY ID_INFO_QUALITY";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_INFO_QUALITY WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY ID_INFO_QUALITY";
+        SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_info_quality WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY ID_INFO_QUALITY";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_INFO_QUALITY WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY ID_INFO_QUALITY";
+          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_info_quality WHERE DESCRIPTION LIKE '%"+ val + "%' ORDER BY ID_INFO_QUALITY";
         } else {
-          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_INFO_QUALITY ORDER BY ID_INFO_QUALITY";
+          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_info_quality ORDER BY ID_INFO_QUALITY";
         }
       }
     }
@@ -282,15 +282,15 @@
 
   if(lov.equalsIgnoreCase("Trend")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_TREND WHERE STATUS='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
+      SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_trend WHERE STATUS='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_TREND WHERE STATUS LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+        SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_trend WHERE STATUS LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_TREND WHERE STATUS LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_trend WHERE STATUS LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
         } else {
-          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM CHM62EDT_TREND ORDER BY STATUS";
+          SQL="SELECT DISTINCT STATUS,DESCRIPTION FROM chm62edt_trend ORDER BY STATUS";
         }
       }
     }
@@ -298,15 +298,15 @@
 
   if(lov.equalsIgnoreCase("RegionCode")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_REGION_CODES WHERE NAME='"+ val + "' ORDER BY ID_REGION_CODE";
+      SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_region_codes WHERE NAME='"+ val + "' ORDER BY ID_REGION_CODE";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_REGION_CODES WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_REGION_CODE";
+        SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_region_codes WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_REGION_CODE";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_REGION_CODES WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_REGION_CODE";
+          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_region_codes WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_REGION_CODE";
         } else {
-          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_REGION_CODES ORDER BY ID_REGION_CODE";
+          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_region_codes ORDER BY ID_REGION_CODE";
         }
       }
     }
@@ -314,15 +314,15 @@
 
   if(lov.equalsIgnoreCase("HumanActivity")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_HUMAN_ACTIVITY WHERE NAME='"+ val + "' ORDER BY ID_HUMAN_ACTIVITY";
+      SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_human_activity WHERE NAME='"+ val + "' ORDER BY ID_HUMAN_ACTIVITY";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_HUMAN_ACTIVITY WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_HUMAN_ACTIVITY";
+        SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_human_activity WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_HUMAN_ACTIVITY";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_HUMAN_ACTIVITY WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_HUMAN_ACTIVITY";
+          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_human_activity WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_HUMAN_ACTIVITY";
         } else {
-          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM CHM62EDT_HUMAN_ACTIVITY ORDER BY ID_HUMAN_ACTIVITY";
+          SQL="SELECT DISTINCT NAME,DESCRIPTION FROM chm62edt_human_activity ORDER BY ID_HUMAN_ACTIVITY";
         }
       }
     }
@@ -330,15 +330,15 @@
 
   if(lov.equalsIgnoreCase("Group")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM CHM62EDT_GROUP_SPECIES WHERE COMMON_NAME='"+ val + "' ORDER BY COMMON_NAME";
+      SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM chm62edt_group_species WHERE COMMON_NAME='"+ val + "' ORDER BY COMMON_NAME";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM CHM62EDT_GROUP_SPECIES WHERE COMMON_NAME LIKE '%"+ val + "%' ORDER BY COMMON_NAME";
+        SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM chm62edt_group_species WHERE COMMON_NAME LIKE '%"+ val + "%' ORDER BY COMMON_NAME";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM CHM62EDT_GROUP_SPECIES WHERE COMMON_NAME LIKE '%"+ val + "%' ORDER BY COMMON_NAME";
+          SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM chm62edt_group_species WHERE COMMON_NAME LIKE '%"+ val + "%' ORDER BY COMMON_NAME";
         } else {
-          SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM CHM62EDT_GROUP_SPECIES ORDER BY COMMON_NAME";
+          SQL="SELECT DISTINCT COMMON_NAME,SCIENTIFIC_NAME FROM chm62edt_group_species ORDER BY COMMON_NAME";
         }
       }
     }
@@ -346,15 +346,15 @@
 
   if(lov.equalsIgnoreCase("Country")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM CHM62EDT_COUNTRY WHERE SELECTION <> 0 AND AREA_NAME_EN='"+ val + "' ORDER BY AREA_NAME_EN";
+      SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM chm62edt_country WHERE SELECTION <> 0 AND AREA_NAME_EN='"+ val + "' ORDER BY AREA_NAME_EN";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM CHM62EDT_COUNTRY WHERE SELECTION <> 0 AND AREA_NAME_EN LIKE '%"+ val + "%' ORDER BY AREA_NAME_EN";
+        SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM chm62edt_country WHERE SELECTION <> 0 AND AREA_NAME_EN LIKE '%"+ val + "%' ORDER BY AREA_NAME_EN";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM CHM62EDT_COUNTRY WHERE SELECTION <> 0 AND AREA_NAME_EN LIKE '%"+ val + "%' ORDER BY AREA_NAME_EN";
+          SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM chm62edt_country WHERE SELECTION <> 0 AND AREA_NAME_EN LIKE '%"+ val + "%' ORDER BY AREA_NAME_EN";
         } else {
-          SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM CHM62EDT_COUNTRY WHERE SELECTION <> 0 ORDER BY AREA_NAME_EN";
+          SQL="SELECT DISTINCT AREA_NAME_EN,EUNIS_AREA_CODE FROM chm62edt_country WHERE SELECTION <> 0 ORDER BY AREA_NAME_EN";
         }
       }
     }
@@ -362,15 +362,15 @@
 
   if(lov.equalsIgnoreCase("SpeciesStatus")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM CHM62EDT_SPECIES_STATUS WHERE NAME='"+ val + "' ORDER BY DESCRIPTION";
+      SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM chm62edt_species_status WHERE NAME='"+ val + "' ORDER BY DESCRIPTION";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM CHM62EDT_SPECIES_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
+        SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM chm62edt_species_status WHERE NAME LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM CHM62EDT_SPECIES_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
+          SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM chm62edt_species_status WHERE NAME LIKE '%"+ val + "%' ORDER BY DESCRIPTION";
         } else {
-          SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM CHM62EDT_SPECIES_STATUS ORDER BY DESCRIPTION";
+          SQL="SELECT DISTINCT DESCRIPTION,SHORT_DEFINITION FROM chm62edt_species_status ORDER BY DESCRIPTION";
         }
       }
     }
@@ -378,15 +378,15 @@
 
   if(lov.equalsIgnoreCase("Biogeoregion")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME,CODE FROM CHM62EDT_BIOGEOREGION WHERE NAME='"+ val + "' ORDER BY NAME";
+      SQL="SELECT DISTINCT NAME,CODE FROM chm62edt_biogeoregion WHERE NAME='"+ val + "' ORDER BY NAME";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME,CODE FROM CHM62EDT_BIOGEOREGION WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+        SQL="SELECT DISTINCT NAME,CODE FROM chm62edt_biogeoregion WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME,CODE FROM CHM62EDT_BIOGEOREGION WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME,CODE FROM chm62edt_biogeoregion WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
         } else {
-          SQL="SELECT DISTINCT NAME,CODE FROM CHM62EDT_BIOGEOREGION ORDER BY NAME";
+          SQL="SELECT DISTINCT NAME,CODE FROM chm62edt_biogeoregion ORDER BY NAME";
         }
       }
     }
@@ -396,78 +396,78 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_INDEX`.`SOURCE` = '"+ val + "')";
+        SQLWhere=" (`dc_index`.`SOURCE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%')";
+          SQLWhere=" (`dc_index`.`SOURCE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_INDEX`.`SOURCE` = '"+ val + "')";
+            SQLWhere=" (`dc_index`.`SOURCE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%')";
+            SQLWhere=" (`dc_index`.`SOURCE` LIKE '%"+ val + "%')";
           }
         }
       }
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`SOURCE`,";
-      SQL+="      `DC_INDEX`.`EDITOR`";
+      SQL+="      `dc_index`.`SOURCE`,";
+      SQL+="      `dc_index`.`EDITOR`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_reports` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_reports`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_report_type` ON (`chm62edt_reports`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_reports`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE";
-      SQL+="      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
+      SQL+="      (`chm62edt_report_type`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
       SQL+="    AND "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`SOURCE`,";
-      SQL+="      `DC_INDEX`.`EDITOR`";
+      SQL+="      `dc_index`.`SOURCE`,";
+      SQL+="      `dc_index`.`EDITOR`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`SOURCE`,";
-      SQL+="      `DC_INDEX`.`EDITOR`";
+      SQL+="      `dc_index`.`SOURCE`,";
+      SQL+="      `dc_index`.`EDITOR`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`SOURCE`,";
-      SQL+="      `DC_INDEX`.`EDITOR`";
+      SQL+="      `dc_index`.`SOURCE`,";
+      SQL+="      `dc_index`.`EDITOR`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_taxonomy` ON (`chm62edt_species`.`ID_TAXONOMY` = `chm62edt_taxonomy`.`ID_TAXONOMY`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_taxonomy`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
-      SQL+="    GROUP BY DC_INDEX.SOURCE,DC_INDEX.EDITOR";
-      SQL+="    ORDER BY `DC_INDEX`.`SOURCE`";
+      SQL+="    GROUP BY dc_index.SOURCE,dc_index.EDITOR";
+      SQL+="    ORDER BY `dc_index`.`SOURCE`";
       SQL+="    LIMIT 0,100";
     }
     if(natureobject.equalsIgnoreCase("Habitat")) {
-      String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+      String isGoodHabitat = " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
 
-      SQL="SELECT DISTINCT `DC_INDEX`.`SOURCE`,`DC_INDEX`.`EDITOR` FROM `CHM62EDT_HABITAT`";
-      SQL+=" INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+=" INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL="SELECT DISTINCT `dc_index`.`SOURCE`,`dc_index`.`EDITOR` FROM `chm62edt_habitat`";
+      SQL+=" INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+=" INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` = '"+ val + "') ORDER BY `DC_INDEX`.`SOURCE`";
+        SQL+=" WHERE "+isGoodHabitat+" AND (`dc_index`.`SOURCE` = '"+ val + "') ORDER BY `dc_index`.`SOURCE`";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`SOURCE`";
+          SQL+=" WHERE "+isGoodHabitat+" AND (`dc_index`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `dc_index`.`SOURCE`";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` = '"+ val + "') ORDER BY `DC_INDEX`.`SOURCE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND (`dc_index`.`SOURCE` = '"+ val + "') ORDER BY `dc_index`.`SOURCE`";
           } else {
-            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`SOURCE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND (`dc_index`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `dc_index`.`SOURCE`";
           }
         }
       }
@@ -478,79 +478,79 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_INDEX`.`TITLE` = '"+ val + "')";
+        SQLWhere=" (`dc_index`.`TITLE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%')";
+          SQLWhere=" (`dc_index`.`TITLE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_INDEX`.`TITLE` = '"+ val + "')";
+            SQLWhere=" (`dc_index`.`TITLE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%')";
+            SQLWhere=" (`dc_index`.`TITLE` LIKE '%"+ val + "%')";
           }
         }
       }
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`TITLE`,";
-      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
+      SQL+="      `dc_index`.`TITLE`,";
+      SQL+="      `dc_index`.`ALTERNATIVE`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_reports` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_reports`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_report_type` ON (`chm62edt_reports`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_reports`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE";
-      SQL+="      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
+      SQL+="      (`chm62edt_report_type`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
       SQL+="    AND "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`TITLE`,";
-      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
+      SQL+="      `dc_index`.`TITLE`,";
+      SQL+="      `dc_index`.`ALTERNATIVE`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`TITLE`,";
-      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
+      SQL+="      `dc_index`.`TITLE`,";
+      SQL+="      `dc_index`.`ALTERNATIVE`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_INDEX`.`TITLE`,";
-      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
+      SQL+="      `dc_index`.`TITLE`,";
+      SQL+="      `dc_index`.`ALTERNATIVE`";
       SQL+="    FROM";
-      SQL+="      `CHM62EDT_SPECIES`";
-      SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+="      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
-      SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL+="      `chm62edt_species`";
+      SQL+="      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+="      INNER JOIN `chm62edt_taxonomy` ON (`chm62edt_species`.`ID_TAXONOMY` = `chm62edt_taxonomy`.`ID_TAXONOMY`)";
+      SQL+="      INNER JOIN `dc_index` ON (`chm62edt_taxonomy`.`ID_DC` = `dc_index`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
-      SQL+="    GROUP BY DC_INDEX.SOURCE,DC_INDEX.EDITOR";
-      SQL+="    ORDER BY `DC_INDEX`.`TITLE`";
+      SQL+="    GROUP BY dc_index.SOURCE,dc_index.EDITOR";
+      SQL+="    ORDER BY `dc_index`.`TITLE`";
       SQL+="    LIMIT 0,100";
     }
 
     if(natureobject.equalsIgnoreCase("Habitat")) {
-      String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+      String isGoodHabitat = " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
 
-      SQL="SELECT DISTINCT `DC_INDEX`.`TITLE`,`DC_INDEX`.`ALTERNATIVE` FROM `CHM62EDT_HABITAT`";
-      SQL+=" INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-      SQL+=" INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+      SQL="SELECT DISTINCT `dc_index`.`TITLE`,`dc_index`.`ALTERNATIVE` FROM `chm62edt_habitat`";
+      SQL+=" INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+      SQL+=" INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` = '"+ val + "') ORDER BY `DC_INDEX`.`TITLE`";
+        SQL+=" WHERE "+isGoodHabitat+" AND  (`dc_index`.`TITLE` = '"+ val + "') ORDER BY `dc_index`.`TITLE`";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`TITLE`";
+          SQL+=" WHERE "+isGoodHabitat+" AND  (`dc_index`.`TITLE` LIKE '%"+ val + "%') ORDER BY `dc_index`.`TITLE`";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` = '"+ val + "') ORDER BY `DC_INDEX`.`TITLE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND  (`dc_index`.`TITLE` = '"+ val + "') ORDER BY `dc_index`.`TITLE`";
           } else {
-            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`TITLE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND  (`dc_index`.`TITLE` LIKE '%"+ val + "%') ORDER BY `dc_index`.`TITLE`";
           }
         }
       }
@@ -559,18 +559,18 @@
 
   if(lov.equalsIgnoreCase("Taxonomy")) {
 //    System.out.println("oper = " + oper);
-    SQL="SELECT DISTINCT `CHM62EDT_TAXONOMY`.`NAME`,`CHM62EDT_TAXONOMY`.`LEVEL` FROM `CHM62EDT_SPECIES`";
-    SQL+=" INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
+    SQL="SELECT DISTINCT `chm62edt_taxonomy`.`NAME`,`chm62edt_taxonomy`.`LEVEL` FROM `chm62edt_species`";
+    SQL+=" INNER JOIN `chm62edt_taxonomy` ON (`chm62edt_species`.`ID_TAXONOMY` = `chm62edt_taxonomy`.`ID_TAXONOMY`)";
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL+=" WHERE (`CHM62EDT_TAXONOMY`.`NAME` = '"+ val + "') ORDER BY `CHM62EDT_TAXONOMY`.`NAME`";
+      SQL+=" WHERE (`chm62edt_taxonomy`.`NAME` = '"+ val + "') ORDER BY `chm62edt_taxonomy`.`NAME`";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL+=" WHERE (`CHM62EDT_TAXONOMY`.`NAME` LIKE '%"+ val + "%') ORDER BY `CHM62EDT_TAXONOMY`.`NAME`";
+        SQL+=" WHERE (`chm62edt_taxonomy`.`NAME` LIKE '%"+ val + "%') ORDER BY `chm62edt_taxonomy`.`NAME`";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL+=" WHERE (`CHM62EDT_TAXONOMY`.`NAME` = '"+ val + "') ORDER BY `CHM62EDT_TAXONOMY`.`NAME`";
+          SQL+=" WHERE (`chm62edt_taxonomy`.`NAME` = '"+ val + "') ORDER BY `chm62edt_taxonomy`.`NAME`";
         } else {
-          SQL+=" WHERE (`CHM62EDT_TAXONOMY`.`NAME` = '"+ val + "') ORDER BY `CHM62EDT_TAXONOMY`.`NAME`";
+          SQL+=" WHERE (`chm62edt_taxonomy`.`NAME` = '"+ val + "') ORDER BY `chm62edt_taxonomy`.`NAME`";
         }
       }
     }
@@ -595,51 +595,51 @@
 
   if(lov.equalsIgnoreCase("ScientificName")) {
     if(natureobject.equalsIgnoreCase("Species")) {
-      SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
+      SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM chm62edt_species";
       SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
       SQL+=" ORDER BY SCIENTIFIC_NAME";
       SQL+=" LIMIT 0,100";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM chm62edt_species";
         SQL+=" WHERE SCIENTIFIC_NAME = '"+val+"'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM chm62edt_species";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Between")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM chm62edt_species";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
     }
     if(natureobject.equalsIgnoreCase("Habitat")) {
-       String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+       String isGoodHabitat = " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
 
-      SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM CHM62EDT_HABITAT";
-      SQL+=" WHERE  "+isGoodHabitat+" AND  SCIENTIFIC_NAME LIKE '%"+val+"%' AND CHM62EDT_HABITAT.ID_HABITAT<>'-1' AND CHM62EDT_HABITAT.ID_HABITAT<>'10000' ";
+      SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
+      SQL+=" WHERE  "+isGoodHabitat+" AND  SCIENTIFIC_NAME LIKE '%"+val+"%' AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
       SQL+=" ORDER BY SCIENTIFIC_NAME";
       SQL+=" LIMIT 0,100";
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM CHM62EDT_HABITAT";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND CHM62EDT_HABITAT.ID_HABITAT<>'-1' AND CHM62EDT_HABITAT.ID_HABITAT<>'10000' ";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM CHM62EDT_HABITAT";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME = '"+val+"'  AND CHM62EDT_HABITAT.ID_HABITAT<>'-1' AND CHM62EDT_HABITAT.ID_HABITAT<>'10000' ";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME = '"+val+"'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Between")) {
-        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM CHM62EDT_HABITAT";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND CHM62EDT_HABITAT.ID_HABITAT<>'-1' AND CHM62EDT_HABITAT.ID_HABITAT<>'10000' ";
+        SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
@@ -648,24 +648,24 @@
 
   if(lov.equalsIgnoreCase("Name")) {
     if(natureobject.equalsIgnoreCase("Sites")) {
-      SQL="SELECT DISTINCT NAME,ID_SITE FROM CHM62EDT_SITES";
+      SQL="SELECT DISTINCT NAME,ID_SITE FROM chm62edt_sites";
       SQL+=" WHERE NAME LIKE '%"+val+"%'";
       SQL+=" ORDER BY NAME";
       SQL+=" LIMIT 0,100";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL="SELECT DISTINCT NAME,ID_SITE FROM CHM62EDT_SITES";
+        SQL="SELECT DISTINCT NAME,ID_SITE FROM chm62edt_sites";
         SQL+=" WHERE NAME = '"+val+"'";
         SQL+=" ORDER BY NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME,ID_SITE FROM CHM62EDT_SITES";
+        SQL="SELECT DISTINCT NAME,ID_SITE FROM chm62edt_sites";
         SQL+=" WHERE NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Between")) {
-        SQL="SELECT DISTINCT NAME,ID_SITE FROM CHM62EDT_SITES";
+        SQL="SELECT DISTINCT NAME,ID_SITE FROM chm62edt_sites";
         SQL+=" WHERE NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY NAME";
         SQL+=" LIMIT 0,100";
@@ -674,63 +674,63 @@
   }
 
   if(lov.equalsIgnoreCase("VernacularName")){
-    SQL="SELECT DISTINCT CHM62EDT_REPORT_ATTRIBUTES.VALUE,' ' FROM CHM62EDT_REPORTS ";
-    SQL+=" INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
-    SQL+=" INNER JOIN `CHM62EDT_REPORT_ATTRIBUTES` ON (`CHM62EDT_REPORTS`.`ID_REPORT_ATTRIBUTES` = `CHM62EDT_REPORT_ATTRIBUTES`.`ID_REPORT_ATTRIBUTES`)";
-    SQL+=" WHERE (`CHM62EDT_REPORT_ATTRIBUTES`.`NAME` = 'VERNACULAR_NAME')";
-    SQL+=" AND (CHM62EDT_REPORT_ATTRIBUTES.VALUE LIKE '%"+val+"%')";
+    SQL="SELECT DISTINCT chm62edt_report_attributes.VALUE,' ' FROM chm62edt_reports ";
+    SQL+=" INNER JOIN `chm62edt_species` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_species`.`ID_NATURE_OBJECT`)";
+    SQL+=" INNER JOIN `chm62edt_report_attributes` ON (`chm62edt_reports`.`ID_REPORT_ATTRIBUTES` = `chm62edt_report_attributes`.`ID_REPORT_ATTRIBUTES`)";
+    SQL+=" WHERE (`chm62edt_report_attributes`.`NAME` = 'VERNACULAR_NAME')";
+    SQL+=" AND (chm62edt_report_attributes.VALUE LIKE '%"+val+"%')";
     SQL+=" LIMIT 0,100";
     if(oper.equalsIgnoreCase("Contains")) {
-      SQL="SELECT DISTINCT CHM62EDT_REPORT_ATTRIBUTES.VALUE,' ' FROM CHM62EDT_REPORTS ";
-      SQL+=" INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
-      SQL+=" INNER JOIN `CHM62EDT_REPORT_ATTRIBUTES` ON (`CHM62EDT_REPORTS`.`ID_REPORT_ATTRIBUTES` = `CHM62EDT_REPORT_ATTRIBUTES`.`ID_REPORT_ATTRIBUTES`)";
-      SQL+=" WHERE (`CHM62EDT_REPORT_ATTRIBUTES`.`NAME` = 'VERNACULAR_NAME')";
-      SQL+=" AND (CHM62EDT_REPORT_ATTRIBUTES.VALUE LIKE '%"+val+"%')";
+      SQL="SELECT DISTINCT chm62edt_report_attributes.VALUE,' ' FROM chm62edt_reports ";
+      SQL+=" INNER JOIN `chm62edt_species` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_species`.`ID_NATURE_OBJECT`)";
+      SQL+=" INNER JOIN `chm62edt_report_attributes` ON (`chm62edt_reports`.`ID_REPORT_ATTRIBUTES` = `chm62edt_report_attributes`.`ID_REPORT_ATTRIBUTES`)";
+      SQL+=" WHERE (`chm62edt_report_attributes`.`NAME` = 'VERNACULAR_NAME')";
+      SQL+=" AND (chm62edt_report_attributes.VALUE LIKE '%"+val+"%')";
       SQL+=" LIMIT 0,100";
     }
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT CHM62EDT_REPORT_ATTRIBUTES.VALUE,' ' FROM CHM62EDT_REPORTS ";
-      SQL+=" INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
-      SQL+=" INNER JOIN `CHM62EDT_REPORT_ATTRIBUTES` ON (`CHM62EDT_REPORTS`.`ID_REPORT_ATTRIBUTES` = `CHM62EDT_REPORT_ATTRIBUTES`.`ID_REPORT_ATTRIBUTES`)";
-      SQL+=" WHERE (`CHM62EDT_REPORT_ATTRIBUTES`.`NAME` = 'VERNACULAR_NAME')";
-      SQL+=" AND (CHM62EDT_REPORT_ATTRIBUTES.VALUE = '"+val+"')";
+      SQL="SELECT DISTINCT chm62edt_report_attributes.VALUE,' ' FROM chm62edt_reports ";
+      SQL+=" INNER JOIN `chm62edt_species` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_species`.`ID_NATURE_OBJECT`)";
+      SQL+=" INNER JOIN `chm62edt_report_attributes` ON (`chm62edt_reports`.`ID_REPORT_ATTRIBUTES` = `chm62edt_report_attributes`.`ID_REPORT_ATTRIBUTES`)";
+      SQL+=" WHERE (`chm62edt_report_attributes`.`NAME` = 'VERNACULAR_NAME')";
+      SQL+=" AND (chm62edt_report_attributes.VALUE = '"+val+"')";
       SQL+=" LIMIT 0,100";
     }
     if(oper.equalsIgnoreCase("Between")) {
-      SQL="SELECT DISTINCT CHM62EDT_REPORT_ATTRIBUTES.VALUE,' ' FROM CHM62EDT_REPORTS ";
-      SQL+=" INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
-      SQL+=" INNER JOIN `CHM62EDT_REPORT_ATTRIBUTES` ON (`CHM62EDT_REPORTS`.`ID_REPORT_ATTRIBUTES` = `CHM62EDT_REPORT_ATTRIBUTES`.`ID_REPORT_ATTRIBUTES`)";
-      SQL+=" WHERE (`CHM62EDT_REPORT_ATTRIBUTES`.`NAME` = 'VERNACULAR_NAME')";
-      SQL+=" AND (CHM62EDT_REPORT_ATTRIBUTES.VALUE LIKE '%"+val+"%')";
+      SQL="SELECT DISTINCT chm62edt_report_attributes.VALUE,' ' FROM chm62edt_reports ";
+      SQL+=" INNER JOIN `chm62edt_species` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_species`.`ID_NATURE_OBJECT`)";
+      SQL+=" INNER JOIN `chm62edt_report_attributes` ON (`chm62edt_reports`.`ID_REPORT_ATTRIBUTES` = `chm62edt_report_attributes`.`ID_REPORT_ATTRIBUTES`)";
+      SQL+=" WHERE (`chm62edt_report_attributes`.`NAME` = 'VERNACULAR_NAME')";
+      SQL+=" AND (chm62edt_report_attributes.VALUE LIKE '%"+val+"%')";
       SQL+=" LIMIT 0,100";
     }
   }
   if(lov.equalsIgnoreCase("Designation")){
-    SQL="SELECT DISTINCT `CHM62EDT_DESIGNATIONS`.`DESCRIPTION`,`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION`";
-    SQL+=" FROM CHM62EDT_DESIGNATIONS ";
-    SQL+=" INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION` = `CHM62EDT_SITES`.`ID_DESIGNATION` AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = `CHM62EDT_SITES`.`ID_GEOSCOPE`)";
+    SQL="SELECT DISTINCT `chm62edt_designations`.`DESCRIPTION`,`chm62edt_designations`.`ID_DESIGNATION`";
+    SQL+=" FROM chm62edt_designations ";
+    SQL+=" INNER JOIN `chm62edt_sites` ON (`chm62edt_designations`.`ID_DESIGNATION` = `chm62edt_sites`.`ID_DESIGNATION` AND `chm62edt_designations`.`ID_GEOSCOPE` = `chm62edt_sites`.`ID_GEOSCOPE`)";
     SQL+=" WHERE";
-    SQL+=" (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` LIKE '%"+val+"%')";
+    SQL+=" (`chm62edt_designations`.`DESCRIPTION` LIKE '%"+val+"%')";
     if(oper.equalsIgnoreCase("Contains")) {
-      SQL="SELECT DISTINCT `CHM62EDT_DESIGNATIONS`.`DESCRIPTION`,`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION`";
-      SQL+=" FROM CHM62EDT_DESIGNATIONS ";
-      SQL+=" INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION` = `CHM62EDT_SITES`.`ID_DESIGNATION` AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = `CHM62EDT_SITES`.`ID_GEOSCOPE`)";
+      SQL="SELECT DISTINCT `chm62edt_designations`.`DESCRIPTION`,`chm62edt_designations`.`ID_DESIGNATION`";
+      SQL+=" FROM chm62edt_designations ";
+      SQL+=" INNER JOIN `chm62edt_sites` ON (`chm62edt_designations`.`ID_DESIGNATION` = `chm62edt_sites`.`ID_DESIGNATION` AND `chm62edt_designations`.`ID_GEOSCOPE` = `chm62edt_sites`.`ID_GEOSCOPE`)";
       SQL+=" WHERE";
-      SQL+=" (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` LIKE '%"+val+"%')";
+      SQL+=" (`chm62edt_designations`.`DESCRIPTION` LIKE '%"+val+"%')";
     }
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT `CHM62EDT_DESIGNATIONS`.`DESCRIPTION`,`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION`";
-      SQL+=" FROM CHM62EDT_DESIGNATIONS ";
-      SQL+=" INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION` = `CHM62EDT_SITES`.`ID_DESIGNATION` AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = `CHM62EDT_SITES`.`ID_GEOSCOPE`)";
+      SQL="SELECT DISTINCT `chm62edt_designations`.`DESCRIPTION`,`chm62edt_designations`.`ID_DESIGNATION`";
+      SQL+=" FROM chm62edt_designations ";
+      SQL+=" INNER JOIN `chm62edt_sites` ON (`chm62edt_designations`.`ID_DESIGNATION` = `chm62edt_sites`.`ID_DESIGNATION` AND `chm62edt_designations`.`ID_GEOSCOPE` = `chm62edt_sites`.`ID_GEOSCOPE`)";
       SQL+=" WHERE";
-      SQL+=" (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` = '"+val+"')";
+      SQL+=" (`chm62edt_designations`.`DESCRIPTION` = '"+val+"')";
     }
     if(oper.equalsIgnoreCase("Between")) {
-      SQL="SELECT DISTINCT `CHM62EDT_DESIGNATIONS`.`DESCRIPTION`,`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION`";
-      SQL+=" FROM CHM62EDT_DESIGNATIONS ";
-      SQL+=" INNER JOIN `CHM62EDT_SITES` ON (`CHM62EDT_DESIGNATIONS`.`ID_DESIGNATION` = `CHM62EDT_SITES`.`ID_DESIGNATION` AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = `CHM62EDT_SITES`.`ID_GEOSCOPE`)";
+      SQL="SELECT DISTINCT `chm62edt_designations`.`DESCRIPTION`,`chm62edt_designations`.`ID_DESIGNATION`";
+      SQL+=" FROM chm62edt_designations ";
+      SQL+=" INNER JOIN `chm62edt_sites` ON (`chm62edt_designations`.`ID_DESIGNATION` = `chm62edt_sites`.`ID_DESIGNATION` AND `chm62edt_designations`.`ID_GEOSCOPE` = `chm62edt_sites`.`ID_GEOSCOPE`)";
       SQL+=" WHERE";
-      SQL+=" (`CHM62EDT_DESIGNATIONS`.`DESCRIPTION` LIKE '%"+val+"%')";
+      SQL+=" (`chm62edt_designations`.`DESCRIPTION` LIKE '%"+val+"%')";
     }
   }
 

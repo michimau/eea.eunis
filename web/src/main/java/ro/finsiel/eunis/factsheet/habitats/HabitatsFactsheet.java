@@ -206,7 +206,7 @@ public class HabitatsFactsheet {
     public Integer idNatureObject = null;
 
     /**
-     * Habitat JRF object from database (CHM62EDT_HABITAT).
+     * Habitat JRF object from database (chm62edt_habitat).
      */
     private Chm62edtHabitatPersist habitat = null;
 
@@ -263,7 +263,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Find a habitat using its ID (Column ID_HABITAT from CHM62EDT_HABITAT).
+     * Find a habitat using its ID (Column ID_HABITAT from chm62edt_habitat).
      * Initialize Chm62edtHabitatPersist object with info about specified habitat, or null if not found or exception.
      */
     private void initHabitat() {
@@ -431,8 +431,8 @@ public class HabitatsFactsheet {
      */
     public String getSQLForOtherInfo(Integer information) throws InitializationException {
         String result = "SELECT count(*) "
-            + " FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE A "
-            + " INNER JOIN CHM62EDT_REPORT_TYPE B ON A.ID_REPORT_TYPE=B.ID_REPORT_TYPE "
+            + " FROM chm62edt_nature_object_report_type A "
+            + " INNER JOIN chm62edt_report_type B ON A.ID_REPORT_TYPE=B.ID_REPORT_TYPE "
             + " where A.ID_NATURE_OBJECT = " + idNatureObject
             + " AND B.LOOKUP_TYPE = ";
 
@@ -1256,7 +1256,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve description &amp; owner information for a habitat (from CHM62EDT_HABITAT_DESCRIPTION) using
+     * Retrieve description &amp; owner information for a habitat (from chm62edt_habitat_description) using
      * Chm62edtHabitatDescriptionDomain.
      *
      * @return Vector of DescriptionWrapper objects.
@@ -1291,7 +1291,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve habitat references (from CHM62EDT_HABITAT_REFERENCES) using
+     * Retrieve habitat references (from chm62edt_habitat_references) using
      * Chm62edtHabitatReferenceDomain.
      *
      * @return List of Chm62edtHabitatReferencePersist objects.
@@ -1562,7 +1562,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve the original database code for this habitat (ORIGINAL_CODE field from CHM62EDT_NATURE_OBJECT table).
+     * Retrieve the original database code for this habitat (ORIGINAL_CODE field from chm62edt_nature_object table).
      *
      * @return The original code or "na" if not found in database.
      */
@@ -1591,7 +1591,7 @@ public class HabitatsFactsheet {
 
     /**
      * Used for habitat geographical distribution to retrieve probability and comment columns information.
-     * Uses CHM62EDT_REPORT_ATTRIBUTES table.
+     * Uses chm62edt_report_attributes table.
      *
      * @param idReportAttribute ID_REPORT_ATTRIBUTES for the country.
      * @return Vector with two String elements: probability, comment.
@@ -1941,7 +1941,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Find attribute information about this habitat (from CHM62EDT_REPORT_ATTRIBUTES table).
+     * Find attribute information about this habitat (from chm62edt_report_attributes table).
      *
      * @param idReportAttribute ID of the atrribute (ID_REPORT_ATTRIBUTES column from the table).
      * @param name              Name of the attribute to retrieve (NAME column from the table).
@@ -1968,13 +1968,13 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Find a value from CHM62EDT_REPORT_TYPE table.
+     * Find a value from chm62edt_report_type table.
      *
      * @param idReportType ID_REPORT_TYPE column from table.
      * @param lookup_type  LOOKUP_TYPE column from the table (currently implemented are: abundance, frequencies,
      *                     faithfulness, species_status).
      * @return String with VALUE for this attribute from the associated table (ex. abundance is associated with
-     *         CHM62EDT_ABUNDANCE. Give the name and will return the VALUE from that table).
+     *         chm62edt_abundance. Give the name and will return the VALUE from that table).
      */
     private static String findReportTypeValue(Integer idReportType, String lookup_type) {
         String result = "";
@@ -2119,7 +2119,7 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Get the main picture available in database for this habitat. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
+     * Get the main picture available in database for this habitat. It queries the chm62edt_nature_object_picture
      * with ID_HABITAT and NATURE_OBJECT_TYPE='Habitats' AND MAIN_PIC = 1 .
      *
      * @return A PictureDTO object.

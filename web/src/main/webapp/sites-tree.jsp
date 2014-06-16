@@ -61,9 +61,9 @@
             PreparedStatement ps3 = null;
             ResultSet rs3 = null;
 
-            strSQL = "SELECT ID_DESIGNATION, CHM62EDT_DESIGNATIONS.ID_GEOSCOPE, DESCRIPTION, AREA_NAME_EN";
-            strSQL = strSQL + " FROM CHM62EDT_DESIGNATIONS, CHM62EDT_COUNTRY";
-            strSQL = strSQL + " WHERE CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
+            strSQL = "SELECT ID_DESIGNATION, chm62edt_designations.ID_GEOSCOPE, DESCRIPTION, AREA_NAME_EN";
+            strSQL = strSQL + " FROM chm62edt_designations, chm62edt_country";
+            strSQL = strSQL + " WHERE chm62edt_designations.ID_GEOSCOPE = chm62edt_country.ID_GEOSCOPE";
             strSQL = strSQL + " AND LENGTH(DESCRIPTION)>0";
             strSQL = strSQL + " ORDER BY DESCRIPTION ASC, AREA_NAME_EN ASC";
 

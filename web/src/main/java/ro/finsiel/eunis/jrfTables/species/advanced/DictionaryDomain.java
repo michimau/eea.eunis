@@ -32,7 +32,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
     /** Cache the results of a count to avoid overhead queries for counting */
     private Long _resultCount = new Long(-1);
 
-    /** Session ID to do proper search on the EUNIS_ADVANCED_SEARCH_RESULTS table */
+    /** Session ID to do proper search on the eunis_advanced_search_results table */
     private String IdSession = "";
 
     private boolean showInvalidatedSpecies = false;
@@ -72,7 +72,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_SPECIES");
+        this.setTableName("chm62edt_species");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -100,38 +100,38 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
         // Joined tables
         OuterJoinTable groupSpecies;
 
-        groupSpecies = new OuterJoinTable("CHM62EDT_GROUP_SPECIES B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies = new OuterJoinTable("chm62edt_group_species B", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
         groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         this.addJoinTable(groupSpecies);
 
         JoinTable taxCodeFamily;
 
-        taxCodeFamily = new JoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY", "ID_TAXONOMY");
+        taxCodeFamily = new JoinTable("chm62edt_taxonomy C", "ID_TAXONOMY", "ID_TAXONOMY");
         taxCodeFamily.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameFamily", "setTaxonomicNameFamily"));
         taxCodeFamily.addJoinColumn(new StringJoinColumn("LEVEL", "taxonomicLevel", "setTaxonomicLevel"));
         this.addJoinTable(taxCodeFamily);
 
         OuterJoinTable taxCodeOrder;
 
-        taxCodeOrder = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
+        taxCodeOrder = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK", "ID_TAXONOMY");
         taxCodeOrder.addJoinColumn(new StringJoinColumn("NAME", "taxonomicNameOrder", "setTaxonomicNameOrder"));
         taxCodeFamily.addJoinTable(taxCodeOrder);
 
         JoinTable natureObject;
 
-        natureObject = new JoinTable("CHM62EDT_NATURE_OBJECT M", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        natureObject = new JoinTable("chm62edt_nature_object M", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
         natureObject.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDc", "setIdDc"));
         this.addJoinTable(natureObject);
 
         JoinTable dcIndex;
 
-        dcIndex = new JoinTable("DC_INDEX N", "ID_DC", "ID_DC");
+        dcIndex = new JoinTable("dc_index N", "ID_DC", "ID_DC");
         dcIndex.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
         dcIndex.addJoinColumn(new StringJoinColumn("EDITOR", "editor", "setEditor"));
         dcIndex.addJoinColumn(new StringJoinColumn("BOOK_TITLE", "bookTitle", "setBookTitle"));
         natureObject.addJoinTable(dcIndex);
 
-        JoinTable advSearchResults = new JoinTable("EUNIS_ADVANCED_SEARCH_RESULTS", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        JoinTable advSearchResults = new JoinTable("eunis_advanced_search_results", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
 
         this.addJoinTable(advSearchResults);
     }
@@ -147,7 +147,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
     public List getResults(int offsetStart, int pageSize, AbstractSortCriteria[] sortCriteria) throws CriteriaMissingException {
         this.sortCriteria = sortCriteria;
         // String filterSQL = _prepareWhereSearch();
-        String filterSQL = " 1=1 AND EUNIS_ADVANCED_SEARCH_RESULTS.ID_SESSION = '"
+        String filterSQL = " 1=1 AND eunis_advanced_search_results.ID_SESSION = '"
             + IdSession + "'";
 
         // Add the ORDER BY clause to do the sorting
@@ -186,11 +186,11 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
         StringBuffer sql = new StringBuffer();
 
         sql.append(
-                "SELECT COUNT(*) FROM CHM62EDT_SPECIES A "
-                + " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES "
-                + " INNER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY "
-                + " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY "
-                + " INNER JOIN EUNIS_ADVANCED_SEARCH_RESULTS E ON A.ID_NATURE_OBJECT=E.ID_NATURE_OBJECT "
+                "SELECT COUNT(*) FROM chm62edt_species A "
+                + " LEFT OUTER JOIN chm62edt_group_species B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES "
+                + " INNER JOIN chm62edt_taxonomy C ON A.ID_TAXONOMY=C.ID_TAXONOMY "
+                + " LEFT OUTER JOIN chm62edt_taxonomy D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY "
+                + " INNER JOIN eunis_advanced_search_results E ON A.ID_NATURE_OBJECT=E.ID_NATURE_OBJECT "
                 + " WHERE 1=1 AND E.ID_SESSION='" + IdSession + "' ");
         Long ret = findLong(sql.toString());
 

@@ -56,20 +56,20 @@
        sql += " SELECT DISTINCT D.NAME ";
 
       if(0 == whichclicked)
-              sql += " FROM CHM62EDT_COUNTRY AS C ";
+              sql += " FROM chm62edt_country AS C ";
       else
-              sql += " FROM CHM62EDT_BIOGEOREGION AS D ";
+              sql += " FROM chm62edt_biogeoregion AS D ";
 
 
     if(0 == whichclicked)
     {
-            sql += " INNER JOIN CHM62EDT_REPORTS AS B ON B.ID_GEOSCOPE = C.ID_GEOSCOPE ";
-            sql += " LEFT OUTER JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE ";
+            sql += " INNER JOIN chm62edt_reports AS B ON B.ID_GEOSCOPE = C.ID_GEOSCOPE ";
+            sql += " LEFT OUTER JOIN chm62edt_biogeoregion AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE ";
     }
     else
     {
-            sql += " INNER JOIN CHM62EDT_REPORTS AS B ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE ";
-            sql += " LEFT OUTER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE ";
+            sql += " INNER JOIN chm62edt_reports AS B ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE ";
+            sql += " LEFT OUTER JOIN chm62edt_country AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE ";
     }
 
      sql += idNOList.trim().length() > 0 ?  " where " + idNOList : "";

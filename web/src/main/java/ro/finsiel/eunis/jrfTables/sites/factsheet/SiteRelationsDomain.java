@@ -34,7 +34,7 @@ public class SiteRelationsDomain extends AbstractDomain {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_SITES_SITES");
+    this.setTableName("chm62edt_sites_sites");
     this.setTableAlias("A");
     this.setReadOnly(true);
 
@@ -50,11 +50,11 @@ public class SiteRelationsDomain extends AbstractDomain {
     this.addColumnSpec(new IntegerColumnSpec("WITHIN_PROJECT", "getWithinProject", "setWithinProject", DEFAULT_TO_ZERO));
 //    this.addColumnSpec(new StringColumnSpec("SOURCE_TABLE", "getSourceTable", "setSourceTable", DEFAULT_TO_NULL));
 
-    JoinTable sites = new JoinTable("CHM62EDT_SITES B", "ID_SITE_LINK", "ID_SITE");
+    JoinTable sites = new JoinTable("chm62edt_sites B", "ID_SITE_LINK", "ID_SITE");
     sites.addJoinColumn(new StringJoinColumn("NAME", "setSiteName"));
     this.addJoinTable(sites);
 
-    OuterJoinTable siteTypes = new OuterJoinTable("CHM62EDT_NATURA2000_SITE_TYPE C", "RELATION_TYPE", "ID_SITE_TYPE");
+    OuterJoinTable siteTypes = new OuterJoinTable("chm62edt_natura2000_site_type C", "RELATION_TYPE", "ID_SITE_TYPE");
     siteTypes.addJoinColumn(new StringJoinColumn("NAME", "setRelationName"));
     this.addJoinTable(siteTypes);
   }

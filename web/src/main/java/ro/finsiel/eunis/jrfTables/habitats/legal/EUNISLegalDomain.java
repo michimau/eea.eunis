@@ -23,10 +23,10 @@ import java.util.Vector;
  *
  * IMPLEMENTED QUERY:
  * SELECT A.SCIENTIFIC_NAME
- * FROM CHM62EDT_HABITAT AS A
- * INNER JOIN CHM62EDT_HABITAT_REPORT_TYPE AS B ON A.ID_HABITAT = B.ID_HABITAT
- * INNER JOIN CHM62EDT_REPORT_TYPE AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE
- * INNER JOIN CHM62EDT_HABITAT_DESIGNATED_CODES AS D ON C.ID_LOOKUP = D.ID_HABITAT_CODE
+ * FROM chm62edt_habitat AS A
+ * INNER JOIN chm62edt_habitat_REPORT_TYPE AS B ON A.ID_HABITAT = B.ID_HABITAT
+ * INNER JOIN chm62edt_report_type AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE
+ * INNER JOIN chm62edt_habitat_DESIGNATED_CODES AS D ON C.ID_LOOKUP = D.ID_HABITAT_CODE
  * WHERE A.EUNIS_HABITAT_CODE LIKE "A%"
  * AND (A.SCIENTIFIC_NAME LIKE "%AC%" OR A.DESCRIPTION LIKE "%AC%")
  * AND C.LOOKUP_TYPE = "HABITAT_CODES"
@@ -65,7 +65,7 @@ public class EUNISLegalDomain extends AbstractDomain implements Paginable {
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
 
-    this.setTableName("CHM62EDT_HABITAT");
+    this.setTableName("chm62edt_habitat");
 
     this.addColumnSpec(new StringColumnSpec("ID_HABITAT", "getIdHabitat", "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
     this.addColumnSpec(new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject", "setIdNatureObject", DEFAULT_TO_ZERO, REQUIRED));
@@ -79,11 +79,11 @@ public class EUNISLegalDomain extends AbstractDomain implements Paginable {
     this.setReadOnly(true);
 
     JoinTable habitatReportType = null;
-    habitatReportType = new JoinTable("CHM62EDT_HABITAT_CLASS_CODE B", "ID_HABITAT", "ID_HABITAT");
+    habitatReportType = new JoinTable("chm62edt_habitat_class_code B", "ID_HABITAT", "ID_HABITAT");
     this.addJoinTable(habitatReportType);
 
     JoinTable reportType = null;
-    reportType = new JoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
+    reportType = new JoinTable("chm62edt_class_code C", "ID_CLASS_CODE", "ID_CLASS_CODE");
     reportType.addJoinColumn(new StringJoinColumn("NAME", "setLegalName"));
     habitatReportType.addJoinTable(reportType);
 
@@ -177,9 +177,9 @@ public class EUNISLegalDomain extends AbstractDomain implements Paginable {
   private Long _rawCount() throws CriteriaMissingException {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
-    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM CHM62EDT_HABITAT AS A " +
-            "INNER JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT = B.ID_HABITAT " +
-            "INNER JOIN CHM62EDT_CLASS_CODE AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE " +
+    sql.append("SELECT COUNT(DISTINCT A.ID_HABITAT) FROM chm62edt_habitat AS A " +
+            "INNER JOIN chm62edt_habitat_class_code AS B ON A.ID_HABITAT = B.ID_HABITAT " +
+            "INNER JOIN chm62edt_class_code AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE " +
             "WHERE ");
     // Apply WHERE CLAUSE
     sql.append(_prepareWhereSearch().toString());

@@ -7,7 +7,7 @@ import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
 
 /**
- * JRF table for EUNIS_USERS_ROLES inner join EUNIS_ROLES.
+ * JRF table for eunis_users_roles inner join eunis_roles.
  * @author finsiel
  **/
 public class UsersRolesDomain extends AbstractDomain {
@@ -27,7 +27,7 @@ public class UsersRolesDomain extends AbstractDomain {
     // These setters could be used to override the default.
     // this.setDatabasePolicy(new null());
     // this.setJDBCHelper(JDBCHelperFactory.create());
-    this.setTableName("EUNIS_USERS_ROLES");
+    this.setTableName("eunis_users_roles");
     this.setTableAlias("A");
     this.addColumnSpec(
             new CompoundPrimaryKeyColumnSpec(
@@ -36,7 +36,7 @@ public class UsersRolesDomain extends AbstractDomain {
             )
     );
 
-    JoinTable eunisRoles = new JoinTable("EUNIS_ROLES E", "ROLENAME", "ROLENAME");
+    JoinTable eunisRoles = new JoinTable("eunis_roles E", "ROLENAME", "ROLENAME");
     this.addJoinTable(eunisRoles);
   }
 }

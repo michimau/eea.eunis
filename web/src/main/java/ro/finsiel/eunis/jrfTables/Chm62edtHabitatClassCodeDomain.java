@@ -8,7 +8,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_CLASS_CODE.
+ * JRF table for chm62edt_habitat_class_code.
  * @author finsiel
  **/
 public class Chm62edtHabitatClassCodeDomain extends AbstractDomain {
@@ -25,7 +25,7 @@ public class Chm62edtHabitatClassCodeDomain extends AbstractDomain {
      * Implements setup from AbstractDomain.
      */
     public void setup() {
-        this.setTableName("CHM62EDT_HABITAT_CLASS_CODE");
+        this.setTableName("chm62edt_habitat_class_code");
         this.setReadOnly(true);
 
         this.addColumnSpec(
@@ -46,7 +46,7 @@ public class Chm62edtHabitatClassCodeDomain extends AbstractDomain {
     }
 
     /**
-     * Wrapper method for SELECT COUNT(*) FROM CHM62EDT_HABITAT_CLASS_CODE WHERE (...).
+     * Wrapper method for SELECT COUNT(*) FROM chm62edt_habitat_class_code WHERE (...).
      * @param sqlWhere SQL to be executed for count (...).
      * @return Number of elements found within database.
      */

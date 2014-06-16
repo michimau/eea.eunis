@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * JRF table for CHM62EDT_HABITAT_DESIGNATED_CODES.
+ * JRF table for chm62edt_habitat_DESIGNATED_CODES.
  * @author finsiel
  **/
 public class Chm62edtHabitatDesignatedCodesDomain extends AbstractDomain {
@@ -30,7 +30,7 @@ public class Chm62edtHabitatDesignatedCodesDomain extends AbstractDomain {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
-        this.setTableName("CHM62EDT_HABITAT_DESIGNATED_CODES");
+        this.setTableName("chm62edt_habitat_DESIGNATED_CODES");
         this.setReadOnly(true);
 
         this.addColumnSpec(

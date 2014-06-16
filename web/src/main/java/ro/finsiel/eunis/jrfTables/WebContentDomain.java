@@ -27,7 +27,7 @@ public class WebContentDomain extends AbstractDomain {
      * Table definition.
      */
     public void setup() {
-        this.setTableName("EUNIS_WEB_CONTENT");
+        this.setTableName("eunis_web_content");
         this.addColumnSpec(
                 new StringColumnSpec("ID_PAGE", "getIDPage", "setIDPage",
                 DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));

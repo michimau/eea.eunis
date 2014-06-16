@@ -295,7 +295,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
     }
 
     private String getNatObjectId(String specieId) throws SQLException {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_species WHERE ID_SPECIES = '"
             + specieId + "'";
         String natId = ExecuteSQL(query);
 
@@ -304,7 +304,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
     private boolean isSynonym(String specieId) throws SQLException {
         boolean ret = false;
-        String query = "SELECT VALID_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
+        String query = "SELECT VALID_NAME FROM chm62edt_species WHERE ID_SPECIES = '"
             + specieId + "'";
         String synonym = ExecuteSQL(query);
 

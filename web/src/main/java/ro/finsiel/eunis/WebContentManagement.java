@@ -268,7 +268,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Load the HTML content when object initialized from EUNIS_WEB_CONTENT into a
+     * Load the HTML content when object initialized from eunis_web_content into a
      * HashMap object and caches for later use while generating pages.
      */
     private void cacheHTMLContent(final String language) {
@@ -575,7 +575,7 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
-                "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
+                "DELETE FROM eunis_web_content WHERE ID_PAGE = ? AND LANG = ? ");
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
@@ -583,7 +583,7 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (lang.equalsIgnoreCase("EN")) {
                 ps = con.prepareStatement(
-                "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )");
+                "INSERT INTO eunis_web_content( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )");
                 ps.setString(1, idPage);
                 ps.setString(2, content);
                 ps.setString(3, description);
@@ -592,7 +592,7 @@ public class WebContentManagement implements java.io.Serializable {
                 ps.setString(6, username);
             } else {
                 ps = con.prepareStatement(
-                "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+                "INSERT INTO eunis_web_content( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )");
                 ps.setString(1, idPage);
                 ps.setString(2, content);
                 ps.setString(3, description);
@@ -657,14 +657,14 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
-                "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
+                "DELETE FROM eunis_web_content WHERE ID_PAGE = MD5(?) AND LANG = ? ");
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
             }
 
             ps = con.prepareStatement(
-            "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+            "INSERT INTO eunis_web_content( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
 
             ps.setString(1, idPage);
             ps.setString(2, content);
@@ -695,7 +695,7 @@ public class WebContentManagement implements java.io.Serializable {
      * Translate language code into language name in english. For example 'da' translates to 'Danish';
      *
      * @param code Code which will be decoded.
-     * @return Decoded language or null if code is not found within CHM62EDT_LANGUAGE
+     * @return Decoded language or null if code is not found within chm62edt_language
      */
     public String translateLanguageCode(final String code) {
         String value = null;
@@ -725,9 +725,9 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             final List<WebContentPersist> items = new WebContentDomain().findCustom(
-            "SELECT * FROM EUNIS_WEB_CONTENT WHERE LANG_STATUS > 0 AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
+            "SELECT * FROM eunis_web_content WHERE LANG_STATUS > 0 AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
 
-            // Decode the languages from CHM62EDT_LANGUAGE table
+            // Decode the languages from chm62edt_language table
             for (WebContentPersist item : items) {
                 final List<EunisISOLanguagesPersist> tmp = new EunisISOLanguagesDomain().findWhere(
                         "CODE = '" + item.getLang() + "'");
@@ -745,7 +745,7 @@ public class WebContentManagement implements java.io.Serializable {
 
     /**
      * Find all available language into which EUNIS can be translated.
-     * Formula is: SELECT CODE FROM CHM62EDT_LANGUAGE - ( SELECT DISTINCT(LANG) EUNIS_WEB_CONTENT ) )
+     * Formula is: SELECT CODE FROM chm62edt_language - ( SELECT DISTINCT(LANG) eunis_web_content ) )
      */
     public List<Chm62edtLanguagePersist> getAvailableLanguages() {
         List<Chm62edtLanguagePersist> languages = new Vector<Chm62edtLanguagePersist>();
@@ -754,7 +754,7 @@ public class WebContentManagement implements java.io.Serializable {
             final List<Chm62edtLanguagePersist> all_languages = new Chm62edtLanguageDomain().findOrderBy(
             "NAME_EN");
             final List<WebContentPersist> translated_languages = new WebContentDomain().findCustom(
-            "SELECT * FROM EUNIS_WEB_CONTENT WHERE CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
+            "SELECT * FROM eunis_web_content WHERE CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
 
             for (Chm62edtLanguagePersist language : all_languages) {
                 boolean exists = false;
@@ -779,7 +779,7 @@ public class WebContentManagement implements java.io.Serializable {
     /**
      * Add a new language for translation into the database.
      *
-     * @param code Language code from CHM62EDT_LANGUAGE
+     * @param code Language code from chm62edt_language
      */
     public boolean addLanguage(final String code) throws Exception {
         boolean ret = false;
@@ -898,7 +898,7 @@ public class WebContentManagement implements java.io.Serializable {
 
                     if (!new_ids.contains(text)) {
                         ps = con.prepareStatement(
-                        "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+                        "INSERT INTO eunis_web_content( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
                         ps.setString(1, text);
                         ps.setString(2, text);
                         ps.setString(3, description);

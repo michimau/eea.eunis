@@ -171,7 +171,7 @@ public class HabitatsAdvancedSearch {
             if (idcolumn == null || idcolumn.length() == 0) {
                 idcolumn = "ID_" + table.toUpperCase();
             }
-            SQL = "SELECT " + idcolumn + " FROM CHM62EDT_" + table.toUpperCase();
+            SQL = "SELECT " + idcolumn + " FROM chm62edt_" + table.toLowerCase();
             SQL += " WHERE " + valuecolumn + "='" + value + "'";
 
             if (SQL.length() > 0) {
@@ -217,7 +217,7 @@ public class HabitatsAdvancedSearch {
                 sValueMax = (String) this.MaxValues.elementAt(i);
 
                 if (sTable.equalsIgnoreCase("ScientificName")) {
-                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT";
+                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_habitat";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
@@ -232,7 +232,7 @@ public class HabitatsAdvancedSearch {
                     }
                 }
                 if (sTable.equalsIgnoreCase("Code")) {
-                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT";
+                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_habitat";
                     if (sOperand.equalsIgnoreCase("Contains")) {
                         habitatsSQL += " WHERE EUNIS_HABITAT_CODE LIKE '%" + sValueMin + "%' OR CODE_ANNEX1 LIKE '%" + sValueMin
                         + "%'";
@@ -250,509 +250,509 @@ public class HabitatsAdvancedSearch {
                     }
                 }
                 if (sTable.equalsIgnoreCase("LegalInstruments")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_HABITAT`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT_CLASS_CODE` ON (`CHM62EDT_HABITAT`.`ID_HABITAT` = `CHM62EDT_HABITAT_CLASS_CODE`.`ID_HABITAT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_CLASS_CODE` ON (`CHM62EDT_HABITAT_CLASS_CODE`.`ID_CLASS_CODE` = `CHM62EDT_CLASS_CODE`.`ID_CLASS_CODE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_CLASS_CODE`.`LEGAL` = 1)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_habitat`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat_class_code` ON (`chm62edt_habitat`.`ID_HABITAT` = `chm62edt_habitat_class_code`.`ID_HABITAT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_class_code` ON (`chm62edt_habitat_class_code`.`ID_CLASS_CODE` = `chm62edt_class_code`.`ID_CLASS_CODE`)";
+                    habitatsSQL += " WHERE (`chm62edt_class_code`.`LEGAL` = 1)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_class_code`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_class_code`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_class_code`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                 }
                 if (sTable.equalsIgnoreCase("SourceDatabase")) {
-                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT WHERE ";
+                    habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE ";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         if (sValueMin.equalsIgnoreCase("EUNIS")) {
                             // habitatsSQL+="CODE_ANNEX1 IS NULL";
-                            habitatsSQL += "CHM62EDT_HABITAT.ID_HABITAT>=1 and  CHM62EDT_HABITAT.ID_HABITAT<10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>=1 and  chm62edt_habitat.ID_HABITAT<10000";
                         } else {
                             // habitatsSQL+="CODE_ANNEX1 IS NOT NULL";
-                            habitatsSQL += "CHM62EDT_HABITAT.ID_HABITAT>10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>10000";
                         }
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
                         if (sValueMin.equalsIgnoreCase("EUNIS")) {
                             // habitatsSQL+="CODE_ANNEX1 IS NULL";
-                            habitatsSQL += "CHM62EDT_HABITAT.ID_HABITAT >=1 and CHM62EDT_HABITAT.ID_HABITAT<10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT >=1 and chm62edt_habitat.ID_HABITAT<10000";
                         } else {
                             // habitatsSQL+="CODE_ANNEX1 IS NOT NULL";
-                            habitatsSQL += "CHM62EDT_HABITAT.ID_HABITAT>10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>10000";
                         }
                     }
                 }
                 if (sTable.equalsIgnoreCase("Country")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_REPORTS`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_COUNTRY` ON (`CHM62EDT_REPORTS`.`ID_GEOSCOPE` = `CHM62EDT_COUNTRY`.`ID_GEOSCOPE`)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_reports`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_reports`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_country` ON (`chm62edt_reports`.`ID_GEOSCOPE` = `chm62edt_country`.`ID_GEOSCOPE`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`chm62edt_country`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Biogeoregion")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_REPORTS`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_BIOGEOREGION` ON (`CHM62EDT_REPORTS`.`ID_GEOSCOPE_LINK` = `CHM62EDT_BIOGEOREGION`.`ID_GEOSCOPE`)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_reports`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_reports`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_reports`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_biogeoregion` ON (`chm62edt_reports`.`ID_GEOSCOPE_LINK` = `chm62edt_biogeoregion`.`ID_GEOSCOPE`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`chm62edt_biogeoregion`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`chm62edt_biogeoregion`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`chm62edt_biogeoregion`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                 }
 
                 if (sTable.equalsIgnoreCase("LegalInstrument")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` FROM `CHM62EDT_HABITAT`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    habitatsSQL += " INNER JOIN `DC_INDEX` `DC_INDEX_REFERENCE` ON (`DC_INDEX`.`REFERENCE` = `DC_INDEX_REFERENCE`.`REFCD`)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT` FROM `chm62edt_habitat`";
+                    habitatsSQL += " INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
+                    habitatsSQL += " INNER JOIN `dc_index` `dc_index_REFERENCE` ON (`dc_index`.`REFERENCE` = `dc_index_REFERENCE`.`REFCD`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
                 if (sTable.equalsIgnoreCase("Author")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` FROM `CHM62EDT_HABITAT`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT` FROM `chm62edt_habitat`";
+                    habitatsSQL += " INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`SOURCE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`SOURCE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`dc_index`.`SOURCE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
                 if (sTable.equalsIgnoreCase("Title")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` FROM `CHM62EDT_HABITAT`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT` FROM `chm62edt_habitat`";
+                    habitatsSQL += " INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`dc_index`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
                 if (sTable.equalsIgnoreCase("Altitude")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_ALTITUDE` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_ALTITUDE`.`ID_ALTITUDE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'ALTITUDE')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_altitude` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_altitude`.`ID_ALTITUDE`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'ALTITUDE')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_altitude`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_altitude`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_altitude`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`ID_ALTITUDE` >= " + GetID(sValueMin, "ALTITUDE", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`ID_ALTITUDE` <= " + GetID(sValueMax, "ALTITUDE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_altitude`.`ID_ALTITUDE` >= " + GetID(sValueMin, "ALTITUDE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_altitude`.`ID_ALTITUDE` <= " + GetID(sValueMax, "ALTITUDE", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Chemistry")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_CHEMISTRY` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_CHEMISTRY`.`ID_CHEMISTRY`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'CHEMISTRY')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_chemistry` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_chemistry`.`ID_CHEMISTRY`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'CHEMISTRY')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_chemistry`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_chemistry`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_chemistry`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`ID_CHEMISTRY` >= " + GetID(sValueMin, "CHEMISTRY", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`ID_CHEMISTRY` <= " + GetID(sValueMax, "CHEMISTRY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_chemistry`.`ID_CHEMISTRY` >= " + GetID(sValueMin, "CHEMISTRY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_chemistry`.`ID_CHEMISTRY` <= " + GetID(sValueMax, "CHEMISTRY", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Climate")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_CLIMATE` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_CLIMATE`.`ID_CLIMATE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'CLIMATE')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_climate` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_climate`.`ID_CLIMATE`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'CLIMATE')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_climate`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_climate`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_climate`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`ID_CLIMATE` >= " + GetID(sValueMin, "CLIMATE", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`ID_CLIMATE` <= " + GetID(sValueMax, "CLIMATE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_climate`.`ID_CLIMATE` >= " + GetID(sValueMin, "CLIMATE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_climate`.`ID_CLIMATE` <= " + GetID(sValueMax, "CLIMATE", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Cover")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_COVER` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_COVER`.`ID_COVER`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'COVER')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_cover` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_cover`.`ID_COVER`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'COVER')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_cover`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_cover`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_cover`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_COVER`.`ID_COVER` >= " + GetID(sValueMin, "COVER", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_COVER`.`ID_COVER` <= " + GetID(sValueMax, "COVER", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_cover`.`ID_COVER` >= " + GetID(sValueMin, "COVER", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_cover`.`ID_COVER` <= " + GetID(sValueMax, "COVER", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Depth")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_DEPTH` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_DEPTH`.`ID_DEPTH`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'DEPTH')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_depth` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_depth`.`ID_DEPTH`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'DEPTH')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_depth`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_depth`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_depth`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_DEPTH`.`ID_DEPTH` >= " + GetID(sValueMin, "DEPTH", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_DEPTH`.`ID_DEPTH` <= " + GetID(sValueMax, "DEPTH", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_depth`.`ID_DEPTH` >= " + GetID(sValueMin, "DEPTH", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_depth`.`ID_DEPTH` <= " + GetID(sValueMax, "DEPTH", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Geomorph")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_GEOMORPH` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_GEOMORPH`.`ID_GEOMORPH`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'GEOMORPH')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_geomorph` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_geomorph`.`ID_GEOMORPH`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'GEOMORPH')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_geomorph`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_geomorph`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_geomorph`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`ID_GEOMORPH` >= " + GetID(sValueMin, "GEOMORPH", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`ID_GEOMORPH` <= " + GetID(sValueMax, "GEOMORPH", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_geomorph`.`ID_GEOMORPH` >= " + GetID(sValueMin, "GEOMORPH", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_geomorph`.`ID_GEOMORPH` <= " + GetID(sValueMax, "GEOMORPH", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Humidity")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HUMIDITY` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_HUMIDITY`.`ID_HUMIDITY`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'HUMIDITY')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_humidity` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_humidity`.`ID_HUMIDITY`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'HUMIDITY')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_humidity`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_humidity`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_humidity`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`ID_HUMIDITY` >= " + GetID(sValueMin, "HUMIDITY", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`ID_HUMIDITY` <= " + GetID(sValueMax, "HUMIDITY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_humidity`.`ID_HUMIDITY` >= " + GetID(sValueMin, "HUMIDITY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_humidity`.`ID_HUMIDITY` <= " + GetID(sValueMax, "HUMIDITY", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("LifeForm")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_LIFE_FORM` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_LIFE_FORM`.`ID_LIFE_FORM`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'LIFE_FORM')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_life_form` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_life_form`.`ID_LIFE_FORM`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'LIFE_FORM')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_life_form`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_life_form`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_life_form`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`ID_LIFE_FORM` >= " + GetID(sValueMin, "ID_LIFE_FORM", "", "")
+                        habitatsSQL += " AND (`chm62edt_life_form`.`ID_LIFE_FORM` >= " + GetID(sValueMin, "ID_LIFE_FORM", "", "")
                         + ")";
-                        habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`ID_LIFE_FORM` <= " + GetID(sValueMax, "ID_LIFE_FORM", "", "")
+                        habitatsSQL += " AND (`chm62edt_life_form`.`ID_LIFE_FORM` <= " + GetID(sValueMax, "ID_LIFE_FORM", "", "")
                         + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("LightIntensity")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_LIGHT_INTENSITY` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_LIGHT_INTENSITY`.`ID_LIGHT_INTENSITY`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'LIGHT_INTENSITY')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_light_intensity` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_light_intensity`.`ID_LIGHT_INTENSITY`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'LIGHT_INTENSITY')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_light_intensity`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_light_intensity`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_light_intensity`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`ID_LIGHT_INTENSITY` >= "
+                        habitatsSQL += " AND (`chm62edt_light_intensity`.`ID_LIGHT_INTENSITY` >= "
                             + GetID(sValueMin, "LIGHT_INTENSITY", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`ID_LIGHT_INTENSITY` <= "
+                        habitatsSQL += " AND (`chm62edt_light_intensity`.`ID_LIGHT_INTENSITY` <= "
                             + GetID(sValueMax, "LIGHT_INTENSITY", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Marine")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_MARINE` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_MARINE`.`ID_MARINE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'MARINE')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_marine` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_marine`.`ID_MARINE`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'MARINE')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_marine`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_marine`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_marine`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_MARINE`.`ID_MARINE` >= " + GetID(sValueMin, "MARINE", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_MARINE`.`ID_MARINE` <= " + GetID(sValueMax, "MARINE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_marine`.`ID_MARINE` >= " + GetID(sValueMin, "MARINE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_marine`.`ID_MARINE` <= " + GetID(sValueMax, "MARINE", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Salinity")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_SALINITY` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_SALINITY`.`ID_SALINITY`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'SALINITY')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_salinity` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_salinity`.`ID_SALINITY`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'SALINITY')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_salinity`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_salinity`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_salinity`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_SALINITY`.`ID_SALINITY` >= " + GetID(sValueMin, "SALINITY", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_SALINITY`.`ID_SALINITY` <= " + GetID(sValueMax, "SALINITY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_salinity`.`ID_SALINITY` >= " + GetID(sValueMin, "SALINITY", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_salinity`.`ID_SALINITY` <= " + GetID(sValueMax, "SALINITY", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Spatial")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_SPATIAL` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_SPATIAL`.`ID_SPATIAL`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'SPATIAL')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_spatial` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_spatial`.`ID_SPATIAL`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'SPATIAL')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_spatial`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_spatial`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_spatial`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`ID_SPATIAL` >= " + GetID(sValueMin, "SPATIAL", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`ID_SPATIAL` <= " + GetID(sValueMax, "SPATIAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_spatial`.`ID_SPATIAL` >= " + GetID(sValueMin, "SPATIAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_spatial`.`ID_SPATIAL` <= " + GetID(sValueMax, "SPATIAL", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Substrate")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_SUBSTRATE` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_SUBSTRATE`.`ID_SUBSTRATE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'SUBSTRATE')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_substrate` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_substrate`.`ID_SUBSTRATE`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'SUBSTRATE')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_substrate`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_substrate`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_substrate`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`ID_SUBSTRATE` >= " + GetID(sValueMin, "SUBSTRATE", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`ID_SUBSTRATE` <= " + GetID(sValueMax, "SUBSTRATE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_substrate`.`ID_SUBSTRATE` >= " + GetID(sValueMin, "SUBSTRATE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_substrate`.`ID_SUBSTRATE` <= " + GetID(sValueMax, "SUBSTRATE", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Temporal")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_TEMPORAL` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_TEMPORAL`.`ID_TEMPORAL`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'TEMPORAL')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_temporal` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_temporal`.`ID_TEMPORAL`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'TEMPORAL')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_temporal`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_temporal`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_temporal`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`ID_TEMPORAL` >= " + GetID(sValueMin, "TEMPORAL", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`ID_TEMPORAL` <= " + GetID(sValueMax, "TEMPORAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_temporal`.`ID_TEMPORAL` >= " + GetID(sValueMin, "TEMPORAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_temporal`.`ID_TEMPORAL` <= " + GetID(sValueMax, "TEMPORAL", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Tidal")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_TIDAL` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_TIDAL`.`ID_TIDAL`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'TIDAL')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_tidal` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_tidal`.`ID_TIDAL`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'TIDAL')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_tidal`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_tidal`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_tidal`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_TIDAL`.`ID_TIDAL` >= " + GetID(sValueMin, "TIDAL", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_TIDAL`.`ID_TIDAL` <= " + GetID(sValueMax, "TIDAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_tidal`.`ID_TIDAL` >= " + GetID(sValueMin, "TIDAL", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_tidal`.`ID_TIDAL` <= " + GetID(sValueMax, "TIDAL", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Water")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_WATER` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_WATER`.`ID_WATER`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'WATER')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_water` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_water`.`ID_WATER`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'WATER')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_water`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_water`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_water`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_WATER`.`ID_WATER` >= " + GetID(sValueMin, "WATER", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_WATER`.`ID_WATER` <= " + GetID(sValueMax, "WATER", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_water`.`ID_WATER` >= " + GetID(sValueMin, "WATER", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_water`.`ID_WATER` <= " + GetID(sValueMax, "WATER", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Usage")) {
-                    habitatsSQL = "SELECT DISTINCT `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT`";
-                    habitatsSQL += " FROM `CHM62EDT_NATURE_OBJECT_REPORT_TYPE`";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_HABITAT` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_NATURE_OBJECT` = `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_NATURE_OBJECT_REPORT_TYPE`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-                    habitatsSQL += " INNER JOIN `CHM62EDT_USAGE` ON (`CHM62EDT_REPORT_TYPE`.`ID_LOOKUP` = `CHM62EDT_USAGE`.`ID_USAGE`)";
-                    habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'USAGE')";
+                    habitatsSQL = "SELECT DISTINCT `chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT`";
+                    habitatsSQL += " FROM `chm62edt_nature_object_report_type`";
+                    habitatsSQL += " INNER JOIN `chm62edt_habitat` ON (`chm62edt_nature_object_report_type`.`ID_NATURE_OBJECT` = `chm62edt_habitat`.`ID_NATURE_OBJECT`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_report_type` ON (`chm62edt_nature_object_report_type`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+                    habitatsSQL += " INNER JOIN `chm62edt_usage` ON (`chm62edt_report_type`.`ID_LOOKUP` = `chm62edt_usage`.`ID_USAGE`)";
+                    habitatsSQL += " WHERE (`chm62edt_report_type`.`LOOKUP_TYPE` = 'USAGE')";
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` = '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_usage`.`NAME` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " AND (`chm62edt_usage`.`NAME` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " AND (`chm62edt_usage`.`NAME` LIKE '%" + sValueMin + "%')";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
-                        habitatsSQL += " AND (`CHM62EDT_USAGE`.`ID_USAGE` >= " + GetID(sValueMin, "USAGE", "", "") + ")";
-                        habitatsSQL += " AND (`CHM62EDT_USAGE`.`ID_USAGE` <= " + GetID(sValueMax, "USAGE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_usage`.`ID_USAGE` >= " + GetID(sValueMin, "USAGE", "", "") + ")";
+                        habitatsSQL += " AND (`chm62edt_usage`.`ID_USAGE` <= " + GetID(sValueMax, "USAGE", "", "") + ")";
                     }
                 }
 
-                habitatsSQL += " AND (CHM62EDT_HABITAT.ID_HABITAT<>'-1' AND CHM62EDT_HABITAT.ID_HABITAT<>'10000') ";
+                habitatsSQL += " AND (chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000') ";
                 // execute every attribute query
                 attributesFilter += " AND ID_NATURE_OBJECT IN (" + ExecuteSQL(habitatsSQL, "") + ")";
             } // end for
             habitatsFilter = " WHERE 1=1 " + attributesFilter;
             // execute final query
-            habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT";
+            habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_habitat";
             habitatsSQL += habitatsFilter;
             // removed WHERE because is added automatically by JRF (findWere())
             filter += " ID_NATURE_OBJECT IN (" + ExecuteSQL(habitatsSQL, "") + ")";

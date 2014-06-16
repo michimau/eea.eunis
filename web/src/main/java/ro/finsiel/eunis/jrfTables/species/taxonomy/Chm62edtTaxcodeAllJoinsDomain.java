@@ -33,7 +33,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());
 
-        this.setTableName("CHM62EDT_TAXONOMY");
+        this.setTableName("chm62edt_taxonomy");
         this.setReadOnly(true);
         this.setTableAlias("A");
 
@@ -72,7 +72,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
         OuterJoinTable taxcode4 = null;
         OuterJoinTable taxcode5 = null;
 
-        taxcode1 = new OuterJoinTable("CHM62EDT_TAXONOMY B", "ID_TAXONOMY_LINK",
+        taxcode1 = new OuterJoinTable("chm62edt_taxonomy B", "ID_TAXONOMY_LINK",
                 "ID_TAXONOMY");
         taxcode1.addJoinColumn(
                 new StringJoinColumn("ID_TAXONOMY", "id1", "setId1"));
@@ -83,7 +83,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
                 new StringJoinColumn("LEVEL", "level1", "setLevel1"));
         this.addJoinTable(taxcode1);
 
-        taxcode2 = new OuterJoinTable("CHM62EDT_TAXONOMY C", "ID_TAXONOMY_LINK",
+        taxcode2 = new OuterJoinTable("chm62edt_taxonomy C", "ID_TAXONOMY_LINK",
                 "ID_TAXONOMY");
         taxcode2.addJoinColumn(
                 new StringJoinColumn("ID_TAXONOMY", "id2", "setId2"));
@@ -94,7 +94,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
                 new StringJoinColumn("LEVEL", "level2", "setLevel2"));
         taxcode1.addJoinTable(taxcode2);
 
-        taxcode3 = new OuterJoinTable("CHM62EDT_TAXONOMY D", "ID_TAXONOMY_LINK",
+        taxcode3 = new OuterJoinTable("chm62edt_taxonomy D", "ID_TAXONOMY_LINK",
                 "ID_TAXONOMY");
         taxcode3.addJoinColumn(
                 new StringJoinColumn("ID_TAXONOMY", "id3", "setId3"));
@@ -105,7 +105,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
                 new StringJoinColumn("LEVEL", "level3", "setLevel3"));
         taxcode2.addJoinTable(taxcode3);
 
-        taxcode4 = new OuterJoinTable("CHM62EDT_TAXONOMY E", "ID_TAXONOMY_LINK",
+        taxcode4 = new OuterJoinTable("chm62edt_taxonomy E", "ID_TAXONOMY_LINK",
                 "ID_TAXONOMY");
         taxcode4.addJoinColumn(
                 new StringJoinColumn("ID_TAXONOMY", "id4", "setId4"));
@@ -116,7 +116,7 @@ public class Chm62edtTaxcodeAllJoinsDomain extends AbstractDomain {
                 new StringJoinColumn("LEVEL", "level4", "setLevel4"));
         taxcode3.addJoinTable(taxcode4);
 
-        taxcode5 = new OuterJoinTable("CHM62EDT_TAXONOMY G", "ID_TAXONOMY_LINK",
+        taxcode5 = new OuterJoinTable("chm62edt_taxonomy G", "ID_TAXONOMY_LINK",
                 "ID_TAXONOMY");
         taxcode5.addJoinColumn(
                 new StringJoinColumn("ID_TAXONOMY", "id5", "setId5"));

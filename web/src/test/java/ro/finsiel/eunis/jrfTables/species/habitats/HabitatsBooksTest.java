@@ -21,7 +21,7 @@ public class HabitatsBooksTest {
         DbHelper.handleSetUpOperation("seed-four-species-habitats.xml");
         SQLUtilities sqlUtils = DbHelper.getSqlUtilities();
         // The created date isn't set in the seed. We set it manually.
-        sqlUtils.UpdateSQL("UPDATE DC_INDEX SET CREATED='2004' WHERE ID_DC = 2409");
+        sqlUtils.UpdateSQL("UPDATE dc_index SET CREATED='2004' WHERE ID_DC = 2409");
     }
 
     /**

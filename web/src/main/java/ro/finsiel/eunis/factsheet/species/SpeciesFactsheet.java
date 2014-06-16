@@ -86,10 +86,10 @@ public class SpeciesFactsheet {
     /** Log4J logger used for logging system */
     private static Logger logger = Logger.getLogger(SpeciesFactsheet.class);
 
-    /** ID_SPECIES from CHM62EDT_SPECIES */
+    /** ID_SPECIES from chm62edt_species */
     private Integer idSpecies = null;
 
-    /** ID_SPECIES_LINK from CHM62EDT_SPECIES */
+    /** ID_SPECIES_LINK from chm62edt_species */
     private Integer idSpeciesLink = null;
 
     /** Species object from database */
@@ -107,8 +107,8 @@ public class SpeciesFactsheet {
     /**
      * Creates a new SpeciesFactsheet object.
      *
-     * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES.
-     * @param idSpeciesLink ID_SPECIES_LINK from CHM62EDT_SPECIES.
+     * @param idSpecies ID_SPECIES from chm62edt_species.
+     * @param idSpeciesLink ID_SPECIES_LINK from chm62edt_species.
      */
     public SpeciesFactsheet(Integer idSpecies, Integer idSpeciesLink) {
         this.idSpecies = idSpecies;
@@ -322,12 +322,12 @@ public class SpeciesFactsheet {
 
         List results = new Vector();
         String sql =
-                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
-                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                        + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
-                        + " LEFT JOIN CHM62EDT_REPORT_ATTRIBUTES AS F ON F.ID_REPORT_ATTRIBUTES = B.ID_REPORT_ATTRIBUTES "
+                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM chm62edt_species AS A "
+                        + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                        + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                        + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                        + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                        + " LEFT JOIN chm62edt_report_attributes AS F ON F.ID_REPORT_ATTRIBUTES = B.ID_REPORT_ATTRIBUTES "
                         + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) "
                         + " AND F.NAME='SOURCE_TABLE' AND F.VALUE IN (" + EunisUtil.SPECIES_GROUPS + ")"
                         + " GROUP BY C.ID_NATURE_OBJECT";
@@ -348,11 +348,11 @@ public class SpeciesFactsheet {
     public List getSitesForSubpecies() {
         List results = new Vector();
         String sql =
-                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
-                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                        + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
+                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM chm62edt_species AS A "
+                        + " INNER JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                        + " INNER JOIN chm62edt_sites AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                        + " LEFT JOIN chm62edt_nature_object_geoscope AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                        + " LEFT JOIN chm62edt_country AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
                         + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'"
                         + " AND A.ID_SPECIES <> '" + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
                         + EunisUtil.mysqlEscapes(getSpeciesObject().getScientificName()) + "%')" + " GROUP BY C.ID_NATURE_OBJECT";
@@ -487,7 +487,7 @@ public class SpeciesFactsheet {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
 
                             String intThreatCode = consS.getCode();
-                            // "International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
+                            // "International threat code" in table "chm62edt_conservation_status"
                             Integer idConsStatus = consS.getIdConsStatus();
                             Integer idDcConsStatus = consS.getIdDc();
                             String author = report.getSource();
@@ -917,8 +917,8 @@ public class SpeciesFactsheet {
     /**
      * Get the regions where an nature objects is located.
      *
-     * @param idNatureObject ID_NATURE_OBJECT from CHM62EDT_REPORTS.
-     * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES
+     * @param idNatureObject ID_NATURE_OBJECT from chm62edt_reports.
+     * @param idSpecies ID_SPECIES from chm62edt_species
      * @return A vector of GeographicalStatusWrapper objects.
      */
     public static Vector getBioRegionIterator(Integer idNatureObject, Integer idSpecies) {
@@ -972,7 +972,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve population information for species.
      *
-     * @param idNatureObject ID_NATURE_OBJECT from CHM62EDT_REPORTS.
+     * @param idNatureObject ID_NATURE_OBJECT from chm62edt_reports.
      * @return A vector of FactSheetPopulationWrapper objects.
      */
     public static Vector<FactSheetPopulationWrapper> getPopulation(String idNatureObject) {
@@ -1040,8 +1040,8 @@ public class SpeciesFactsheet {
     /**
      * Retrieve trends information for species.
      *
-     * @param idNatureObject ID_NATURE_OBJECT from CHM62EDT_REPORTS
-     * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES
+     * @param idNatureObject ID_NATURE_OBJECT from chm62edt_reports
+     * @param idSpecies ID_SPECIES from chm62edt_species
      * @return A vector of FactSheetTrendsWrapper objects.
      */
     public static Vector<FactSheetTrendsWrapper> getTrends(Integer idNatureObject, Integer idSpecies) {
@@ -1086,7 +1086,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve the author of the taxonomic information.
      *
-     * @param idTaxCode ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param idTaxCode ID_TAXONOMY from chm62edt_taxonomy.
      * @return String with author.
      */
     public String getTaxCodeAuthorDate(String idTaxCode) {
@@ -1117,79 +1117,79 @@ public class SpeciesFactsheet {
         Vector results = new Vector();
         String sql = "";
         sql += "    SELECT";
-        sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
-        sql += "      `DC_INDEX`.`ID_DC`,";
-        sql += "      `CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` AS `TYPE`,";
-        sql += "      `DC_INDEX`.`SOURCE`,";
-        sql += "      `DC_INDEX`.`EDITOR`,";
-        sql += "      `DC_INDEX`.`CREATED`,";
-        sql += "      `DC_INDEX`.`TITLE`,";
-        sql += "      `DC_INDEX`.`PUBLISHER`";
+        sql += "      `chm62edt_species`.`ID_NATURE_OBJECT`,";
+        sql += "      `dc_index`.`ID_DC`,";
+        sql += "      `chm62edt_report_type`.`LOOKUP_TYPE` AS `TYPE`,";
+        sql += "      `dc_index`.`SOURCE`,";
+        sql += "      `dc_index`.`EDITOR`,";
+        sql += "      `dc_index`.`CREATED`,";
+        sql += "      `dc_index`.`TITLE`,";
+        sql += "      `dc_index`.`PUBLISHER`";
         sql += "    FROM";
-        sql += "      `CHM62EDT_SPECIES`";
+        sql += "      `chm62edt_species`";
         sql +=
-                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
         sql +=
-                "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `chm62edt_reports` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_reports`.`ID_NATURE_OBJECT`)";
         sql +=
-                "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
-        sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
+                "      INNER JOIN `chm62edt_report_type` ON (`chm62edt_reports`.`ID_REPORT_TYPE` = `chm62edt_report_type`.`ID_REPORT_TYPE`)";
+        sql += "      INNER JOIN `dc_index` ON (`chm62edt_reports`.`ID_DC` = `dc_index`.`ID_DC`)";
         sql += "    WHERE";
         sql +=
-                "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
-        sql += "    AND (`CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject + ")";
+                "      (`chm62edt_report_type`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
+        sql += "    AND (`chm62edt_species`.`ID_SPECIES` = " + idNatureObject + ")";
         sql += "    UNION";
         sql += "    SELECT";
-        sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
-        sql += "      `DC_INDEX`.`ID_DC`,";
+        sql += "      `chm62edt_species`.`ID_NATURE_OBJECT`,";
+        sql += "      `dc_index`.`ID_DC`,";
         sql += "      'Synonyms' AS `TYPE`,";
-        sql += "      `DC_INDEX`.`SOURCE`,";
-        sql += "      `DC_INDEX`.`EDITOR`,";
-        sql += "      `DC_INDEX`.`CREATED`,";
-        sql += "      `DC_INDEX`.`TITLE`,";
-        sql += "      `DC_INDEX`.`PUBLISHER`";
+        sql += "      `dc_index`.`SOURCE`,";
+        sql += "      `dc_index`.`EDITOR`,";
+        sql += "      `dc_index`.`CREATED`,";
+        sql += "      `dc_index`.`TITLE`,";
+        sql += "      `dc_index`.`PUBLISHER`";
         sql += "    FROM";
-        sql += "      `CHM62EDT_SPECIES`";
+        sql += "      `chm62edt_species`";
         sql +=
-                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-        sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES_LINK` = " + idNatureObject;
-        sql += "    AND `CHM62EDT_SPECIES`.`ID_SPECIES` <> " + idNatureObject;
+                "      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+        sql += "      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
+        sql += "    WHERE `chm62edt_species`.`ID_SPECIES_LINK` = " + idNatureObject;
+        sql += "    AND `chm62edt_species`.`ID_SPECIES` <> " + idNatureObject;
         sql += "    UNION";
         sql += "    SELECT";
-        sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
-        sql += "      `DC_INDEX`.`ID_DC`,";
+        sql += "      `chm62edt_species`.`ID_NATURE_OBJECT`,";
+        sql += "      `dc_index`.`ID_DC`,";
         sql += "      'Species' AS `TYPE`,";
-        sql += "      `DC_INDEX`.`SOURCE`,";
-        sql += "      `DC_INDEX`.`EDITOR`,";
-        sql += "      `DC_INDEX`.`CREATED`,";
-        sql += "      `DC_INDEX`.`TITLE`,";
-        sql += "      `DC_INDEX`.`PUBLISHER`";
+        sql += "      `dc_index`.`SOURCE`,";
+        sql += "      `dc_index`.`EDITOR`,";
+        sql += "      `dc_index`.`CREATED`,";
+        sql += "      `dc_index`.`TITLE`,";
+        sql += "      `dc_index`.`PUBLISHER`";
         sql += "    FROM";
-        sql += "      `CHM62EDT_SPECIES`";
+        sql += "      `chm62edt_species`";
         sql +=
-                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-        sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
+                "      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+        sql += "      INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
+        sql += "    WHERE `chm62edt_species`.`ID_SPECIES` = " + idNatureObject;
         sql += "    UNION";
         sql += "    SELECT";
-        sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
-        sql += "      `DC_INDEX`.`ID_DC`,";
+        sql += "      `chm62edt_species`.`ID_NATURE_OBJECT`,";
+        sql += "      `dc_index`.`ID_DC`,";
         sql += "      'Taxonomy' AS `TYPE`,";
-        sql += "      `DC_INDEX`.`SOURCE`,";
-        sql += "      `DC_INDEX`.`EDITOR`,";
-        sql += "      `DC_INDEX`.`CREATED`,";
-        sql += "      `DC_INDEX`.`TITLE`,";
-        sql += "      `DC_INDEX`.`PUBLISHER`";
+        sql += "      `dc_index`.`SOURCE`,";
+        sql += "      `dc_index`.`EDITOR`,";
+        sql += "      `dc_index`.`CREATED`,";
+        sql += "      `dc_index`.`TITLE`,";
+        sql += "      `dc_index`.`PUBLISHER`";
         sql += "    FROM";
-        sql += "      `CHM62EDT_SPECIES`";
+        sql += "      `chm62edt_species`";
         sql +=
-                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
-        sql += "      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
-        sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
+                "      INNER JOIN `chm62edt_nature_object` ON (`chm62edt_species`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
+        sql += "      INNER JOIN `chm62edt_taxonomy` ON (`chm62edt_species`.`ID_TAXONOMY` = `chm62edt_taxonomy`.`ID_TAXONOMY`)";
+        sql += "      INNER JOIN `dc_index` ON (`chm62edt_taxonomy`.`ID_DC` = `dc_index`.`ID_DC`)";
+        sql += "    WHERE `chm62edt_species`.`ID_SPECIES` = " + idNatureObject;
         sql +=
-                "    GROUP BY CHM62EDT_SPECIES.ID_NATURE_OBJECT,DC_INDEX.ID_DC,DC_INDEX.SOURCE,DC_INDEX.EDITOR,DC_INDEX.TITLE,DC_INDEX.PUBLISHER,DC_INDEX.CREATED";
+                "    GROUP BY chm62edt_species.ID_NATURE_OBJECT,dc_index.ID_DC,dc_index.SOURCE,dc_index.EDITOR,dc_index.TITLE,dc_index.PUBLISHER,dc_index.CREATED";
         try {
             List list = new NatureObjectDcSourceDomain().findCustom(sql, 1000);
 
@@ -1230,7 +1230,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve family name for species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @return Family.
      */
     public String getFamilyName(String taxcodeID) {
@@ -1240,7 +1240,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve order name for species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @return Order.
      */
     public String getOrderName(String taxcodeID) {
@@ -1250,7 +1250,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve class name for species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @return Class.
      */
     public String getClassName(String taxcodeID) {
@@ -1260,7 +1260,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve phylum name for species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @return Phylum.
      */
     public String getPhylumName(String taxcodeID) {
@@ -1270,7 +1270,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve kingdom name for species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @return Kingdom.
      */
     public String getKingdomName(String taxcodeID) {
@@ -1280,7 +1280,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve taxonomic information about a species.
      *
-     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @param taxcodeID ID_TAXONOMY from chm62edt_taxonomy.
      * @param level Level (0, 1, 2 etc. for family, order, class, phylum etc.)
      * @return Name.
      */
@@ -1290,7 +1290,7 @@ public class SpeciesFactsheet {
         Chm62edtTaxonomyPersist t;
 
         try {
-            List ltaxcode = tDomain.findWhere("CHM62EDT_TAXONOMY.ID_TAXONOMY='" + taxcodeID + "'");
+            List ltaxcode = tDomain.findWhere("chm62edt_taxonomy.ID_TAXONOMY='" + taxcodeID + "'");
 
             if (!ltaxcode.isEmpty() && level < 3) {
                 t = (Chm62edtTaxonomyPersist) ltaxcode.get(0);
@@ -1317,7 +1317,7 @@ public class SpeciesFactsheet {
             } else {
                 if (3 == level) {
                     Chm62edtTaxcodeLeftDomain tLDomain = new Chm62edtTaxcodeLeftDomain();
-                    List list = tLDomain.findWhere("CHM62EDT_TAXONOMY.ID_TAXONOMY='" + taxcodeID + "'");
+                    List list = tLDomain.findWhere("chm62edt_taxonomy.ID_TAXONOMY='" + taxcodeID + "'");
                     Chm62edtTaxcodeLeftPersist tL;
 
                     if (!list.isEmpty()) {
@@ -1342,7 +1342,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve taxonomic tree information.
      *
-     * @param taxcodeID TAXONOMY_TREE from CHM62EDT_TAXONOMY.
+     * @param taxcodeID TAXONOMY_TREE from chm62edt_taxonomy.
      * @return TaxonomyTreeDTO
      */
     public TaxonomyTreeDTO getTaxonomicTree(String taxcodeID) {
@@ -1353,7 +1353,7 @@ public class SpeciesFactsheet {
 
         try {
             if (taxcodeID != null) {
-                List ltaxcode = tDomain.findWhere("CHM62EDT_TAXONOMY.ID_TAXONOMY='" + taxcodeID + "'");
+                List ltaxcode = tDomain.findWhere("chm62edt_taxonomy.ID_TAXONOMY='" + taxcodeID + "'");
 
                 if (!ltaxcode.isEmpty()) {
                     t = (Chm62edtTaxonomyPersist) ltaxcode.get(0);
@@ -1371,7 +1371,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve minumum population for a given species.
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes
      * @return Minimum population.
      */
     private static int findPopulationMin(Integer idReportAttribute) {
@@ -1396,7 +1396,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve maximum population for a given species.
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes
      * @return Maximum population.
      */
     private static int findPopulationMax(Integer idReportAttribute) {
@@ -1421,7 +1421,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve unit of measurement for population for a given species.
      *
-     * @param idPopulationUnit ID_POPULATION_UNIT from CHM62EDT_POPULATION_UNIT
+     * @param idPopulationUnit ID_POPULATION_UNIT from chm62edt_population_unit
      * @return Unit of measurement (unit, pairs etc.).
      */
     private static String findPopulationUnits(String idPopulationUnit) {
@@ -1444,7 +1444,7 @@ public class SpeciesFactsheet {
     /**
      * Population information (date of reference).
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes
      * @return reference date.
      */
     private static String findPopulationDate(Integer idReportAttribute) {
@@ -1471,7 +1471,7 @@ public class SpeciesFactsheet {
     /**
      * Population information (status of species).
      *
-     * @param idReportType ID_REPORT_TYPE from CHM62EDT_REPORT_TYPE
+     * @param idReportType ID_REPORT_TYPE from chm62edt_report_type
      * @return population status.
      */
     private static String findPopulationStatus(Integer idReportType) {
@@ -1496,7 +1496,7 @@ public class SpeciesFactsheet {
     /**
      * Population information (quality of information).
      *
-     * @param idReportType ID_REPORT_TYPE from CHM62EDT_REPORT_TYPE
+     * @param idReportType ID_REPORT_TYPE from chm62edt_report_type
      * @return quality of information.
      */
     private static String findPopulationQuality(Integer idReportType) {
@@ -1521,7 +1521,7 @@ public class SpeciesFactsheet {
     /**
      * Population information (start period).
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES.
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes.
      * @return start of period.
      */
     private static String findStartPeriod(Integer idReportAttribute) {
@@ -1546,7 +1546,7 @@ public class SpeciesFactsheet {
     /**
      * Population information (end period).
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES.
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes.
      * @return end of period.
      */
     private static String findEndPeriod(Integer idReportAttribute) {
@@ -1571,7 +1571,7 @@ public class SpeciesFactsheet {
     /**
      * Retrieve trends information.
      *
-     * @param idTrend ID_TREND from CHM62EDT_TREND.
+     * @param idTrend ID_TREND from chm62edt_trend.
      * @return Trend information.
      */
     private static String findTrends(String idTrend) {
@@ -1592,7 +1592,7 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Get the pictures available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES ant
+     * Get the pictures available in database for this species. It queries the chm62edt_nature_object_picture with ID_SPECIES ant
      * NATURE_OBJECT_TYPE='Species'.
      *
      * @param limit - number of pictures returned
@@ -1643,7 +1643,7 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Get the main picture available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES
+     * Get the main picture available in database for this species. It queries the chm62edt_nature_object_picture with ID_SPECIES
      * and NATURE_OBJECT_TYPE='Species' AND MAIN_PIC = 1 .
      *
      * @return A PictureDTO object.
@@ -1697,7 +1697,7 @@ public class SpeciesFactsheet {
 
     /**
      * Get the all picture available in database for this species and return a list of PctureDto objects. It queries the
-     * CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES and NATURE_OBJECT_TYPE='Species'.
+     * chm62edt_nature_object_picture with ID_SPECIES and NATURE_OBJECT_TYPE='Species'.
      *
      * @return A list of PictureDTO objects.
      */
@@ -1763,11 +1763,11 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Find the value of an attribute for species, from CHM62EDT_REPORT_ATTRIBUTES.
+     * Find the value of an attribute for species, from chm62edt_report_attributes.
      *
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES.
-     * @param name NAME from CHM62EDT_REPORT_ATTRIBUTES.
-     * @return VALUE from CHM62EDT_REPORT_ATTRIBUTES.
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES from chm62edt_report_attributes.
+     * @param name NAME from chm62edt_report_attributes.
+     * @return VALUE from chm62edt_report_attributes.
      */
     private static String findReportAttributesValue(Integer idReportAttribute, String name) {
         String result = "";
@@ -1789,9 +1789,9 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Find the value of an attribute for species, from CHM62EDT_REPORT_TYPE.
+     * Find the value of an attribute for species, from chm62edt_report_type.
      *
-     * @param idReportType ID_REPORT_TYPE from CHM62EDT_REPORT_TYPE.
+     * @param idReportType ID_REPORT_TYPE from chm62edt_report_type.
      * @param lookup_type Name of the attribute (implemented: abundance, frequencies, faithfulness, species_status).
      * @return value associated with the given attribute.
      */
@@ -1848,7 +1848,7 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Get the taxonomic code associated with this species (ID_TAXCODE from CHM62EDT_SPECIES).
+     * Get the taxonomic code associated with this species (ID_TAXCODE from chm62edt_species).
      *
      * @return ID taxonomic code.
      */
@@ -1964,7 +1964,7 @@ public class SpeciesFactsheet {
         }
 
         String queriesSQL =
-                "select ATTRS.OBJECT from CHM62EDT_SPECIES as SPECIES" + " left join CHM62EDT_NATURE_OBJECT_ATTRIBUTES as ATTRS"
+                "select ATTRS.OBJECT from chm62edt_species as SPECIES" + " left join chm62edt_nature_object_attributes as ATTRS"
                         + " on SPECIES.ID_NATURE_OBJECT=ATTRS.ID_NATURE_OBJECT where SPECIES.ID_SPECIES=? and ATTRS.NAME='"
                         + queriesName + "'";
 

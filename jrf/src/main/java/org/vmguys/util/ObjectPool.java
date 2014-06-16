@@ -21,12 +21,12 @@
  *
  * 3. The end-user documentation included with the redistribution,
  *    if any, must include the following acknowledgment:
- *       "This product includes software developed by 
+ *       "This product includes software developed by
  *        VM Systems, Inc. (http://www.vmguys.com/)."
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "VM Systems" must not be used to endorse or promote products 
+ * 4. The names "VM Systems" must not be used to endorse or promote products
  *    derived from this software without prior written permission. For written
  *    permission, please contact info@vmguys.com.
  *
@@ -41,13 +41,13 @@
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE TITLE
  * AND NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL VM SYSTEMS, INC.,
- * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. EACH RECIPIENT OR USER IS SOLELY RESPONSIBLE
  * FOR DETERMINING THE APPROPRIATENESS OF USING AND DISTRIBUTING THE SOFTWARE
  * AND ASSUMES ALL RISKS ASSOCIATED WITH ITS EXERCISE OF RIGHTS HEREUNDER,
@@ -58,64 +58,64 @@
 */
 package org.vmguys.util;
 
-/** An interface that handles object pooling.  The majority of open source and 
+/** An interface that handles object pooling.  The majority of open source and
 * commercial methods contain a method for getting an object from the pool and returning
 * the object with similar signatures.  This interface lets a user wrap a specific pool handler
 * to this interface or write their own.
 */
 public interface ObjectPool  {
 
-	/** Set the class name of the pool.
-	* @param className
-	*/
-	public void setClassName(String className);
+    /** Set the class name of the pool.
+    * @param className
+    */
+    public void setClassName(String className);
 
-	/** Fetches an object from the pool
-	* @return object of class type specified in <code>setClassName()</code>.
-	* @see #setClassName(String)
-	*/
-	public Object getObject();
-	
-
-	/** Returns an object to the pool.
-	* @param obj object to return obtained through a call to <code>getObject()</code>
-	* @see #getObject()
-	*/
-	public void returnObject(Object obj);
+    /** Fetches an object from the pool
+    * @return object of class type specified in <code>setClassName()</code>.
+    * @see #setClassName(String)
+    */
+    public Object getObject();
 
 
-	/** Sets maximum pool size.
-	* @param max maximum pool value.
-	*/
-	public void setMaximumSize(int max);
+    /** Returns an object to the pool.
+    * @param obj object to return obtained through a call to <code>getObject()</code>
+    * @see #getObject()
+    */
+    public void returnObject(Object obj);
 
 
-	/** Trims the pool (e.g. removes unnecessary pool objects).
-	*/
-	public void adjustPool();
+    /** Sets maximum pool size.
+    * @param max maximum pool value.
+    */
+    public void setMaximumSize(int max);
 
 
-	/** Adds a listener for object creation and removal on this pool.  Implementations
-	* should call <code>objectCreated()</code> method whenever an object
-	* if first created and <code>objectRemoved</code> whenever an object is removed
-	* from the pool.
-	* @param listener <code>ObjectPoolListener</code> implementation to add.
-	* @throws UnsupportedOperationException if listeners are not supported.
-	* @see org.vmguys.util.ObjectPoolListener#objectCreated(Object)
-	* @see org.vmguys.util.ObjectPoolListener#objectRemoved(Object)
-	*/ 
-	public void addListener(ObjectPoolListener listener) throws UnsupportedOperationException;
+    /** Trims the pool (e.g. removes unnecessary pool objects).
+    */
+    public void adjustPool();
 
-	/** Removes  a listener for object creation and removeal on this pool.  Implementations
-	* should call <code>objectCreated()</code> method whenever an object
-	* if first created and <code>objectRemoved</code> whenever an object is removed
-	* from the pool.
-	* @param listener <code>ObjectPoolListener</code> implementation to add.
-	* @throws UnsupportedOperationException if listeners are not supported.
-	* @see org.vmguys.util.ObjectPoolListener#objectCreated(Object)
-	* @see org.vmguys.util.ObjectPoolListener#objectRemoved(Object)
-	*/ 
-	public void removeListener(ObjectPoolListener listener) throws UnsupportedOperationException;
+
+    /** Adds a listener for object creation and removal on this pool.  Implementations
+    * should call <code>objectCreated()</code> method whenever an object
+    * if first created and <code>objectRemoved</code> whenever an object is removed
+    * from the pool.
+    * @param listener <code>ObjectPoolListener</code> implementation to add.
+    * @throws UnsupportedOperationException if listeners are not supported.
+    * @see org.vmguys.util.ObjectPoolListener#objectCreated(Object)
+    * @see org.vmguys.util.ObjectPoolListener#objectRemoved(Object)
+    */
+    public void addListener(ObjectPoolListener listener) throws UnsupportedOperationException;
+
+    /** Removes  a listener for object creation and removeal on this pool.  Implementations
+    * should call <code>objectCreated()</code> method whenever an object
+    * if first created and <code>objectRemoved</code> whenever an object is removed
+    * from the pool.
+    * @param listener <code>ObjectPoolListener</code> implementation to add.
+    * @throws UnsupportedOperationException if listeners are not supported.
+    * @see org.vmguys.util.ObjectPoolListener#objectCreated(Object)
+    * @see org.vmguys.util.ObjectPoolListener#objectRemoved(Object)
+    */
+    public void removeListener(ObjectPoolListener listener) throws UnsupportedOperationException;
 
 }
 

@@ -55,7 +55,7 @@ import java.util.Vector;
 **/
 public class JModifiers {
 
-    
+
     /* static members */
 
     private static final String sAbstract   = "abstract";
@@ -69,7 +69,7 @@ public class JModifiers {
     private static final short vPrivate   = 1;
     private static final short vProtected = 2;
     private static final short vPublic    = 3;
-    
+
 
     /* local members */
 
@@ -83,25 +83,25 @@ public class JModifiers {
      * with this JModifiers is static
     **/
     private boolean isStatic = false;
-    
+
     /**
      * A flag indicating whether or not the object associated
      * with this JModifiers is final
     **/
     private boolean isFinal  = false;
-    
+
     /**
      * A flag indicating whether or not the object associated
      * with this JModifiers is abstract
     **/
     private boolean isAbstract = false;
-    
+
     /**
      * A flag indicating whether or not the object associated
      * with this JModifiers is transient
     **/
     private boolean isTransient = false;
-    
+
     /**
      * Creates a new JModifiers class, by default the
      * modifiers presented are public.
@@ -109,9 +109,9 @@ public class JModifiers {
     public JModifiers() {
         super();
     } //-- JModifiers
-    
+
     /**
-     * Creates a new JModifiers 
+     * Creates a new JModifiers
      * @param visibility the visibile qualifier
      * @param isStatic a boolean indicating the static qualifier.
      * A value of true indicates that this static qualifier is present.
@@ -123,7 +123,7 @@ public class JModifiers {
         this.isStatic = isStatic;
         this.isFinal = isFinal;
     } //-- JModifiers
-    
+
     /**
      * Creates a copy of this JModifiers
      * @return the copy of this JModifiers
@@ -134,14 +134,14 @@ public class JModifiers {
         mods.setTransient(isTransient);
         return mods;
     } //-- copy
-    
+
     /**
      * Changes the visibility qualifier to "private"
     **/
     public void makePrivate() {
         this.visibility = vPrivate;
     } //-- makePrivate
-    
+
     /**
      * Changes the visibility qualifier to "protected"
     **/
@@ -155,7 +155,7 @@ public class JModifiers {
     public void makePublic() {
         this.visibility = vPublic;
     } //-- makePublic
-    
+
     /**
      * Returns true if the abstract qualifier is present.
      * <BR /> This is only applicable to methods and classes.
@@ -164,7 +164,7 @@ public class JModifiers {
     public boolean isAbstract() {
         return isAbstract;
     } //-- isAbstract
-    
+
     /**
      * Returns true if the modifier represented is private.
      * @return true if the modifier represented is private.
@@ -172,7 +172,7 @@ public class JModifiers {
     public boolean isPrivate() {
         return (visibility == vPrivate);
     } //-- isPrivate
-    
+
     /**
      * Returns true if the modifier represented is protected.
      * @return true if the modifier represented is protected.
@@ -180,7 +180,7 @@ public class JModifiers {
     public boolean isProtected() {
         return (visibility == vProtected);
     } //-- isProtected
-    
+
     /**
      * Returns true if the modifier represented is public.
      * @return true if the modifier represented is public.
@@ -204,7 +204,7 @@ public class JModifiers {
     public boolean isTransient() {
         return this.isTransient;
     } //-- isTransient
-    
+
     /**
      * Sets whether or not the "abstract" qualifier is present
      * <BR /> This applies only to methods or classes.
@@ -214,7 +214,7 @@ public class JModifiers {
     public void setAbstract(boolean isAbstract) {
         this.isAbstract = isAbstract;
     } //-- setAbstract
-    
+
     /**
      * Sets whether or not the "final" qualifier is present
      * @param isFinal is a boolean which when true will indicate
@@ -223,7 +223,7 @@ public class JModifiers {
     public void setFinal(boolean isFinal) {
         this.isFinal = isFinal;
     } //-- setFinal
-    
+
     /**
      * Sets whether or not the "static" qualifier is present
      * @param isStatic is a boolean which when true will indicate
@@ -232,7 +232,7 @@ public class JModifiers {
     public void setStatic(boolean isStatic) {
         this.isStatic = isStatic;
     } //-- setStatic
-    
+
     /**
      * Sets whether or not the "transient" qualifier is present
      * @param isTransient is a boolean which when true will indicate
@@ -241,14 +241,14 @@ public class JModifiers {
     public void setTransient(boolean isTransient) {
         this.isTransient = isTransient;
     } //-- setTransient
-    
+
     /**
      * Returns the String represetation of this JModifiers
      * @return the String represetation of this JModifiers
     **/
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        
+
         //-- visibility
         switch(visibility) {
             case vPrivate:
@@ -261,13 +261,13 @@ public class JModifiers {
                 sb.append(sPublic);
                 break;
         }
-        
+
         //-- static
         if (isStatic) {
             sb.append(' ');
             sb.append(sStatic);
         }
-        
+
         //-- final
         if (isFinal) {
             sb.append(' ');
@@ -286,9 +286,9 @@ public class JModifiers {
             sb.append(sTransient);
         }
 
-        
+
         return sb.toString();
     } //-- toString
-    
+
 } //-- JModifiers
 

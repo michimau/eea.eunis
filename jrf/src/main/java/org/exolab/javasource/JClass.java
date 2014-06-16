@@ -252,7 +252,7 @@ public class JClass extends JType {
         if (modifiers.isAbstract()) {
             this.modifiers.setAbstract(true);
         }
-        
+
         for (int i = 0; i < methods.size(); i++) {
             JMethod tmp = (JMethod) methods.elementAt(i);
             //-- first compare modifiers
@@ -272,7 +272,7 @@ public class JClass extends JType {
         }
         //-- END SORT
         if (!added) methods.addElement(jMethod);
-        
+
         //-- check parameter packages to make sure we have them
         //-- in our import list
 
@@ -448,9 +448,9 @@ public class JClass extends JType {
     }
 
     public void print(String destDir, String lineSeparator, int size) {
-        
+
         String name = getLocalName();
-        
+
         //-- open output file
         String filename = getFilename(destDir);
 
@@ -699,14 +699,14 @@ public class JClass extends JType {
         JConstructor cons = testClass.createConstructor();
         testClass.addConstructor(cons);
         cons.getSourceCode().add("this.x = 6;");
-        
+
         JMethod jMethod = new JMethod(JType.Int, "getX");
-        
+
         jMethod.setSourceCode("return this.x;");
         testClass.addMethod(jMethod);
-        
+
         testClass.print();
     } //-- main
     /* */
-    
+
 } //-- JClass

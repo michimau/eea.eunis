@@ -21,12 +21,12 @@
  *
  * 3. The end-user documentation included with the redistribution,
  *    if any, must include the following acknowledgment:
- *       "This product includes software developed by 
+ *       "This product includes software developed by
  *        VM Systems, Inc. (http://www.vmguys.com/)."
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "VM Systems" must not be used to endorse or promote products 
+ * 4. The names "VM Systems" must not be used to endorse or promote products
  *    derived from this software without prior written permission. For written
  *    permission, please contact info@vmguys.com.
  *
@@ -41,13 +41,13 @@
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE TITLE
  * AND NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL VM SYSTEMS, INC.,
- * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. EACH RECIPIENT OR USER IS SOLELY RESPONSIBLE
  * FOR DETERMINING THE APPROPRIATENESS OF USING AND DISTRIBUTING THE SOFTWARE
  * AND ASSUMES ALL RISKS ASSOCIATED WITH ITS EXERCISE OF RIGHTS HEREUNDER,
@@ -63,80 +63,80 @@ import org.vmguys.appgen.*;
 /** Join column XML entity.
 * XML element "JoinColumn"
 <pre>
-!ATTLIST JoinColumn 
-		columnName CDATA #REQUIRED
-		fieldName CDATA #REQUIRED
-		joinColumnSpec CDATA #REQUIRED
-		fieldClassName CDATA #REQUIRED
-		usePrimitives (true|false) "true"	
+!ATTLIST JoinColumn
+        columnName CDATA #REQUIRED
+        fieldName CDATA #REQUIRED
+        joinColumnSpec CDATA #REQUIRED
+        fieldClassName CDATA #REQUIRED
+        usePrimitives (true|false) "true"   
 </pre>
 */
 public class JoinColumnXMLEntity extends SourceGenXMLEntity  {
 
-	boolean usePrimitives;
+    boolean usePrimitives;
 
-	
-	/*** Default constructor
-	*/
-	public JoinColumnXMLEntity() {
-	}
+    
+    /*** Default constructor
+    */
+    public JoinColumnXMLEntity() {
+    }
 
-	/**
-	*/
-	public void resolveImpliedKeys() {
-		String util = (String) super.transientKeys.get("joinColumnSpec");
-		if (util.indexOf(".") == -1) {
-			util = "net.sf.jrf.join.joincolumns."+util;
-			super.transientKeys.put("joinColumnSpec",util);
-		}
-	}
+    /**
+    */
+    public void resolveImpliedKeys() {
+        String util = (String) super.transientKeys.get("joinColumnSpec");
+        if (util.indexOf(".") == -1) {
+            util = "net.sf.jrf.join.joincolumns."+util;
+            super.transientKeys.put("joinColumnSpec",util);
+        }
+    }
 
-	public String getObjectDeclaration() {
+    public String getObjectDeclaration() {
 
-		return ColumnXMLEntity.getFieldDeclaration(usePrimitives,
-					(String) super.transientKeys.get("fieldClassName"),
-					"f_"+(String) super.transientKeys.get("fieldName"),null);
-	}
+        return ColumnXMLEntity.getFieldDeclaration(usePrimitives,
+                    (String) super.transientKeys.get("fieldClassName"),
+                    "f_"+(String) super.transientKeys.get("fieldName"),null);
+    }
 
-	/** Returns join column declaration.
-	*/
-	public String getJoinColumnDeclare() {
-		return " new "+super.transientKeys.get("joinColumnSpec")+"(\""+
-					 super.transientKeys.get("columnName")+"\", new "+
-					 super.transientKeys.get("fieldName")+"GetterSetter())";
-	}
+    /** Returns join column declaration.
+    */
+    public String getJoinColumnDeclare() {
+        return " new "+super.transientKeys.get("joinColumnSpec")+"(\""+
+                     super.transientKeys.get("columnName")+"\", new "+
+                     super.transientKeys.get("fieldName")+"GetterSetter())";
+    }
 
-	public String getToString(String strBufVar) {
-		String fieldName = (String) super.transientKeys.get("fieldName");
-		return  "		"+strBufVar+".append(\"\\n"+fieldName+"=\"+f_"+fieldName+");\n";
-	}
-	
-	/** Returns getter-setter impl code for the column.
-	 * @param dbObjClassName class name of the PO.
-	*/
-	public String getGetterSetterImpl(String dbObjClassName) throws CodeGenException {
-		String fieldName = (String) super.transientKeys.get("fieldName");
-		return  JRFGeneratorUtil.getGetterSetterImplCode(
-					fieldName+"GetterSetter",
-					dbObjClassName,
-					fieldName,
-					(String) super.transientKeys.get("fieldClassName"),
-					usePrimitives);
-	} 
+    public String getToString(String strBufVar) {
+        String fieldName = (String) super.transientKeys.get("fieldName");
+        return  "       "+strBufVar+".append(\"\\n"+fieldName+"=\"+f_"+fieldName+");\n";
+    }
+    
+    /** Returns getter-setter impl code for the column.
+     * @param dbObjClassName class name of the PO.
+    */
+    public String getGetterSetterImpl(String dbObjClassName) throws CodeGenException {
+        String fieldName = (String) super.transientKeys.get("fieldName");
+        return  JRFGeneratorUtil.getGetterSetterImplCode(
+                    fieldName+"GetterSetter",
+                    dbObjClassName,
+                    fieldName,
+                    (String) super.transientKeys.get("fieldClassName"),
+                    usePrimitives);
+    }
 
-	public void appendGetterSetter(StringBuffer buf) throws CodeGenException {
-		String description = (String) super.transientKeys.get("description");
-		String cVarClassName = (String) super.transientKeys.get("fieldClassName");
-		if (usePrimitives)
-			cVarClassName = JRFGeneratorUtil.translateWrapper(cVarClassName);
-		String postFix = (String) super.transientKeys.get("fieldName");
-		String fieldName = "f_"+postFix;
-		CodeGenUtil.appendSetter(description,postFix,fieldName,cVarClassName,null,null,buf);
-		CodeGenUtil.appendGetter(description,postFix,fieldName,cVarClassName,null,buf);
+    public void appendGetterSetter(StringBuffer buf) throws CodeGenException {
+        String description = (String) super.transientKeys.get("description");
+        String cVarClassName = (String) super.transientKeys.get("fieldClassName");
+        if (usePrimitives)
+            cVarClassName = JRFGeneratorUtil.translateWrapper(cVarClassName);
+        String postFix = (String) super.transientKeys.get("fieldName");
+        String fieldName = "f_"+postFix;
+        CodeGenUtil.appendSetter(description,postFix,fieldName,cVarClassName,null,null,buf);
+        CodeGenUtil.appendGetter(description,postFix,fieldName,cVarClassName,null,buf);
 
-	}
+    }
 
-	public void setUsePrimitives(boolean usePrimitives) {
-		this.usePrimitives = usePrimitives;
-	}
+    public void setUsePrimitives(boolean usePrimitives) {
+        this.usePrimitives = usePrimitives;
+    }
 }

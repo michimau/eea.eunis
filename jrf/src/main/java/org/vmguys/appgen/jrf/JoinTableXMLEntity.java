@@ -21,12 +21,12 @@
  *
  * 3. The end-user documentation included with the redistribution,
  *    if any, must include the following acknowledgment:
- *       "This product includes software developed by 
+ *       "This product includes software developed by
  *        VM Systems, Inc. (http://www.vmguys.com/)."
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "VM Systems" must not be used to endorse or promote products 
+ * 4. The names "VM Systems" must not be used to endorse or promote products
  *    derived from this software without prior written permission. For written
  *    permission, please contact info@vmguys.com.
  *
@@ -41,13 +41,13 @@
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE TITLE
  * AND NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL VM SYSTEMS, INC.,
- * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. EACH RECIPIENT OR USER IS SOLELY RESPONSIBLE
  * FOR DETERMINING THE APPROPRIATENESS OF USING AND DISTRIBUTING THE SOFTWARE
  * AND ASSUMES ALL RISKS ASSOCIATED WITH ITS EXERCISE OF RIGHTS HEREUNDER,
@@ -63,62 +63,62 @@ import org.vmguys.appgen.*;
 /** Joine field XML entity.
 * XML element "JoinTable
 <pre>
-!ATTLIST JoinTable 
-		tableName CDATA #REQUIRED 
-	 mainColumnNames CDATA #REQUIRED
-	 joinColumnNames CDATA #REQUIRED
+!ATTLIST JoinTable
+        tableName CDATA #REQUIRED
+     mainColumnNames CDATA #REQUIRED
+     joinColumnNames CDATA #REQUIRED
 
 </pre>
 */
 public class JoinTableXMLEntity extends SourceGenXMLEntity  {
 
-	private List joinColumns = new ArrayList();
-	private List joinTables = new ArrayList();
+    private List joinColumns = new ArrayList();
+    private List joinTables = new ArrayList();
 
-	boolean innerJoin = true;
+    boolean innerJoin = true;
 
-	/*** Default constructor
-	*/
-	public JoinTableXMLEntity() {
-	}
+    /*** Default constructor
+    */
+    public JoinTableXMLEntity() {
+    }
 
-	public void resolveImpliedKeys() {
-	}
+    public void resolveImpliedKeys() {
+    }
 
-	public void setInnerJoin(boolean innerJoin) {
-		this.innerJoin = innerJoin;
-	}
-	public String getJoinTableDeclare(String varName) { 
-		String joinType = innerJoin ? "JoinTable":"OuterJoinTable";
-		return 
-			"	JoinTable "+varName+" = new "+joinType+"(\""+
-					super.transientKeys.get("tableName")+
-					"\",\""+
-					super.transientKeys.get("mainColumnNames")+"\",\""+
-					super.transientKeys.get("joinColumnNames")+"\");\n";	
-	}
+    public void setInnerJoin(boolean innerJoin) {
+        this.innerJoin = innerJoin;
+    }
+    public String getJoinTableDeclare(String varName) {
+        String joinType = innerJoin ? "JoinTable":"OuterJoinTable";
+        return
+            "   JoinTable "+varName+" = new "+joinType+"(\""+
+                    super.transientKeys.get("tableName")+
+                    "\",\""+
+                    super.transientKeys.get("mainColumnNames")+"\",\""+
+                    super.transientKeys.get("joinColumnNames")+"\");\n";    
+    }
 
-	/** Gets embedded join columns 
-	*/
-	public List getJoinColumn() {
-		return joinColumns;
-	}
+    /** Gets embedded join columns
+    */
+    public List getJoinColumn() {
+        return joinColumns;
+    }
 
-	/** Sets join columns.
-	*/
-	public void setJoinColumn(List joinColumns) {
-		this.joinColumns = joinColumns;
-	}
-	
-	/** Gets embedded join tables 
-	*/
-	public List getJoinTable() {
-		return joinTables;
-	}
+    /** Sets join columns.
+    */
+    public void setJoinColumn(List joinColumns) {
+        this.joinColumns = joinColumns;
+    }
+    
+    /** Gets embedded join tables
+    */
+    public List getJoinTable() {
+        return joinTables;
+    }
 
-	/** Sets join columns.
-	*/
-	public void setJoinTable(List joinTables) {
-		this.joinTables = joinTables;
-	}
+    /** Sets join columns.
+    */
+    public void setJoinTable(List joinTables) {
+        this.joinTables = joinTables;
+    }
 }

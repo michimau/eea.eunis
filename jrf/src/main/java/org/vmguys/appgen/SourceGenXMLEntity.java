@@ -21,12 +21,12 @@
  *
  * 3. The end-user documentation included with the redistribution,
  *    if any, must include the following acknowledgment:
- *       "This product includes software developed by 
+ *       "This product includes software developed by
  *        VM Systems, Inc. (http://www.vmguys.com/)."
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "VM Systems" must not be used to endorse or promote products 
+ * 4. The names "VM Systems" must not be used to endorse or promote products
  *    derived from this software without prior written permission. For written
  *    permission, please contact info@vmguys.com.
  *
@@ -41,13 +41,13 @@
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE TITLE
  * AND NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL VM SYSTEMS, INC.,
- * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * ITS SHAREHOLDERS, DIRECTORS OR EMPLOYEES BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE. EACH RECIPIENT OR USER IS SOLELY RESPONSIBLE
  * FOR DETERMINING THE APPROPRIATENESS OF USING AND DISTRIBUTING THE SOFTWARE
  * AND ASSUMES ALL RISKS ASSOCIATED WITH ITS EXERCISE OF RIGHTS HEREUNDER,
@@ -60,51 +60,51 @@ import java.util.*;
 
 /**
 * Base class for all code-generated entities
-* using templates. 
+* using templates.
 */
 public abstract class SourceGenXMLEntity {
 
-	/** Transient key map **/
-	protected HashMap transientKeys = new HashMap();
-	private String contents = null;
+    /** Transient key map **/
+    protected HashMap transientKeys = new HashMap();
+    private String contents = null;
 
-	/** Gets underlying transient key hash map.
-	 * @return transient key hash map.
-	 */
-	public HashMap getTransientKeys() {
-		return this.transientKeys;
-	}
+    /** Gets underlying transient key hash map.
+     * @return transient key hash map.
+     */
+    public HashMap getTransientKeys() {
+        return this.transientKeys;
+    }
 
-	/** Sets entity contents for entities without any attributes.
-	* @param contents entity contents.
-	*/
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
+    /** Sets entity contents for entities without any attributes.
+    * @param contents entity contents.
+    */
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
 
-	/** Returns contents for XML entities with out any attributes.
-	* @return entity contents.
-	*/
-	public String getContents() {
-		return this.contents;
-	}
+    /** Returns contents for XML entities with out any attributes.
+    * @return entity contents.
+    */
+    public String getContents() {
+        return this.contents;
+    }
 
-	/** Resolves any implied keys.
-	*/
-	abstract public void resolveImpliedKeys();
+    /** Resolves any implied keys.
+    */
+    abstract public void resolveImpliedKeys();
 
-	/** Returns list of all keys and values on the map.
-	 * @return list of all keys.
-	 */
-	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		Iterator iter = transientKeys.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = (String) iter.next();
-			String value = (String) transientKeys.get(key);
-			buf.append("Key = ["+key+"] Value = ["+value+"]\n");
-		}
-		return super.toString()+": "+buf.toString();
+    /** Returns list of all keys and values on the map.
+     * @return list of all keys.
+     */
+    public String toString() {
+        StringBuffer buf = new StringBuffer();
+        Iterator iter = transientKeys.keySet().iterator();
+        while (iter.hasNext()) {
+            String key = (String) iter.next();
+            String value = (String) transientKeys.get(key);
+            buf.append("Key = ["+key+"] Value = ["+value+"]\n");
+        }
+        return super.toString()+": "+buf.toString();
 
-	}
+    }
 }

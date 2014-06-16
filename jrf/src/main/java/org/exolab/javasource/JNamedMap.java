@@ -54,10 +54,10 @@ import java.util.Vector;
  * @author <a href="mailto:kvisco@ziplink.net">Keith Visco</a>
 **/
 public class JNamedMap {
-    
+
     private Vector names = null;
     private Vector objects = null;
-    
+
     /**
      * Creates a new JNamedMap
     **/
@@ -74,8 +74,8 @@ public class JNamedMap {
         names = new Vector(size);
         objects = new Vector(size);
     } //-- JNamedMap
-    
-    
+
+
     /**
      * Returns the Object associated with the given name
      * @param name the name to search for
@@ -86,18 +86,18 @@ public class JNamedMap {
         if (i >= 0) return objects.elementAt(i);
         return null;
     } //-- get
-    
+
     /**
      * Returns the Object at the given index
      * @param index the index of the Object to return
      * @return the Object at the given index
     **/
-    public Object get(int index) 
-        throws IndexOutOfBoundsException 
+    public Object get(int index)
+        throws IndexOutOfBoundsException
     {
         return objects.elementAt(index);
     } //-- get
-    
+
     /**
      * Returns the name associated with the given Object
      * @param obj the Object to search for
@@ -108,7 +108,7 @@ public class JNamedMap {
         if (i >= 0) return (String)names.elementAt(i);
         return null;
     } //-- getNameByObject
-    
+
     /**
      * Return a Vector of names
      * @return a Vector of names
@@ -116,7 +116,7 @@ public class JNamedMap {
     public Vector getNames() {
         return (Vector)names.clone();
     } //-- getNames
-    
+
     /**
      * @return a Vector of Objects
      * @return a Vector of Objects
@@ -124,23 +124,23 @@ public class JNamedMap {
     public Vector getObjects() {
         return (Vector)objects.clone();
     } //-- getObjects
-    
+
     /**
-     * Returns the index of the Object which has been 
+     * Returns the index of the Object which has been
      * mapped (associated) with the given name
      * @return the index of the Object which has been mapped (associated)
      * to the given name
     **/
     public int indexOf(String name) {
-        
+
         for (int i = 0; i < names.size(); i++) {
             String iName = (String)names.elementAt(i);
             if (iName.equals(name)) return i;
         }
         return -1;
-        
+
     } //-- indexOf
-    
+
     /**
      * Maps (associates) an Object with a name
      * @param name the name to associate with the given Object
@@ -156,7 +156,7 @@ public class JNamedMap {
             objects.addElement(obj);
         }
     } //-- put
-    
+
     /**
      * Returns the number of Object associations currently in
      * this named map
@@ -166,5 +166,5 @@ public class JNamedMap {
     public int size() {
         return names.size();
     } //-- size
-    
+
 } //-- JNamedMap

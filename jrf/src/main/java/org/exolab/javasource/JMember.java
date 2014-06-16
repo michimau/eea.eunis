@@ -65,25 +65,25 @@ public class JMember {
     private JDocComment comment = null;
 
     private String initString = null;
-    
+
     /**
      * The Class in this JMember has been declared
     **/
     private JClass declaringClass = null;
 
     public JMember(JType type, String name) {
-        
+
         this.type = type;
         this.name = name;
         this.modifiers = new JModifiers();
         this.modifiers.makePrivate();
-        
+
     } //-- JMember
 
-    
+
 
     /**
-     * Returns the comment describing this member. 
+     * Returns the comment describing this member.
      * @return the comment describing this member, or
      * null if no comment has been set.
     **/
@@ -91,7 +91,7 @@ public class JMember {
         return this.comment;
     } //-- getComment
 
-    
+
 
     /**
      * Returns the class in which this JMember has been declared
@@ -109,11 +109,11 @@ public class JMember {
     public String getInitString() {
         return initString;
     } //-- getInitString
-    
-     
+
+
     /**
      * Returns the modifiers for this JMember
-     * @return the modifiers for this JMember     
+     * @return the modifiers for this JMember
     **/
     public JModifiers getModifiers() {
         return this.modifiers;
@@ -136,7 +136,7 @@ public class JMember {
     } //-- getType
 
     /**
-     * Sets the comment describing this member. 
+     * Sets the comment describing this member.
      * @param comment the JDocComment for this member
     **/
     public void setComment(JDocComment comment) {
@@ -144,7 +144,7 @@ public class JMember {
     } //-- setComment
 
     /**
-     * Sets the comment describing this member. 
+     * Sets the comment describing this member.
      * @param comment the JDocComment for this member
     **/
     public void setComment(String comment) {
@@ -162,7 +162,7 @@ public class JMember {
     public void setInitString(String init) {
         this.initString = init;
     } //-- setInitString
-    
+
     /**
      * Sets the name of this JMember
      * @param name the name of this JMember
@@ -170,7 +170,7 @@ public class JMember {
      * name is not a valid Java member name, or if a member
      * with the given name already exists in the declaring class
     **/
-    public void setName(String name) throws 
+    public void setName(String name) throws
         IllegalArgumentException
     {
         this.name = name;
@@ -183,7 +183,7 @@ public class JMember {
     protected void setDeclaringClass(JClass declaringClass) {
         this.declaringClass = declaringClass;
     } //-- setDeclaringClass
-   
+
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(modifiers.toString());

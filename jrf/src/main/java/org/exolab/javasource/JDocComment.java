@@ -58,18 +58,18 @@ import java.io.*;
 **/
 public class JDocComment {
 
-        
-       
+
+
     /**
      * An ordered list of descriptors
     **/
     private Vector       _descriptors = null;
-    
-    /** 
+
+    /**
      * The internal buffer for this JDocComment
     **/
     private StringBuffer _comment     = null;
-    
+
     /**
      * Creates a new JavaDoc Comment
     **/
@@ -85,20 +85,20 @@ public class JDocComment {
      * @param desc the description of the exception
     **/
     public void addDescriptor(JDocDescriptor jdesc) {
-        
+
         if (jdesc == null) return;
         //-- on the fly sorting of descriptors
         if (_descriptors.size() == 0) {
             _descriptors.addElement(jdesc);
             return;
         }
-            
+
         for (int i = 0; i < _descriptors.size(); i++) {
-            JDocDescriptor jdd 
+            JDocDescriptor jdd
                 = (JDocDescriptor)_descriptors.elementAt(i);
-            
+
             short compare = jdesc.compareTo(jdd);
-            
+
             switch (compare) {
                 case  0: // equal
                     _descriptors.insertElementAt(jdesc, i+1);
@@ -111,12 +111,12 @@ public class JDocComment {
                     break;
             }
         }
-        
+
         //-- if we make it here we need to add
         _descriptors.addElement(jdesc);
-        
+
     } //-- addException
-    
+
     /**
      * Appends the comment String to this JDocComment
      * @param comment the comment to append
@@ -124,7 +124,7 @@ public class JDocComment {
     public void appendComment(String comment) {
         _comment.append(comment);
     } //-- appendComment
-    
+
     /**
      * Returns an enumeration of the parameters of this JDocComment
      * @return an enumeration of the parameters of this JDocComment
@@ -132,24 +132,24 @@ public class JDocComment {
     public Enumeration getDescriptors() {
         return _descriptors.elements();
     } //-- getDescriptors
-    
+
     /**
      * prints this JavaDoc comment using the given JSourceWriter
     **/
     public void print(JSourceWriter jsw) {
-        
+
         //-- I reuse JComment for printing
         JComment jComment = new JComment(JComment.JAVADOC_STYLE);
-        
+
         jComment.setComment(_comment.toString());
-        
+
         for (int i = 0; i < _descriptors.size(); i++) {
             jComment.appendComment("\n");
             jComment.appendComment(_descriptors.elementAt(i).toString());
         }
         jComment.print(jsw);
     } //-- print
-    
+
     /**
      * Sets the comment String of this JDocComment
      * @param comment the comment String of this JDocComment
@@ -158,7 +158,7 @@ public class JDocComment {
         _comment.setLength(0);
         _comment.append(comment);
     } //-- setComment
-    
+
     /**
      * Returns the String representation of this Java Doc Comment
      * @return the String representation of this Java Doc Comment
@@ -167,7 +167,7 @@ public class JDocComment {
         StringBuffer sb = new StringBuffer();
         sb.append("/**\n");
         sb.append(" * ");
-        
+
         sb.append("**/\n");
 
         return sb.toString();

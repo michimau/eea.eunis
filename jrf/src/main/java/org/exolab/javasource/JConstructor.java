@@ -56,7 +56,7 @@ import java.io.PrintWriter;
 **/
 public class JConstructor {
 
-    
+
 
 
 
@@ -68,9 +68,9 @@ public class JConstructor {
 
     private JModifiers modifiers = null;
 
-    
 
-    
+
+
 
     /**
 
@@ -80,7 +80,7 @@ public class JConstructor {
 
     private JNamedMap params       = null;
 
-    
+
 
     /**
 
@@ -90,11 +90,11 @@ public class JConstructor {
 
     private JClass declaringClass = null;
 
-    
+
 
     private JSourceCode sourceCode = null;
 
-    
+
 
     /**
 
@@ -106,7 +106,7 @@ public class JConstructor {
 
     protected JConstructor(JClass declaringClass) {
 
-        
+
 
         this.declaringClass = declaringClass;
 
@@ -118,7 +118,7 @@ public class JConstructor {
 
     }
 
-    
+
 
     /**
 
@@ -134,13 +134,13 @@ public class JConstructor {
 
     **/
 
-    public void addParameter(JParameter parameter) 
+    public void addParameter(JParameter parameter)
 
         throws IllegalArgumentException
 
     {
 
-        
+
 
         if (parameter == null) return;
 
@@ -162,11 +162,11 @@ public class JConstructor {
 
         }
 
-        
+
 
         params.put(parameter.getName(), parameter);
 
-        
+
 
         //-- be considerate and add the class name to the
         //-- declaring class's list of imports
@@ -195,7 +195,7 @@ public class JConstructor {
         return this.modifiers;
     } //-- getModifiers
 
-        
+
     /**
      * Returns an array of JParameters consisting of the parameters
      * of this Method in declared order
@@ -204,7 +204,7 @@ public class JConstructor {
     **/
     public JParameter[] getParameters() {
 
-        
+
         JParameter[] jpArray = new JParameter[params.size()];
         for (int i = 0; i < jpArray.length; i++) {
             jpArray[i] = (JParameter)params.get(i);
@@ -218,14 +218,14 @@ public class JConstructor {
     } //-- getSourceCode
 
     public void print(JSourceWriter jsw) {
-        
+
         if (modifiers.isPrivate()) jsw.write("private");
         else if (modifiers.isProtected()) jsw.write("protected");
         else jsw.write("public");
         jsw.write(' ');
         jsw.write(declaringClass.getLocalName());
         jsw.write('(');
-        
+
         //-- print parameters
         for (int i = 0; i < params.size(); i++) {
             if (i > 0) jsw.write(", ");
@@ -239,27 +239,27 @@ public class JConstructor {
         jsw.write("}");
         jsw.writeln();
     } //-- print
-    
+
     public void setModifiers(JModifiers modifiers) {
         this.modifiers = modifiers.copy();
         this.modifiers.setFinal(false);
     } //-- setModifiers
-    
-    
+
+
     public void setSourceCode(String sourceCode) {
         this.sourceCode = new JSourceCode(sourceCode);
     } //-- setSourceCode
-    
+
     public void setSourceCode(JSourceCode sourceCode) {
         this.sourceCode = sourceCode;
     } //-- setSourceCode
-    
-    
+
+
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(declaringClass.getName());
         sb.append('(');
-        
+
         //-- print parameters
         for (int i = 0; i < params.size(); i++) {
             JParameter jp = (JParameter)params.get(i);
@@ -269,5 +269,5 @@ public class JConstructor {
         sb.append(')');
         return sb.toString();
     } //-- toString
-   
+
 } //-- JConstructor

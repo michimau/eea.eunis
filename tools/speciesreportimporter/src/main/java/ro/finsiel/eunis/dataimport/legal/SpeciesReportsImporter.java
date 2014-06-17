@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  */
 public class SpeciesReportsImporter {
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     private ExcelReader excelReader;
     private SQLUtilities sqlUtilities;
@@ -234,7 +234,21 @@ public class SpeciesReportsImporter {
      * Import all the species in the list
      */
     private void importAllSpecies(){
-        for(SpeciesRow sr : excelReader.getSpeciesRows()){
+        List<SpeciesRow> rows = excelReader.getSpeciesRows();
+        // identify doubles
+        for(SpeciesRow sr : rows) {
+            int count=0;
+            for(SpeciesRow sr2 : rows) {
+                if(sr.getSpeciesName().equalsIgnoreCase(sr2.getSpeciesName()) && sr2.getExcelRow()>sr.getExcelRow()){
+                    count++;
+                    if(count>0){
+                        System.out.println("WARNING: Species " + sr.getSpeciesName() + " (row " + sr.getExcelRow() + ") doubled by row " + sr2.getExcelRow());
+                    }
+                }
+            }
+        }
+
+        for(SpeciesRow sr : rows){
 //            if(sr.getSpeciesName().equals("Lethenteron camtschaticum"))
                 importSpecies(sr);
         }
@@ -599,12 +613,12 @@ public class SpeciesReportsImporter {
                             String link = ((TableColumns)l.get(0)).getColumnsValues().get(3).toString();
                             String related = ((TableColumns)l.get(0)).getColumnsValues().get(4).toString();
 
-                            if(validName.equals("0") && related.equalsIgnoreCase("synonym") && link.equalsIgnoreCase(idSpecies)) {
+                            if(validName.equals("0") && (related.equalsIgnoreCase("synonym") || related.equalsIgnoreCase("Subspecies")) && link.equalsIgnoreCase(idSpecies)) {
                                 if(debug) System.out.println(" Synonym ok");
                             } else if(idSpeciesSynonym.trim().equalsIgnoreCase(idSpecies.trim())) {
-                                if(debug) System.out.println(" Same species!");
+                                if(debug) System.out.println(" Same species! " + idSpeciesSynonym.trim());
                             } else {
-                                System.out.println("WARNING: idSpecies=" + idSpeciesSynonym +" valid name=" + validName + " link=" + link + " related=" + related);
+                                System.out.println("WARNING: Incorrect synonym: " + name.trim() + " idSpecies=" + idSpeciesSynonym +" valid name=" + validName + " link=" + link + " related=" + related);
                             }
 
                         } else if (l.size() > 1) {

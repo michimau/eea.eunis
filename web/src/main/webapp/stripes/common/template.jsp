@@ -85,7 +85,7 @@
                                   <li><a href="combined-search.jsp" <c:if test = "${currentTab == 'combined_search'}">class="current"</c:if> >Combined search</a></li>
                                   <li><a href="externalglobal" <c:if test = "${currentTab == 'externalglobal'}">class="current"</c:if> >Global queries</a></li>
                                   <li><a href="references" <c:if test = "${currentTab == 'references'}">class="current"</c:if> >References</a></li>
-                                  <li><a href="about.jsp" class="last-tab <c:if test = "${currentTab == 'about_EUNIS_database'}">current</c:if>">About EUNIS</a></li>
+                                  <li><a href="about" class="last-tab <c:if test = "${currentTab == 'about_EUNIS_database'}">current</c:if>">About EUNIS</a></li>
                           </ul>
                      </div>
 

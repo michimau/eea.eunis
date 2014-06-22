@@ -2198,4 +2198,19 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         </rollback>
     </changeSet>
 
+    <changeSet id="rev-134" author="ivascu">
+        <comment>Adds a table to list the RDF files for download</comment>
+        <sql>create table eunis_rdf_downloads (
+                file_name varchar(100) not null,
+                title varchar(100),
+                comment varchar(400),
+                record_date timestamp default current_timestamp,
+                sort_column int,
+                primary key(file_name)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+        <rollback>
+            <sql>drop table eunis_rdf_downloads</sql>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

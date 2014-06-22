@@ -22,7 +22,6 @@ public class DcIndexDTO implements Serializable {
 
     private String idDc;
     private String comment;
-    private String refCd;
     private String reference;
     private String source;
     private String editor;
@@ -50,14 +49,6 @@ public class DcIndexDTO implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getRefCd() {
-        return refCd;
-    }
-
-    public void setRefCd(String refCd) {
-        this.refCd = refCd;
     }
 
     public String getReference() {

@@ -798,22 +798,24 @@ public class SpeciesFactsheet {
     private void populateLegalStatusWrapper(LegalStatusWrapper legalStatus, Chm62edtReportsPersist report) {
         if (report.getIdDc() != null) {
             legalStatus.setReference(report.getReference().toString());
-            legalStatus.setRefcd(report.getRefcd().toString());
             legalStatus.setIdDc(report.getIdDc());
 
             // get the description from attributes
             IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+
+
+//          Populate the parent
+            if(report.getReference() != null){
+                DcIndexDTO dto = dao.getDcIndex(report.getReference().toString());
+                legalStatus.setParentName(dto.getTitle());
+                legalStatus.setParentUrl(dto.getUrl());
+                legalStatus.setParentAlternative(dto.getAlternative());
+            }
+
             List<AttributeDto> dcAttributes = dao.getDcAttributes(report.getIdDc().toString());
             for(AttributeDto a : dcAttributes){
                 if(a.getName().equals("description"))
                     legalStatus.setDescription(a.getObjectLabel());
-                if(a.getName().equals("isPartOf")) {
-                    // populate parent data
-                    DcIndexDTO dto = findParent(a.getValue());
-                    legalStatus.setParentName(dto.getTitle());
-                    legalStatus.setParentUrl(dto.getUrl());
-                    legalStatus.setParentAlternative(dto.getAlternative());
-                }
                 // populate the more info section from the annex links
                 if(a.getName().equalsIgnoreCase("foaf:page")) {
                     legalStatus.addMoreInfo(a.getValue());
@@ -824,7 +826,6 @@ public class SpeciesFactsheet {
 
         } else {
             legalStatus.setReference("-1");
-            legalStatus.setRefcd("-1");
         }
 
         List list2 = new Chm62edtCountryDomain().findWhere("ID_GEOSCOPE='" + report.getIdGeoscope() + "'");
@@ -865,33 +866,6 @@ public class SpeciesFactsheet {
             legalStatus.setParentUrl(legalStatus.getUrl());
             legalStatus.setParentAlternative(report.getAlternative());
         }
-    }
-
-    /**
-     * Returns the parent (top level) DC for the given reference; returns current object if no parent found
-     * @param idDc reference id
-     * @return parent object
-     */
-    DcIndexDTO findParent(String idDc){
-        IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
-
-        // only searches in the first 5, so it doesn't cycle if incorrect data
-        for(int i=0;i<1;i++){
-            List<AttributeDto> dtoAttributes = dao.getDcAttributes(idDc);
-            boolean foundParent = false;
-            for(AttributeDto dtoA : dtoAttributes){
-                if(dtoA.getName().equals("isPartOf")){
-                    idDc = dtoA.getValue();
-                    foundParent = true;
-                }
-            }
-            if(!foundParent) {
-                // top level
-                break;
-            }
-        }
-
-        return dao.getDcIndex(idDc);
     }
 
     /**

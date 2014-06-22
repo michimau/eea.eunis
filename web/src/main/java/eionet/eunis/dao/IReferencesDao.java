@@ -75,4 +75,11 @@ public interface IReferencesDao {
      */
     public List<PairDTO> getRedListSources() throws Exception;
 
+    /**
+     * Returns a list of DC objects that are children of the given DC. Searches by the REFERENCE DB field.
+     * @param idDc The parent document
+     * @return List of DC objects
+     */
+    public List<DcIndexDTO> getChildren(String idDc);
+
 }

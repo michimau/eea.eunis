@@ -85,15 +85,12 @@ public class SpeciesNatureObjectDomain extends AbstractDomain {
 
         // JoinTable dcIndex = new JoinTable("dc_index", "ID_DC", "ID_DC");
         // dcIndex.addJoinColumn(new IntegerJoinColumn("REFERENCE", "getReference", "setReference"));
-        // dcIndex.addJoinColumn(new IntegerJoinColumn("REFCD", "getRefcd", "setRefcd"));
         // natureObject.addJoinTable(dcIndex);
         OuterJoinTable dcIndex = new OuterJoinTable("dc_index", "ID_DC", "ID_DC");
 
         dcIndex.addJoinColumn(
                 new IntegerJoinColumn("REFERENCE", "getReference",
                 "setReference"));
-        dcIndex.addJoinColumn(
-                new IntegerJoinColumn("REFCD", "getRefcd", "setRefcd"));
         natureObject.addJoinTable(dcIndex);
     }
 }

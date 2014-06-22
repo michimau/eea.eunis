@@ -21,7 +21,6 @@ public class DcIndexDTOReader extends ResultSetBaseReader<DcIndexDTO> {
 
         dto.setIdDc(rs.getString("ID_DC"));
         dto.setComment(rs.getString("COMMENT"));
-        dto.setRefCd(rs.getString("REFCD"));
         dto.setReference(rs.getString("REFERENCE"));
         dto.setSource(rs.getString("SOURCE"));
         dto.setEditor(rs.getString("EDITOR"));

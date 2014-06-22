@@ -14,7 +14,6 @@ public class LegalStatusWrapper {
     private String detailedReference = "n/a";
     private String area = "n/a";
     private String reference = "";
-    private String refcd = "";
     private String comments = "";
     private Integer idDc;
     private String formattedUrl;
@@ -112,25 +111,6 @@ public class LegalStatusWrapper {
     }
 
     /**
-     * Getter for refcd property (reference code).
-     *
-     * @return refcd.
-     */
-    public String getRefcd() {
-        return refcd;
-    }
-
-    /**
-     * Setter for reference code property.
-     *
-     * @param refcd
-     *            refcd.
-     */
-    public void setRefcd(String refcd) {
-        this.refcd = refcd;
-    }
-
-    /**
      * Getter for detailedReference property.
      *
      * @return detailedReference.
@@ -198,7 +178,7 @@ public class LegalStatusWrapper {
             if ((isIntegerEquals(object.idDc, this.idDc) && isStringsEquals(object.area, this.area)
                     && isStringsEquals(object.comments, this.comments)
                     && isStringsEquals(object.detailedReference, this.detailedReference)
-                    && isStringsEquals(object.legalText, this.legalText) && isStringsEquals(object.refcd, this.refcd)
+                    && isStringsEquals(object.legalText, this.legalText)
                     && isStringsEquals(object.reference, this.reference) && isStringsEquals(object.url, this.url))) {
 
                 status = true;

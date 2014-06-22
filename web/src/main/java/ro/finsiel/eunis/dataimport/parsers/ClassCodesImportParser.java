@@ -201,6 +201,11 @@ public class ClassCodesImportParser extends DefaultHandler {
         }
     }
 
+    /**
+     * @deprecated The REFCD column was removed, the map now uses the ID_DC column as a key
+     * @return
+     * @throws Exception
+     */
     private HashMap<String, Integer> getDCIds() throws Exception {
         HashMap<String, Integer> ret = new HashMap<String, Integer>();
 
@@ -208,15 +213,14 @@ public class ClassCodesImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_DC, REFCD FROM dc_index WHERE COMMENT = 'REFERENCES'";
+            String query = "SELECT ID_DC FROM dc_index WHERE COMMENT = 'REFERENCES'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();
             while (rset.next()) {
                 int idDc = rset.getInt("ID_DC");
-                String refcd = rset.getString("REFCD");
 
-                ret.put(refcd, new Integer(idDc));
+                ret.put(idDc + "", idDc);
             }
 
         } catch (Exception e) {

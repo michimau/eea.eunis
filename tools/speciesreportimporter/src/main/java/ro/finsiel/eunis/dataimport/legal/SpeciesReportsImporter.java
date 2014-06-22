@@ -187,9 +187,13 @@ public class SpeciesReportsImporter {
             selectToDeleteRedListPs = sqlUtilities.getConnection().prepareStatement(selectToDeleteRedList);
 
             // get the max ids so we can insert over, as the tables don't have autoincrement
-            lastLegalStatusId = new Integer(sqlUtilities.ExecuteSQL("select max(id_legal_status) from chm62edt_legal_status")) + 1;
+            String maxLegal = sqlUtilities.ExecuteSQL("select max(id_legal_status) from chm62edt_legal_status");
+            if(maxLegal == null) maxLegal = "0";
+            lastLegalStatusId = new Integer(maxLegal) + 1;
             lastReportTypeId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_type) from chm62edt_report_type")) + 1;
-            lastIdReportAttributesId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_attributes) from chm62edt_report_attributes")) + 1;
+            String maxReport = sqlUtilities.ExecuteSQL("select max(id_report_attributes) from chm62edt_report_attributes");
+            if(maxReport == null) maxReport = "0";
+            lastIdReportAttributesId = new Integer(maxReport) + 1;
 
             if(debug) System.out.println("Last IDs: id_legal_status=" + lastLegalStatusId + "  id_report_type=" + lastReportTypeId + "  id_report_attributes="  + lastIdReportAttributesId);
 

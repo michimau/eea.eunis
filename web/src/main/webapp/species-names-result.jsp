@@ -27,7 +27,12 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-  	//Utilities.dumpRequestParams( request );
+    // #18874: search all the genus when searching "spp."
+    if(formBean.getScientificName().contains("spp.")){
+        formBean.setScientificName(formBean.getScientificName().replace("spp.",""));
+        formBean.setRelationOp(""+Utilities.OPERATOR_STARTS);
+    }
+
   	if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   	// Check columns to be displayed
   	boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), NameBean.HIDE);

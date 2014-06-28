@@ -63,46 +63,46 @@ import java.sql.PreparedStatement;
 ************************************************************************
 *                JE Changes to this file:
 ************************************************************************
-*	1.	Added concept of interface implementations of getters and setters for
-*	     column values to replace reflection.  Reflection is
-*	     used by default.  A new interface called GetterSetter was added
-*		as well as a default implementation called GetterSetterDefaultImpl.
-*		The calls to the static methods that use reflection in this class
-*		have been moved to GetterSetterDefaultImpl.java.
+*   1.  Added concept of interface implementations of getters and setters for
+*        column values to replace reflection.  Reflection is
+*        used by default.  A new interface called GetterSetter was added
+*       as well as a default implementation called GetterSetterDefaultImpl.
+*       The calls to the static methods that use reflection in this class
+*       have been moved to GetterSetterDefaultImpl.java.
 *
-*		Details:
+*       Details:
 *
-*		A.	Added protected "GetterSetter" variable.
-*		B.	In the main contructor, set the value of "A" to
-*			the default implementation, which uses reflection.
-*		C.	Added new constructor to support the "GetterSetter".
-*		D.	decodeToPersistenObject() no longer calls the
-*			static method that uses reflection (This call is
-*			now in GetterSetterDefaultImpl.java).
-*		E.   encodeFromPersistentObject() now calls
-*			getValueFrom(PersistentObject)
-*		F.	copyColumnValueToPersistentObject() no longer
-*			uses test for "i_setter == || "i_setter.length() != 0"
-*			to test for a setter, but rather uses the
-*			GetterSetterImpl.isSetterFunctional() method.
-*			(see GetterSetterDefaultImpl.java).
-*		G.	copyAttribute() follows copyColumnValueToPersistenObject()'s
-*			lead.
-*		H.	getValueFrom() now uses the GetterSetter implementation
-*	 		of "get".
-*		I.	setValueTo() now uses the GetterSetter implmentation of
-*			"set".
-*		J.	Get and set methods added for the GetterSetter implementation.
+*       A.  Added protected "GetterSetter" variable.
+*       B.  In the main contructor, set the value of "A" to
+*           the default implementation, which uses reflection.
+*       C.  Added new constructor to support the "GetterSetter".
+*       D.  decodeToPersistenObject() no longer calls the
+*           static method that uses reflection (This call is
+*           now in GetterSetterDefaultImpl.java).
+*       E.   encodeFromPersistentObject() now calls
+*           getValueFrom(PersistentObject)
+*       F.  copyColumnValueToPersistentObject() no longer
+*           uses test for "i_setter == || "i_setter.length() != 0"
+*           to test for a setter, but rather uses the
+*           GetterSetterImpl.isSetterFunctional() method.
+*           (see GetterSetterDefaultImpl.java).
+*       G.  copyAttribute() follows copyColumnValueToPersistenObject()'s
+*           lead.
+*       H.  getValueFrom() now uses the GetterSetter implementation
+*           of "get".
+*       I.  setValueTo() now uses the GetterSetter implmentation of
+*           "set".
+*       J.  Get and set methods added for the GetterSetter implementation.
 *
-*	2.	To support Sybase and other implicit auto-sequence column supporting
-*		database vendor, added methods to determine if column is
-*	     an implicit primary key column (e.g. Sybase IDENTITY).
-*		Details:
+*   2.  To support Sybase and other implicit auto-sequence column supporting
+*       database vendor, added methods to determine if column is
+*        an implicit primary key column (e.g. Sybase IDENTITY).
+*       Details:
 *
-*		A. 	Added getInsertSqlValueFrom()
-*		C.	Added isImplicitInsertColumn()
-*		D.   Added getInsertColumnName()
-*	3.	Class implements cloneable.
+*       A.  Added getInsertSqlValueFrom()
+*       C.  Added isImplicitInsertColumn()
+*       D.   Added getInsertColumnName()
+*   3.  Class implements cloneable.
 */
 
 /**
@@ -248,7 +248,7 @@ public abstract class AbstractColumnSpec
 
   protected String  i_propertyName;
   protected String  i_columnName;
-  protected int	i_columnIdx;
+  protected int i_columnIdx;
   protected String  i_getter;
   protected String  i_setter;
   protected Object  i_default = null;
@@ -261,12 +261,12 @@ public abstract class AbstractColumnSpec
   protected boolean i_optimisticLock = false;
   protected boolean i_writeOnce = false;
 
-  protected Comparable maxValue = null;	// Maximum allowable value.
-  protected Comparable minValue = null;	// Minimum allowable value.
-  protected List listOfValues = null;	// Acceptable list of values.
+  protected Comparable maxValue = null; // Maximum allowable value.
+  protected Comparable minValue = null; // Minimum allowable value.
+  protected List listOfValues = null;   // Acceptable list of values.
 
   protected GetterSetter i_getterSetterImpl = null;
-  protected ColumnOption i_columnOption;	// To be used later.
+  protected ColumnOption i_columnOption;    // To be used later.
 
   /* ===============  Constructors  =============== */
 
@@ -287,7 +287,7 @@ public abstract class AbstractColumnSpec
                         Object defaultValue) {
             i_columnName = columnName;
         this.i_columnOption = columnOption;
-        setColumnOptions(columnOption);	// Backward compatible.
+        setColumnOptions(columnOption); // Backward compatible.
         this.i_getter = getter;
         this.i_setter = setter;
         this.i_default = defaultValue;
@@ -303,7 +303,7 @@ public abstract class AbstractColumnSpec
     public AbstractColumnSpec(String columnName, ColumnOption columnOption, GetterSetter getterSetter, Object defaultValue) {
             i_columnName = columnName;
         this.i_columnOption = columnOption;
-        setColumnOptions(columnOption);	// Backward compatible.
+        setColumnOptions(columnOption); // Backward compatible.
         this.i_default = defaultValue;
           this.i_getterSetterImpl = getterSetter;
     }
@@ -315,8 +315,8 @@ public abstract class AbstractColumnSpec
         i_unique = columnOption.isUnique();
         i_subtypeIdentifier = columnOption.isSubtypeIdentifier();
         i_optimisticLock = columnOption.isOptimisticLock();
-	if (isPrimaryKey())
-		i_writeOnce = true;
+    if (isPrimaryKey())
+        i_writeOnce = true;
     }
 
     /** Constructs an <code>X</code> with three option values.
@@ -1110,46 +1110,46 @@ public abstract class AbstractColumnSpec
 
   /** @see net.sf.jrf.column.ColumnSpec#getPropertyName() **/
   public String getPropertyName() {
-	if (i_propertyName == null) {
-		String nameToHandle = i_columnName; // Default to column name
-		// Try to figure out the property name.
-		// Should be using standard bean formats; if not . . .
-		if (i_setter != null && i_setter.startsWith("set") && i_setter.length() > 3) {
-			nameToHandle = i_setter.substring(3);
-		}
-		else if (i_getter != null) {
-			if (i_getter.startsWith("is") && i_getter.length() > 2)
-				nameToHandle = i_getter.substring(2);
-			else if (i_getter.startsWith("get") && i_getter.length() > 3)
-				nameToHandle = i_getter.substring(2);
-		}
-		int i = 0;
-		for ( ; i < nameToHandle.length(); i++) {
-			if (Character.isLowerCase(nameToHandle.charAt(i)) )
-				break;
-		}
-		if (i == nameToHandle.length())
-			i_propertyName = nameToHandle;
-		else
-			i_propertyName = Character.toLowerCase(nameToHandle.charAt(0))+nameToHandle.substring(1);
-	}
-	return i_propertyName;
+    if (i_propertyName == null) {
+        String nameToHandle = i_columnName; // Default to column name
+        // Try to figure out the property name.
+        // Should be using standard bean formats; if not . . .
+        if (i_setter != null && i_setter.startsWith("set") && i_setter.length() > 3) {
+            nameToHandle = i_setter.substring(3);
+        }
+        else if (i_getter != null) {
+            if (i_getter.startsWith("is") && i_getter.length() > 2)
+                nameToHandle = i_getter.substring(2);
+            else if (i_getter.startsWith("get") && i_getter.length() > 3)
+                nameToHandle = i_getter.substring(2);
+        }
+        int i = 0;
+        for ( ; i < nameToHandle.length(); i++) {
+            if (Character.isLowerCase(nameToHandle.charAt(i)) )
+                break;
+        }
+        if (i == nameToHandle.length())
+            i_propertyName = nameToHandle;
+        else
+            i_propertyName = Character.toLowerCase(nameToHandle.charAt(0))+nameToHandle.substring(1);
+    }
+    return i_propertyName;
   }
 
     /**
       * @see net.sf.jrf.column.ColumnSpec#isWriteOnce()
       */
     public boolean isWriteOnce() {
-	return this.i_writeOnce;
+    return this.i_writeOnce;
     }
 
     /**
       * @see net.sf.jrf.column.ColumnSpec#setWriteOnce(boolean)
       */
     public void setWriteOnce(boolean writeOnce) {
-	if (!writeOnce && isPrimaryKey()) 
-		return; // Ignore argument.
-	this.i_writeOnce = writeOnce;
+    if (!writeOnce && isPrimaryKey())
+        return; // Ignore argument.
+    this.i_writeOnce = writeOnce;
     }
 
     /** Updates a <code>PersistentObjectDynaProperty</code> with values from the column specification.
@@ -1160,12 +1160,12 @@ public abstract class AbstractColumnSpec
         p.setMaxValue(maxValue);
         p.setMinValue(minValue);
         p.setListOfValues(listOfValues);
-	p.setDefaultValue(i_default);
-	p.setDbColumn(true);
-	p.setPrimaryKey(isPrimaryKey());
-	p.setWriteOnce(i_writeOnce);
-	p.setOptimisticLock(i_optimisticLock);
-	p.setGetterSetter(i_getterSetterImpl);
+    p.setDefaultValue(i_default);
+    p.setDbColumn(true);
+    p.setPrimaryKey(isPrimaryKey());
+    p.setWriteOnce(i_writeOnce);
+    p.setOptimisticLock(i_optimisticLock);
+    p.setGetterSetter(i_getterSetterImpl);
     }
 
   /** @see net.sf.jrf.column.ColumnSpec#getColumnName() **/

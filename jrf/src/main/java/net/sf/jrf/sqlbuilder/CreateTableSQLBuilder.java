@@ -72,11 +72,11 @@ public class CreateTableSQLBuilder
      * @param columnSpecs           a value of type 'List'
      * @param foreignKeys           List of <code>ForeignKey</code> elements.
      * @param vendorSpecifications  Database vendor-specific expression that is inserted after
-     *						  the CREATE TABLE construct to specify specification parameters, usually
-     *						  for how the table should be stored physically.
-     *						  (e.g. Under Oracle, tablepace, etc).
+     *                        the CREATE TABLE construct to specify specification parameters, usually
+     *                        for how the table should be stored physically.
+     *                        (e.g. Under Oracle, tablepace, etc).
      * @return                      a syntactically correct, vendor-specific "CREATE TABLE" SQL statement for
-     *		   an <code>AbstractDomain</code>.
+     *         an <code>AbstractDomain</code>.
      */
     public String buildSQL(String tableName,
         List columnSpecs, List foreignKeys, String vendorSpecifications)
@@ -91,7 +91,7 @@ public class CreateTableSQLBuilder
      * @param tableName    The name of the table to create.
      * @param columnSpecs  a value of type 'List'
      * @return             a syntactically correct, vendor-specific "CREATE TABLE" SQL statement for
-     *		   an <code>AbstractDomain</code>.
+     *         an <code>AbstractDomain</code>.
      */
     public String buildSQL(String tableName,
         List columnSpecs)
@@ -107,14 +107,14 @@ public class CreateTableSQLBuilder
      * @param columnSpecs           a value of type 'List'
      * @param foreignKeys           List of <code>ForeignKey</code> elements.
      * @param vendorSpecifications  Database vendor-specific expression that is inserted after
-     *						  the CREATE TABLE construct to specify specification parameters, usually
-     *						  for how the table should be stored physically.
-     *						  (e.g. Under Oracle, tablepace, etc).
+     *                        the CREATE TABLE construct to specify specification parameters, usually
+     *                        for how the table should be stored physically.
+     *                        (e.g. Under Oracle, tablepace, etc).
      * @param makeReadable          if <code>true</code>, make the format human readable
-     *				 with carriage returns and tabs.  This is useful
-     *				 for creating script files.
+     *               with carriage returns and tabs.  This is useful
+     *               for creating script files.
      * @return                      a syntactically correct, vendor-specific "CREATE TABLE" SQL statement for
-     *		   an <code>AbstractDomain</code>.
+     *         an <code>AbstractDomain</code>.
      * @see                         net.sf.jrf.util.ForeignKey
      * @see                         net.sf.jrf.DatabasePolicy
      */

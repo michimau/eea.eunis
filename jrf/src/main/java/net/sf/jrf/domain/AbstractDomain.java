@@ -16,8 +16,8 @@
  *  Portions created by is.com are Copyright (C) 2000 is.com.
  *  All Rights Reserved.
  *
- *  Contributor(s): 	Jonathan Carlson (joncrlsn@users.sf.net)
- *  Contributor: 		James Evans (jevans@vmguys.com)
+ *  Contributor(s):     Jonathan Carlson (joncrlsn@users.sf.net)
+ *  Contributor:        James Evans (jevans@vmguys.com)
  *  Contributor(s): ____________________________________
  *
  *  Alternatively, the contents of this file may be used under the terms of
@@ -79,13 +79,13 @@ import org.apache.log4j.Category;
  *  relatively simple and one rather complex method. The simple method is: <p>
  *
  *  <pre>
- * 	public abstract PersistentObject newPersistentObject();
+ *  public abstract PersistentObject newPersistentObject();
  * </pre> This implementation of the method usually just will require a call to
  *  the default constructor for the subclass of <code>PersistentObject</code>.
  *  The second, more complex method to implement is: <p>
  *
  *  <pre>
- * 	public abstract void setup();
+ *  public abstract void setup();
  * </pre> This method is called by the constructor of this base class. <code>setup</code>
  *  is required to provide enough information to the base class to perform data
  *  management on the <code>PersistentObject</code>. Minimally, at least a table
@@ -123,7 +123,7 @@ import org.apache.log4j.Category;
  *  <p>
  *
  *  <strong>Heavily-used Public Methods and Usage Contexts</strong>
- *  
+ *
  *  <table border=4>
  *    <thead>
  *
@@ -408,10 +408,10 @@ public abstract class AbstractDomain
     private int i_embeddedObjectsContextAfterEach = 0;
     private Vector i_updateListeners = new Vector();
     private static HashMap updateListeners = new HashMap();
-    private HashMap embeddedPropertyNames = new HashMap(); // Map of persistent object class names 
-							// managed by this object.
-							// Key = className
-							// Value = embeddedHandler
+    private HashMap embeddedPropertyNames = new HashMap(); // Map of persistent object class names
+                            // managed by this object.
+                            // Key = className
+                            // Value = embeddedHandler
     final static Map s_subtypeDomains = new HashMap();
 
     private HashMap i_attributes = new HashMap();
@@ -628,9 +628,9 @@ public abstract class AbstractDomain
         // Set up for transactions just within this domain and possible embedded object domains.
         this.localWriteTransaction.addDomain(this);
         this.localReadTransaction.addDomain(this);
-	// Set up list of class names under the domain so that newPersistentObject(PersistentObject,String) 
-	// can be called by user.
-	addEmbeddedPropertyNames(this,this.embeddedPropertyNames);
+    // Set up list of class names under the domain so that newPersistentObject(PersistentObject,String)
+    // can be called by user.
+    addEmbeddedPropertyNames(this,this.embeddedPropertyNames);
 
     }
 
@@ -642,10 +642,10 @@ public abstract class AbstractDomain
             EmbeddedPersistentObjectHandler handler = (EmbeddedPersistentObjectHandler) iterator.next();
             AbstractDomain subDomain = handler.getDomain();
             if (subDomain != null) {
-		addEmbeddedPropertyNames(subDomain,map);
-    		map.put(handler.getBeanAttribute(),handler);
-	    }
-	}	
+        addEmbeddedPropertyNames(subDomain,map);
+            map.put(handler.getBeanAttribute(),handler);
+        }
+    }
     }
 
     // Sets up the properties for the domain.
@@ -829,54 +829,54 @@ public abstract class AbstractDomain
      * to insert an individual component of a composite.
      *
      * @param master <code>PersistentObject</code> instance that <em>must</em> be the
-     * 		     parent record of <code>className</code> object.  For simple two-level
-     *		     composites, this value will be the type returned by <code>newPersistentObject</code>.
+     *           parent record of <code>className</code> object.  For simple two-level
+     *           composites, this value will be the type returned by <code>newPersistentObject</code>.
      * @param beanProperty bean attribute name of <code>PersistentObject</code> to instantiate.
      * @return new instanceo of the <code>PersistentObject</code>
      * @throws IllegalArgumentException if class name is invalid.
-     * @throws ClassCastException if <code>master</code> is not the appropriate 
-     *				  class type.
+     * @throws ClassCastException if <code>master</code> is not the appropriate
+     *                class type.
      * @see #newPersistentObject()
      * @see net.sf.jrf.domain.EmbeddedPersistentObjectHandler#populateEmbeddedObjectKeyValues(PersistentObject,PersistentObject)
      */
-    public PersistentObject newEmbeddedPersistentObject(PersistentObject master, String beanProperty) 
-			throws IllegalArgumentException, ClassCastException {
+    public PersistentObject newEmbeddedPersistentObject(PersistentObject master, String beanProperty)
+            throws IllegalArgumentException, ClassCastException {
             EmbeddedPersistentObjectHandler handler = getHandler(beanProperty);
-	    PersistentObject result = handler.getDomain().newPersistentObject();
-	    handler.populateEmbeddedObjectKeyValues(master,result);
-	    result.forceNewPersistentState();
-	    return result;
+        PersistentObject result = handler.getDomain().newPersistentObject();
+        handler.populateEmbeddedObjectKeyValues(master,result);
+        result.forceNewPersistentState();
+        return result;
     }
 
     /** Copies keys from the master object to the embedded detail object.
      * @param master <code>PersistentObject</code> instance that <em>must</em> be the
-     * 		     parent record of <code>beanProperty</code> object.  For simple two-level
-     *		     composites, this value will be the type returned by <code>newPersistentObject</code>.
+     *           parent record of <code>beanProperty</code> object.  For simple two-level
+     *           composites, this value will be the type returned by <code>newPersistentObject</code>.
      * @param embedded embedded <code>PersistentObject</code> instance to populate.
      * @param beanProperty bean attribute name of <code>PersistentObject</code> to instantiate.
      * @throws IllegalArgumentException if class name of <code>embedded</code> is invalid.
-     * @throws ClassCastException if <code>master</code> is not the appropriate 
-     *				  class type.
+     * @throws ClassCastException if <code>master</code> is not the appropriate
+     *                class type.
      */
     public void populateEmbeddedObjectKeyValues(PersistentObject master, PersistentObject embedded,
-						String beanProperty) 
-		throws IllegalArgumentException, ClassCastException  {
+                        String beanProperty)
+        throws IllegalArgumentException, ClassCastException  {
             EmbeddedPersistentObjectHandler handler = getHandler(beanProperty);
-	    handler.populateEmbeddedObjectKeyValues(master,embedded);
+        handler.populateEmbeddedObjectKeyValues(master,embedded);
     }
 
     private EmbeddedPersistentObjectHandler getHandler(String beanProperty) {
-            EmbeddedPersistentObjectHandler handler = 
-			(EmbeddedPersistentObjectHandler) embeddedPropertyNames.get(beanProperty);
-	    if (handler == null) {
-		IllegalArgumentException ex = new 
-			IllegalArgumentException(this.getTableName()+": Bean property ["+beanProperty+
-					"] is not valid: valid bean aggregate property names are: "+
-					embeddedPropertyNames.keySet());
-		LOG.error(ex.getMessage(),ex);
-		throw ex;
-	    }
-   	    return handler;
+            EmbeddedPersistentObjectHandler handler =
+            (EmbeddedPersistentObjectHandler) embeddedPropertyNames.get(beanProperty);
+        if (handler == null) {
+        IllegalArgumentException ex = new
+            IllegalArgumentException(this.getTableName()+": Bean property ["+beanProperty+
+                    "] is not valid: valid bean aggregate property names are: "+
+                    embeddedPropertyNames.keySet());
+        LOG.error(ex.getMessage(),ex);
+        throw ex;
+        }
+        return handler;
     }
 
     /** Returns a list of embedded <code>PersistentObject</code> property names in this object.
@@ -885,7 +885,7 @@ public abstract class AbstractDomain
     * @see #newEmbeddedPersistentObject(PersistentObject,String)
     */
     public List getEmbeddedPropertyNames() {
-	return new ArrayList(embeddedPropertyNames.keySet());
+    return new ArrayList(embeddedPropertyNames.keySet());
     }
 
     /**
@@ -1084,17 +1084,17 @@ public abstract class AbstractDomain
      *  Generally, application contexts that use <code>Timestamp</code>
      *  optimistic lock columns with <i>successive</i> updates on the <i>same
      *  </i> object will require refetching the data. For example: <pre>
-     *  		OpLockColumnDomain domain; 	// Domain that uses a timestamp op lock column
-     *		OpLockObject obj;			// Persistent object managed by the domain.
-     *		.
-     *		obj = domain.find(key);		// Fetch a specific object under given key.
-     *		.
-     *	     obj.setAValue(value);		// Setting some value.
-     *		.
-     *		obj = domain.update(obj);	// Update it.
-     *		.						// Allow object to have values updated again.
-     *	     obj.setAValue(value);		// Setting some value.
-     *		obj = domain.update(obj);	// Update it again.
+     *          OpLockColumnDomain domain;  // Domain that uses a timestamp op lock column
+     *      OpLockObject obj;           // Persistent object managed by the domain.
+     *      .
+     *      obj = domain.find(key);     // Fetch a specific object under given key.
+     *      .
+     *       obj.setAValue(value);      // Setting some value.
+     *      .
+     *      obj = domain.update(obj);   // Update it.
+     *      .                       // Allow object to have values updated again.
+     *       obj.setAValue(value);      // Setting some value.
+     *      obj = domain.update(obj);   // Update it again.
      *
      * </pre> Obviously, using <code>Integer</code> optimistic lock columns will
      *  result in better performance since refetching will never be necessary.
@@ -1480,11 +1480,11 @@ public abstract class AbstractDomain
         // Set up for fetching the auto-increment value after the fetch, if required.
         if (i_gotSequenceColumnToHandle) {
             int type = i_databasePolicy.getSequenceSupportType();
-	    if (type == DatabasePolicy.SEQUENCE_SUPPORT_NONE) {
+        if (type == DatabasePolicy.SEQUENCE_SUPPORT_NONE) {
                     throw new ConfigurationException(this + ": Database policy (" + (i_databasePolicy) + ") does not " +
                             "support sequenced primary keys yet you have specified one: "
                             + i_primaryKeyColumnSpec.getColumnName());
-	    }
+        }
             // Set up embedded primary key column for implicit insert or external sequence based on the database type.
             if (this.i_primaryKeyColumnSpec instanceof CompoundPrimaryKeyColumnSpec) {
                    CompoundPrimaryKeyColumnSpec cpk = (CompoundPrimaryKeyColumnSpec) this.i_primaryKeyColumnSpec;
@@ -1641,7 +1641,7 @@ public abstract class AbstractDomain
 
 
     //////////////////////////////////////////////////////////
-    // Execute statement wrappers				//
+    // Execute statement wrappers               //
     //////////////////////////////////////////////////////////
 
     /// Static SQL ---
@@ -2126,22 +2126,22 @@ public abstract class AbstractDomain
 
         if (!handler.isReadOnly()) {
             i_gotWriteableEmbeddedObjects = true;
-	    // If the sub-domain is cacheable and the master composite domain is also cacheable,
-	    // then any changes to the detail record will violate the master composite domain.
-	    // In this case, register this classe's cache to be cleared for any changes to the detail
-	    // record cache.
+        // If the sub-domain is cacheable and the master composite domain is also cacheable,
+        // then any changes to the detail record will violate the master composite domain.
+        // In this case, register this classe's cache to be cleared for any changes to the detail
+        // record cache.
             AbstractDomain domain = handler.getDomain();
             if (domain != null) {
-        	boolean isCached = PersistentObjectCache.isClassCached(this.getClass());
-        	boolean isSubDomainCached = PersistentObjectCache.isClassCached(domain.getClass());
-		if (isCached && isSubDomainCached) {
-			LOG.debug("Detail domain "+domain.getClass().getName()+" is cached and composite "+
-				  this.getClass().getName()+" is also cached.  Any changes to "+
-				  domain.getClass().getName()+" cache will result in clearing of the "+
-				  "composite cache.");
-			// Add it in if not already done so previously (see addRelatedCache).
-    		 	PersistentObjectCache.addRelatedCache(domain.getClass(),this.getClass());
-		}
+            boolean isCached = PersistentObjectCache.isClassCached(this.getClass());
+            boolean isSubDomainCached = PersistentObjectCache.isClassCached(domain.getClass());
+        if (isCached && isSubDomainCached) {
+            LOG.debug("Detail domain "+domain.getClass().getName()+" is cached and composite "+
+                  this.getClass().getName()+" is also cached.  Any changes to "+
+                  domain.getClass().getName()+" cache will result in clearing of the "+
+                  "composite cache.");
+            // Add it in if not already done so previously (see addRelatedCache).
+                PersistentObjectCache.addRelatedCache(domain.getClass(),this.getClass());
+        }
             }
             if (handler.isDependentDetailRecord()) {
                 i_gotDeleteableEmbeddedObjects = true;
@@ -2202,8 +2202,8 @@ public abstract class AbstractDomain
      * @return attribute key iterator.
      */
     public Iterator getAttributeKeyIterator() {
-	return i_attributes.keySet().iterator();
-    } 
+    return i_attributes.keySet().iterator();
+    }
 
     /**
      *  Removes attribute value, if it exists.
@@ -2708,16 +2708,16 @@ public abstract class AbstractDomain
      *@see              #removeUpdateListener(UpdateListener)
      */
     public static void addUpdateListener(String className,UpdateListener listener) {
-	synchronized (updateListeners) {
-		List list = (List) updateListeners.get(className);
-		if (list == null) {
-			list = new ArrayList();
-			updateListeners.put(className,list);
-		}
-        	if (!list.contains(listener)) {
-       	 	    list.add(listener);
-        	}
-	}
+    synchronized (updateListeners) {
+        List list = (List) updateListeners.get(className);
+        if (list == null) {
+            list = new ArrayList();
+            updateListeners.put(className,list);
+        }
+            if (!list.contains(listener)) {
+                list.add(listener);
+            }
+    }
     }
 
 
@@ -2731,12 +2731,12 @@ public abstract class AbstractDomain
      *@see              #addUpdateListener(UpdateListener)
      */
     public static void removeUpdateListener(String className, UpdateListener listener) {
-	synchronized (updateListeners) {
-		List list = (List) updateListeners.get(className);
-		if (list != null) {
-        		list.remove(listener);
-		}
-	}
+    synchronized (updateListeners) {
+        List list = (List) updateListeners.get(className);
+        if (list != null) {
+                list.remove(listener);
+        }
+    }
     }
 
     /**
@@ -2840,29 +2840,29 @@ public abstract class AbstractDomain
      *  argument to the JRFResultSet argument): <pre>
      * // Post find version.
      * public VideoDomain extends AbstractDomain {
-     * 		private CustomerDomain customerDomain = new CustomerDomain();
+     *      private CustomerDomain customerDomain = new CustomerDomain();
      * .
      * .
      * .
      * protected void postFind(PersistentObject aPO, JRFResultSet baseFindResultSet)
      * {
-     * 		Video video = (Video) aPO;
-     *		List customers = customerDomain.findForVideo(video);
-     *		video.setCustomers(customers);
-     * 		// Attach the appropriate media and genre objects
-     *		Integer mediaId = null;
-     *		Integer genreId = null;
+     *      Video video = (Video) aPO;
+     *      List customers = customerDomain.findForVideo(video);
+     *      video.setCustomers(customers);
+     *      // Attach the appropriate media and genre objects
+     *      Integer mediaId = null;
+     *      Integer genreId = null;
      * try
      * {
-     *		Media media = new Media(
-     *				baseFindResultSet.getInteger("MEDIA_ID"),
-     *				baseFindResultSet.getString("MEDIA_NAME"));
-     *		video.setMedia(media);
-     *		genreId = baseFindResultSet.getInteger("GENRE_ID");
+     *      Media media = new Media(
+     *              baseFindResultSet.getInteger("MEDIA_ID"),
+     *              baseFindResultSet.getString("MEDIA_NAME"));
+     *      video.setMedia(media);
+     *      genreId = baseFindResultSet.getInteger("GENRE_ID");
      * }
      * catch (SQLException e)
      * {
-     *  	throw new DatabaseException(e);
+     *      throw new DatabaseException(e);
      * }
      *}
      * // New version.
@@ -3511,7 +3511,7 @@ public abstract class AbstractDomain
     /**
      *  Find in database given supplied where clause and order by clause.
      *  Calling this method is the equivalent of calling: <pre>
-     * 	findWhereOrderBy(whereString,orderByString,0)
+     *  findWhereOrderBy(whereString,orderByString,0)
      * </pre>
      *
      *@param  whereString    where clause; 'WHERE' should not be present.
@@ -3529,7 +3529,7 @@ public abstract class AbstractDomain
     /**
      *  Finds data based on constructed SQL select statement in builder. Calling
      *  this method is the equivalent of calling: <pre>
-     * 	find(builder,0)
+     *  find(builder,0)
      * </pre>
      *
      *@param  builder  a properly constructed <code>SQLBuilder</code> instance.
@@ -3557,7 +3557,7 @@ public abstract class AbstractDomain
     /**
      *  Finds data specified in supplied SQL statement. Calling this method is
      *  the equivalent of calling: <pre>
-     * 	findCustom(sql,0)
+     *  findCustom(sql,0)
      * </pre>
      *
      *@param  sql  a valid SQL select statement.
@@ -4056,23 +4056,23 @@ public abstract class AbstractDomain
         }
         PersistentObject changed = (result == null ? aPO : result);
         if (LOG.isDebugEnabled())
-		LOG.debug("State of object update() complete: "+changed);
+        LOG.debug("State of object update() complete: "+changed);
         // Update cache if required.
         PersistentObjectCache.updateCache(this, changed);
-	// Update local and global listeners.
+    // Update local and global listeners.
         Iterator iter = i_updateListeners.iterator();
         while (iter.hasNext()) {
             UpdateListener listener = (UpdateListener) iter.next();
             listener.objectUpdated(changed);
         }
-	List globalListeners = (List) updateListeners.get(this.getClass().getName());
-	if (globalListeners != null) {
-        	iter = globalListeners.iterator();
-      		while (iter.hasNext()) {
-            		UpdateListener listener = (UpdateListener) iter.next();
-            		listener.objectUpdated(changed);
-		}
-	}
+    List globalListeners = (List) updateListeners.get(this.getClass().getName());
+    if (globalListeners != null) {
+            iter = globalListeners.iterator();
+            while (iter.hasNext()) {
+                    UpdateListener listener = (UpdateListener) iter.next();
+                    listener.objectUpdated(changed);
+        }
+    }
         return result;
     }
 
@@ -5089,22 +5089,22 @@ public abstract class AbstractDomain
         if (value == null) {
             throw new DatabaseException("Auto Increment Id is null");
         }
-	/**
-	LOG.info("Updating AUTO inc ID for "+aPO+" with "+value+" PK name is "+i_primaryKeyColumnSpec.getColumnName());
-	*/
+    /**
+    LOG.info("Updating AUTO inc ID for "+aPO+" with "+value+" PK name is "+i_primaryKeyColumnSpec.getColumnName());
+    */
         // Determine the real type.
-	Object setValue;		// Assume long, but may be short or int.
-	if (i_primaryKeyColumnSpec.getColumnClass().equals(java.lang.Short.class)) {
-		setValue = new Short(value.shortValue());
-	}	
-	else if (i_primaryKeyColumnSpec.getColumnClass().equals(java.lang.Integer.class)) {
-		setValue = new Integer(value.intValue()); 
-	}
-	else
-		setValue = value;	// Assume long.
+    Object setValue;        // Assume long, but may be short or int.
+    if (i_primaryKeyColumnSpec.getColumnClass().equals(java.lang.Short.class)) {
+        setValue = new Short(value.shortValue());
+    }
+    else if (i_primaryKeyColumnSpec.getColumnClass().equals(java.lang.Integer.class)) {
+        setValue = new Integer(value.intValue());
+    }
+    else
+        setValue = value;   // Assume long.
         i_primaryKeyColumnSpec.setValueTo(setValue, aPO);
-	if (LOG.isDebugEnabled())
-		LOG.debug("setAutoIncrementId("+aPO+","+value+")");
+    if (LOG.isDebugEnabled())
+        LOG.debug("setAutoIncrementId("+aPO+","+value+")");
     }
 
 

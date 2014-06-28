@@ -337,10 +337,10 @@ public class PreparedStatementListHandler
     {
         return list.get(key) != null ? true : false;
         /*
-		JRFPreparedStatement i = (JRFPreparedStatement) list.get(key);
-		if (i != null)
-			throw new IllegalArgumentException("Already have a statement under key ["+key+"]: "+i+"\n"+getKeys());
-		*/
+        JRFPreparedStatement i = (JRFPreparedStatement) list.get(key);
+        if (i != null)
+            throw new IllegalArgumentException("Already have a statement under key ["+key+"]: "+i+"\n"+getKeys());
+        */
     }
 
     /**

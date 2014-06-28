@@ -16,7 +16,7 @@
  *  Portions created by is.com are Copyright (C) 2000 is.com.
  *  All Rights Reserved.
  *
- *  Contributor: 		James Evans (jevans@vmguys.com)
+ *  Contributor:        James Evans (jevans@vmguys.com)
  *  Contributor(s): ____________________________________
  *
  *  Alternatively, the contents of this file may be used under the terms of
@@ -168,7 +168,7 @@ public class PersistentObjectCache {
         Map map = null;
         // Cache
         List relatedCaches;
-	String className;
+    String className;
         // List of caches related to this cache.
 
 
@@ -176,14 +176,14 @@ public class PersistentObjectCache {
          *  Constructor for the ClassCache object
          */
         ClassCache(String className) {
-	    this.className = className;
+        this.className = className;
             relatedCaches = new ArrayList();
         }
-	
-	public boolean equals(Object o) {
-		ClassCache c = (ClassCache) o;
-		return this.className.equals(c.className);
-	}
+
+    public boolean equals(Object o) {
+        ClassCache c = (ClassCache) o;
+        return this.className.equals(c.className);
+    }
 
         // Clear out cache
 
@@ -255,8 +255,8 @@ public class PersistentObjectCache {
 
 
     /**
-     *  Adds a related cache to a given cache.  Any changes to the base 
-     *  class cache will result the the clearing of the relation class 
+     *  Adds a related cache to a given cache.  Any changes to the base
+     *  class cache will result the the clearing of the relation class
      *  cache.
      *
      *@param  baseClass      class name of cache that needs to store the
@@ -267,8 +267,8 @@ public class PersistentObjectCache {
         ClassCache baseCache = findOrCreateCache(baseClass);
         ClassCache relationCache = findOrCreateCache(relationClass);
         synchronized (baseCache) {
-	    if (!baseCache.relatedCaches.contains(relationCache))
-            	baseCache.relatedCaches.add(relationCache);
+        if (!baseCache.relatedCaches.contains(relationCache))
+                baseCache.relatedCaches.add(relationCache);
         }
     }
 

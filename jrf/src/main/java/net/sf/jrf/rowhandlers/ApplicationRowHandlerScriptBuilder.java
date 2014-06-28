@@ -71,7 +71,7 @@ public class ApplicationRowHandlerScriptBuilder implements ApplicationRowHandler
      * Sets <code>AbstractDomain</code> to use.
      *
      * @param includeImplicitInsertCols  if <code>true</code> implicit column status will be ignored; all values
-     *					    will be inserted.
+     *                      will be inserted.
      */
     public void setIncludeImplicitInsertCols(boolean includeImplicitInsertCols)
     {

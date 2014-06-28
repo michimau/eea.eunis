@@ -17,7 +17,7 @@
 * Portions created by is.com are Copyright (C) 2000 is.com.
 * All Rights Reserved.
 *
-* Contributor: 		James Evans (jevans@vmguys.com)
+* Contributor:      James Evans (jevans@vmguys.com)
 * Contributor: ____________________________________
 *
 * Alternatively, the contents of this file may be used under the terms of

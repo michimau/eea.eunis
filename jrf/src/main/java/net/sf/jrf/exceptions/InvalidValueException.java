@@ -94,7 +94,7 @@ public class InvalidValueException extends DomainException
     public InvalidValueException(String msg,int type)
     {
         super(msg);
-	this.type = type;
+        this.type = type;
     }
 
     /**

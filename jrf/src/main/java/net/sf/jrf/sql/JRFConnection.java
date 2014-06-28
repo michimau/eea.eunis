@@ -86,31 +86,31 @@ public class JRFConnection
     private final static String CLOSE = "close()";// Records number of live connections.
 
     private interface ConnectionCreator  {
-	    public Connection getConnection() throws SQLException;
+        public Connection getConnection() throws SQLException;
     }
 
     private class XAConnectionCreator implements ConnectionCreator {
-		private XADataSource source;
+        private XADataSource source;
 
-		XAConnectionCreator(Object source) {
-			this.source = (XADataSource) source;
-		}
-		public Connection getConnection()  throws SQLException{
-			return source.getXAConnection().getConnection();
-		}	
+        XAConnectionCreator(Object source) {
+            this.source = (XADataSource) source;
+        }
+        public Connection getConnection()  throws SQLException{
+            return source.getXAConnection().getConnection();
+        }
     }
     private class RegularConnectionCreator implements ConnectionCreator {
-		private DataSource source;
+        private DataSource source;
 
-		RegularConnectionCreator(Object source) {
-			this.source = (DataSource) source;
-		}
-		public Connection getConnection()  throws SQLException{
-			return source.getConnection();
-		}	
+        RegularConnectionCreator(Object source) {
+            this.source = (DataSource) source;
+        }
+        public Connection getConnection()  throws SQLException{
+            return source.getConnection();
+        }
     }
     private ConnectionCreator connectionCreator = null;
-	
+
     /**
      * Constructs a JRF connection handle.
      *
@@ -120,16 +120,16 @@ public class JRFConnection
     public JRFConnection(Object dataSource, DataSourceProperties dataSourceProperties)
     {
         this.dataSourceProperties = dataSourceProperties;
-	this.dataSource = dataSource;
-	if (dataSource instanceof XADataSource) {
-	    connectionCreator = new XAConnectionCreator(dataSource);
-	}
-	else if (dataSource instanceof DataSource) {
-	    connectionCreator = new RegularConnectionCreator(dataSource);
-	}
-	else {
-		throw new IllegalArgumentException(dataSource.getClass()+" is not XADataSource or DataSource.");
-	}
+    this.dataSource = dataSource;
+    if (dataSource instanceof XADataSource) {
+        connectionCreator = new XAConnectionCreator(dataSource);
+    }
+    else if (dataSource instanceof DataSource) {
+        connectionCreator = new RegularConnectionCreator(dataSource);
+    }
+    else {
+        throw new IllegalArgumentException(dataSource.getClass()+" is not XADataSource or DataSource.");
+    }
         this.statementExecuter = new StatementExecuter(this, dataSourceProperties);
         this.preparedStatementList = new PreparedStatementListHandler(this);
         this.instanceId = addInstance();
@@ -348,7 +348,7 @@ public class JRFConnection
         {
             close();
             this.dataSource = dataSource;
-	    connectionCreator = new RegularConnectionCreator(dataSource);
+        connectionCreator = new RegularConnectionCreator(dataSource);
         }
     }
 
@@ -366,7 +366,7 @@ public class JRFConnection
         {
             close();
             this.dataSource = dataSource;
-	    connectionCreator = new XAConnectionCreator(dataSource);
+        connectionCreator = new XAConnectionCreator(dataSource);
         }
     }
 
@@ -554,8 +554,8 @@ public class JRFConnection
     * @return <code>XADataSource</code> or <code>DataSource</code>
     */
     public Object getDataSource() {
-	return this.dataSource;
-    } 
+    return this.dataSource;
+    }
 
     /**
      * Returns <code>DataSourceProperties</code> instance that applies to this

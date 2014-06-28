@@ -23,6 +23,7 @@
 
     <properties>
         <main.basedir>${project.basedir}/..</main.basedir>
+        <checkstyle.config.location>${project.basedir}/doc/checkstyle.xml</checkstyle.config.location>
     </properties>
 
     <repositories>

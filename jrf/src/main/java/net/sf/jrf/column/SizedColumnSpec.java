@@ -232,8 +232,8 @@ public abstract class SizedColumnSpec extends AbstractColumnSpec
      * @param p <code>PersistentObjectDynaProperty</code> instance.
      */
     public void updatePersistentObjectDynaProperty(net.sf.jrf.domain.PersistentObjectDynaProperty p) {
-     	super.updatePersistentObjectDynaProperty(p);
-	p.setMaxSize(i_maxLength);
+        super.updatePersistentObjectDynaProperty(p);
+    p.setMaxSize(i_maxLength);
     }
 
 

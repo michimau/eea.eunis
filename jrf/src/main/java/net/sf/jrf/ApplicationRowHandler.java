@@ -49,24 +49,24 @@ import net.sf.jrf.domain.PersistentObject;
  * Example usage with Blobs:
  * <pre>
  *  public class BlobData {
- *  		private BlobWrapper b;
- *		private String key;
- *     	.
- *		.
- *		public getData() {
- *			return this.b;
- *		}
+ *          private BlobWrapper b;
+ *      private String key;
+ *      .
+ *      .
+ *      public getData() {
+ *          return this.b;
+ *      }
  * .
  * .
  * private class MyBlobHandler implements ApplicationRowHandler {
  *
- *	public boolean processRow(PersistentObject aPO) {
- *		BlobData bd= (BlobData) aPO;
- *		Blob b = bd.getData().getBlob();
- *		.	// call some blob methods.
- *		.
- *		return true;
- *	}
+ *  public boolean processRow(PersistentObject aPO) {
+ *      BlobData bd= (BlobData) aPO;
+ *      Blob b = bd.getData().getBlob();
+ *      .   // call some blob methods.
+ *      .
+ *      return true;
+ *  }
  * }
  * .
  * .

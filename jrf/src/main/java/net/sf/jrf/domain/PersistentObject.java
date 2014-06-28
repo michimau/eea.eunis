@@ -42,12 +42,12 @@ import java.io.Serializable;
  * attributes may be stored in an SQL database as well.  Subclasses may be:
  * <ul>
  * <li> A Java version of an SQL table with one-to-one correspondence between
- *	   fields in the object and columns in the table.
+ *     fields in the object and columns in the table.
  * <li> A Java version of an SQL table with all the required database columns,
- *	   but additional Java fields necessary for an application.
+ *     but additional Java fields necessary for an application.
  * <li> A Java version of an SQL view.
  * <li> A Java version of a base SQL table with
- *	   field attributes that map to column attributes from an SQL join construct.
+ *     field attributes that map to column attributes from an SQL join construct.
  * <li> A Java version of base SQL table with aggregate <code>PersistentObject</code>s.
  * </ul>
  */

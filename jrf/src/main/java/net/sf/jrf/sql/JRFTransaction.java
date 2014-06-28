@@ -306,7 +306,7 @@ public abstract class JRFTransaction
                 LOG.debug("addDomainConnection("+domain+"): new datasource with connection "+conn);
             }
             // Force this guy to open up a connection.
-            conn.assureDatabaseConnection();	// Force a connection init.
+            conn.assureDatabaseConnection();    // Force a connection init.
             dataSources.put(hashCode,conn);
             uniqueConnections.addElement(conn);
         }

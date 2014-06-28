@@ -95,10 +95,10 @@ public class StatementExecuter {
 
 
     /** Fetches the underlying <code>JRFConnection</code> handle.
-     * @return <code>JRFConnection</code> handle. 
+     * @return <code>JRFConnection</code> handle.
      */
     public JRFConnection getConnection()  {
-	return i_jrfConnection; 
+        return i_jrfConnection;
     }
 
     /**
@@ -204,17 +204,17 @@ public class StatementExecuter {
      */
     public int executeUpdate(String sqlString) throws SQLException {
         Statement stmt = setUpForStaticStatementExecute(false);
-	/*
+    /*
         if (SQLLOG.isDebugEnabled()) {
             // log the SQL
             SQLLOG.debug("executeUpdate([" + sqlString + "])" + this);
         }
-	*/
+    */
         i_jrfConnection.statementExecutionCount++;
         int result = stmt.executeUpdate(sqlString);
         if (SQLLOG.isDebugEnabled()) {
             SQLLOG.debug("executeUpdate([" + sqlString + "]) returned " + result);
-	}
+    }
         staticSqlMostRecentWarnings = stmt.getWarnings();
         return result;
     }
@@ -281,11 +281,11 @@ public class StatementExecuter {
      *@see                   net.sf.jrf.sql.DataSourceProperties#isTransactionsForDropAndCreateSupported()
      */
     public void executeCreateOrDropTableSQL(String sqlStatement) throws SQLException {
-	///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
         // Determine whether transactions are supported. If they are not,
         // turn on auto-commit mode before you execute the statements and
         // restore state when complete.
-	///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
         if (SQLLOG.isDebugEnabled()) {
             SQLLOG.debug("executeCreateOrDropTableSQL(" + sqlStatement + ")");
         }

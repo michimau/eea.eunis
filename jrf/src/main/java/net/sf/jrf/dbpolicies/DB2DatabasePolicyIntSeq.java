@@ -151,7 +151,7 @@ public class DB2DatabasePolicyIntSeq extends DB2DatabasePolicyBase
      */
     public Long findAutoIncrementIdByMethodInvoke(String tableName, String columnName, Statement stmt)
     {
-	return null;
+    return null;
     }
 
 }

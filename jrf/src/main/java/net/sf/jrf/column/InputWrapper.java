@@ -56,8 +56,8 @@ public abstract class InputWrapper
      *
      * @param data           input data
      * @param storageLength  length of all underlying data, which may not necessarily
-     *			 be the same value as the one returned from the <code>InputStream.available()</code>
-     *			 method.
+     *           be the same value as the one returned from the <code>InputStream.available()</code>
+     *           method.
      */
     public InputWrapper(Object data, int storageLength)
     {
@@ -88,8 +88,8 @@ public abstract class InputWrapper
      * Sets both object and full storage length of data.
      *
      * @param storageLength  length of all underlying data, which may not necessarily
-     *			 be the same value as the one returned from the <code>InputStream.available()</code>
-     *			 method.
+     *           be the same value as the one returned from the <code>InputStream.available()</code>
+     *           method.
      * @param data           The new input value
      */
     public void setInput(Object data, int storageLength)

@@ -139,15 +139,15 @@
      lov.equalsIgnoreCase("Tidal")) {
 
    if(oper.equalsIgnoreCase("Equal")) {
-     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
+     SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toLowerCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
    } else {
      if(oper.equalsIgnoreCase("Contains")) {
-       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toLowerCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
      } else {
        if(oper.equalsIgnoreCase("Between")) {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toLowerCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
        } else {
-         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toUpperCase()+" ORDER BY ID_"+lov.toUpperCase();
+         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_"+lov.toLowerCase()+" ORDER BY ID_"+lov.toUpperCase();
        }
      }
    }

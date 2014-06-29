@@ -83,12 +83,12 @@ public class StringUtil
 
 
     /* Formats a String for use as a String in a DB query
-	*   where the delimiter is as provided.
-	*
-	* @param p_val the String to format
-	* @param p_delimiter the delimiter for formatting
-	* @return String with quotes escaped, and enclosing.
-	*/
+    *   where the delimiter is as provided.
+    *
+    * @param p_val the String to format
+    * @param p_delimiter the delimiter for formatting
+    * @return String with quotes escaped, and enclosing.
+    */
     /**
      * Description of the Method
      *

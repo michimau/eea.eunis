@@ -280,7 +280,7 @@ public abstract class NumericColumnSpec extends AbstractColumnSpec
      *
      * @param dbPolicy  dbPolicy instance to use.
      * @return          an optimized expression of the column type for create
-     * 		table statements.
+     *      table statements.
      * @see             net.sf.jrf.DatabasePolicy#getNumericColumnTypeDefinition(int,int,int)
      */
     public String getSQLColumnType(DatabasePolicy dbPolicy)

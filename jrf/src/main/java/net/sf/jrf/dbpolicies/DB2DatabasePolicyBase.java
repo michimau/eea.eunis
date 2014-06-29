@@ -169,21 +169,21 @@ public abstract class DB2DatabasePolicyBase implements DatabasePolicy
         boolean variable, int minBlockSize)
     {
         if (maxLength == 0)
-		return "CLOB(50K)"; // Default to 50 K 
-	int type = getTextColumnSqlType(maxLength,multiByteCharacters,variable,minBlockSize);
-	String sType = "VARCHAR";
-	switch (type) {
-		case java.sql.Types.CLOB:
-        		sType = "CLOB";
-			break;
-		case java.sql.Types.CHAR:
-        		sType = "CHAR";
-			break;
-		case java.sql.Types.LONGVARCHAR:
-        		sType = "LONG VARCHAR";
-			break;
-	}
-       	return sType+"(" + maxLength + ")";
+        return "CLOB(50K)"; // Default to 50 K
+    int type = getTextColumnSqlType(maxLength,multiByteCharacters,variable,minBlockSize);
+    String sType = "VARCHAR";
+    switch (type) {
+        case java.sql.Types.CLOB:
+                sType = "CLOB";
+            break;
+        case java.sql.Types.CHAR:
+                sType = "CHAR";
+            break;
+        case java.sql.Types.LONGVARCHAR:
+                sType = "LONG VARCHAR";
+            break;
+    }
+        return sType+"(" + maxLength + ")";
     }
 
     /**
@@ -204,7 +204,7 @@ public abstract class DB2DatabasePolicyBase implements DatabasePolicy
             }
             return java.sql.Types.LONGVARCHAR;
         }
-	// Doesn't matter about non-variable if length is too big.	
+    // Doesn't matter about non-variable if length is too big.
         return maxLength > 254 ? java.sql.Types.VARCHAR:java.sql.Types.CHAR;
     }
 
@@ -231,7 +231,7 @@ public abstract class DB2DatabasePolicyBase implements DatabasePolicy
      */
     public int getDuplicateKeyErrorCode()
     {
-        return 1;	// FIXME
+        return 1;   // FIXME
     }
 
     /**

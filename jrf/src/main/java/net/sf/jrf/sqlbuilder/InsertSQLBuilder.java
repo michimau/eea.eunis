@@ -49,7 +49,7 @@ import net.sf.jrf.exceptions.*;
 import net.sf.jrf.sql.*;
 import org.apache.log4j.Category;
 
-/** VM Changes  -- to support implicit insert column.	See buildSQL(). */
+/** VM Changes  -- to support implicit insert column.   See buildSQL(). */
 
 /**  Instances of this class build SQL to do INSERT statements. */
 public class InsertSQLBuilder
@@ -200,7 +200,7 @@ public class InsertSQLBuilder
      *
      * @param aPO                        a value of type 'PersistentObject'
      * @param includeImplicitInsertCols  if <code>true</code> implicit column status will be ignored; all values
-     * 					    will be inserted.
+     *                      will be inserted.
      * @param tableName                  Description of the Parameter
      * @param columnSpecs                Description of the Parameter
      * @return                           a value of type 'String'

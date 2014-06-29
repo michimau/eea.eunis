@@ -41,18 +41,18 @@ import org.apache.commons.beanutils.DynaClass;
 */
 public class PersistentObjectDynaBeanBase extends BasicDynaBean implements PersistentObjectDynaBean {
 
-	/** Construct a new <code>DynaBean</code> associated with the specified
-	* <code>DynaClass</code> instance.
-	* @param poDynaClass  <code>PersistentObjectDynaClass</code> instance.
-	*/
-	public PersistentObjectDynaBeanBase(PersistentObjectDynaClass dynaClass) {
-        	super(dynaClass);
-	}
+    /** Construct a new <code>DynaBean</code> associated with the specified
+    * <code>DynaClass</code> instance.
+    * @param poDynaClass  <code>PersistentObjectDynaClass</code> instance.
+    */
+    public PersistentObjectDynaBeanBase(PersistentObjectDynaClass dynaClass) {
+            super(dynaClass);
+    }
 
-	/** Returns <code>PersistentObjectDynaClass</code> instance of the bean.
-	* @return <code>PersistentObjectDynaClass</code> instance of the bean.
-	*/
-	public PersistentObjectDynaClass getPersistentObjectDynaClass() {
-        	 return (PersistentObjectDynaClass) this.getDynaClass();
-	}
+    /** Returns <code>PersistentObjectDynaClass</code> instance of the bean.
+    * @return <code>PersistentObjectDynaClass</code> instance of the bean.
+    */
+    public PersistentObjectDynaClass getPersistentObjectDynaClass() {
+             return (PersistentObjectDynaClass) this.getDynaClass();
+    }
 }

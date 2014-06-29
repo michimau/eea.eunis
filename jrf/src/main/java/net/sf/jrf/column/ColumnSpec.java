@@ -156,11 +156,11 @@ public interface ColumnSpec
      * CompoundPrimaryKeyColumnSpec instances.  Use #buildWhereClause() instead.
      *
      * @param valueOrPersistentObject  an instance of the <code>PersistentObject</code>
-     *						   includes the column attribute or an object
-     *						   representing the column itself. Implementations
-     *						   will use <code>instanceof</code> to determine which.
+     *                         includes the column attribute or an object
+     *                         representing the column itself. Implementations
+     *                         will use <code>instanceof</code> to determine which.
      * @param separator                either <code>JRFConstants.EQUALS</code>
-     *						   or <code>JRFConstants.NOT_EQUALS</code>
+     *                         or <code>JRFConstants.NOT_EQUALS</code>
      * @param tableName                table name.
      * @param dbPolicy                 appropriate database policy instance.
      * @return                         an expression in the format "COLUMNNAME = (or !=) VALUE".
@@ -316,7 +316,7 @@ public interface ColumnSpec
      * @param name property name to set.
      */
     public void setPropertyName(String name);
-  
+
     /**
      * Returns the property name for this attribute, for use in <code>Reflection</code>
      * and other utilities. This value should be the name returned by <code>PropertyDescriptor.getName()</code>
@@ -327,7 +327,7 @@ public interface ColumnSpec
     public String getPropertyName();
 
     /** Returns <code>true</code> if a value for this attribute is written to database only once upon
-      * row creation.  Subsequent updates always contain 
+      * row creation.  Subsequent updates always contain
       * the same initial value.  While primary keys are "write once" columns, oother columns such aa
       * creation date and creation user also qualify.
       * @return "write once" status of the attrbute.
@@ -344,7 +344,7 @@ public interface ColumnSpec
      * @param prop <code>PersistentObjectDynaProperty</code> instance.
      */
     public void updatePersistentObjectDynaProperty(net.sf.jrf.domain.PersistentObjectDynaProperty prop);
- 
+
     /**
      * Returns the column index for use in <code>java.sql.ResultSet.get()</code> methods.
      *

@@ -149,10 +149,10 @@ public class PostgreSQLDatabasePolicy
         {
             try {
                 stmtExecuter.executeUpdate("DROP SEQUENCE " + domain.getSequenceName());
-	    }
+            }
             catch (SQLException ex) {
-		LOG.debug("Sequence does not exist: [" +domain.getSequenceName()+"]. Rolling back connection.");
-		stmtExecuter.getConnection().rollback();		
+                LOG.debug("Sequence does not exist: [" +domain.getSequenceName()+"]. Rolling back connection.");
+                stmtExecuter.getConnection().rollback();
             }
             if (sequenceParameters == null) {
                 sequenceParameters = "";
@@ -161,7 +161,7 @@ public class PostgreSQLDatabasePolicy
                 "CREATE SEQUENCE " + domain.getSequenceName() + " " + sequenceParameters);
         }
         catch (SQLException e) {
-	    LOG.error("Postgres SQL sequence create error.",e);
+        LOG.error("Postgres SQL sequence create error.",e);
             throw e;
         }
         catch (Exception e)
@@ -213,15 +213,15 @@ public class PostgreSQLDatabasePolicy
     public String getNumericColumnTypeDefinition(int sqlType, int precision, int scale)
     {
 
-	switch (sqlType)
+        switch (sqlType)
         {
             case java.sql.Types.DOUBLE:
                 return "FLOAT8";
             case java.sql.Types.FLOAT:
                 return "FLOAT4";
             default:
-        	return DefaultImpls.getNumericColumnTypeDefinition(sqlType, precision, scale);
-	}
+            return DefaultImpls.getNumericColumnTypeDefinition(sqlType, precision, scale);
+        }
     }
 
     /**

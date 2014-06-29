@@ -115,13 +115,13 @@ public abstract class DomainHandler implements Serializable
 
     /** Creates new embedded <code>PersistentObject</code>.
      * @param master <code>PersistentObject</code> instance that <em>must</em> be the
-     * 		     parent record of <code>className</code> object.  For simple two-level
-     *		     composites, this value will be the type returned by <code>newPersistentObject</code>.
+     *           parent record of <code>className</code> object.  For simple two-level
+     *           composites, this value will be the type returned by <code>newPersistentObject</code>.
      * @param beanProperty bean name of <code>PersistentObject</code> to instantiate.
      * @return new instance of the embedded <code>PersistentObject</code>
      * @throws IllegalArgumentException if class name is invalid.
-     * @throws ClassCastException if <code>master</code> is not the appropriate 
-     *				  class type.
+     * @throws ClassCastException if <code>master</code> is not the appropriate
+     *                class type.
      * @see net.sf.jrf.domain.AbstractDomain#newEmbeddedPersistentObject(PersistentObject,String)
      * @see net.sf.jrf.domain.EmbeddedPersistentObjectHandler#getBeanAttribute()
      */
@@ -138,13 +138,13 @@ public abstract class DomainHandler implements Serializable
 
     /** Copies keys from the master object to the embedded detail object.
      * @param master <code>PersistentObject</code> instance that <em>must</em> be the
-     * 		     parent record of <code>className</code> object.  For simple two-level
-     *		     composites, this value will be the type returned by <code>newPersistentObject</code>.
+     *           parent record of <code>className</code> object.  For simple two-level
+     *           composites, this value will be the type returned by <code>newPersistentObject</code>.
      * @param embedded embedded <code>PersistentObject</code> instance to populate.
      * @param beanProperty bean name of accessor in <code>PersistentObject</code> to instantiate.
      * @throws IllegalArgumentException if class name of <code>embedded</code> is invalid.
-     * @throws ClassCastException if <code>master</code> is not the appropriate 
-     *				  class type.
+     * @throws ClassCastException if <code>master</code> is not the appropriate
+     *                class type.
      */
     public void populateEmbeddedObjectKeyValues(PersistentObject master, PersistentObject embedded,String beanProperty) {
         AbstractDomain domain = getDomain(fullDomainClassName);
@@ -153,7 +153,7 @@ public abstract class DomainHandler implements Serializable
         }
         finally {
             releaseDomain(domain);
-	}
+    }
     }
 
    /** Returns a list of embedded <code>PersistentObject</code> class property names in this object.
@@ -170,7 +170,7 @@ public abstract class DomainHandler implements Serializable
             releaseDomain(domain);
         }
     }
-            
+
     /**
      * Returns complete composite object, if applicable, by searching the
      * database key on the <code>List</code> object of <code>PersistentObject</code>s
@@ -312,7 +312,7 @@ public abstract class DomainHandler implements Serializable
 
     /**
      * Finds by a specific prepared find statement by wrapping the poolable search
-     *<code>AbstractDomain.findByPreparedStatement</code> method using the searchable domain.  
+     *<code>AbstractDomain.findByPreparedStatement</code> method using the searchable domain.
      * Sub-classes must create the key. Calling this method is the equivalent of calling
      * <code>findByPreparedStatement(preparedStatementKey,handler,params,true)</code>.
      * @param preparedStatementKey       key added in <code>addPreparedFindStatement()</code>.
@@ -322,8 +322,8 @@ public abstract class DomainHandler implements Serializable
      */
     protected int findByPreparedStatement(String preparedStatementKey,
         ApplicationRowHandler handler, List params) {
-		return findByPreparedStatement(preparedStatementKey,handler,params,true);
-    } 
+        return findByPreparedStatement(preparedStatementKey,handler,params,true);
+    }
 
 
     /** Finds by a specific prepared find statement by wrapping the poolable search
@@ -331,8 +331,8 @@ public abstract class DomainHandler implements Serializable
      * @param preparedStatementKey       key added in <code>addPreparedFindStatement()</code>.
      * @param handler                    <code>ApplicationRowHandler</code> to use.
      * @param params                     list of object parameters to use to set up <code>PreparedStatment</code>.
-     * @param useSearchDomain		 If <code>true</code>, <code>searchClassDomainClassName</code> will be
-     *					 used. Otherwise, <code>fullDomainClassName will be used.
+     * @param useSearchDomain        If <code>true</code>, <code>searchClassDomainClassName</code> will be
+     *                   used. Otherwise, <code>fullDomainClassName will be used.
      * @return                           number of rows fetched.
      * @throws IllegalArgumentException  if number of parameters in <code>params</code> does not
      * match number of column specifications set in <code>addPreparedFindStatement()</code>.
@@ -359,26 +359,26 @@ public abstract class DomainHandler implements Serializable
      * @see #findByPreparedStatement(String,List,boolean)
      */
     protected List findByPreparedStatement(String preparedStatementKey, Object [] params) {
-	ArrayList a = new ArrayList();
-	for (int i = 0; i < params.length; i++)
-		a.add(params[i]);
-	return findByPreparedStatement(preparedStatementKey,a,true);
-    } 
+    ArrayList a = new ArrayList();
+    for (int i = 0; i < params.length; i++)
+        a.add(params[i]);
+    return findByPreparedStatement(preparedStatementKey,a,true);
+    }
 
      /** Finds by a specific prepared find statement with an array of  <code>Object</code> parameters,
      * returning the result as a <code>List</code>.
      * @param preparedStatementKey       key added in <code>addPreparedFindStatement()</code>.
      * @param params      <code>Object</code> array of search parameters.
-     * @param useSearchDomain		 If <code>true</code>, <code>searchClassDomainClassName</code> will be
-     *					 used. Otherwise, <code>fullDomainClassName will be used.
+     * @param useSearchDomain        If <code>true</code>, <code>searchClassDomainClassName</code> will be
+     *                   used. Otherwise, <code>fullDomainClassName will be used.
      * @see #findByPreparedStatement(String,List,boolean)
      */
     protected List findByPreparedStatement(String preparedStatementKey, Object [] params, boolean useSearchDomain) {
-	ArrayList a = new ArrayList();
-	for (int i = 0; i < params.length; i++)
-		a.add(params[i]);
-	return findByPreparedStatement(preparedStatementKey,a,useSearchDomain);
-    } 
+    ArrayList a = new ArrayList();
+    for (int i = 0; i < params.length; i++)
+        a.add(params[i]);
+    return findByPreparedStatement(preparedStatementKey,a,useSearchDomain);
+    }
 
      /** Finds by a specific prepared find statement by wrapping the poolable search
      *<code>AbstractDomain.findByPreparedStatement</code> method using the searchable domain,
@@ -390,19 +390,19 @@ public abstract class DomainHandler implements Serializable
      * @see #findByPreparedStatement(String,List,boolean)
      */
     protected List findByPreparedStatement(String preparedStatementKey,List params) {
-	return findByPreparedStatement(preparedStatementKey,params,true);
-    } 
+    return findByPreparedStatement(preparedStatementKey,params,true);
+    }
 
 
     /**
      * Finds by a specific prepared find statement by wrapping the poolable search
-     *<code>AbstractDomain.findByPreparedStatement</code> method and returning the result as 
+     *<code>AbstractDomain.findByPreparedStatement</code> method and returning the result as
      * a <code>List</code>.  Sub-classes must create the key.
      *
      * @param preparedStatementKey       key added in <code>addPreparedFindStatement()</code>.
      * @param params                     list of object parameters to use to set up <code>PreparedStatment</code>.
-     * @param useSearchDomain		 If <code>true</code>, <code>searchClassDomainClassName</code> will be
-     *					 used. Otherwise, <code>fullDomainClassName will be used.
+     * @param useSearchDomain        If <code>true</code>, <code>searchClassDomainClassName</code> will be
+     *                   used. Otherwise, <code>fullDomainClassName will be used.
      * @return                           <code>List</code> of rows fetched.
      * @throws IllegalArgumentException  if number of parameters in <code>params</code> does not
      * match number of column specifications set in <code>addPreparedFindStatement()</code>.
@@ -410,10 +410,10 @@ public abstract class DomainHandler implements Serializable
      */
     protected List findByPreparedStatement(String preparedStatementKey, List params,boolean useSearchDomain)
     {
-	net.sf.jrf.rowhandlers.ApplicationRowHandlerList handler =  
-				new net.sf.jrf.rowhandlers.ApplicationRowHandlerList();
+    net.sf.jrf.rowhandlers.ApplicationRowHandlerList handler =
+                new net.sf.jrf.rowhandlers.ApplicationRowHandlerList();
         findByPreparedStatement(preparedStatementKey, handler, params);
-	return (List) handler.getResult();
+    return (List) handler.getResult();
     }
 
     /**
@@ -424,12 +424,12 @@ public abstract class DomainHandler implements Serializable
      * @exception ObjectHasChangedException  Description of the Exception
      * @exception MissingAttributeException  Description of the Exception
      * @throws ObjectHasChangeException      when another user has already updated the record (i.e.
-     *					an optimistic lock error.
+     *                  an optimistic lock error.
      * @throws MissingAtributeException      if the column specification for some fields are marked
-     *							as required and these fields are <code>null</code> in
-     *							the <code>PersistentObject</code> parameter.
+     *                          as required and these fields are <code>null</code> in
+     *                          the <code>PersistentObject</code> parameter.
      * @throws DuplicateRowException         if an insert operation fails or would fail because of
-     *						  key duplication.
+     *                        key duplication.
      * @throws InvalidValueException         if a value in a column is invalid (e.g. out of range).
      * @see                                  #findByKey(Object)
      */
@@ -453,18 +453,18 @@ public abstract class DomainHandler implements Serializable
     /**
      * Updates a <code>List</code> of objects obtained through a call to
      * <code>findAllByList()</code>.  Each modified row in the list will
-     *						   be updated.
+     *                         be updated.
      *
      * @param list                           list of <code>PersistentObject</code>s.
      * @exception ObjectHasChangedException  Description of the Exception
      * @exception MissingAttributeException  Description of the Exception
      * @throws ObjectHasChangeException      when another user has already updated the record (i.e.
-     *					an optimistic lock error.
+     *                  an optimistic lock error.
      * @throws MissingAtributeException      if the column specification for some fields are marked
-     *							as required and these fields are <code>null</code> in
-     *							the <code>PersistentObject</code> parameter.
+     *                          as required and these fields are <code>null</code> in
+     *                          the <code>PersistentObject</code> parameter.
      * @throws DuplicateRowException         if an insert operation fails or would fail because of
-     *						  key duplication.
+     *                        key duplication.
      * @throws InvalidValueException         if a value in a column is invalid (e.g. out of range).
      * @see                                  #findByKey(Object)
      * @see                                  #getAllAsList()
@@ -481,11 +481,11 @@ public abstract class DomainHandler implements Serializable
     /**
      * Deletes a <code>PersistentObject</code> instance, in many cases one fetched
      * through a call to <code>findByKey()</code>.  Calling this method is the equivalent of calling
-     * <pre>delete( persistentObject, false)</pre>.  This method will <em>not</em> ignore 
+     * <pre>delete( persistentObject, false)</pre>.  This method will <em>not</em> ignore
      * <code>ObjectHasChangedException</code>
      *
      * @param persistentObject               object to delete.
-     * @throws ObjectHasChangeException      when another user has already delete the record (i.e. 
+     * @throws ObjectHasChangeException      when another user has already delete the record (i.e.
      *                                       an optimistic lock error
      * @see                                  #findByKey(Object)
      * @see                                  #getAllAsList()
@@ -501,9 +501,9 @@ public abstract class DomainHandler implements Serializable
      * through a call to <code>findByKey()</code>.
      *
      * @param persistentObject               object to delete.
-     * @param ignoreChangedException	     If <code>true</code>, <code>ObjectHasChangedException</code>
+     * @param ignoreChangedException         If <code>true</code>, <code>ObjectHasChangedException</code>
      *                                       will not be thrown, but ignored.
-     * @throws ObjectHasChangeException      when another user has already delete the record (i.e. 
+     * @throws ObjectHasChangeException      when another user has already delete the record (i.e.
      *                                       an optimistic lock error) and <code>ignoreChangedException</code>
      *                                       is <code>false</code>.
      * @see                                  #findByKey(Object)
@@ -527,15 +527,15 @@ public abstract class DomainHandler implements Serializable
             }
             domain.delete(objectToDelete);
         }
-	catch (ObjectHasChangedException oe) {
-		if (!ignoreChangedException)
-			throw oe;
-	}
-	catch (Exception ex ) {
-		if (ex instanceof DatabaseException )
-			throw (DatabaseException) ex;
-		throw new DatabaseException(ex,"Unexpected delete exception");
-	}
+    catch (ObjectHasChangedException oe) {
+        if (!ignoreChangedException)
+            throw oe;
+    }
+    catch (Exception ex ) {
+        if (ex instanceof DatabaseException )
+            throw (DatabaseException) ex;
+        throw new DatabaseException(ex,"Unexpected delete exception");
+    }
         finally {
             releaseDomain(domain);
         }
@@ -545,18 +545,18 @@ public abstract class DomainHandler implements Serializable
     /**
      * Updates a <code>Map</code> of objects obtained through a call to
      * <code>findAllByMap()</code>.   Each modified row in the map will
-     *						   be updated.
+     *                         be updated.
      *
      * @param map                            <code>HashMap</code> of <code>PersistentObject</code>s.
      * @exception ObjectHasChangedException  Description of the Exception
      * @exception MissingAttributeException  Description of the Exception
      * @throws ObjectHasChangeException      when another user has already updated the record (i.e.
-     *					an optimistic lock error.
+     *                  an optimistic lock error.
      * @throws MissingAtributeException      if the column specification for some fields are marked
-     *							as required and these fields are <code>null</code> in
-     *							the <code>PersistentObject</code> parameter.
+     *                          as required and these fields are <code>null</code> in
+     *                          the <code>PersistentObject</code> parameter.
      * @throws DuplicateRowException         if an insert operation fails or would fail because of
-     *						  key duplication.
+     *                        key duplication.
      * @throws InvalidValueException         if a value in a column is invalid (e.g. out of range).
      * @see                                  #findByKey(Object)
      * @see                                  #getAllAsMap()

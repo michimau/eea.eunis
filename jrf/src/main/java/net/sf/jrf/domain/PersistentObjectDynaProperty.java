@@ -47,7 +47,7 @@ import org.apache.log4j.Category;
 
 /** Extension of <code>DynaProperty</code> that contains the <code>PersistentObject</code>
 * properties with the sub-set of properties from <code>ColumnSpec</code>, most of which
-* are applicable in pure Java space. 
+* are applicable in pure Java space.
 */
 public class PersistentObjectDynaProperty extends DynaProperty {
 
@@ -59,9 +59,9 @@ public class PersistentObjectDynaProperty extends DynaProperty {
   /** Write once flag.
   */
   protected boolean writeOnce = false;
-  
+
   /** database column flag.
-  */ 
+  */
   protected boolean dbColumn = false;
 
   /** Required flag
@@ -74,16 +74,16 @@ public class PersistentObjectDynaProperty extends DynaProperty {
 
   /** Maximum value.
   */
-  protected Comparable maxValue = null;	
+  protected Comparable maxValue = null;
 
   /** Mininum value.
   */
-  protected Comparable minValue = null;	
+  protected Comparable minValue = null;
 
   /** List of valid values.
   */
-  protected List listOfValues = null;	
- 
+  protected List listOfValues = null;
+
   /** <code>GetterSetter</code> implementation.
   */
   protected GetterSetter getterSetterImpl = null;
@@ -101,7 +101,7 @@ public class PersistentObjectDynaProperty extends DynaProperty {
    */
   protected String readMethodName;
 
-  /** Write method names for 
+  /** Write method names for
    * <code>GetterSetter</code> implementations that do not implement <code>Serializable</code>.
    */
   protected String writeMethodName;
@@ -124,35 +124,35 @@ public class PersistentObjectDynaProperty extends DynaProperty {
        this.writeMethodName = writeMethodName;
        if (cls.isPrimitive()) {
             if (cls.equals(Boolean.TYPE))
-		   primitiveWrapperClass = Boolean.class;
-	    else if (cls.equals(Byte.TYPE))
-		   primitiveWrapperClass = Byte.class;
-	    else if (cls.equals(Character.TYPE))
-		   primitiveWrapperClass = Character.class;
-	    else if (cls.equals(Double.TYPE))
-		   primitiveWrapperClass = Double.class;
-	    else if (cls.equals(Float.TYPE))
-		   primitiveWrapperClass = Float.class;
-	    else if (cls.equals(Integer.TYPE))
-		   primitiveWrapperClass = Integer.class;
-	    else if (cls.equals(Long.TYPE))
-		   primitiveWrapperClass = Long.class;
-	    else if (cls.equals(Short.TYPE))
-		   primitiveWrapperClass = Short.class;
+           primitiveWrapperClass = Boolean.class;
+        else if (cls.equals(Byte.TYPE))
+           primitiveWrapperClass = Byte.class;
+        else if (cls.equals(Character.TYPE))
+           primitiveWrapperClass = Character.class;
+        else if (cls.equals(Double.TYPE))
+           primitiveWrapperClass = Double.class;
+        else if (cls.equals(Float.TYPE))
+           primitiveWrapperClass = Float.class;
+        else if (cls.equals(Integer.TYPE))
+           primitiveWrapperClass = Integer.class;
+        else if (cls.equals(Long.TYPE))
+           primitiveWrapperClass = Long.class;
+        else if (cls.equals(Short.TYPE))
+           primitiveWrapperClass = Short.class;
 
       }
       else if (java.util.List.class.isAssignableFrom(cls) || cls.isArray()) {
-		indexed = true;
+        indexed = true;
       }
       else if (java.util.Map.class.isAssignableFrom(cls)) {
-	        mapped = true;
+            mapped = true;
       }
   }
 
 
   /** Returns string representation of the properties.
    * @return string representation of the properties.
-   */ 
+   */
   public String toString() {
      StringBuffer buf = new StringBuffer();
      buf.append("name=["+getName()+"]\n");
@@ -182,162 +182,162 @@ public class PersistentObjectDynaProperty extends DynaProperty {
    * of <code>PersistentObjectDynaProperty</code> or <code>null</code> if not.
    */
    public static PersistentObjectDynaProperty getPOProperty(DynaProperty p) {
-	try {
-		return (PersistentObjectDynaProperty) p;
-	}
-	catch (ClassCastException ce) {
+    try {
+        return (PersistentObjectDynaProperty) p;
+    }
+    catch (ClassCastException ce) {
 
-		return null;
-	}
-  } 
-	
+        return null;
+    }
+  }
+
   /** Returns the value in the <code>PersistentObject</code>.
   * @param obj <code>PersistentObject</code> from which to get the object value.
   * @return the value in the <code>PersistentObject</code>.
   */
   public Object get(PersistentObject obj) {
-	Object result = null;
-	if (getterSetterImpl == null) {
-		try {
-			Method m = obj.getClass().getMethod(readMethodName,new Class [] {});
-			result = m.invoke(obj,new Object [] {});		
-			if (result == null)
-				result = defaultValue;
-		}
-		catch (Exception ex) {
-			String error = "Unable to evoke "+readMethodName+"() for "+obj.getClass();
-			LOG.error(error,ex);
-			throw new IllegalArgumentException(error);
-		}	
-	}
-	else {
-		result = getterSetterImpl.get(obj,defaultValue);
-	}
-	return result;
-  } 
+    Object result = null;
+    if (getterSetterImpl == null) {
+        try {
+            Method m = obj.getClass().getMethod(readMethodName,new Class [] {});
+            result = m.invoke(obj,new Object [] {});
+            if (result == null)
+                result = defaultValue;
+        }
+        catch (Exception ex) {
+            String error = "Unable to evoke "+readMethodName+"() for "+obj.getClass();
+            LOG.error(error,ex);
+            throw new IllegalArgumentException(error);
+        }
+    }
+    else {
+        result = getterSetterImpl.get(obj,defaultValue);
+    }
+    return result;
+  }
 
   /** Sets the object in the <code>PersistentObject</code>.
   * @param obj <code>PersistentObject</code> from which to get the object value.
   * @param value value to set.
   */
   public void set(PersistentObject obj, Object value) {
-	if (getterSetterImpl == null) {
-		if (writeMethodName == null)
-			return; // OK.
-		try {
-			Method m = obj.getClass().getMethod(writeMethodName,new Class [] {type} );
-			m.invoke(obj,new Object [] {value});		
-		}
-		catch (Exception ex) {
-			String error = "Unable to evoke "+writeMethodName+"("+type.getName()+") for "+obj.getClass();
-			LOG.error(error,ex);
-			throw new IllegalArgumentException(error);
-		}	
-	}
-	else {
-		getterSetterImpl.set(obj,value);
-	}
+    if (getterSetterImpl == null) {
+        if (writeMethodName == null)
+            return; // OK.
+        try {
+            Method m = obj.getClass().getMethod(writeMethodName,new Class [] {type} );
+            m.invoke(obj,new Object [] {value});
+        }
+        catch (Exception ex) {
+            String error = "Unable to evoke "+writeMethodName+"("+type.getName()+") for "+obj.getClass();
+            LOG.error(error,ex);
+            throw new IllegalArgumentException(error);
+        }
+    }
+    else {
+        getterSetterImpl.set(obj,value);
+    }
    }
 
 
    /** Validates the column value againsts either a list of values, a specified
-   * minimum or maximum value.   
+   * minimum or maximum value.
    * sub-classes.
    * @param obj <code>Object</code> instance to check.
    * @throws InvalidValueException if validation fails.
    * @see net.sf.jrf.exceptions.InvalidValueException
    */
   public void validate(Object obj) throws InvalidValueException {
-	if (obj == null) {
-		if (required) 
-			throw new InvalidValueException(getName(),InvalidValueException.TYPE_REQUIRED);
-	}
-	else {
-		if (!isAssignableFrom(obj) ) {
-			throw new InvalidValueException(getType().getName(),InvalidValueException.TYPE_INVALID_VALUE_TYPE);
-		}
-		if (this.maxSize > 0) {
-			if (obj instanceof java.lang.String) {
-				String s = (String) obj;
-				if (s.length() > this.maxSize)
-					throw new InvalidValueException(this.maxSize,obj);
-			}
-			// TODO -- other types - or changes to ColumnSpec.
-		}
-		if (maxValue != null && maxValue.compareTo(obj) < 0)
-        	    	throw new InvalidValueException(InvalidValueException.TYPE_GREATER_THAN_MAXIMUM,maxValue,obj);
-        	else if (minValue != null && minValue.compareTo(obj) > 0)
-                	throw new InvalidValueException(InvalidValueException.TYPE_LESS_THAN_MINIMUM,minValue,obj);
-           	else if (listOfValues != null && !listOfValues.contains(obj) )
-                	throw new InvalidValueException(listOfValues,obj);
-	}
+    if (obj == null) {
+        if (required)
+            throw new InvalidValueException(getName(),InvalidValueException.TYPE_REQUIRED);
+    }
+    else {
+        if (!isAssignableFrom(obj) ) {
+            throw new InvalidValueException(getType().getName(),InvalidValueException.TYPE_INVALID_VALUE_TYPE);
+        }
+        if (this.maxSize > 0) {
+            if (obj instanceof java.lang.String) {
+                String s = (String) obj;
+                if (s.length() > this.maxSize)
+                    throw new InvalidValueException(this.maxSize,obj);
+            }
+            // TODO -- other types - or changes to ColumnSpec.
+        }
+        if (maxValue != null && maxValue.compareTo(obj) < 0)
+                    throw new InvalidValueException(InvalidValueException.TYPE_GREATER_THAN_MAXIMUM,maxValue,obj);
+            else if (minValue != null && minValue.compareTo(obj) > 0)
+                    throw new InvalidValueException(InvalidValueException.TYPE_LESS_THAN_MINIMUM,minValue,obj);
+            else if (listOfValues != null && !listOfValues.contains(obj) )
+                    throw new InvalidValueException(listOfValues,obj);
+    }
     }
 
    // Check for primitives if necessary.
    private boolean isAssignableFrom(Object obj) {
-	if (primitiveWrapperClass != null && primitiveWrapperClass.equals(obj.getClass())  ) {
-		return true;
-	}
-	if (this.getType().isAssignableFrom(obj.getClass()) ) 
-		return true;
-	return false;
+    if (primitiveWrapperClass != null && primitiveWrapperClass.equals(obj.getClass())  ) {
+        return true;
+    }
+    if (this.getType().isAssignableFrom(obj.getClass()) )
+        return true;
+    return false;
    }
 
   /** Returns <code>true</code> if property is indexed (array or list)
    * @return <code>true</code> if property is indexed (array or list)
    */
   public boolean isIndexed() {
-	return this.indexed;
+    return this.indexed;
   }
 
   /** Returns <code>true</code> if property is mapped.
    * @return <code>true</code> if property is mapped.
    */
   public boolean isMapped() {
-	return this.mapped;
+    return this.mapped;
   }
 
   /** Sets primary key status.
    * @param primaryKey primary key status of the attribute.
    */
   public void setPrimaryKey(boolean primaryKey) {
-    	this.primaryKey = primaryKey;
-	this.writeOnce = true;
+        this.primaryKey = primaryKey;
+    this.writeOnce = true;
   }
 
   /** Returns true if attribute is a primary key.
   * @return true if attribute is a primary key.
   */
   public boolean isPrimaryKey() {
-	return this.primaryKey;
+    return this.primaryKey;
   }
-  
+
   /** Sets optimistic lock status.
    * @param optimisticLock optimistic lock status of the attribute.
    */
   public void setOptimisticLock(boolean optimisticLock) {
-    	this.optimisticLock = optimisticLock;
+        this.optimisticLock = optimisticLock;
   }
 
   /** Gets optimistic lock status.
    * @return optimistic lock status of the attribute.
    */
   public boolean isOptimisticLock() {
-    	return this.optimisticLock;
+        return this.optimisticLock;
   }
 
   /** Sets required status.
    * @param required required status of the attribute.
    */
   public void setRequired(boolean required) {
-    	this.required = required;
+        this.required = required;
   }
 
   /** Gets required status.
    * @return required status of the attribute.
    */
   public boolean isRequired() {
-    	return this.required;
+        return this.required;
   }
 
    /** Returns <code>true</code> if this attribute is written to database only once upon
@@ -361,66 +361,66 @@ public class PersistentObjectDynaProperty extends DynaProperty {
    * @param dbColumn if <code>true</code> attribute is a database column.
    */
   public void setDbColumn(boolean dbColumn) {
-    	this.dbColumn = dbColumn;
+        this.dbColumn = dbColumn;
   }
 
   /** Gets db column status.
    * @return db column status of the attribute.
    */
   public boolean isDbColumn() {
-    	return this.dbColumn;
+        return this.dbColumn;
   }
 
   /** Sets maximum size of the attribute.
    * @param maxSize maximum size of the attribute.
    */
   public void setMaxSize(int maxSize) {
-    	this.maxSize = maxSize;
+        this.maxSize = maxSize;
   }
 
   /** Gets maximum size of the attribute.
    * @return maximum size of the attribute.
    */
   public int getMaxSize() {
-    	return this.maxSize;
+        return this.maxSize;
   }
 
   /** Sets default value.
    * @param value default value.
    */
   public void setDefaultValue(Object defaultValue) {
-    	this.defaultValue = defaultValue;
+        this.defaultValue = defaultValue;
   }
 
   /** Gets default value.
    * @return default value.
    */
   public Object getDefaultValue() {
-	if (defaultValue != null)
-    		return this.defaultValue;
-	Class cls = getType();
-	if (primitiveWrapperClass != null) {
+    if (defaultValue != null)
+            return this.defaultValue;
+    Class cls = getType();
+    if (primitiveWrapperClass != null) {
             if (cls.equals(Boolean.TYPE))
-		   return new Boolean(false);
-	    else if (cls.equals(Byte.TYPE))
-		   return new Byte((byte) 0);
-	    else if (cls.equals(Character.TYPE))
-		   return new Character((char) 0);
-	    else if (cls.equals(Double.TYPE))
-		   return new Double((double) 0);
-	    else if (cls.equals(Float.TYPE))
-		   return new Float((float) 0);
-	    else if (cls.equals(Integer.TYPE))
-		   return new Integer((int) 0);
-	    else if (cls.equals(Long.TYPE))
-		   return new Long((long) 0);
-	    else if (cls.equals(Short.TYPE))
-		   return new Short((short) 0);
-	    else
-		   return null;
-	}
-	else 
-		return null;
+           return new Boolean(false);
+        else if (cls.equals(Byte.TYPE))
+           return new Byte((byte) 0);
+        else if (cls.equals(Character.TYPE))
+           return new Character((char) 0);
+        else if (cls.equals(Double.TYPE))
+           return new Double((double) 0);
+        else if (cls.equals(Float.TYPE))
+           return new Float((float) 0);
+        else if (cls.equals(Integer.TYPE))
+           return new Integer((int) 0);
+        else if (cls.equals(Long.TYPE))
+           return new Long((long) 0);
+        else if (cls.equals(Short.TYPE))
+           return new Short((short) 0);
+        else
+           return null;
+    }
+    else
+        return null;
   }
 
   /** Returns the implementation of <code>GetterSetter</code>.
@@ -437,7 +437,7 @@ public class PersistentObjectDynaProperty extends DynaProperty {
    */
   public void setGetterSetter(GetterSetter getterSetterImpl) {
      if (getterSetterImpl != null && getterSetterImpl instanceof java.io.Serializable) {
-     	this.readMethodName = null; // Dereference this; not needed.
+        this.readMethodName = null; // Dereference this; not needed.
         this.writeMethodName = null; // Ditto.
         this.getterSetterImpl = getterSetterImpl;
      }

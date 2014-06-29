@@ -96,7 +96,7 @@ public class JRFWriteTransaction extends JRFTransaction
 
     // Leave this as a timer task for future changes.
 
-    //private class TransactionCompleter extends TimerTask {	// 1.2 does not support.:w
+    //private class TransactionCompleter extends TimerTask {    // 1.2 does not support.:w
     private class TransactionCompleter
     {
         private boolean commit;
@@ -123,7 +123,7 @@ public class JRFWriteTransaction extends JRFTransaction
                         ": Attempting to abort or commit a transaction without any connections!");
                 }
                 SQLException error = null;
-		int count = 0;
+        int count = 0;
                 for (int i = 0; i < total; i++)
                 {
                     JRFConnection c = (JRFConnection) jrfConnections.elementAt(i);
@@ -138,7 +138,7 @@ public class JRFWriteTransaction extends JRFTransaction
                         c.closeOrReleaseResources();
                         continue;
                     }
-		    count++;
+            count++;
                     try
                     {
                         if (commit)

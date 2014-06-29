@@ -17,7 +17,7 @@
 * Portions created by is.com are Copyright (C) 2000 is.com.
 * All Rights Reserved.
 *
-* Contributor: 		James Evans (jevans@vmguys.com)
+* Contributor:      James Evans (jevans@vmguys.com)
 * Contributor: ____________________________________
 *
 * Alternatively, the contents of this file may be used under the terms of
@@ -67,8 +67,8 @@ public abstract class EmbeddedPersistentObjectHandlerReadOnly implements Embedde
      * the parent object's <code>AbstractDomain</code>.
      *
      * @param parentPO         <code>PersistentObject</code> instance just
-     *			fetched a call to the parent's
-     *		     <code>AbstractDomain.find(PersistentObject)</code> method.
+     *          fetched a call to the parent's
+     *           <code>AbstractDomain.find(PersistentObject)</code> method.
      * @param parentResultset  Description of the Parameter
      * @see                    net.sf.jrf.domain.AbstractDomain#find(Object)
      */
@@ -82,8 +82,8 @@ public abstract class EmbeddedPersistentObjectHandlerReadOnly implements Embedde
      * the parent object's <code>AbstractDomain</code>.
      *
      * @param parentPO  <code>PersistentObject</code> instance just
-     *			fetched a call to the parent's
-     *		     <code>AbstractDomain.find(PersistentObject)</code> method.
+     *          fetched a call to the parent's
+     *           <code>AbstractDomain.find(PersistentObject)</code> method.
      * @see             net.sf.jrf.domain.AbstractDomain#find(Object)
      */
     public void constructObjects(PersistentObject parentPO)

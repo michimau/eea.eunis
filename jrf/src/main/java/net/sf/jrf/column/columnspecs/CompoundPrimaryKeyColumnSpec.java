@@ -213,24 +213,24 @@ public class CompoundPrimaryKeyColumnSpec
         while (iterator.hasNext()) {
             ColumnSpec spec = (ColumnSpec) iterator.next();
             if (spec.isImplicitInsertColumn(policy)) {
-            	if (implicitInsertColumn != null) {
-               		 throw new ConfigurationException(
-                	        this.getClass().toString() +
-                        	": there can only be one implicit sequenced column in a compound primary key; "+
-				" already have column "+ implicitInsertColumn.getColumnName());
-            	}
+                if (implicitInsertColumn != null) {
+                         throw new ConfigurationException(
+                                this.getClass().toString() +
+                                ": there can only be one implicit sequenced column in a compound primary key; "+
+                                " already have column "+ implicitInsertColumn.getColumnName());
+                }
                 implicitInsertColumn = spec;
             }
-	    else if (spec.isSequencedPrimaryKey() && 
-		policy.getSequenceSupportType() == DatabasePolicy.SEQUENCE_SUPPORT_EXTERNAL) {
-            	if (externalSequenceColumn != null) {
-                	throw new ConfigurationException(
+            else if (spec.isSequencedPrimaryKey() &&
+                policy.getSequenceSupportType() == DatabasePolicy.SEQUENCE_SUPPORT_EXTERNAL) {
+                if (externalSequenceColumn != null) {
+                        throw new ConfigurationException(
                         this.getClass().toString() +
                         ": there can only be one external sequenced column in a compound primary key; already have column "
                         + externalSequenceColumn.getColumnName());
-            	}
-	    	externalSequenceColumn = spec;
-	    } 
+                }
+                externalSequenceColumn = spec;
+            }
         }
     }
 
@@ -254,7 +254,7 @@ public class CompoundPrimaryKeyColumnSpec
                         + implicitInsertColumn.getColumnName());
             }
             implicitInsertColumn = aColumnSpec;
-	}
+        }
     }
 
 
@@ -639,12 +639,12 @@ public class CompoundPrimaryKeyColumnSpec
     public void setValueTo(Object aValue,
             PersistentObject aPO) {
         if (implicitInsertColumn != null)
-		implicitInsertColumn.setValueTo(aValue, aPO);
+                implicitInsertColumn.setValueTo(aValue, aPO);
         else if (externalSequenceColumn != null)
-		externalSequenceColumn.setValueTo(aValue, aPO);
-	else
+                externalSequenceColumn.setValueTo(aValue, aPO);
+        else
             throw new UnsupportedOperationException(
-		"setValueTo() should not be used if no implicit auto-increment column or external sequence column exists.");
+                "setValueTo() should not be used if no implicit auto-increment column or external sequence column exists.");
     }
 
 

@@ -17,7 +17,7 @@
 * Portions created by is.com are Copyright (C) 2000 is.com.
 * All Rights Reserved.
 *
-* Contributor: 		James Evans (jevans@vmguys.com)
+* Contributor:      James Evans (jevans@vmguys.com)
 * Contributor: ____________________________________
 *
 * Alternatively, the contents of this file may be used under the terms of
@@ -58,25 +58,25 @@ public interface EmbeddedPersistentObjectHandler
      * Consider the following scenario:
      * <pre>
      * Table A (
-     *		id integer not null
-     *		.
-     *		.
-     *		primary key(id)
+     *      id integer not null
+     *      .
+     *      .
+     *      primary key(id)
      * )
      * Table A_dates (
-     *		id integer not null,
-     *		workdate date not null,
-     *		.
-     *		.
-     *		primary key(id,workdate)
+     *      id integer not null,
+     *      workdate date not null,
+     *      .
+     *      .
+     *      primary key(id,workdate)
      * )
      * Table A_date_detail (
-     *		id integer not null
-     *		workdate date not null,
-     *		detailtype integer not null,
-     *		.
-     *		.
-     *		primary key(id,workdate,detailtype)
+     *      id integer not null
+     *      workdate date not null,
+     *      detailtype integer not null,
+     *      .
+     *      .
+     *      primary key(id,workdate,detailtype)
      * </pre>
      * An application may need to build a composite object that
      * includes A as a base and all Table A_dates for
@@ -90,21 +90,21 @@ public interface EmbeddedPersistentObjectHandler
      * .
      * .
      * public AComposite extends A {
-     *		private ArrayList dateInfo;
-     *		.
-     *		public ArrayList getDateInfo() {
-     *			return dateInfo;
-     *		}
-     *		.
-     *	     .
+     *      private ArrayList dateInfo;
+     *      .
+     *      public ArrayList getDateInfo() {
+     *          return dateInfo;
+     *      }
+     *      .
+     *       .
      *
      * public ADateDetailComposite extends ADateDetail {
-     *		private ArrayList detailInfo;
-     *		.
-     *		.
-     *		public ArrayList getDetaiInfo() {
-     *			return detailInfo;
-     *		}
+     *      private ArrayList detailInfo;
+     *      .
+     *      .
+     *      public ArrayList getDetaiInfo() {
+     *          return detailInfo;
+     *      }
      *
      * </pre>
      *  The embedded handler for <code>AComposite</code> at level 1
@@ -162,7 +162,7 @@ public interface EmbeddedPersistentObjectHandler
      * when the construct context is <code>CONSTRUCT_CONTEXT_AFTER_ALL_ROWS</code>.
      *
      * @param parentPO  the <em>last</em> <code>PersistentObject</code> instance.
-     *					fetched a call to the parent's <code>AbstractDomain.find(PersistentObject)</code> method.
+     *                  fetched a call to the parent's <code>AbstractDomain.find(PersistentObject)</code> method.
      * @see             net.sf.jrf.domain.AbstractDomain#find(Object)
      * @see             #CONSTRUCT_CONTEXT_AFTER_ALL_ROWS
      * @see             #getConstructObjectContext()
@@ -178,8 +178,8 @@ public interface EmbeddedPersistentObjectHandler
      * when the construct context is <code>CONSTRUCT_CONTEXT_EACH_ROW</code>.
      *
      * @param parentPO         <code>PersistentObject</code> instance just
-     *					fetched a call to the parent's
-     *		     		<code>AbstractDomain.find(PersistentObject)</code> method.
+     *                  fetched a call to the parent's
+     *                  <code>AbstractDomain.find(PersistentObject)</code> method.
      * @param parentResultset  Description of the Parameter
      * @see                    net.sf.jrf.domain.AbstractDomain#find(Object)
      * @see                    #CONSTRUCT_CONTEXT_AFTER_EACH_ROW
@@ -194,16 +194,16 @@ public interface EmbeddedPersistentObjectHandler
      * <pre>
      *   public void populateEmbeddedObjectKeyValues(PersistentObject parentPO, PersistentObject embeddedPO)
      *   {
-     *		// Populate sequence id value from master to detail record.
-     *	 	Customer c = (Customer) parentPO;
-     *		CustomerPhone cp = (CustomerPhone) embeddedPO;
-     *		cp.setId(c.getId());
+     *      // Populate sequence id value from master to detail record.
+     *      Customer c = (Customer) parentPO;
+     *      CustomerPhone cp = (CustomerPhone) embeddedPO;
+     *      cp.setId(c.getId());
      *
      *   }
      * </pre>
      *
      * @param parentPO    <code>PersistentObject</code> instance just
-     *					fetched a call to the parent's
+     *                  fetched a call to the parent's
      * @param embeddedPO  <code>PersistentObject</code> instance of the embedded object.
      */
     public void populateEmbeddedObjectKeyValues(PersistentObject parentPO, PersistentObject embeddedPO);

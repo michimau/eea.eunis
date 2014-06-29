@@ -34,7 +34,7 @@
  */
 package net.sf.jrf.domain;
 
-/** Interface with a single method to obtain <code>PersistentObjectDynaClass</code> instance.  This interface is 
+/** Interface with a single method to obtain <code>PersistentObjectDynaClass</code> instance.  This interface is
 * provided to allow a <code>DynaBean</code> implementation to store a <code>PersistentObjectDynaClass</code>
 * instance in contexts where is it is not possible to directly store <code>PersistentObjectDynaClass</code>
 * as the real underlying <code>DynaClass</code>.  Implementations of this interface <em>MUST</em> also implement
@@ -42,14 +42,14 @@ package net.sf.jrf.domain;
 */
 public interface PersistentObjectDynaBean {
 
-	/** Returns <code>PersistentObjectDynaClass</code> instance of the bean.
-	* In many implementations where the underlying <code>DynaClass</code> is a <code>PersistentObjectDynaClass</code>,
-	* the return will simply be:
-	* <pre>
+    /** Returns <code>PersistentObjectDynaClass</code> instance of the bean.
+    * In many implementations where the underlying <code>DynaClass</code> is a <code>PersistentObjectDynaClass</code>,
+    * the return will simply be:
+    * <pre>
         * return (PersistentObjectDynaClass) getDynaClass();
         * </pre>
-	* @return <code>PersistentObjectDynaClass</code> instance of the bean.
-	*/
-	public PersistentObjectDynaClass getPersistentObjectDynaClass();
+    * @return <code>PersistentObjectDynaClass</code> instance of the bean.
+    */
+    public PersistentObjectDynaClass getPersistentObjectDynaClass();
 
 }

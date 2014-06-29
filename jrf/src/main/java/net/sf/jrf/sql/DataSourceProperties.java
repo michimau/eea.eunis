@@ -44,7 +44,7 @@ import net.sf.jrf.exceptions.ConfigurationException;
  *   stored in this class are:
  * <ol>
  * <li> <code>DatabaseMetaData<code> properties.  Value may be set
- * 	after a connection has been established.
+ *  after a connection has been established.
  * <li> <code>DatabasePolicy</code> implementation to use.
  * <li> Various driver-specific properties that are unfortunately not included
  *      in <code>java.sql.DatabaseMetaData</code>.  For example, you may specify
@@ -429,7 +429,7 @@ public class DataSourceProperties implements Cloneable
      * </pre>
      *
      * @param transactionsForDropAndCreateSupported  if <code>true</code> transactions
-     *		are permitted for drop and create table SQL statements.
+     *      are permitted for drop and create table SQL statements.
      */
     public void setTransactionsForDropAndCreateSupported(
         boolean transactionsForDropAndCreateSupported)

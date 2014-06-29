@@ -63,7 +63,7 @@ import net.sf.jrf.util.ForeignKey;
  * <p>
  * <p>
  * <h4>External Sequence Implementation Overview (External sequences are created independent of any single table)
-	</h4>
+    </h4>
  * <table border=4>
  *    <thead>
  *      <tr align='left'bgcolor='gold'>
@@ -73,20 +73,20 @@ import net.sf.jrf.util.ForeignKey;
  *    <tbody>
  *    <tr align='left'>
  *    <th>sequenceNextValSQL()</th>
- *    <th>This method should return the SQL expression for next sequence value (e.g. seq.NEXTVAL)</th> 
+ *    <th>This method should return the SQL expression for next sequence value (e.g. seq.NEXTVAL)</th>
  *     </tr>
  *    <tr align='left'>
  *    <th>sequenceSQL()</th>
- *    <th>Ordinarily, this method should be implemented as <code>"SELECT "+sequenceNextValSQL()"</code>.</th> 
+ *    <th>Ordinarily, this method should be implemented as <code>"SELECT "+sequenceNextValSQL()"</code>.</th>
  *     </tr>
  *    <tr align='left'>
  *    <th>getCreateSequenceSQL()</th>
- *    <th>Return the full SQL to create the sequence.</th> 
+ *    <th>Return the full SQL to create the sequence.</th>
  *     </tr>
  *    <tr align='left'>
  *    <th>createSequence() (both overloads)</th>
- *    <th>Until a separate method is created for dropping sequence, implementation should include issuing an 
-	  SQL statement to drop the sequence.</th> 
+ *    <th>Until a separate method is created for dropping sequence, implementation should include issuing an
+      SQL statement to drop the sequence.</th>
  *    </tr>
  *    </tbody>
  * </table>
@@ -106,7 +106,7 @@ import net.sf.jrf.util.ForeignKey;
  *     </tr>
  *    <tr align='left'>
  *    <th>getAutoIncrementNumericColumnType()</th>
- *    <th>Some database vendors insist on a specific database numeric type "CREATE TABLE" statements."</th> 
+ *    <th>Some database vendors insist on a specific database numeric type "CREATE TABLE" statements."</th>
  *    </tr>
  *    </tbody>
  * </table>
@@ -170,7 +170,7 @@ public interface DatabasePolicy
     /**
      * Constant to denote that database does not support fetching sequences
      * after an insert operation at all.  (<em>A database type that returns this
-     * value for <code>getSequenceFetchAfterInsertSupportType()</code> is, of course, 
+     * value for <code>getSequenceFetchAfterInsertSupportType()</code> is, of course,
      * incapable of implementing the application scenario of a sequenced
      * master table and accompanying detail tables that use the master's sequence value as
      * a foreign key</em>).
@@ -214,8 +214,8 @@ public interface DatabasePolicy
      * recently inserted sequence value.
      *
      * @return   <code>SEQUENCE_FETCHAFTERINSERTSUPPORT_NONE</code>,
-     *	<code>SEQUENCE_FETCHAFTERINSERTSUPPORT_SQLQUERY</code>,
-     *	or <code>SEQUENCE_FETCHAFTERINSERTSUPPORT_METHODINVOKE</code>.
+     *  <code>SEQUENCE_FETCHAFTERINSERTSUPPORT_SQLQUERY</code>,
+     *  or <code>SEQUENCE_FETCHAFTERINSERTSUPPORT_METHODINVOKE</code>.
      * @see      #SEQUENCE_FETCHAFTERINSERTSUPPORT_NONE
      * @see      #SEQUENCE_FETCHAFTERINSERTSUPPORT_METHODINVOKE
      * @see      #SEQUENCE_FETCHAFTERINSERTSUPPORT_SQLQUERY
@@ -227,9 +227,9 @@ public interface DatabasePolicy
      * Returns the sequence support type for this database.
      *
      * @return   <code>SEQUENCE_SUPPORT_NONE</code>,
-     *	<code>SEQUENCE_SUPPORT_AUTOINCREMENT_IMPLICIT</code>,
-     *	<code>SEQUENCE_SUPPORT_AUTOINCREMENT_EXPLICIT</code> or
-     *	<code>SEQUENCE_SUPPORT__EXTERNAL</code>.
+     *  <code>SEQUENCE_SUPPORT_AUTOINCREMENT_IMPLICIT</code>,
+     *  <code>SEQUENCE_SUPPORT_AUTOINCREMENT_EXPLICIT</code> or
+     *  <code>SEQUENCE_SUPPORT__EXTERNAL</code>.
      * @see      #SEQUENCE_SUPPORT_NONE
      * @see      #SEQUENCE_SUPPORT_AUTOINCREMENT_IMPLICIT
      * @see      #SEQUENCE_SUPPORT_AUTOINCREMENT_EXPLICIT
@@ -404,7 +404,7 @@ public interface DatabasePolicy
      *
      * @param executer       Description of the Parameter
      * @throws SQLException  is an error occurs accessing the
-     *			database.
+     *          database.
      * @see                  net.sf.jrf.sql.JRFConnection#assureDatabaseConnection()
      */
     public void initialize(StatementExecuter executer)
@@ -424,7 +424,7 @@ public interface DatabasePolicy
      * that converts the argument to upper case.  For example:
      * <pre>
      * public String formatToUpper(String value) {
-     *		return "UPPER("+value+")";
+     *      return "UPPER("+value+")";
      * }
      * </pre>
      *
@@ -439,7 +439,7 @@ public interface DatabasePolicy
      * that converts the argument to lower case.  For example:
      * <pre>
      * public String formatToLower(String value) {
-     *		return "LOWER("+value+")";
+     *      return "LOWER("+value+")";
      * }
      * </pre>
      *
@@ -514,7 +514,7 @@ public interface DatabasePolicy
      *
      * @param foreignKey  foreign key information.
      * @return            SQL expression that may be used to declare
-     *		  a foreign key relationship in a CREATE TABLE statement.
+     *        a foreign key relationship in a CREATE TABLE statement.
      * @see               #getForeignKeySQLStatement(ForeignKey)
      * @see               #foreignKeyExpressionsAllowedInCreateTable()
      * @see               net.sf.jrf.util.ForeignKey
@@ -527,7 +527,7 @@ public interface DatabasePolicy
      *
      * @param foreignKey  foreign key information.
      * @return            SQL expression that may be used to declare
-     *		  a foreign key relationship in a CREATE TABLE statement.
+     *        a foreign key relationship in a CREATE TABLE statement.
      * @see               #getForeignKeySQLExpression(ForeignKey)
      * @see               net.sf.jrf.util.ForeignKey
      */

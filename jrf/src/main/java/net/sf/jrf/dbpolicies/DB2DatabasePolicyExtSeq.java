@@ -91,7 +91,7 @@ public class DB2DatabasePolicyExtSeq extends DB2DatabasePolicyBase
     public void createSequence(AbstractDomain domain, StatementExecuter stmtExecuter)
         throws SQLException
     {
-	createSequence(domain, "INCREMENT BY 1 START WITH 1", stmtExecuter);
+    createSequence(domain, "INCREMENT BY 1 START WITH 1", stmtExecuter);
     }
 
     /**
@@ -172,7 +172,7 @@ public class DB2DatabasePolicyExtSeq extends DB2DatabasePolicyBase
      */
     public Long findAutoIncrementIdByMethodInvoke(String tableName, String columnName, Statement stmt)
     {
-	return null;
+    return null;
     }
 
 }

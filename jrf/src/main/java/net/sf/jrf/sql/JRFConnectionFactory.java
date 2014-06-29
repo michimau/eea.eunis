@@ -49,7 +49,7 @@ import org.apache.log4j.Category;
  */
 public class JRFConnectionFactory
 {
-    private static Object defaultDataSource = null;	// XADataSource or DataSource 
+    private static Object defaultDataSource = null; // XADataSource or DataSource
     private static DataSourceProperties defaultDataSourceProperties = null;
     private static net.sf.jrf.exceptions.ConfigurationException loadDefaultsException = null;
     private static boolean defaultLoadAttempted = false;
@@ -60,7 +60,7 @@ public class JRFConnectionFactory
 
     static
     {
-        // Set up local data source generator. If available. 
+        // Set up local data source generator. If available.
         String genClass = null;
         try
         {
@@ -92,11 +92,11 @@ public class JRFConnectionFactory
                 throw loadDefaultsException;
             }
             try {
-		return new JRFConnection(defaultDataSource,
-					(DataSourceProperties) defaultDataSourceProperties.clone());
+        return new JRFConnection(defaultDataSource,
+                    (DataSourceProperties) defaultDataSourceProperties.clone());
             }
             catch (CloneNotSupportedException ex) {
-		throw new InternalError();
+        throw new InternalError();
             }
         }
         JRFConnection conn = null;
@@ -140,17 +140,17 @@ public class JRFConnectionFactory
         }
         else if (conntype.equals("local"))
         {
-	    if (localDataSourceGenerator == null)
-		throw new net.sf.jrf.exceptions.ConfigurationException(
-			"Local data sources cannot be used; bad or no implementation of "+
-			"net.sf.jrf.sql.LocalDataSourceGenerator specified.");
+        if (localDataSourceGenerator == null)
+        throw new net.sf.jrf.exceptions.ConfigurationException(
+            "Local data sources cannot be used; bad or no implementation of "+
+            "net.sf.jrf.sql.LocalDataSourceGenerator specified.");
             dataSource = localDataSourceGenerator.findLocalDataSource(dbtype, p);
         }
         else
         {
             throw new net.sf.jrf.exceptions.ConfigurationException(dbtype + "." + conntype + ": value must be 'local' or 'jndi'");
         }
-	JRFConnection result = new JRFConnection(dataSource,dataSourceProperties);
+    JRFConnection result = new JRFConnection(dataSource,dataSourceProperties);
         // Set dedicated connection properties.
         result.setDedicatedConnection(JRFProperties.resolveBooleanProperty(p, "dedicatedConnection", false));
         return result;
@@ -174,8 +174,8 @@ public class JRFConnectionFactory
      * @param dbtype                                            name of database type.
      * @param p                                                 <code>Properties</code> instance.
      * @return                                                  <code>DataSource</code> or <code>XADataSource</code>
-     *							        instance.
-     * @throws net.sf.jrf.exceptions.ConfigurationException  if DataSource cannot be obtained. 
+     *                                  instance.
+     * @throws net.sf.jrf.exceptions.ConfigurationException  if DataSource cannot be obtained.
      */
     public static Object findJNDIDataSource(String dbtype, Properties p)
         throws net.sf.jrf.exceptions.ConfigurationException
@@ -206,7 +206,7 @@ public class JRFConnectionFactory
      * @param providerURL                 provider URL of the data source.
      * @param contextFactoryName          name of the factory
      * @return                            <code>DataSource</code> or <code>XADataSource</code>
-     *			      		  instance.
+     *                        instance.
      * @exception InstantiationException  Description of the Exception
      * @exception IllegalAccessException  Description of the Exception
      * @exception NamingException         Description of the Exception

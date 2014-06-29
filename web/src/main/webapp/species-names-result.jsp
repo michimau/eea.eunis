@@ -385,12 +385,6 @@
 					                        	expand.addElement("newName");
 					                        String expandURL = formBean.toURLParam(expand);
 					                        boolean isExpanded = Utilities.checkedStringToBoolean(formBean.getExpand(), false);
-					                        if (showVernacularNames && !isExpanded){
-                      						%>
-                          						<a title="<%=cm.cms("show_vernacular_list")%>" rel="nofollow" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names in results table")%></a>
-                        						<%=cm.cmsTitle("show_vernacular_list")%>
-                      						<%
-                        					}
                       						%>
                       						<table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable listing">
                         						<thead>

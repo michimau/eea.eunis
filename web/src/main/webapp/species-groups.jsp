@@ -84,7 +84,7 @@
                             <%=cm.cmsPhrase("Group")%>
                           </th>
                           <th style="text-align:right" class="nosort">
-                            <%=cm.cmsPhrase("Number of valid species")%>
+                            <%=cm.cmsPhrase("Number of valid species in EUNIS")%>
                           </th>
                           <th style="text-align:center" class="nosort">
                             <%=cm.cmsPhrase("Select")%>

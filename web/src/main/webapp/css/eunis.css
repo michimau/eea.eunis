@@ -599,3 +599,18 @@ div.overlay .formControls a {
 .conservation-legend-nodata {
     background-color: #EDEDED;
 }
+
+#popup_login_form_eea {
+    position: absolute;
+    top: 43px;
+    right: 0;
+    background-color: #FFF;
+    z-index: 500;
+    padding: 1em;
+    width: 100px;
+    -webkit-box-shadow: 0px 2px 2px #333;
+    -moz-box-shadow: 0px 2px 2px #333;
+    -ms-box-shadow: 0px 2px 2px #333;
+    -o-box-shadow: 0px 2px 2px #333;
+    box-shadow: 0px 2px 2px #333;
+}

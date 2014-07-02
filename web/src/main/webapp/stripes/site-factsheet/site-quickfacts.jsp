@@ -125,7 +125,7 @@
           <br>
 			<c:if test="${ actionBean.typeNatura2000 }">
                 <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source and more information')}: <a href="http://natura2000.eea.europa.eu/Natura2000/SDF.aspx?site=${ actionBean.idsite }" target="_BLANK">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 Standard Data Form')}</a></p>
-                <c:if test="${ actionBean.context.sessionManager.authenticated }">
+                <c:if test="${ actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.importExportData_RIGHT}">
                   <p class="discreet" style="color:red;"><a href="/updatesite/${ actionBean.idsite }" title="Testing only">Force SDF update from Natura 2000 site</a></p>
                 </c:if>
             </c:if>

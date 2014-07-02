@@ -52,23 +52,10 @@
                 </h1>
                 <br />
                 <table class="listing fullwidth" id="services">
-<%--
-                  <tr>
-                    <th align="center">
-                      &nbsp;
-                    </th>
-                    <th>
-                      <%=cm.cmsPhrase("Services")%>
-                    </th>
-                  </tr>
---%>
 <%
-  int color = 0;
   String cssClass = "";
   if( SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT() )
   {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
-
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -96,23 +83,10 @@
                   </tr>
 <%
   }
-  //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
-<%--
-                  <tr <%=cssClass%>>
-                    <td align="center">
-                      <a href="logos.jsp" title="<%=cm.cms("eunis_database_logos")%>"><img alt="<%=cm.cms("eunis_database_logos")%>" src="images/logos.gif" width="81" height="43" border="0" title="<%=cm.cms("eunis_database_logos")%>" /></a>
-                      <%=cm.cmsAlt("eunis_database_logos")%><%=cm.cmsTitle("eunis_database_logos")%>
-                    </td>
-                    <td>
-                      <a href="logos.jsp"><%=cm.cmsPhrase("Download EUNIS Database logos")%></a>
-                    </td>
-                  </tr>
---%>
 <%
-  if( SessionManager.isAuthenticated() )
+  if( SessionManager.isSave_search_criteria_RIGHT() )
   {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -125,43 +99,8 @@
                   </tr>
 <%
   }
-  if( SessionManager.isContent_management_RIGHT() )
-  {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
-%>
-<%--
-                  <tr <%=cssClass%>>
-                    <td align="center">
-                      <a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><img alt="<%=cm.cms("services_headlinelink")%>" src="images/headlines.gif" width="81" height="43" border="0" title="<%=cm.cms("services_headlinelink_title")%>" /></a>
-                      <%=cm.cmsAlt("services_headlinelink")%><%=cm.cmsTitle("services_headlinelink_title")%>
-                    </td>
-                    <td>
-                      <a href="headline.jsp"><%=cm.cmsPhrase("Edit EUNIS Database headline")%></a>
-                    </td>
-                  </tr>
---%>
-<%
-  }
-  if( SessionManager.isAuthenticated() )
-  {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
-%>
-<%--
-                  <tr <%=cssClass%>>
-                    <td align="center">
-                      <a href="download-database.jsp" title="<%=cm.cms("services_access")%>"><img alt="<%=cm.cms("services_access")%>" src="images/access.gif" width="81" height="43" border="0" title="<%=cm.cms("services_access")%>" /></a>
-                      <%=cm.cmsAlt("services_access")%><%=cm.cmsTitle("services_access")%>
-                    </td>
-                    <td>
-                      <a href="download-database.jsp"><%=cm.cmsPhrase("Download database in Microsoft Access format")%></a>
-                    </td>
-                  </tr>
---%>
-<%
-  }
   if(SessionManager.isAdmin())
   {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -176,7 +115,6 @@
   }
   if ( SessionManager.isContent_management_RIGHT() )
   {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -191,7 +129,6 @@
   }
   if ( SessionManager.isAdmin() )
   {
-    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -205,7 +142,6 @@
 <%
     if ( !SessionManager.getWebContent().isEditMode() )
     {
-      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -220,7 +156,6 @@
     }
     else
     {
-      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -235,7 +170,6 @@
     }
     if ( !SessionManager.getWebContent().isAdvancedEditMode() )
     {
-      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
@@ -251,7 +185,6 @@
     }
     else
     {
-      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 %>
                   <tr <%=cssClass%>>
                     <td align="center">

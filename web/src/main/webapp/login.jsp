@@ -105,7 +105,7 @@
           <%
             }
           %>
-              <%=cm.cmsText("habitats_login-help_01")%>
+              <%--<%=cm.cmsText("habitats_login-help_01")%>--%>
 <!-- END MAIN CONTENT -->
     </stripes:layout-component>
 </stripes:layout-render>

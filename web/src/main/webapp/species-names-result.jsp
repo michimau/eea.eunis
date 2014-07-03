@@ -431,7 +431,7 @@
                                                         if (showVernacularNames){
                                             %>
                                                             <th scope="col" class="nosort">
-                                                                <%=cm.cmsPhrase("Common name")%>
+                                                                <%=cm.cmsPhrase("English common name")%>
                                                             </th>
                                                         <%
                                                         }
@@ -730,7 +730,7 @@
                                                         if (showVernacularNames ){
                                             %>
                                                           <th scope="col" class="nosort">
-                                                              <%=cm.cmsPhrase("Common name")%>
+                                                              <%=cm.cmsPhrase("English common name")%>
                                                           </th>
                                             <%
                                                         }

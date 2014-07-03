@@ -603,7 +603,7 @@ div.overlay .formControls a {
 #popup_login_form_eea {
     position: absolute;
     top: 43px;
-    right: 0;
+    right: 9px;
     background-color: #FFF;
     border-left: 0;
     z-index: 500;

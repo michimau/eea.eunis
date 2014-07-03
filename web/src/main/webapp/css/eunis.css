@@ -605,6 +605,7 @@ div.overlay .formControls a {
     top: 43px;
     right: 0;
     background-color: #FFF;
+    border-left: 0;
     z-index: 500;
     padding: 1em;
     width: 100px;

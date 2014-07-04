@@ -29,13 +29,13 @@
                         Simple interactive map showing Natura 2000 sites and Nationally designated areas
                     </td>
                 </tr>
-                <c:if test="actionBean.typeNatura2000">
+                <c:if test="${actionBean.typeNatura2000}">
                     <tr>
                         <td>
-                            <a href="http://www.eea.europa.eu/data-and-maps/data/natura-3" target="_BLANK">Data download</a>
+                            <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5" target="_BLANK">Data download</a>
                         </td>
                         <td>
-
+                            The Natura 2000 dataset is available from the European Environment Agency website
                         </td>
                     </tr>
                 </c:if>

@@ -37,9 +37,6 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
     /** The legal text referenced by a group (could be a valid name or 'any'. */
     private String legalText;
 
-    /** Used by second form (annex I, IV etc).*/
-    private String annex;
-
     /** Type (form where I come from I or II). */
     private Integer typeForm = null;
 
@@ -48,6 +45,11 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
 
     /** Map the search criterias to human readable strings. */
     private static Hashtable humanMappings = null;
+
+    /**
+     * Uniquely identifies the annex
+     */
+    private String dcId = null;
 
     /**
      * Basic constructor (one which does the first search...) rest are only for search in results.
@@ -71,7 +73,7 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
         if (CRITERIA_LEGAL.intValue() == typeForm.intValue()) {
             this.groupName = groupName;
             this.legalText = sciNameOrLegal;
-            this.annex = annex;
+            this.dcId = annex;
         }
         this.typeForm = typeForm;
     }
@@ -125,9 +127,11 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
         if (null != scientificName) {
             url.append(Utilities.writeURLParameter("scientificName", scientificName));
         }
-        if (null != legalText && null != annex) {
+        if (null != legalText) {
             url.append(Utilities.writeURLParameter("legalText", legalText));
-            url.append(Utilities.writeURLParameter("annex", annex));
+        }
+        if (null != dcId) {
+            url.append(Utilities.writeURLParameter("dcId", dcId));
         }
         if (null != criteriaSearch && null != criteriaType && null != oper) {
             url.append(Utilities.writeURLParameter("criteriaSearch", criteriaSearch));
@@ -166,26 +170,24 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
         // System.out.println("groupName = " + groupName);
         // System.out.println("legalText = " + legalText);
         // System.out.println("annex = " + annex);
-        if (null != groupName && null != legalText && null != annex) {
+        if (null != groupName && null != dcId) {
             if (0 == typeForm.compareTo(CRITERIA_LEGAL)) {
-                if (!legalText.equalsIgnoreCase("any")) {
-                    if (groupName.equalsIgnoreCase("any")) {
-                        // first case ('Any group')
-                        result.append("ANNEX='" + annex + "' AND LOOKUP_TYPE='LEGAL_STATUS' AND ALTERNATIVE='" + legalText + "'");
-                    } else {
-                        // second case (not 'Any group')
-                        result.append(
-                                "ANNEX='" + annex + "' AND LOOKUP_TYPE='LEGAL_STATUS' AND ALTERNATIVE='" + legalText
-                                + "' AND E.ID_GROUP_SPECIES='" + groupName + "'");
-                    }
+                if(!dcId.equalsIgnoreCase("any")) {
+                    result.append("A.ID_DC='" + dcId + "' AND ");
+                }
+                if (!groupName.equalsIgnoreCase("any")) {
+                    result.append("E.ID_GROUP_SPECIES='" + groupName + "' AND ");
+                }
+
+                result.append("LOOKUP_TYPE='LEGAL_STATUS'");
+
+            } else {
+                if (groupName.equalsIgnoreCase("any")) {
+                    // first case ('Any group')
+                    result.append("LOOKUP_TYPE='LEGAL_STATUS'");
                 } else {
-                    if (groupName.equalsIgnoreCase("any")) {
-                        // first case ('Any group')
-                        result.append("LOOKUP_TYPE='LEGAL_STATUS'");
-                    } else {
-                        // second case (not 'Any group')
-                        result.append("LOOKUP_TYPE='LEGAL_STATUS' AND E.ID_GROUP_SPECIES='" + groupName + "'");
-                    }
+                    // second case (not 'Any group')
+                    result.append("LOOKUP_TYPE='LEGAL_STATUS' AND E.ID_GROUP_SPECIES='" + groupName + "'");
                 }
             }
         }
@@ -222,7 +224,6 @@ public class LegalSearchCriteria extends AbstractSearchCriteria {
         if (null != groupName && null != legalText) {
             if (0 == typeForm.compareTo(CRITERIA_LEGAL)) {
                 result.append(Utilities.writeFormParameter("legalText", legalText));
-                result.append(Utilities.writeFormParameter("annex", annex));
             }
         }
         // If this object is a search in results

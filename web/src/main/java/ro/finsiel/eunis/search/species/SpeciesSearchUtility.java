@@ -28,7 +28,6 @@ import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
-import ro.finsiel.eunis.jrfTables.species.legal.LegalReportsDomain;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
@@ -227,12 +226,7 @@ public class SpeciesSearchUtility {
      * @param groupID Group for which you want the legal texts to be found. You can pass 'any' here to find all the
      *                legal texts.
      * @return A list of legal texts associated with this groupID.<br />
-     * The list contains the following type of objects:<br />
-     * <UL>
-     *  <LI> If groupID = "any", list contains ScientificLegalPersist objects
-     *  <LI> If groupID != "any", list contains LegalReportsPersist objects
-     *  <LI> If groupID is null, list size will be 0.
-     * </UL>
+     * The list contains ScientificLegalPersist objects. If groupID is null, list size will be 0.
      */
     public static List findLegalTextsForGroup(String groupID) {
         if (null == groupID) {
@@ -245,12 +239,12 @@ public class SpeciesSearchUtility {
                 ScientificLegalDomain finder = new ScientificLegalDomain();
 
                 results = finder.findWhere(
-                        "E.ID_GROUP_SPECIES = " + groupID + " AND B.LOOKUP_TYPE = 'LEGAL_STATUS' GROUP BY C.ANNEX, D.ALTERNATIVE");
+                        "E.ID_GROUP_SPECIES = " + groupID + " AND B.LOOKUP_TYPE = 'LEGAL_STATUS' AND E.VALID_NAME>0 GROUP BY D.ALTERNATIVE");
             } else {
                 // Any group
-                LegalReportsDomain finder = new LegalReportsDomain();
+                ScientificLegalDomain finder = new ScientificLegalDomain();
 
-                results = finder.findWhere("B.LOOKUP_TYPE = 'LEGAL_STATUS' GROUP BY C.ANNEX, D.ALTERNATIVE");
+                results = finder.findWhere("B.LOOKUP_TYPE = 'LEGAL_STATUS' AND E.VALID_NAME>0 GROUP BY D.ALTERNATIVE");
             }
         } catch (Exception ex) {
             // If exception occurrs, return an empty list!

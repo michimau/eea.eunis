@@ -54,6 +54,8 @@ public class ScientificLegalPersist extends PersistentObject {
     private String url = null;
     private String comment = null;
 
+    private String idDc = null;
+
     /** Default constructor */
     public ScientificLegalPersist() {
         super();
@@ -230,5 +232,13 @@ public class ScientificLegalPersist extends PersistentObject {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getIdDc() {
+        return idDc;
+    }
+
+    public void setIdDc(String idDc) {
+        this.idDc = idDc;
     }
 }

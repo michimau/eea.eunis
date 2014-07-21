@@ -12,7 +12,6 @@
 <%@page import="ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                 ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist,
-                ro.finsiel.eunis.jrfTables.species.legal.LegalReportsPersist,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.WebContentManagement,
                 java.util.Vector"%>
@@ -60,31 +59,19 @@
         {
           var frm = document.eunis2;
           var legalText1 = document.eunis2.legalText1.options[document.eunis2.legalText1.selectedIndex].value;
-          var arr = legalText1.split( "##" );
-
-          var grName = document.createElement("input");
-          grName.type= "hidden";
-          grName.name = "grName";
-          grName.value = arr[ 0 ];
-          frm.appendChild( grName );
-
-          var groupName = document.createElement("input");
-          groupName.type= "hidden";
-          groupName.name = "groupName";
-          groupName.value = arr[ 1 ];
-          frm.appendChild( groupName );
-
-          var annex = document.createElement("input");
-          annex.type= "hidden";
-          annex.name = "annex";
-          annex.value = arr[ 2 ];
-          frm.appendChild( annex );
+          var legalTextLabel = document.eunis2.legalText1.options[document.eunis2.legalText1.selectedIndex].innerHTML;
 
           var legalText = document.createElement("input");
           legalText.type= "hidden";
           legalText.name = "legalText";
-          legalText.value = arr[ 3 ];
+          legalText.value = legalTextLabel;
           frm.appendChild( legalText );
+
+          var dcId = document.createElement("input");
+          dcId.type= "hidden";
+          dcId.name = "dcId";
+          dcId.value = legalText1;
+          frm.appendChild( dcId );
 
           frm.submit();
         }
@@ -360,28 +347,16 @@
                                 <label for="legalText1" class="noshow"><%=cm.cms("species_legal_instrument")%></label>
                                 <select name="legalText1" id="legalText1" onchange="legalText1OnChange();" title="<%=cm.cms("species_legal_instrument")%>">
                                   <option value="" selected="selected"><%=cm.cms("species_legal_28")%></option>
-                                  <option value="any##any##any##any"><%=cm.cms("any_legal_text")%></option>
+                                  <option value="any"><%=cm.cms("any_legal_text")%></option>
                                   <%// Legal texts within selected group
                                   List results = SpeciesSearchUtility.findLegalTextsForGroup(groupID);
                                   Iterator resIt = results.iterator();
-                                  // if we don't have any group
-                                  if (!groupID.equalsIgnoreCase("any"))
-                                  {
                                     while (resIt.hasNext())
                                     {
                                       ScientificLegalPersist item = (ScientificLegalPersist)resIt.next();%>
-                                      <option value="<%=(item.getCommonName() != null ? item.getCommonName().replaceAll("&","&amp;") : "")%>##<%=item.getIdGroupspecies()%>##<%=item.getAnnex()%>##<%=item.getAlternative()%>">ANNEX <%=item.getAnnex()%> - <%=item.getAlternative()%></option>
+                                      <option value="<%=item.getIdDc()%>"><%=item.getAlternative()%></option>
                                 <%
                                     }
-                                  } else {
-                                  // if we have any group
-                                    while (resIt.hasNext())
-                                    {
-                                      LegalReportsPersist item = (LegalReportsPersist)resIt.next();%>
-                                      <option value="any##any##<%=item.getAnnex()%>##<%=item.getAlternative()%>">ANNEX <%=item.getAnnex()%> - <%=item.getAlternative()%></option>
-                                <%
-                                    }
-                                  }
                                 %>
                                 </select>
                                 <%=cm.cmsLabel("species_legal_instrument")%>

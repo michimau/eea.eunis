@@ -13,16 +13,12 @@
                 ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
                 ro.finsiel.eunis.search.species.legal.LegalPaginator,
                 ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain,
-                ro.finsiel.eunis.jrfTables.species.legal.LegalStatusDomain,
                 ro.finsiel.eunis.search.species.legal.LegalSortCriteria,
                 ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist,
-                ro.finsiel.eunis.jrfTables.species.legal.LegalStatusPersist,
                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                 ro.finsiel.eunis.formBeans.AbstractFormBean,
                 ro.finsiel.eunis.WebContentManagement,
-                ro.finsiel.eunis.search.*,
-                ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,
-                ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
+                ro.finsiel.eunis.search.*"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.legal.LegalBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -30,57 +26,6 @@
 <%
 
   //Utilities.dumpRequestParams(request);
-
-  // If user has right to save this search and he want to save it
-  if (SessionManager.isAuthenticated()
-          && SessionManager.isSave_search_criteria_RIGHT()
-          && request.getParameter("saveCriteria") != null
-          && request.getParameter("saveCriteria").equalsIgnoreCase("true"))
-  {
-   // Set database parameters
-   String SQL_DRV="";
-   String SQL_URL="";
-   String SQL_USR="";
-   String SQL_PWD="";
-
-    SQL_DRV = application.getInitParameter("JDBC_DRV");
-    SQL_URL = application.getInitParameter("JDBC_URL");
-    SQL_USR = application.getInitParameter("JDBC_USR");
-    SQL_PWD = application.getInitParameter("JDBC_PWD");
-    // Description of this search
-    String description = "";
-    String pageName = "species-legal.jsp";
-    // values of database constants from specific class Domain(only in habitat searches, so here database vector is empty)
-    Vector database = new Vector();
-    String typeForm = (request.getParameter("typeForm") == null? "": request.getParameter("typeForm"));
-     // Create a new object SetVectorsForSaveCriteria
-     SetVectorsForSaveCriteria setSaveParameters = new SetVectorsForSaveCriteria();
-     // Set parameters for this save
-     setSaveParameters.SetVectorsForSaveCriteriaSpeciesLegal(formBean.getGroupName(),
-             formBean.getLegalText(),
-             formBean.getAnnex(),
-             formBean.getScientificName(),
-             typeForm);
-    // Save this search
-    SaveSearchCriteria save = new SaveSearchCriteria(database,
-            6,
-            SessionManager.getUsername(),
-            description,
-            pageName,
-            setSaveParameters.getAttributesNames(),
-            setSaveParameters.getFormFieldAttributes(),
-            setSaveParameters.getFormFieldOperators(),
-            setSaveParameters.getBooleans(),
-            setSaveParameters.getOperators(),
-            setSaveParameters.getFirstValue(),
-            setSaveParameters.getLastValue(),
-            SQL_DRV,
-            SQL_URL,
-            SQL_USR,
-            SQL_PWD);
-
-    save.SaveCriterias();
-  }
 
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
@@ -104,7 +49,7 @@
   }
   // Coming from form 2
   if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm) {
-    paginator = new LegalPaginator(new LegalStatusDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getShowEUNISInvalidatedSpecies()));
+    paginator = new LegalPaginator(new ScientificLegalDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getShowEUNISInvalidatedSpecies()));
   }
   // Initialisation
   paginator.setSortCriteria(formBean.toSortCriteria());
@@ -450,7 +395,6 @@
                           {
             %>
                             <td>
-                              &nbsp;
                               <%=Utilities.treatURLSpecialCharacters(specie.getCommonName())%>
                             </td>
             <%
@@ -467,7 +411,7 @@
                           {
             %>
                             <td>
-                              <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
+                              <%=Utilities.treatURLSpecialCharacters(specie.getAlternative())%>
                             </td>
             <%
                           }
@@ -475,7 +419,6 @@
                           {
             %>
                             <td>
-                              &nbsp;
                               <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
                             </td>
             <%
@@ -518,7 +461,7 @@
                         while (it.hasNext())
                         {
                           String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
-                          LegalStatusPersist specie = (LegalStatusPersist)it.next();
+                            ScientificLegalPersist specie = (ScientificLegalPersist)it.next();
             %>
                           <tr>
             <%
@@ -534,7 +477,6 @@
                           {
             %>
                             <td>
-                              &nbsp;
                               <%=Utilities.treatURLSpecialCharacters(specie.getCommonName())%>
                             </td>
             <%
@@ -551,7 +493,7 @@
                           {
             %>
                             <td>
-                                <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
+                                <%=Utilities.treatURLSpecialCharacters(specie.getAlternative())%>
                             </td>
             <%
                           }
@@ -559,7 +501,6 @@
                           {
             %>
                             <td>
-                              &nbsp;
                               <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
                             </td>
             <%

@@ -222,7 +222,6 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
                 "SELECT COUNT(*) FROM chm62edt_species AS E "
                 + "INNER JOIN  chm62edt_reports AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
                 + "INNER JOIN chm62edt_report_type AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                + "INNER JOIN chm62edt_legal_status AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
                 + "INNER JOIN dc_index AS D ON A.ID_DC = D.ID_DC "
                 + "INNER JOIN chm62edt_group_species AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
                 + "WHERE ");

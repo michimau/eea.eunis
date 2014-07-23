@@ -142,7 +142,6 @@ String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welco
 					<input type="hidden" name="showOrder" value="true" />
 					<input type="hidden" name="showFamily" value="true" />
 					<input type="hidden" name="showScientificName" value="true" />
-					<input type="hidden" name="showVernacularNames" value="true" />
 					<input type="hidden" name="showValidName" value="true" />
 					<input type="hidden" name="showOtherInfo" value="true" />
                       <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />

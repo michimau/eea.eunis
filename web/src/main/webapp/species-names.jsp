@@ -152,7 +152,6 @@
                         <input type="hidden" name="typeForm" value="<%=NameSearchCriteria.CRITERIA_VERNACULAR%>" />
                         <input type="hidden" name="expand" value="true" />
                         <input type="hidden" name="showScientificName" value="true" />
-                        <input type="hidden" name="showVernacularNames" value="true" />
                         <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
                         <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
                         <input type="hidden" name="noSoundex" value="true" />
@@ -185,7 +184,7 @@
                                       <%--<input id="checkbox15" type="checkbox" name="showKingdom" value="true" checked="checked" /><label for="checkbox15"><%=cm.cmsPhrase("Kingdom")%></label>--%>
                                       <input title="<%=cm.cms("valid_name")%>" id="checkbox17" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox17"><%=cm.cmsPhrase("Valid name")%></label>
                                         <%=cm.cmsTitle("valid_name")%>
-                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="true" disabled="disabled" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("Common names")%></label>
+                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="false" disabled="disabled" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("Common names")%></label>
                                         <%=cm.cmsTitle("vernacular_name")%>
                                     </td>
                                   </tr>

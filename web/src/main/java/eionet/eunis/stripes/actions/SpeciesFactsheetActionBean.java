@@ -861,12 +861,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
-        setRangeLayer(isSpeciesLayer(scientificName, 1));
+//        setRangeLayer(isSpeciesLayer(scientificName, 1));
 
         // Hidden according to http://taskman.eionet.europa.eu/issues/19431#note-4
+        // also removed by #20530#note-2
         setRangeLayer(false);
+        setDistributionLayer(false);
 
-        setDistributionLayer(isSpeciesLayer(scientificName, 4));
+//        setDistributionLayer(isSpeciesLayer(scientificName, 4));
     }
 
     /**

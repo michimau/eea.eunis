@@ -261,6 +261,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
    }
 //]]>
 </script>
+<script src="script/search-advanced.js"></script>
 
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -675,6 +676,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 %>
                 <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
                 <input type="text" title="<%=cm.cmsPhrase("List of values")%>" id="First_Value<%=IdNode%>" name="First_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
+                <script>
+                    selectDefaultOnFocus($("#First_Value<%=IdNode%>"));
+                </script>
                 <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
                 <%
                   if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
@@ -685,6 +689,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
                 <input type="text" title="<%=cm.cmsPhrase("List of values")%>" id="Last_Value<%=IdNode%>" name="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
                 <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
+                <script>
+                    selectDefaultOnFocus($("#Last_Value<%=IdNode%>"));
+                </script>
                 <%
                   }
                 %>

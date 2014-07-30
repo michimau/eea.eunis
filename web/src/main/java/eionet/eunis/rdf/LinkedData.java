@@ -122,6 +122,9 @@ public class LinkedData {
      */
     public void executeQuery(String queryId, int id) throws Exception {
 
+        if (StringUtils.isBlank(queryId)) {
+            throw new IllegalArgumentException("External data query called with blank queryid and " + String.valueOf(id) + " identifier");
+        }
         if (props != null && queryId != null) {
 
             String query = props.getProperty(queryId + ".query");
@@ -147,11 +150,7 @@ public class LinkedData {
                 generateRows(queryId, result);
                 generateCols(queryId, result);
             } else {
-                if (StringUtils.isBlank(queryId)) {
-                    logger.error("External data query called with blank queryid and " + String.valueOf(id) + " identifier");
-                } else {
-                    logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);
-                }
+                logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);
             }
         }
     }

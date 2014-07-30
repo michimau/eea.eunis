@@ -147,7 +147,11 @@ public class LinkedData {
                 generateRows(queryId, result);
                 generateCols(queryId, result);
             } else {
-                logger.error("query or endpoint is not defined in linkeddata properties file for: " + queryId);
+                if (StringUtils.isBlank(queryId)) {
+                    logger.error("External data query called with blank queryid and " + String.valueOf(id) + " identifier");
+                } else {
+                    logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);
+                }
             }
         }
     }

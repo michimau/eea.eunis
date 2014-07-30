@@ -47,10 +47,14 @@
                         <div class="eea-accordion-panel" style="clear: both;" id="distribution-accordion">
                             <h2 class="notoc eea-icon-right-container">Distribution</h2>
                             <div class="pane" id="distributionPane">
-                                <stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>
+                                The distribution map is currently disabled. A new map solution will soon become available. In the meantime, please consult other species distribution map providers listed in the Other resources panel below.
                                 <script>
-                                    addReloadOnDisplay("distributionPane", null, null, init);
+                                    $("#distribution-accordion").addClass("nodata");
                                 </script>
+                                <%--<stripes:layout-render name="/stripes/habitats-factsheet/annex1/habitats-distribution.jsp"/>--%>
+                                <%--<script>--%>
+                                    <%--addReloadOnDisplay("distributionPane", null, null, init);--%>
+                                <%--</script>--%>
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="conservation-accordion">

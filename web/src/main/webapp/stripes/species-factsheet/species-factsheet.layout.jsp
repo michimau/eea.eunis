@@ -77,10 +77,14 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                                 <div class="eea-accordion-panel" style="clear: both;" id="reported-accordion">
                                     <h2 class="notoc eea-icon-right-container">Distribution</h2>
                                     <div class="pane" id="distributionPane">
-                                        <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
+                                        The distribution map is currently disabled. A new map solution will soon become available. In the meantime, please consult other species distribution map providers listed in the Other resources panel below.
                                         <script>
-                                            addReloadOnDisplay("distributionPane", null, null, init);
+                                            $("#reported-accordion").addClass("nodata");
                                         </script>
+                                        <%--<stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>--%>
+                                        <%--<script>--%>
+                                            <%--addReloadOnDisplay("distributionPane", null, null, init);--%>
+                                        <%--</script>--%>
                                     </div>
                                 </div>
 

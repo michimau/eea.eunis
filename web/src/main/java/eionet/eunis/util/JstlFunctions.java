@@ -167,12 +167,24 @@ public class JstlFunctions {
      * and descriptions, where there is a convention to display species names
      * in italics.
      *
+     * The italics are automatically closed at the end of the paragraph.
+     *
      * @param inStr - input string
      * @return - string with replacements.
      */
     public static String bracketsToItalics(String inStr) {
         if (inStr.contains("[") || inStr.contains("]")) {
-            inStr = inStr.replaceAll("\\[","<i>").replaceAll("]","</i>");
+            int initial = inStr.length();
+
+            inStr = inStr.replaceAll("\\[", "<i>");
+            int opened = (inStr.length() - initial)/2;
+            initial = inStr.length();
+
+            inStr = inStr.replaceAll("]", "</i>");
+            int closed = (inStr.length() - initial)/3;
+            while(opened > closed) {
+                inStr = inStr + "</i>";  closed++;
+            }
         }
         return inStr;
     }
@@ -454,6 +466,17 @@ public class JstlFunctions {
      */
     public static String getDefaultPicture(String speciesGroup){
         return EunisUtil.getDefaultPicture(speciesGroup);
+    }
+
+    /**
+     * Shortens an URL (to display as a link title, when none available)
+     * @param url
+     * @return
+     */
+    public static String shortenURL(String url){
+        if(url != null && url.length() > 55)
+            return url.substring(0,28) + "..." + url.substring(url.length()-20);
+        return url;
     }
 
 }

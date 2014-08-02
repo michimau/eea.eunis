@@ -2,7 +2,6 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 
-<%--todo: the right menu is disabled here--%>
 <c:set var="hideMenu" value="true"/>
 
 <stripes:layout-definition>
@@ -39,8 +38,17 @@
             </c:choose>
         </title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css" />
-        <%--<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css"/>--%>
-        <%--<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>--%>
+        <script>
+            // all the non-local links should display on a new tab; this script sets target=_blank for all non-local links
+            $(document).ready(function() {
+                $("a").each(function(){
+                    h = $(this).attr("href");
+                    if(h && h.indexOf("http") != -1 && h.indexOf("<%=application.getInitParameter("DOMAIN_NAME")%>") == -1) {
+                        $(this).attr("target", "_blank");
+                    }
+                });
+            });
+        </script>
 
         <stripes:layout-component name="head"/>
     </head>
@@ -76,13 +84,23 @@
                                   <li><a href="combined-search.jsp" <c:if test = "${currentTab == 'combined_search'}">class="current"</c:if> >Combined search</a></li>
                                   <li><a href="externalglobal" <c:if test = "${currentTab == 'externalglobal'}">class="current"</c:if> >Global queries</a></li>
                                   <li><a href="references" <c:if test = "${currentTab == 'references'}">class="current"</c:if> >References</a></li>
-                                  <li><a href="about.jsp" class="last-tab <c:if test = "${currentTab == 'about_EUNIS_database'}">current</c:if>">About EUNIS</a></li>
+                                  <li><a href="about" class="last-tab <c:if test = "${currentTab == 'about_EUNIS_database'}">current</c:if>">About EUNIS</a></li>
+
+                              <% if(SessionManager.isAuthenticated()) { %>
+                                  <li style="float: right"><a href="index.jsp?operation=logout" id="siteaction-login_eea"><i class="eea-icon eea-icon-user"></i> <%= SessionManager.getUserFullName() %></a></li>
+
+                                  <div id="popup_login_form_eea" style="display:none;" class="callout">
+                                         <p><a href="services.jsp">Services</a></p>
+                                         <p><a href="index.jsp?operation=logout">Logout</a></p>
+                                  </div>
+
+                                  <script>var $popup_login_eea=$("#popup_login_form_eea");$("#siteaction-login_eea").click(function(e){$popup_login_eea.slideToggle(100);e.preventDefault()});</script>
+                              <% } %>
                           </ul>
                      </div>
 
                      <div id="content" class="border-tabbedmenu">
 
-                        <%--todo: test this --%>
                         <c:if test="${empty btrail}"><c:set var="btrail" value="${actionBean.btrail}"/> </c:if>
                         <c:if test="${not empty btrail}">
                             <jsp:include page="/header-dynamic.jsp">
@@ -104,8 +122,6 @@
                 </div>
 
                 <div class="visualClear"><!-- --></div>
-
-                    <!-- - TODO Check if we can replace foot by bottom menu  -->
 
                     <stripes:layout-component name="foot"/>
             </div>

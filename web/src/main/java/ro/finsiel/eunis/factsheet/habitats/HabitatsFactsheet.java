@@ -1,10 +1,7 @@
 package ro.finsiel.eunis.factsheet.habitats;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sf.jrf.exceptions.DatabaseException;
@@ -68,6 +65,7 @@ import ro.finsiel.eunis.jrfTables.DcIndexPersist;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
@@ -1255,6 +1253,8 @@ public class HabitatsFactsheet {
         }
     }
 
+    private String description = "";
+
     /**
      * Retrieve description &amp; owner information for a habitat (from chm62edt_habitat_description) using
      * Chm62edtHabitatDescriptionDomain.
@@ -1282,6 +1282,8 @@ public class HabitatsFactsheet {
                             new DescriptionWrapper(habitatDescr.getDescription(),
                                     habitatDescr.getLanguageName(),
                                     habitatDescr.getOwnerText(), habitatDescr.getIdDc()));
+
+                    description = description + habitatDescr.getDescription();
                 }
             }
         } catch (Exception ex) {
@@ -1500,6 +1502,7 @@ public class HabitatsFactsheet {
             result = new OtherClassificationDomain().findWhere(
                     "ID_HABITAT='" + idHabitat
                     + "' AND LEGAL=0  AND current_data=1 ORDER BY SORT_ORDER");
+            sourceOnTop(result);
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             result = new Vector();
@@ -1524,11 +1527,26 @@ public class HabitatsFactsheet {
             result = new OtherClassificationDomain().findWhere(
                     "ID_HABITAT='" + idHabitat
                             + "' AND LEGAL=0 AND current_data=0 ORDER BY SORT_ORDER");
+            sourceOnTop(result);
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
-            result = new Vector();
         }
         return result;
+    }
+
+    /**
+     * Makes the source to be on top
+     * @param list
+     */
+    private void sourceOnTop(List<OtherClassificationPersist> list){
+        Collections.sort(list, new Comparator<OtherClassificationPersist>() {
+            @Override
+            public int compare(OtherClassificationPersist o1, OtherClassificationPersist o2) {
+                if(o1.getRelationType().equalsIgnoreCase("s")) return -1;
+                if(o2.getRelationType().equalsIgnoreCase("s")) return 1;
+                return o1.getSortOrder().compareTo(o2.getSortOrder());
+            }
+        });
     }
 
     /**
@@ -2043,6 +2061,12 @@ public class HabitatsFactsheet {
         List speciesList = null;
 
         try {
+
+            if(description.isEmpty()) {
+                // initialize the description, for filtering
+                getDescrOwner();
+            }
+
             speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
@@ -2050,19 +2074,23 @@ public class HabitatsFactsheet {
             if (speciesList != null) {
                 for (Object specy : speciesList) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;
-                    List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
-                    String englishName = "";
-                    for (VernacularNameWrapper vernName : vernNames) {
-                        if (vernName.getLanguageCode().toLowerCase().equals("en")) {
-                            englishName = vernName.getName();
-                            break;
+                    // #19430 show only the species that are in the habitat descriptions
+                    if(description.contains(specie.getSpeciesScientificName())) {
+
+                        List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
+                        String englishName = "";
+                        for (VernacularNameWrapper vernName : vernNames) {
+                            if (vernName.getLanguageCode().toLowerCase().equals("en")) {
+                                englishName = vernName.getName();
+                                break;
+                            }
                         }
+
+                        SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
+                                englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());
+
+                        results.add(speciesBean);
                     }
-
-                    SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
-                            englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());
-
-                    results.add(speciesBean);
                 }
             }
         } catch (Exception _ex) {

@@ -2198,4 +2198,32 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         </rollback>
     </changeSet>
 
+    <changeSet id="rev-134" author="ivascu">
+        <comment>Adds a table to list the RDF files for download</comment>
+        <sql>create table eunis_rdf_downloads (
+                file_name varchar(100) not null,
+                title varchar(100),
+                comment varchar(400),
+                record_date timestamp default current_timestamp,
+                sort_column int,
+                primary key(file_name)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+        <rollback>
+            <sql>drop table eunis_rdf_downloads</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="rev-135" author="ivascu">
+       <comment>Moves the References isPartOf/hasPart to the dc_index REFERENCE column</comment>
+           <sql>update dc_index set reference=null</sql>
+           <sql>update dc_index di, dc_attributes da set di.REFERENCE = cast(da.OBJECT as unsigned) where di.id_dc=da.id_dc and da.NAME = 'isPartOf'</sql>
+           <sql>alter table dc_index add CONSTRAINT `ReferenceIdDc` FOREIGN KEY (`REFERENCE`) REFERENCES `dc_index` (`ID_DC`)</sql>
+           <sql>alter table dc_index drop column refcd</sql>
+           <rollback>
+               <sql>alter table dc_index drop FOREIGN KEY `ReferenceIdDc`</sql>
+               <sql>alter table dc_index add (refcd int)</sql>
+           </rollback>
+    </changeSet>
+
+
 </databaseChangeLog>

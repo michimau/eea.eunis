@@ -280,7 +280,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
                     conservationStatusPDF = link;
                     addToLinks = false;
-                } else if (link.getName().equalsIgnoreCase("Conservation status 2012 - Experts web tool")){
+                } else if (link.getName().toLowerCase().startsWith("conservation status")){
                     conservationStatus = link;
                     addToLinks = false;
                 }
@@ -599,16 +599,22 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     legalStatusWrapper.setAnnexTitle(annex.getTitle());
                     legalStatusWrapper.setAnnexLink(annex.getUrl());
 
+//                    Populate the parent
+                    if(annex.getReference() != null){
+                        DcIndexDTO dto = dao.getDcIndex(annex.getReference());
+                        legalStatusWrapper.setParentTitle(dto.getTitle());
+                        legalStatusWrapper.setParentLink(dto.getUrl());
+                        legalStatusWrapper.setParentAlternative(dto.getAlternative());
+                    }
+
                     List<AttributeDto> annexAttributes = dao.getDcAttributes(legalStatusWrapper.getLegalPersist().getIdDc().toString());
                     for(AttributeDto a : annexAttributes){
 //                        if(a.getName().equals("description"))
 //                            legalStatus.setDescription(a.getObjectLabel());
-                        if(a.getName().equals("isPartOf")) {
-                            // populate parent data
-                            DcIndexDTO dto = findParent(a.getValue());
-                            legalStatusWrapper.setParentTitle(dto.getTitle());
-                            legalStatusWrapper.setParentLink(dto.getUrl());
-                            legalStatusWrapper.setParentAlternative(dto.getAlternative());
+
+                        // populate the more info section from the annex links
+                        if(a.getName().equalsIgnoreCase("foaf:page")) {
+                            legalStatusWrapper.addMoreInfo(a.getValue());
                         }
                     }
                 }
@@ -617,34 +623,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
         return legalInfo;
-    }
-
-    /**
-     * Returns the parent (top level) DC for the given reference; returns current object if no parent found
-     * @param idDc reference id
-     * @return parent object
-     */
-    DcIndexDTO findParent(String idDc){
-        IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
-
-        // only searches in the first 5, so it doesn't cycle if incorrect data
-        for(int i=0;i<1;i++){
-            List<AttributeDto> dtoAttributes = dao.getDcAttributes(idDc);
-            boolean foundParent = false;
-            for(AttributeDto dtoA : dtoAttributes){
-                if(dtoA.getName().equals("isPartOf")){
-                    idDc = dtoA.getValue();
-                    foundParent = true;
-                    break;
-                }
-            }
-            if(!foundParent) {
-                // top level
-                break;
-            }
-        }
-
-        return dao.getDcIndex(idDc);
     }
 
     /**

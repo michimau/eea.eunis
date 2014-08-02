@@ -10,22 +10,22 @@
             <table summary="${eunis:cms(actionBean.contentManagement, 'habitat_type_legal_instruments')}" class="listing fullwidth">
                 <thead>
                 <tr>
-                    <th width="30%" style="text-align: left;">
+                    <th width="30%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Legal text')}
                     </th>
-                    <th width="30%" style="text-align: left;">
+                    <th width="30%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                     </th>
-                    <th width="50%" style="text-align: left;">
+                    <th width="50%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Name in legal text')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Code in legal text')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type<br> relationship')}
                     </th>
-                    <th width="20%" style="text-align: left;">
+                    <th width="20%" style="text-align: left;" class="nosort">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
                     </th>
                 </tr>
@@ -47,7 +47,13 @@
                                 ${legal.legalPersist.code}
                         </td>
                         <td>${legal.relationTypeString}</td>
-                        <td><a href="${legal.annexLink}">${legal.annexLink}</a>
+                        <td>
+                            <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
+                                <c:if test="${oldLink != link}">
+                                    <a href="${ link }">${eunis:shortenURL(link)}</a> <c:if test="${not status.last}"><br></c:if>
+                                </c:if>
+                                <c:set var="oldLink" value="${link}"/>
+                            </c:forEach>
                         </td>
                     </tr>
                 </c:forEach>

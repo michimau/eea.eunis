@@ -76,7 +76,6 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
 
     private Integer reference = null;
 
-    private Integer refcd = null;
     private String author = null;
   
     // Additional field for species factsheet
@@ -93,18 +92,6 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
 
     public void setReference(Integer reference) {
         this.reference = reference;
-        this.markModifiedPersistentState();
-    }
-
-    public int getRefcd() {
-        if (refcd == null) {
-            return -1;
-        }
-        return refcd.intValue();
-    }
-
-    public void setRefcd(Integer refcd) {
-        this.refcd = refcd;
         this.markModifiedPersistentState();
     }
 

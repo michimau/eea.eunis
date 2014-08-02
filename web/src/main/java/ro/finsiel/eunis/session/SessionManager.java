@@ -10,6 +10,7 @@ import ro.finsiel.eunis.Settings;
 import ro.finsiel.eunis.WebContentManagement;
 import ro.finsiel.eunis.auth.EncryptPassword;
 import ro.finsiel.eunis.jrfTables.users.*;
+import ro.finsiel.eunis.search.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
@@ -81,6 +82,8 @@ public final class SessionManager implements java.io.Serializable {
     private String combinedcombinationtype = "";
 
     private String cacheReportEmailAddress = "";
+
+    private String userFullName = "";
 
     boolean languageDetected = false;
 
@@ -541,6 +544,7 @@ public final class SessionManager implements java.io.Serializable {
      */
     public void loadUserPreferences() {
         UserPersist user = findUser(username);
+        userFullName = username;
 
         if (null == user) {
             authenticated = false;
@@ -548,14 +552,17 @@ public final class SessionManager implements java.io.Serializable {
             password = null;
             this.userPrefs = new UserPersist();
             // If user is normal (not authenticated) default preferences.
-            userPrefs.setThemeIndex(new Integer(ThemeManager.THEME_SKY_BLUE));
+            userPrefs.setThemeIndex(ThemeManager.THEME_SKY_BLUE);
         } else {
             this.userPrefs = user;
             authenticated = true;
             username = user.getUsername();
+            if(!Utilities.isEmptyString(user.getFirstName()) && !Utilities.isEmptyString(user.getLastName())){
+                userFullName = user.getFirstName() + " " + user.getLastName();
+            }
             // showEUNISInvalidatedSpecies = Utilities.checkedStringToBoolean(user.getShowInvalidatedSpecies().toString(), false);
             themeManager = new ThemeManager(this);
-            themeManager.switchTheme(user.getThemeIndex().intValue());
+            themeManager.switchTheme(user.getThemeIndex());
 
             Vector userRights = findUserRights(username);
 
@@ -574,7 +581,7 @@ public final class SessionManager implements java.io.Serializable {
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
                     "save_search_criteria")) {
-                        save_search_criteria_RIGHT = true;
+//                        save_search_criteria_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
                     "content_management")) {
@@ -598,7 +605,7 @@ public final class SessionManager implements java.io.Serializable {
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
                     "show_novalidated_species")) {
-                        showEUNISInvalidatedSpecies = true;
+//                        showEUNISInvalidatedSpecies = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
                     "edit_glossary")) {
@@ -965,5 +972,13 @@ public final class SessionManager implements java.io.Serializable {
      */
     public void setLanguageDetected(boolean languageDetected) {
         this.languageDetected = languageDetected;
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 }

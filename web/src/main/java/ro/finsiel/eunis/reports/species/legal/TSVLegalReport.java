@@ -3,8 +3,6 @@ package ro.finsiel.eunis.reports.species.legal;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
-import ro.finsiel.eunis.jrfTables.species.legal.LegalStatusDomain;
-import ro.finsiel.eunis.jrfTables.species.legal.LegalStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
@@ -51,7 +49,7 @@ public class TSVLegalReport extends AbstractTSVReport
     }
     // Form 2
     if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm) {
-      this.dataFactory = new LegalPaginator(new LegalStatusDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
+      this.dataFactory = new LegalPaginator(new ScientificLegalDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
     }
   }
 
@@ -121,7 +119,7 @@ public class TSVLegalReport extends AbstractTSVReport
           }
           // Form 2
           if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm) {
-            LegalStatusPersist specie = (LegalStatusPersist) resultSet.get(i);
+              ScientificLegalPersist specie = (ScientificLegalPersist) resultSet.get(i);
 
             cellScientificName = specie.getScientificName();
             cellGroup = specie.getCommonName();

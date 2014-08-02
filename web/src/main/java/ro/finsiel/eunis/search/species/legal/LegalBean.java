@@ -48,6 +48,8 @@ public class LegalBean extends AbstractFormBean {
     /** Show or hide Abbreviation column. */
     private String showAbbreviation = null;
 
+    private String dcId = null;
+
     /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
      * in order to use them in searches.
      * @return A list of AbstractSearchCriteria objects used to do the search.
@@ -61,8 +63,8 @@ public class LegalBean extends AbstractFormBean {
             criterias.addElement(new LegalSearchCriteria(groupName, scientificName, annex, LegalSearchCriteria.CRITERIA_SPECIES));
         }
         // Form 2
-        if (null != groupName && null != legalText && null != annex) {
-            criterias.addElement(new LegalSearchCriteria(groupName, legalText, annex, LegalSearchCriteria.CRITERIA_LEGAL));
+        if (null != groupName && null != dcId) {
+            criterias.addElement(new LegalSearchCriteria(groupName, legalText, dcId, LegalSearchCriteria.CRITERIA_LEGAL));
         }
         // Search in results
         if (null != criteriaSearch && null != criteriaType && null != oper & null != typeForm) {
@@ -367,5 +369,13 @@ public class LegalBean extends AbstractFormBean {
      */
     public void setShowAbbreviation(String showAbbreviation) {
         this.showAbbreviation = showAbbreviation;
+    }
+
+    public String getDcId() {
+        return dcId;
+    }
+
+    public void setDcId(String dcId) {
+        this.dcId = dcId;
     }
 }

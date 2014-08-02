@@ -35,9 +35,6 @@ public class Chm62edtDcIndexDomain extends AbstractDomain {
                 new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
                 DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(
-                new IntegerColumnSpec("REFCD", "getRefcd", "setRefcd",
-                DEFAULT_TO_NULL));
-        this.addColumnSpec(
                 new IntegerColumnSpec("REFERENCE", "getReference",
                 "setReference", DEFAULT_TO_NULL));
         this.addColumnSpec(

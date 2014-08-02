@@ -16,7 +16,7 @@
     String eeaHome = application.getInitParameter( "EEA_HOME" );
     String btrail = "eea#" + eeaHome + ",home#index.jsp,error_page_01";
 %>
-<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Application error") %>'></c:set>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase("Access forbidden") %>'></c:set>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">
@@ -35,6 +35,7 @@
                 <%=cm.cmsText("generic_404_01")%>
                 <br />
                 <br />
+                Page message:
                 <strong>
                   Access forbidden.
                 </strong>

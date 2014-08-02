@@ -229,7 +229,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // redirecting to more general search in case user tried text based search
             String redirectUrl =
                     "/species-names-result.jsp?pageSize=10" + "&relationOp=2&typeForm=0&showGroup=true&showOrder=true"
-                            + "&showFamily=true&showScientificName=true&showVernacularNames=true"
+                            + "&showFamily=true&showScientificName=true&showVernacularNames=false"
                             + "&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" + "&scientificName=" + idSpeciesText;
 
             return new RedirectResolution(redirectUrl);

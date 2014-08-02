@@ -25,7 +25,6 @@ public class LegalStatusWrapperTest extends TestCase {
         tester1.setArea(null);
         tester1.setComments(null);
         tester1.setIdDc(null);
-        tester1.setRefcd(null);
         tester1.setReference(null);
 
         tester2.setLegalText(null);
@@ -34,7 +33,6 @@ public class LegalStatusWrapperTest extends TestCase {
         tester2.setArea(null);
         tester2.setComments(null);
         tester2.setIdDc(null);
-        tester2.setRefcd(null);
         tester2.setReference(null);
 
         assertTrue("test 2", tester1.equals(tester2));
@@ -87,9 +85,7 @@ public class LegalStatusWrapperTest extends TestCase {
         tester1.setIdDc(null);
         tester2.setIdDc(null);
 
-        tester1.setRefcd("Refcd");
         assertFalse("test 9", tester1.equals(tester2));
-        tester2.setRefcd("Refcd");
         assertTrue("test 9.1", tester1.equals(tester2));
 
         tester1.setIdDc(null);
@@ -115,7 +111,6 @@ public class LegalStatusWrapperTest extends TestCase {
         assertFalse("test 15", tester1.equals(tester2));
         tester2.setIdDc(1);
         assertFalse("test 16", tester1.equals(tester2));
-        tester2.setRefcd("Refcd");
         assertFalse("test 17", tester1.equals(tester2));
         tester2.setReference("Ref");
         assertFalse("test 18", tester1.equals(tester2));
@@ -132,7 +127,6 @@ public class LegalStatusWrapperTest extends TestCase {
         assertFalse("test 23", tester1.equals(tester2));
         tester1.setIdDc(1);
         assertFalse("test 24", tester1.equals(tester2));
-        tester1.setRefcd("Refcd");
         assertFalse("test 25", tester1.equals(tester2));
         tester1.setReference("Ref");
         assertTrue("test 26", tester1.equals(tester2));

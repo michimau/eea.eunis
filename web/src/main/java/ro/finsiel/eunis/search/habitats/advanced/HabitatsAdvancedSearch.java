@@ -333,7 +333,7 @@ public class HabitatsAdvancedSearch {
                     habitatsSQL = "SELECT DISTINCT `chm62edt_habitat`.`ID_NATURE_OBJECT` FROM `chm62edt_habitat`";
                     habitatsSQL += " INNER JOIN `chm62edt_nature_object` ON (`chm62edt_habitat`.`ID_NATURE_OBJECT` = `chm62edt_nature_object`.`ID_NATURE_OBJECT`)";
                     habitatsSQL += " INNER JOIN `dc_index` ON (`chm62edt_nature_object`.`ID_DC` = `dc_index`.`ID_DC`)";
-                    habitatsSQL += " INNER JOIN `dc_index` `dc_index_REFERENCE` ON (`dc_index`.`REFERENCE` = `dc_index_REFERENCE`.`REFCD`)";
+                    habitatsSQL += " INNER JOIN `dc_index` `dc_index_REFERENCE` ON (`dc_index`.`REFERENCE` = `dc_index_REFERENCE`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }

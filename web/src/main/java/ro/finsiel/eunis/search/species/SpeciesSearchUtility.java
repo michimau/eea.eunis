@@ -28,7 +28,6 @@ import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
-import ro.finsiel.eunis.jrfTables.species.legal.LegalReportsDomain;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
@@ -48,19 +47,19 @@ public class SpeciesSearchUtility {
      * Specifies that the search is used in species' scientific names.
      * @see SpeciesSearchUtility#findSpeciesWithCriteria
      */
-    public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(0);
+    public static final Integer CRITERIA_SCIENTIFIC_NAME = 0;
 
     /**
      * Specifies that the search is used in species' comon names.
      * @see SpeciesSearchUtility#findSpeciesWithCriteria
      */
-    public static final Integer CRITERIA_VERNACULAR_NAME = new Integer(1);
+    public static final Integer CRITERIA_VERNACULAR_NAME = 1;
 
     /** Finds the common names for a given specie, returning a vector of pairs : language, name.
      * @param idNatureObject ID Nature object of that specie
      * @return A list of VernacularNameWrapper objects, containing common names for that specie.
      */
-    public static final Vector<VernacularNameWrapper> findVernacularNames(Integer idNatureObject) {
+    public static Vector<VernacularNameWrapper> findVernacularNames(Integer idNatureObject) {
         Vector<VernacularNameWrapper> ret = new Vector<VernacularNameWrapper>(0);
 
         if (null == idNatureObject) {
@@ -69,7 +68,6 @@ public class SpeciesSearchUtility {
         try {
             // search also on synonyms
             Vector<Integer> synonyms = new Vector<Integer>();
-            Integer IdNatureObjectSpecie = idNatureObject;
 
             List<Integer> idList = new LinkedList<Integer>();
             List<Chm62edtSpeciesPersist> lstSpeciesIDs = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT=" + idNatureObject);
@@ -80,7 +78,7 @@ public class SpeciesSearchUtility {
                 }
             }
 
-            synonyms.add(IdNatureObjectSpecie);
+            synonyms.add(idNatureObject);
             List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere(
                     "TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK IN (" + listToStringIds(idList) + ")");
 
@@ -104,10 +102,55 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return an empty list!
             ex.printStackTrace(System.err);
-            ret = new Vector(0);
-        } finally {
+        }
+        return ret;
+    }
+
+    /** Finds the English common name for a given species
+     * @param idNatureObject ID Nature object of that species
+     * @return English common name of the species
+     */
+    public static String findEnglishName(Integer idNatureObject) {
+        String ret = "";
+
+        if (null == idNatureObject) {
             return ret;
         }
+        try {
+            // search also on synonyms
+            Vector<Integer> synonyms = new Vector<Integer>();
+
+            List<Integer> idList = new LinkedList<Integer>();
+            List<Chm62edtSpeciesPersist> lstSpeciesIDs = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT=" + idNatureObject);
+
+            if (lstSpeciesIDs.size() > 0) {
+                for (Chm62edtSpeciesPersist speciesPersist : lstSpeciesIDs) {
+                    idList.add(speciesPersist.getIdSpecies());
+                }
+            }
+
+            synonyms.add(idNatureObject);
+            List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere(
+                    "TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK IN (" + listToStringIds(idList) + ")");
+
+            if (lstSynonyms.size() > 0) {
+                for (Chm62edtSpeciesPersist speciesPersist : lstSynonyms) {
+                    synonyms.add(speciesPersist.getIdNatureObject());
+                }
+            }
+
+            List<VernacularNamesPersist> verNameList = new VernacularNamesDomain().findWhere(
+                    "LOOKUP_TYPE='language' " + "AND ID_NATURE_OBJECT IN (" + listToStringIds(synonyms)
+                            + ") AND F.NAME='vernacular_name' AND CODE='en' GROUP BY F.VALUE, NAME_EN");
+
+            for (VernacularNamesPersist vernName : verNameList) {
+                ret = vernName.getValue();
+            }
+        } catch (Exception ex) {
+            // If exception occurrs, return an empty list!
+            ex.printStackTrace(System.err);
+        }
+        return ret;
     }
 
     private static String listToStringIds(List<Integer> list) {
@@ -145,7 +188,7 @@ public class SpeciesSearchUtility {
         if (null == groupID || null == scientificName) {
             return new Vector(0);
         }
-        List results = new ArrayList();
+        List results = new Vector(0);
 
         try {
 
@@ -174,10 +217,8 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return an empty list!
             ex.printStackTrace(System.err);
-            results = new Vector(0);
-        } finally {
-            return results;
         }
+        return results;
     }
 
     /**
@@ -185,12 +226,7 @@ public class SpeciesSearchUtility {
      * @param groupID Group for which you want the legal texts to be found. You can pass 'any' here to find all the
      *                legal texts.
      * @return A list of legal texts associated with this groupID.<br />
-     * The list contains the following type of objects:<br />
-     * <UL>
-     *  <LI> If groupID = "any", list contains ScientificLegalPersist objects
-     *  <LI> If groupID != "any", list contains LegalReportsPersist objects
-     *  <LI> If groupID is null, list size will be 0.
-     * </UL>
+     * The list contains ScientificLegalPersist objects. If groupID is null, list size will be 0.
      */
     public static List findLegalTextsForGroup(String groupID) {
         if (null == groupID) {
@@ -203,20 +239,18 @@ public class SpeciesSearchUtility {
                 ScientificLegalDomain finder = new ScientificLegalDomain();
 
                 results = finder.findWhere(
-                        "E.ID_GROUP_SPECIES = " + groupID + " AND B.LOOKUP_TYPE = 'LEGAL_STATUS' GROUP BY C.ANNEX, D.ALTERNATIVE");
+                        "E.ID_GROUP_SPECIES = " + groupID + " AND B.LOOKUP_TYPE = 'LEGAL_STATUS' AND E.VALID_NAME>0 GROUP BY D.ALTERNATIVE");
             } else {
                 // Any group
-                LegalReportsDomain finder = new LegalReportsDomain();
+                ScientificLegalDomain finder = new ScientificLegalDomain();
 
-                results = finder.findWhere("B.LOOKUP_TYPE = 'LEGAL_STATUS' GROUP BY C.ANNEX, D.ALTERNATIVE");
+                results = finder.findWhere("B.LOOKUP_TYPE = 'LEGAL_STATUS' AND E.VALID_NAME>0 GROUP BY D.ALTERNATIVE");
             }
         } catch (Exception ex) {
             // If exception occurrs, return an empty list!
             ex.printStackTrace(System.err);
-            results = new Vector(0);
-        } finally {
-            return results;
         }
+        return results;
     }
 
     /**
@@ -225,7 +259,7 @@ public class SpeciesSearchUtility {
      * @return An group ID or new Integer(-1) if that group is not found or exception occurrs
      */
     public static Integer findGroupID(String groupName) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == groupName) {
             return ret;
@@ -246,10 +280,9 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
+            ret = -1;
         }
+        return ret;
     }
 
     /**
@@ -258,7 +291,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDConservationStatus(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -279,10 +312,9 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
+            ret = -1;
         }
+        return ret;
     }
 
     /**
@@ -291,7 +323,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDAbundance(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -312,7 +344,7 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
+            ret = -1;
         }
         return ret;
     }
@@ -323,7 +355,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDTrend(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -344,10 +376,9 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
+            ret = -1;
         }
+        return ret;
     }
 
     /**
@@ -356,7 +387,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDDistributionStatus(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -377,10 +408,9 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
+            ret = -1;
         }
+        return ret;
     }
 
     /**
@@ -389,7 +419,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDSpeciesStatus(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -410,10 +440,8 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -422,7 +450,7 @@ public class SpeciesSearchUtility {
      * @return ID of that abundance attribute or -1 if not found.
      */
     public static Integer findIDInfoQuality(String name) {
-        Integer ret = new Integer(-1);
+        Integer ret = -1;
 
         if (null == name) {
             return ret;
@@ -443,10 +471,8 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Integer(-1);
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -482,9 +508,8 @@ public class SpeciesSearchUtility {
             // If exception occurrs, return "Exception!" string
             ex.printStackTrace(System.err);
             ret = "any";
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -505,8 +530,8 @@ public class SpeciesSearchUtility {
             Chm62edtGroupspeciesDomain finder = new Chm62edtGroupspeciesDomain();
             List resList = finder.findWhere(Utilities.prepareSQLOperator("COMMON_NAME", namePart, relationOp).toString());
 
-            for (int i = 0; i < resList.size(); i++) {
-                Chm62edtGroupspeciesPersist group = (Chm62edtGroupspeciesPersist) resList.get(i);
+            for (Object aResList : resList) {
+                Chm62edtGroupspeciesPersist group = (Chm62edtGroupspeciesPersist) aResList;
 
                 results.add(group.getCommonName());
             }
@@ -525,7 +550,7 @@ public class SpeciesSearchUtility {
      * @return Count number of species. -1 is returned if groupID is null or an exception occurrs
      */
     public static Long countUniqueSpecies(Integer groupID, boolean showInvalidatedSpecies) {
-        Long ret = new Long(-1);
+        Long ret = (long) -1;
 
         if (null == groupID) {
             return ret;
@@ -533,7 +558,7 @@ public class SpeciesSearchUtility {
         try {
             Chm62edtSpeciesDomain finder = new Chm62edtSpeciesDomain();
 
-            if (showInvalidatedSpecies == true) {
+            if (showInvalidatedSpecies) {
                 ret = finder.countWhere(
                         "SELECT count(*) FROM chm62edt_species WHERE ID_GROUP_SPECIES = " + groupID
                         + " AND (TYPE_RELATED_SPECIES='species' OR TYPE_RELATED_SPECIES='subspecies')");
@@ -545,10 +570,9 @@ public class SpeciesSearchUtility {
         } catch (Exception ex) {
             // If exception occurrs, return -1!
             ex.printStackTrace(System.err);
-            ret = new Long(-1);
-        } finally {
-            return ret;
+            ret = (long) -1;
         }
+        return ret;
     }
 
     /**
@@ -600,7 +624,7 @@ public class SpeciesSearchUtility {
                 results = new Chm62edtSpeciesDomain().findWhere(sql);
             }
             if (0 == criteria.compareTo(CRITERIA_VERNACULAR_NAME)) {
-                if (null == langName || (null != langName && langName.equalsIgnoreCase("any"))) {
+                if (null == langName || (langName.equalsIgnoreCase("any"))) {
                     String sql = Utilities.prepareSQLOperator("VALUE", name, relationOp)
                     + " AND NAME='vernacular_name' GROUP BY VALUE";
 
@@ -625,9 +649,8 @@ public class SpeciesSearchUtility {
             // If exception occurrs, return an empty list!
             ex.printStackTrace(System.err);
             results = new Vector(0);
-        } finally {
-            return results;
         }
+        return results;
     }
 
     /**
@@ -647,9 +670,8 @@ public class SpeciesSearchUtility {
             // If exception occurrs, return an empty list!
             ex.printStackTrace(System.err);
             results = new Vector(0);
-        } finally {
-            return results;
         }
+        return results;
     }
 
     /**
@@ -667,9 +689,8 @@ public class SpeciesSearchUtility {
             results = new Chm62edtGroupspeciesDomain().findOrderBy("COMMON_NAME");
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
-        } finally {
-            return results;
         }
+        return results;
     }
 
     /**
@@ -797,8 +818,8 @@ public class SpeciesSearchUtility {
         Vector res = new Vector();
 
         try {
-            for (int i = 0; i < threats.size(); i++) {
-                NationalThreatWrapper tw = (NationalThreatWrapper) threats.get(i);
+            for (Object threat : threats) {
+                NationalThreatWrapper tw = (NationalThreatWrapper) threat;
 
                 if (duplicate(res, tw)) {
                     replace(res, tw);
@@ -813,8 +834,8 @@ public class SpeciesSearchUtility {
     }
 
     private static boolean duplicate(List threats, NationalThreatWrapper threat) {
-        for (int i = 0; i < threats.size(); i++) {
-            NationalThreatWrapper tw = (NationalThreatWrapper) threats.get(i);
+        for (Object threat1 : threats) {
+            NationalThreatWrapper tw = (NationalThreatWrapper) threat1;
 
             if (tw.getCountry().equalsIgnoreCase(threat.getCountry())) {
                 if (tw.getReferenceYear() <= threat.getReferenceYear()) {
@@ -865,8 +886,8 @@ public class SpeciesSearchUtility {
 
         List v1 = SpeciesSearchUtility.processThreats(v);
 
-        for (int i = 0; i < v1.size(); i++) {
-            NationalThreatWrapper tw = (NationalThreatWrapper) v1.get(i);
+        for (Object aV1 : v1) {
+            NationalThreatWrapper tw = (NationalThreatWrapper) aV1;
             // System.out.println(tw.getCountry() + "   |   " + tw.getStatus()  + "  |   " + tw.getReferenceYear());
         }
 
@@ -922,8 +943,8 @@ public class SpeciesSearchUtility {
             List columns = sqlc.ExecuteSQLReturnList(sql, 1);
 
             if (columns != null && columns.size() > 0) {
-                for (int i = 0; i < columns.size(); i++) {
-                    results.add(((TableColumns) columns.get(i)).getColumnsValues().get(0));
+                for (Object column : columns) {
+                    results.add(((TableColumns) column).getColumnsValues().get(0));
                 }
             }
         } catch (Exception ex) {

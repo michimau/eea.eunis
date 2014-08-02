@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="other-classifications-accordion">
-                            <h2 class="notoc eea-icon-right-container">Relation to EUNIS habitat classification</h2>
+                            <h2 class="notoc eea-icon-right-container">Relation to habitat classifications</h2>
                             <div class="pane">
                                 <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-classifications.jsp"/>
                             </div>

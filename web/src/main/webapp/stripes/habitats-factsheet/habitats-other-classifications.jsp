@@ -3,10 +3,7 @@
 <stripes:layout-definition>
     <c:choose>
     <c:when test="${!empty actionBean.factsheet.otherClassifications}">
-        <h3>
-                ${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}
-        </h3>
-        <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'Relationships with other classifications')}" class="listing fullwidth" style="display: table">
+        <table class="listing fullwidth" style="display: table">
             <col style="width:30%"/>
             <col style="width:15%"/>
             <col style="width:40%"/>

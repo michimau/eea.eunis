@@ -48,6 +48,8 @@ public class ReferencesActionBean extends AbstractStripesAction {
     private String section;
     private CustomPaginatedList<ReferenceDTO> refs;
     private DcIndexDTO dcIndex;
+    private DcIndexDTO parent;
+    private List<DcIndexDTO> children;
     private List<AttributeDto> dcAttributes;
 
     /** tabs to display */
@@ -82,6 +84,14 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
             dcIndex = dao.getDcIndex(idref);
             dcAttributes = dao.getDcAttributes(idref);
+
+            // Get the parent reference
+            if(dcIndex.getReference() != null) {
+                parent = dao.getDcIndex(dcIndex.getReference());
+            }
+
+            // search for the children
+            children = dao.getChildren(dcIndex.getIdDc());
 
             btrail = "eea#" + eeaHome
                     + ",home#index.jsp,references#references";
@@ -221,5 +231,13 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    public DcIndexDTO getParent() {
+        return parent;
+    }
+
+    public List<DcIndexDTO> getChildren() {
+        return children;
     }
 }

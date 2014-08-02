@@ -33,11 +33,11 @@
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
 
   // Columns to be displayed
-  boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), GroupsBean.HIDE);
-  boolean showOrder = Utilities.checkedStringToBoolean(formBean.getShowOrder(), GroupsBean.HIDE);
-  boolean showFamily = Utilities.checkedStringToBoolean(formBean.getShowFamily(), GroupsBean.HIDE);
-  boolean showScientificName = Utilities.checkedStringToBoolean(formBean.getShowScientificName(), GroupsBean.HIDE);
-  boolean showVernacularNames = Utilities.checkedStringToBoolean(formBean.getShowVernacularNames(), GroupsBean.HIDE);
+  boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), GroupsBean.SHOW);
+  boolean showOrder = Utilities.checkedStringToBoolean(formBean.getShowOrder(), GroupsBean.SHOW);
+  boolean showFamily = Utilities.checkedStringToBoolean(formBean.getShowFamily(), GroupsBean.SHOW);
+  boolean showScientificName = Utilities.checkedStringToBoolean(formBean.getShowScientificName(), GroupsBean.SHOW);
+  boolean showVernacularNames = Utilities.checkedStringToBoolean(formBean.getShowVernacularNames(), GroupsBean.SHOW);
 
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   // The main paginator

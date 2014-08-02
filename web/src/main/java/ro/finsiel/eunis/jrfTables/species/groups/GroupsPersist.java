@@ -122,7 +122,7 @@ public final class GroupsPersist extends PersistentObject {
     public String getTaxonomicNameOrder() {
         String level = this.getTaxonomyLevel();
 
-        if (level != null && level.equalsIgnoreCase("order_column")) {
+        if (level != null && level.equalsIgnoreCase("order")) {
             return this.getTaxonomyName();
         } else {
             String result = "";
@@ -137,7 +137,7 @@ public final class GroupsPersist extends PersistentObject {
                 String classification_name = sts.nextToken();
 
                 if (classification_level != null
-                        && classification_level.equalsIgnoreCase("order_column")) {
+                        && classification_level.equalsIgnoreCase("order")) {
                     result = classification_name;
                     break;
                 }

@@ -28,15 +28,6 @@ public class Chm62edtReportsPersist extends PersistentObject {
         this.reference = reference;
     }
 
-    public Integer getRefcd() {
-        return refcd;
-    }
-
-    public void setRefcd(Integer refcd) {
-        this.refcd = refcd;
-    }
-
-    private Integer refcd = null;
     private Integer i_idGeoscope = null;
     private Integer i_idGeoscopeLink = null;
     private Integer i_idReportType = null;

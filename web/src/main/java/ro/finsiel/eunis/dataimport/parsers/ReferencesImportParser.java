@@ -154,18 +154,17 @@ public class ReferencesImportParser extends DefaultHandler {
 
                     preparedStatementDcIndexInsert.setInt(1, maxDcId);
                     preparedStatementDcIndexInsert.setString(2, legalInstCd);
-                    preparedStatementDcIndexInsert.setString(3, refcd);
-                    preparedStatementDcIndexInsert.setString(4, created);
-                    preparedStatementDcIndexInsert.setString(5, title);
-                    preparedStatementDcIndexInsert.setString(6, abrevTitle);
-                    preparedStatementDcIndexInsert.setString(7, publisher);
-                    preparedStatementDcIndexInsert.setString(8, author);
-                    preparedStatementDcIndexInsert.setString(9, editor);
-                    preparedStatementDcIndexInsert.setString(10, journTitle);
-                    preparedStatementDcIndexInsert.setString(11, bookTitle);
-                    preparedStatementDcIndexInsert.setString(12, journIssue);
-                    preparedStatementDcIndexInsert.setString(13, isbn);
-                    preparedStatementDcIndexInsert.setString(14, url);
+                    preparedStatementDcIndexInsert.setString(3, created);
+                    preparedStatementDcIndexInsert.setString(4, title);
+                    preparedStatementDcIndexInsert.setString(5, abrevTitle);
+                    preparedStatementDcIndexInsert.setString(6, publisher);
+                    preparedStatementDcIndexInsert.setString(7, author);
+                    preparedStatementDcIndexInsert.setString(8, editor);
+                    preparedStatementDcIndexInsert.setString(9, journTitle);
+                    preparedStatementDcIndexInsert.setString(10, bookTitle);
+                    preparedStatementDcIndexInsert.setString(11, journIssue);
+                    preparedStatementDcIndexInsert.setString(12, isbn);
+                    preparedStatementDcIndexInsert.setString(13, url);
                     preparedStatementDcIndexInsert.addBatch();
 
                 } else {
@@ -227,9 +226,9 @@ public class ReferencesImportParser extends DefaultHandler {
             maxDcId = getMaxId("SELECT MAX(ID_DC) FROM dc_index");
 
             // Insert statement
-            String query = "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD, "
+            String query = "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, "
                 + "CREATED, TITLE, ALTERNATIVE, PUBLISHER, SOURCE, EDITOR, JOURNAL_TITLE, "
-                + "BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,?,'REFERENCES',?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,?,'REFERENCES',?,?,?,?,?,?,?,?,?,?,?)";
             this.preparedStatementDcIndexInsert = con.prepareStatement(query);
 
             // Update statement
@@ -307,6 +306,11 @@ public class ReferencesImportParser extends DefaultHandler {
         return maxIdInt;
     }
 
+    /**
+     * @deprecated The REFCD column was removed, the map now uses the ID_DC column as a key
+     * @return
+     * @throws Exception
+     */
     private HashMap<String, Integer> getDCIds() throws Exception {
         HashMap<String, Integer> ret = new HashMap<String, Integer>();
 
@@ -314,15 +318,13 @@ public class ReferencesImportParser extends DefaultHandler {
         ResultSet rset = null;
 
         try {
-            String query = "SELECT ID_DC, REFCD FROM dc_index WHERE COMMENT = 'REFERENCES'";
+            String query = "SELECT ID_DC FROM dc_index WHERE COMMENT = 'REFERENCES'";
 
             stmt = con.prepareStatement(query);
             rset = stmt.executeQuery();
             while (rset.next()) {
                 int dcId = rset.getInt("ID_DC");
-                String refCd = rset.getString("REFCD");
-
-                ret.put(refCd, new Integer(dcId));
+                ret.put(dcId + "", dcId);
             }
 
         } catch (Exception e) {

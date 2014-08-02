@@ -66,9 +66,28 @@
                             <th scope="row">Publisher</th>
                             <td>${eunis:replaceTags(actionBean.dcIndex.publisher)}</td>
                         </tr>
+                        <c:set var="zebra" value="${'zebraeven'}"/>
+                        <c:if test="${not empty actionBean.parent}">
+                            <tr class="${zebra}">
+                                <th scope="row">Is part of</th>
+                                <td>
+                                    <a href="references/${actionBean.parent.idDc}">${actionBean.parent.title}</a>
+                                </td>
+                            </tr>
+                            <c:set var="zebra" value="${(zebra eq 'zebraeven')?'':'zebraeven' }"/>
+                        </c:if>
+                        <c:forEach var="child" items="${actionBean.children}">
+                            <tr class="${zebra}">
+                                <th scope="row">Has part</th>
+                                <td>
+                                    <a href="references/${child.idDc}">${child.title}</a><br>
+                                </td>
+                                <c:set var="zebra" value="${(zebra eq 'zebraeven')?'':'zebraeven' }"/>
+                            </tr>
+                        </c:forEach>
                         <c:if test="${!empty actionBean.dcAttributes}">
                             <c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
-                                <tr ${loop.index % 2 != 0 ? '' : 'class="zebraeven"'}>
+                                <tr class="${zebra}">
                                     <th scope="row">${attr.label}</th>
                                     <c:choose>
                                         <c:when test="${attr.type == 'reference'}">
@@ -88,6 +107,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </tr>
+                                <c:set var="zebra" value="${(zebra eq 'zebraeven')?'':'zebraeven' }"/>
                             </c:forEach>
                         </c:if>
                     </table>
@@ -121,7 +141,7 @@
                             <c:forEach items="${actionBean.speciesByName}" var="spe" varStatus="loop">
                                 <tr>
                                     <td>
-                                        <a href="species/${spe.id}">${spe.name}<c:if test="${not empty spe.author}">, ${spe.author}</c:if></a>
+                                        <a href="species/${spe.id}"><span class="italics">${spe.name}</span><c:if test="${not empty spe.author}"> ${spe.author}</c:if></a>
                                     </td>
                                     <td>
                                             ${spe.groupCommonName}

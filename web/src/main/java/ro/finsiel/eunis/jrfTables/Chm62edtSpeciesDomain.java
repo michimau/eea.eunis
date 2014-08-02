@@ -84,7 +84,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
         try {
             result = this.findLong(
                     "SELECT COUNT(*) FROM " + this.getTableAlias()
-                    + " WHERE ID_GROUP_SPECIES='" + groupID.toString() + "'");
+                    + " WHERE ID_GROUP_SPECIES='" + groupID.toString() + "' AND VALID_NAME > 0 and TYPE_RELATED_SPECIES='Species'");
         } catch (Exception e) {
             e.printStackTrace();
         }

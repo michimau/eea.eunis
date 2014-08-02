@@ -353,4 +353,16 @@
             ${getDefaultPicture("Birds")}
         </example>
     </function>
+
+    <function>
+        <description>
+            Shortens an URL (to display as a link title, when none available)
+        </description>
+        <name>shortenURL</name>
+        <function-class>eionet.eunis.util.JstlFunctions</function-class>
+        <function-signature>java.lang.String shortenURL(java.lang.String)</function-signature>
+        <example>
+            ${shortenURL("http://example.com")}
+        </example>
+    </function>
 </taglib>

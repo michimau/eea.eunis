@@ -2616,9 +2616,6 @@ public final class Utilities {
                     int iRnd;
 
                     iRnd = rnd.nextInt(files.length);
-                    if (iRnd == 0) {
-                        iRnd = 1;
-                    }
                     ret = files[ iRnd ].getName();
                 }
             } else {
@@ -2750,7 +2747,7 @@ public final class Utilities {
     }
 
     // Method that generates tree for species-taxonomic-browser.jsp
-    public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, Connection con, SQLUtilities sqlc, WebContentManagement cm) {
+    public static String generateSpeciesTaxonomicTree(String id, String expand, String genus, boolean isRoot, Connection con, SQLUtilities sqlc, WebContentManagement cm) {
 
         String ret = "";
         String strSQL = "";
@@ -2791,7 +2788,7 @@ public final class Utilities {
             for (TaxonomyDTO tax : list) {
 
                 String taxTitle = tax.getTitle();
-                String taxId = new Integer(tax.getId()).toString();
+                String taxId = Integer.toString(tax.getId());
 
                 ret += "<li>" + newLine;
                 boolean hasChilds = sqlc.SpeciesHasChildTaxonomies(taxId);
@@ -2823,21 +2820,73 @@ public final class Utilities {
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
 
-                    ret += generateSpeciesTaxonomicTree(taxId, expand, false, con, sqlc, cm);
+                    ret += generateSpeciesTaxonomicTree(taxId, expand, genus, false, con, sqlc, cm);
 
-                    ArrayList SpeciesList = sqlc.SQL2Array(
-                            "SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM chm62edt_species"
-                                    + " WHERE ID_TAXONOMY=" + taxId + " ORDER BY SCIENTIFIC_NAME");
+                    // Extract genus list and species links
+                    List speciesList = sqlc.ExecuteSQLReturnList("SELECT GENUS, CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM chm62edt_species"
+                            + " WHERE ID_TAXONOMY=" + taxId + " ORDER BY GENUS, SCIENTIFIC_NAME", 2);
 
-                    if (SpeciesList.size() > 0) {
-                        ret += "<ul class=\"eunistree\">" + newLine;
-                        for (int i = 0; i < SpeciesList.size(); i++) {
-                            ret += "<li>" + newLine;
-                            ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"
-                                    + SpeciesList.get(i) + newLine;
-                            ret += "</li>" + newLine;
+                    if(speciesList.size() > 0){
+                        // groups, species
+                        String lastGenus = "#null#";
+                        ret += "<ul class=\"eunistree\" id='aaa'>" + newLine;
+
+                        for(Object o : speciesList){
+                            TableColumns species = (TableColumns)o;
+                            String currentGenus = species.getColumnsValues().get(0).toString();
+                            String link = species.getColumnsValues().get(1).toString();
+
+                            if(!lastGenus.equalsIgnoreCase(currentGenus)) {
+
+                                if(lastGenus.equalsIgnoreCase(genus)){
+                                    // end the list of species
+                                    ret += "</ul>" + newLine;
+                                }
+
+                                // write the genus expand link
+                                // if the genus exists in the DB, then a species exists - so there is no need to display "ending" icons
+                                ret += "<li>";
+
+                                if (currentGenus.equalsIgnoreCase(genus)) {
+                                    // link to hide the branches
+                                    ret += "<a title=\"" + hide + "\" id=\"level_" + currentGenus
+                                            + "\" href=\"species-taxonomic-browser.jsp?expand=" + expand + "#level_" + currentGenus
+                                            + "\"><img src=\"images/img_minus.gif\" alt=\""
+                                            + hide + "\"/></a>" + newLine;
+                                } else {
+                                    // link to expand the branches
+                                    ret += "<a title=\"" + show + "\" id=\"level_" + currentGenus
+                                            + "\" href=\"species-taxonomic-browser.jsp?expand=" + expand + "&genus=" + currentGenus + "#level_"
+                                            + currentGenus
+                                            + "\"><img src=\"images/img_plus.gif\" alt=\""
+                                            + show + "\"/></a>" + newLine;
+                                }
+
+                                ret += currentGenus + " (Genus)</li>" + newLine;
+
+                                if(currentGenus.equalsIgnoreCase(genus)){
+                                    // selected genus, start the list of species
+                                    ret += "<ul class=\"eunistree\">" + newLine;
+                                }
+
+                                lastGenus = currentGenus;
+                            }
+
+                            // display the species (if needed)
+                            if(currentGenus.equalsIgnoreCase(genus)) {
+                                ret += "<li>" + newLine;
+                                ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"
+                                        + "<span class='italics'>" + link + "</span>" + newLine;
+                                ret += "</li>" + newLine;
+                            }
                         }
-                        ret += "</ul>" + newLine;
+
+                        if(lastGenus.equalsIgnoreCase(genus)){
+                            // end the list of species, if the last genus is the current one
+                            ret += "</ul>" + newLine;
+                        }
+
+                        ret += "</ul>" + newLine;  // end the genus list
                     }
                 }
                 ret += "</li>" + newLine;

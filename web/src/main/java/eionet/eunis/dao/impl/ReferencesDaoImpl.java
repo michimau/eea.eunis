@@ -162,9 +162,9 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                     con.prepareStatement(
                             "SELECT " +
                             "a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE " +
-                            "from dc_attributes AS a " +
+                            "FROM dc_attributes AS a " +
                             "LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME " +
-                            "WHERE ID_DC = ?");
+                            "WHERE ID_DC = ? and b.name not in ('isPartOf','hasPart')");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             
@@ -257,7 +257,6 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 object = new DcIndexDTO();
                 object.setIdDc(rs.getString("ID_DC"));
                 object.setComment(rs.getString("COMMENT"));
-                object.setRefCd(rs.getString("REFCD"));
                 object.setReference(rs.getString("REFERENCE"));
                 object.setSource(rs.getString("SOURCE"));
                 object.setEditor(rs.getString("EDITOR"));
@@ -318,8 +317,8 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             ret = new Integer(id_dc);
 
             String insertIndex =
-                    "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD, "
-                            + "TITLE, PUBLISHER, CREATED, SOURCE, EDITOR, URL) VALUES (?,-1,'RED_LIST',0,?,?,?,?,?,?)";
+                    "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, "
+                            + "TITLE, PUBLISHER, CREATED, SOURCE, EDITOR, URL) VALUES (?,-1,'RED_LIST',?,?,?,?,?,?)";
 
             Connection con = null;
             PreparedStatement psIndex = null;
@@ -436,6 +435,54 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             closeAllResources(con, preparedStatement, rs);
         }
         return ret;
+    }
+
+    /**
+     * Returns a list of DC objects that are children of the given DC. Searches by the REFERENCE DB field.
+     * @param idDc The parent document
+     * @return List of DC objects
+     */
+    public List<DcIndexDTO> getChildren(String idDc){
+        DcIndexDTO object;
+        List<DcIndexDTO> result = new ArrayList<DcIndexDTO>();
+
+        String query = "SELECT * FROM dc_index WHERE REFERENCE = ?";
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = getConnection();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, idDc);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                object = new DcIndexDTO();
+                object.setIdDc(rs.getString("ID_DC"));
+                object.setComment(rs.getString("COMMENT"));
+                object.setReference(rs.getString("REFERENCE"));
+                object.setSource(rs.getString("SOURCE"));
+                object.setEditor(rs.getString("EDITOR"));
+                object.setJournalTitle(rs.getString("JOURNAL_TITLE"));
+                object.setBookTitle(rs.getString("BOOK_TITLE"));
+                object.setJournalIssue(rs.getString("JOURNAL_ISSUE"));
+                object.setIsbn(rs.getString("ISBN"));
+                object.setUrl(rs.getString("URL"));
+                object.setCreated(rs.getString("CREATED"));
+                object.setTitle(rs.getString("TITLE"));
+                object.setAlternative(rs.getString("ALTERNATIVE"));
+                object.setPublisher(rs.getString("PUBLISHER"));
+                result.add(object);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, preparedStatement, rs);
+        }
+
+        return result;
     }
 
 }

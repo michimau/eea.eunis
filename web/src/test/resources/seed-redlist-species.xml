@@ -3,8 +3,8 @@
   <dc_index ID_DC="2407" COMMENT="REFERENCES" SOURCE="IUCN Red List Categories and Criteria: Version 3.1"
       EDITOR="IUCN Species Survival Commission" ISBN="2-8317-0633-5" URL="http://www.iucn.org"
       TITLE="IUCN Red List Categories and Criteria: Version 3.1"
-      PUBLISHER="IUCN, Gland, Switzerland and Cambridge, UK" REFCD="0" REFERENCE="-1"/>
-  <dc_index ID_DC="1" COMMENT="RED_LIST" REFCD="0" REFERENCE="-1" SOURCE="sss" TITLE="IUCN"/>
+      PUBLISHER="IUCN, Gland, Switzerland and Cambridge, UK"/>
+  <dc_index ID_DC="1" COMMENT="RED_LIST" SOURCE="sss" TITLE="IUCN"/>
 
   <chm62edt_country ID_COUNTRY="67" ID_GEOSCOPE="67" EUNIS_AREA_CODE="E25"
       AREA_NAME="European Union (25 Member States)"

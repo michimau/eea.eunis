@@ -111,7 +111,7 @@ public class SpeciesReportsImporter {
 
     /**
      * Runs the import
-     * @param args
+     * @param args Main arguments: list of Excel files
      */
     public static void main(String[] args){
 
@@ -187,9 +187,13 @@ public class SpeciesReportsImporter {
             selectToDeleteRedListPs = sqlUtilities.getConnection().prepareStatement(selectToDeleteRedList);
 
             // get the max ids so we can insert over, as the tables don't have autoincrement
-            lastLegalStatusId = new Integer(sqlUtilities.ExecuteSQL("select max(id_legal_status) from chm62edt_legal_status")) + 1;
+            String maxLegal = sqlUtilities.ExecuteSQL("select max(id_legal_status) from chm62edt_legal_status");
+            if(maxLegal == null) maxLegal = "0";
+            lastLegalStatusId = new Integer(maxLegal) + 1;
             lastReportTypeId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_type) from chm62edt_report_type")) + 1;
-            lastIdReportAttributesId = new Integer(sqlUtilities.ExecuteSQL("select max(id_report_attributes) from chm62edt_report_attributes")) + 1;
+            String maxReport = sqlUtilities.ExecuteSQL("select max(id_report_attributes) from chm62edt_report_attributes");
+            if(maxReport == null) maxReport = "0";
+            lastIdReportAttributesId = new Integer(maxReport) + 1;
 
             if(debug) System.out.println("Last IDs: id_legal_status=" + lastLegalStatusId + "  id_report_type=" + lastReportTypeId + "  id_report_attributes="  + lastIdReportAttributesId);
 
@@ -234,7 +238,21 @@ public class SpeciesReportsImporter {
      * Import all the species in the list
      */
     private void importAllSpecies(){
-        for(SpeciesRow sr : excelReader.getSpeciesRows()){
+        List<SpeciesRow> rows = excelReader.getSpeciesRows();
+        // identify doubles
+        for(SpeciesRow sr : rows) {
+            int count=0;
+            for(SpeciesRow sr2 : rows) {
+                if(sr.getSpeciesName().equalsIgnoreCase(sr2.getSpeciesName()) && sr2.getExcelRow()>sr.getExcelRow()){
+                    count++;
+                    if(count>0){
+                        System.out.println("WARNING: Species " + sr.getSpeciesName() + " (row " + sr.getExcelRow() + ") doubled by row " + sr2.getExcelRow());
+                    }
+                }
+            }
+        }
+
+        for(SpeciesRow sr : rows){
 //            if(sr.getSpeciesName().equals("Lethenteron camtschaticum"))
                 importSpecies(sr);
         }
@@ -278,16 +296,29 @@ public class SpeciesReportsImporter {
     private void identifySpecies(SpeciesRow speciesRow){
         String idLink = null;
 
-        List speciesList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where scientific_name='"+ speciesRow.getSpeciesName() + "'", 7);
+        List speciesList = selectSpeciesByName(speciesRow.getSpeciesName());
 
         idLink = populateSpeciesIds(speciesRow, speciesList);
 
         if(speciesRow.getIdSpecies() == null && idLink != null) {
             // extract the parent species
-            List speciesFullList = sqlUtilities.ExecuteSQLReturnList("select id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species from chm62edt_species where id_species='"+ idLink + "'", 7);
+            List speciesFullList = selectSpeciesById(idLink);
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
         }
+    }
+
+    private String speciesColumns = "id_species, id_nature_object, valid_name, id_species_link, type_related_species, scientific_name, id_group_species";
+    private int speciesColumnsNumber = 7;
+
+    private List selectSpeciesByName(String scientificName) {
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select " + speciesColumns + " from chm62edt_species where scientific_name='"+ scientificName + "'", speciesColumnsNumber);
+        return speciesList;
+    }
+
+    private List selectSpeciesById(String idSpecies) {
+        List speciesList = sqlUtilities.ExecuteSQLReturnList("select " + speciesColumns + " from chm62edt_species where id_species='"+ idSpecies + "'", speciesColumnsNumber);
+        return speciesList;
     }
 
     /**
@@ -365,13 +396,13 @@ public class SpeciesReportsImporter {
         multipleInsertReport("Bonn Convention", speciesRow.getBonnConventionAnnex(), bonnMap, ID_GEOSCOPE_WORLD, "Bonn", speciesRow.getBonnName(), speciesRow);
         multipleInsertReport("CITES", speciesRow.getCitesAnnex(), citesMap, ID_GEOSCOPE_WORLD, null, speciesRow.getCitesName(), speciesRow);
         multipleInsertReport("EU Trade", speciesRow.getEuTradeAnnex(), euTradeMap, ID_GEOSCOPE_EU, null, speciesRow.getEuTradeName(), speciesRow);
-        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow);
+        singleInsertReport("AEWA", speciesRow.getAewa(), "II", AEWA, ID_GEOSCOPE_WORLD, null, speciesRow.getAewaName(), speciesRow);
         singleInsertReport("EuroBats", speciesRow.getEurobats(), "I", EUROBATS, ID_GEOSCOPE_EU, null, speciesRow);
         singleInsertReport("ACCOBAMS", speciesRow.getAccobams(), "I", ACCOBAMS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("ASCOBANS", speciesRow.getAscobans(), "Yes", ASCOBANS, ID_GEOSCOPE_WORLD, null, speciesRow);
         singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, ID_GEOSCOPE_EU, null, speciesRow);
         multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow.getSpaName(), speciesRow);
-        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow.getOsparName(), speciesRow);
         singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
 
         insertRedListReport(ID_GEOSCOPE_EU, speciesRow);
@@ -480,15 +511,15 @@ public class SpeciesReportsImporter {
         multipleInsertReport(name, annexes,values, geoscope, restrictionPrefix, "", speciesRow);
     }
 
-        /**
-         * Insert the report data for a multiple-annex report
-         * @param name
-         * @param annexes
-         * @param values
-         * @param geoscope
-         * @param restrictionPrefix
-         * @param speciesRow
-         */
+    /**
+     * Insert the report data for a multiple-annex report
+     * @param name
+     * @param annexes
+     * @param values
+     * @param geoscope
+     * @param restrictionPrefix
+     * @param speciesRow
+     */
     private void multipleInsertReport(String name, String[] annexes, Map<String, String> values, String geoscope, String restrictionPrefix, String nameInDocument, SpeciesRow speciesRow){
 
         for(String annex : annexes){
@@ -562,6 +593,45 @@ public class SpeciesReportsImporter {
             int idReportType = insertReportType(idLegalStatus, "LEGAL_STATUS");
 
             insertReport(idNatureObject, idDc, idGeoscope, idReportAttributes, idReportType);
+
+            // check that nameInDocument is synonym
+            if(isSynonymName(nameInDocument)){
+                System.out.println("Searching for synonyms: " + nameInDocument);
+
+                // find in DB
+                String[] names = nameInDocument.split(";");
+                for(String name : names) {
+                    if(!name.trim().isEmpty()) {
+                        List l = selectSpeciesByName(name.trim());
+                        if(debug) System.out.println(name.trim());
+                        // check it's a synonym
+                        if(l.size() == 0) {
+                            if(debug) System.out.println(" Not found");
+                            // todo add it ?
+                        } else if (l.size() == 1) {
+                            if(debug) System.out.println(" Found 1");
+                            // check it's synonym or original species
+
+                            String idSpeciesSynonym = ((TableColumns)l.get(0)).getColumnsValues().get(0).toString();
+                            String validName = ((TableColumns)l.get(0)).getColumnsValues().get(2).toString();
+                            String link = ((TableColumns)l.get(0)).getColumnsValues().get(3).toString();
+                            String related = ((TableColumns)l.get(0)).getColumnsValues().get(4).toString();
+
+                            if(validName.equals("0") && (related.equalsIgnoreCase("synonym") || related.equalsIgnoreCase("Subspecies")) && link.equalsIgnoreCase(idSpecies)) {
+                                if(debug) System.out.println(" Synonym ok");
+                            } else if(idSpeciesSynonym.trim().equalsIgnoreCase(idSpecies.trim())) {
+                                if(debug) System.out.println(" Same species! " + idSpeciesSynonym.trim());
+                            } else {
+                                System.out.println("WARNING: Incorrect synonym: " + name.trim() + " idSpecies=" + idSpeciesSynonym +" valid name=" + validName + " link=" + link + " related=" + related);
+                            }
+
+                        } else if (l.size() > 1) {
+                            if(debug) System.out.println(" Found too many (" + l.size() + ")");
+                            // todo still check
+                        }
+                    }
+                }
+            }
 
             if(debug) System.out.println(" Inserted legal report with idDc=" + idDc);
         } catch (SQLException e) {
@@ -673,6 +743,16 @@ public class SpeciesReportsImporter {
 
         // fix for CR/PE (Critically Endangered, Possibly Extinct) - should be treated as Critically Endangered (CR)
         conservationStatusCode.put("CR/PE", conservationStatusCode.get("CR"));
+    }
+
+    /**
+     * Synonym as defined in #19506
+     * @param name
+     * @return
+     */
+    private boolean isSynonymName(String name){
+        if(name == null) return false;
+        return !(name.isEmpty() || name.contains("species") || name.contains("spp.") || name.contains("sp. plur."));
     }
 
 

@@ -81,7 +81,6 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         // Joined tables
         JoinTable reports = null;
         JoinTable reportType = null;
-        JoinTable legalStatus = null;
         JoinTable dcIndex = null;
         JoinTable groupSpecies = null;
 
@@ -96,13 +95,9 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         reportType.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType", "setIdReportType"));
         reports.addJoinTable(reportType);
 
-        legalStatus = new JoinTable("chm62edt_legal_status C", "ID_LOOKUP", "ID_LEGAL_STATUS");
-        legalStatus.addJoinColumn(new StringJoinColumn("ANNEX", "annex", "setAnnex"));
-        legalStatus.addJoinColumn(new StringJoinColumn("COMMENT", "comment", "setComment"));
-        reportType.addJoinTable(legalStatus);
-
         dcIndex = new JoinTable("dc_index D", "ID_DC", "ID_DC");
         dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "Alternative", "setAlternative"));
+        dcIndex.addJoinColumn(new StringJoinColumn("ID_DC", "ID_DC", "setIdDc"));
         dcIndex.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
         dcIndex.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
         reports.addJoinTable(dcIndex);
@@ -227,7 +222,6 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
                 "SELECT COUNT(*) FROM chm62edt_species AS E "
                 + "INNER JOIN  chm62edt_reports AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
                 + "INNER JOIN chm62edt_report_type AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                + "INNER JOIN chm62edt_legal_status AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
                 + "INNER JOIN dc_index AS D ON A.ID_DC = D.ID_DC "
                 + "INNER JOIN chm62edt_group_species AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
                 + "WHERE ");

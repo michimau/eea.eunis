@@ -47,7 +47,6 @@
 
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
-  var defaultValue="enter value here...";
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;
@@ -143,8 +142,7 @@
   function submitFirstValueForm(firstvalue, idnode) {
     if(firstvalue.value == "") {
       firstvalue.value = document.criteria.oldfirstvalue.value;
-      if(defaultValue != document.criteria.oldfirstvalue.value)
-        alert('<%=cm.cmsPhrase("Previous values were restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return(false);
     }
@@ -173,8 +171,7 @@
   function submitLastValueForm(lastvalue, idnode) {
     if(lastvalue.value == "") {
       lastvalue.value = document.criteria.oldlastvalue.value;
-      if(defaultValue != document.criteria.oldlastvalue.value)
-            alert('<%=cm.cmsPhrase("Previous values were restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return false;
     }
@@ -212,20 +209,11 @@
   }
 
   function saveFirstValue(val) {
-    if(val.value == defaultValue){
-        val.value="";
-    } else {
-        document.criteria.oldfirstvalue.value=val.value;
-    }
+    document.criteria.oldfirstvalue.value=val.value;
   }
 
   function saveLastValue(val) {
-      if(val.value == defaultValue){
-          val.value="";
-      } else {
-          document.criteria.oldlastvalue.value=val.value;
-      }
-
+      document.criteria.oldlastvalue.value=val.value;
   }
 
   function SaveCriteriaFunction() {
@@ -257,6 +245,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
    }
 //]]>
 </script>
+    <script src="script/search-advanced.js"></script>
 <%
 // Load saved search
 if(request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes"))
@@ -634,6 +623,9 @@ String rsn = (String)request.getParameter("siteName");
                     <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
                     <input type="text" title="<%=cm.cmsPhrase("List of values")%>" name="First_Value<%=IdNode%>" id="First_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
                     <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
+                    <script>
+                        selectDefaultOnFocus($("#First_Value<%=IdNode%>"));
+                    </script>
                     <%
                     if(rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
                       out.println(cm.cmsPhrase("and"));
@@ -643,6 +635,9 @@ String rsn = (String)request.getParameter("siteName");
                       <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
                       <input type="text" title="<%=cm.cmsPhrase("List of values")%>" name="Last_Value<%=IdNode%>" id="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
                       <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
+                      <script>
+                          selectDefaultOnFocus($("#Last_Value<%=IdNode%>"));
+                      </script>
                       <%
                     }
                     %>

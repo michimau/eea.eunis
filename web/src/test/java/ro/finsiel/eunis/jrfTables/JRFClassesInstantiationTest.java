@@ -1149,4 +1149,16 @@ public class JRFClassesInstantiationTest {
         assertNotNull("Instantiation failed", instance);
     }
 
+    @Test
+    public void test_EunisRdfFownloadsDomain() {
+        EunisRdfDownloadsDomain instance = new EunisRdfDownloadsDomain();
+        assertNotNull("Instantiation failed", instance);
+    }
+
+    @Test
+    public void test_EunisRdfDownloadsPersist() {
+        EunisRdfDownloadsPersist instance = new EunisRdfDownloadsPersist();
+        assertNotNull("Instantiation failed", instance);
+    }
+
 }

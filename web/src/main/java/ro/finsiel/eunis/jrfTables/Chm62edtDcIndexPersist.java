@@ -10,7 +10,6 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtDcIndexPersist extends PersistentObject {
     private Integer IdDc = null;
-    private Integer Refcd = null;
     private Integer reference = null;
     private String Comment = null;
 
@@ -35,22 +34,6 @@ public class Chm62edtDcIndexPersist extends PersistentObject {
      **/
     public void setIdDc(Integer idDc) {
         IdDc = idDc;
-    }
-
-    /**
-     * Getter for a database field.
-     * @return Field value.
-     **/
-    public Integer getRefcd() {
-        return Refcd;
-    }
-
-    /**
-     * Setter for a database field.
-     * @param refcd New value.
-     **/
-    public void setRefcd(Integer refcd) {
-        Refcd = refcd;
     }
 
     /**

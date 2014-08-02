@@ -26,15 +26,18 @@
                         <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.code2000, '')})</span>
                     </c:if>
                 </li>
-                <li>
-                    Priority habitat: <span class="bold"><c:choose><c:when test="${!empty actionBean.factsheet.priority && actionBean.factsheet.priority == 1}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></span>
-                </li>
-                <li>
-                    Protected in
-                    <a href="${ actionBean.pageUrl }#sites" onclick="openSection('sites');"><span class="bold">${fn:length(actionBean.sites)}</span></a>
-                     Natura 2000 sites
-                </li>
+                <c:if test="${actionBean.factsheet.habitatLevel eq 3}">
+                    <li>
+                        Priority habitat type: <span class="bold"><c:choose><c:when test="${!empty actionBean.factsheet.priority && actionBean.factsheet.priority == 1}">Yes</c:when><c:otherwise>No</c:otherwise></c:choose></span>
+                    </li>
+                    <li>
+                        Protected in
+                        <a href="${ actionBean.pageUrl }#sites" onclick="openSection('sites');"><span class="bold">${fn:length(actionBean.sites)}</span></a>
+                         Natura 2000 sites
+                    </li>
+                </c:if>
             </ul>
+            <br/>
         </div>
     </div>
     <c:if test="${fn:length(actionBean.englishDescription)>=actionBean.descriptionThreshold}">

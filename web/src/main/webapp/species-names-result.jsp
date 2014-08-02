@@ -27,7 +27,12 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-  	//Utilities.dumpRequestParams( request );
+    // #18874: search all the genus when searching "spp."
+    if(formBean.getScientificName().contains("spp.")){
+        formBean.setScientificName(formBean.getScientificName().replace("spp.",""));
+        formBean.setRelationOp(""+Utilities.OPERATOR_STARTS);
+    }
+
   	if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   	// Check columns to be displayed
   	boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), NameBean.HIDE);
@@ -378,16 +383,24 @@
 					                        expand.addElement("useVernacular");
 					                        if(newName)
 					                        	expand.addElement("newName");
-					                        String expandURL = formBean.toURLParam(expand);
-					                        boolean isExpanded = Utilities.checkedStringToBoolean(formBean.getExpand(), false);
-					                        if (showVernacularNames && !isExpanded){
+
+					                        String toggleLink = formBean.toURLParam(expand);
+					                        if(!toggleLink.contains("showVernacularNames"))
+					                            toggleLink = toggleLink + "&showVernacularNames=" + showVernacularNames;
+                                            toggleLink = toggleLink.replace("showVernacularNames=" + showVernacularNames,"showVernacularNames=" + (!showVernacularNames));
+
                       						%>
-                          						<a title="<%=cm.cms("show_vernacular_list")%>" rel="nofollow" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display common names in results table")%></a>
-                        						<%=cm.cmsTitle("show_vernacular_list")%>
-                      						<%
-                        					}
-                      						%>
-                      						<table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable listing">
+
+                                              <a rel="nofollow" href="<%=pageName + "?" + toggleLink%>">
+                                                <% if(showVernacularNames){ %>
+                                                  <%=cm.cmsPhrase("Display English common names only")%>
+                                                <% } else { %>
+                                                  <%=cm.cmsPhrase("Display all available common names")%>
+                                                <% } %>
+                                              </a>
+                                              <%=cm.cmsTitle("show_vernacular_list")%>
+
+                                              <table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable listing">
                         						<thead>
                         							<tr>
             								<%
@@ -429,6 +442,20 @@
                           									</th>
             								<%
                         								}
+                                                        if (showVernacularNames){
+                                            %>
+                                                            <th scope="col" class="nosort">
+                                                                <%=cm.cmsPhrase("Common names")%>
+                                                            </th>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                            <th scope="col" class="nosort">
+                                                            <%=cm.cmsPhrase("English common name")%>
+                                                            </th>
+                                                        <%
+                                                        }
+
                         								if (showValidName) {
                         									if(newName){
                         					%>
@@ -445,13 +472,6 @@
             								<%
                         									}
                         								}
-                        								if (showVernacularNames && isExpanded){
-            								%>
-                          									<th scope="col" class="nosort">
-                            									<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Common names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
-                          									</th>
-            								<%
-                        								}
             								%>
                         							</tr>
                         						</thead>
@@ -466,9 +486,13 @@
                           						while ( it.hasNext() ){
                             						ScientificNamePersist specie = ( ScientificNamePersist ) it.next();
 
-						                            Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
+                                                    Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
+                                                    // Sort this common names in alphabetical order
+                                                    Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+
+                                                    String englishName = SpeciesSearchUtility.findEnglishName( specie.getIdNatureObject() );
 						                            // Sort this common names in alphabetical order
-						                            Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );%>
+						                            %>
                         							<tr>
                         					<%
                           								if ( showGroup ){
@@ -512,6 +536,46 @@
                           								} else {
                             								isValid = specie.getValidName().intValue() == 1;
                           								}
+                          								%>
+                                                        <td>
+                                                            <%
+                                                            if ( showVernacularNames ) {
+                                                                if ( sortVernList != null && sortVernList.size() > 0 ){
+                                                            %>
+                                                                <%-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
+                                                                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                    <col style="width:30%"/>
+                                                                    <col style="width:70%"/>
+
+                                                                    <%
+                                                                        for ( int i = 0; i < sortVernList.size(); i++ ){
+                                                                            VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( i );
+                                                                            String vernacularName = aVernName.getName();
+                                                                            String searchedName = formBean.getVernacularName();
+                                                                            String bgColor1 = ( 0 == i % 2 ) ? "#EEEEEE" : "#FFFFFF";
+                                                                            if ( null != searchedName && -1 != vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) ){
+                                                                                bgColor1 = "#BBBBFF";
+                                                                            }
+                                                                    %>
+                                                                    <tr>
+                                                                        <td style="background-color:<%=bgColor1%>">
+                                                                            <%=Utilities.treatURLSpecialCharacters( aVernName.getLanguage() )%>
+                                                                        </td>
+                                                                        <td style="background-color:<%=bgColor1%>">
+                                                                            <%=Utilities.treatURLSpecialCharacters( vernacularName )%>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% } %>
+                                                                </table>
+                                                            <% } %>
+
+                                                            <%  } else { %>
+                                                                <%= englishName %>
+                                                            <%
+                                                            }
+                                                            %>
+                                                        </td>
+                                                        <%
                           								if ( showValidName ){
 	                            							if ( isValid ){
 	                        				%>
@@ -526,43 +590,6 @@
 	                        									</td>
 	                        				<%
 	                            							}
-                          								}
-                          								if ( showVernacularNames && isExpanded ) {
-                        					%>
-                        									<td>
-                          										<%-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
-                          										<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-                            										<col style="width:30%"/>
-                            										<col style="width:70%"/>
-                            				<%		                if ( sortVernList == null || sortVernList.size() <= 0 ){
-                            				%>
-                            											<tr><td>&nbsp;</td></tr>
-                            				<%
-                            										} else {
-                              											for ( int i = 0; i < sortVernList.size(); i++ ){
-                                											VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( i );
-                                											String vernacularName = aVernName.getName();
-                                											String searchedName = formBean.getVernacularName();
-                                											String bgColor1 = ( 0 == i % 2 ) ? "#EEEEEE" : "#FFFFFF";
-                                											if ( null != searchedName && -1 != vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) ){
-                                  												bgColor1 = "#BBBBFF";
-                                											}
-                            				%>
-                            												<tr>
-                              													<td style="background-color:<%=bgColor1%>">
-                                													<%=Utilities.treatURLSpecialCharacters( aVernName.getLanguage() )%>
-                              													</td>
-                              													<td style="background-color:<%=bgColor1%>">
-                                													<%=Utilities.treatURLSpecialCharacters( vernacularName )%>
-                              													</td>
-                            												</tr>
-                            				<%
-                                										}
-                              										}
-                            				%>
-                          										</table>
-                        									</td>
-                        					<%
                           								}
                         					%>
                         							</tr>
@@ -580,9 +607,15 @@
                           						int col = 0;
                           						while (it.hasNext()){
 						                            VernacularNameAnyPersist specie = (VernacularNameAnyPersist)it.next();
-						                            Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-						                            // Sort this common names in alphabetical order
-						                            Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
+						                            String englishName = SpeciesSearchUtility.findEnglishName(specie.getIdNatureObject());
+
+
+                                                      Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
+                                                      // Sort this common names in alphabetical order
+                                                      Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+
+
+
             								%>
                           								<tr>
             								<%
@@ -615,6 +648,46 @@
             								<%
                           								}
                             							boolean isValid = specie.getValidName() != null && specie.getValidName().intValue() == 1;
+                                            %>
+                                                        <td>
+                                                                  <%
+                                                                      if ( showVernacularNames ) {
+                                                                          if ( sortVernList != null && sortVernList.size() > 0 ){
+                                                                  %>
+                                                                      <%-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
+                                                                  <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                      <col style="width:30%"/>
+                                                                      <col style="width:70%"/>
+
+                                                                      <%
+                                                                          for ( int i = 0; i < sortVernList.size(); i++ ){
+                                                                              VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( i );
+                                                                              String vernacularName = aVernName.getName();
+                                                                              String searchedName = formBean.getVernacularName();
+                                                                              String bgColor1 = ( 0 == i % 2 ) ? "#EEEEEE" : "#FFFFFF";
+                                                                              if ( null != searchedName && -1 != vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) ){
+                                                                                  bgColor1 = "#BBBBFF";
+                                                                              }
+                                                                      %>
+                                                                      <tr>
+                                                                          <td style="background-color:<%=bgColor1%>">
+                                                                              <%=Utilities.treatURLSpecialCharacters( aVernName.getLanguage() )%>
+                                                                          </td>
+                                                                          <td style="background-color:<%=bgColor1%>">
+                                                                              <%=Utilities.treatURLSpecialCharacters( vernacularName )%>
+                                                                          </td>
+                                                                      </tr>
+                                                                      <% } %>
+                                                                  </table>
+                                                                  <% } %>
+
+                                                                  <%  } else { %>
+                                                                  <%= englishName %>
+                                                                  <%
+                                                                      }
+                                                                  %>
+                                                              </td>
+                                            <%
                             							if ( showValidName ){
                               								if ( isValid ){
             								%>
@@ -630,53 +703,7 @@
             								<%
                               								}
                             							}
-                          								if (showVernacularNames && isExpanded){
-            								%>
-                            								<td>
-                               									<%-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
-                              									<table summary="List of common names" width="100%" border="0" cellspacing="0" cellpadding="0">
-                               										<col style="width:30%"/>
-                               										<col style="width:70%"/>
-            								<%
-                              										if(sortVernList == null || sortVernList.size()<=0){
-            								%>
-                              											<tr><td>&nbsp;</td></tr>
-            								<%
-                              										} else {
-                            											for (int i = 0; i < sortVernList.size(); i++){
-                              												VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
-                              												String vernacularName = aVernName.getName();
-											                              	String searchedName = formBean.getVernacularName();
-											                              	String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
-											                              	int relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-											                              	if ( null != searchedName ) {
-                                												if ( relationOp == Utilities.OPERATOR_IS && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
-                                  													bgColor1 = "#BBBBFF";
-                                												}
-                                												if ( relationOp == Utilities.OPERATOR_CONTAINS && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
-                                  													bgColor1 = "#BBBBFF";
-                                												}
-                                												if ( relationOp == Utilities.OPERATOR_STARTS && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
-                                  													bgColor1 = "#BBBBFF";
-                                												}
-                              												}
-            								%>
-                                											<tr>
-                                  												<td style="background-color:<%=bgColor1%>">
-                                    												<%=Utilities.treatURLSpecialCharacters(aVernName.getLanguage())%>
-                                  												</td>
-                                  												<td style="background-color:<%=bgColor1%>">
-	                                    											<%=Utilities.treatURLSpecialCharacters(vernacularName)%>
-                                  												</td>
-                                											</tr>
-            								<%
-                            											}
-                           											}
-            								%>
-                              									</table>
-                            								</td>
-            								<%
-                          								}
+
             								%>
                           								</tr>
             								<%
@@ -693,10 +720,13 @@
                         					<%
                             						while (it.hasNext()){
                               							VernacularNamePersist specie = (VernacularNamePersist)it.next();
-                              							Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-                              							// Sort this common names in alphabetical order
-                              							Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);%>
-                              							<tr>
+                              							String englishName = SpeciesSearchUtility.findEnglishName(specie.getIdNatureObject());
+
+                                                        Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
+                                                        // Sort this common names in alphabetical order
+                                                        Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+                                            %>
+                                                    <tr>
             								<%
                               								if (showGroup){
             								%>
@@ -742,59 +772,47 @@
             								<%
                               									}
                             								}
-                              								if (showVernacularNames && isExpanded){
-            								%>
-                                								<td>
-                                   									<!-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT -->
-                                  									<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-            								<%       					if(sortVernList == null || sortVernList.size()<=0){
-            								%>
-            																<tr><td>&nbsp;</td></tr>
-            								<%
-            															} else {
-              																for (int i = 0; i < sortVernList.size(); i++){
-                																VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
-                																String language = formBean.getLanguage();
-                																String specieLangName = aVernName.getLanguage();
-                																String vernacularName = aVernName.getName();
-                																String searchedName = formBean.getVernacularName();
-                																int relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-                																if (language.toLowerCase().equalsIgnoreCase( specieLangName.toLowerCase()) || language.toLowerCase().equalsIgnoreCase("english") ){
-                  																	String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
-                  																	if ( null != searchedName ){
-                    																	if ( relationOp == Utilities.OPERATOR_IS && vernacularName.toLowerCase().equalsIgnoreCase( searchedName.toLowerCase() ) ){
-                      																		bgColor1 = "#BBBBFF";
-                    																	}
-                    																	if ( relationOp == Utilities.OPERATOR_CONTAINS && vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) != -1 ){
-                      																		bgColor1 = "#BBBBFF";
-                    																	}
-                    																	if ( relationOp == Utilities.OPERATOR_STARTS && vernacularName.toLowerCase().startsWith( searchedName.toLowerCase() ) ){
-                    																		bgColor1 = "#BBBBFF";
-                    																	}
-                  																	}
-            								%>
-                                    												<tr>
-                                      													<td style="background-color:<%=bgColor1%>;white-space: nowrap" width="50%">
-                                        													<%=Utilities.treatURLSpecialCharacters(aVernName.getLanguage())%>
-                                      													</td>
-                                      													<td style="background-color:<%=bgColor1%>;white-space: nowrap" width="50%">
-                                        													<%=Utilities.treatURLSpecialCharacters(aVernName.getName())%>
-                                      													</td>
-                                    												</tr>
-            								<%
-                																}
-              																}
-                														}
-            								%>
-                                  									</table>
-                                								</td>
-            								<%
-                              								}
-            								%>
+                          								%>
+                                                <td>
+                                                    <%
+                                                        if ( showVernacularNames ) {
+                                                            if ( sortVernList != null && sortVernList.size() > 0 ){
+                                                    %>
+                                                        <%-- I display the common names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
+                                                    <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <col style="width:30%"/>
+                                                        <col style="width:70%"/>
+
+                                                        <%
+                                                            for ( int i = 0; i < sortVernList.size(); i++ ){
+                                                                VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( i );
+                                                                String vernacularName = aVernName.getName();
+                                                                String searchedName = formBean.getVernacularName();
+                                                                String bgColor1 = ( 0 == i % 2 ) ? "#EEEEEE" : "#FFFFFF";
+                                                                if ( null != searchedName && -1 != vernacularName.toLowerCase().lastIndexOf( searchedName.toLowerCase() ) ){
+                                                                    bgColor1 = "#BBBBFF";
+                                                                }
+                                                        %>
+                                                        <tr>
+                                                            <td style="background-color:<%=bgColor1%>">
+                                                                <%=Utilities.treatURLSpecialCharacters( aVernName.getLanguage() )%>
+                                                            </td>
+                                                            <td style="background-color:<%=bgColor1%>">
+                                                                <%=Utilities.treatURLSpecialCharacters( vernacularName )%>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                    </table>
+                                                    <% } %>
+
+                                                    <%  } else { %>
+                                                    <%= englishName %>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </td>
                               							</tr>
-            								<%
-                            						}
-            								%>
+            								<%	} 	%>
                         							</tbody>
             								<%
                           						}
@@ -840,6 +858,21 @@
                           									</th>
             								<%
                         								}
+
+                                                        if (showVernacularNames){
+                                            %>
+                                                          <th scope="col" class="nosort">
+                                                              <%=cm.cmsPhrase("Common names")%>
+                                                          </th>
+                                                          <%
+                                                          } else {
+                                                          %>
+                                                          <th scope="col" class="nosort">
+                                                              <%=cm.cmsPhrase("English common name")%>
+                                                          </th>
+                                                          <%
+                                                        }
+
                         								if (showValidName){
                         									if(newName){
                         					%>
@@ -856,13 +889,7 @@
             								<%
                         									}
                         								}
-                        								if (showVernacularNames && isExpanded){
-            								%>
-                          									<th scope="col" class="nosort">
-                            									<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Common names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
-                          									</th>
-            								<%
-                        								}
+
             								%>
                         							</tr>
                         						</thead>

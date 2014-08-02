@@ -28,7 +28,7 @@
 </jsp:useBean>
 <%
     // #18874: search all the genus when searching "spp."
-    if(formBean.getScientificName().contains("spp.")){
+    if(formBean.getScientificName()!= null && formBean.getScientificName().contains("spp.")){
         formBean.setScientificName(formBean.getScientificName().replace("spp.",""));
         formBean.setRelationOp(""+Utilities.OPERATOR_STARTS);
     }

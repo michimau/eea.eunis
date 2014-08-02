@@ -215,7 +215,6 @@
                         						</tr>
                       						</table>
                       						<br />
-                      						<br />
                         					<%=cm.cmsPhrase("Results found")%>:
                         					<strong><%=resultsCount%></strong>
             								<%
@@ -337,6 +336,34 @@
                         						}	
             								%>
                       						</table>
+                                              <%
+                                              // Expand/Collapse common names
+                                              Vector expand = new Vector();
+                                              expand.addElement("sort");
+                                              expand.addElement("ascendency");
+                                              expand.addElement("criteriaSearch");
+                                              expand.addElement("oper");
+                                              expand.addElement("criteriaType");
+                                              expand.addElement("pageSize");
+                                              expand.addElement("currentPage");
+                                              expand.addElement("useVernacular");
+                                              if(newName)
+                                              expand.addElement("newName");
+
+                                              String toggleLink = formBean.toURLParam(expand);
+                                              if(!toggleLink.contains("showVernacularNames"))
+                                              toggleLink = toggleLink + "&showVernacularNames=" + showVernacularNames;
+                                              toggleLink = toggleLink.replace("showVernacularNames=" + showVernacularNames,"showVernacularNames=" + (!showVernacularNames));
+
+                                              %>
+
+                                              <a rel="nofollow" href="<%=pageName + "?" + toggleLink%>" style="font-weight: bold;">
+                                                  <% if(showVernacularNames){ %>
+                                                  <%=cm.cmsPhrase("Display English common names only")%>
+                                                  <% } else { %>
+                                                  <%=cm.cmsPhrase("Display all available common names")%>
+                                                  <% } %>
+                                              </a>
                       						<br />
             								<%
 					                        Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
@@ -371,33 +398,7 @@
 					                        AbstractSortCriteria sortSciName = formBean.lookupSortCriteria(NameSortCriteria.SORT_SCIENTIFIC_NAME);
 					                        AbstractSortCriteria sortValidName = formBean.lookupSortCriteria(NameSortCriteria.SORT_VALID_NAME);
 
-					                        // Expand/Collapse common names
-					                        Vector expand = new Vector();
-					                        expand.addElement("sort");
-					                        expand.addElement("ascendency");
-					                        expand.addElement("criteriaSearch");
-					                        expand.addElement("oper");
-					                        expand.addElement("criteriaType");
-					                        expand.addElement("pageSize");
-					                        expand.addElement("currentPage");
-					                        expand.addElement("useVernacular");
-					                        if(newName)
-					                        	expand.addElement("newName");
-
-					                        String toggleLink = formBean.toURLParam(expand);
-					                        if(!toggleLink.contains("showVernacularNames"))
-					                            toggleLink = toggleLink + "&showVernacularNames=" + showVernacularNames;
-                                            toggleLink = toggleLink.replace("showVernacularNames=" + showVernacularNames,"showVernacularNames=" + (!showVernacularNames));
-
-                      						%>
-
-                                              <a rel="nofollow" href="<%=pageName + "?" + toggleLink%>">
-                                                <% if(showVernacularNames){ %>
-                                                  <%=cm.cmsPhrase("Display English common names only")%>
-                                                <% } else { %>
-                                                  <%=cm.cmsPhrase("Display all available common names")%>
-                                                <% } %>
-                                              </a>
+                                               %>
                                               <%=cm.cmsTitle("show_vernacular_list")%>
 
                                               <table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable listing">

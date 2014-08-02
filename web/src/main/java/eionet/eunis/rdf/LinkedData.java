@@ -75,7 +75,7 @@ public class LinkedData {
         }
 
         this.props = props;
-        queries = props.getProperty("queries").split("\\s+");
+        queries = props.getProperty("queries").trim().split("\\s+");
 
         if (queries != null) {
 

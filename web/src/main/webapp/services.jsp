@@ -213,6 +213,15 @@
     
   }
 %>
+
+                    <tr <%=cssClass%>>
+                        <td align="center">
+                            <a href="index.jsp?operation=logout" title="<%=cm.cmsPhrase("Logout")%>"><img alt="<%=cm.cmsPhrase("Logout")%>" src="images/access.gif" width="81" height="43" border="0" title="<%=cm.cmsPhrase("Logout")%>" /></a>
+                        </td>
+                        <td>
+                            <a href="index.jsp?operation=logout"><%=cm.cmsPhrase("Current user logout")%></a>
+                        </td>
+                    </tr>
                 </table>
 
                 <%=cm.cmsMsg("refresh_language")%>

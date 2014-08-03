@@ -92,7 +92,7 @@
                                     <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                                     <input title="<%=cm.cms("valid_name")%>" id="checkbox6" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox6"><%=cm.cmsPhrase("Valid name")%></label>
                                       <%=cm.cmsTitle("valid_name")%>
-                                    <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" checked="checked" /><label for="checkbox5"><%=cm.cmsPhrase("Common Name")%></label>
+                                    <input title="Display all common names (default: only English names are displayed)" id="checkbox5" type="checkbox" name="showVernacularNames" value="false"/><label for="checkbox5"><%=cm.cmsPhrase("All common names")%></label>
                                       <%=cm.cmsTitle("vernacular_name")%>
                                   </td>
                                 </tr>
@@ -184,7 +184,7 @@
                                       <%--<input id="checkbox15" type="checkbox" name="showKingdom" value="true" checked="checked" /><label for="checkbox15"><%=cm.cmsPhrase("Kingdom")%></label>--%>
                                       <input title="<%=cm.cms("valid_name")%>" id="checkbox17" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox17"><%=cm.cmsPhrase("Valid name")%></label>
                                         <%=cm.cmsTitle("valid_name")%>
-                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="false" disabled="disabled" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("Common names")%></label>
+                                      <input title="<%=cm.cms("vernacular_name")%>" id="checkbox16" type="checkbox" name="showVernacularNames" value="true" checked="checked" /><label for="checkbox16"><%=cm.cmsPhrase("All common names")%></label>
                                         <%=cm.cmsTitle("vernacular_name")%>
                                     </td>
                                   </tr>

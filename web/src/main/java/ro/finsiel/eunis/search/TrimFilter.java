@@ -100,7 +100,11 @@ public class TrimFilter implements Filter {
          * @return the trimmed result
          */
         private String applyChanges(String s) {
-            return s.trim();
+            if(s != null){
+                return s.trim();
+            } else {
+                return s;
+            }
         }
 
         /**

@@ -87,7 +87,7 @@
                                   <li><a href="about" class="last-tab <c:if test = "${currentTab == 'about_EUNIS_database'}">current</c:if>">About EUNIS</a></li>
 
                               <% if(SessionManager.isAuthenticated()) { %>
-                                  <li style="float: right"><a href="index.jsp?operation=logout" id="siteaction-login_eea"><i class="eea-icon eea-icon-user"></i> <%= SessionManager.getUserFullName() %></a></li>
+                                  <li style="float: right"><a href="index.jsp?operation=logout" id="siteaction-login_eea"><i class="eea-icon eea-icon-user"></i> <%= SessionManager.getUserFullName() %> <i class="eea-icon eea-icon-caret-down"></i></a></li>
 
                                   <div id="popup_login_form_eea" style="display:none;" class="callout">
                                          <p><a href="services.jsp">Services</a></p>

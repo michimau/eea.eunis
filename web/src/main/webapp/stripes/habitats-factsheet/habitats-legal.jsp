@@ -36,7 +36,7 @@
                     <tr>
                         <td><a href="${legal.parentLink}">${legal.parentTitle}</a></td>
                         <td>
-                           <a href="/references/${legal.legalPersist.idDc}">
+                           <a href="/references/${legal.legalPersist.idDc}/habitats">
                                 ${legal.annexTitle}
                            </a>
                         </td>

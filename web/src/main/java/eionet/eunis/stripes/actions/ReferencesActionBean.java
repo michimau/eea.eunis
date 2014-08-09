@@ -1,9 +1,8 @@
 package eionet.eunis.stripes.actions;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+import eionet.eunis.util.AlphanumComparator;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.DontValidate;
 import net.sourceforge.stripes.action.ErrorResolution;
@@ -15,10 +14,7 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
-import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.habitats.legal.LegalSearchCriteria;
-import ro.finsiel.eunis.search.habitats.legal.LegalSortCriteria;
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
@@ -31,7 +27,6 @@ import eionet.eunis.dto.ReferenceSpeciesDTO;
 import eionet.eunis.dto.ReferenceSpeciesGroupDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
-import eionet.eunis.util.Pair;
 
 /**
  * Action bean for references.
@@ -90,8 +85,9 @@ public class ReferencesActionBean extends AbstractStripesAction {
                 parent = dao.getDcIndex(dcIndex.getReference());
             }
 
-            // search for the children
+            // search for the children ; orders by alphanum
             children = dao.getChildren(dcIndex.getIdDc());
+            Collections.sort(children, new ChildrenComparator());
 
             btrail = "eea#" + eeaHome
                     + ",home#index.jsp,references#references";
@@ -239,5 +235,19 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
     public List<DcIndexDTO> getChildren() {
         return children;
+    }
+
+    private class ChildrenComparator implements Comparator {
+
+        private AlphanumComparator ac = new AlphanumComparator();
+
+        @Override
+        public int compare(Object o1, Object o2) {
+            if (!(o1 instanceof DcIndexDTO) || !(o2 instanceof DcIndexDTO))
+            {
+                return 0;
+            }
+            return ac.compare(((DcIndexDTO) o1).getTitle(), ((DcIndexDTO) o2).getTitle());
+        }
     }
 }

@@ -361,4 +361,16 @@ public class HabitatLegalPersist extends PersistentObject {
     public void setIdDc(Integer idDc) {
         this.idDc = idDc;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HabitatLegalPersist that = (HabitatLegalPersist) o;
+
+        if (!i_idHabitat.equals(that.i_idHabitat)) return false;
+
+        return true;
+    }
 }

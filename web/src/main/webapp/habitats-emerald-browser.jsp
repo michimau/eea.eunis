@@ -16,6 +16,9 @@
 <%@ page import="ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain" %>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain" %>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.ArrayList" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -41,8 +44,19 @@
                 String hide = cm.cmsPhrase("Hide sublevel habitat types");
                 String show = cm.cmsPhrase("Show sublevel habitat types");
 
-                List<HabitatLegalPersist> allEmerald = new HabitatLegalDomain().findWhere(
+                List<HabitatLegalPersist> allEmeraldDoubles = new HabitatLegalDomain().findWhere(
                         "C.LEGAL=1 AND ID_DC='2442' order by eunis_habitat_code");
+
+// remove doubles
+                List<HabitatLegalPersist> allEmerald = new ArrayList<HabitatLegalPersist>();
+                HabitatLegalPersist lastHabitat = null;
+                for(HabitatLegalPersist p : allEmeraldDoubles) {
+                    if(!p.equals(lastHabitat)) {
+                        allEmerald.add(p);
+                    }
+                    lastHabitat = p;
+                }
+
 
                 boolean showExpanded = false;
                 Chm62edtHabitatPersist topLevelHabitat = null;

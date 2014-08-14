@@ -27,6 +27,12 @@
                         <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> used for designation of Emerald sites (Bern Convention)
                     </li>
                 </c:if>
+                <c:if test="${not empty actionBean.resolution4Parent}">
+                    <li>
+                        This habitat type is included in a <span class="bold">Resolution 4 habitat type</span> (Bern convention) at a higher level (<a href="/habitats/${actionBean.resolution4Parent.idHabitat}"><span class="bold">${actionBean.resolution4Parent.eunisHabitatCode}</span></a>)
+
+                    </li>
+                </c:if>
 
                 <c:if test="${actionBean.habitatsDirective}">
                     <li>

@@ -691,4 +691,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public LinkDTO getConservationStatus() {
         return conservationStatus;
     }
+
+    public HabitatLegalPersist getResolution4Parent(){
+        return factsheet.getResolution4Parent();
+    }
 }

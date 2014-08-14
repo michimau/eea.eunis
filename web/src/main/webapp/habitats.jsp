@@ -112,22 +112,29 @@
                     </tr>
                     <tr>
                       <td>
-                        <img alt="<%=cm.cms("habitats_main_EUNIShierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
+                        <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
                         <a href="habitats-code-browser.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_EUNIShierarchyDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsPhrase("Hierarchical visualisation of EUNIS habitat types classification")%>
+                        <%=cm.cmsPhrase("Visualisation of EUNIS habitat types classification")%>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <img alt="<%=cm.cms("habitats_main_ANNEXhierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
+                        <img alt="<%=cm.cmsPhrase("ANNEX I habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
                         <a href="habitats-annex1-browser.jsp"><strong><%=cm.cmsPhrase("ANNEX I habitat types hierarchical view")%></strong></a>
-                        <%=cm.cmsTitle("habitats_main_ANNEXhierarchyDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsPhrase("Hierarchical visualisation of ANNEX I habitat types classification")%>
+                        <%=cm.cmsPhrase("Visualisation of Habitats Directive Annex I habitat types (Natura 2000 network)")%>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img alt="<%=cm.cmsPhrase("Resolution 4 habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
+                        <a href="habitats-emerald-browser.jsp"><strong><%=cm.cmsPhrase("Resolution 4 habitat types hierarchical view")%></strong></a>
+                      </td>
+                      <td>
+                        <%=cm.cmsPhrase("Visualisation of Bern Convention Resolution 4 habitat types (Emerald network)")%>
                       </td>
                     </tr>
                   </tbody>

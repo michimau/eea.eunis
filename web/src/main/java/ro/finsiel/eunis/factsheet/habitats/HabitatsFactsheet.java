@@ -62,10 +62,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtUsageDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtWaterDomain;
 import ro.finsiel.eunis.jrfTables.DcIndexDomain;
 import ro.finsiel.eunis.jrfTables.DcIndexPersist;
-import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
-import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
-import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
-import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.*;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
@@ -91,107 +88,107 @@ public class HabitatsFactsheet {
     /**
      * Retrieve Altitude information about habitat.
      */
-    public static final Integer OTHER_INFO_ALTITUDE = new Integer(0);
+    public static final Integer OTHER_INFO_ALTITUDE = 0;
 
     /**
      * Retrieve Chemistry information about habitat.
      */
-    public static final Integer OTHER_INFO_CHEMISTRY = new Integer(1);
+    public static final Integer OTHER_INFO_CHEMISTRY = 1;
 
     /**
      * Retrieve Climate information about habitat.
      */
-    public static final Integer OTHER_INFO_CLIMATE = new Integer(2);
+    public static final Integer OTHER_INFO_CLIMATE = 2;
 
     /**
      * Retrieve Coverage information about habitat.
      */
-    public static final Integer OTHER_INFO_COVER = new Integer(3);
+    public static final Integer OTHER_INFO_COVER = 3;
 
     /**
      * Retrieve Humidity information about habitat.
      */
-    public static final Integer OTHER_INFO_HUMIDITY = new Integer(4);
+    public static final Integer OTHER_INFO_HUMIDITY = 4;
 
     /**
      * Retrieve Impact information about habitat.
      */
-    public static final Integer OTHER_INFO_IMPACT = new Integer(5);
+    public static final Integer OTHER_INFO_IMPACT = 5;
 
     /**
      * Retrieve Light information about habitat.
      */
-    public static final Integer OTHER_INFO_LIGHT = new Integer(6);
+    public static final Integer OTHER_INFO_LIGHT = 6;
 
     /**
      * Retrieve Life form information about habitat.
      */
-    public static final Integer OTHER_INFO_LIFEFORM = new Integer(7);
+    public static final Integer OTHER_INFO_LIFEFORM = 7;
 
     /**
      * Retrieve Temperature information about habitat.
      */
-    public static final Integer OTHER_INFO_TEMPERATURE = new Integer(8);
+    public static final Integer OTHER_INFO_TEMPERATURE = 8;
 
     /**
      * Retrieve Usage information about habitat.
      */
-    public static final Integer OTHER_INFO_USAGE = new Integer(9);
+    public static final Integer OTHER_INFO_USAGE = 9;
 
     /**
      * Retrieve Water information about habitat.
      */
-    public static final Integer OTHER_INFO_WATER = new Integer(10);
+    public static final Integer OTHER_INFO_WATER = 10;
 
     /**
      * Retrieve Substrate information about habitat.
      */
-    public static final Integer OTHER_INFO_SUBSTRATE = new Integer(11);
+    public static final Integer OTHER_INFO_SUBSTRATE = 11;
 
     /**
      * Retrieve Depth information about habitat.
      */
-    public static final Integer OTHER_INFO_DEPTH = new Integer(12);
+    public static final Integer OTHER_INFO_DEPTH = 12;
 
     /**
      * Retrieve Geomorphology information about habitat.
      */
-    public static final Integer OTHER_INFO_GEOMORPH = new Integer(13);
+    public static final Integer OTHER_INFO_GEOMORPH = 13;
 
     /**
      * Retrieve Species richness information about habitat.
      */
-    public static final Integer OTHER_INFO_SPECIES_RICHNESS = new Integer(18);
+    public static final Integer OTHER_INFO_SPECIES_RICHNESS = 18;
 
     /**
      * Retrieve Exposure to human factors information about habitat.
      */
-    public static final Integer OTHER_INFO_EXPOSURE = new Integer(15);
+    public static final Integer OTHER_INFO_EXPOSURE = 15;
 
     /**
      * Retrieve Spatial information about habitat.
      */
-    public static final Integer OTHER_INFO_SPATIAL = new Integer(16);
+    public static final Integer OTHER_INFO_SPATIAL = 16;
 
     /**
      * Retrieve Temporal information about habitat.
      */
-    public static final Integer OTHER_INFO_TEMPORAL = new Integer(17);
+    public static final Integer OTHER_INFO_TEMPORAL = 17;
 
     /**
      * Retrieve Salinity information about habitat.
      */
-    public static final Integer OTHER_INFO_SALINITY = new Integer(14);
+    public static final Integer OTHER_INFO_SALINITY = 14;
 
     /**
      * Defines an EUNIS habitat.
      */
-    public static final Integer EUNIS_HABITAT = new Integer(0);
+    public static final Integer EUNIS_HABITAT = 0;
 
     /**
      * Defines an ANNEX I habitat.
      */
-    public static final Integer ANNEX_I_HABITAT = new Integer(1);
+    public static final Integer ANNEX_I_HABITAT = 1;
 
     /**
      * Habitat ID for the habitat we're constructing the factsheet.
@@ -212,6 +209,10 @@ public class HabitatsFactsheet {
      * Logging system.
      */
     private static Logger logger = Logger.getLogger(HabitatsFactsheet.class);
+
+
+    // Cache for resolution 4 queries  (getResolution4Parent)
+    private HabitatLegalPersist resolution4Parent = null;
 
     /**
      * Construct an new Factsheet for the specified habitat.
@@ -326,10 +327,9 @@ public class HabitatsFactsheet {
         try {
             List list = new Chm62edtHabitatSyntaxaDomain().findWhere(
                     "A.ID_HABITAT='" + idHabitat + "'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtHabitatSyntaxaPersist habSyn = (Chm62edtHabitatSyntaxaPersist) it.next();
+            for (Object aList : list) {
+                Chm62edtHabitatSyntaxaPersist habSyn = (Chm62edtHabitatSyntaxaPersist) aList;
                 SyntaxaWrapper syntaxa = new SyntaxaWrapper();
 
                 syntaxa.setRelation(habSyn.getRelationType());
@@ -343,9 +343,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             ret = new Vector();
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -587,10 +586,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='altitude'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtAltitudeDomain().findWhere(
                         "ID_ALTITUDE='" + report.getIDLookup() + "'");
 
@@ -601,9 +599,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -623,10 +620,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='chemistry'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtChemistryDomain().findWhere(
                         "ID_CHEMISTRY='" + report.getIDLookup() + "'");
 
@@ -658,10 +654,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='climate'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtClimateDomain().findWhere(
                         "ID_CLIMATE='" + report.getIDLookup() + "'");
 
@@ -672,9 +667,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -694,10 +688,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='impact'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtImpactDomain().findWhere(
                         "ID_IMPACT='" + report.getIDLookup() + "'");
 
@@ -708,9 +701,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -730,10 +722,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='temperature'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtTemperatureDomain().findWhere(
                         "ID_TEMPERATURE='" + report.getIDLookup() + "'");
 
@@ -744,9 +735,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -766,10 +756,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='life_form'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtLifeFormDomain().findWhere(
                         "ID_LIFE_FORM='" + report.getIDLookup() + "'");
 
@@ -780,9 +769,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -802,10 +790,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='light_intensity'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtLightIntensityDomain().findWhere(
                         "ID_LIGHT_INTENSITY='" + report.getIDLookup() + "'");
 
@@ -816,9 +803,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -838,10 +824,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='substrate'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtSubstrateDomain().findWhere(
                         "ID_substrate='" + report.getIDLookup() + "'");
 
@@ -852,9 +837,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -874,10 +858,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='humidity'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtHumidityDomain().findWhere(
                         "ID_HUMIDITY='" + report.getIDLookup() + "'");
 
@@ -888,9 +871,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -910,10 +892,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='usage'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtUsageDomain().findWhere(
                         "ID_USAGE='" + report.getIDLookup() + "'");
 
@@ -924,9 +905,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -946,10 +926,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='water'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtWaterDomain().findWhere(
                         "ID_WATER='" + report.getIDLookup() + "'");
 
@@ -960,9 +939,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -982,10 +960,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='cover'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtCoverDomain().findWhere(
                         "ID_COVER='" + report.getIDLookup() + "'");
 
@@ -996,9 +973,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1018,10 +994,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='salinity'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtSalinityDomain().findWhere(
                         "ID_SALINITY='" + report.getIDLookup() + "'");
 
@@ -1032,9 +1007,9 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
+
     }
 
     /**
@@ -1054,10 +1029,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='depth'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtDepthDomain().findWhere(
                         "ID_DEPTH='" + report.getIDLookup() + "'");
 
@@ -1068,9 +1042,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1090,10 +1063,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='geomorph'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtGeomorphDomain().findWhere(
                         "ID_GEOMORPH='" + report.getIDLookup() + "'");
 
@@ -1104,9 +1076,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1126,10 +1097,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='species_richness'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtRichnessDomain().findWhere(
                         "ID_SPECIES_RICHNESS='" + report.getIDLookup() + "'");
 
@@ -1140,9 +1110,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1162,10 +1131,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='exposure'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtExposureDomain().findWhere(
                         "ID_EXPOSURE='" + report.getIDLookup() + "'");
 
@@ -1176,9 +1144,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1198,10 +1165,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='spatial'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtSpatialDomain().findWhere(
                         "ID_SPATIAL='" + report.getIDLookup() + "'");
 
@@ -1212,9 +1178,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
     }
 
     /**
@@ -1234,10 +1199,9 @@ public class HabitatsFactsheet {
             List list = new Chm62edtNatureObjectReportTypeDomain().findWhere(
                     "ID_NATURE_OBJECT='" + idNatureObject
                     + "' AND B.LOOKUP_TYPE='temporal'");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) it.next();
+            for (Object aList : list) {
+                Chm62edtNatureObjectReportTypePersist report = (Chm62edtNatureObjectReportTypePersist) aList;
                 List l1 = new Chm62edtTemporalDomain().findWhere(
                         "ID_TEMPORAL='" + report.getIDLookup() + "'");
 
@@ -1248,9 +1212,9 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             res = new Vector();
-        } finally {
-            return res;
         }
+        return res;
+
     }
 
     private String description = "";
@@ -1274,9 +1238,8 @@ public class HabitatsFactsheet {
                     "ID_HABITAT='" + idHabitat + "'");
 
             if (list != null && list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-                    Chm62edtHabitatDescriptionPersist habitatDescr = (Chm62edtHabitatDescriptionPersist) list.get(
-                            i);
+                for (Object aList : list) {
+                    Chm62edtHabitatDescriptionPersist habitatDescr = (Chm62edtHabitatDescriptionPersist) aList;
 
                     results.addElement(
                             new DescriptionWrapper(habitatDescr.getDescription(),
@@ -1370,9 +1333,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             ret = new CodeLevelWrapper();
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -1412,6 +1374,32 @@ public class HabitatsFactsheet {
     }
 
     /**
+     * Finds if a parent is Resolution 4 and if so returns its code
+     * @return A code or empty if none found
+     */
+    public HabitatLegalPersist getResolution4Parent() {
+        if(resolution4Parent == null) {
+            HabitatLegalPersist result = null;
+            List<Chm62edtHabitatHabitatPersist> list = new Chm62edtHabitatHabitatDomain().findWhere("ID_HABITAT='" + idHabitat + "'");
+            // unique
+            Set<Integer> ancestors = new HashSet<Integer>();
+            for(Chm62edtHabitatHabitatPersist item : list) {
+                ancestors.add(item.getIdHabitatLink());
+            }
+            for(Integer ancestor : ancestors) {
+                List<HabitatLegalPersist> ancestorLegals = new HabitatLegalDomain().findWhere(
+                        "C.LEGAL=1 AND A.ID_HABITAT='" + ancestor
+                                + "' AND ID_DC='2442'");
+                if(!ancestorLegals.isEmpty()) {
+                    result = ancestorLegals.get(0);
+                }
+            }
+            resolution4Parent = result;
+        }
+        return resolution4Parent;
+    }
+
+    /**
      * Retrieve the relation of this habitat with other habitats.
      *
      * @return Vector of HabitatFactsheetRelWrapper objects.
@@ -1423,10 +1411,9 @@ public class HabitatsFactsheet {
         }
         Vector v = new Vector();
         List list = new Chm62edtHabitatHabitatDomain().findWhere("ID_HABITAT='" + idHabitat + "'");
-        Iterator it = list.iterator();
 
-        while (it.hasNext()) {
-            v.addElement(it.next());
+        for (Object aList : list) {
+            v.addElement(aList);
         }
         Vector res = new Vector();
 
@@ -1536,7 +1523,7 @@ public class HabitatsFactsheet {
 
     /**
      * Makes the source to be on top
-     * @param list
+     * @param list The classifications list
      */
     private void sourceOnTop(List<OtherClassificationPersist> list){
         Collections.sort(list, new Comparator<OtherClassificationPersist>() {
@@ -1566,17 +1553,15 @@ public class HabitatsFactsheet {
             List list = new HabitatLegalDomain().findWhere(
                     "C.LEGAL=1 AND A.ID_HABITAT='" + idHabitat
                     + "' ORDER BY C.NAME, B.CODE");
-            Iterator it = list.iterator();
 
-            while (it.hasNext()) {
-                ret.addElement(it.next());
+            for (Object aList : list) {
+                ret.addElement(aList);
             }
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             ret = new Vector();
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -1602,9 +1587,8 @@ public class HabitatsFactsheet {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             ret = "na";
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -1740,9 +1724,8 @@ public class HabitatsFactsheet {
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             ret = new Vector();
-        } finally {
-            return ret;
         }
+        return ret;
     }
 
     /**
@@ -1859,7 +1842,7 @@ public class HabitatsFactsheet {
         // if (0 == EUNIS_HABITAT.compareTo(getHabitatType())) return true;
         int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
 
-        return (idHabitat > 10000) ? false : true;
+        return (idHabitat <= 10000);
     }
 
     /**
@@ -1871,7 +1854,7 @@ public class HabitatsFactsheet {
     public static boolean isEunis(String idHab) {
         int id = Utilities.checkedStringToInt(idHab, -1);
 
-        return (id > 10000) ? false : true;
+        return (id <= 10000);
     }
 
     /**
@@ -1880,10 +1863,7 @@ public class HabitatsFactsheet {
      * @return true if ANNEX I.
      */
     public boolean isAnnexI() {
-        if (0 == ANNEX_I_HABITAT.compareTo(getHabitatType())) {
-            return true;
-        }
-        return false;
+        return 0 == ANNEX_I_HABITAT.compareTo(getHabitatType());
     }
 
     /**
@@ -1895,7 +1875,7 @@ public class HabitatsFactsheet {
         Integer level = (null != habitat) ? habitat.getHabLevel() : null;
 
         if (null == level) {
-            level = new Integer(0);
+            level = 0;
         }
         return level;
     }
@@ -1980,9 +1960,8 @@ public class HabitatsFactsheet {
             }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
-        } finally {
-            return result;
         }
+        return result;
     }
 
     /**
@@ -2046,9 +2025,8 @@ public class HabitatsFactsheet {
             }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
-        } finally {
-            return result;
         }
+        return result;
     }
 
     /**
@@ -2166,10 +2144,10 @@ public class HabitatsFactsheet {
 
                     String styleAttr = "max-width:300px; max-height:400px;";
 
-                    if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
-                            && mainPictureMaxHeightInt.intValue() > 0) {
-                        styleAttr = "max-width: " + mainPictureMaxWidthInt.intValue() +
-                        "px; max-height: " + mainPictureMaxHeightInt.intValue() + "px";
+                    if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt > 0 && mainPictureMaxHeightInt != null
+                            && mainPictureMaxHeightInt > 0) {
+                        styleAttr = "max-width: " + mainPictureMaxWidthInt +
+                        "px; max-height: " + mainPictureMaxHeightInt + "px";
                     }
 
                     String desc = pp.getDescription();
@@ -2274,7 +2252,7 @@ public class HabitatsFactsheet {
 
     /**
      * Get the sites for the habitat
-     * @return
+     * @return The Sites list
      */
     public List<HabitatsSitesPersist> getSites(){
         List<HabitatsSitesPersist> results = null;

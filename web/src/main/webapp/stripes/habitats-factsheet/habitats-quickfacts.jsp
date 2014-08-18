@@ -29,7 +29,7 @@
                 </c:if>
                 <c:if test="${not empty actionBean.resolution4Parent}">
                     <li>
-                        This habitat type is included in a <span class="bold">Resolution 4 habitat type</span> (Bern convention) at a higher level (<a href="/habitats/${actionBean.resolution4Parent.idHabitat}"><span class="bold">${actionBean.resolution4Parent.eunisHabitatCode}</span></a>)
+                        This habitat type is included in a <span class="bold">Resolution 4 habitat type</span> (Bern convention) at a higher level (<a href="/habitats/${actionBean.resolution4Parent.idHabitat}">${actionBean.resolution4Parent.eunisHabitatCode}</a>)
 
                     </li>
                 </c:if>

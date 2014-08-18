@@ -76,7 +76,7 @@
         <h4><%=cm.cmsPhrase("A set of predefined functions to search the database") %></h4>
         <table class="fullwidth">
             <colgroup>
-                <col style="width: 310px; white-space: nowrap;">
+                <col style="width: 350px; white-space: nowrap;">
                 <col>
             </colgroup>
                   <tbody>
@@ -147,7 +147,7 @@
                 <h4><%=cm.cmsPhrase("Search habitat type information using more complex filtering capabilities") %></h4>
                 <table class="fullwidth">
                 <colgroup>
-                    <col style="width: 310px; white-space: nowrap;">
+                    <col style="width: 350px; white-space: nowrap;">
                     <col>
                 </colgroup>
                     <tbody>

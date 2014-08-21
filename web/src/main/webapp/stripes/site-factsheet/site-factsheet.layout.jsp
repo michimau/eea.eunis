@@ -167,15 +167,14 @@
                             <a id="interactive_map" ></a>
                             <h2 class="notoc eea-icon-right-container">Interactive map</h2>
                             <div class="pane" id="sitesMapPane">
-                                The interactive map of EUNIS sites is currently under development. Meanwhile, use for example European protected areas viewer below. To activate and deactivate the Natura 2000 layer or the Nationally designated areas layer, please go to Layers at the center of the top menu bar. Other relevant map viewers are listed below in Other resources panel.
-                                <iframe id="interactive-map-iframe" class="map-border" height="600" width="100%" src=""></iframe>
+                                The interactive map of EUNIS sites is currently under development. Meanwhile, use for example European protected areas viewer below. To activate and deactivate the Natura 2000 layer or the Nationally designated areas layer, please go to Layers at the right side of the top menu bar. Other relevant map viewers are listed below in Other resources panel.                   <iframe id="interactive-map-iframe" class="map-border" height="600" width="100%" src=""></iframe>
                                 <p>
-                                    <a class="standardButton" target="_blank" href="http://eea.maps.arcgis.com/apps/OnePane/basicviewer/index.html?appid=07661dc8a5bc446fafcfe918c91a1b1b">Full screen mode</a>
+                                    <a class="standardButton" target="_blank" href="http://maps.eea.europa.eu/EEABasicViewer/v3/index.html?appid=07661dc8a5bc446fafcfe918c91a1b1b&displaylegend=true">Full screen mode</a>
                                 </p>
                             </div>
 
                             <script>
-                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://eea.maps.arcgis.com/apps/OnePane/basicviewer/index.html?appid=07661dc8a5bc446fafcfe918c91a1b1b&embed=true");
+                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://maps.eea.europa.eu/EEABasicViewer/v3/index.html?appid=07661dc8a5bc446fafcfe918c91a1b1b&displaylegend=true&embed=true");
                             </script>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">

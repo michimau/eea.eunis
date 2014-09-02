@@ -20,7 +20,7 @@
             <ul>
                 <li>
                     <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</span>
-                    <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')})</span>
+                    (code <span class="bold">${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')}</span>)
                 </li>
                 <c:if test="${actionBean.resolution4}">
                     <li>

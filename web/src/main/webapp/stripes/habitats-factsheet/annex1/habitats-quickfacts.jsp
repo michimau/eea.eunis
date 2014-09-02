@@ -23,7 +23,7 @@
                         <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'Annex I habitat type')}</span>
                     <c:if test="${not empty actionBean.legalInfo}"></a></c:if>
                     <c:if test="${not empty actionBean.factsheet.code2000}">
-                        <span class="discreet">(code ${eunis:formatString(actionBean.factsheet.code2000, '')})</span>
+                        (code <span class="bold">${eunis:formatString(actionBean.factsheet.code2000, '')}</span>)
                     </c:if>
                 </li>
                 <c:if test="${actionBean.factsheet.habitatLevel eq 3}">

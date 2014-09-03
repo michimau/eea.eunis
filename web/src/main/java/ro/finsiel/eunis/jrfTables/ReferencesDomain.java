@@ -138,6 +138,24 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         });
         return results;
     }
+
+    public List<Integer> getReferencesForHabitat(String idHabitat) {
+        final List<Integer> results = new ArrayList<Integer>();
+        String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
+
+        String SQL = " SELECT DISTINCT A.ID_DC  ";
+        SQL += " FROM  dc_index A ";
+        SQL += " INNER JOIN chm62edt_habitat_references B ON (A.ID_DC = B.ID_DC) ";
+        SQL += " INNER JOIN chm62edt_habitat H ON (B.ID_HABITAT = H.ID_HABITAT) ";
+        SQL += " WHERE " + isGoodHabitat + " AND H.ID_HABITAT = '" + idHabitat +"'";
+
+        this.executeSQLQuery(SQL, new RowHandler() {
+            public void handleRow(JRFResultSet rs) throws Exception {
+                results.add(rs.getInteger(1));
+            }
+        });
+        return results;
+    }
     
     public List<ReferenceSpeciesGroupDTO> getSpeciesForAReferenceByGroup(String idDc)
             throws CriteriaMissingException {

@@ -18,11 +18,13 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
+import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
@@ -30,6 +32,7 @@ import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.ResultValue;
+import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 
 /**
  * Action bean to handle habitats-factsheet functionality. Data is loaded from
@@ -581,6 +584,39 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
+    public List<LegalStatusWrapper> getLegalMentionedIn(){
+        List<LegalStatusWrapper> li = getLegalInfo();
+        List<LegalStatusWrapper> result = new ArrayList<LegalStatusWrapper>();
+
+        ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
+        List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
+
+        for(LegalStatusWrapper lsw : li){
+            if(references.contains(lsw.getLegalPersist().getIdDc())){
+                result.add(lsw);
+            }
+        }
+
+        return result;
+    }
+
+    public List<LegalStatusWrapper> getLegalRelationTo(){
+        List<LegalStatusWrapper> li = getLegalInfo();
+        List<LegalStatusWrapper> result = new ArrayList<LegalStatusWrapper>();
+
+        ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
+        List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
+
+        for(LegalStatusWrapper lsw : li){
+            if(!references.contains(lsw.getLegalPersist().getIdDc())){
+                result.add(lsw);
+            }
+        }
+
+
+        return result;
+    }
+
     /**
      * Returns the legal info list
      * @return List of HabitatLegalPersist objects
@@ -619,7 +655,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     }
                 }
             } catch (InitializationException e) {
-                legalInfo = new ArrayList<HabitatLegalPersist>();
+                legalInfo = new ArrayList<LegalStatusWrapper>();
             }
         }
         return legalInfo;

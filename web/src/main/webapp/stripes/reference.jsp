@@ -164,7 +164,7 @@
                         <ol>
                             <c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
                                 <li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
-                                    <a href="habitats/${habitat.key}">${habitat.value}</a>
+                                    <a href="habitats/${habitat.key}">${eunis:bracketsToItalics(habitat.value)}</a>
                                 </li>
                             </c:forEach>
                         </ol>

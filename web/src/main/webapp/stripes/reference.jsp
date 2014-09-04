@@ -161,13 +161,18 @@
                     <h2 class="notoc eea-icon-right-container<c:if test="${actionBean.section eq 'habitats'}"> current</c:if>">Habitats related to this reference</h2>
 
                     <div class="pane">
-                        <ol>
+                        <table class="listing fullwidth">
+                            <colgroup><col><col></colgroup>
+
                             <c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
-                                <li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
-                                    <a href="habitats/${habitat.key}">${eunis:bracketsToItalics(habitat.value)}</a>
-                                </li>
+                                <tr>
+                                    <td><span  class="bold"><a href="habitats/${habitat.idHabitat}">${habitat.code}</a></span></td>
+                                    <td>
+                                        <a href="habitats/${habitat.idHabitat}">${eunis:bracketsToItalics(habitat.name)}</a>
+                                    </td>
+                                </tr>
                             </c:forEach>
-                        </ol>
+                        </table>
                     </div>
                 </div>
             </c:if>

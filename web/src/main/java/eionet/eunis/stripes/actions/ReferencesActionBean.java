@@ -2,6 +2,7 @@ package eionet.eunis.stripes.actions;
 
 import java.util.*;
 
+import eionet.eunis.dto.*;
 import eionet.eunis.util.AlphanumComparator;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.DontValidate;
@@ -19,12 +20,6 @@ import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IReferencesDao;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.DcIndexDTO;
-import eionet.eunis.dto.PairDTO;
-import eionet.eunis.dto.ReferenceDTO;
-import eionet.eunis.dto.ReferenceSpeciesDTO;
-import eionet.eunis.dto.ReferenceSpeciesGroupDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
 
@@ -53,7 +48,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
     List<ReferenceSpeciesGroupDTO> speciesGrouped = new ArrayList<ReferenceSpeciesGroupDTO>();
     List<ReferenceSpeciesDTO> speciesByName = new ArrayList<ReferenceSpeciesDTO>();
     
-    List<PairDTO> habitats = new ArrayList<PairDTO>();
+    List<HabitatDTO> habitats = new ArrayList<HabitatDTO>();
 
     private int page = 1;
     private String sort;
@@ -165,12 +160,8 @@ public class ReferencesActionBean extends AbstractStripesAction {
         this.speciesGrouped = speciesGrouped;
     }
 
-    public List<PairDTO> getHabitats() {
+    public List<HabitatDTO> getHabitats() {
         return habitats;
-    }
-
-    public void setHabitats(List<PairDTO> habitats) {
-        this.habitats = habitats;
     }
 
     public int getPage() {

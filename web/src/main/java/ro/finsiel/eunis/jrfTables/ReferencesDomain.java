@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dto.HabitatDTO;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
@@ -117,22 +118,23 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         return results;
     }
 
-    public List<PairDTO> getHabitatsForAReferences(String idDc) {
-        final List<PairDTO> results = new ArrayList<PairDTO>();
+    public List<HabitatDTO> getHabitatsForAReferences(String idDc) {
+        final List<HabitatDTO> results = new ArrayList<HabitatDTO>();
         String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 
-        String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME  ";
+        String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME, ifnull(h.code_2000, h.eunis_habitat_code) c ";
         SQL += " FROM  dc_index A ";
         SQL += " INNER JOIN chm62edt_habitat_references B ON (A.ID_DC = B.ID_DC) ";
         SQL += " INNER JOIN chm62edt_habitat H ON (B.ID_HABITAT = H.ID_HABITAT) ";
-        SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = " + idDc;
+        SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = '" + idDc + "' order by C";
 
         this.executeSQLQuery(SQL, new RowHandler() {
             public void handleRow(JRFResultSet rs) throws Exception {
-                PairDTO dto = new PairDTO();
+                HabitatDTO dto = new HabitatDTO();
 
-                dto.setKey(rs.getString(1));
-                dto.setValue(rs.getString(2));
+                dto.setIdHabitat(rs.getString(1));
+                dto.setName(rs.getString(2));
+                dto.setCode(rs.getString(3));
                 results.add(dto);
             }
         });

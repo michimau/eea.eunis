@@ -641,6 +641,15 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         legalStatusWrapper.setParentTitle(dto.getTitle());
                         legalStatusWrapper.setParentLink(dto.getUrl());
                         legalStatusWrapper.setParentAlternative(dto.getAlternative());
+
+                        List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
+                        for(AttributeDto attribute : attributes){
+                            if(attribute.getName().equalsIgnoreCase("replaces")) {
+                                legalStatusWrapper.setReplacedBy(attribute.getValue());
+                                legalStatusWrapper.setReplacedByTitle(attribute.getObjectLabel());
+                            }
+                        }
+
                     }
 
                     List<AttributeDto> annexAttributes = dao.getDcAttributes(legalStatusWrapper.getLegalPersist().getIdDc().toString());

@@ -34,6 +34,8 @@ public class LegalStatusWrapper {
     private String parentAlternative;
 
     private List<String> moreInfo = new ArrayList<String>();
+    private String replacedByTitle;
+    private String replacedBy;
 
     public LegalStatusWrapper(HabitatLegalPersist legalPersist) {
         this.legalPersist = legalPersist;
@@ -99,5 +101,21 @@ public class LegalStatusWrapper {
 
     public List<String> getMoreInfo() {
         return moreInfo;
+    }
+
+    public void setReplacedByTitle(String replacedByTitle) {
+        this.replacedByTitle = replacedByTitle;
+    }
+
+    public String getReplacedByTitle() {
+        return replacedByTitle;
+    }
+
+    public void setReplacedBy(String replacedBy) {
+        this.replacedBy = replacedBy;
+    }
+
+    public String getReplacedBy() {
+        return replacedBy;
     }
 }

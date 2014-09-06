@@ -12,7 +12,6 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
@@ -20,17 +19,14 @@ import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
-import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
-import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.ResultValue;
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 
@@ -584,37 +580,83 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
-    public List<LegalStatusWrapper> getLegalMentionedIn(){
-        List<LegalStatusWrapper> li = getLegalInfo();
-        List<LegalStatusWrapper> result = new ArrayList<LegalStatusWrapper>();
+    public List<MentionedIn> getLegalMentionedIn(){
+//        List<LegalStatusWrapper> li = getLegalInfo();
+        List<MentionedIn> result = new ArrayList<MentionedIn>();
 
         ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
         List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
 
-        for(LegalStatusWrapper lsw : li){
-            if(references.contains(lsw.getLegalPersist().getIdDc())){
-                result.add(lsw);
+        for(Integer idDc : references){
+            MentionedIn m = new MentionedIn();
+            // todo: filter by important documents?
+
+            IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+            DcIndexDTO annex = dao.getDcIndex(idDc.toString());
+            m.setAnnex(annex);
+
+//          Populate the parent and link
+            if(annex.getReference() != null){
+                DcIndexDTO dto = dao.getDcIndex(annex.getReference());
+                m.setParent(dto);
+
+                List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
+                for(AttributeDto attribute : attributes){
+                    if(attribute.getName().equalsIgnoreCase("replaces")) {
+                        m.setReplaces(dao.getDcIndex(attribute.getValue()));
+                    }
+                }
             }
+            result.add(m);
+
         }
 
         return result;
     }
 
-    public List<LegalStatusWrapper> getLegalRelationTo(){
-        List<LegalStatusWrapper> li = getLegalInfo();
-        List<LegalStatusWrapper> result = new ArrayList<LegalStatusWrapper>();
+    /**
+     * MentionedIn bean
+     */
+    public class MentionedIn {
+        private DcIndexDTO annex;
+        private DcIndexDTO parent;
+        private DcIndexDTO replaces;
 
-        ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
-        List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
-
-        for(LegalStatusWrapper lsw : li){
-            if(!references.contains(lsw.getLegalPersist().getIdDc())){
-                result.add(lsw);
+        public DcIndexDTO getAnnex() {
+            if(parent != null) {
+                return annex;
+            } else {
+                return null;
             }
         }
 
+        public void setAnnex(DcIndexDTO annex) {
+            this.annex = annex;
+        }
 
-        return result;
+        public DcIndexDTO getParent() {
+            if(parent == null) {
+                return annex;
+            } else {
+                return parent;
+            }
+        }
+
+        public void setParent(DcIndexDTO parent) {
+            this.parent = parent;
+        }
+
+        public DcIndexDTO getReplaces() {
+            return replaces;
+        }
+
+        public void setReplaces(DcIndexDTO replaces) {
+            this.replaces = replaces;
+        }
+    }
+
+    public List<LegalStatusWrapper> getLegalRelationTo(){
+        return getLegalInfo();
     }
 
     /**
@@ -641,15 +683,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         legalStatusWrapper.setParentTitle(dto.getTitle());
                         legalStatusWrapper.setParentLink(dto.getUrl());
                         legalStatusWrapper.setParentAlternative(dto.getAlternative());
-
-                        List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
-                        for(AttributeDto attribute : attributes){
-                            if(attribute.getName().equalsIgnoreCase("replaces")) {
-                                legalStatusWrapper.setReplacedBy(attribute.getValue());
-                                legalStatusWrapper.setReplacedByTitle(attribute.getObjectLabel());
-                            }
-                        }
-
                     }
 
                     List<AttributeDto> annexAttributes = dao.getDcAttributes(legalStatusWrapper.getLegalPersist().getIdDc().toString());

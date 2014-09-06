@@ -3,7 +3,7 @@
 <stripes:layout-definition>
 
     <c:choose>
-        <c:when test="${not empty actionBean.legalInfo}">
+        <c:when test="${(not empty actionBean.legalInfo) or (not empty actionBean.legalMentionedIn)}">
             <c:if test="${not empty actionBean.legalMentionedIn}">
                 <h3>
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in the following international legal instruments and agreements')}
@@ -17,15 +17,6 @@
                         <th width="30%" style="text-align: left;" class="nosort">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                         </th>
-                        <%--<th width="50%" style="text-align: left;" class="nosort">--%>
-                                <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Name in legal text')}--%>
-                        <%--</th>--%>
-                        <%--<th width="20%" style="text-align: left;" class="nosort">--%>
-                                <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Code in legal text')}--%>
-                        <%--</th>--%>
-                        <%--<th width="20%" style="text-align: left;" class="nosort">--%>
-                                <%--${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type<br> relationship')}--%>
-                        <%--</th>--%>
                         <th width="20%" style="text-align: left;" class="nosort">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
                         </th>
@@ -35,29 +26,23 @@
 
                     <c:forEach items="${actionBean.legalMentionedIn}" var="legal">
                         <tr>
-                            <td><a href="${legal.parentLink}">${legal.parentTitle}</a> (${legal.parentAlternative})</td>
                             <td>
-                                <c:if test="${not empty legal.replacedBy}">
-                                    <a href="/references/${legal.replacedBy}">${legal.replacedByTitle}</a>
+                            <c:choose>
+                                <c:when test="${not empty legal.parent.url}"><a href="${legal.parent.url}"></c:when>
+                                <c:otherwise><a href="/references/${legal.parent.idDc}"></c:otherwise>
+                            </c:choose>
+
+
+                            ${legal.parent.title}</a> <c:if test="${not empty legal.parent.alternative}">(${legal.parent.alternative})</c:if></td>
+                            <td>
+                                <c:if test="${not empty legal.replaces}">
+                                    <a href="/references/${legal.replaces.idDc}">${legal.replaces.title}</a>
                                 </c:if>
                             </td>
-                            <%--<td>--%>
-                                    <%--${legal.legalPersist.title}--%>
-                            <%--</td>--%>
-                            <%--<td>--%>
-                                    <%--${legal.legalPersist.code}--%>
-                            <%--</td>--%>
-                            <%--<td>${legal.relationTypeString}</td>--%>
                             <td>
-                                <a href="/references/${legal.legalPersist.idDc}/habitats">
-                                        ${legal.annexTitle}
+                                <a href="/references/${legal.annex.idDc}/habitats">
+                                        ${legal.annex.title}
                                 </a>
-                                <%--<c:forEach var="link" items="${legal.moreInfo}" varStatus="status">--%>
-                                    <%--<c:if test="${oldLink != link}">--%>
-                                        <%--<a href="${ link }">${eunis:shortenURL(link)}</a> <c:if test="${not status.last}"><br></c:if>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:set var="oldLink" value="${link}"/>--%>
-                                <%--</c:forEach>--%>
                             </td>
                         </tr>
                     </c:forEach>

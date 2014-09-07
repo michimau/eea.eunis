@@ -17,6 +17,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
@@ -108,6 +109,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String englishDescription = null;
 
     private List speciesForHabitats = null;
+    // cache for legal mentioned in
+    private List<MentionedIn> mentionedInList = null;
+
 
 
     /**
@@ -558,9 +562,17 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return false;
     }
 
+    /**
+     * Checks if the Habitat is mentioned in Resolution 4
+     * @return
+     */
     public boolean isResolution4() {
-        for(String s : getProtectedBy()) {
-            if(s.contains("Bern Convention Res. No. 4 1996")) return true;
+        for(MentionedIn mi : getLegalMentionedIn()) {
+            if(mi.getAnnex()!=null){
+                if( mi.getAnnex().getIdDc().equals(Constants.RESOLUTION4.toString()) ){
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -581,37 +593,39 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     public List<MentionedIn> getLegalMentionedIn(){
-//        List<LegalStatusWrapper> li = getLegalInfo();
-        List<MentionedIn> result = new ArrayList<MentionedIn>();
 
-        ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
-        List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
+        if(mentionedInList == null) {
+            List<MentionedIn> result = new ArrayList<MentionedIn>();
 
-        for(Integer idDc : references){
-            MentionedIn m = new MentionedIn();
-            // todo: filter by important documents?
+            ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
+            List<Integer> references = refDomain.getReferencesForHabitat(idHabitat);
 
-            IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
-            DcIndexDTO annex = dao.getDcIndex(idDc.toString());
-            m.setAnnex(annex);
+            for(Integer idDc : references){
+                MentionedIn m = new MentionedIn();
+                // todo: filter by important documents?
 
-//          Populate the parent and link
-            if(annex.getReference() != null){
-                DcIndexDTO dto = dao.getDcIndex(annex.getReference());
-                m.setParent(dto);
+                IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+                DcIndexDTO annex = dao.getDcIndex(idDc.toString());
+                m.setAnnex(annex);
 
-                List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
-                for(AttributeDto attribute : attributes){
-                    if(attribute.getName().equalsIgnoreCase("replaces")) {
-                        m.setReplaces(dao.getDcIndex(attribute.getValue()));
+    //          Populate the parent and link
+                if(annex.getReference() != null){
+                    DcIndexDTO dto = dao.getDcIndex(annex.getReference());
+                    m.setParent(dto);
+
+                    List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
+                    for(AttributeDto attribute : attributes){
+                        if(attribute.getName().equalsIgnoreCase("replaces")) {
+                            m.setReplaces(dao.getDcIndex(attribute.getValue()));
+                        }
                     }
                 }
+                result.add(m);
             }
-            result.add(m);
-
+            mentionedInList = result;
         }
 
-        return result;
+        return mentionedInList;
     }
 
     /**
@@ -770,7 +784,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return conservationStatus;
     }
 
-    public HabitatLegalPersist getResolution4Parent(){
+    public Chm62edtHabitatPersist getResolution4Parent(){
         return factsheet.getResolution4Parent();
     }
 }

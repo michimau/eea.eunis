@@ -119,4 +119,6 @@ public interface Constants {
 
     /** The name of the webapp init-parameter that stands for application home. */
     public static final String APP_HOME_INIT_PARAM = "APP_HOME";
+
+    public static final Integer RESOLUTION4 = 2442;
 }

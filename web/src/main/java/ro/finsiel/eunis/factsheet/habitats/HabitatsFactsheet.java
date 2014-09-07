@@ -3,65 +3,17 @@ package ro.finsiel.eunis.factsheet.habitats;
 
 import java.util.*;
 
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.IReferencesDao;
+import eionet.eunis.dto.DcIndexDTO;
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
+import eionet.eunis.util.Constants;
 import net.sf.jrf.exceptions.DatabaseException;
 
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtAltitudeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtChemistryDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtClimateDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtCoverDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtDepthDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtExposureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtGeomorphDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDescriptionDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDescriptionPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatHabitatDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatHabitatPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatInternationalNameDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatInternationalNamePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferenceDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferencePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtHumidityDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtImpactDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtLifeFormDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtLightIntensityDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportTypeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportTypePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtRichnessDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSalinityDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpatialDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSubstrateDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtTemperatureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtTemporalDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtUsageDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtWaterDomain;
-import ro.finsiel.eunis.jrfTables.DcIndexDomain;
-import ro.finsiel.eunis.jrfTables.DcIndexPersist;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.*;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
@@ -69,6 +21,7 @@ import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesPersist;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
@@ -76,6 +29,7 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
 import eionet.eunis.dto.PictureDTO;
+import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 
 
 /**
@@ -212,7 +166,7 @@ public class HabitatsFactsheet {
 
 
     // Cache for resolution 4 queries  (getResolution4Parent)
-    private HabitatLegalPersist resolution4Parent = null;
+    private Chm62edtHabitatPersist resolution4Parent = null;
 
     /**
      * Construct an new Factsheet for the specified habitat.
@@ -1377,24 +1331,23 @@ public class HabitatsFactsheet {
      * Finds if a parent is Resolution 4 and if so returns its code
      * @return A code or empty if none found
      */
-    public HabitatLegalPersist getResolution4Parent() {
+    public Chm62edtHabitatPersist getResolution4Parent() {
         if(resolution4Parent == null) {
             HabitatLegalPersist result = null;
             List<Chm62edtHabitatHabitatPersist> list = new Chm62edtHabitatHabitatDomain().findWhere("ID_HABITAT='" + idHabitat + "'");
             // unique
-            Set<Integer> ancestors = new HashSet<Integer>();
+            ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
+
             for(Chm62edtHabitatHabitatPersist item : list) {
-                ancestors.add(item.getIdHabitatLink());
-            }
-            for(Integer ancestor : ancestors) {
-                List<HabitatLegalPersist> ancestorLegals = new HabitatLegalDomain().findWhere(
-                        "C.LEGAL=1 AND A.ID_HABITAT='" + ancestor
-                                + "' AND ID_DC='2442'");
-                if(!ancestorLegals.isEmpty()) {
-                    result = ancestorLegals.get(0);
+
+                List<Integer> references = refDomain.getReferencesForHabitat(item.getIdHabitatLink().toString());
+                if(references.contains(Constants.RESOLUTION4)) {
+                    List<Chm62edtHabitatPersist> parentList = new Chm62edtHabitatDomain().findWhere("ID_HABITAT = " + item.getIdHabitatLink());
+                    if(parentList.size()>0){
+                        resolution4Parent = parentList.get(0);
+                    }
                 }
             }
-            resolution4Parent = result;
         }
         return resolution4Parent;
     }

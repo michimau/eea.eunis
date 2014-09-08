@@ -19,6 +19,11 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.HashSet" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="ro.finsiel.eunis.jrfTables.ReferencesDomain" %>
+<%@ page import="ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria" %>
+<%@ page import="ro.finsiel.eunis.search.AbstractSortCriteria" %>
+<%@ page import="eionet.eunis.util.Constants" %>
+<%@ page import="eionet.eunis.dto.HabitatDTO" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -44,18 +49,9 @@
                 String hide = cm.cmsPhrase("Hide sublevel habitat types");
                 String show = cm.cmsPhrase("Show sublevel habitat types");
 
-                List<HabitatLegalPersist> allEmeraldDoubles = new HabitatLegalDomain().findWhere(
-                        "C.LEGAL=1 AND ID_DC='2442' order by eunis_habitat_code");
+                ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
+                List<HabitatDTO> references = refDomain.getHabitatsForAReferences(Constants.RESOLUTION4.toString());
 
-// remove doubles
-                List<HabitatLegalPersist> allEmerald = new ArrayList<HabitatLegalPersist>();
-                HabitatLegalPersist lastHabitat = null;
-                for(HabitatLegalPersist p : allEmeraldDoubles) {
-                    if(!p.equals(lastHabitat)) {
-                        allEmerald.add(p);
-                    }
-                    lastHabitat = p;
-                }
 
 
                 boolean showExpanded = false;
@@ -65,8 +61,8 @@
                 <ul class="eunistree">
                 <%
                 String lastTopLevel="ZZZ";
-                for(HabitatLegalPersist emerald : allEmerald) {
-                    String topLevel = emerald.getEunisHabitatCode().trim().substring(0,1);
+                for(HabitatDTO emerald : references) {
+                    String topLevel = emerald.getCode().trim().substring(0,1);
                     if(!topLevel.equals(lastTopLevel)) {
                         lastTopLevel = topLevel;
                         if(!lastTopLevel.equals("ZZZ")){
@@ -105,7 +101,7 @@
                     %>
                         <% if(showExpanded) { %>
                             <li>
-                                <img src="images/img_bullet.gif"/>&nbsp;<a title="<%= emerald.getScientificName() %>" href="habitats/<%= emerald.getIdHabitat() %>"><%= emerald.getEunisHabitatCode() %> : <%=JstlFunctions.bracketsToItalics(emerald.getScientificName())%></a>
+                                <img src="images/img_bullet.gif"/>&nbsp;<a title="<%= emerald.getName() %>" href="habitats/<%= emerald.getIdHabitat() %>"><%= emerald.getCode() %> : <%=JstlFunctions.bracketsToItalics(emerald.getName())%></a>
                             </li>
                         <%  } %>
                <%  } %>

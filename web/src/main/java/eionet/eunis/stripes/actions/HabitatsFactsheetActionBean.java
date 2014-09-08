@@ -592,6 +592,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return result;
     }
 
+    /**
+     * Returns the "Mentioned in..." list for the Legal Section
+     * Only lists Resolution 4 and Annex I, as the others are not legal instruments
+     * @return
+     */
     public List<MentionedIn> getLegalMentionedIn(){
 
         if(mentionedInList == null) {
@@ -602,25 +607,27 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
             for(Integer idDc : references){
                 MentionedIn m = new MentionedIn();
-                // todo: filter by important documents?
+                // only show R4 and A1
+                if(idDc.equals(Constants.RESOLUTION4) || idDc.equals(Constants.ANNEX1)) {
 
-                IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
-                DcIndexDTO annex = dao.getDcIndex(idDc.toString());
-                m.setAnnex(annex);
+                    IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
+                    DcIndexDTO annex = dao.getDcIndex(idDc.toString());
+                    m.setAnnex(annex);
 
-    //          Populate the parent and link
-                if(annex.getReference() != null){
-                    DcIndexDTO dto = dao.getDcIndex(annex.getReference());
-                    m.setParent(dto);
+        //          Populate the parent and link
+                    if(annex.getReference() != null){
+                        DcIndexDTO dto = dao.getDcIndex(annex.getReference());
+                        m.setParent(dto);
 
-                    List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
-                    for(AttributeDto attribute : attributes){
-                        if(attribute.getName().equalsIgnoreCase("replaces")) {
-                            m.setReplaces(dao.getDcIndex(attribute.getValue()));
+                        List<AttributeDto> attributes = dao.getDcAttributes(annex.getIdDc());
+                        for(AttributeDto attribute : attributes){
+                            if(attribute.getName().equalsIgnoreCase("replaces")) {
+                                m.setReplaces(dao.getDcIndex(attribute.getValue()));
+                            }
                         }
                     }
+                    result.add(m);
                 }
-                result.add(m);
             }
             mentionedInList = result;
         }

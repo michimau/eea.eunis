@@ -121,4 +121,5 @@ public interface Constants {
     public static final String APP_HOME_INIT_PARAM = "APP_HOME";
 
     public static final Integer RESOLUTION4 = 2442;
+    public static final Integer ANNEX1 = 2324;
 }

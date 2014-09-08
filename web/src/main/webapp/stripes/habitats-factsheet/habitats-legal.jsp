@@ -35,14 +35,15 @@
 
                             ${legal.parent.title}</a> <c:if test="${not empty legal.parent.alternative}">(${legal.parent.alternative})</c:if></td>
                             <td>
-                                <c:if test="${not empty legal.replaces}">
-                                    <a href="/references/${legal.replaces.idDc}">${legal.replaces.title}</a>
-                                </c:if>
-                            </td>
-                            <td>
                                 <a href="/references/${legal.annex.idDc}/habitats">
                                         ${legal.annex.title}
                                 </a>
+                            </td>
+                            <td>
+                                <a href="${legal.annex.url}">
+                                    ${eunis:shortenURL(legal.annex.url)}
+                                </a>
+
                             </td>
                         </tr>
                     </c:forEach>

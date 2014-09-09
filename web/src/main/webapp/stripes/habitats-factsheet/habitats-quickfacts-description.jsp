@@ -31,6 +31,7 @@
             <p>
                 <span class="discreet">
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+                    <c:if test="${actionBean.resolution4}"><br></c:if>
                     <a href="http://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">EUNIS habitat classification</a>
                     <c:if test="${actionBean.resolution4}">
                         <br>

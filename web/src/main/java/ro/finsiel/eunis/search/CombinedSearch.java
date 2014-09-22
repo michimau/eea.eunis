@@ -110,9 +110,6 @@ public class CombinedSearch {
             ps = con.createStatement();
             StringTokenizer tokenizer = new StringTokenizer(IdNatureObject, ",");
 
-            SQL.append("ALTER TABLE eunis_combined_search_results DISABLE KEYS");
-            ps.execute(SQL.toString());
-
             int poscount = tokenizer.countTokens();
             // System.out.println("poscount = " + poscount);
             int pos = 0;
@@ -194,11 +191,6 @@ public class CombinedSearch {
             if (SQL.length() > 0) {
                 ps.executeUpdate(SQL.toString());
             }
-
-            SQL = new StringBuffer();
-            SQL.append("ALTER TABLE eunis_combined_search_results ENABLE KEYS");
-            ps.execute(SQL.toString());
-            ps.close();
 
             ps.close();
             con.close();

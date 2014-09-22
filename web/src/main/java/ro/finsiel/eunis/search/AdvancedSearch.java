@@ -280,9 +280,6 @@ public class AdvancedSearch {
 
             StringTokenizer tokenizer = new StringTokenizer(IdNatureObject, ",");
 
-            SQL.append("ALTER TABLE eunis_advanced_search_results DISABLE KEYS");
-            ps.execute(SQL.toString());
-
             int poscount = tokenizer.countTokens();
             // System.out.println("poscount = " + poscount);
             int pos = 0;
@@ -290,7 +287,6 @@ public class AdvancedSearch {
 
             // int max_results=3;
 
-            SQL = new StringBuffer();
             SQL.ensureCapacity(65000);
             SQL.append("INSERT INTO eunis_advanced_search_results");
             SQL.append("(ID_SESSION,NATURE_OBJECT,ID_NATURE_OBJECT)");
@@ -326,9 +322,6 @@ public class AdvancedSearch {
                 ps.executeUpdate(SQL.toString());
             }
 
-            SQL = new StringBuffer();
-            SQL.append("ALTER TABLE eunis_advanced_search_results ENABLE KEYS");
-            ps.execute(SQL.toString());
             ps.close();
 
             con.close();

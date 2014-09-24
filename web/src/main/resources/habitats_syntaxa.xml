@@ -18,12 +18,14 @@
 <!-- -->
   <entry key="syntaxa.querytype">SPARQL</entry>
   <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-  <entry key="syntaxa.title">Crosswalk from EUNIS habitat types to phytosociological syntaxa</entry>
+  <entry key="syntaxa.title">Relation to vegetation types (syntaxa)</entry>
   <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
 syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>
 
+  <entry key="syntaxa.column.name">Name</entry>
   <entry key="syntaxa.column.alternatives">Other names</entry>
-  <entry key="syntaxa.column.name">Syntaxon name</entry>
+  <entry key="syntaxa.column.reftext">Reference</entry>
+  <entry key="syntaxa.link.reftext">reflink</entry>
 
 <!-- Query -->
 <!-- [IDENTIFIER] is replaced with actual habitat ID before query will be executed -->
@@ -32,7 +34,10 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
 
-SELECT ?name ?code ?description sql:group_concat(?alternative,'; ') AS ?alternatives
+SELECT ?name ?definition
+    sql:group_concat(?alternative,'; ') AS ?alternatives
+    ('Schaminee et al, 2012' AS ?reftext)
+    ('/references/2460' AS ?reflink)
 WHERE {
  GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
   <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]> owl:sameAs ?EUNIS_code
@@ -40,10 +45,10 @@ WHERE {
   _:rec skos:inScheme <http://www.synbiosys.alterra.nl/rdf/syntaxa/> .
   _:rec skos:closeMatch ?EUNIS_code .
   _:rec skos:prefLabel ?name .
-  _:rec skos:definition ?description .
+  _:rec skos:definition ?definition .
   _:rec skos:notation ?code
  OPTIONAL { _:rec skos:altLabel ?alternative }
-} GROUP BY ?code ?name ?description ?EUNIS_code
+} GROUP BY ?code ?name ?definition ?EUNIS_code
 ]]></entry>
   <entry key="syntaxa.codes"><![CDATA[
 PREFIX owl: <http://www.w3.org/2002/07/owl#>

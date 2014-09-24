@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -88,6 +88,41 @@ JOIN chm62edt_species AS v ON s.ID_SPECIES_LINK = v.ID_SPECIES
 WHERE s.ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
 ]]></entry>
 
+
+  <entry key="syntaxa.querytype">SPARQL</entry>
+  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.title">Vegetation syntaxa crosswalks to EUNIS habitat classification</entry>
+  <entry key="syntaxa.summary"><![CDATA[Source: <a href="/references/2460">Schaminée et al, 2012</a>]]></entry>
+  <entry key="syntaxa.column.eunishabitat">EUNIS Habitat type</entry>
+  <entry key="syntaxa.link.eunishabitat">eunisurl</entry>
+  <entry key="syntaxa.column.reftext">Reference</entry>
+  <entry key="syntaxa.link.reftext">reflink</entry>
+  <entry key="syntaxa.query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT ?name ?definition (sql:GROUP_CONCAT(?altlabel, ';\n') AS ?synonyms)
+('Schaminee et al, 2012' AS ?reftext)
+('/references/2460' AS ?reflink)
+?eunishabitat ?eunisurl
+WHERE {
+  _:rec skos:inScheme <http://www.synbiosys.alterra.nl/rdf/syntaxa/> .
+  _:rec skos:prefLabel ?name .
+  _:rec skos:notation ?code .
+  _:rec skos:definition ?definition .
+  OPTIONAL {_:rec skos:altLabel ?altlabel }
+  _:rec skos:closeMatch ?EUNIS_code .
+
+ GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+  ?eunisurl owl:sameAs ?EUNIS_code;
+            rdfs:label ?eunishabitat
+  }
+}
+GROUP BY ?name ?definition ?eunishabitat ?eunisurl
+ORDER BY ?name
+]]></entry>
 
   <entry key="nutscodes.querytype">SPARQL</entry>
   <entry key="nutscodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>

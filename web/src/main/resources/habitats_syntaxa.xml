@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Linked data queries for vegetation types</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">syntaxa </entry>
+
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+
+<!-- -->
+<!-- Syntaxa crosswalk query -->
+<!-- -->
+  <entry key="syntaxa.querytype">SPARQL</entry>
+  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.title">Crosswalk from EUNIS habitat types to phytosociological syntaxa</entry>
+  <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
+syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>
+
+  <entry key="syntaxa.column.alternatives">Other names</entry>
+  <entry key="syntaxa.column.name">Syntaxon name</entry>
+
+<!-- Query -->
+<!-- [IDENTIFIER] is replaced with actual habitat ID before query will be executed -->
+  <entry key="syntaxa.query"><![CDATA[
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT ?name ?code ?description sql:group_concat(?alternative,'; ') AS ?alternatives
+WHERE {
+ GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+  <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]> owl:sameAs ?EUNIS_code
+  }
+  _:rec skos:inScheme <http://www.synbiosys.alterra.nl/rdf/syntaxa/> .
+  _:rec skos:closeMatch ?EUNIS_code .
+  _:rec skos:prefLabel ?name .
+  _:rec skos:definition ?description .
+  _:rec skos:notation ?code
+ OPTIONAL { _:rec skos:altLabel ?alternative }
+} GROUP BY ?code ?name ?description ?EUNIS_code
+]]></entry>
+  <entry key="syntaxa.codes"><![CDATA[
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT DISTINCT ?code
+WHERE {
+  _:rec skos:inScheme <http://www.synbiosys.alterra.nl/rdf/syntaxa/> .
+  _:rec skos:closeMatch ?EUNIS_code .
+
+ GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+  ?eunisurl owl:sameAs ?EUNIS_code;
+            h:code ?code
+  }
+}
+]]></entry>
+
+
+</properties>

@@ -21,7 +21,14 @@
                                     title="${pic.description}"
                                     </c:if>
                                      style="display: none;"
-                                     data-description="${pic.source}"
+                                     <c:choose>
+                                         <c:when test="${not empty pic.sourceUrl}">
+                                         data-description="<a href='${pic.sourceUrl}'>${pic.source}</a>"
+                                         </c:when>
+                                         <c:otherwise>
+                                             data-description="${pic.source}"
+                                         </c:otherwise>
+                                     </c:choose>
                                      />
                                 </li>
                             </c:forEach>

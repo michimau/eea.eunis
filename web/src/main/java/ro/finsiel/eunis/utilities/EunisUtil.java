@@ -476,7 +476,8 @@ public class EunisUtil {
      * @return The link to the abstract picture, relative path from /images/species/
      */
     public static String getDefaultPicture(String group){
-        return "default/" + defaultPictures.get(group) + ".jpg";
+        //http://taskman.eionet.europa.eu/issues/18873 : only use the "birds" photo
+        return "default/" + defaultPictures.get("Birds") + ".jpg";
     }
 
 }

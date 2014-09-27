@@ -41,8 +41,10 @@
     cursor: pointer;
     z-index: 200;
 }
-.gv_overlay h4 { color: white; margin: 1em; font-weight: bold; }
+.gv_overlay h4 { color: white; margin: 1em; text-shadow: none !important; font-weight: normal; font-size: 100%; }
 .gv_overlay p { color: white; margin: 1em; }
+.gv_overlay a:link  { color: white !important; }
+.gv_overlay a:visited  { color: white !important; }
 
 .gv_infobar {
     background: #222;

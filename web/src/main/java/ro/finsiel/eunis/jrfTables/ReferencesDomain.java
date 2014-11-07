@@ -122,11 +122,11 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         final List<HabitatDTO> results = new ArrayList<HabitatDTO>();
         String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 
-        String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME, ifnull(h.code_2000, h.eunis_habitat_code) c ";
-        SQL += " FROM  dc_index A ";
+        String SQL = " SELECT DISTINCT H.ID_HABITAT,H.SCIENTIFIC_NAME, IFNULL(H.CODE_2000, H.EUNIS_HABITAT_CODE) C ";
+        SQL += " FROM dc_index A ";
         SQL += " INNER JOIN chm62edt_habitat_references B ON (A.ID_DC = B.ID_DC) ";
         SQL += " INNER JOIN chm62edt_habitat H ON (B.ID_HABITAT = H.ID_HABITAT) ";
-        SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = '" + idDc + "' order by C";
+        SQL += " WHERE " + isGoodHabitat + " AND A.ID_DC = '" + idDc + "' ORDER BY C";
 
         this.executeSQLQuery(SQL, new RowHandler() {
             public void handleRow(JRFResultSet rs) throws Exception {

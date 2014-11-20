@@ -21,8 +21,7 @@ import ro.finsiel.eunis.dataimport.ImportLogDTO;
 import eionet.eunis.dto.DoubleDTO;
 
 /**
- * Created by IntelliJ IDEA. User: ancai Date: 03.03.2005 Time: 15:35:37 To change this template use File | Settings | File
- * Templates.
+ * User: ancai Date: 03.03.2005 Time: 15:35:37.
  */
 public class SQLUtilities {
     private String SQL_DRV = "";
@@ -558,8 +557,7 @@ public class SQLUtilities {
         try {
             con = getConnection();
 
-            ps =
-                con.prepareStatement("UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
+            ps = con.prepareStatement("UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
                         + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
@@ -1020,7 +1018,7 @@ public class SQLUtilities {
     }
 
     /**
-     * Lists all the table names starting with chm63edt or dc_.
+     * Lists all the table names starting with chm62edt or dc_.
      * @return The list of table names
      */
     public List<String> getAllChm62edtTableNames() {
@@ -1270,8 +1268,8 @@ public class SQLUtilities {
     }
 
     /**
-     * Returns all URLs in the DB
-     * @return URLs from dc_index, GLOSSARY, SITE_ATTRIBUTES, DESIGNATIONS
+     * Returns all URLs in the DB.
+     * @return URLs from dc_index, site_attributes, designations
      */
     public List<String> getUrls() {
         List<String> ret = new ArrayList<String>();
@@ -1283,7 +1281,6 @@ public class SQLUtilities {
         List<String> statements = new ArrayList<String>();
 
         statements.add("SELECT URL FROM dc_index");
-        statements.add("SELECT LINK_URL FROM chm62edt_glossary");
         // can also be https!
         statements.add("SELECT VALUE FROM chm62edt_site_attributes WHERE VALUE LIKE 'http%'");
         statements.add("SELECT DATA_SOURCE FROM chm62edt_designations WHERE DATA_SOURCE LIKE 'http%'");

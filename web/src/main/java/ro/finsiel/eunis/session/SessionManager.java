@@ -62,7 +62,6 @@ public final class SessionManager implements java.io.Serializable {
     private boolean upload_pictures_RIGHT = false;
     private boolean role_management_RIGHT = false;
     private boolean admin_ROLE = false;
-    private boolean edit_glossary_RIGHT = false;
     private boolean manage_users = false;
 
     private ThemeManager themeManager = null;
@@ -489,7 +488,6 @@ public final class SessionManager implements java.io.Serializable {
         this.upload_pictures_RIGHT = false;
         this.manage_users = false;
         this.role_management_RIGHT = false;
-        this.edit_glossary_RIGHT = false;
         this.admin_ROLE = false;
         setEditContentMode(false);
         setAdvancedEditContentMode(false);
@@ -557,7 +555,7 @@ public final class SessionManager implements java.io.Serializable {
             this.userPrefs = user;
             authenticated = true;
             username = user.getUsername();
-            if(!Utilities.isEmptyString(user.getFirstName()) && !Utilities.isEmptyString(user.getLastName())){
+            if (!Utilities.isEmptyString(user.getFirstName()) && !Utilities.isEmptyString(user.getLastName())){
                 userFullName = user.getFirstName() + " " + user.getLastName();
             }
             // showEUNISInvalidatedSpecies = Utilities.checkedStringToBoolean(user.getShowInvalidatedSpecies().toString(), false);
@@ -572,44 +570,32 @@ public final class SessionManager implements java.io.Serializable {
                     if (((String) userRights.get(i)).equalsIgnoreCase("login")) {
                         login_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "upload_reports")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("upload_reports")) {
                         upload_reports_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase("services")) {
                         services_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "save_search_criteria")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("save_search_criteria")) {
 //                        save_search_criteria_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "content_management")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("content_management")) {
                         content_management_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "import/export_data")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("import/export_data")) {
                         import_export_data_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "user_management")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("user_management")) {
                         manage_users = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "role_management")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("role_management")) {
                         role_management_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "upload_pictures")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("upload_pictures")) {
                         upload_pictures_RIGHT = true;
                     }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "show_novalidated_species")) {
+                    if (((String) userRights.get(i)).equalsIgnoreCase("show_novalidated_species")) {
 //                        showEUNISInvalidatedSpecies = true;
-                    }
-                    if (((String) userRights.get(i)).equalsIgnoreCase(
-                    "edit_glossary")) {
-                        edit_glossary_RIGHT = true;
                     }
                 }
             }
@@ -882,13 +868,6 @@ public final class SessionManager implements java.io.Serializable {
         return admin_ROLE;
     }
 
-    /**
-     * Getter for edit glossary right.
-     * @return True if user has the right to edit the glossary of terms.
-     */
-    public boolean isEdit_glossary() {
-        return edit_glossary_RIGHT;
-    }
 
     /**
      * Current application language specified by the user

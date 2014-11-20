@@ -2225,5 +2225,9 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
            </rollback>
     </changeSet>
 
+    <changeSet id="rev-136" author="roug">
+        <comment>Remove the last bits of the glossary pages</comment>
+        <dropTable tableName="chm62edt_glossary"/>
+    </changeSet>
 
 </databaseChangeLog>

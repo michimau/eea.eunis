@@ -364,18 +364,6 @@ public class JRFClassesInstantiationTest {
     }
 
     @Test
-    public void test_Chm62edtHabitatGlossaryDomain() {
-        Chm62edtHabitatGlossaryDomain instance = new Chm62edtHabitatGlossaryDomain();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtHabitatGlossaryPersist() {
-        Chm62edtHabitatGlossaryPersist instance = new Chm62edtHabitatGlossaryPersist();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
     public void test_Chm62edtHabitatHabitatDomain() {
         Chm62edtHabitatHabitatDomain instance = new Chm62edtHabitatHabitatDomain();
         assertNotNull("Instantiation failed", instance);
@@ -846,18 +834,6 @@ public class JRFClassesInstantiationTest {
     @Test
     public void test_Chm62edtSalinityPersist() {
         Chm62edtSalinityPersist instance = new Chm62edtSalinityPersist();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSiteGlossaryDomain() {
-        Chm62edtSiteGlossaryDomain instance = new Chm62edtSiteGlossaryDomain();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSiteGlossaryPersist() {
-        Chm62edtSiteGlossaryPersist instance = new Chm62edtSiteGlossaryPersist();
         assertNotNull("Instantiation failed", instance);
     }
 

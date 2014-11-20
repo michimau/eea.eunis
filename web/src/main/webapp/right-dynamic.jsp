@@ -15,7 +15,6 @@
 Input parameters  on REQUEST:
   - SessionManager - to get theme info
   - location     - Link to the location on the web site (backtrail). SEE NOTES BELOW
-  - glossaryLink - Link to the glossary page
   - helpLink - Link to the help page
   - printLink - Link to printable version (PDF) of the view
   - downloadLink - Link to Excel version (TSV) of the view

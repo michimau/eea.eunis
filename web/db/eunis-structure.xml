@@ -2230,4 +2230,40 @@ CREATE FUNCTION levenshtein( s1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_gen
         <dropTable tableName="chm62edt_glossary"/>
     </changeSet>
 
+    <changeSet author="roug" id="rev-137" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <dbms type="mysql"/>
+        </preConditions>
+
+        <comment>Convenience procedure for investigation of document references. Not used in apps.</comment>
+        <sql>DROP PROCEDURE IF EXISTS wherereferenced</sql>
+        <createProcedure><![CDATA[
+CREATE PROCEDURE wherereferenced(IN refId INT)
+    READS SQL DATA
+    COMMENT 'Find tables containing a reference ID'
+BEGIN
+        (SELECT 'chm62edt_area_legal_text' AS found FROM chm62edt_area_legal_text WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_class_code' AS found FROM chm62edt_class_code WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_conservation_status' AS found FROM chm62edt_conservation_status WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_designations' AS found FROM chm62edt_designations WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_distribution_status' AS found FROM chm62edt_distribution_status WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_geoscope' AS found FROM chm62edt_geoscope WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_grid' AS found FROM chm62edt_grid WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_group_species' AS found FROM chm62edt_group_species WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_habitat_description' AS found FROM chm62edt_habitat_description WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_habitat_references' AS found FROM chm62edt_habitat_references WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_nature_object' AS found FROM chm62edt_nature_object WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_nature_object_geoscope' AS found FROM chm62edt_nature_object_geoscope WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_nature_object_report_type' AS found FROM chm62edt_nature_object_report_type WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_report_attributes' AS found FROM chm62edt_report_attributes where NAME="ID_DC" AND VALUE = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_reports' AS found FROM chm62edt_reports WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_syntaxa_source' AS found FROM chm62edt_syntaxa_source WHERE ID_DC = refId LIMIT 1)
+  UNION (SELECT 'chm62edt_taxonomy' AS found FROM chm62edt_taxonomy WHERE ID_DC = refId LIMIT 1)
+  ;
+END 
+]]></createProcedure>
+        <rollback>
+            <sql>DROP PROCEDURE IF EXISTS wherereferenced</sql>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

@@ -92,8 +92,8 @@ WHERE s.ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
   <entry key="syntaxa.querytype">SPARQL</entry>
   <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="syntaxa.title">Vegetation syntaxa crosswalks to EUNIS habitat classification (Schaminée et al, 2012)</entry>
-  <entry key="syntaxa.summary"><![CDATA[Source: <a href="/references/2460">Schaminée et al, 2012</a>]]></entry>
-  <entry key="syntaxa.attribution"><![CDATA[The crosswalks are cross-references between widely accepted European habitats (i.e. the EUNIS habitats classification) and phytosociological definitions of vegetation types (i.e. syntaxa).
+  <entry key="syntaxa.attribution"><![CDATA[<a href="/references/2460">Schaminée <em>et al.</em>, 2012</a>]]></entry>
+  <entry key="syntaxa.summary"><![CDATA[The crosswalks are cross-references between widely accepted European habitats (i.e. the EUNIS habitats classification) and phytosociological definitions of vegetation types (i.e. syntaxa).
 Source: <a href="/references/2460">Schaminée <em>et al.</em>, 2012</a>]]></entry>
   <entry key="syntaxa.column.habitatcode">EUNIS code</entry>
   <entry key="syntaxa.column.eunishabitat">EUNIS habitat type</entry>

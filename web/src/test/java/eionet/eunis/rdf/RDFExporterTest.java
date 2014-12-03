@@ -35,6 +35,9 @@ public class RDFExporterTest {
 
         RDFExportService rdfExportService = new RDFExportServiceImpl(testOutput, con, props);
         rdfExportService.exportTable("species", null);
+        /*
+         * Expected RDF should be of this form, however xml attribute order might differ.
+        
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "<rdf:RDF xmlns:foaf=\"http://xmlns.com/foaf/0.1/\"\n"
             + " xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
@@ -44,11 +47,19 @@ public class RDFExporterTest {
             + " <foaf:isPrimaryTopicOf rdf:resource=\"species/3456/general\"/>\n"
             + "</Species>\n"
             + "</rdf:RDF>\n";
-
+        */
+        
         String actual = testOutput.toString(UTF8_ENCODING);
         testOutput.close();
-
-        assertEquals(expected, actual);
+        String expectedRdfAttribute1 = "xml:base=\"http://eunis.eea.europa.eu/species\"";
+        String expectedRdfData = "<Species rdf:about=\"species/3456\">\n"
+                + " <foaf:isPrimaryTopicOf rdf:resource=\"species/3456/general\"/>\n"
+                + "</Species>";
+        boolean expectedRdfAttribute1Found = actual.contains(expectedRdfAttribute1);
+        boolean expectedRdfDataFound = actual.contains(expectedRdfData);
+        
+        assertTrue(expectedRdfAttribute1Found);
+        assertTrue(expectedRdfDataFound);
     }
 
 }

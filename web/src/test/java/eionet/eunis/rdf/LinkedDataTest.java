@@ -54,9 +54,13 @@ public class LinkedDataTest {
         ArrayList<HashMap<String, ResultValue>> rows = qObj.getRows();
 
         assertEquals(1, rows.size());
-        String expected = "{ID_SPECIES=9970, SCIENTIFIC_NAME=<a href=\"9970/general\">Salmo trutta</a>}";
+
+        String expectedIdSpecies = "9970";
+        String expectedScientificName = "<a href=\"9970/general\">Salmo trutta</a>";
+        
         for (HashMap<String, ResultValue> row : rows) {
-            assertEquals(expected, row.toString());
+            assertEquals(expectedIdSpecies, row.get("ID_SPECIES").toString());
+            assertEquals(expectedScientificName, row.get("SCIENTIFIC_NAME").toString());
         }
     }
 

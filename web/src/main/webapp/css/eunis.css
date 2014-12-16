@@ -615,3 +615,18 @@ div.overlay .formControls a {
     -o-box-shadow: 0px 2px 2px #333;
     box-shadow: 0px 2px 2px #333;
 }
+
+/* Report generator */
+
+table.globalQuery.syntaxa th.name {
+    width: 15em;
+}
+table.globalQuery.syntaxa th.definition {
+    width: 17em;
+}
+table.globalQuery.syntaxa th.synonyms {
+    white-space: pre-line;
+}
+table.globalQuery.syntaxa th.definition {
+    width: 5em;
+}

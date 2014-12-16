@@ -624,7 +624,7 @@ table.globalQuery.syntaxa th.name {
 table.globalQuery.syntaxa th.definition {
     width: 17em;
 }
-table.globalQuery.syntaxa th.synonyms {
+table.globalQuery.syntaxa td.synonyms {
     white-space: pre-line;
 }
 table.globalQuery.syntaxa th.definition {

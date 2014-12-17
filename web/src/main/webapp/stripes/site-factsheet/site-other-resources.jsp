@@ -7,7 +7,7 @@
             <table class="listing fullwidth">
                 <tr>
                     <td>
-                        <a href="http://natura2000.eea.europa.eu" target="_BLANK">Natura 2000 map viewer</a>
+                        <a href="http://natura2000.eea.europa.eu/#siteCode=${actionBean.idsite}" target="_BLANK">Natura 2000 map viewer</a>
                     </td>
                     <td>
                         Interactive map designed for showing and querying Natura 2000 sites. Other information such as Nationally designated areas and LIFE projects are also available.

@@ -70,6 +70,8 @@ public class HabitatLegalPersist extends PersistentObject {
   private String legalName = "";
 
   private Integer idDc = null;
+  
+  private String relatedIdHabitat;
 
 
   public HabitatLegalPersist() {
@@ -360,6 +362,14 @@ public class HabitatLegalPersist extends PersistentObject {
      */
     public void setIdDc(Integer idDc) {
         this.idDc = idDc;
+    }
+    
+    public String getRelatedIdHabitat() {
+        return this.relatedIdHabitat;
+    }
+    
+    public void setRelatedIdHabitat(String relatedIdHabitat) {
+        this.relatedIdHabitat = relatedIdHabitat;
     }
 
     @Override

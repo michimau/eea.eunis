@@ -89,10 +89,28 @@
                                 </a>
                             </td>
                             <td>
-                                    ${legal.legalPersist.title}
+                                <c:choose>
+                                    <c:when test="${not empty legal.legalPersist.relatedIdHabitat}">
+                                        <a href="/habitats/${legal.legalPersist.relatedIdHabitat}">
+                                            ${legal.legalPersist.title}
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${legal.legalPersist.title}
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                             <td>
-                                    ${legal.legalPersist.code}
+                                <c:choose>
+                                    <c:when test="${not empty legal.legalPersist.relatedIdHabitat}">
+                                        <a href="/habitats/${legal.legalPersist.relatedIdHabitat}">
+                                            ${legal.legalPersist.code}
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${legal.legalPersist.code}
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                             <td>${legal.relationTypeString}</td>
                             <td>

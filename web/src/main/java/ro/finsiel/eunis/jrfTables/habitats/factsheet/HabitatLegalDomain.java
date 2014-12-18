@@ -1,6 +1,5 @@
 package ro.finsiel.eunis.jrfTables.habitats.factsheet;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;

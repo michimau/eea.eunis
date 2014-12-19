@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<resultset statement="select * from chm62edt_habitat where ID_HABITAT in ( '1000', '1007', '10122' )" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_NATURE_OBJECT">278968</field>
+	<field name="SCIENTIFIC_NAME">Iberian southeastern subnitrophilous herb communities</field>
+	<field name="DESCRIPTION">Iberian southeastern subnitrophilous herb communities</field>
+	<field name="CODE_2000" xsi:nil="true" />
+	<field name="CODE_ANNEX1" xsi:nil="true" />
+	<field name="PRIORITY" xsi:nil="true" />
+	<field name="EUNIS_HABITAT_CODE">E1.63</field>
+	<field name="CLASS_REF">P</field>
+	<field name="CODE_PART_2">34.83</field>
+	<field name="LEVEL">4</field>
+	<field name="ORIGINALLY_PUBLISHED_CODE">1000</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_NATURE_OBJECT">278974</field>
+	<field name="SCIENTIFIC_NAME">[Nardus stricta] swards</field>
+	<field name="DESCRIPTION">Mat-grass swards</field>
+	<field name="CODE_2000" xsi:nil="true" />
+	<field name="CODE_ANNEX1" xsi:nil="true" />
+	<field name="PRIORITY" xsi:nil="true" />
+	<field name="EUNIS_HABITAT_CODE">E1.71</field>
+	<field name="CLASS_REF">P</field>
+	<field name="CODE_PART_2">35.11</field>
+	<field name="LEVEL">4</field>
+	<field name="ORIGINALLY_PUBLISHED_CODE">1007</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">10122</field>
+	<field name="ID_NATURE_OBJECT">283548</field>
+	<field name="SCIENTIFIC_NAME">Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)</field>
+	<field name="DESCRIPTION">Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)</field>
+	<field name="CODE_2000">6230</field>
+	<field name="CODE_ANNEX1">35.1</field>
+	<field name="PRIORITY">1</field>
+	<field name="EUNIS_HABITAT_CODE"></field>
+	<field name="CLASS_REF" xsi:nil="true" />
+	<field name="CODE_PART_2" xsi:nil="true" />
+	<field name="LEVEL">3</field>
+	<field name="ORIGINALLY_PUBLISHED_CODE">10122</field>
+  </row>
+</resultset>

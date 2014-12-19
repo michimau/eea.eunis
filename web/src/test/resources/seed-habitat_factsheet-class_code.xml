@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<dataset>
+  <chm62edt_class_code ID_CLASS_CODE="1" NAME="Palaearctic Habitat Classification 1997" SORT_ORDER="13" CURRENT_DATA="0" LEGAL="0" ID_DC="2339"/>
+  <chm62edt_class_code ID_CLASS_CODE="4" NAME="Palaearctic Habitat Classification 1993" SORT_ORDER="15" CURRENT_DATA="0" LEGAL="0" ID_DC="2339"/>
+  <chm62edt_class_code ID_CLASS_CODE="5" NAME="CORINE Biotopes Classification 1991" SORT_ORDER="16" CURRENT_DATA="0" LEGAL="0" ID_DC="191"/>
+  <chm62edt_class_code ID_CLASS_CODE="8" NAME="CORINE Land Cover" SORT_ORDER="21" CURRENT_DATA="1" LEGAL="0" ID_DC="1438"/>
+  <chm62edt_class_code ID_CLASS_CODE="14" NAME="Palaearctic Habitat Classification 1996" SORT_ORDER="14" CURRENT_DATA="0" LEGAL="0" ID_DC="2"/>
+  <chm62edt_class_code ID_CLASS_CODE="15" NAME="EUNIS Habitat Classification 199712" SORT_ORDER="8" CURRENT_DATA="0" LEGAL="0" ID_DC="2339"/>
+  <chm62edt_class_code ID_CLASS_CODE="18" NAME="EUNIS Habitat Classification 199811" SORT_ORDER="7" CURRENT_DATA="0" LEGAL="0" ID_DC="2339"/>
+  <chm62edt_class_code ID_CLASS_CODE="20" NAME="Palaearctic Habitat Classification 199905" SORT_ORDER="12" CURRENT_DATA="0" LEGAL="0" ID_DC="1385"/>
+  <chm62edt_class_code ID_CLASS_CODE="23" NAME="EUNIS Habitat Classification 199910" SORT_ORDER="6" CURRENT_DATA="0" LEGAL="0" ID_DC="1384"/>
+  <chm62edt_class_code ID_CLASS_CODE="28" NAME="Palaearctic Habitat Classification 200112" SORT_ORDER="11" UNVALIDATED_CODE="P" CURRENT_DATA="1" LEGAL="0" ID_DC="1435"/>
+  <chm62edt_class_code ID_CLASS_CODE="30" NAME="EUNIS Habitat Classification 200202" SORT_ORDER="5" CURRENT_DATA="0" LEGAL="0" ID_DC="1439"/>
+  <chm62edt_class_code ID_CLASS_CODE="32" NAME="EUNIS Habitat Classification 200308" SORT_ORDER="4" CURRENT_DATA="0" LEGAL="0" ID_DC="1444"/>
+  <chm62edt_class_code ID_CLASS_CODE="34" NAME="EUNIS Habitat Classification 200410" SORT_ORDER="3" CURRENT_DATA="0" LEGAL="0" ID_DC="1473"/>
+  <chm62edt_class_code ID_CLASS_CODE="2" NAME="Nordic Vegetation Classification 1994" SORT_ORDER="101" UNVALIDATED_CODE="N" CURRENT_DATA="1" LEGAL="0" ID_DC="3"/>
+  <chm62edt_class_code ID_CLASS_CODE="9" NAME="EU Habitats Directive Annex I" SORT_ORDER="31" CURRENT_DATA="1" LEGAL="1" ID_DC="2324"/>
+  <chm62edt_class_code ID_CLASS_CODE="10" NAME="National Vegetation Classification (UK)" SORT_ORDER="114" CURRENT_DATA="1" LEGAL="0" ID_DC="629"/>
+  <chm62edt_class_code ID_CLASS_CODE="22" NAME="Milieux Naturels de Suisse 1998" SORT_ORDER="121" CURRENT_DATA="1" LEGAL="0" ID_DC="1387"/>
+  <chm62edt_class_code ID_CLASS_CODE="29" NAME="Biotopes of the Czech Republic 2001" SORT_ORDER="131" CURRENT_DATA="1" LEGAL="0" ID_DC="1436"/>
+</dataset>

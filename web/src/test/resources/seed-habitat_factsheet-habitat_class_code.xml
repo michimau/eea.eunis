@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<dataset>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="1" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="4" TITLE="" RELATION_TYPE="=" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="5" TITLE="" RELATION_TYPE="=" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="8" TITLE="Natural grassland" RELATION_TYPE="" CODE="3.2.1."/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="14" TITLE="" RELATION_TYPE="=" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="15" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.143"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="18" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.63"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="20" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="23" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.63"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="28" TITLE="Iberian southeastern subnitrophilous herb communities" RELATION_TYPE="S" CODE="34.83"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="30" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.63"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="32" TITLE="Iberian south-eastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.63"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1000" ID_CLASS_CODE="34" TITLE="Iberian southeastern subnitrophilous herb communities" RELATION_TYPE="=" CODE="E1.63"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="1" TITLE="Mat-grass swards" RELATION_TYPE="=" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="2" TITLE="Mat grass heath type" RELATION_TYPE="" CODE="5.1.3.3"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="4" TITLE="" RELATION_TYPE="=" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="5" TITLE="" RELATION_TYPE="=" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="8" TITLE="Natural grassland" RELATION_TYPE="" CODE="3.2.1."/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="9" TITLE="Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)" RELATION_TYPE="&lt;" CODE="6230"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="10" TITLE="[Nardus stricta]-[Galium saxatile] grassland" RELATION_TYPE="&lt;" CODE="U5"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="14" TITLE="" RELATION_TYPE="=" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="15" TITLE="Mat-grass swards" RELATION_TYPE="=" CODE="E1.211"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="18" TITLE="[Nardus stricta] swards" RELATION_TYPE="=" CODE="E1.71"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="20" TITLE="Mat-grass swards" RELATION_TYPE="=" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="22" TITLE="Lande subatlantique s&#xE8;che" RELATION_TYPE="&gt;" CODE="5.4.1.1"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="23" TITLE="[Nardus stricta] swards" RELATION_TYPE="=" CODE="E1.71"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="28" TITLE="Mat-grass swards" RELATION_TYPE="S" CODE="35.11"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="29" TITLE="HORSK&#xC9; SMILKOV&#xC9; TR&#xC1;VN&#xCD;KY S ALP&#xCD;NSK&#xDD;MI DRUHY (Montane Nardus grasslands with alpine species)" RELATION_TYPE="?" CODE="T2.2"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="29" TITLE="PODHORSK&#xC9; A HORSK&#xC9; SMILKOV&#xC9; TR&#xC1;VN&#xCD;KY (Submontane and montane Nardus grasslands)" RELATION_TYPE="#" CODE="T2.3"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="30" TITLE="[Nardus stricta] swards" RELATION_TYPE="=" CODE="E1.71"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="32" TITLE="[Nardus stricta] swards" RELATION_TYPE="=" CODE="E1.71"/>
+  <chm62edt_habitat_class_code ID_HABITAT="1007" ID_CLASS_CODE="34" TITLE="[Nardus stricta] swards" RELATION_TYPE="=" CODE="E1.71"/>
+</dataset>

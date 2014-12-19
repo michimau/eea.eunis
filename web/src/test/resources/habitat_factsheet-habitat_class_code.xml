@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+
+<resultset statement="select * from chm62edt_habitat_class_code where ID_HABITAT in ( '1000', '1007')
+" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">1</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">4</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">5</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">8</field>
+	<field name="TITLE">Natural grassland</field>
+	<field name="RELATION_TYPE"></field>
+	<field name="CODE">3.2.1.</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">14</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">15</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.143</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">18</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.63</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">20</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">23</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.63</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">28</field>
+	<field name="TITLE">Iberian southeastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">S</field>
+	<field name="CODE">34.83</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">30</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.63</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">32</field>
+	<field name="TITLE">Iberian south-eastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.63</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1000</field>
+	<field name="ID_CLASS_CODE">34</field>
+	<field name="TITLE">Iberian southeastern subnitrophilous herb communities</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.63</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">1</field>
+	<field name="TITLE">Mat-grass swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">2</field>
+	<field name="TITLE">Mat grass heath type</field>
+	<field name="RELATION_TYPE"></field>
+	<field name="CODE">5.1.3.3</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">4</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">5</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">8</field>
+	<field name="TITLE">Natural grassland</field>
+	<field name="RELATION_TYPE"></field>
+	<field name="CODE">3.2.1.</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">9</field>
+	<field name="TITLE">Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)</field>
+	<field name="RELATION_TYPE">&lt;</field>
+	<field name="CODE">6230</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">10</field>
+	<field name="TITLE">[Nardus stricta]-[Galium saxatile] grassland</field>
+	<field name="RELATION_TYPE">&lt;</field>
+	<field name="CODE">U5</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">14</field>
+	<field name="TITLE"></field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">15</field>
+	<field name="TITLE">Mat-grass swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.211</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">18</field>
+	<field name="TITLE">[Nardus stricta] swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.71</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">20</field>
+	<field name="TITLE">Mat-grass swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">22</field>
+	<field name="TITLE">Lande subatlantique sèche</field>
+	<field name="RELATION_TYPE">&gt;</field>
+	<field name="CODE">5.4.1.1</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">23</field>
+	<field name="TITLE">[Nardus stricta] swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.71</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">28</field>
+	<field name="TITLE">Mat-grass swards</field>
+	<field name="RELATION_TYPE">S</field>
+	<field name="CODE">35.11</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">29</field>
+	<field name="TITLE">HORSKÉ SMILKOVÉ TRÁVNÍKY S ALPÍNSKÝMI DRUHY (Montane Nardus grasslands with alpine species)</field>
+	<field name="RELATION_TYPE">?</field>
+	<field name="CODE">T2.2</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">29</field>
+	<field name="TITLE">PODHORSKÉ A HORSKÉ SMILKOVÉ TRÁVNÍKY (Submontane and montane Nardus grasslands)</field>
+	<field name="RELATION_TYPE">#</field>
+	<field name="CODE">T2.3</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">30</field>
+	<field name="TITLE">[Nardus stricta] swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.71</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">32</field>
+	<field name="TITLE">[Nardus stricta] swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.71</field>
+  </row>
+
+  <row>
+	<field name="ID_HABITAT">1007</field>
+	<field name="ID_CLASS_CODE">34</field>
+	<field name="TITLE">[Nardus stricta] swards</field>
+	<field name="RELATION_TYPE">=</field>
+	<field name="CODE">E1.71</field>
+  </row>
+</resultset>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<dataset>
+  <chm62edt_habitat ID_HABITAT="1000" ID_NATURE_OBJECT="278968" SCIENTIFIC_NAME="Iberian southeastern subnitrophilous herb communities" DESCRIPTION="Iberian southeastern subnitrophilous herb communities" EUNIS_HABITAT_CODE="E1.63" CLASS_REF="P" CODE_PART_2="34.83" LEVEL="4" ORIGINALLY_PUBLISHED_CODE="1000"/>
+  <chm62edt_habitat ID_HABITAT="1007" ID_NATURE_OBJECT="278974" SCIENTIFIC_NAME="[Nardus stricta] swards" DESCRIPTION="Mat-grass swards" EUNIS_HABITAT_CODE="E1.71" CLASS_REF="P" CODE_PART_2="35.11" LEVEL="4" ORIGINALLY_PUBLISHED_CODE="1007"/>
+  <chm62edt_habitat ID_HABITAT="10122" ID_NATURE_OBJECT="283548" SCIENTIFIC_NAME="Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)" DESCRIPTION="Species-rich Nardus grasslands, on silicious substrates in mountain areas (and submountain areas in Continental Europe)" CODE_2000="6230" CODE_ANNEX1="35.1" PRIORITY="1" EUNIS_HABITAT_CODE="" LEVEL="3" ORIGINALLY_PUBLISHED_CODE="10122"/>
+</dataset>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<resultset statement="select n.* from chm62edt_nature_object n inner join chm62edt_habitat h on h.ID_NATURE_OBJECT = n.ID_NATURE_OBJECT where h.ID_HABITAT in ( '1000', '1007', '10122' )
+" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="ID_NATURE_OBJECT">278968</field>
+	<field name="ID_DC">2416</field>
+	<field name="ORIGINAL_CODE">1000</field>
+	<field name="TYPE">HABITAT</field>
+  </row>
+
+  <row>
+	<field name="ID_NATURE_OBJECT">278974</field>
+	<field name="ID_DC">2416</field>
+	<field name="ORIGINAL_CODE">1007</field>
+	<field name="TYPE">HABITAT</field>
+  </row>
+
+  <row>
+	<field name="ID_NATURE_OBJECT">283548</field>
+	<field name="ID_DC">2356</field>
+	<field name="ORIGINAL_CODE">10122</field>
+	<field name="TYPE">HABITAT</field>
+  </row>
+</resultset>

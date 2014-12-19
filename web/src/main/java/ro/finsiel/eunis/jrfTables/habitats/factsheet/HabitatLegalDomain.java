@@ -12,17 +12,13 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 public class HabitatLegalDomain extends AbstractDomain {
 
-    /**
-     *
-     */
+    @Override
     public PersistentObject newPersistentObject() {
         return new HabitatLegalPersist();
     }
 
-    /**
-     *
-     */
-    public void setup() {
+    @Override
+    protected void setup() {
     // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
         // this.setJDBCHelper(JDBCHelperFactory.create());

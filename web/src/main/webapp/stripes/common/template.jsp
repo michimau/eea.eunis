@@ -39,6 +39,7 @@
         </title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css" />
         <script>
+            // <![CDATA[
             // all the non-local links should display on a new tab; this script sets target=_blank for all non-local links
             $(document).ready(function() {
                 $("a").each(function(){
@@ -48,6 +49,7 @@
                     }
                 });
             });
+            // ]]>
         </script>
 
         <stripes:layout-component name="head"/>

@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+
+<resultset statement="select distinct cc.* from chm62edt_class_code cc inner join chm62edt_habitat_class_code hcc on cc.ID_CLASS_CODE = hcc.ID_CLASS_CODE where hcc.ID_HABITAT in ( '1000', '1007')
+" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="ID_CLASS_CODE">1</field>
+	<field name="NAME">Palaearctic Habitat Classification 1997</field>
+	<field name="SORT_ORDER">13</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">2339</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">4</field>
+	<field name="NAME">Palaearctic Habitat Classification 1993</field>
+	<field name="SORT_ORDER">15</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">2339</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">5</field>
+	<field name="NAME">CORINE Biotopes Classification 1991</field>
+	<field name="SORT_ORDER">16</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">191</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">8</field>
+	<field name="NAME">CORINE Land Cover</field>
+	<field name="SORT_ORDER">21</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1438</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">14</field>
+	<field name="NAME">Palaearctic Habitat Classification 1996</field>
+	<field name="SORT_ORDER">14</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">2</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">15</field>
+	<field name="NAME">EUNIS Habitat Classification 199712</field>
+	<field name="SORT_ORDER">8</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">2339</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">18</field>
+	<field name="NAME">EUNIS Habitat Classification 199811</field>
+	<field name="SORT_ORDER">7</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">2339</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">20</field>
+	<field name="NAME">Palaearctic Habitat Classification 199905</field>
+	<field name="SORT_ORDER">12</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1385</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">23</field>
+	<field name="NAME">EUNIS Habitat Classification 199910</field>
+	<field name="SORT_ORDER">6</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1384</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">28</field>
+	<field name="NAME">Palaearctic Habitat Classification 200112</field>
+	<field name="SORT_ORDER">11</field>
+	<field name="UNVALIDATED_CODE">P</field>
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1435</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">30</field>
+	<field name="NAME">EUNIS Habitat Classification 200202</field>
+	<field name="SORT_ORDER">5</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1439</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">32</field>
+	<field name="NAME">EUNIS Habitat Classification 200308</field>
+	<field name="SORT_ORDER">4</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1444</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">34</field>
+	<field name="NAME">EUNIS Habitat Classification 200410</field>
+	<field name="SORT_ORDER">3</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">0</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1473</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">2</field>
+	<field name="NAME">Nordic Vegetation Classification 1994</field>
+	<field name="SORT_ORDER">101</field>
+	<field name="UNVALIDATED_CODE">N</field>
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">3</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">9</field>
+	<field name="NAME">EU Habitats Directive Annex I</field>
+	<field name="SORT_ORDER">31</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">1</field>
+	<field name="ID_DC">2324</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">10</field>
+	<field name="NAME">National Vegetation Classification (UK)</field>
+	<field name="SORT_ORDER">114</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">629</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">22</field>
+	<field name="NAME">Milieux Naturels de Suisse 1998</field>
+	<field name="SORT_ORDER">121</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1387</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="ID_CLASS_CODE">29</field>
+	<field name="NAME">Biotopes of the Czech Republic 2001</field>
+	<field name="SORT_ORDER">131</field>
+	<field name="UNVALIDATED_CODE" xsi:nil="true" />
+	<field name="CURRENT_DATA">1</field>
+	<field name="LEGAL">0</field>
+	<field name="ID_DC">1436</field>
+	<field name="CURRENT_CLASSIFICATION" xsi:nil="true" />
+  </row>
+</resultset>

@@ -92,6 +92,7 @@
 			}
         </style>
 		<script>
+                // <![CDATA[
 			var interactive_map_load_count = 0;
 			function loadMapIframe(mapLink) {
 				if(interactive_map_load_count == 0) {
@@ -120,6 +121,7 @@
 				var pathname = window.location.pathname;
 				window.location.href = pathname+"#tab-interactive-map";	
 			}
+                // ]]>
 		</script>
 
         <link rel="alternate" type="application/rdf+xml" title="RDF"

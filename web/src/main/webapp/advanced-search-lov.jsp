@@ -216,21 +216,7 @@
       }
     }
   }
-  if(lov.equalsIgnoreCase("ThreatStatus")) {
-    if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME='"+ val + "' ORDER BY NAME";
-    } else {
-      if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-      } else {
-        if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-        } else {
-          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM chm62edt_conservation_status ORDER BY NAME";
-        }
-      }
-    }
-  }
+
 
   if(lov.equalsIgnoreCase("LegalInstruments")) {
     if(oper.equalsIgnoreCase("Equal")) {

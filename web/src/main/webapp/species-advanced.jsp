@@ -559,8 +559,6 @@ String rsn = (String)request.getParameter("siteName");
                       out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("vernacular_name")+"</option>");
                       if(val.equalsIgnoreCase("Group")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Group\">"+cm.cmsPhrase("Group")+"</option>");
-                      if(val.equalsIgnoreCase("ThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"ThreatStatus\">"+cm.cms("threat_status")+"</option>");
                       if(val.equalsIgnoreCase("InternationalThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"InternationalThreatStatus\">"+cm.cms("international_threat_status")+"</option>");
                       if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -585,7 +583,6 @@ String rsn = (String)request.getParameter("siteName");
                     out.println("</select>");
                     %>
                     <%=cm.cmsInput("vernacular_name")%>
-                    <%=cm.cmsInput("threat_status")%>
                     <%=cm.cmsInput("international_threat_status")%>
                     <%=cm.cmsInput("biogeoregion")%>
                     <%=cm.cmsInput("reference_author")%>

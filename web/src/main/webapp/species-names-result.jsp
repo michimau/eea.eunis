@@ -32,6 +32,10 @@
         formBean.setScientificName(formBean.getScientificName().replace("spp.",""));
         formBean.setRelationOp(""+Utilities.OPERATOR_STARTS);
     }
+    if(formBean.getScientificName()!= null && formBean.getScientificName().endsWith(" spp")){
+        formBean.setScientificName(formBean.getScientificName().replace(" spp"," "));
+        formBean.setRelationOp(""+Utilities.OPERATOR_STARTS);
+    }
 
   	if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   	// Check columns to be displayed

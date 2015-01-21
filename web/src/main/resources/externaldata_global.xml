@@ -158,7 +158,7 @@ PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
 
 SELECT ?identifier ?label ?eunis_name ?eunis_url
 WHERE {
-  ?estatspecies skos:inScheme <http://rdfdata.eionet.europa.eu/eurostat/dic/species>;
+  ?estatspecies skos:inScheme <http://dd.eionet.europa.eu/vocabulary/eurostat/species/>;
           a skos:Concept;
             rdfs:label ?label;
             skos:notation ?identifier .

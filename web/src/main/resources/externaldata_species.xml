@@ -425,6 +425,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#>
 PREFIX measure: <http://purl.org/linked-data/sdmx/2009/measure#>
 PREFIX dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX attribute: <http://purl.org/linked-data/sdmx/2009/attribute#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
@@ -434,18 +435,18 @@ WHERE {
    <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSynonym ?uspecies
   }
   ?obsUri e:species ?uspecies;
-     e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>;
-     e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>;
-     e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>;
-     e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>, ?uunit;
-     e:geo ?ucountry;
+     e:pres <http://dd.eionet.europa.eu/vocabulary/eurostat/pres/0>;
+     e:dest <http://dd.eionet.europa.eu/vocabulary/eurostat/dest/0>;
+     e:natvessr <http://dd.eionet.europa.eu/vocabulary/eurostat/natvessr/TOTAL>;
+     attribute:unitMeasure <http://dd.eionet.europa.eu/vocabulary/eurostat/unit/TPW>, ?uunit;
+     dimension:refArea ?ucountry;
      dimension:timePeriod ?year;
      measure:obsValue ?landed.
  GRAPH <http://rdfdata.eionet.europa.eu/eea/countries.rdf> {
   ?eeacountry owl:sameAs ?ucountry .
   ?eeacountry skos:prefLabel ?country.
  }
- GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/unit.rdf> {
+ GRAPH <http://dd.eionet.europa.eu/vocabularyfolder/eurostat/rdf> {
   ?uunit skos:prefLabel ?unit.
  }
 }
@@ -455,13 +456,14 @@ ORDER BY ?country ?year
   <entry key="landings.codes"><![CDATA[
 PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#>
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX attribute: <http://purl.org/linked-data/sdmx/2009/attribute#>
 
 SELECT DISTINCT ?speciescode
 WHERE {
-  ?obsUri e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>;
-          e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>;
-          e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>;
-          e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>;
+  ?obsUri e:pres <http://dd.eionet.europa.eu/vocabulary/eurostat/pres/0>;
+          e:dest <http://dd.eionet.europa.eu/vocabulary/eurostat/dest/0>;
+          e:natvessr <http://dd.eionet.europa.eu/vocabulary/eurostat/natvessr/TOTAL>;
+          attribute:unitMeasure <http://dd.eionet.europa.eu/vocabulary/eurostat/unit/TPW>;
           e:species ?uspecies.
   GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
       ?speciesurl eunis:sameSynonym ?uspecies.

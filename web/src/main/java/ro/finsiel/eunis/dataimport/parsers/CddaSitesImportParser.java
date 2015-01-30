@@ -142,7 +142,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                 lon = buf.toString().trim();
             }
 
-            if (qName.equalsIgnoreCase("CDDA_v8_sites")) {
+            if (qName.equalsIgnoreCase("CDDA_sites")) { // record name
 
                 siteNatureObjectId = natObjectIds.get(siteCode);
                 if (siteNatureObjectId == null

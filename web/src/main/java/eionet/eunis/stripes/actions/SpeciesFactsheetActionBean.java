@@ -159,7 +159,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private boolean rangeLayer;
     private boolean distributionLayer;
-    private boolean attributes;
 
     private Map<String, List<Chm62edtNatureObjectAttributesPersist>> natureObjectAttributesMap;
 
@@ -208,7 +207,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
         int mainIdSpecies = 0;
 
-        // get idSpecies based on the request param. Functionality also available in #getSpeciesId()
+        // get idSpecies based on the request param.
         if (StringUtils.isNumeric(idSpecies)) {
             mainIdSpecies = new Integer(idSpecies);
         } else if (!StringUtils.isBlank(idSpecies)) {
@@ -243,7 +242,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             specie = factsheet.getSpeciesNatureObject();
 
-            generalTabActions(mainIdSpecies);
+            generalTabActions();
 
             // Sets all actionBean values for quickfactsheet
             setQuickFactSheetValues();
@@ -676,24 +675,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         subMapIds = getIds(subSpeciesSites);
     }
 
-    private int getSpeciesId() {
-        int tempIdSpecies = 0;
-
-        // get idSpecies based on the request param.
-        if (StringUtils.isNumeric(idSpecies)) {
-            tempIdSpecies = new Integer(idSpecies);
-        } else if (!StringUtils.isBlank(idSpecies)) {
-            tempIdSpecies = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
-        }
-        return tempIdSpecies;
-    }
-
     /**
      * Populate the member variables used in the "general" tab.
      *
-     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
      */
-    private void generalTabActions(int mainIdSpecies) {
+    private void generalTabActions() {
 
         speciesBook = factsheet.getSpeciesBook();
 
@@ -717,11 +703,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     }
                 }
             }
-
-
-            String sn = scientificName;
-
-            sn = sn.replaceAll("sp.", "").replaceAll("ssp.", "");
 
             if (kingdomname.equalsIgnoreCase("Animalia")) {
                 kingdomname = "Animals";

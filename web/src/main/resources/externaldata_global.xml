@@ -69,8 +69,9 @@ that includes the code lists for species and e.g. more information about alterna
 ]]></entry>
 
   <entry key="n2000other.column.N2000CODE">N2000 Code</entry>
-  <entry key="n2000other.link.SCIENTIFIC_NAME">FACTSHEET</entry>
+  <entry key="n2000other.link.N2000CODE">N2000URL</entry>
   <entry key="n2000other.column.SCIENTIFIC_NAME">Species name</entry>
+  <entry key="n2000other.link.SCIENTIFIC_NAME">FACTSHEET</entry>
   <entry key="n2000other.column.AUTHOR">Author</entry>
   <entry key="n2000other.column.VALCODE">Valid code</entry>
   <entry key="n2000other.column.VALID_NAME">Valid name</entry>
@@ -79,6 +80,7 @@ that includes the code lists for species and e.g. more information about alterna
   <entry key="n2000other.query"><![CDATA[
 SELECT
  a.OBJECT AS N2000CODE,
+ CONCAT('http://dd.eionet.europa.eu/vocabulary/biodiversity/n2000species/', a.OBJECT) AS N2000URL,
  s.SCIENTIFIC_NAME, s.AUTHOR,
  CONCAT('[CONTEXT_PATH]/species/', CONVERT(s.ID_SPECIES USING utf8)) AS FACTSHEET,
  IF(s.ID_SPECIES != s.ID_SPECIES_LINK, v.SCIENTIFIC_NAME,NULL) AS VALID_NAME,

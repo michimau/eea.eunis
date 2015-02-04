@@ -41,14 +41,18 @@ that includes the code lists for birds and e.g. more information about presence/
 <!-- If the label column in query is bound to ?filetitle and link itself to ?file -->
 <!-- then the property should be defined as: {queryId}.link.filetitle = file -->
 <!-- This will produce <a href="file">filetitle</a> in result row -->
-  <entry key="n2000birds.column.N2000CODE">N2000 Code</entry>
+  <entry key="n2000birds.column.N2000CODE">N2000 code</entry>
+  <entry key="n2000birds.link.N2000CODE">N2000URL</entry>
   <entry key="n2000birds.link.SCIENTIFIC_NAME">FACTSHEET</entry>
   <entry key="n2000birds.column.SCIENTIFIC_NAME">Species name</entry>
   <entry key="n2000birds.column.AUTHOR">Author</entry>
   <entry key="n2000birds.column.COMMENT">Comment</entry>
 
   <entry key="n2000birds.query"><![CDATA[
-SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR,
+SELECT
+ a.OBJECT AS N2000CODE,
+ CONCAT('http://dd.eionet.europa.eu/vocabulary/biodiversity/n2000birds/', a.OBJECT) AS N2000URL,
+ SCIENTIFIC_NAME, AUTHOR,
  CONCAT('[CONTEXT_PATH]/species/', CONVERT(ID_SPECIES USING utf8)) AS FACTSHEET,
  c.OBJECT AS COMMENT
 FROM chm62edt_species AS s
@@ -68,12 +72,12 @@ Code list for species under Directive 92/42/EEC. These are the codes used in the
 that includes the code lists for species and e.g. more information about alternative names and presence/absence in the annexes.
 ]]></entry>
 
-  <entry key="n2000other.column.N2000CODE">N2000 Code</entry>
+  <entry key="n2000other.column.N2000CODE">N2000 code</entry>
   <entry key="n2000other.link.N2000CODE">N2000URL</entry>
   <entry key="n2000other.column.SCIENTIFIC_NAME">Species name</entry>
   <entry key="n2000other.link.SCIENTIFIC_NAME">FACTSHEET</entry>
   <entry key="n2000other.column.AUTHOR">Author</entry>
-  <entry key="n2000other.column.VALCODE">Valid code</entry>
+  <entry key="n2000other.column.VALCODE">N2000 code</entry>
   <entry key="n2000other.column.VALID_NAME">Valid name</entry>
   <entry key="n2000other.link.VALID_NAME">VALIDLINK</entry>
 

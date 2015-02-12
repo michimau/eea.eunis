@@ -68,7 +68,7 @@
               try
               {
                 Class.forName( SQL_DRV );
-                con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+                con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection( SQL_URL, SQL_USR, SQL_PWD );
                 
                 //we display root nodes
                 strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";

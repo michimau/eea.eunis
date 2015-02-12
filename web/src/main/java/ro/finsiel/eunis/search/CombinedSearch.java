@@ -67,7 +67,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -106,7 +106,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
             StringTokenizer tokenizer = new StringTokenizer(IdNatureObject, ",");
 
@@ -213,7 +213,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='" + Criteria + "'";
@@ -244,7 +244,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET ATTRIBUTE='" + Attribute + "'";
@@ -275,7 +275,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET OPERATOR='" + Operator + "'";
@@ -328,7 +328,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET FIRST_VALUE='" + FirstValue + "'";
@@ -359,7 +359,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET LAST_VALUE='" + LastValue + "'";
@@ -391,7 +391,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -478,7 +478,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -524,7 +524,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -570,7 +570,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -614,7 +614,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -662,7 +662,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             // obtin ultimul nod child al nodului curent
             if (IdNode.length() == 1) {
@@ -761,7 +761,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='All'";
@@ -813,7 +813,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
@@ -897,7 +897,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "SELECT ";
             SQLModelStart += "`eunis_combined_search`.`ID_NODE`,";
@@ -1087,7 +1087,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "DELETE FROM eunis_combined_search_temp";
             SQLModelStart += " WHERE (`eunis_combined_search_temp`.`ID_SESSION`='"
@@ -1427,7 +1427,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (SQL.length() > 0) {
                 resultCount = 0;
@@ -1480,7 +1480,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             if (SQL.length() > 0) {
                 ResultSet rs = null;
 
@@ -1512,7 +1512,7 @@ public class CombinedSearch {
         try {
             Class.forName(SQL_DRV);
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             ResultSet rs = null;
 
@@ -1590,7 +1590,7 @@ public class CombinedSearch {
         try {
             Class.forName(SQL_DRV);
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             ResultSet rs = null;
 
@@ -1641,7 +1641,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = " DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -1688,7 +1688,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = " DELETE FROM eunis_combined_search_results";
             ps = con.createStatement();
@@ -1731,7 +1731,7 @@ public class CombinedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT COUNT(*) FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";

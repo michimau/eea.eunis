@@ -194,7 +194,7 @@ public class SaveSearchCriteria {
             criteriaName = userName + (CriteriaMaxNumber(userName).toString());
       
             for (int i = 0; i < numberCriteria; i++) {
-                con1[i] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                con1[i] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
                 SQL = "INSERT INTO eunis_group_search_criteria "
                         + "(CRITERIA_NAME,ID_eunis_group_search_criteria,CRITERIA_ATTRIBUTE,CRITERIA_FORM_FIELD_ATTRIBUTE,"
@@ -222,7 +222,7 @@ public class SaveSearchCriteria {
                 con1[i].close();
             }
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "INSERT INTO eunis_group_search (CRITERIA_NAME,DESCRIPTION,USERNAME,FROM_WHERE)VALUES(?,?,?,?)";
 
@@ -273,7 +273,7 @@ public class SaveSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM eunis_group_search" + " WHERE USERNAME = '" + user + "'";
@@ -812,8 +812,8 @@ public class SaveSearchCriteria {
             PreparedStatement ps1 = null;
 
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "DELETE FROM eunis_group_search WHERE CRITERIA_NAME='" + criteriaName + "'";
             ps = con.prepareStatement(SQL);

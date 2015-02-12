@@ -977,7 +977,7 @@ public final class PDFSpeciesFactsheet {
         sql += "    GROUP BY chm62edt_species.ID_NATURE_OBJECT,dc_index.ID_DC,dc_index.SOURCE,dc_index.EDITOR,dc_index.TITLE,dc_index.PUBLISHER,dc_index.CREATED";
 
         Class.forName(SQL_DRV);
-        Connection con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+        Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
         Statement ps = con.createStatement();
         ResultSet rs = ps.executeQuery(sql);
 

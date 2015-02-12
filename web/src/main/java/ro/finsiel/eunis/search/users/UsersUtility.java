@@ -121,8 +121,8 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             SQL = "DELETE FROM eunis_users WHERE USERNAME='" + username + "'";
 
             ps = con.prepareStatement(SQL);
@@ -200,8 +200,8 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             SQL = "DELETE FROM eunis_rights WHERE RIGHTNAME='" + rightname + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
@@ -508,7 +508,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             // System.out.println("2----------loginDate="+loginDate+"+");
             updateSQL = "";
             updateSQL += " UPDATE eunis_users SET";
@@ -647,7 +647,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             updateSQL = "";
             updateSQL += " UPDATE eunis_roles SET";
             updateSQL += " ROLENAME=?,";
@@ -746,7 +746,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             updateSQL = "UPDATE eunis_rights SET";
             updateSQL += " DESCRIPTION=?";
@@ -968,7 +968,7 @@ public class UsersUtility {
 
                 for (int i = 0; i < newRights.size(); i++) {
                     j++;
-                    con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con2[j] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     SQL = "INSERT INTO eunis_roles_rights(ROLENAME,RIGHTNAME) VALUES(";
                     SQL += "'" + rolename + "',";
                     SQL += "'" + (String) newRights.get(i) + "')";
@@ -1045,7 +1045,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             SQL = "DELETE FROM eunis_roles WHERE ROLENAME='" + roleName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
@@ -1172,7 +1172,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT * FROM eunis_group_search WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
                     + "' AND FROM_WHERE='" + pagename + "'";
@@ -1226,7 +1226,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT * FROM eunis_save_advanced_search WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
                     + criterianame + "' AND FROM_WHERE='" + pagename + "'";
@@ -1280,7 +1280,7 @@ public class UsersUtility {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL = "SELECT * FROM EUNIS_SAVE_COMBINED_SEARCH WHERE CRITERIA_NAME='" + criterianame + "' AND FROM_WHERE='" + pagename
                     + "'";
@@ -1347,7 +1347,7 @@ public class UsersUtility {
         if (!existUserName(username)) {
             try {
                 Class.forName(SQL_DRV);
-                con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
                 SQL = "INSERT INTO eunis_users(USERNAME,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) "
                         + " VALUES(?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
@@ -1396,7 +1396,7 @@ public class UsersUtility {
 
                 for (int i = 0; i < newRoles.size(); i++) {
                     j++;
-                    con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con2[j] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     SQL = "INSERT INTO eunis_users_roles(USERNAME,ROLENAME) VALUES(";
                     SQL += "'" + username + "',";
                     SQL += "'" + (String) newRoles.get(i) + "')";

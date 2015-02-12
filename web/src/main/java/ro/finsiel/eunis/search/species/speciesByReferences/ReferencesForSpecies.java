@@ -214,7 +214,7 @@ public class ReferencesForSpecies {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL_REFERENCES = "SELECT DISTINCT A.";
 

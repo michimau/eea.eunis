@@ -101,7 +101,7 @@
     try
     {
       Class.forName(SQL_DRV);
-      con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
       String SQL;
       // Find total number of rows containing temporary data detected in database

@@ -175,7 +175,7 @@ public class SQLUtilities {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -1334,7 +1334,7 @@ public class SQLUtilities {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
         } catch (Exception e) {

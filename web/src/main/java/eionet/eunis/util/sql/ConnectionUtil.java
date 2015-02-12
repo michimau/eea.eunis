@@ -42,7 +42,7 @@ public class ConnectionUtil {
 
         try {
             Class.forName(drv);
-            return DriverManager.getConnection(url, usr, pwd);
+            return ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(url, usr, pwd);
         } catch (ClassNotFoundException e) {
             throw new SQLException("Failed to get connection, driver class not found: " + drv, e);
         }

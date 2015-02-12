@@ -30,14 +30,14 @@ public class Natura2000ImportParserTest {
     }
 
     private static String[] tables = {"chm62edt_nature_object_report_type",
-        "chm62edt_nature_object_geoscope",
-        "chm62edt_nature_object",
-        "chm62edt_report_attributes",
-        "chm62edt_site_attributes",
-        "chm62edt_sites_sites",
-        "chm62edt_sites_related_designations",
-        "chm62edt_report_type",
-        "chm62edt_sites"};
+            "chm62edt_nature_object_geoscope",
+            "chm62edt_nature_object",
+            "chm62edt_report_attributes",
+            "chm62edt_site_attributes",
+            "chm62edt_sites_sites",
+            "chm62edt_sites_related_designations",
+            "chm62edt_report_type",
+            "chm62edt_sites"};
 
     /**
      * Runs the "action" on all the tables in the tables list, adding the prefix.
@@ -71,6 +71,9 @@ public class Natura2000ImportParserTest {
             Statement statement = null;
             try {
                 statement = con.createStatement();
+                try{
+                    statement.execute("DROP TABLE " + prefix + table );
+                } catch (Exception e) { }
                 statement.execute("CREATE " + (debug?"":" TEMPORARY ") + " TABLE " + prefix + table + " AS SELECT * FROM " + table) ;
                 statement.close();
             } catch (Exception e) {
@@ -233,17 +236,17 @@ public class Natura2000ImportParserTest {
 
         // add here text contained in the ingorable compare errors
         String[] toIgnore = {
-        "ID_LOOKUP",
-        "chm62edt_sites_sites",
-        "HABITAT_",
-        "INTENSITY",
-        "INFLUENCE",
-        "IN_OUT",
-        "ALT_",          // no altitude
-        "AMT DER STMK.",     // new documentation
-        "Das Steirische Ennstal",  // new quality
-        "COVER",
-        "OTHER_SPECIES"
+                "ID_LOOKUP",
+                "chm62edt_sites_sites",
+                "HABITAT_",
+                "INTENSITY",
+                "INFLUENCE",
+                "IN_OUT",
+                "ALT_",          // no altitude
+                "AMT DER STMK.",     // new documentation
+                "Das Steirische Ennstal",  // new quality
+                "COVER",
+                "OTHER_SPECIES"
         };
 
         try {
@@ -465,7 +468,7 @@ public class Natura2000ImportParserTest {
     }
 
     private List<String> compareTables(String source, String target) throws Exception{
-    // select * from first
+        // select * from first
         Statement s= con.createStatement();
         ResultSet rs = s.executeQuery("SELECT * FROM " + source);
         Table t = new Table(rs, source);

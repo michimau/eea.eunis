@@ -67,9 +67,9 @@ public class DbHelper {
         Class.forName("com.mysql.jdbc.Driver");
         Connection jdbcConnection = null; 
         if (liveBase){
-            jdbcConnection = DriverManager.getConnection(getJdbcUrlLive(), getJdbcUserLive(), getJdbcPasswordLive());
+            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(getJdbcUrlLive(), getJdbcUserLive(), getJdbcPasswordLive());
         } else {
-            jdbcConnection = DriverManager.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
         }
         IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
         DatabaseConfig config = connection.getConfig();

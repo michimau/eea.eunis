@@ -105,7 +105,7 @@ public class CleanupSessionListener implements HttpSessionListener {
 
         try {
             Class.forName(JDBC_DRV);
-            conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
+            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
             // System.out.println("Updating eunis_session_log table.");
             PreparedStatement ps = conn.prepareStatement(
                     "UPDATE eunis_session_log SET START=START, END=? WHERE ID_SESSION=?");

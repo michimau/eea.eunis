@@ -172,7 +172,7 @@ public class SitesAdvancedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (valuecolumn == null || valuecolumn.length() == 0) {
                 valuecolumn = "NAME";
@@ -571,7 +571,7 @@ public class SitesAdvancedSearch {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (SQL.length() > 0) {
                 resultCount = 0;

@@ -92,7 +92,7 @@ public class SaveCombinedSearchCriteria {
         try {
             Class.forName(SQL_DRV);
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_combined_search " + " WHERE ID_SESSION = '" + idSession + "' ";
@@ -107,7 +107,7 @@ public class SaveCombinedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH";
@@ -135,7 +135,7 @@ public class SaveCombinedSearchCriteria {
 
             // inser criteria
 
-            Connection con3 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con3 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             Statement ps3 = con3.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_combined_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
@@ -146,7 +146,7 @@ public class SaveCombinedSearchCriteria {
             if (rs3.isBeforeFirst()) {
                 while (!rs3.isLast()) {
                     rs3.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH_CRITERIA";
@@ -176,7 +176,7 @@ public class SaveCombinedSearchCriteria {
             if (natureObject != null && natureObject.equalsIgnoreCase("Sites")) {
                 long maxIdNode = MaxIdNode(name);
 
-                Connection con2 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                Connection con2 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                 Statement ps2 = con2.createStatement();
 
                 String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH";
@@ -196,7 +196,7 @@ public class SaveCombinedSearchCriteria {
                 ps2.close();
                 con2.close();
 
-                Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                 Statement ps1 = con1.createStatement();
 
                 SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH_CRITERIA";
@@ -237,7 +237,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            Connection con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             Statement ps = con.createStatement();
 
             String SQL = "SELECT FIRST_VALUE " + " FROM EUNIS_SAVE_COMBINED_SEARCH_CRITERIA " + " WHERE CRITERIA_NAME ='" + criteria
@@ -272,7 +272,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT MAX(ID_NODE) " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME ='" + criteria + "' "
@@ -311,7 +311,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT MAX(ID_NODE) " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME ='" + criteria + "' "
@@ -349,7 +349,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT NODE_TYPE " + " FROM eunis_combined_search " + " WHERE ID_SESSION='" + idsession + "' "
@@ -386,7 +386,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             // for first natureobject
@@ -448,7 +448,7 @@ public class SaveCombinedSearchCriteria {
             con.close();
             rs.close();
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             // for others natureobject
@@ -544,7 +544,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
@@ -604,7 +604,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME='" + criterianame + "' ";
@@ -619,7 +619,7 @@ public class SaveCombinedSearchCriteria {
                         // is not SourceDB
                         if (!rs.getString("ID_NODE").equalsIgnoreCase(
                                 new Long(MaxIdNode(rs.getString("criteria_name"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD)).toString())) {
-                            Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                             Statement ps1 = con1.createStatement();
 
                             String SQL1 = "INSERT INTO eunis_combined_search";
@@ -636,7 +636,7 @@ public class SaveCombinedSearchCriteria {
                             con1.close();
                         }
                     } else {
-                        Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                         Statement ps1 = con1.createStatement();
 
                         String SQL1 = "INSERT INTO eunis_combined_search";
@@ -689,7 +689,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH_CRITERIA " + " WHERE CRITERIA_NAME='" + criterianame + "' ";
@@ -703,7 +703,7 @@ public class SaveCombinedSearchCriteria {
                         // is not SourceDB
                         if (!rs.getString("ID_NODE").equalsIgnoreCase(
                                 new Long(MaxIdNode(rs.getString("criteria_name"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD)).toString())) {
-                            Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                             Statement ps1 = con1.createStatement();
 
                             String SQL1 = "INSERT INTO eunis_combined_search_criteria";
@@ -723,7 +723,7 @@ public class SaveCombinedSearchCriteria {
                             con1.close();
                         }
                     } else {
-                        Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                         Statement ps1 = con1.createStatement();
 
                         String SQL1 = "INSERT INTO eunis_combined_search_criteria";
@@ -769,7 +769,7 @@ public class SaveCombinedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM EUNIS_SAVE_COMBINED_SEARCH" + " WHERE USERNAME = '" + user + "'";

@@ -83,7 +83,7 @@ public class SaveAdvancedSearchCriteria {
         try {
             Class.forName(SQL_DRV);
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_advanced_search " + " WHERE ID_SESSION = '" + idSession + "' "
@@ -98,7 +98,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO eunis_save_advanced_search";
@@ -126,7 +126,7 @@ public class SaveAdvancedSearchCriteria {
 
             // inser criteria
 
-            Connection con3 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con3 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             Statement ps3 = con3.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
@@ -136,7 +136,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs3.isBeforeFirst()) {
                 while (!rs3.isLast()) {
                     rs3.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO eunis_save_advanced_search_criteria";
@@ -183,7 +183,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT NODE_TYPE " + " FROM eunis_advanced_search " + " WHERE ID_SESSION='" + idsession + "' "
@@ -216,7 +216,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION='" + idSession + "' "
@@ -274,7 +274,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
@@ -328,7 +328,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE CRITERIA_NAME='" + criterianame + "' "
@@ -339,7 +339,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL1 = "INSERT INTO eunis_advanced_search";
@@ -390,7 +390,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search_criteria " + " WHERE CRITERIA_NAME='" + criterianame + "' "
@@ -401,7 +401,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                     Statement ps1 = con1.createStatement();
 
                     String SQL1 = "INSERT INTO eunis_advanced_search_criteria";
@@ -445,7 +445,7 @@ public class SaveAdvancedSearchCriteria {
 
         try {
             Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM eunis_save_advanced_search" + " WHERE USERNAME = '" + user + "'";

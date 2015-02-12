@@ -414,7 +414,7 @@ public final class SessionManager implements java.io.Serializable {
             // update last login date
             try {
                 Class.forName(JDBC_DRV);
-                Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR,
+                Connection conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL, JDBC_USR,
                         JDBC_PWD);
                 PreparedStatement ps = null;
 
@@ -446,7 +446,7 @@ public final class SessionManager implements java.io.Serializable {
 
                 try {
                     Class.forName(JDBC_DRV);
-                    Connection conn = DriverManager.getConnection(JDBC_URL,
+                    Connection conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL,
                             JDBC_USR, JDBC_PWD);
                     PreparedStatement ps = conn.prepareStatement(
                     "INSERT INTO eunis_session_log (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");

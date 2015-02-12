@@ -36,7 +36,7 @@ public abstract class MySqlBaseDao {
             String dbPass = props.getString("mysql.password");
 
             Class.forName(dbDriver);
-            conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(dbUrl, dbUser, dbPass);
         } catch (Throwable e) {
             System.err.println(e.getMessage());
         }

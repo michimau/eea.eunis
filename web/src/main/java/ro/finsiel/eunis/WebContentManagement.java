@@ -571,7 +571,7 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
@@ -653,7 +653,7 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
@@ -880,7 +880,7 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             InputStream is = this.getClass().getClassLoader().getResourceAsStream(
                     DATA_FILE_NAME);

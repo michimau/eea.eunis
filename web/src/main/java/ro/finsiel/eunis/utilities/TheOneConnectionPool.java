@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -33,7 +34,7 @@ public class TheOneConnectionPool {
         return dataSource;
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() throws SQLException{
         try {
             logger.debug("getConnection Invoked!");
             StackTraceElement[] ste = Thread.currentThread().getStackTrace();
@@ -49,7 +50,12 @@ public class TheOneConnectionPool {
                 logger.debug("which is invoked by " + ste[first]);
             }
 
-            return getDataSource().getConnection();
+            Connection c = getDataSource().getConnection();
+            if(c != null){
+                return c;
+            } else {
+                throw new SQLException("The connection pool could not return a connection");
+            }
         } catch (SQLException e) {
             logger.error(e,e);
             return null;
@@ -59,7 +65,7 @@ public class TheOneConnectionPool {
     /**
      * @deprecated All calls like this should be replaced by the simple getConnection() call and all the parameters should be removed from the initial code.
      */
-    public static Connection getConnection(String sql_url, String sql_usr, String sql_pwd) {
+    public static Connection getConnection(String sql_url, String sql_usr, String sql_pwd) throws SQLException {
         return getConnection();
     }
 }

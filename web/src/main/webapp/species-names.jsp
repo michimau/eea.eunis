@@ -213,12 +213,8 @@
                                   </option>
                                   <%
                                     // List of languages
-                                     String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                                     String SQL_URL = application.getInitParameter("JDBC_URL");
-                                     String SQL_USR = application.getInitParameter("JDBC_USR");
-                                     String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-                                    Iterator it = SpeciesSearchUtility.findAllLanguagesWithVernacularNames(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD).iterator();
+                                    Iterator it = SpeciesSearchUtility.findAllLanguagesWithVernacularNames().iterator();
                                     while (it.hasNext())
                                     {
                                       String language = (String)it.next();%>

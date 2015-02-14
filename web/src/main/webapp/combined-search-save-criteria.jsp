@@ -51,11 +51,6 @@
     </script>
   </head>
   <%
-  // Set the database connection parameters
-    String SQL_DRV = application.getInitParameter("JDBC_DRV");
-    String SQL_URL = application.getInitParameter("JDBC_URL");
-    String SQL_USR = application.getInitParameter("JDBC_USR");
-    String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
     String descr = (request.getParameter("description") == null ? "" : request.getParameter("description"));
     // fromWhere - in witch jsp page the save is done.
@@ -101,11 +96,7 @@
                                                                       request.getParameter("username"),
                                                                       descr,
                                                                       fromWhere,
-                                                                      SQL_DRV,
-                                                                      SQL_URL,
-                                                                      SQL_USR,
-                                                                      SQL_PWD,
-                                                                      SourceDB);
+               SourceDB);
      saveWithSuccess = sal.SaveCriteria();
   }
   %>

@@ -44,20 +44,14 @@
 	            String expand = Utilities.formatString( request.getParameter( "expand" ), "" );
 	            String genus = Utilities.formatString( request.getParameter( "genus" ), "" );
 
-	            String SQL_DRV = application.getInitParameter("JDBC_DRV");
-	            String SQL_URL = application.getInitParameter("JDBC_URL");
-	            String SQL_USR = application.getInitParameter("JDBC_USR");
-	            String SQL_PWD = application.getInitParameter("JDBC_PWD");
-	            
 	            SQLUtilities sqlc = new SQLUtilities();
-        		sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-        		
+        		sqlc.Init();
+
         		Connection con = null;
 	            
 	            try
             	{
-	            	Class.forName( SQL_DRV );
-              		con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+              		con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 	            %>
 	
 	            	<%=Utilities.generateSpeciesTaxonomicTree("", expand, genus, true, con, sqlc, cm)%>
@@ -66,13 +60,14 @@
                 	<%=cm.cmsTitle("Hide sublevels")%>
 	            
 	            <%
-	            	con.close();	
             	}
             	catch ( Exception e )
             	{
               		e.printStackTrace();
               		return;
-            	}
+            	} finally {
+                    SQLUtilities.closeAll(con, null, null);
+                }
 	            %>
 
 <!-- END MAIN CONTENT -->

@@ -5,13 +5,14 @@ package eionet.eunis.rdf;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import eionet.eunis.util.sql.ConnectionUtil;
 import eionet.rdfexport.RDFExportService;
 import eionet.rdfexport.RDFExportServiceImpl;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
  * @author Risto Alt
@@ -42,14 +43,16 @@ public class RdfExporter {
                 i++;
             }
 
+            Connection con = null;
+            FileOutputStream fos = null;
             try {
                 ResourceBundle props = ResourceBundle.getBundle("rdfexport");
                 String dir = props.getString("files.dest.dir");
 
                 File file = new File(dir, table + ".rdf");
-                FileOutputStream fos = new FileOutputStream(file);
+                fos = new FileOutputStream(file);
 
-                Connection con = ConnectionUtil.getSimpleConnection();
+                con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 Properties properties = new Properties();
                 properties.load(RdfExporter.class.getClassLoader().getResourceAsStream("rdfexport.properties"));
                 RDFExportService rdfExportService = new RDFExportServiceImpl(fos, con, properties);
@@ -61,6 +64,15 @@ public class RdfExporter {
                 System.out.println("Successfully exported to: " + dir + "/" + table + ".rdf");
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                SQLUtilities.closeAll(con, null, null);
+                if(fos!=null){
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

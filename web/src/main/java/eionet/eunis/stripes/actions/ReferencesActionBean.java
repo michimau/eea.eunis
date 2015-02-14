@@ -75,6 +75,10 @@ public class ReferencesActionBean extends AbstractStripesAction {
             dcIndex = dao.getDcIndex(idref);
             dcAttributes = dao.getDcAttributes(idref);
 
+            if (dcIndex == null) {
+                return new ErrorResolution(404);
+            }
+
             // Get the parent reference
             if(dcIndex.getReference() != null) {
                 parent = dao.getDcIndex(dcIndex.getReference());
@@ -89,9 +93,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
             if (dcIndex != null && dcIndex.getTitle() != null) {
                 btrail += "," + dcIndex.getTitle();
             }
-            if (dcIndex == null) {
-                return new ErrorResolution(404);
-            }
+
             try {
                 ReferencesDomain refDomain = new ReferencesDomain(new ReferencesSearchCriteria[0], new AbstractSortCriteria[0]);
                 speciesByName = refDomain.getSpeciesForAReference(idref);

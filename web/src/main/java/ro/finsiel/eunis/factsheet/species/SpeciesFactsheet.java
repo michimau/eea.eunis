@@ -244,7 +244,7 @@ public class SpeciesFactsheet {
             ex.printStackTrace();
         }
 
-        if (countriesList == null || !countriesList.isEmpty()) {
+        if (countriesList != null && !countriesList.isEmpty()) {
             ret += " it is geographically distrubuted among the following countries/areas: " + countries;
         }
         return ret;

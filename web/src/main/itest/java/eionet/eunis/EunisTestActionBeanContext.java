@@ -16,18 +16,12 @@ import eionet.eunis.stripes.EunisActionBeanContext;
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public class EunisTestActionBeanContext extends EunisActionBeanContext {
-	
-	
-	private static final String SQL_DRIVER_NAME = "org.gjt.mm.mysql.Driver";
-	private static final String SQL_DRIVER_URL = "jdbc:mysql://localhost/eunis?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8";
-	private static final String SQL_DRIVER_USERNAME = "eunisuser";
-	private static final String SQL_DRIVER_PASSWORD = "password";
 
 	private static final SQLUtilities SQL_UTILS;
 	
 	static {
 		SQL_UTILS = new SQLUtilities();
-		SQL_UTILS.Init(SQL_DRIVER_NAME, SQL_DRIVER_URL, SQL_DRIVER_USERNAME, SQL_DRIVER_PASSWORD);
+		SQL_UTILS.Init();
 	}
 	
 	

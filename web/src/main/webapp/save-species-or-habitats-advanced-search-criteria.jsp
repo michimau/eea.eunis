@@ -45,16 +45,6 @@
     NatureObject="";
   }
 
-  // Set the database connection parameters
-  String SQL_DRV;
-  String SQL_URL;
-  String SQL_USR;
-  String SQL_PWD;
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-
   String descr = (request.getParameter("description")==null ? "" : request.getParameter("description"));
   // fromWhere - in witch jsp page the save is done.
   String fromWhere=(request.getParameter("fromWhere")==null ? "" : request.getParameter("fromWhere"));
@@ -73,11 +63,8 @@
                                                                   NatureObject,
                                                                   request.getParameter("username"),
                                                                   descr,
-                                                                  fromWhere,
-                                                                  SQL_DRV,
-                                                                  SQL_URL,
-                                                                  SQL_USR,
-                                                                  SQL_PWD);
+                                                                  fromWhere
+   );
   saveWithSuccess = sal.SaveCriteria();
 }
 %>

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import ro.finsiel.eunis.dataimport.parsers.CallbackSAXParser;
-import ro.finsiel.eunis.dataimport.parsers.Natura2000ImportParser;
 import ro.finsiel.eunis.dataimport.parsers.Natura2000ParserCallbackV2;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -45,7 +44,7 @@ public class Natura2000Importer {
 
                 SQLUtilities sqlUtilities = new SQLUtilities();
 
-                sqlUtilities.Init(dbDriver, dbUrl, dbUser, dbPass);
+                sqlUtilities.Init();
 
                 List<Exception> errors = new ArrayList<Exception>();
                 int cnt = 1;

@@ -113,7 +113,7 @@ public class ImportParser extends DefaultHandler {
         }
     }
 
-    public void execute(String filePath, String table, String sqlDrv, String sqlUser, String sqlPwd, String sqlUrl) throws Exception {
+    public void execute(String filePath, String table) throws Exception {
 
         this.filePath = filePath;
 
@@ -121,8 +121,7 @@ public class ImportParser extends DefaultHandler {
         ResultSet rs = null;
 
         try {
-            Class.forName(sqlDrv);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(sqlUrl, sqlUser, sqlPwd);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             st = con.createStatement();
             rs = st.executeQuery("SELECT * FROM " + table + " limit 1");

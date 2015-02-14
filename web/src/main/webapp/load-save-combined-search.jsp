@@ -25,17 +25,7 @@
 
   String criterianame = request.getParameter("criterianame");
 
-  // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
   int SQL_LIMIT=1000;
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   // if NatureObject is valid
   if(!NatureObject.equalsIgnoreCase(""))
@@ -45,15 +35,14 @@
     // Set SourceDB for NatureObject = 'Sites'
     if (NatureObject.equalsIgnoreCase("sites"))
     {
-      tsas.SetSourceDB(ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.getSourceDB(criterianame,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD));
+      tsas.SetSourceDB(ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.getSourceDB(criterianame));
     }
     tsas.SetSQLLimit(SQL_LIMIT);
-    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
     // Delete old data by IdSession
     tsas.DeleteSessionData(IdSession);
     // Insert the saved search data
-    ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.insertEunisCombinedSearch(IdSession,criterianame,NatureObject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-    ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.insertEunisCombinedSearchCriteria(IdSession,criterianame,NatureObject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+    ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.insertEunisCombinedSearch(IdSession,criterianame,NatureObject);
+    ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria.insertEunisCombinedSearchCriteria(IdSession,criterianame,NatureObject);
   }
 %>
 

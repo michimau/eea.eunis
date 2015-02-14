@@ -7,9 +7,9 @@ package ro.finsiel.eunis.search.combined;
  */
 
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -33,15 +33,6 @@ public class SaveCombinedSearchCriteria {
     // sites source data set
     private String SourceDB = null;
 
-    // JDBC driver.
-    private String SQL_DRV = "";
-    // JDBC url.
-    private String SQL_URL = "";
-    // JDBC user.
-    private String SQL_USR = "";
-    // JDBC password.
-    private String SQL_PWD = "";
-
     /**
      * Class constructor.
      * @param idsession id session
@@ -49,31 +40,19 @@ public class SaveCombinedSearchCriteria {
      * @param username user name
      * @param description search description
      * @param fromWhere page name
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      * @param SourceDB sites source data set
      */
     public SaveCombinedSearchCriteria(String idsession,
-            String natureobject,
-            String username,
-            String description,
-            String fromWhere,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD,
-            String SourceDB) {
+                                      String natureobject,
+                                      String username,
+                                      String description,
+                                      String fromWhere,
+                                      String SourceDB) {
         this.idSession = idsession;
         this.natureObject = natureobject;
         this.userName = username;
         this.description = description;
         this.fromWhere = fromWhere;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
-        this.SQL_PWD = SQL_PWD;
         this.SourceDB = SourceDB;
     }
 
@@ -90,9 +69,7 @@ public class SaveCombinedSearchCriteria {
         boolean saveWithSuccess = false;
 
         try {
-            Class.forName(SQL_DRV);
-
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_combined_search " + " WHERE ID_SESSION = '" + idSession + "' ";
@@ -107,7 +84,7 @@ public class SaveCombinedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH";
@@ -135,7 +112,7 @@ public class SaveCombinedSearchCriteria {
 
             // inser criteria
 
-            Connection con3 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con3 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             Statement ps3 = con3.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_combined_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
@@ -146,7 +123,7 @@ public class SaveCombinedSearchCriteria {
             if (rs3.isBeforeFirst()) {
                 while (!rs3.isLast()) {
                     rs3.next();
-                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH_CRITERIA";
@@ -174,9 +151,9 @@ public class SaveCombinedSearchCriteria {
 
             // insert SourceDB (if search begin with sites nature object)
             if (natureObject != null && natureObject.equalsIgnoreCase("Sites")) {
-                long maxIdNode = MaxIdNode(name);
+                long maxIdNode = getMaxIdNode(name);
 
-                Connection con2 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                Connection con2 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 Statement ps2 = con2.createStatement();
 
                 String SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH";
@@ -196,7 +173,7 @@ public class SaveCombinedSearchCriteria {
                 ps2.close();
                 con2.close();
 
-                Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 Statement ps1 = con1.createStatement();
 
                 SQL = "INSERT INTO EUNIS_SAVE_COMBINED_SEARCH_CRITERIA";
@@ -224,20 +201,16 @@ public class SaveCombinedSearchCriteria {
 
     /**
      * Return source data set for sites.
+     *
      * @param criteria criteria name (from EUNIS_SAVE_COMBINED_SEARCH_CRITERIA table)
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      * @return sites source data set.
      */
-    public static String getSourceDB(String criteria, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static String getSourceDB(String criteria) {
         String sourceDB = "";
-        long maxIdNode = MaxIdNode(criteria, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        long maxIdNode = MaxIdNode(criteria);
 
         try {
-            Class.forName(SQL_DRV);
-            Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             Statement ps = con.createStatement();
 
             String SQL = "SELECT FIRST_VALUE " + " FROM EUNIS_SAVE_COMBINED_SEARCH_CRITERIA " + " WHERE CRITERIA_NAME ='" + criteria
@@ -263,7 +236,7 @@ public class SaveCombinedSearchCriteria {
      * @param criteria criteria name
      * @return max value.
      */
-    private long MaxIdNode(String criteria) {
+    private long getMaxIdNode(String criteria) {
         String SQL = "";
         Connection con = null;
         Statement ps = null;
@@ -271,8 +244,7 @@ public class SaveCombinedSearchCriteria {
         long result = 0;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT MAX(ID_NODE) " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME ='" + criteria + "' "
@@ -295,14 +267,11 @@ public class SaveCombinedSearchCriteria {
 
     /**
      * Return max value of ID_NODE field from EUNIS_SAVE_COMBINED_SEARCH table for a criteria name.
+     *
      * @param criteria criteria name
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      * @return max value
      */
-    private static long MaxIdNode(String criteria, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    private static long MaxIdNode(String criteria) {
         String SQL = "";
         Connection con = null;
         Statement ps = null;
@@ -310,8 +279,7 @@ public class SaveCombinedSearchCriteria {
         long result = 0;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT MAX(ID_NODE) " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME ='" + criteria + "' "
@@ -348,8 +316,7 @@ public class SaveCombinedSearchCriteria {
         String result = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT NODE_TYPE " + " FROM eunis_combined_search " + " WHERE ID_SESSION='" + idsession + "' "
@@ -385,8 +352,7 @@ public class SaveCombinedSearchCriteria {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             // for first natureobject
@@ -448,7 +414,7 @@ public class SaveCombinedSearchCriteria {
             con.close();
             rs.close();
 
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             // for others natureobject
@@ -521,19 +487,11 @@ public class SaveCombinedSearchCriteria {
     /**
      * Expand, in a jsp page, list of saved combined searches made by a user.
      * @param natureObject nature object
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      * @param userName user name
      * @param fromWhere page name
      * @return list of saved searches
      */
     public static String ExpandSaveCriteriaForThisPage(String natureObject,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD,
             String userName,
             String fromWhere) {
         String result = "";
@@ -543,8 +501,7 @@ public class SaveCombinedSearchCriteria {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
@@ -559,7 +516,7 @@ public class SaveCombinedSearchCriteria {
                     String sourceDB = "";
 
                     if (natureObject != null && natureObject.equalsIgnoreCase("Sites")) {
-                        sourceDB = getSourceDB(rs.getString("CRITERIA_NAME"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                        sourceDB = getSourceDB(rs.getString("CRITERIA_NAME"));
                         sourceDB = Utilities.removeQuotes(sourceDB);
                         sourceDB = sourceDB.replaceAll(" ", "");
                     }
@@ -575,6 +532,8 @@ public class SaveCombinedSearchCriteria {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
         return result;
     }
@@ -585,26 +544,17 @@ public class SaveCombinedSearchCriteria {
      * @param idsession id session
      * @param criterianame criteria name
      * @param natureObject nature object
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      */
     public static void insertEunisCombinedSearch(String idsession,
-            String criterianame,
-            String natureObject,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                                 String criterianame,
+                                                 String natureObject) {
         String SQL = "";
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH " + " WHERE CRITERIA_NAME='" + criterianame + "' ";
@@ -618,8 +568,8 @@ public class SaveCombinedSearchCriteria {
                     if (natureObject != null && natureObject.equalsIgnoreCase("Sites")) {
                         // is not SourceDB
                         if (!rs.getString("ID_NODE").equalsIgnoreCase(
-                                new Long(MaxIdNode(rs.getString("criteria_name"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD)).toString())) {
-                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                                new Long(MaxIdNode(rs.getString("criteria_name"))).toString())) {
+                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                             Statement ps1 = con1.createStatement();
 
                             String SQL1 = "INSERT INTO eunis_combined_search";
@@ -636,7 +586,7 @@ public class SaveCombinedSearchCriteria {
                             con1.close();
                         }
                     } else {
-                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         Statement ps1 = con1.createStatement();
 
                         String SQL1 = "INSERT INTO eunis_combined_search";
@@ -654,12 +604,10 @@ public class SaveCombinedSearchCriteria {
                     }
                 }
             }
-
-            rs.close();
-            ps.close();
-            con.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
     }
 
@@ -669,27 +617,18 @@ public class SaveCombinedSearchCriteria {
      * @param idsession id session
      * @param criterianame criteria name
      * @param natureObject nature object
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      */
 
     public static void insertEunisCombinedSearchCriteria(String idsession,
-            String criterianame,
-            String natureObject,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                                         String criterianame,
+                                                         String natureObject) {
         String SQL = "";
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM EUNIS_SAVE_COMBINED_SEARCH_CRITERIA " + " WHERE CRITERIA_NAME='" + criterianame + "' ";
@@ -702,8 +641,8 @@ public class SaveCombinedSearchCriteria {
                     if (natureObject != null && natureObject.equalsIgnoreCase("Sites")) {
                         // is not SourceDB
                         if (!rs.getString("ID_NODE").equalsIgnoreCase(
-                                new Long(MaxIdNode(rs.getString("criteria_name"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD)).toString())) {
-                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                                new Long(MaxIdNode(rs.getString("criteria_name"))).toString())) {
+                            Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                             Statement ps1 = con1.createStatement();
 
                             String SQL1 = "INSERT INTO eunis_combined_search_criteria";
@@ -723,7 +662,7 @@ public class SaveCombinedSearchCriteria {
                             con1.close();
                         }
                     } else {
-                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         Statement ps1 = con1.createStatement();
 
                         String SQL1 = "INSERT INTO eunis_combined_search_criteria";
@@ -768,8 +707,7 @@ public class SaveCombinedSearchCriteria {
         Long result = new Long(0);
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM EUNIS_SAVE_COMBINED_SEARCH" + " WHERE USERNAME = '" + user + "'";

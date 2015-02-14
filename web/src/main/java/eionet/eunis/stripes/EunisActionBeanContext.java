@@ -127,10 +127,10 @@ public class EunisActionBeanContext extends ActionBeanContext {
     /**
      * @return sql utils
      */
-    public SQLUtilities getSqlUtilities() {
+    public synchronized SQLUtilities getSqlUtilities() {
         if (sqlUtil == null) {
             sqlUtil = new SQLUtilities();
-            sqlUtil.Init(getJdbcDriver(), getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+            sqlUtil.Init();
         }
         return sqlUtil;
     }

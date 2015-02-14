@@ -268,7 +268,7 @@ public class HabitatImportParser extends DefaultHandler {
         int maxIdInt = 0;
 
         if (maxId != null && maxId.length() > 0) {
-            maxIdInt = new Integer(maxId).intValue();
+            maxIdInt = new Integer(maxId);
         }
 
         return maxIdInt;
@@ -282,17 +282,17 @@ public class HabitatImportParser extends DefaultHandler {
 
             ps = con.prepareStatement(query);
             ps.executeUpdate();
+            ps.close();
 
             query = "DELETE FROM chm62edt_nature_object WHERE TYPE = 'HABITAT'";
             ps = con.prepareStatement(query);
             ps.executeUpdate();
+            ps.close();
 
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         } finally {
-            if (ps != null) {
-                ps.close();
-            }
+            SQLUtilities.closeAll(null, ps, null);
         }
     }
 
@@ -311,18 +311,13 @@ public class HabitatImportParser extends DefaultHandler {
                 String originalCode = rset.getString("ORIGINAL_CODE");
                 int idNatureObject = rset.getInt("ID_NATURE_OBJECT");
 
-                ret.put(originalCode, new Integer(idNatureObject));
+                ret.put(originalCode, idNatureObject);
             }
 
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (rset != null) {
-                rset.close();
-            }
+            SQLUtilities.closeAll(null, stmt, rset);
         }
         return ret;
     }
@@ -344,12 +339,7 @@ public class HabitatImportParser extends DefaultHandler {
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (rset != null) {
-                rset.close();
-            }
+            SQLUtilities.closeAll(null, stmt, rset);
         }
     }
 }

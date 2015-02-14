@@ -42,14 +42,8 @@
 		                <select id="table" name="table" title="Table names">
 		                	<option value=""></option>
 		                <%
-		                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
-		                    String SQL_URL = application.getInitParameter("JDBC_URL");
-		                    String SQL_USR = application.getInitParameter("JDBC_USR");
-		                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-		
 		                    SQLUtilities sqlc = new SQLUtilities();
-		                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-		                    
+
 		                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
 		                	for(Iterator it = tableNames.iterator(); it.hasNext();){
 			                	String tableName = (String) it.next();%>

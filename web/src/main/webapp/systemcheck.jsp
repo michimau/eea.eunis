@@ -17,6 +17,7 @@
                  java.sql.DriverManager,
                  java.sql.ResultSet"%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -30,21 +31,17 @@
 
 <%
   String SQL = "SELECT * FROM eunis_web_content LIMIT 0,10";
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-  Connection con;
-  PreparedStatement ps;
+  Connection con = null;
+  PreparedStatement ps = null;
+  ResultSet rs = null;
 
   try
   {
-    Class.forName(SQL_DRV);
-    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
     if (SQL.length() > 0)
     {
-      ResultSet rs;
+
       ps = con.prepareStatement(SQL);
       rs = ps.executeQuery();
       if (rs.next()) {
@@ -57,7 +54,10 @@
   catch (Exception e)
   {
     response.sendError( 500 );
+  } finally {
+      SQLUtilities.closeAll(con, ps, rs);
   }
+
   String hide = request.getParameter("hide");
   if (null != hide && hide.equalsIgnoreCase("true"))
   {

@@ -1,7 +1,6 @@
 package ro.finsiel.eunis.dataimport;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,23 +11,13 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 
 public class TabScripts {
 
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
-
     // Is executed from command line
     private boolean cmd = false;
 
     public TabScripts() {
     }
 
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL, String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD,
-            boolean cmd) {
-        SQL_DRV = SQL_DRIVER_NAME;
-        SQL_URL = SQL_DRIVER_URL;
-        SQL_USR = SQL_DRIVER_USERNAME;
-        SQL_PWD = SQL_DRIVER_PASSWORD;
+    public void Init(boolean cmd) {
         this.cmd = cmd;
     }
 
@@ -42,10 +31,9 @@ public class TabScripts {
         SQLUtilities sqlc = new SQLUtilities();
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sqlc.Init();
 
             EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
                     + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
@@ -166,9 +154,8 @@ public class TabScripts {
         SQLUtilities sqlUtil = new SQLUtilities();
         try {
             // Initialize connection.
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            sqlUtil.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            sqlUtil.Init();
 
             // Log start message.
             EunisUtil .writeLogMessage("LINKED DATA tab generation started. Time: "
@@ -201,9 +188,8 @@ public class TabScripts {
 
         try {
             // Initialize connection.
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            sqlUtil.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            sqlUtil.Init();
 
             // Log start message.
             EunisUtil .writeLogMessage("CONSERVATION STATUS tab generation started. Time: "
@@ -236,10 +222,9 @@ public class TabScripts {
         SQLUtilities sqlc = new SQLUtilities();
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sqlc.Init();
 
             EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
                     + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
@@ -320,10 +305,9 @@ public class TabScripts {
         SQLUtilities sqlc = new SQLUtilities();
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sqlc.Init();
 
             EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
                     + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
@@ -634,8 +618,7 @@ public class TabScripts {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             ps = con.prepareStatement("UPDATE chm62edt_tab_page_species SET `REFERENCES`='N'");
             ps.executeUpdate();

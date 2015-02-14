@@ -46,19 +46,13 @@
     }
   }
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
   Connection con = null;
   PreparedStatement ps = null;
   ResultSet rs = null;
 
   try
   {
-      Class.forName(SQL_DRV);
-      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
       String SQL="SELECT COUNT(*) from eunis_web_content";
       ps = con.prepareStatement(SQL);

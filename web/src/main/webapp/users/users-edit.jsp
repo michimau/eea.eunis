@@ -200,24 +200,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
       //-->
   </script>
 <%
-  // Set database parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-  // If some of them is null, the wanted database operation isn't made
-  if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
-  {
-%>
-    <%=cm.cmsText("error_web_xml_missing_required_values")%>
-<%
-    return;
-  }
 
 String message = "";
 //Request parameters
@@ -252,7 +234,7 @@ if(users_operation.equalsIgnoreCase("edit_users"))
         // set newUserName to lower case
         String goodNewUserName = request.getParameter("newUserName").toLowerCase();
         // Update user
-        boolean editWithSuccess = UsersUtility.editUser(SessionManager.getUsername(),userName,firstName,lastName,mail,loginDate,goodNewUserName,request,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+        boolean editWithSuccess = UsersUtility.editUser(SessionManager.getUsername(),userName,firstName,lastName,mail,loginDate,goodNewUserName,request);
         if(editWithSuccess) message = cm.cms("users_edit_17");
         else message = "<span color=\"red\">"+cm.cms("failed_to_update_user")+"</span>";
 
@@ -269,7 +251,7 @@ if(users_operation.equalsIgnoreCase("edit_users"))
           && UsersUtility.existUserName(request.getParameter("userName")))
        {
            // delete the user
-           boolean deleteWithSucces = UsersUtility.deleteUser(userName,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+           boolean deleteWithSucces = UsersUtility.deleteUser(userName);
            if(deleteWithSucces) message = cm.cms("users_edit_20");
            else message = "<span color=\"red\">"+cm.cms("failed_to_delete_user")+"</span>";
        }  else message = "<span color=\"red\">"+cm.cms("failed_to_delete_user")+"</span>";
@@ -300,11 +282,11 @@ if(users_operation.equalsIgnoreCase("edit_users"))
           // set userName to lower case
           String goodUserName = request.getParameter("userName").toLowerCase();
            // Add user
-           boolean addUserSuccess = UsersUtility.addUsers(goodUserName,firstName,lastName,mail,loginDate,SessionManager.getUsername(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+           boolean addUserSuccess = UsersUtility.addUsers(goodUserName,firstName,lastName,mail,loginDate,SessionManager.getUsername());
            boolean addRolesSuccess = false;
            if(addUserSuccess){
              // Add roles for user
-             addRolesSuccess = UsersUtility.addRolesForUser(goodUserName,request,SessionManager.getUsername(),SQL_URL,SQL_USR,SQL_PWD);
+             addRolesSuccess = UsersUtility.addRolesForUser(goodUserName,request,SessionManager.getUsername());
            }
 
 

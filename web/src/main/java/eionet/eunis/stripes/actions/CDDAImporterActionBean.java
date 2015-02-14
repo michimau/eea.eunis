@@ -97,11 +97,7 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             } finally {
                 // close connection
-                try {
-                    con.close();
-                } catch (SQLException se) {
-                    se.printStackTrace();
-                }
+                SQLUtilities.closeAll(con, null, null);
             }
         } else {
             handleEunisException(

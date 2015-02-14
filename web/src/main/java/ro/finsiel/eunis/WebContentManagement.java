@@ -30,6 +30,7 @@ import ro.finsiel.eunis.jrfTables.WebContentPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.util.Pair;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
 /**
@@ -555,23 +556,18 @@ public class WebContentManagement implements java.io.Serializable {
      * @param modifyAllIdentical - Deletes the historic versions of the page.
      */
     public boolean savePageContentJDBC(String idPage,
-            final String content,
-            final String description,
-            final String lang,
-            final short contentLength,
-            final String username,
-            final boolean modifyAllIdentical,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                       final String content,
+                                       final String description,
+                                       final String lang,
+                                       final short contentLength,
+                                       final String username,
+                                       final boolean modifyAllIdentical) {
         boolean result = false;
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
@@ -579,6 +575,7 @@ public class WebContentManagement implements java.io.Serializable {
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
+                ps.close();
             }
 
             if (lang.equalsIgnoreCase("EN")) {
@@ -601,6 +598,7 @@ public class WebContentManagement implements java.io.Serializable {
                 ps.setString(6, username);
             }
             ps.executeUpdate();
+            ps.close();
 
             // Do not reload all language again, just modify the current key.
             // cacheHTMLContent( this.language );
@@ -623,37 +621,23 @@ public class WebContentManagement implements java.io.Serializable {
             e.printStackTrace();
             result = false;
         } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
 
     public boolean insertContentJDBC(String idPage,
-            final String content,
-            final String description,
-            final String lang,
-            final String username,
-            final boolean modifyAllIdentical,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                     final String content,
+                                     final String description,
+                                     final String lang,
+                                     final String username,
+                                     final boolean modifyAllIdentical) {
         boolean result = false;
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
@@ -661,6 +645,7 @@ public class WebContentManagement implements java.io.Serializable {
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
+                ps.close();
             }
 
             ps = con.prepareStatement(
@@ -672,21 +657,13 @@ public class WebContentManagement implements java.io.Serializable {
             ps.setString(4, lang);
             ps.setString(5, username);
             ps.executeUpdate();
+
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
             result = false;
         } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -801,8 +778,8 @@ public class WebContentManagement implements java.io.Serializable {
                 row.setContent("");
                 row.setDescription("null");
                 row.setLang(code);
-                row.setLangStatus(new Short((short) 0));
-                row.setContentLength(new Short((short) 0));
+                row.setLangStatus((short) 0);
+                row.setContentLength((short) 0);
                 row.setRecordDate(new Timestamp(new Date().getTime()));
                 new WebContentDomain().save(row);
                 ret = true;
@@ -867,20 +844,15 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     public boolean importNewTexts(String description,
-            String lang,
-            String username,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                  String lang,
+                                  String username) {
         Connection con = null;
         PreparedStatement ps = null;
         BufferedReader input = null;
         String DATA_FILE_NAME = "new_texts.txt";
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             InputStream is = this.getClass().getClassLoader().getResourceAsStream(
                     DATA_FILE_NAME);
@@ -893,7 +865,7 @@ public class WebContentManagement implements java.io.Serializable {
             while ((line = input.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(line, "|");
 
-                if (st != null && st.countTokens() == 2) {
+                if (st.countTokens() == 2) {
                     String text = st.nextToken();
 
                     if (!new_ids.contains(text)) {
@@ -915,19 +887,12 @@ public class WebContentManagement implements java.io.Serializable {
             e.printStackTrace();
             return false;
         } finally {
+            SQLUtilities.closeAll(con, ps, null);
             try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
                 if (input != null) {
                     input.close();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            } catch (Exception ignore) { }
         }
 
     }

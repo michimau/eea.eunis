@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSessionListener;
 import ro.finsiel.eunis.Settings;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.util.Constants;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
 /**
@@ -76,53 +77,26 @@ public class CleanupSessionListener implements HttpSessionListener {
         // Clear the tables used for advanced and combined search...
         // System.out.println("Clearing temporary tables...");
 
-        String sqlDrv = session.getServletContext().getInitParameter("JDBC_DRV");
-        String sqlUrl = session.getServletContext().getInitParameter("JDBC_URL");
-        String sqlUsr = session.getServletContext().getInitParameter("JDBC_USR");
-        String sqlPwd = session.getServletContext().getInitParameter("JDBC_PWD");
+        Utilities.ClearSessionData(httpSessionEvent.getSession().getId());
 
-        if (!sqlDrv.equalsIgnoreCase("") && !sqlUrl.equalsIgnoreCase("")
-                && !sqlUrl.equalsIgnoreCase("") && !sqlUsr.equalsIgnoreCase("")) {
-            Utilities.ClearSessionData(httpSessionEvent.getSession().getId(),
-                    sqlDrv, sqlUrl, sqlUsr, sqlPwd);
-        } else {
-            System.out.println(
-                    "CleanupSessionListener::sessionDestroyed(...) - Warning: database connection info incorrect. Temp tables not cleaned.");
-        }
-
-        // log the session expiration within database
-        // log the login process to database
-        String JDBC_DRV = session.getServletContext().getInitParameter(
-                "JDBC_DRV");
-        String JDBC_URL = session.getServletContext().getInitParameter(
-                "JDBC_URL");
-        String JDBC_USR = session.getServletContext().getInitParameter(
-                "JDBC_USR");
-        String JDBC_PWD = session.getServletContext().getInitParameter(
-                "JDBC_PWD");
         long longTime = new Date().getTime();
         Connection conn = null;
+        PreparedStatement ps = null;
 
         try {
-            Class.forName(JDBC_DRV);
-            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
+            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             // System.out.println("Updating eunis_session_log table.");
-            PreparedStatement ps = conn.prepareStatement(
+            ps = conn.prepareStatement(
                     "UPDATE eunis_session_log SET START=START, END=? WHERE ID_SESSION=?");
 
             // Check MySQL manual (START=START because MySQL updates *only* first occurring timestamp *if* the value differs)
             ps.setTimestamp(1, new java.sql.Timestamp(longTime));
             ps.setString(2, sessionID);
             ps.executeUpdate();
-            ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (Exception e) {}
-            }
+            SQLUtilities.closeAll(conn, ps,  null);
         }
     }
 }

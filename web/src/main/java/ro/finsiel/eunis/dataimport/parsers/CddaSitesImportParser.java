@@ -309,6 +309,7 @@ public class CddaSitesImportParser extends DefaultHandler {
             }
 
             if (con != null) {
+                con.setAutoCommit(true);
                 con.close();
             }
         }

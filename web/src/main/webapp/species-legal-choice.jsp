@@ -48,13 +48,7 @@
     // Coming from form 1
     if (typeForm == LegalSearchCriteria.CRITERIA_SPECIES.intValue())
     {
-      // List of species related to a species group name
-      String SQL_DRV = application.getInitParameter("JDBC_DRV");
-      String SQL_URL = application.getInitParameter("JDBC_URL");
-      String SQL_USR = application.getInitParameter("JDBC_USR");
-      String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
-      results = SpeciesSearchUtility.findSpeciesFromGroup(formBean.getGroupName(), formBean.getScientificName(), expandFullNames,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+      results = SpeciesSearchUtility.findSpeciesFromGroup(formBean.getGroupName(), formBean.getScientificName(), expandFullNames);
     }
     Iterator it = results.iterator();
     %>

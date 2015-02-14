@@ -84,7 +84,7 @@ public class PostImportScripts extends HttpServlet {
                 } else {
 
                     SQLUtilities sql = new SQLUtilities();
-                    sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                    sql.Init();
 
                     if (sites != null && sites.equals("on")) {
                         sql.runPostImportSitesScript(false);
@@ -92,7 +92,7 @@ public class PostImportScripts extends HttpServlet {
 
                     TabScripts scripts = new TabScripts();
 
-                    scripts.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD, false);
+                    scripts.Init(false);
 
                     if (spiecesTab != null && spiecesTab.equals("on")) {
                         scripts.setTabSpecies();

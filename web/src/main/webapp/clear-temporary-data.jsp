@@ -57,12 +57,6 @@
                   <input type="submit" value="<%=cm.cmsPhrase("Clear temporary data")%>" title="<%=cm.cmsPhrase("Clear temporary data")%>" id="submit" name="submit" class="submitSearchButton" />
                 </form>
 <%
-    String SQL_DRV = application.getInitParameter("JDBC_DRV");
-    String SQL_URL = application.getInitParameter("JDBC_URL");
-    String SQL_USR = application.getInitParameter("JDBC_USR");
-    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-    // If some of them is null, the wanted database operation isn't made
-
     if(request.getParameter("submit") != null)
     {
       if(request.getParameter("submit").equalsIgnoreCase(cm.cmsPhrase("Clear temporary data")))
@@ -71,7 +65,7 @@
         try
         {
           // Delete all session data
-          result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+          result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData();
           if(!result)
           {
 %>
@@ -100,8 +94,7 @@
 
     try
     {
-      Class.forName(SQL_DRV);
-      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
       String SQL;
       // Find total number of rows containing temporary data detected in database

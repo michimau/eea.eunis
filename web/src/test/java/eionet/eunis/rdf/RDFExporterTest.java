@@ -9,7 +9,6 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
-import eionet.eunis.util.sql.ConnectionUtil;
 import eionet.rdfexport.RDFExportService;
 import eionet.rdfexport.RDFExportServiceImpl;
 
@@ -30,7 +29,7 @@ public class RDFExporterTest {
         props.setProperty("vocabulary", "http://eunis.eea.europa.eu/rdf/schema.rdf#");
         props.setProperty("xmlns.foaf", "http://xmlns.com/foaf/0.1/");
 
-        Connection con = ConnectionUtil.getSimpleConnection();
+        Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
 
         RDFExportService rdfExportService = new RDFExportServiceImpl(testOutput, con, props);
@@ -47,6 +46,7 @@ public class RDFExporterTest {
 
         String actual = testOutput.toString(UTF8_ENCODING);
         testOutput.close();
+        con.close();
 
         assertEquals(expected, actual);
     }

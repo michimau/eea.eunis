@@ -34,20 +34,28 @@ public class TheOneConnectionPool {
         return dataSource;
     }
 
+    /**
+     * Returns a DB connection from the c3p0 pool
+     * @return A DB connection
+     * @throws SQLException Mainly thrown if the pool cannot return a conneciton before timeout (see checkoutTimeout on c3p0's settings)
+     */
     public static Connection getConnection() throws SQLException{
         try {
-            logger.debug("getConnection Invoked!");
-            StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-            int first = 2;
-            if(ste[first].getClassName().endsWith("TheOneConnectionPool")){
-                first++;
-            }
+            if(logger.isDebugEnabled()) {
+                // the code below can list the calling class - useful to debug or monitor connection usage
+                logger.debug("getConnection Invoked!");
+                StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+                int first = 2;
+                if(ste[first].getClassName().endsWith("TheOneConnectionPool")){
+                    first++;
+                }
 
-            logger.debug("getConnection invoked from " + ste[first]);
+                logger.debug("getConnection invoked from " + ste[first]);
 
-            if(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) {
-                while(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) first++;
-                logger.debug("which is invoked by " + ste[first]);
+                if(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) {
+                    while(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) first++;
+                    logger.debug("which is invoked by " + ste[first]);
+                }
             }
 
             Connection c = getDataSource().getConnection();
@@ -57,8 +65,8 @@ public class TheOneConnectionPool {
                 throw new SQLException("The connection pool could not return a connection");
             }
         } catch (SQLException e) {
-            logger.error(e,e);
-            return null;
+            logger.error(e,e);  //just log the error, it could be that the calling class doesn't do it
+            throw e;
         }
     }
 

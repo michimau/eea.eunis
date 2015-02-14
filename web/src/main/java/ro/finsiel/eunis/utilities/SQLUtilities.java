@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
 import eionet.eunis.dto.DoubleDTO;
@@ -23,6 +24,9 @@ import eionet.eunis.dto.DoubleDTO;
  * User: ancai Date: 03.03.2005 Time: 15:35:37.
  */
 public class SQLUtilities {
+
+    private static final Logger logger = Logger.getLogger(SQLUtilities.class);
+
     private int SQL_LIMIT = 1000;
     private int resultCount = 0;
     private static final String INSERT_BOOKMARK =
@@ -261,7 +265,7 @@ public class SQLUtilities {
             return "";
         }
 
-        // System.out.println("SQL = " + SQL);
+        logger.debug("SQL = " + SQL);
 
         String result = "";
 
@@ -297,9 +301,9 @@ public class SQLUtilities {
     public void UpdateSQL(String SQL) {
 
         if (SQL == null || SQL.trim().length() <= 0) {
-            System.out.println("SQL is empty!");
+            logger.info("SQL is empty!");
         }
-        // System.out.println("SQL = " + SQL);
+        // logger.debug("SQL is empty!");
 
         String result = "";
 
@@ -314,7 +318,7 @@ public class SQLUtilities {
             updateQuery = statement.executeUpdate(SQL);
 
             if (updateQuery != 0) {
-                System.out.println("table is created successfully and " + updateQuery
+                logger.info("table is created successfully and " + updateQuery
                         + " row is inserted.");
             }
 

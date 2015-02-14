@@ -358,11 +358,6 @@
 //  System.out.println("IdSession = " + IdSession);
                 int SQL_LIMIT = Integer.parseInt(application.getInitParameter("SQL_LIMIT"));
 
-                String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                String SQL_URL = application.getInitParameter("JDBC_URL");
-                String SQL_USR = application.getInitParameter("JDBC_USR");
-                String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
                 //Utilities.dumpRequestParams(request);
                 String p_action = request.getParameter("action");
                 if(p_action==null) p_action="";
@@ -383,14 +378,12 @@
                 ro.finsiel.eunis.search.CombinedSearch tas = new ro.finsiel.eunis.search.CombinedSearch();
                 tas.SetSQLLimit(SQL_LIMIT);
 
-                tas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
                 //prelucram actiunea curenta
                 if(p_action.equalsIgnoreCase("reset")) {
                   ro.finsiel.eunis.search.CombinedSearch tsas;
                   tsas = new ro.finsiel.eunis.search.CombinedSearch();
                   tsas.SetSQLLimit(SQL_LIMIT);
-                  tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                   String attribute="ScientificName";
                   if(NatureObject.equalsIgnoreCase("Sites")) {
                     attribute="Name";
@@ -510,8 +503,8 @@
                 ResultSet rs =null;
 
                 try {
-                  Class.forName(SQL_DRV);
-                  con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                  
+                  con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 }
                 catch(Exception e) {
                   e.printStackTrace();
@@ -909,7 +902,6 @@
                     ro.finsiel.eunis.search.CombinedSearch tsas;
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -948,7 +940,6 @@
                     ro.finsiel.eunis.search.CombinedSearch tsas;
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -988,7 +979,6 @@
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSourceDB(SourceDB);
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -1026,7 +1016,6 @@
                   tsas = new ro.finsiel.eunis.search.CombinedSearch();
                   tsas.SetSourceDB(SourceDB);
                   tsas.SetSQLLimit(SQL_LIMIT);
-                  tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                   String str=tsas.calculateCriteria(IdSession,NatureObject);
 
                   tsas.DeleteResults(IdSession,NatureObject);
@@ -1054,9 +1043,9 @@
                     SQL+=" WHERE ID_SESSION = '"+IdSession+"'";
                     SQL+=" AND ID_NATURE_OBJECT > 0";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(SQL);
                       //System.out.println("Executing: "+SQL);
                       ps.execute();
@@ -1093,9 +1082,9 @@
                       speciesHabitatsSQL+=" WHERE ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                       speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(speciesHabitatsSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
@@ -1127,9 +1116,9 @@
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(habitatsSitesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
@@ -1162,9 +1151,9 @@
                       speciesSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       speciesSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(speciesSitesSQL);
                         rs = ps.executeQuery();
                         while(rs.next()) {
@@ -1248,9 +1237,9 @@
                         combinedSQL+=" INNER JOIN `eunis_combined_search_results` `eunis_combined_search_results2` ON (`chm62edt_sites`.`ID_NATURE_OBJECT` = `eunis_combined_search_results2`.`ID_NATURE_OBJECT_COMBINATION_1`)";
                       }
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(combinedSQL);
                         //System.out.println("Executing: "+combinedSQL);
                         rs = ps.executeQuery();
@@ -1315,9 +1304,9 @@
                         speciesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                         speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                        Class.forName(SQL_DRV);
+                        
                         try {
-                          con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                          con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 //          System.out.println("Executing: "+speciesHabitatsSQL);
                           ps = con.prepareStatement(speciesHabitatsSQL);
                           rs = ps.executeQuery();
@@ -1352,9 +1341,9 @@
 
                 //        System.out.println("Species-sites started.");
 
-                        Class.forName(SQL_DRV);
+                        
                         try {
-                          con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                          con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                           ps = con.prepareStatement(speciesSitesSQL);
                           //System.out.println("Executing: "+SQL);
                           rs = ps.executeQuery();
@@ -1394,9 +1383,9 @@
                         }
                       }
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(speciesSQL);
                         //System.out.println("Executing: "+SQL);
                         rs = ps.executeQuery();
@@ -1458,9 +1447,9 @@
                       habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                       habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 //        System.out.println("Executing: "+habitatsSpeciesSQL);
                         ps = con.prepareStatement(habitatsSpeciesSQL);
                         rs = ps.executeQuery();
@@ -1494,9 +1483,9 @@
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(habitatsSitesSQL);
                         //System.out.println("Executing: "+SQL);
                         rs = ps.executeQuery();
@@ -1536,9 +1525,9 @@
                       }
                     }
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(habitatsSQL);
                       //System.out.println("Executing: "+habitatsSQL);
                       rs = ps.executeQuery();
@@ -1604,9 +1593,9 @@
                       sitesSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       sitesSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
 
-                      Class.forName(SQL_DRV);
+                      
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 //        System.out.println("Executing: "+sitesSpeciesSQL);
                         ps = con.prepareStatement(sitesSpeciesSQL);
                         rs = ps.executeQuery();
@@ -1640,10 +1629,10 @@
                       sitesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                       sitesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                      Class.forName(SQL_DRV);
+                      
 
                       try {
-                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                        con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                         ps = con.prepareStatement(sitesHabitatsSQL);
                         //System.out.println("Executing: "+sitesHabitatsSQL);
                         rs = ps.executeQuery();
@@ -1685,9 +1674,9 @@
                       }
                     }
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(sitesSQL);
                       //System.out.println("Executing: "+sitesSQL);
                       rs = ps.executeQuery();
@@ -1750,7 +1739,6 @@
                 ro.finsiel.eunis.search.CombinedSearch tsas;
                 tsas = new ro.finsiel.eunis.search.CombinedSearch();
                 tsas.SetSQLLimit(SQL_LIMIT);
-                tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
                 //delete previous results
                 SQL="DELETE FROM eunis_combined_search_results";
@@ -1779,7 +1767,7 @@
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 //          System.out.println("Executing: "+speciesHabitatsSQL);
                       ps = con.prepareStatement(speciesHabitatsSQL);
                       rs = ps.executeQuery();
@@ -1809,9 +1797,9 @@
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     speciesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 //          System.out.println("Executing: "+speciesHabitatsSQL);
                       ps = con.prepareStatement(speciesHabitatsSQL);
                       rs = ps.executeQuery();
@@ -1844,9 +1832,9 @@
                     speciesSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     speciesSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(speciesSitesSQL);
                       //System.out.println("Executing: "+SQL);
                       rs = ps.executeQuery();
@@ -1882,7 +1870,7 @@
                   }
 
                   try {
-                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     ps = con.prepareStatement(speciesSQL);
                     //System.out.println("Executing: "+SQL);
                     rs = ps.executeQuery();
@@ -1943,9 +1931,9 @@
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                   //        System.out.println("Executing: "+habitatsSpeciesSQL);
                       ps = con.prepareStatement(habitatsSpeciesSQL);
                       rs = ps.executeQuery();
@@ -1975,9 +1963,9 @@
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Species")+")";
                     habitatsSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                   //        System.out.println("Executing: "+habitatsSpeciesSQL);
                       ps = con.prepareStatement(habitatsSpeciesSQL);
                       rs = ps.executeQuery();
@@ -2010,9 +1998,9 @@
                     habitatsSitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     habitatsSitesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(habitatsSitesSQL);
                       //System.out.println("Executing: "+SQL);
                       rs = ps.executeQuery();
@@ -2047,9 +2035,9 @@
                     habitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_2")+")";
                   }
 
-                  Class.forName(SQL_DRV);
+                  
                   try {
-                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     ps = con.prepareStatement(habitatsSQL);
                     //System.out.println("Executing: "+habitatsSQL);
                     rs = ps.executeQuery();
@@ -2112,9 +2100,9 @@
                     sitesSpeciesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     sitesSpeciesSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Species")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                   //        System.out.println("Executing: "+sitesSpeciesSQL);
                       ps = con.prepareStatement(sitesSpeciesSQL);
                       rs = ps.executeQuery();
@@ -2147,9 +2135,9 @@
                     sitesHabitatsSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Sites")+")";
                     sitesHabitatsSQL+=" AND ID_NATURE_OBJECT_LINK IN ("+tsas.CreateList(IdSession,"Habitat")+")";
 
-                    Class.forName(SQL_DRV);
+                    
                     try {
-                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                      con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                       ps = con.prepareStatement(sitesHabitatsSQL);
                       //System.out.println("Executing: "+sitesHabitatsSQL);
                       rs = ps.executeQuery();
@@ -2184,9 +2172,9 @@
                     sitesSQL+=" AND ID_NATURE_OBJECT IN ("+tsas.CreateList(IdSession,"Combination_2")+")";
                   }
 
-                  Class.forName(SQL_DRV);
+                  
                   try {
-                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     ps = con.prepareStatement(sitesSQL);
                     //System.out.println("Executing: "+sitesSQL);
                     rs = ps.executeQuery();

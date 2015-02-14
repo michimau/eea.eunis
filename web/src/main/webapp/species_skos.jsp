@@ -16,11 +16,6 @@
     return;
   }
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
   java.sql.Connection con = null;
   java.sql.Statement ps = null;
   java.sql.Statement psNames = null;
@@ -29,18 +24,8 @@
   java.sql.ResultSet rsNames = null;
   java.sql.ResultSet rsGeo = null;
 
-  try
-  {
-    Class.forName(SQL_DRV);
-  }
-  catch (ClassNotFoundException e)
-  {
-    e.printStackTrace();
-    return;
-  }
-
   try {
-    con = java.sql.ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
     e.printStackTrace();

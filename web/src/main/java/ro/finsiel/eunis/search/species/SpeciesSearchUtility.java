@@ -168,14 +168,11 @@ public class SpeciesSearchUtility {
 
     /**
      * This method finds all the species belonging to a group (Algae, Fishes, duh!s).
+     *
      * @param groupID The ID of the group species belongs to. Can also be 'any' and will return all the species.
      * @param scientificName The scientific name of the species searched. Note that the SQL is executing as
      *                       "... LIKE '%" + scientificName + "%' ..." so could find all the species matching criteria.
      * @param expandAll Apply limit or not in results (Utilities.MAX_POPUP_RESULTS)
-     * @param SQL_DRV SQL Driver
-     * @param SQL_URL SQL Driver URL
-     * @param SQL_USR SQL Driver user
-     * @param SQL_PWD SQL Driver password
      * @return A list with species belonging to the specified group.<br />
      * The returned list can contain the following possible values:<br />
      * <UL>
@@ -183,8 +180,7 @@ public class SpeciesSearchUtility {
      *  <LI> A list of Chm62edtSpeciesPersist objects if the query was successfully.
      * </UL>
      */
-    public static List findSpeciesFromGroup(String groupID, String scientificName, boolean expandAll,
-            String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static List findSpeciesFromGroup(String groupID, String scientificName, boolean expandAll) {
         if (null == groupID || null == scientificName) {
             return new Vector(0);
         }
@@ -194,7 +190,7 @@ public class SpeciesSearchUtility {
 
             SQLUtilities sqlc = new SQLUtilities();
 
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sqlc.Init();
 
             String SQL = "SELECT distinct e.scientific_name " + "FROM chm62edt_legal_status AS D "
             + "INNER JOIN chm62edt_report_type AS C ON (D.ID_LEGAL_STATUS = C.ID_LOOKUP and C.LOOKUP_TYPE='LEGAL_STATUS') "
@@ -921,20 +917,16 @@ public class SpeciesSearchUtility {
 
     /**
      * Finds all the languages with species common names.
-     * @param SQL_DRV SQL Driver
-     * @param SQL_URL SQL Driver URL
-     * @param SQL_USR SQL Driver user
-     * @param SQL_PWD SQL Driver password
      * @return A list of languages
      */
-    public static List findAllLanguagesWithVernacularNames(String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static List findAllLanguagesWithVernacularNames() {
         List results = new ArrayList();
 
         try {
 
             SQLUtilities sqlc = new SQLUtilities();
 
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sqlc.Init();
             String sql = "SELECT DISTINCT NAME_EN " + "FROM chm62edt_language AS A "
             + "INNER JOIN chm62edt_report_type AS B ON (A.ID_LANGUAGE = B.ID_LOOKUP AND B.LOOKUP_TYPE = 'LANGUAGE') "
             + "INNER JOIN chm62edt_reports AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE "

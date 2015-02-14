@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
-import eionet.eunis.util.sql.ConnectionUtil;
 import eionet.rdfexport.RDFExportService;
 import eionet.rdfexport.RDFExportServiceImpl;
 
@@ -70,7 +69,7 @@ public class RdfFilter implements Filter {
             boolean rdf = extractTableAndIdentifier(uri, cpath);
             if (rdf) {
                 try {
-                    Connection con = ConnectionUtil.getSimpleConnection();
+                    Connection con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
                     httpResponse.setContentType(ACCEPT_RDF_HEADER);
                     httpResponse.setCharacterEncoding("UTF-8");

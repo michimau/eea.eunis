@@ -11,6 +11,7 @@ import ro.finsiel.eunis.WebContentManagement;
 import ro.finsiel.eunis.auth.EncryptPassword;
 import ro.finsiel.eunis.jrfTables.users.*;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
@@ -406,18 +407,12 @@ public final class SessionManager implements java.io.Serializable {
             this.authenticated = true;
             loadUserPreferences();
             // log the login process to database
-            String JDBC_DRV = Settings.getSetting("JDBC_DRV");
-            String JDBC_URL = Settings.getSetting("JDBC_URL");
-            String JDBC_USR = Settings.getSetting("JDBC_USR");
-            String JDBC_PWD = Settings.getSetting("JDBC_PWD");
 
+            Connection conn = null;
+            PreparedStatement ps = null;
             // update last login date
             try {
-                Class.forName(JDBC_DRV);
-                Connection conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL, JDBC_USR,
-                        JDBC_PWD);
-                PreparedStatement ps = null;
-
+                conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 UserPersist user = findUser(username);
 
                 if (user == null) {
@@ -425,10 +420,12 @@ public final class SessionManager implements java.io.Serializable {
                             "INSERT INTO eunis_users (USERNAME) VALUES ('"
                             + username + "')");
                     ps.execute();
+                    ps.close();
                     ps = conn.prepareStatement(
                             "INSERT INTO eunis_users_roles (USERNAME, ROLENAME) VALUES ('"
                             + username + "','Guest')");
                     ps.execute();
+                    ps.close();
                 }
 
                 ps = conn.prepareStatement(
@@ -438,17 +435,18 @@ public final class SessionManager implements java.io.Serializable {
                 ps.execute();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                SQLUtilities.closeAll(conn, ps, null);
             }
+
             if (null != request) {
                 String sessionID = request.getSession().getId();
                 String ipAddr = request.getRemoteAddr();
                 long longTime = new Date().getTime();
 
                 try {
-                    Class.forName(JDBC_DRV);
-                    Connection conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(JDBC_URL,
-                            JDBC_USR, JDBC_PWD);
-                    PreparedStatement ps = conn.prepareStatement(
+                    conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+                    ps = conn.prepareStatement(
                     "INSERT INTO eunis_session_log (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
 
                     ps.setString(1, sessionID);
@@ -459,6 +457,8 @@ public final class SessionManager implements java.io.Serializable {
                     ps.execute();
                 } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    SQLUtilities.closeAll(conn, ps, null);
                 }
             } else {
                 System.out.println(

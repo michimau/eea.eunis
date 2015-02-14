@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +16,6 @@ import java.util.StringTokenizer;
  * @author finsiel
  */
 public class CombinedSearch {
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
     private int SQL_LIMIT = 1000;
     private String SourceDB = "''";
     private int resultCount = 0;
@@ -37,17 +35,9 @@ public class CombinedSearch {
 
     /**
      * Initialization method for this object.
-     * @param SQL_DRIVER_NAME JDBC driver.
-     * @param SQL_DRIVER_URL JDBC url.
-     * @param SQL_DRIVER_USERNAME JDBC username.
-     * @param SQL_DRIVER_PASSWORD JDBC password.
+     * @deprecated All DB connections should be taken from the pool
      */
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL,
-            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
-        SQL_DRV = SQL_DRIVER_NAME;
-        SQL_URL = SQL_DRIVER_URL;
-        SQL_USR = SQL_DRIVER_USERNAME;
-        SQL_PWD = SQL_DRIVER_PASSWORD;
+    public void Init() {
     }
 
     /**
@@ -66,8 +56,7 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -105,8 +94,8 @@ public class CombinedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
             StringTokenizer tokenizer = new StringTokenizer(IdNatureObject, ",");
 
@@ -212,8 +201,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='" + Criteria + "'";
@@ -243,8 +232,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET ATTRIBUTE='" + Attribute + "'";
@@ -274,8 +263,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET OPERATOR='" + Operator + "'";
@@ -285,6 +274,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             if (Operator.equalsIgnoreCase("Between")) {
                 SQL = "UPDATE eunis_combined_search_criteria";
@@ -313,7 +303,8 @@ public class CombinedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -327,8 +318,7 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET FIRST_VALUE='" + FirstValue + "'";
@@ -345,6 +335,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -358,8 +350,7 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET LAST_VALUE='" + LastValue + "'";
@@ -376,6 +367,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -390,8 +383,8 @@ public class CombinedSearch {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -410,7 +403,6 @@ public class CombinedSearch {
 
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -424,7 +416,6 @@ public class CombinedSearch {
 
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
-                    has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     has.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -439,7 +430,6 @@ public class CombinedSearch {
                     sas = new ro.finsiel.eunis.search.sites.advanced.SitesAdvancedSearch();
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -458,6 +448,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
     }
 
@@ -477,8 +469,7 @@ public class CombinedSearch {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -507,12 +498,12 @@ public class CombinedSearch {
             rs.close();
             ps.close();
             con.close();
-
-            return result;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
+        return result;
     }
 
     public boolean DeleteBranch(String IdNode, String IdSession, String NatureObject) {
@@ -523,8 +514,7 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -533,6 +523,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -549,6 +540,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -569,8 +562,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -578,6 +571,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -592,7 +586,8 @@ public class CombinedSearch {
             result = this.CreateInitialBranch(IdSession, NatureObject, Attribute);
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -613,8 +608,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -622,6 +617,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -638,6 +634,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -661,8 +659,8 @@ public class CombinedSearch {
         String IdNodeNew = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             // obtin ultimul nod child al nodului curent
             if (IdNode.length() == 1) {
@@ -700,6 +698,7 @@ public class CombinedSearch {
                 }
 
                 rs.close();
+                ps.close();
 
                 if (LastNumber.intValue() > 9) {
                     return result;
@@ -722,6 +721,7 @@ public class CombinedSearch {
 
                 ps = con.prepareStatement(SQL);
                 ps.execute();
+                ps.close();
 
                 SQL = "INSERT INTO eunis_combined_search_criteria";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
@@ -746,7 +746,8 @@ public class CombinedSearch {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -760,8 +761,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_combined_search";
             SQL += " SET NODE_TYPE='All'";
@@ -771,6 +772,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_combined_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
@@ -782,6 +784,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "UPDATE eunis_combined_search_criteria";
             SQL += " SET ID_NODE='" + IdNode + ".1'";
@@ -799,6 +802,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -812,8 +817,8 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
@@ -850,6 +855,7 @@ public class CombinedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_combined_search_criteria";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
@@ -872,6 +878,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -896,8 +904,8 @@ public class CombinedSearch {
         ResultSet rsc = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQLModelStart = "SELECT ";
             SQLModelStart += "`eunis_combined_search`.`ID_NODE`,";
@@ -925,6 +933,7 @@ public class CombinedSearch {
                 p_operator = rs.getString("NODE_TYPE");
             }
             rs.close();
+            ps.close();
 
             SQL = SQLModelStart;
             SQL += "AND (LENGTH(`eunis_combined_search`.`ID_NODE`)=1) ";
@@ -1052,6 +1061,11 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return where;
+        } finally {
+            SQLUtilities.closeAll(null, null, rsa);
+            SQLUtilities.closeAll(null, null, rsb);
+            SQLUtilities.closeAll(null, null, rsc);
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return where;
@@ -1086,8 +1100,8 @@ public class CombinedSearch {
         String snodesc = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQLModelStart = "DELETE FROM eunis_combined_search_temp";
             SQLModelStart += " WHERE (`eunis_combined_search_temp`.`ID_SESSION`='"
@@ -1096,6 +1110,7 @@ public class CombinedSearch {
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             SQLModelStart = "DELETE FROM eunis_combined_search_criteria_temp";
             SQLModelStart += " WHERE (`eunis_combined_search_criteria_temp`.`ID_SESSION`='"
@@ -1104,6 +1119,7 @@ public class CombinedSearch {
                     + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             // System.out.println("delete done");
 
@@ -1127,6 +1143,7 @@ public class CombinedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             SQLModelStart = "SELECT * FROM eunis_combined_search_criteria";
             SQLModelStart += " WHERE (`eunis_combined_search_criteria`.`ID_SESSION`='"
@@ -1151,6 +1168,7 @@ public class CombinedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             // System.out.println("populate done");
 
@@ -1180,6 +1198,7 @@ public class CombinedSearch {
                 p_operator = rs.getString("NODE_TYPE");
             }
             rs.close();
+            ps.close();
 
             SQL = SQLModelStart;
             SQL += "AND (LENGTH(`eunis_combined_search_temp`.`ID_NODE`)=1) ";
@@ -1366,6 +1385,11 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return where;
+        } finally {
+            SQLUtilities.closeAll(null, null, rsa);
+            SQLUtilities.closeAll(null, null, rsb);
+            SQLUtilities.closeAll(null, null, rsc);
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return snodes;
@@ -1426,8 +1450,7 @@ public class CombinedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (SQL.length() > 0) {
                 resultCount = 0;
@@ -1462,6 +1485,8 @@ public class CombinedSearch {
             e.printStackTrace();
             // System.out.println("SQL = " + SQL);
             return "";
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -1477,13 +1502,12 @@ public class CombinedSearch {
 
         Connection con = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             if (SQL.length() > 0) {
-                ResultSet rs = null;
-
                 ps = con.prepareStatement(SQL);
                 // System.out.println("Executing: "+SQL);
                 rs = ps.executeQuery();
@@ -1497,6 +1521,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -1508,13 +1534,12 @@ public class CombinedSearch {
 
         Connection con = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
 
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
-            ResultSet rs = null;
 
             if (NatureObject.equalsIgnoreCase("Species")) {
                 SQL = "SELECT ID_NATURE_OBJECT_SPECIES";
@@ -1574,6 +1599,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -1586,13 +1613,10 @@ public class CombinedSearch {
 
         Connection con = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-
-            ResultSet rs = null;
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (ColumnIndex == 1) {
                 SQL = "ID_NATURE_OBJECT_COMBINATION_1";
@@ -1627,6 +1651,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -1640,28 +1666,32 @@ public class CombinedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = " DELETE FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_criteria_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -1674,7 +1704,8 @@ public class CombinedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -1687,24 +1718,28 @@ public class CombinedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = " DELETE FROM eunis_combined_search_results";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_temp";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_criteria";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_combined_search_criteria_temp";
             ps = con.createStatement();
@@ -1716,7 +1751,8 @@ public class CombinedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -1730,8 +1766,7 @@ public class CombinedSearch {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT COUNT(*) FROM eunis_combined_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -1746,6 +1781,7 @@ public class CombinedSearch {
                 return result;
             }
             rs.close();
+            ps.close();
 
             SQL = "SELECT COUNT(*) FROM eunis_combined_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -1760,6 +1796,7 @@ public class CombinedSearch {
                 return result;
             }
             rs.close();
+            ps.close();
 
             SQL = "SELECT COUNT(*) FROM eunis_combined_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -1780,6 +1817,8 @@ public class CombinedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;

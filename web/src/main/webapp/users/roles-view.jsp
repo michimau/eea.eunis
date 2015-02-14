@@ -30,24 +30,7 @@
 </h2>
 <br />
 <%
-  // Set database parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
 
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-  // If some of them is null, the wanted database operation isn't made
-  if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
-  {
-%>
-    <%=cm.cmsText("error_web_xml_missing_required_values")%>
-<%
-    return;
-  }
 // Request parameters
 String tab = (request.getParameter("tab")==null?"view_roles":request.getParameter("tab"));
 

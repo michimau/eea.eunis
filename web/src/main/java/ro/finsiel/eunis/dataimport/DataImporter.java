@@ -144,6 +144,7 @@ public class DataImporter extends HttpServlet {
                                 JobDetail jobDetail = new JobDetail("importJob",
                                         null, ImportJob.class);
 
+                                // todo #23018 check if these are necessary
                                 jobDetail.getJobDataMap().put("sqlDrv", SQL_DRV);
                                 jobDetail.getJobDataMap().put("sqlUrl", SQL_URL);
                                 jobDetail.getJobDataMap().put("sqlUsr", SQL_USR);
@@ -168,7 +169,7 @@ public class DataImporter extends HttpServlet {
                             } else {
                                 SQLUtilities sql = new SQLUtilities();
 
-                                sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                                sql.Init();
                                 if (emptyTable) {
                                     if (table != null
                                             && table.equals("natura2000")) {
@@ -186,8 +187,8 @@ public class DataImporter extends HttpServlet {
                                 ImportParser iparser = new ImportParser();
 
                                 iparser.execute(TEMP_DIR + "importXmlFile",
-                                        table, SQL_DRV, SQL_USR, SQL_PWD,
-                                        SQL_URL);
+                                        table
+                                );
 
                                 // List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
                                 /* if(success != null || success.size() > 0){

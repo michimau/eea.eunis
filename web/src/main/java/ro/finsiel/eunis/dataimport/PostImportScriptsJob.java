@@ -23,7 +23,7 @@ public class PostImportScriptsJob implements Job {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         String sites = dataMap.getString("sites");
         String spiecesTab = dataMap.getString("spiecesTab");
@@ -38,7 +38,7 @@ public class PostImportScriptsJob implements Job {
 
             TabScripts scripts = new TabScripts();
 
-            scripts.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd, false);
+            scripts.Init(false);
 
             if (spiecesTab != null && spiecesTab.equals("on")) {
                 scripts.setTabSpecies();

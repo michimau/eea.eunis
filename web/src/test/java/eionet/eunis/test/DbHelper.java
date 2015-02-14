@@ -1,9 +1,7 @@
 package eionet.eunis.test;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -12,10 +10,8 @@ import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
@@ -67,9 +63,9 @@ public class DbHelper {
         Class.forName("com.mysql.jdbc.Driver");
         Connection jdbcConnection = null; 
         if (liveBase){
-            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(getJdbcUrlLive(), getJdbcUserLive(), getJdbcPasswordLive());
+            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } else {
-            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection(getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+            jdbcConnection = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         }
         IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
         DatabaseConfig config = connection.getConfig();
@@ -82,7 +78,7 @@ public class DbHelper {
         if (sqlUtil == null) {
             validateTestDbConnection();
             sqlUtil = new SQLUtilities();
-            sqlUtil.Init(getJdbcDriver(), getJdbcUrl(), getJdbcUser(), getJdbcPassword());
+            sqlUtil.Init();
         }
         return sqlUtil;
     }

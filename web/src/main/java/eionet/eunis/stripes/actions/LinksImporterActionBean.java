@@ -128,11 +128,7 @@ public class LinksImporterActionBean extends AbstractStripesAction {
                     }
                 }
                 // close connection
-                try {
-                    con.close();
-                } catch (SQLException se) {
-                    se.printStackTrace();
-                }
+                SQLUtilities.closeAll(con, null, null);
             }
         } else {
             handleEunisException(

@@ -24,10 +24,6 @@
   String idPage = Utilities.formatString( request.getParameter( "idPage" ) );
   String type = Utilities.formatString( request.getParameter( "type" ), "msg" );
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -177,7 +173,7 @@
                 language,
                 maxLengthSave,
                 SessionManager.getUsername(),
-                false, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD  );
+                false);
         version = -1;
       }
       else

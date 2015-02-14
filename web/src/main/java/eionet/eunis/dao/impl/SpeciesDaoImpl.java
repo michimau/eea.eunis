@@ -283,14 +283,13 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            con.close();
-            st.close();
+            closeAllResources(con, st, null);
+            closeAllResources(con, st2, null);
             for (PreparedStatement statement : statements) {
                 if (statement != null) {
                     statement.close();
                 }
             }
-            st2.close();
         }
     }
 

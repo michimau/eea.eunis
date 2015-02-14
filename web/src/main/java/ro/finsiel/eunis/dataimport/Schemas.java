@@ -47,22 +47,13 @@ public class Schemas extends HttpServlet {
 
         errors = new ArrayList<String>();
 
-        String SQL_DRV = request.getSession().getServletContext().getInitParameter(
-                "JDBC_DRV");
-        String SQL_URL = request.getSession().getServletContext().getInitParameter(
-                "JDBC_URL");
-        String SQL_USR = request.getSession().getServletContext().getInitParameter(
-                "JDBC_USR");
-        String SQL_PWD = request.getSession().getServletContext().getInitParameter(
-                "JDBC_PWD");
-
         String nl = "\n";
 
         try {
 
             SQLUtilities sql = new SQLUtilities();
 
-            sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sql.Init();
             List<ColumnDTO> columns = sql.getTableInfoList(table);
 
             StringBuilder s = new StringBuilder();

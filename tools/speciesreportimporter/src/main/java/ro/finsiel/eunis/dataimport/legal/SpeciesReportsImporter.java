@@ -141,7 +141,7 @@ public class SpeciesReportsImporter {
 
         SQLUtilities sqlUtilities = new SQLUtilities();
 
-        sqlUtilities.Init(dbDriver, dbUrl, dbUser, dbPass);
+        sqlUtilities.Init();
 
         SpeciesReportsImporter vi = new SpeciesReportsImporter(sqlUtilities);
 

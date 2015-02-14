@@ -1,30 +1,15 @@
 package ro.finsiel.eunis.dataimport;
 
 
-import static org.w3c.dom.Node.ELEMENT_NODE;
-import static org.w3c.dom.Node.TEXT_NODE;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-import org.xml.sax.SAXException;
 
-import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import ro.finsiel.eunis.utilities.TableColumns;
 
 
 public class TesterJob implements Job {
@@ -42,7 +27,7 @@ public class TesterJob implements Job {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         String filePath = dataMap.getString("filePath");
 

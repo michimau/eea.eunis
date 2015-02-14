@@ -33,15 +33,6 @@ public class DataExporter extends HttpServlet {
                 && sessionManager.isImportExportData_RIGHT()) {
             errors = new ArrayList<String>();
 
-            String SQL_DRV = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_DRV");
-            String SQL_URL = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_URL");
-            String SQL_USR = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_USR");
-            String SQL_PWD = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_PWD");
-
             String table = request.getParameter("table");
             String addSchema = request.getParameter("schema");
             String nl = "\n";
@@ -50,7 +41,7 @@ public class DataExporter extends HttpServlet {
 
                 SQLUtilities sql = new SQLUtilities();
 
-                sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                sql.Init();
                 String content = sql.getTableContentAsXML(table);
 
                 StringBuilder s = new StringBuilder();

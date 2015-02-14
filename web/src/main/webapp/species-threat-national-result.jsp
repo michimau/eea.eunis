@@ -32,11 +32,6 @@
       request.getParameter("saveCriteria").equalsIgnoreCase("true")
       )
   {
-  // Set database parameters
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
    // Description of this search
   String description = "";
@@ -65,11 +60,8 @@
                                                    setSaveParameters.getBooleans(),
                                                    setSaveParameters.getOperators(),
                                                    setSaveParameters.getFirstValue(),
-                                                   setSaveParameters.getLastValue(),
-                                                   SQL_DRV,
-                                                   SQL_URL,
-                                                   SQL_USR,
-                                                   SQL_PWD);
+                                                   setSaveParameters.getLastValue()
+   );
    save.SaveCriterias();
 
   }

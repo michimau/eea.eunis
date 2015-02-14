@@ -40,10 +40,6 @@ public class PDFSitesFactsheet {
     private static final int TONE_EE = 0xEE;
 
     private WebContentManagement contentManagement = null;
-    private final String SQL_DRV;
-    private final String SQL_URL;
-    private final String SQL_USR;
-    private final String SQL_PWD;
     private final String fontLocation;
 
     private SiteFactsheet factsheet = null;
@@ -61,19 +57,10 @@ public class PDFSitesFactsheet {
      * @param idSite ID_SITE
      * @param report Report to write to, already initialized
      * @param contentManagement current content management
-     * @param SQL_DRV SQL Driver
-     * @param SQL_URL SQL Driver URL
-     * @param SQL_USR SQL Driver username
-     * @param SQL_PWD SQL Driver password
      */
-    public PDFSitesFactsheet(String idSite, pdfReport report, WebContentManagement contentManagement, String fontLocation,
-            String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public PDFSitesFactsheet(String idSite, pdfReport report, WebContentManagement contentManagement, String fontLocation) {
         this.contentManagement = contentManagement;
         this.report = report;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
-        this.SQL_PWD = SQL_PWD;
         this.fontLocation = fontLocation;
 
         factsheet = new SiteFactsheet(idSite);
@@ -307,7 +294,7 @@ public class PDFSitesFactsheet {
     private void getFaunaFlora() throws Exception {
         SQLUtilities sqlc = new SQLUtilities();
 
-        sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        sqlc.Init();
 
         String respondent = factsheet.getSiteObject().getRespondent();
         String author = factsheet.getAuthor();
@@ -2282,7 +2269,7 @@ public class PDFSitesFactsheet {
     private void getHabitats() throws Exception {
         SQLUtilities sqlc = new SQLUtilities();
 
-        sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        sqlc.Init();
 
         List habit1Eunis = new ArrayList();
         List habit1NotEunis = new ArrayList();
@@ -2821,7 +2808,7 @@ public class PDFSitesFactsheet {
     private void getOtherInfo() throws Exception {
         SQLUtilities sqlc = new SQLUtilities();
 
-        sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        sqlc.Init();
 
         // Human activity.
         if (SiteFactsheet.TYPE_CORINE == type

@@ -1787,21 +1787,15 @@ public final class Utilities {
      * when the session is destroyed.
      *
      * @param IdSession ID of the session being expired
-     * @param SQL_DRV   SQL Driver used to do the db connection (from web.xml)
-     * @param SQL_URL   SQL URL used to do the db connection (from web.xml)
-     * @param SQL_USR   SQL user used to do the db connection (from web.xml)
-     * @param SQL_PWD   SQL password used to do the db connection (from web.xml)
      */
-    public static void ClearSessionData(String IdSession, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static void ClearSessionData(String IdSession) {
         try {
             ro.finsiel.eunis.search.CombinedSearch tcs = new ro.finsiel.eunis.search.CombinedSearch();
 
-            tcs.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
             tcs.DeleteSessionData(IdSession);
 
             ro.finsiel.eunis.search.AdvancedSearch tas = new ro.finsiel.eunis.search.AdvancedSearch();
 
-            tas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
             tas.DeleteSessionData(IdSession);
         } catch (Exception e) {
             e.printStackTrace();
@@ -1811,24 +1805,18 @@ public final class Utilities {
     /**
      * Clear all the temporary tables.
      *
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation succeed.
      */
-    public static boolean ClearAllSessionsData(String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static boolean ClearAllSessionsData() {
         boolean result = false;
 
         try {
             ro.finsiel.eunis.search.CombinedSearch tcs = new ro.finsiel.eunis.search.CombinedSearch();
 
-            tcs.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
             tcs.DeleteAllTemporaryData();
 
             ro.finsiel.eunis.search.AdvancedSearch tas = new ro.finsiel.eunis.search.AdvancedSearch();
 
-            tas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
             tas.DeleteAllTemporaryData();
 
             result = true;
@@ -2544,7 +2532,7 @@ public final class Utilities {
         Utilities.timer = timer;
     }
 
-    public static String getTaxonomicNameForASpecies(String idSpecies, String what, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static String getTaxonomicNameForASpecies(String idSpecies, String what) {
         if (idSpecies == null || idSpecies.trim().length() <= 0 || what == null
                 || what.trim().length() <= 0) {
             return "";
@@ -2553,7 +2541,7 @@ public final class Utilities {
 
         SQLUtilities sqlc = new SQLUtilities();
 
-        sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+        sqlc.Init();
 
         List rez = sqlc.ExecuteSQLReturnList(
                 "SELECT LEVEL,NAME,TAXONOMY_TREE FROM chm62edt_species AS A INNER JOIN chm62edt_taxonomy AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY WHERE A.ID_SPECIES = "

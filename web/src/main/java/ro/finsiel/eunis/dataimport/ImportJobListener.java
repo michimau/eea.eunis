@@ -54,7 +54,7 @@ public class ImportJobListener implements JobListener {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         sql.addImportLogMessage("Table " + table + " import started!");
     }
@@ -76,7 +76,7 @@ public class ImportJobListener implements JobListener {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         if (exception != null) {
             logger.error(

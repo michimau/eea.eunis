@@ -21,17 +21,7 @@
     natureobject="";
   }
 
-  // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
   int SQL_LIMIT=1000;
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   // if NatureObject is valid
   if(!natureobject.equalsIgnoreCase(""))
@@ -41,20 +31,20 @@
     // Set SourceDB for NatureObject = 'Sites'
     if (natureobject.equalsIgnoreCase("sites"))
     {
-      tsas.SetSourceDB(ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.getSourceDB(criterianame,natureobject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD));
+      tsas.SetSourceDB(ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.getSourceDB(criterianame,natureobject));
     }
     tsas.SetSQLLimit(SQL_LIMIT);
-    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+    tsas.Init();
     // Delete old data by IdSession
     tsas.DeleteSessionDataForNatureObject(idsession,natureobject);
     // Insert the saved search data
     if (natureobject.equalsIgnoreCase("sites"))
     {
-      ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearch(idsession,criterianame,natureobject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-      ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearchCriteria(idsession,criterianame,natureobject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+      ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearch(idsession,criterianame,natureobject);
+      ro.finsiel.eunis.search.sites.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearchCriteria(idsession,criterianame,natureobject);
     } else {
-      ro.finsiel.eunis.search.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearch(idsession,criterianame,natureobject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-      ro.finsiel.eunis.search.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearchCriteria(idsession,criterianame,natureobject,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+      ro.finsiel.eunis.search.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearch(idsession,criterianame,natureobject);
+      ro.finsiel.eunis.search.advanced.SaveAdvancedSearchCriteria.insertEunisAdvancedSearchCriteria(idsession,criterianame,natureobject);
     }
   }
 %>

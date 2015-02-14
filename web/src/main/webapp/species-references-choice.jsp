@@ -48,16 +48,6 @@
   <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
   <%
-    // Set the database connection parameters
-    String SQL_DRV="";
-    String SQL_URL="";
-    String SQL_USR="";
-    String SQL_PWD="";
-
-    SQL_DRV = application.getInitParameter("JDBC_DRV");
-    SQL_URL = application.getInitParameter("JDBC_URL");
-    SQL_USR = application.getInitParameter("JDBC_USR");
-    SQL_PWD = application.getInitParameter("JDBC_PWD");
     // dateVal - what date form field was used
     String dateVal = (request.getParameter("dateVal") == null ? "0" : request.getParameter("dateVal"));
 
@@ -79,11 +69,8 @@
                                 request.getParameter("editor"),
                                 Utilities.checkedStringToInt(request.getParameter("relationOpEditor"),
                                                              Utilities.OPERATOR_CONTAINS),
-                                SessionManager.getShowEUNISInvalidatedSpecies(),
-                                SQL_DRV,
-                                SQL_URL,
-                                SQL_USR,
-                                SQL_PWD);
+                                SessionManager.getShowEUNISInvalidatedSpecies()
+    );
     // Set references list
     references.setReferencesList((request.getParameter("fromWhere")==null?"":request.getParameter("fromWhere")),
                                  !expandFullNames);

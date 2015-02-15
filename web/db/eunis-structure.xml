@@ -2266,4 +2266,12 @@ END
             <sql>DROP PROCEDURE IF EXISTS wherereferenced</sql>
         </rollback>
     </changeSet>
+
+    <changeSet id="rev-138" author="ivascu">
+        <comment>Adds an index on Species table that greatly improves Sites SDF import speed</comment>
+        <sql>ALTER TABLE `chm62edt_species` ADD INDEX `IDX_SPECIES_CODE_2000` (`CODE_2000`)</sql>
+        <rollback>
+            <sql>ALTER TABLE `chm62edt_species` DROP INDEX `IDX_SPECIES_CODE_2000`</sql>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

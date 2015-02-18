@@ -10,11 +10,6 @@
 %>
 <%@ page import="ro.finsiel.eunis.search.users.UsersUtility"%>
 <%
-  // Set the database connection parameters
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   // The record witch will be deteled is identified by userName, pageName and criteriaName parameters,
   // so they must be not null
@@ -25,11 +20,8 @@
     // Delete the record
     UsersUtility.deleteUserSaveCriteria(request.getParameter("userName"),
                                         request.getParameter("pageName"),
-                                        request.getParameter("criteriaName"),
-                                        SQL_DRV,
-                                        SQL_URL,
-                                        SQL_USR,
-                                        SQL_PWD);
+                                        request.getParameter("criteriaName")
+    );
     // Redirect to page where delete record was made
     response.sendRedirect(request.getParameter("pageName")+"?expandSearchCriteria=yes");
     return;

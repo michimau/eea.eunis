@@ -242,21 +242,21 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            con.close();
-            st.close();
-            ps7.close();
-            ps8.close();
-            ps9.close();
-            ps10.close();
-            ps11.close();
-            ps12.close();
-            ps13.close();
-            ps14.close();
-            ps15.close();
-            ps16.close();
-            ps17.close();
-            ps18.close();
-            ps19.close();
+            closeAllResources(null, ps7, null);
+            closeAllResources(null, ps8, null);
+            closeAllResources(null, ps9, null);
+            closeAllResources(null, ps10, null);
+            closeAllResources(null, ps11, null);
+            closeAllResources(null, ps12, null);
+            closeAllResources(null, ps13, null);
+            closeAllResources(null, ps14, null);
+            closeAllResources(null, ps15, null);
+            closeAllResources(null, ps16, null);
+            closeAllResources(null, ps16, null);
+            closeAllResources(null, ps17, null);
+            closeAllResources(null, ps18, null);
+            closeAllResources(null, ps19, null);
+            closeAllResources(con, st, null);
         }
     }
 
@@ -587,6 +587,8 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             e.printStackTrace();
             throw new SQLException(e.getMessage(), e);
         } finally {
+            closeAllResources(null, ps2, rs2);
+            closeAllResources(null, ps1, rs1);
             closeAllResources(con, ps, rs);
         }
     }

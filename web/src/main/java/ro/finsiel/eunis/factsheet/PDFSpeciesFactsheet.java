@@ -37,6 +37,7 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Table;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
 /**
@@ -55,11 +56,6 @@ public final class PDFSpeciesFactsheet {
     private pdfReport report = null;
     private SpeciesFactsheet factsheet = null;
 
-    private final String SQL_DRV;
-    private final String SQL_URL;
-    private final String SQL_USR;
-    private final String SQL_PWD;
-
     Font fontNormal = FontFactory.getFont(FontFactory.HELVETICA, 9, Font.NORMAL);
     Font fontNormalBold = FontFactory.getFont(FontFactory.HELVETICA, 9,
             Font.BOLD);
@@ -72,21 +68,12 @@ public final class PDFSpeciesFactsheet {
      * @param report Report to write to, already initialized
      * @param idSpecies ID_SPECIES
      * @param idSpeciesLink ID_SPECIES_LINK
-     * @param SQL_DRV SQL Driver
-     * @param SQL_URL SQL Driver URL
-     * @param SQL_USR SQL Driver username
-     * @param SQL_PWD SQL Driver password
      */
     public PDFSpeciesFactsheet(WebContentManagement contentManagement, pdfReport report,
-            Integer idSpecies, Integer idSpeciesLink,
-            String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+                               Integer idSpecies, Integer idSpeciesLink) {
         this.contentManagement = contentManagement;
         this.report = report;
         this.idSpecies = idSpecies;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
-        this.SQL_PWD = SQL_PWD;
 
         factsheet = new SpeciesFactsheet(this.idSpecies, idSpeciesLink);
         this.idNatureObject = factsheet.getSpeciesNatureObject().getIdNatureObject();
@@ -976,101 +963,110 @@ public final class PDFSpeciesFactsheet {
         sql += "    WHERE `chm62edt_species`.`ID_SPECIES` = " + idSpecies;
         sql += "    GROUP BY chm62edt_species.ID_NATURE_OBJECT,dc_index.ID_DC,dc_index.SOURCE,dc_index.EDITOR,dc_index.TITLE,dc_index.PUBLISHER,dc_index.CREATED";
 
-        Class.forName(SQL_DRV);
-        Connection con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery(sql);
+        Connection con = null;
+        ResultSet rs = null;
+        Statement ps = null;
 
-        if (rs.next()) {
-            rs.beforeFirst();
-            Table table = new Table(5);
+        try {
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            ps = con.createStatement();
+            rs = ps.executeQuery(sql);
 
-            table.setWidth(TABLE_WIDTH);
-            table.setBorderColor(Color.BLACK);
-            table.setAlignment(Table.ALIGN_LEFT);
-            table.setBorderWidth(1);
-            table.setDefaultCellBorderWidth(1);
-            table.setCellspacing(2);
-            table.setCellsFitPage(true);
-            float[] widths = { 20f, 20f, 25f, 10f, 25f };
+            if (rs.next()) {
+                rs.beforeFirst();
+                Table table = new Table(5);
 
-            table.setWidths(widths);
-            table.setWidth(TABLE_WIDTH);
+                table.setWidth(TABLE_WIDTH);
+                table.setBorderColor(Color.BLACK);
+                table.setAlignment(Table.ALIGN_LEFT);
+                table.setBorderWidth(1);
+                table.setDefaultCellBorderWidth(1);
+                table.setCellspacing(2);
+                table.setCellsFitPage(true);
+                float[] widths = { 20f, 20f, 25f, 10f, 25f };
 
-            Cell cell;
+                table.setWidths(widths);
+                table.setWidth(TABLE_WIDTH);
 
-            cell = new Cell(new Phrase("References", fontTitle));
-            cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
-            cell.setColspan(5);
-            table.addCell(cell);
+                Cell cell;
 
-            cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Title"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-            cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Author"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-            cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Editor"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-            cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Date"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-            cell = new Cell(
-                    new Phrase(contentManagement.cmsPhrase("Source"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-
-            String source;
-            String author;
-            String editor;
-            String date;
-            String title;
-
-            while (rs.next()) {
-                if (rs.getString(1) == null) {
-                    source = "&nbsp;";
-                } else {
-                    source = ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(
-                            rs.getString(1));
-                }
-                if (rs.getString(2) == null) {
-                    author = "&nbsp;";
-                } else {
-                    author = rs.getString(2);
-                }
-                if (rs.getString(3) == null) {
-                    editor = "&nbsp;";
-                } else {
-                    editor = rs.getString(3);
-                }
-                if (rs.getString(4) == null || rs.getString(4).equals("")) {
-                    date = "&nbsp;";
-                } else {
-                    date = Utilities.formatReferencesDate(rs.getDate(4));
-                }
-                if (rs.getString(5) == null) {
-                    title = "&nbsp;";
-                } else {
-                    title = rs.getString(5);
-                }
-
-                cell = new Cell(new Phrase(title, fontNormal));
+                cell = new Cell(new Phrase("References", fontTitle));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
+                cell.setColspan(5);
                 table.addCell(cell);
-                cell = new Cell(new Phrase(author, fontNormal));
+
+                cell = new Cell(
+                        new Phrase(contentManagement.cmsPhrase("Title"), fontNormalBold));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
-                cell = new Cell(new Phrase(editor, fontNormal));
+                cell = new Cell(
+                        new Phrase(contentManagement.cmsPhrase("Author"), fontNormalBold));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
-                cell = new Cell(new Phrase(date, fontNormal));
+                cell = new Cell(
+                        new Phrase(contentManagement.cmsPhrase("Editor"), fontNormalBold));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
-                cell = new Cell(new Phrase(source, fontNormal));
+                cell = new Cell(
+                        new Phrase(contentManagement.cmsPhrase("Date"), fontNormalBold));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
+                cell = new Cell(
+                        new Phrase(contentManagement.cmsPhrase("Source"), fontNormalBold));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
+                table.addCell(cell);
+
+                String source;
+                String author;
+                String editor;
+                String date;
+                String title;
+
+                while (rs.next()) {
+                    if (rs.getString(1) == null) {
+                        source = "&nbsp;";
+                    } else {
+                        source = ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(
+                                rs.getString(1));
+                    }
+                    if (rs.getString(2) == null) {
+                        author = "&nbsp;";
+                    } else {
+                        author = rs.getString(2);
+                    }
+                    if (rs.getString(3) == null) {
+                        editor = "&nbsp;";
+                    } else {
+                        editor = rs.getString(3);
+                    }
+                    if (rs.getString(4) == null || rs.getString(4).equals("")) {
+                        date = "&nbsp;";
+                    } else {
+                        date = Utilities.formatReferencesDate(rs.getDate(4));
+                    }
+                    if (rs.getString(5) == null) {
+                        title = "&nbsp;";
+                    } else {
+                        title = rs.getString(5);
+                    }
+
+                    cell = new Cell(new Phrase(title, fontNormal));
+                    table.addCell(cell);
+                    cell = new Cell(new Phrase(author, fontNormal));
+                    table.addCell(cell);
+                    cell = new Cell(new Phrase(editor, fontNormal));
+                    table.addCell(cell);
+                    cell = new Cell(new Phrase(date, fontNormal));
+                    table.addCell(cell);
+                    cell = new Cell(new Phrase(source, fontNormal));
+                    table.addCell(cell);
+                }
+                report.addTable(table);
             }
-            report.addTable(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
     }
 

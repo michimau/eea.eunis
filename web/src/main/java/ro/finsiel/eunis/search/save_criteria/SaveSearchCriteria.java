@@ -48,15 +48,6 @@ public class SaveSearchCriteria {
     // criteria_last_value table field from eunis_group_search_criteria table
     private Vector lastValues = new Vector();
 
-    // JDBC driver.
-    private String SQL_DRV = "";
-    // JDBC url.
-    private String SQL_URL = "";
-    // JDBC user.
-    private String SQL_USR = "";
-    // JDBC password.
-    private String SQL_PWD = "";
-
     // name of user who mande this save operation
     private String userName = null;
     // search criterion description
@@ -121,6 +112,7 @@ public class SaveSearchCriteria {
      * Class constructor.
      * @param database numeric values of habitat database (EUNIS, ANNEX I, BOTH)
      * @param numberCriteria number of criterias witch will be insert into eunis_group_search_criteria table for that search
+     * @param userName user name
      * @param description description of search
      * @param fromWhere name of page from where search was made
      * @param attributesNames vector with attributes names
@@ -130,29 +122,20 @@ public class SaveSearchCriteria {
      * @param operators vector with operators
      * @param firstValues vector with first values
      * @param lastValues vector with last values
-     * @param SQL_DRV driver string
-     * @param SQL_URL url string
-     * @param SQL_USR user string
-     * @param SQL_PWD password string
-     * @param userName user name
      */
 
     public SaveSearchCriteria(Vector database,
-            int numberCriteria,
-            String userName,
-            String description,
-            String fromWhere,
-            Vector attributesNames,
-            Vector formFieldAttributes,
-            Vector formFieldOperators,
-            Vector booleans,
-            Vector operators,
-            Vector firstValues,
-            Vector lastValues,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                              int numberCriteria,
+                              String userName,
+                              String description,
+                              String fromWhere,
+                              Vector attributesNames,
+                              Vector formFieldAttributes,
+                              Vector formFieldOperators,
+                              Vector booleans,
+                              Vector operators,
+                              Vector firstValues,
+                              Vector lastValues) {
 
         FromWhereMappings();
         this.attributesNames = attributesNames;
@@ -162,10 +145,6 @@ public class SaveSearchCriteria {
         this.operators = operators;
         this.firstValues = firstValues;
         this.lastValues = lastValues;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_PWD = SQL_PWD;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
         this.userName = userName;
         this.description = description;
         this.fromWhere = fromWhere;
@@ -186,15 +165,13 @@ public class SaveSearchCriteria {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-
             Connection[] con1 = new Connection[numberCriteria];
             PreparedStatement[] ps1 = new PreparedStatement[numberCriteria];
 
             criteriaName = userName + (CriteriaMaxNumber(userName).toString());
       
             for (int i = 0; i < numberCriteria; i++) {
-                con1[i] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                con1[i] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
                 SQL = "INSERT INTO eunis_group_search_criteria "
                         + "(CRITERIA_NAME,ID_eunis_group_search_criteria,CRITERIA_ATTRIBUTE,CRITERIA_FORM_FIELD_ATTRIBUTE,"
@@ -222,7 +199,7 @@ public class SaveSearchCriteria {
                 con1[i].close();
             }
 
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "INSERT INTO eunis_group_search (CRITERIA_NAME,DESCRIPTION,USERNAME,FROM_WHERE)VALUES(?,?,?,?)";
 
@@ -240,8 +217,7 @@ public class SaveSearchCriteria {
             ps.setString(4, fromWhere);
 
             ps.execute();
-            ps = con.prepareStatement("COMMIT");
-            ps.executeUpdate();
+            con.commit();
             ps.close();
             con.close();
 
@@ -272,8 +248,7 @@ public class SaveSearchCriteria {
         Long result = new Long(0);
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM eunis_group_search" + " WHERE USERNAME = '" + user + "'";
@@ -811,9 +786,8 @@ public class SaveSearchCriteria {
             Connection con1 = null;
             PreparedStatement ps1 = null;
 
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_group_search WHERE CRITERIA_NAME='" + criteriaName + "'";
             ps = con.prepareStatement(SQL);

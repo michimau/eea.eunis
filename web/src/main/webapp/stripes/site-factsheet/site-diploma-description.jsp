@@ -28,13 +28,7 @@
     int type = factsheet.getType();
     String designationDescr = factsheet.getDesignation();
 
-    String SQL_DRV = application.getInitParameter("JDBC_DRV");
-    String SQL_URL = application.getInitParameter("JDBC_URL");
-    String SQL_USR = application.getInitParameter("JDBC_USR");
-    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
     SQLUtilities sqlc = new SQLUtilities();
-    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
     String respondent = factsheet.getSiteObject().getRespondent();
     String author = factsheet.getAuthor();

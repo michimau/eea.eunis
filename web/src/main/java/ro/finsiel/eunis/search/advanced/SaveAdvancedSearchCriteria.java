@@ -6,7 +6,10 @@ package ro.finsiel.eunis.search.advanced;
  * Time: 3:39:56 PM
  */
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
 import java.sql.*;
 
 
@@ -15,6 +18,8 @@ import java.sql.*;
  * @author finsiel.
  */
 public class SaveAdvancedSearchCriteria {
+
+    private static final Logger logger = Logger.getLogger(SaveAdvancedSearchCriteria.class);
 
     // id of session
     private String idSession = null;
@@ -27,15 +32,6 @@ public class SaveAdvancedSearchCriteria {
     // name of the jsp page where operation was made
     private String fromWhere = null;
 
-    // JDBC driver.
-    private String SQL_DRV = "";
-    // JDBC url.
-    private String SQL_URL = "";
-    // JDBC user.
-    private String SQL_USR = "";
-    // JDBC password.
-    private String SQL_PWD = "";
-
     /**
      * Class constructor.
      * @param idsession id session
@@ -43,29 +39,17 @@ public class SaveAdvancedSearchCriteria {
      * @param username user name
      * @param description search description
      * @param fromWhere page name
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      */
     public SaveAdvancedSearchCriteria(String idsession,
-            String natureobject,
-            String username,
-            String description,
-            String fromWhere,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                      String natureobject,
+                                      String username,
+                                      String description,
+                                      String fromWhere) {
         this.idSession = idsession;
         this.natureObject = natureobject;
         this.userName = username;
         this.description = description;
         this.fromWhere = fromWhere;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
-        this.SQL_PWD = SQL_PWD;
     }
 
     /**
@@ -78,12 +62,14 @@ public class SaveAdvancedSearchCriteria {
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
+        Connection con3 = null;
+        Statement ps3 = null;
+        ResultSet rs3 = null;
+
         boolean saveWithSuccess = false;
 
         try {
-            Class.forName(SQL_DRV);
-
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_advanced_search " + " WHERE ID_SESSION = '" + idSession + "' "
@@ -98,45 +84,46 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-                    Statement ps1 = con1.createStatement();
+                    Connection con1 = null;
+                    Statement ps1 = null;
+                    try {
+                        con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+                        ps1 = con1.createStatement();
 
-                    String SQL = "INSERT INTO eunis_save_advanced_search";
+                        String SQL = "INSERT INTO eunis_save_advanced_search";
 
-                    SQL += "(CRITERIA_NAME,NATURE_OBJECT,ID_NODE,NODE_TYPE,DESCRIPTION,USERNAME,FROM_WHERE)";
-                    SQL += " VALUES(";
-                    SQL += "'" + name + "',";
-                    SQL += "'" + natureObject + "',";
-                    SQL += "'" + rs.getString("ID_NODE") + "',";
-                    SQL += "'" + rs.getString("NODE_TYPE") + "',";
-                    SQL += "'" + descriptionValue + "',";
-                    SQL += "'" + userName + "',";
-                    SQL += "'" + fromWhere + "')";
+                        SQL += "(CRITERIA_NAME,NATURE_OBJECT,ID_NODE,NODE_TYPE,DESCRIPTION,USERNAME,FROM_WHERE)";
+                        SQL += " VALUES(";
+                        SQL += "'" + name + "',";
+                        SQL += "'" + natureObject + "',";
+                        SQL += "'" + rs.getString("ID_NODE") + "',";
+                        SQL += "'" + rs.getString("NODE_TYPE") + "',";
+                        SQL += "'" + descriptionValue + "',";
+                        SQL += "'" + userName + "',";
+                        SQL += "'" + fromWhere + "')";
 
-                    ps1.executeUpdate(SQL);
-
-                    ps1.close();
-                    con1.close();
+                        ps1.executeUpdate(SQL);
+                    } catch(Exception e){
+                        logger.error(e, e);
+                    } finally {
+                        SQLUtilities.closeAll(con1, ps1, null);
+                    }
                 }
             }
 
-            rs.close();
-            ps.close();
-            con.close();
+            // insert criteria
 
-            // inser criteria
-
-            Connection con3 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            Statement ps3 = con3.createStatement();
+            con3 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+             ps3 = con3.createStatement();
 
             SQL1 = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION = '" + idSession + "' "
                     + " AND NATURE_OBJECT = '" + natureObject + "' " + " ORDER BY ID_NODE";
-            ResultSet rs3 = ps3.executeQuery(SQL1);
+            rs3 = ps3.executeQuery(SQL1);
 
             if (rs3.isBeforeFirst()) {
                 while (!rs3.isLast()) {
                     rs3.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     Statement ps1 = con1.createStatement();
 
                     String SQL = "INSERT INTO eunis_save_advanced_search_criteria";
@@ -157,12 +144,12 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
 
-            rs3.close();
-            ps3.close();
-            con3.close();
             saveWithSuccess = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
+            SQLUtilities.closeAll(con3, ps3, rs3);
         }
         return saveWithSuccess;
     }
@@ -175,15 +162,14 @@ public class SaveAdvancedSearchCriteria {
      * @return node type field value.
      */
     private String getNodeType(String idsession, String natureobject, String idnode) {
-        String SQL = "";
+        String SQL;
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
         String result = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT NODE_TYPE " + " FROM eunis_advanced_search " + " WHERE ID_SESSION='" + idsession + "' "
@@ -194,10 +180,10 @@ public class SaveAdvancedSearchCriteria {
                 rs.next();
                 result = rs.getString(1);
             }
-            ps.close();
-            con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -209,14 +195,13 @@ public class SaveAdvancedSearchCriteria {
      */
     private String getDescription() {
         String descr = "";
-        String SQL = "";
+        String SQL;
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_advanced_search_criteria " + " WHERE ID_SESSION='" + idSession + "' "
@@ -245,36 +230,30 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
         return descr;
     }
 
     /**
      * Expand, in a jsp page, list of saved advanced searches made by a user.
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
+     *
      * @param userName user name
      * @param fromWhere page name
      * @return list of saved searches
      */
-    public static String ExpandSaveCriteriaForThisPage(String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD,
-            String userName,
-            String fromWhere) {
+    public static String ExpandSaveCriteriaForThisPage(String userName,
+                                                       String fromWhere) {
         String result = "";
-        String SQL = "";
+        String SQL;
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE USERNAME='" + userName + "' " + " AND FROM_WHERE='"
@@ -298,7 +277,9 @@ public class SaveAdvancedSearchCriteria {
                 result += "</table>";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
         return result;
     }
@@ -309,26 +290,17 @@ public class SaveAdvancedSearchCriteria {
      * @param idsession id session
      * @param criterianame criteria name
      * @param natureobject nature object
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      */
     public static void insertEunisAdvancedSearch(String idsession,
-            String criterianame,
-            String natureobject,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
-        String SQL = "";
+                                                 String criterianame,
+                                                 String natureobject) {
+        String SQL;
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search " + " WHERE CRITERIA_NAME='" + criterianame + "' "
@@ -339,7 +311,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     Statement ps1 = con1.createStatement();
 
                     String SQL1 = "INSERT INTO eunis_advanced_search";
@@ -352,16 +324,14 @@ public class SaveAdvancedSearchCriteria {
                     SQL1 += "'" + rs.getString("NODE_TYPE") + "')";
 
                     ps1.executeUpdate(SQL1);
-                    ps1.close();
-                    con1.close();
+
+                    SQLUtilities.closeAll(con1, ps1, null);
                 }
             }
-
-            rs.close();
-            ps.close();
-            con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
     }
 
@@ -371,26 +341,17 @@ public class SaveAdvancedSearchCriteria {
      * @param idsession id session
      * @param criterianame criteria name
      * @param natureobject nature object
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC user
-     * @param SQL_PWD JDBC password
      */
     public static void insertEunisAdvancedSearchCriteria(String idsession,
-            String criterianame,
-            String natureobject,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
-        String SQL = "";
+                                                         String criterianame,
+                                                         String natureobject) {
+        String SQL;
         Connection con = null;
         Statement ps = null;
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             SQL = "SELECT * " + " FROM eunis_save_advanced_search_criteria " + " WHERE CRITERIA_NAME='" + criterianame + "' "
@@ -401,7 +362,7 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    Connection con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    Connection con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     Statement ps1 = con1.createStatement();
 
                     String SQL1 = "INSERT INTO eunis_advanced_search_criteria";
@@ -417,16 +378,15 @@ public class SaveAdvancedSearchCriteria {
                     SQL1 += "'" + rs.getString("LAST_VALUE") + "')";
 
                     ps1.executeUpdate(SQL1);
-                    ps1.close();
-                    con1.close();
+
+                    SQLUtilities.closeAll(con1, ps1, null);
                 }
             }
 
-            rs.close();
-            ps.close();
-            con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
     }
 
@@ -436,16 +396,15 @@ public class SaveAdvancedSearchCriteria {
      * @return max number
      */
     private Long CriteriaMaxNumber(String user) {
-        String SQL1 = "";
+        String SQL1;
         ResultSet rs = null;
         Connection con1 = null;
         Statement st = null;
 
-        Long result = new Long(0);
+        Long result = (long) 0;
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL1 = " SELECT MAX(CAST(SUBSTRING(CRITERIA_NAME,LENGTH('" + user + "')+1,LENGTH(CRITERIA_NAME)) AS SIGNED))"
                     + " FROM eunis_save_advanced_search" + " WHERE USERNAME = '" + user + "'";
@@ -456,16 +415,15 @@ public class SaveAdvancedSearchCriteria {
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
                     rs.next();
-                    result = new Long(rs.getLong(1) + 1);
+                    result = rs.getLong(1) + 1;
                 }
             }
-
-            rs.close();
-            st.close();
-            con1.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
+        } finally {
+            SQLUtilities.closeAll(con1, st, rs);
         }
+
         return result;
     }
 

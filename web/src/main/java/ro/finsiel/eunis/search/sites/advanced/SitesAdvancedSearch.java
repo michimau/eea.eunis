@@ -13,17 +13,13 @@ import java.sql.ResultSet;
  * @author finsiel
  */
 public class SitesAdvancedSearch {
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
+
     private int SQL_LIMIT = 1000;
 
     private Vector Tables = new Vector();
     private Vector Operands = new Vector();
     private Vector MinValues = new Vector();
     private Vector MaxValues = new Vector();
-    ;
 
     private int resultCount = 0;
 
@@ -44,17 +40,9 @@ public class SitesAdvancedSearch {
 
     /**
      * Initialization method.
-     * @param SQL_DRIVER_NAME JDBC driver.
-     * @param SQL_DRIVER_URL JDBC url.
-     * @param SQL_DRIVER_USERNAME JDBC username.
-     * @param SQL_DRIVER_PASSWORD JDBC password.
+     * @deprecated All DB connections should be taken from the pool
      */
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL,
-            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
-        SQL_DRV = SQL_DRIVER_NAME;
-        SQL_URL = SQL_DRIVER_URL;
-        SQL_USR = SQL_DRIVER_USERNAME;
-        SQL_PWD = SQL_DRIVER_PASSWORD;
+    public void Init() {
     }
 
     /**
@@ -171,8 +159,7 @@ public class SitesAdvancedSearch {
         String result = "-1";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (valuecolumn == null || valuecolumn.length() == 0) {
                 valuecolumn = "NAME";
@@ -570,8 +557,7 @@ public class SitesAdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (SQL.length() > 0) {
                 resultCount = 0;

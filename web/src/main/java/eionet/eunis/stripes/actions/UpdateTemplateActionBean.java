@@ -4,7 +4,6 @@ package eionet.eunis.stripes.actions;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -118,9 +117,8 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
                 && StringUtils.isNotBlank(result.getValue())) {
             return getContentManagement().savePageContentJDBC(idPage,
                     result.getValue(), description, language,
-                    (short) result.getValue().length(), null, true,
-                    getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                    getContext().getJdbcUser(), getContext().getJdbcPassword());
+                    (short) result.getValue().length(), null, true
+            );
         }
         return false;
     }
@@ -140,9 +138,8 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
                 for(Pair<String, String> pair : c.getResultList()){
                     getContentManagement().savePageContentJDBC("CDDA_" + pair.getId(),
                             pair.getValue(), "dd.eionet.europa.eu/CodelistServlet?id=66479", "EN",
-                            (short) pair.getValue().length(), null, true,
-                            getContext().getJdbcDriver(), getContext().getJdbcUrl(),
-                            getContext().getJdbcUser(), getContext().getJdbcPassword());
+                            (short) pair.getValue().length(), null, true
+                    );
 
                 }
 

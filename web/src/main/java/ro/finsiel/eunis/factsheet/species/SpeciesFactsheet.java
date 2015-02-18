@@ -244,7 +244,7 @@ public class SpeciesFactsheet {
             ex.printStackTrace();
         }
 
-        if (!countriesList.isEmpty()) {
+        if (countriesList != null && !countriesList.isEmpty()) {
             ret += " it is geographically distrubuted among the following countries/areas: " + countries;
         }
         return ret;
@@ -797,7 +797,6 @@ public class SpeciesFactsheet {
      */
     private void populateLegalStatusWrapper(LegalStatusWrapper legalStatus, Chm62edtReportsPersist report) {
         if (report.getIdDc() != null) {
-            legalStatus.setReference(report.getReference().toString());
             legalStatus.setIdDc(report.getIdDc());
 
             // get the description from attributes
@@ -810,6 +809,7 @@ public class SpeciesFactsheet {
                 legalStatus.setParentName(dto.getTitle());
                 legalStatus.setParentUrl(dto.getUrl());
                 legalStatus.setParentAlternative(dto.getAlternative());
+                legalStatus.setReference(report.getReference().toString());
             }
 
             List<AttributeDto> dcAttributes = dao.getDcAttributes(report.getIdDc().toString());

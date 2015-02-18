@@ -53,7 +53,7 @@ public class PostImportScriptsJobListener implements JobListener {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         sql.addImportLogMessage("Post import scripts started!");
     }
@@ -73,7 +73,7 @@ public class PostImportScriptsJobListener implements JobListener {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         if (exception != null) {
             logger.error(

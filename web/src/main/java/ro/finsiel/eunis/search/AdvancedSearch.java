@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +16,7 @@ import java.util.StringTokenizer;
  * @author finsiel
  */
 public class AdvancedSearch {
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
+
     private int SQL_LIMIT = 1000;
     private String SourceDB = "''";
 
@@ -38,17 +37,10 @@ public class AdvancedSearch {
 
     /**
      * Initializations.
-     * @param SQL_DRIVER_NAME JDBC driver
-     * @param SQL_DRIVER_URL JDBC url
-     * @param SQL_DRIVER_USERNAME JDBC username
-     * @param SQL_DRIVER_PASSWORD JDBC passw.
+     * @deprecated All DB connections should be taken from the pool
      */
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL,
-            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
-        SQL_DRV = SQL_DRIVER_NAME;
-        SQL_URL = SQL_DRIVER_URL;
-        SQL_USR = SQL_DRIVER_USERNAME;
-        SQL_PWD = SQL_DRIVER_PASSWORD;
+    public void Init() {
+
     }
 
     public void SetSQLLimit(int SQLLimit) {
@@ -63,28 +55,31 @@ public class AdvancedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = " DELETE FROM eunis_advanced_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -98,6 +93,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -109,32 +106,35 @@ public class AdvancedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = " DELETE FROM eunis_advanced_search_results";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             SQL += " AND NATURE_OBJECT = '" + natureObject + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             SQL += " AND NATURE_OBJECT = '" + natureObject + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             SQL += " AND NATURE_OBJECT = '" + natureObject + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
             SQL += " AND NATURE_OBJECT = '" + natureObject + "'";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria_temp";
             SQL += " WHERE ID_SESSION = '" + IdSession + "'";
@@ -149,6 +149,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -165,24 +167,27 @@ public class AdvancedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = " DELETE FROM eunis_advanced_search_results";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_temp";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria";
             ps = con.createStatement();
             ps.execute(SQL);
+            ps.close();
 
             SQL = " DELETE FROM eunis_advanced_search_criteria_temp";
             ps = con.createStatement();
@@ -195,6 +200,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
         return result;
     }
@@ -213,8 +220,7 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_advanced_search_results";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -239,8 +245,7 @@ public class AdvancedSearch {
         Connection con = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } catch (Exception e) {
             return null;
         }
@@ -263,8 +268,7 @@ public class AdvancedSearch {
         Statement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
 
             // while(tokenizer.hasMoreElements()) {
@@ -350,8 +354,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search";
             SQL += " SET NODE_TYPE='" + Criteria + "'";
@@ -390,8 +394,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search_criteria";
             SQL += " SET ATTRIBUTE='" + Attribute + "'";
@@ -422,8 +426,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search_criteria";
             SQL += " SET OPERATOR='" + Operator + "'";
@@ -433,6 +437,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             if (Operator.equalsIgnoreCase("Between")) {
                 SQL = "UPDATE eunis_advanced_search_criteria";
@@ -461,6 +466,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -474,8 +481,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search_criteria";
             SQL += " SET FIRST_VALUE='" + FirstValue + "'";
@@ -506,8 +513,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search_criteria";
             SQL += " SET LAST_VALUE='" + LastValue + "'";
@@ -546,8 +553,8 @@ public class AdvancedSearch {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -566,7 +573,6 @@ public class AdvancedSearch {
 
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -580,7 +586,6 @@ public class AdvancedSearch {
 
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
-                    has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     has.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -595,7 +600,6 @@ public class AdvancedSearch {
                     sas = new ro.finsiel.eunis.search.sites.advanced.SitesAdvancedSearch();
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -635,8 +639,8 @@ public class AdvancedSearch {
         String natObj = NatureObject.substring(0, NatureObject.indexOf("Save"));
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -655,7 +659,7 @@ public class AdvancedSearch {
 
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+//                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -669,7 +673,7 @@ public class AdvancedSearch {
 
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
-                    has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+//                    has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     has.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -684,7 +688,7 @@ public class AdvancedSearch {
                     sas = new ro.finsiel.eunis.search.sites.advanced.SitesAdvancedSearch();
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
-                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+//                    sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     sas.AddCriteria(rs.getString("ATTRIBUTE"),
                             rs.getString("OPERATOR"),
                             rs.getString("FIRST_VALUE"),
@@ -716,8 +720,8 @@ public class AdvancedSearch {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -763,8 +767,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -773,6 +777,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_advanced_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -788,7 +793,8 @@ public class AdvancedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -802,8 +808,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -811,6 +817,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_advanced_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -825,7 +832,8 @@ public class AdvancedSearch {
             result = this.CreateInitialBranch(IdSession, NatureObject, Attribute);
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -839,8 +847,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -848,6 +856,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_advanced_search";
             SQL += " WHERE NATURE_OBJECT = '" + NatureObject + "'";
@@ -863,7 +872,8 @@ public class AdvancedSearch {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -879,8 +889,8 @@ public class AdvancedSearch {
         String IdNodeNew = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             // obtin ultimul nod child al nodului curent
             if (IdNode.length() == 1) {
                 SQL = "SELECT * FROM eunis_advanced_search";
@@ -917,6 +927,7 @@ public class AdvancedSearch {
                 }
 
                 rs.close();
+                ps.close();
 
                 if (LastNumber.intValue() > 9) {
                     return result;
@@ -939,6 +950,7 @@ public class AdvancedSearch {
 
                 ps = con.prepareStatement(SQL);
                 ps.execute();
+                ps.close();
 
                 SQL = "INSERT INTO eunis_advanced_search_criteria";
                 SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
@@ -966,6 +978,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return result;
@@ -979,8 +993,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "UPDATE eunis_advanced_search";
             SQL += " SET NODE_TYPE='All'";
@@ -990,6 +1004,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_advanced_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
@@ -1001,6 +1016,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "UPDATE eunis_advanced_search_criteria";
             SQL += " SET ID_NODE='" + IdNode + ".1'";
@@ -1017,7 +1033,8 @@ public class AdvancedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -1031,8 +1048,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "DELETE FROM eunis_advanced_search";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
@@ -1040,6 +1057,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "DELETE FROM eunis_advanced_search_criteria";
             SQL += " WHERE ID_SESSION='" + IdSession + "'";
@@ -1047,6 +1065,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_advanced_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
@@ -1058,6 +1077,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_advanced_search";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)";
@@ -1069,6 +1089,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQL);
             ps.execute();
+            ps.close();
 
             SQL = "INSERT INTO eunis_advanced_search_criteria";
             SQL += "(ID_SESSION,NATURE_OBJECT,ID_NODE,ATTRIBUTE,OPERATOR,FIRST_VALUE,LAST_VALUE)";
@@ -1090,7 +1111,8 @@ public class AdvancedSearch {
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
 
         return result;
@@ -1115,8 +1137,8 @@ public class AdvancedSearch {
         ResultSet rsc = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQLModelStart = "SELECT ";
             SQLModelStart += "`eunis_advanced_search`.`ID_NODE`,";
@@ -1144,6 +1166,7 @@ public class AdvancedSearch {
                 p_operator = rs.getString("NODE_TYPE");
             }
             rs.close();
+            ps.close();
 
             SQL = SQLModelStart;
             SQL += "AND (LENGTH(`eunis_advanced_search`.`ID_NODE`)=1) ";
@@ -1272,6 +1295,11 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return where;
+        } finally {
+            SQLUtilities.closeAll(null, null, rsa);
+            SQLUtilities.closeAll(null, null, rsb);
+            SQLUtilities.closeAll(null, null, rsc);
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return where;
@@ -1312,8 +1340,8 @@ public class AdvancedSearch {
         String snodesc = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQLModelStart = "DELETE FROM eunis_advanced_search_temp";
             SQLModelStart += " WHERE (`eunis_advanced_search_temp`.`ID_SESSION`='"
@@ -1323,6 +1351,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             SQLModelStart = "DELETE FROM eunis_advanced_search_criteria_temp";
             SQLModelStart += " WHERE (`eunis_advanced_search_criteria_temp`.`ID_SESSION`='"
@@ -1332,6 +1361,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             // System.out.println("delete done");
 
@@ -1357,6 +1387,7 @@ public class AdvancedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             SQLModelStart = "SELECT * FROM eunis_advanced_search_criteria";
             SQLModelStart += " WHERE (`eunis_advanced_search_criteria`.`ID_SESSION`='"
@@ -1383,6 +1414,7 @@ public class AdvancedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             // System.out.println("populate done");
 
@@ -1414,6 +1446,7 @@ public class AdvancedSearch {
                 p_operator = rs.getString("NODE_TYPE");
             }
             rs.close();
+            ps.close();
 
             SQL = SQLModelStart;
             SQL += "AND (LENGTH(`eunis_advanced_search_temp`.`ID_NODE`)=1) ";
@@ -1601,6 +1634,11 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return where;
+        } finally {
+            SQLUtilities.closeAll(null, null, rsa);
+            SQLUtilities.closeAll(null, null, rsb);
+            SQLUtilities.closeAll(null, null, rsc);
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return snodes;
@@ -1641,8 +1679,8 @@ public class AdvancedSearch {
         String snodesc = "";
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQLModelStart = "DELETE FROM eunis_advanced_search_temp";
             SQLModelStart += " WHERE (`eunis_advanced_search_temp`.`ID_SESSION`='"
@@ -1652,6 +1690,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             SQLModelStart = "DELETE FROM eunis_advanced_search_criteria_temp";
             SQLModelStart += " WHERE (`eunis_advanced_search_criteria_temp`.`ID_SESSION`='"
@@ -1661,6 +1700,7 @@ public class AdvancedSearch {
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
+            ps.close();
 
             // System.out.println("delete done");
 
@@ -1686,6 +1726,7 @@ public class AdvancedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             SQLModelStart = "SELECT * FROM eunis_advanced_search_criteria";
             SQLModelStart += " WHERE (`eunis_advanced_search_criteria`.`ID_SESSION`='"
@@ -1712,6 +1753,7 @@ public class AdvancedSearch {
                 ps.execute();
             }
             rs.close();
+            ps.close();
 
             // System.out.println("populate done");
 
@@ -1743,6 +1785,7 @@ public class AdvancedSearch {
                 p_operator = rs.getString("NODE_TYPE");
             }
             rs.close();
+            ps.close();
 
             SQL = SQLModelStart;
             SQL += "AND (LENGTH(`eunis_advanced_search_temp`.`ID_NODE`)=1) ";
@@ -1941,6 +1984,11 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return where;
+        }  finally {
+            SQLUtilities.closeAll(null, null, rsa);
+            SQLUtilities.closeAll(null, null, rsb);
+            SQLUtilities.closeAll(null, null, rsc);
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return snodes;
@@ -1986,18 +2034,18 @@ public class AdvancedSearch {
     public String ExecuteFilterSQL(String SQL, String Delimiter) {
         String result = "";
         int resCount = 0;
-        StringBuffer resultbuf = new StringBuffer();
+        StringBuilder resultbuf = new StringBuilder();
 
         Connection con = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (SQL.length() > 0) {
                 resultCount = 0;
-                ResultSet rs = null;
 
                 ps = con.prepareStatement(SQL);
                 // System.out.println("Executing: "+SQL);
@@ -2043,6 +2091,8 @@ public class AdvancedSearch {
         } catch (Exception e) {
             e.printStackTrace();
             return result;
+        } finally {
+            SQLUtilities.closeAll(con, ps, rs);
         }
         return result;
     }
@@ -2054,8 +2104,8 @@ public class AdvancedSearch {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             if (SQL.length() > 0) {
                 ResultSet rs = null;

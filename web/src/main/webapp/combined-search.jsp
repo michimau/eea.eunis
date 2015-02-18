@@ -398,15 +398,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 //  System.out.println("IdSession = " + IdSession);
                 int SQL_LIMIT = Integer.parseInt(application.getInitParameter("SQL_LIMIT"));
 
-                String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                String SQL_URL = application.getInitParameter("JDBC_URL");
-                String SQL_USR = application.getInitParameter("JDBC_USR");
-                String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
                 String f_action = request.getParameter("action");
                 if(f_action==null) f_action="";
                 ro.finsiel.eunis.search.CombinedSearch cs = new ro.finsiel.eunis.search.CombinedSearch();
-                cs.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                 if(cs.CheckExistingSessionData(IdSession)) {
                   if(f_action.equalsIgnoreCase("clear")) {
                     cs.DeleteSessionData(IdSession);
@@ -524,14 +518,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 ro.finsiel.eunis.search.CombinedSearch tas = new ro.finsiel.eunis.search.CombinedSearch();
                 tas.SetSQLLimit(SQL_LIMIT);
 
-                tas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
                 //prelucram actiunea curenta
                 if(p_action.equalsIgnoreCase("reset")) {
                   ro.finsiel.eunis.search.CombinedSearch tsas;
                   tsas = new ro.finsiel.eunis.search.CombinedSearch();
                   tsas.SetSQLLimit(SQL_LIMIT);
-                  tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                   String attribute="ScientificName";
                   if(NatureObject.equalsIgnoreCase("Sites")) {
                     attribute="Name";
@@ -652,8 +644,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 ResultSet rs =null;
 
                 try {
-                  Class.forName(SQL_DRV);
-                  con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                  con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 }
                 catch(Exception e) {
                   e.printStackTrace();
@@ -1018,7 +1009,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     ro.finsiel.eunis.search.CombinedSearch tsas;
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -1056,7 +1046,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     ro.finsiel.eunis.search.CombinedSearch tsas;
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -1095,7 +1084,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSourceDB(SourceDB);
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                     pos_start=criteria.indexOf('#');
                     pos_end=criteria.indexOf('#',pos_start+1);
                     while(pos_start!=-1 && pos_end!=-1) {
@@ -1132,7 +1120,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   tsas = new ro.finsiel.eunis.search.CombinedSearch();
                   tsas.SetSourceDB(SourceDB);
                   tsas.SetSQLLimit(SQL_LIMIT);
-                  tsas.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                   String str=tsas.calculateCriteria(IdSession,NatureObject);
 
                   tsas.DeleteResults(IdSession,NatureObject);
@@ -1364,10 +1351,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
                 <%   // list of saved searches
                     out.print(SaveCombinedSearchCriteria.ExpandSaveCriteriaForThisPage(NatureObject,
-                                                                                      SQL_DRV,
-                                                                                      SQL_URL,
-                                                                                      SQL_USR,
-                                                                                      SQL_PWD,
                                                                                       SessionManager.getUsername(),
                                                                                       "combined-search.jsp"));
                   }

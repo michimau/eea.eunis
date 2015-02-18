@@ -109,7 +109,7 @@ public class Tester extends DefaultHandler {
 
             SQLUtilities sql = new SQLUtilities();
 
-            sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+            sql.Init();
             HashMap<String, ColumnDTO> columns = sql.getTableInfo(table);
 
             checkNodes(columns);

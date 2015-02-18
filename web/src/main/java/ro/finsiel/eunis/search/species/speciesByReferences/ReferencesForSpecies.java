@@ -29,10 +29,7 @@ public class ReferencesForSpecies {
     private Integer relationOpPublisher = null;
     private String publisher = null;
     private boolean showInvalidatedSpecies = false;
-    String SQL_DRV = "";
-    String SQL_URL = "";
-    String SQL_USR = "";
-    String SQL_PWD = "";
+
     private Vector results = new Vector();
 
     /**
@@ -49,27 +46,19 @@ public class ReferencesForSpecies {
      * @param editor Editor
      * @param relationOpEditor Relation operator for editor
      * @param showInvalidatedSpecies Display / Hide invalidated species in results
-     * @param SQL_DRV JDBC driver
-     * @param SQL_URL JDBC url
-     * @param SQL_USR JDBC username
-     * @param SQL_PWD JDBC password
      */
     public ReferencesForSpecies(String author,
-            Integer relationOpAuthor,
-            String date,
-            String date1,
-            Integer relationOpDate,
-            String title,
-            Integer relationOpTitle,
-            String publisher,
-            Integer relationOpPublisher,
-            String editor,
-            Integer relationOpEditor,
-            boolean showInvalidatedSpecies,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                Integer relationOpAuthor,
+                                String date,
+                                String date1,
+                                Integer relationOpDate,
+                                String title,
+                                Integer relationOpTitle,
+                                String publisher,
+                                Integer relationOpPublisher,
+                                String editor,
+                                Integer relationOpEditor,
+                                boolean showInvalidatedSpecies) {
 
         this.relationOpAuthor = relationOpAuthor;
         this.author = author;
@@ -83,10 +72,6 @@ public class ReferencesForSpecies {
         this.relationOpPublisher = relationOpPublisher;
         this.publisher = publisher;
         this.showInvalidatedSpecies = showInvalidatedSpecies;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_PWD = SQL_PWD;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
     }
 
     /**
@@ -213,8 +198,7 @@ public class ReferencesForSpecies {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL_REFERENCES = "SELECT DISTINCT A.";
 

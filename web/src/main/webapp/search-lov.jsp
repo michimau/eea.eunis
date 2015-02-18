@@ -14,6 +14,7 @@
                  java.sql.ResultSet,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String ctl = request.getParameter("ctl");
@@ -24,8 +25,8 @@
     val="";
   }
   String oper = request.getParameter("oper");
-  System.out.println( "oper=" + oper );
-  System.out.println( "lov=" + lov );
+//  System.out.println( "oper=" + oper );
+//  System.out.println( "lov=" + lov );
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -49,34 +50,14 @@
   </head>
   <body>
 <%
-  // Set the database connection parameters
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
   String SQL="";
-  Connection con;
+  Connection con = null;
   Statement ps = null;
-  ResultSet rs;
-
-  try
-  {
-    Class.forName(SQL_DRV);
-  }
-  catch (ClassNotFoundException e)
-  {
-    e.printStackTrace();
-    return;
-  }
+  ResultSet rs = null;
 
   try {
-    con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-  }
-  catch(Exception e) {
-    e.printStackTrace();
-    return;
-  }
+    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+
 
   // Set SQL string
   if(lov.equalsIgnoreCase("Altitude") ||
@@ -581,6 +562,14 @@
   }
   ps.close();
   con.close();
+
+    }
+    catch(Exception e) {
+        e.printStackTrace();
+        return;
+    } finally {
+      SQLUtilities.closeAll(con,  ps,  rs);
+    }
 %>
     <br />
       <form action="">

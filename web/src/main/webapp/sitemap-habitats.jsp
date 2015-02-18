@@ -1,4 +1,4 @@
-<%
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities" %><%
   response.setContentType("application/xml;charset=UTF-8");
 
   String start = request.getParameter("start");
@@ -17,27 +17,12 @@
     return;
   }
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
   java.sql.Connection con = null;
   java.sql.Statement ps = null;
   java.sql.ResultSet rs = null;
 
-  try
-  {
-    Class.forName(SQL_DRV);
-  }
-  catch (ClassNotFoundException e)
-  {
-    e.printStackTrace();
-    return;
-  }
-
   try {
-    con = java.sql.DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
     e.printStackTrace();
@@ -57,12 +42,11 @@
     while(rs.next()) {
       out.println("<url><loc>" + application.getInitParameter( "DOMAIN_NAME" ) + "/habitats/" + rs.getString("ID_HABITAT") + "</loc></url>");
     }
-
-    con.close();
-
   } catch (Exception e) {
     response.setContentType("text/plain;charset=UTF-8");
     e.printStackTrace();
+  } finally {
+      SQLUtilities.closeAll(con, ps, rs);
   }
   out.println("</urlset>");
 %>

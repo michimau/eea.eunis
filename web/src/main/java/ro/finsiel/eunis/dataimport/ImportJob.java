@@ -30,7 +30,7 @@ public class ImportJob implements Job {
 
         SQLUtilities sql = new SQLUtilities();
 
-        sql.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+        sql.Init();
 
         String tmpDir = dataMap.getString("tmpDir");
 
@@ -52,8 +52,8 @@ public class ImportJob implements Job {
 
             ImportParser iparser = new ImportParser();
 
-            iparser.execute(tmpDir + "importXmlFile", table, sqlDrv, sqlUsr,
-                    sqlPwd, sqlUrl);
+            iparser.execute(tmpDir + "importXmlFile", table
+            );
 
             // List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
 

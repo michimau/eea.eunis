@@ -5,7 +5,7 @@ import ro.finsiel.eunis.jrfTables.users.*;
 import ro.finsiel.eunis.jrfTables.users.UserDomain;
 import ro.finsiel.eunis.jrfTables.users.UserPersist;
 import ro.finsiel.eunis.session.ThemeManager;
-import ro.finsiel.eunis.auth.EncryptPassword;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Vector;
@@ -101,14 +101,11 @@ public class UsersUtility {
 
     /**
      * Delete an user.
+     *
      * @param username username.
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if succeed.
      */
-    public static boolean deleteUser(String username, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static boolean deleteUser(String username) {
         boolean succes = false;
         String SQL = "";
         String SQL1 = "";
@@ -120,9 +117,8 @@ public class UsersUtility {
         Statement st = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             SQL = "DELETE FROM eunis_users WHERE USERNAME='" + username + "'";
 
             ps = con.prepareStatement(SQL);
@@ -183,14 +179,11 @@ public class UsersUtility {
 
     /**
      * Delete an right.
+     *
      * @param rightname Name of the right.
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC urle.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if succeed.
      */
-    public static boolean deleteRights(String rightname, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static boolean deleteRights(String rightname) {
         boolean succes = false;
         String SQL = "";
         Connection con = null;
@@ -199,9 +192,8 @@ public class UsersUtility {
         PreparedStatement ps1 = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             SQL = "DELETE FROM eunis_rights WHERE RIGHTNAME='" + rightname + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
@@ -475,40 +467,32 @@ public class UsersUtility {
 
     /**
      * Edit a user.
+     *
      * @param manager who made this change
      * @param username user name
      * @param firstName user first name
      * @param lastName user last name
      * @param mail user mail
+     * @param loginDate Login date.
      * @param newUserName  new user name
      * @param request request
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC urle.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
-     * @param loginDate Login date.
      * @return true if operation was made with success
      */
     public static boolean editUser(String manager,
-            String username,
-            String firstName,
-            String lastName,
-            String mail,
-            String loginDate,
-            String newUserName,
-            HttpServletRequest request,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                   String username,
+                                   String firstName,
+                                   String lastName,
+                                   String mail,
+                                   String loginDate,
+                                   String newUserName,
+                                   HttpServletRequest request) {
         boolean result = false;
         String updateSQL = "";
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             // System.out.println("2----------loginDate="+loginDate+"+");
             updateSQL = "";
             updateSQL += " UPDATE eunis_users SET";
@@ -618,27 +602,20 @@ public class UsersUtility {
 
     /**
      * Edit a user role.
+     *
      * @param manager who made this change
      * @param rolename role name
      * @param oldRoleName old role name
      * @param description role description
      * @param request request
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC urle.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation was made with success
      */
 
     public static boolean editRoleName(String manager,
-            String rolename,
-            String oldRoleName,
-            String description,
-            HttpServletRequest request,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                       String rolename,
+                                       String oldRoleName,
+                                       String description,
+                                       HttpServletRequest request) {
         boolean result = false;
         String updateSQL = "";
         String SQL = "";
@@ -646,8 +623,7 @@ public class UsersUtility {
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             updateSQL = "";
             updateSQL += " UPDATE eunis_roles SET";
             updateSQL += " ROLENAME=?,";
@@ -708,7 +684,7 @@ public class UsersUtility {
             ps.close();
 
             // ADD NEW ROLES RIGHTS
-            result = addRightsForRole(manager, request, rolename, SQL_URL, SQL_USR, SQL_PWD);
+            result = addRightsForRole(manager, request, rolename);
 
             con.close();
         } catch (Exception e) {
@@ -723,30 +699,22 @@ public class UsersUtility {
     }
 
     /** Edit user rights.
+     *
      * @param manager who made this change
      * @param rightname right name
      * @param description right description
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC urle.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation was made with success
      */
     public static boolean editRights(String manager,
-            String rightname,
-            String description,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                     String rightname,
+                                     String description) {
         boolean result = false;
         String updateSQL = "";
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             updateSQL = "UPDATE eunis_rights SET";
             updateSQL += " DESCRIPTION=?";
@@ -759,17 +727,13 @@ public class UsersUtility {
             // Not sure if it's needed, but strange things happen when doing fast some operation on user from web page.
             ps = con.prepareStatement("COMMIT");
             ps.executeUpdate();
-            ps.close();
-            con.close();
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if (null != con) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {}
-            }
+        } finally {
+            SQLUtilities.closeAll(con, ps, null);
         }
+
         return result;
     }
 
@@ -946,15 +910,13 @@ public class UsersUtility {
 
     /**
      * Add user rights for a user role.
+     *
      * @param manager who made this operation
      * @param request request
      * @param rolename role name
-     * @param SQL_URL JDBC urle.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation was made with success
      */
-    public static boolean addRightsForRole(String manager, HttpServletRequest request, String rolename, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static boolean addRightsForRole(String manager, HttpServletRequest request, String rolename) {
         boolean success = false;
 
         try {
@@ -968,7 +930,7 @@ public class UsersUtility {
 
                 for (int i = 0; i < newRights.size(); i++) {
                     j++;
-                    con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con2[j] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     SQL = "INSERT INTO eunis_roles_rights(ROLENAME,RIGHTNAME) VALUES(";
                     SQL += "'" + rolename + "',";
                     SQL += "'" + (String) newRights.get(i) + "')";
@@ -1026,26 +988,18 @@ public class UsersUtility {
 
     /**
      * Delete a user role.
+     *
      * @param roleName role name
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation was made with success
      */
-    public static boolean deleteRole(String roleName,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+    public static boolean deleteRole(String roleName) {
         boolean result = false;
         String SQL = "";
         Connection con = null;
         PreparedStatement ps = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             SQL = "DELETE FROM eunis_roles WHERE ROLENAME='" + roleName + "'";
             ps = con.prepareStatement(SQL);
             ps.execute();
@@ -1157,12 +1111,8 @@ public class UsersUtility {
      * @param username user name
      * @param pagename page name
      * @param criterianame criteria name
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      */
-    public static void deleteUserSaveCriteria(String username, String pagename, String criterianame, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static void deleteUserSaveCriteria(String username, String pagename, String criterianame) {
         String SQL = "";
         String SQL1 = "";
         ResultSet rs = null;
@@ -1171,8 +1121,7 @@ public class UsersUtility {
         Statement st = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_group_search WHERE USERNAME='" + username + "' AND CRITERIA_NAME='" + criterianame
                     + "' AND FROM_WHERE='" + pagename + "'";
@@ -1211,12 +1160,8 @@ public class UsersUtility {
      * @param natureobject nature object
      * @param pagename page name
      * @param criterianame criteria name
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      */
-    public static void deleteUserSaveAdvancedCriteria(String natureobject, String pagename, String criterianame, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static void deleteUserSaveAdvancedCriteria(String natureobject, String pagename, String criterianame) {
         String SQL = "";
         String SQL1 = "";
         ResultSet rs = null;
@@ -1225,8 +1170,7 @@ public class UsersUtility {
         Statement st = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM eunis_save_advanced_search WHERE NATURE_OBJECT='" + natureobject + "' AND CRITERIA_NAME='"
                     + criterianame + "' AND FROM_WHERE='" + pagename + "'";
@@ -1265,12 +1209,8 @@ public class UsersUtility {
      * Delete saved combined search criteria.
      * @param pagename page name
      * @param criterianame criteria name
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      */
-    public static void deleteUserSaveCombinedCriteria(String pagename, String criterianame, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static void deleteUserSaveCombinedCriteria(String pagename, String criterianame) {
         String SQL = "";
         String SQL1 = "";
         ResultSet rs = null;
@@ -1279,8 +1219,7 @@ public class UsersUtility {
         Statement st = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con1 = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con1 = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL = "SELECT * FROM EUNIS_SAVE_COMBINED_SEARCH WHERE CRITERIA_NAME='" + criterianame + "' AND FROM_WHERE='" + pagename
                     + "'";
@@ -1317,28 +1256,21 @@ public class UsersUtility {
 
     /**
      * Add users.
+     *
      * @param username user name
      * @param firstname user first name
      * @param lastname user last name
      * @param mail user mail
-     * @param manager who made this operation
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @param loginDate Login date.
+     * @param manager who made this operation
      * @return true if operation was made with success
      */
     public static boolean addUsers(String username,
-            String firstname,
-            String lastname,
-            String mail,
-            String loginDate,
-            String manager,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                                   String firstname,
+                                   String lastname,
+                                   String mail,
+                                   String loginDate,
+                                   String manager) {
         boolean success = false;
         Connection con = null;
         PreparedStatement ps = null;
@@ -1346,8 +1278,7 @@ public class UsersUtility {
 
         if (!existUserName(username)) {
             try {
-                Class.forName(SQL_DRV);
-                con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
                 SQL = "INSERT INTO eunis_users(USERNAME,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) "
                         + " VALUES(?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
@@ -1374,15 +1305,13 @@ public class UsersUtility {
 
     /**
      * Add roles for users.
+     *
      * @param username user name
      * @param request request
      * @param manager who made this operation
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      * @return true if operation was made with success
      */
-    public static boolean addRolesForUser(String username, HttpServletRequest request, String manager, String SQL_URL, String SQL_USR, String SQL_PWD) {
+    public static boolean addRolesForUser(String username, HttpServletRequest request, String manager) {
         boolean success = false;
 
         try {
@@ -1396,7 +1325,7 @@ public class UsersUtility {
 
                 for (int i = 0; i < newRoles.size(); i++) {
                     j++;
-                    con2[j] = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con2[j] = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                     SQL = "INSERT INTO eunis_users_roles(USERNAME,ROLENAME) VALUES(";
                     SQL += "'" + username + "',";
                     SQL += "'" + (String) newRoles.get(i) + "')";

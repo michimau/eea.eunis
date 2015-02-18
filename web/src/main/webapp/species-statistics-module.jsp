@@ -22,13 +22,8 @@
     String eeaHome = application.getInitParameter( "EEA_HOME" );
     String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_statistics";
 
-    String SQL_DRV = application.getInitParameter("JDBC_DRV");
-    String SQL_URL = application.getInitParameter("JDBC_URL");
-    String SQL_USR = application.getInitParameter("JDBC_USR");
-    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
     SQLUtilities sqlc = new SQLUtilities();
-    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+    sqlc.Init();
 
     String countryName = (request.getParameter("countryName") == null ? "" : request.getParameter("countryName"));
 %>

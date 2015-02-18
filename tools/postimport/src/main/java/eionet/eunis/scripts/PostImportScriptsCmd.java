@@ -32,7 +32,7 @@ public class PostImportScriptsCmd {
                 String dbPass = props.getString("mysql.password");
 
                 SQLUtilities sql = new SQLUtilities();
-                sql.Init(dbDriver, dbUrl, dbUser, dbPass);
+                sql.Init();
 
                 System.out.println(args[0] + " command started!");
 
@@ -42,7 +42,7 @@ public class PostImportScriptsCmd {
                     sql.reconstructTaxonomyTree();
                 } else {
                     TabScripts scripts = new TabScripts();
-                    scripts.Init(dbDriver, dbUrl, dbUser, dbPass, true);
+                    scripts.Init(true);
                     if (args[0].equals("species_tab")) {
                         scripts.setTabSpecies();
                     } else if (args[0].equals("sites_tab")) {

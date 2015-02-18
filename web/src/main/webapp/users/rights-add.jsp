@@ -118,25 +118,6 @@
       //-->
 </script>
 <%
-  // Set database parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-
-  // If some of them is null, the wanted database operation isn't made
-  if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
-  {
-%>
-    <%=cm.cmsText("error_web_xml_missing_required_values")%>
-<%
-    return;
-  }
 
 // Request parameters
 String rightName = (request.getParameter("rightName") == null ? "" : request.getParameter("rightName"));
@@ -188,7 +169,7 @@ if(users_operation.equalsIgnoreCase("add_rights"))
              {
                String description = (request.getParameter("description") == null ? "" : request.getParameter("description"));
                // Edit right
-               boolean editWithSuccess = UsersUtility.editRights(SessionManager.getUsername(),rightName,description,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+               boolean editWithSuccess = UsersUtility.editRights(SessionManager.getUsername(),rightName,description);
                if(editWithSuccess) message = cm.cms("rights_add_06");
                else message = "<span color=\"red\">"+cm.cms("rights_add_07")+"</span>";
 
@@ -205,7 +186,7 @@ if(users_operation.equalsIgnoreCase("add_rights"))
           && UsersUtility.existRightName(request.getParameter("rightName")) )
        {
            // Delete right
-           boolean deleteWithSucces = UsersUtility.deleteRights(rightName,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+           boolean deleteWithSucces = UsersUtility.deleteRights(rightName);
            if(deleteWithSucces) message = cm.cms("rights_add_08");
            else message = "<span color=\"red\">"+cm.cms("rights_add_09")+"</span>";
        }  else message = "<span color=\"red\">"+cm.cms("rights_add_09")+"</span>";

@@ -40,16 +40,6 @@
     </script>
   </head>
 <%
-  // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   // Number of the form elements used in this save search criteria
   int number = (request.getParameter("numberCriteria") == null ? 0 : Utilities.checkedStringToInt(request.getParameter("numberCriteria"),0));
@@ -88,11 +78,8 @@
                                                   requestParser.getBooleans(),
                                                   requestParser.getOperators(),
                                                   requestParser.getFirstValues(),
-                                                  requestParser.getLastValues(),
-                                                  SQL_DRV,
-                                                  SQL_URL,
-                                                  SQL_USR,
-                                                  SQL_PWD);
+                                                  requestParser.getLastValues()
+    );
     saveWithSuccess = sal.SaveCriterias();
 }
 

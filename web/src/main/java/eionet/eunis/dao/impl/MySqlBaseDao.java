@@ -12,33 +12,25 @@ import java.sql.Types;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
-
 
 public abstract class MySqlBaseDao {
 
+    private static final Logger logger = Logger.getLogger(MySqlBaseDao.class);
+
     /**
      * Returns a new database connection.
-     *
-     * @throws ServiceException if no connections were available.
      */
     public static synchronized Connection getConnection() throws SQLException {
 
         Connection conn = null;
 
         try {
-            ResourceBundle props = ResourceBundle.getBundle("jrf");
-            String dbDriver = props.getString("mysql.driver");
-            String dbUrl = props.getString("mysql.url");
-            String dbUser = props.getString("mysql.user");
-            String dbPass = props.getString("mysql.password");
-
-            Class.forName(dbDriver);
-            conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } catch (Throwable e) {
-            System.err.println(e.getMessage());
+            logger.error(e, e);
         }
         return conn;
     }

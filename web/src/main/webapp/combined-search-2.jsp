@@ -335,11 +335,6 @@
                   //  System.out.println("IdSession = " + IdSession);
                   int SQL_LIMIT = Integer.parseInt(application.getInitParameter("SQL_LIMIT"));
 
-                  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                  String SQL_URL = application.getInitParameter("JDBC_URL");
-                  String SQL_USR = application.getInitParameter("JDBC_USR");
-                  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-
                   //Utilities.dumpRequestParams(request);
                   String p_action = request.getParameter("action");
                   if(p_action == null) p_action = "";
@@ -359,14 +354,11 @@
                   ro.finsiel.eunis.search.CombinedSearch tas = new ro.finsiel.eunis.search.CombinedSearch();
                   tas.SetSQLLimit(SQL_LIMIT);
 
-                  tas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-
                   //prelucram actiunea curenta
                   if(p_action.equalsIgnoreCase("reset")) {
                     ro.finsiel.eunis.search.CombinedSearch tsas;
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     String attribute = "ScientificName";
                     if(NatureObject.equalsIgnoreCase("Sites")) {
                       attribute = "Name";
@@ -485,8 +477,7 @@
                   ResultSet rs = null;
 
                   try {
-                    Class.forName(SQL_DRV);
-                    con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+                    con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                   }
                   catch(Exception e) {
                     e.printStackTrace();
@@ -849,7 +840,6 @@
                       ro.finsiel.eunis.search.CombinedSearch tsas;
                       tsas = new ro.finsiel.eunis.search.CombinedSearch();
                       tsas.SetSQLLimit(SQL_LIMIT);
-                      tsas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                       pos_start = criteria.indexOf('#');
                       pos_end = criteria.indexOf('#', pos_start + 1);
                       while(pos_start != -1 && pos_end != -1) {
@@ -887,7 +877,6 @@
                       ro.finsiel.eunis.search.CombinedSearch tsas;
                       tsas = new ro.finsiel.eunis.search.CombinedSearch();
                       tsas.SetSQLLimit(SQL_LIMIT);
-                      tsas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                       pos_start = criteria.indexOf('#');
                       pos_end = criteria.indexOf('#', pos_start + 1);
                       while(pos_start != -1 && pos_end != -1) {
@@ -926,7 +915,6 @@
                       tsas = new ro.finsiel.eunis.search.CombinedSearch();
                       tsas.SetSourceDB(SourceDB);
                       tsas.SetSQLLimit(SQL_LIMIT);
-                      tsas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                       pos_start = criteria.indexOf('#');
                       pos_end = criteria.indexOf('#', pos_start + 1);
                       while(pos_start != -1 && pos_end != -1) {
@@ -963,7 +951,6 @@
                     tsas = new ro.finsiel.eunis.search.CombinedSearch();
                     tsas.SetSourceDB(SourceDB);
                     tsas.SetSQLLimit(SQL_LIMIT);
-                    tsas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
                     String str = tsas.calculateCriteria(IdSession, NatureObject);
 
                     tsas.DeleteResults(IdSession, NatureObject);

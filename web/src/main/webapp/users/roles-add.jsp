@@ -143,24 +143,6 @@
       //-->
 </script>
 <%
-  // Set database parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-  // If some of them is null, the wanted database operation isn't made
-  if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
-  {
-%>
-    <%=cm.cmsText("error_web_xml_missing_required_values")%>
-<%
-    return;
-  }
 
 String message = "";
 // Request parameters
@@ -194,7 +176,7 @@ else
            boolean addRightsSuccess = false;
            if(addRoleSuccess) {
              // add rights for this role
-             addRightsSuccess = UsersUtility.addRightsForRole(SessionManager.getUsername(),request,goodNameRole,SQL_URL,SQL_USR,SQL_PWD);
+             addRightsSuccess = UsersUtility.addRightsForRole(SessionManager.getUsername(),request,goodNameRole);
            }
 
 
@@ -222,11 +204,8 @@ else
                                      goodNameRole,
                                      request.getParameter("roleName"),
                                      description,
-                                     request,
-                                     SQL_DRV,
-                                     SQL_URL,
-                                     SQL_USR,
-                                     SQL_PWD);
+                                     request
+         );
 
 
         if(updateRoleSuccess) message = cm.cms("roles_add_10");
@@ -244,7 +223,7 @@ else
            && UsersUtility.existRoleName(request.getParameter("roleName")))
         {
             // delete the role
-            boolean deleteWithSuccess = UsersUtility.deleteRole(request.getParameter("roleName"),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+            boolean deleteWithSuccess = UsersUtility.deleteRole(request.getParameter("roleName"));
             if(deleteWithSuccess) message = cm.cms("roles_add_13");
             else message = "<span color=\"red\">"+cm.cms("role_not_deleted")+"</span>";
         } else message = "<span color=\"red\">"+cm.cms("role_not_deleted")+"</span>";

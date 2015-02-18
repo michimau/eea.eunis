@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,11 +28,6 @@ public class References {
     private Integer relationOpPublisher = null;
     private String publisher = null;
 
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
-
     private Vector results = new Vector();
 
     /**
@@ -46,26 +43,18 @@ public class References {
      * @param relationOpPublisher Relation operator for publisher.
      * @param editor Editor.
      * @param relationOpEditor Relation operator for editor.
-     * @param SQL_DRV JDBC driver.
-     * @param SQL_URL JDBC url.
-     * @param SQL_USR JDBC user.
-     * @param SQL_PWD JDBC password.
      */
     public References(String author,
-            Integer relationOpAuthor,
-            String date,
-            String date1,
-            Integer relationOpDate,
-            String title,
-            Integer relationOpTitle,
-            String publisher,
-            Integer relationOpPublisher,
-            String editor,
-            Integer relationOpEditor,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PWD) {
+                      Integer relationOpAuthor,
+                      String date,
+                      String date1,
+                      Integer relationOpDate,
+                      String title,
+                      Integer relationOpTitle,
+                      String publisher,
+                      Integer relationOpPublisher,
+                      String editor,
+                      Integer relationOpEditor) {
 
         this.relationOpAuthor = relationOpAuthor;
         this.author = author;
@@ -78,10 +67,6 @@ public class References {
         this.title = title;
         this.relationOpPublisher = relationOpPublisher;
         this.publisher = publisher;
-        this.SQL_DRV = SQL_DRV;
-        this.SQL_PWD = SQL_PWD;
-        this.SQL_URL = SQL_URL;
-        this.SQL_USR = SQL_USR;
     }
 
     /**
@@ -223,8 +208,7 @@ public class References {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
 
             SQL_REFERENCES = "SELECT DISTINCT ";
 
@@ -266,24 +250,7 @@ public class References {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (Exception ex) {}
-            }
-            ;
-            if (rs != null) {
-                try {
-                    ps.close();
-                } catch (Exception ex) {}
-            }
-            ;
-            if (rs != null) {
-                try {
-                    con.close();
-                } catch (Exception ex) {}
-            }
-            ;
+            SQLUtilities.closeAll(con, ps, rs);
         }
 
         return results;

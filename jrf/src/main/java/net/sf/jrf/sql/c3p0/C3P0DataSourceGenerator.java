@@ -66,8 +66,10 @@ public class C3P0DataSourceGenerator implements LocalDataSourceGenerator {
             cpds.setUnreturnedConnectionTimeout(JRFProperties.resolveIntProperty(p, dbtype + ".c3p0.unreturnedConnectionTimeout", 0));
 
             // http://www.mchange.com/projects/c3p0/#debugUnreturnedConnectionStackTraces
-            cpds.setTestConnectionOnCheckin(JRFProperties.resolveBooleanProperty(p, dbtype + ".c3p0.debugUnreturnedConnectionStackTraces", false));
+            cpds.setDebugUnreturnedConnectionStackTraces(JRFProperties.resolveBooleanProperty(p, dbtype + ".c3p0.debugUnreturnedConnectionStackTraces", false));
 
+            // http://www.mchange.com/projects/c3p0/#checkoutTimeout
+            cpds.setCheckoutTimeout(JRFProperties.resolveIntProperty(p, dbtype + ".c3p0.checkoutTimeout", 0));
 
             LOG.debug(cpds.toString());
         } catch (PropertyVetoException pve){

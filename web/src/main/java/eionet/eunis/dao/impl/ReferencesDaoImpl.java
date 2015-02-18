@@ -143,6 +143,8 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            closeAllResources(con, preparedStatement, rs);
         }
 
         return ret;
@@ -164,7 +166,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                             "a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE " +
                             "FROM dc_attributes AS a " +
                             "LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME " +
-                            "WHERE ID_DC = ? and b.name not in ('isPartOf','hasPart')");
+                            "WHERE ID_DC = ? AND b.name NOT IN ('isPartOf','hasPart')");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             
@@ -182,6 +184,9 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 AttributeDto attr = new AttributeDto(name, type, object, lang, label);
                 ret.add(attr);
             }
+
+            rs.close();
+            preparedStatement.close();
             
             // Retrieving reference labels for objects of type "localref"
             preparedStatement = con.prepareStatement(
@@ -198,6 +203,8 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 String title = rs.getString("TITLE");
                 localrefTitles.put(id, title);
             }
+            rs.close();
+            preparedStatement.close();
             
             // Connecting labels to localref attributes.
             for(int i = 0; i < ret.size(); i++) {
@@ -330,7 +337,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 psIndex.setString(2, title);
                 psIndex.setString(3, publisher);
                 if (year != null && year.length() == 4) {
-                    psIndex.setInt(4, new Integer(year).intValue());
+                    psIndex.setInt(4, new Integer(year));
                 } else {
                     psIndex.setInt(4, Types.NULL);
                 }
@@ -342,8 +349,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                con.close();
-                psIndex.close();
+                closeAllResources(con, psIndex, null);
             }
         }
         return ret;
@@ -354,7 +360,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         int maxIdInt = 0;
 
         if (maxId != null && maxId.length() > 0) {
-            maxIdInt = new Integer(maxId).intValue();
+            maxIdInt = new Integer(maxId);
         }
 
         return maxIdInt;

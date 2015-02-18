@@ -2,7 +2,6 @@ package ro.finsiel.eunis.utilities;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -16,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
 import eionet.eunis.dto.DoubleDTO;
@@ -24,10 +24,9 @@ import eionet.eunis.dto.DoubleDTO;
  * User: ancai Date: 03.03.2005 Time: 15:35:37.
  */
 public class SQLUtilities {
-    private String SQL_DRV = "";
-    private String SQL_URL = "";
-    private String SQL_USR = "";
-    private String SQL_PWD = "";
+
+    private static final Logger logger = Logger.getLogger(SQLUtilities.class);
+
     private int SQL_LIMIT = 1000;
     private int resultCount = 0;
     private static final String INSERT_BOOKMARK =
@@ -58,20 +57,9 @@ public class SQLUtilities {
     /**
      * Initialization method for this object.
      *
-     * @param SQL_DRIVER_NAME
-     *            JDBC driver.
-     * @param SQL_DRIVER_URL
-     *            JDBC url.
-     * @param SQL_DRIVER_USERNAME
-     *            JDBC username.
-     * @param SQL_DRIVER_PASSWORD
-     *            JDBC password.
+     * @deprecated Use the connection pool instead
      */
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL, String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
-        SQL_DRV = SQL_DRIVER_NAME;
-        SQL_URL = SQL_DRIVER_URL;
-        SQL_USR = SQL_DRIVER_USERNAME;
-        SQL_PWD = SQL_DRIVER_PASSWORD;
+    public void Init() {
     }
 
     /**
@@ -174,8 +162,7 @@ public class SQLUtilities {
         Connection con = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -278,7 +265,7 @@ public class SQLUtilities {
             return "";
         }
 
-        // System.out.println("SQL = " + SQL);
+        logger.debug("SQL = " + SQL);
 
         String result = "";
 
@@ -314,9 +301,9 @@ public class SQLUtilities {
     public void UpdateSQL(String SQL) {
 
         if (SQL == null || SQL.trim().length() <= 0) {
-            System.out.println("SQL is empty!");
+            logger.info("SQL is empty!");
         }
-        // System.out.println("SQL = " + SQL);
+        // logger.debug("SQL is empty!");
 
         String result = "";
 
@@ -331,7 +318,7 @@ public class SQLUtilities {
             updateQuery = statement.executeUpdate(SQL);
 
             if (updateQuery != 0) {
-                System.out.println("table is created successfully and " + updateQuery
+                logger.info("table is created successfully and " + updateQuery
                         + " row is inserted.");
             }
 
@@ -400,7 +387,7 @@ public class SQLUtilities {
 
     /**
      * Executes given parameterized SQL statement with the given parameter values, passing the result set rows to the given reader.
-     * Uses connection created internally from arguments supplied via {@link #Init(String, String, String, String)}.
+     * Uses connection created internally from arguments supplied via {@link #Init()}.
      *
      * @param parameterizedSQL The given parameterized SQL.
      * @param values The given SQL parameter values.
@@ -408,12 +395,6 @@ public class SQLUtilities {
      * @throws SQLException When executing the query and traversing its result.
      */
     public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader) throws SQLException {
-
-        try {
-            Class.forName(SQL_DRV);
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Unable to locate JDBC driver: " + SQL_DRV, e);
-        }
 
         ResultSet rs = null;
         PreparedStatement pstmt = null;
@@ -765,12 +746,13 @@ public class SQLUtilities {
             }
             con.commit();
         } catch (Exception e) {
-            con.rollback();
-            con.commit();
+            if(con != null){
+                con.rollback();
+            }
             throw new IllegalArgumentException(e.getMessage() + " for statement: " + query, e);
             // result.add(e.getMessage()+"<br/> SQL statement: "+query);
         } finally {
-            st.close();
+            closeAll(null, st, null);
             closeAll(con, ps, null);
         }
         return result;
@@ -1333,10 +1315,7 @@ public class SQLUtilities {
         SQLUtilities sqlc = new SQLUtilities();
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-
+            con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites latitude/longitude values: " + e.getMessage(), cmd,
                     sqlc);

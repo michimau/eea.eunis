@@ -1,0 +1,79 @@
+package ro.finsiel.eunis.utilities;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import net.sf.jrf.sql.JRFConnection;
+import org.apache.log4j.Logger;
+
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+/**
+ * One pool to rule them all
+ * A c3p0 initialized with the JRF settings, used to replace all the direct calls to DriverManager.getConnection()
+ * User: miahi
+ * Date: 2/11/15
+ * Time: 8:01 PM
+ */
+public class TheOneConnectionPool {
+
+    private static final Logger logger = Logger.getLogger(TheOneConnectionPool.class);
+
+    private static DataSource dataSource = null;
+
+    private static synchronized DataSource getDataSource(){
+        if(dataSource == null){
+            logger.debug("The One Pool is created");
+
+            JRFConnection jrfc = net.sf.jrf.sql.JRFConnectionFactory.create();
+            dataSource = (DataSource) jrfc.getDataSource();
+        }
+        return dataSource;
+    }
+
+    /**
+     * Returns a DB connection from the c3p0 pool
+     * @return A DB connection
+     * @throws SQLException Mainly thrown if the pool cannot return a conneciton before timeout (see checkoutTimeout on c3p0's settings)
+     */
+    public static Connection getConnection() throws SQLException{
+        try {
+            if(logger.isDebugEnabled()) {
+                // the code below can list the calling class - useful to debug or monitor connection usage
+                logger.debug("getConnection Invoked!");
+                StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+                int first = 2;
+                if(ste[first].getClassName().endsWith("TheOneConnectionPool")){
+                    first++;
+                }
+
+                logger.debug("getConnection invoked from " + ste[first]);
+
+                if(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) {
+                    while(ste[first].getClassName().endsWith("MySqlBaseDao") || ste[first].getClassName().endsWith("SQLUtilities")) first++;
+                    logger.debug("which is invoked by " + ste[first]);
+                }
+            }
+
+            Connection c = getDataSource().getConnection();
+            if(c != null){
+                return c;
+            } else {
+                throw new SQLException("The connection pool could not return a connection");
+            }
+        } catch (SQLException e) {
+            logger.error(e,e);  //just log the error, it could be that the calling class doesn't do it
+            throw e;
+        }
+    }
+
+    /**
+     * @deprecated All calls like this should be replaced by the simple getConnection() call and all the parameters should be removed from the initial code.
+     */
+    public static Connection getConnection(String sql_url, String sql_usr, String sql_pwd) throws SQLException {
+        return getConnection();
+    }
+}

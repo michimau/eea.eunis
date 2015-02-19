@@ -16,8 +16,8 @@
     </properties>
 
     <version>1.0-SNAPSHOT</version>
-    <name>Eunis Main POM</name>
-    <url>http://maven.apache.org</url>
+    <name>EUNIS Main POM</name>
+    <url>http://eunis.eea.europa.eu/</url>
 
     <modules>
         <module>web</module>

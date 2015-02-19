@@ -9,9 +9,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>deletesites</artifactId>
+    <artifactId>eunisctl</artifactId>
     <packaging>jar</packaging>
-    <name>Delete sites</name>
+    <name>EUNIS Control tool</name>
 
     <properties>
         <main.basedir>${project.basedir}/../..</main.basedir>
@@ -49,7 +49,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>eionet.eunis.scripts.DeleteSites</mainClass>
+                            <mainClass>eionet.eunis.scripts.EunisCtl</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

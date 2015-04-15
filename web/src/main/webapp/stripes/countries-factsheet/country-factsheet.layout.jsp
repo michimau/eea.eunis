@@ -77,7 +77,7 @@
 	                            <a href="javascript:window.location.reload()" onclick="return false;" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">${tab.title}</a>
 	                        </c:if>
 	                        <c:if test="${!(tab eq actionBean.currTab)}">
-		                        <stripes:link beanclass="${actionBean.class.name}" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">
+		                        <stripes:link beanclass="${actionBean['class'].name}" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">
 		                            <stripes:param name="eunisAreaCode" value="${actionBean.country.eunisAreaCode}"/>
 		                            <stripes:param name="tab" value="${tab.displayName}"/>
 		                            <c:if test="${tab == 'DESIG_TYPES' && actionBean.currTab == 'GENERAL'}">

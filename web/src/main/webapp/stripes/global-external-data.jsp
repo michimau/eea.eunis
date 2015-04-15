@@ -25,7 +25,7 @@
                     <dl>
                         <c:forEach items="${actionBean.queries}" var="query" varStatus="loop">
                             <dt>
-                            <stripes:link beanclass="${actionBean.class.name}" rel="nofollow">
+                            <stripes:link beanclass="${actionBean['class'].name}" rel="nofollow">
                                 <c:out value="${query.title}"/>
                                 <stripes:param name="query" value="${query.id}"/>
                             </stripes:link>
@@ -44,7 +44,7 @@
 
                 <div style="font-weight:bold">Select a query:</div>
                 <c:if test="${not empty actionBean.queries}">
-                    <stripes:form beanclass="${actionBean.class.name}" method="get">
+                    <stripes:form beanclass="${actionBean['class'].name}" method="get">
                         <p>
                             <stripes:select name="query">
                                 <stripes:options-collection collection="${actionBean.queries}" label="title" value="id"/>

@@ -59,6 +59,8 @@
               ResultSet rs7 = null;
               PreparedStatement ps8 = null;
               ResultSet rs8 = null;
+              PreparedStatement ps9 = null;
+              ResultSet rs9 = null;
 
               try
               {
@@ -240,10 +242,99 @@
 		            <%
 		                                   while(rs7.next())
 		                                   {
+                                                       if(sqlc.EunisHabitatHasChilds(rs7.getString("EUNIS_HABITAT_CODE"))) {
+		            %>
+		                                 <li>
+		                                 	<% if(Utilities.expandContains(expand,rs7.getString("EUNIS_HABITAT_CODE"))){ %>
+						                      <a title="<%=hide%>" id="level_<%=rs7.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs7.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs7.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
+						                    <% } else { %>
+						                      <a title="<%=show%>" id="level_<%=rs7.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs7.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs7.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
+						                    <% } %>
+											<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs7.getString("SCIENTIFIC_NAME"))%></a>
+		                                 
+		            <%
+		                                 } else {
+		            %>
+		                                 <li>
+		                                   <img src="images/img_bullet.gif" alt="<%=rs7.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs7.getString("SCIENTIFIC_NAME"))%></a>
+		                                 
+		            <%
+		                                 }
+		                                 if(expand.length()>0 && Utilities.expandContains(expand,rs7.getString("EUNIS_HABITAT_CODE"))) {
+		                                   strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                                   strSQL = strSQL + " FROM chm62edt_habitat";
+		                                   strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs7.getString("EUNIS_HABITAT_CODE").substring(0,7)+"%'";
+		                                   strSQL = strSQL + " AND LEVEL=7";
+		                                   strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                                   ps8 = con.prepareStatement( strSQL );
+		                                   rs8 = ps8.executeQuery();
+		
+		            %>
+		                                   <ul class="eunistree">
+		            <%
+		                                   while(rs8.next())
+		                                   {
+                                                       if(sqlc.EunisHabitatHasChilds(rs8.getString("EUNIS_HABITAT_CODE"))) {
+		            %>
+		                                 <li>
+		                                 	<% if(Utilities.expandContains(expand,rs8.getString("EUNIS_HABITAT_CODE"))){ %>
+						                      <a title="<%=hide%>" id="level_<%=rs8.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs8.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs8.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
+						                    <% } else { %>
+						                      <a title="<%=show%>" id="level_<%=rs8.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs8.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs8.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
+						                    <% } %>
+											<a title="<%=rs8.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs8.getString("ID_HABITAT")%>"><%=rs8.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs8.getString("SCIENTIFIC_NAME"))%></a>
+		                                 
+		            <%
+		                                 } else {
+		            %>
+		                                 <li>
+		                                   <img src="images/img_bullet.gif" alt="<%=rs8.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs8.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs8.getString("ID_HABITAT")%>"><%=rs8.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs8.getString("SCIENTIFIC_NAME"))%></a>
+		                                 
+		            <%
+		                                 }
+		                                 if(expand.length()>0 && Utilities.expandContains(expand,rs8.getString("EUNIS_HABITAT_CODE"))) {
+		                                   strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                                   strSQL = strSQL + " FROM chm62edt_habitat";
+		                                   strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs8.getString("EUNIS_HABITAT_CODE").substring(0,8)+"%'";
+		                                   strSQL = strSQL + " AND LEVEL=8";
+		                                   strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                                   ps9 = con.prepareStatement( strSQL );
+		                                   rs9 = ps9.executeQuery();
+		
+		            %>
+		                                   <ul class="eunistree">
+		            <%
+		                                   while(rs9.next())
+		                                   {
 		            %>
 		                                     <li>
-		                                       <img src="images/img_bullet.gif" alt="<%=rs7.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs7.getString("SCIENTIFIC_NAME"))%></a><br/>
+		                                       <img src="images/img_bullet.gif" alt="<%=rs9.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs9.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs9.getString("ID_HABITAT")%>"><%=rs9.getString("EUNIS_HABITAT_CODE")%> : <%=JstlFunctions.bracketsToItalics(rs9.getString("SCIENTIFIC_NAME"))%></a><br/>
 		                                     </li>
+		            <%
+		                                   }
+		
+		            %>
+		                                   </ul>
+		            <%
+		                                   rs9.close();
+		                                   ps9.close();
+		                                 }
+		                                 %>
+		                                  </li>
+		                                     
+		            <%
+		                                   }
+		
+		            %>
+		                                   </ul>
+		            <%
+		                                   rs8.close();
+		                                   ps8.close();
+		                                 }
+		                                 %>
+		                                  </li>
 		            <%
 		                                   }
 		

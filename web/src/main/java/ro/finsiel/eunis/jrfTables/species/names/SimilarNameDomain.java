@@ -22,6 +22,7 @@ import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.names.NameSearchCriteria;
 import ro.finsiel.eunis.search.species.names.NameSortCriteria;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 public class SimilarNameDomain extends AbstractDomain implements Paginable {
 
@@ -221,6 +222,7 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
 
             if (speciesName != null && speciesName.length() > 1) {
                 String three = speciesName.substring(0, 3);
+                three = EunisUtil.mysqlEscapes(three);
 
                 // get the other criteria (but without the main criteria)
                 StringBuilder filterSQL = new StringBuilder();

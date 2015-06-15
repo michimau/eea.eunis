@@ -465,7 +465,8 @@ public class EunisUtil {
      */
     public static String mysqlEscapes(String text)
     {
-        text = text.replace("'","''");
+        if(text != null)
+            text = text.replaceAll("'","''");
 
         return text;
     }

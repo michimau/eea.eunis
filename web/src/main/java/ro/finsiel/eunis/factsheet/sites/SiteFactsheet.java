@@ -887,7 +887,7 @@ public class SiteFactsheet {
         boolean ret = false;
 
         try {
-            List results = new Chm62edtSitesDomain().findWhere("ID_SITE='" + idSite + "'");
+            List results = new Chm62edtSitesDomain().findWhere("ID_SITE='" + EunisUtil.mysqlEscapes(idSite) + "'");
 
             if (results.size() > 0) {
                 ret = true;
@@ -918,7 +918,7 @@ public class SiteFactsheet {
         }
         // If not initialized - get the data from DB into cache
         try {
-            List results = new Chm62edtSitesDomain().findWhere("ID_SITE='" + idSite + "'");
+            List results = new Chm62edtSitesDomain().findWhere("ID_SITE='" + EunisUtil.mysqlEscapes(idSite) + "'");
 
             if (null != results && results.size() > 0) {
                 siteTableObject = (Chm62edtSitesPersist) results.get(0); // Save information in cache

@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Search criteria used for habitats->references.
@@ -233,6 +234,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 int substringLength = 3;
                 if (fuzzySearch && searchString.length() >=substringLength) {
                     String subSearchString = searchString.substring(0, substringLength);
+                    subSearchString = EunisUtil.mysqlEscapes(subSearchString);
                     sql.append(" OR (A.SCIENTIFIC_NAME LIKE '%").append(subSearchString).append("%' AND levenshtein('")
                             .append(subSearchString.toLowerCase()).append("', LOWER(A.SCIENTIFIC_NAME)) <= 10 ) ");
                 }

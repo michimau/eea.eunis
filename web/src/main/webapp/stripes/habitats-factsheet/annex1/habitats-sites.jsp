@@ -46,6 +46,7 @@
 
             <div class="right-area protected-sites-map">
                 <h3>Protected sites</h3>
+                <span class="bold">Please note the site map takes a while to display.</span>
                 <div id="sites-map" class="map-border">
                     <iframe id="protectionMap" src="" width="100%" height="400"></iframe>
                 </div>

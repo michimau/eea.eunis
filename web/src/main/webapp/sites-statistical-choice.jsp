@@ -16,18 +16,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String name = Utilities.formatString( request.getParameter("designation"), "%" );
-//  boolean[] source_db =
-//  {
-//    request.getParameter( "DB_NATURA2000" ) != null && request.getParameter( "DB_NATURA2000" ).equalsIgnoreCase( "true" ),
-//    request.getParameter( "DB_CORINE" ) != null && request.getParameter( "DB_CORINE" ).equalsIgnoreCase( "true" ),
-//    request.getParameter( "DB_DIPLOMA" ) != null && request.getParameter( "DB_DIPLOMA" ).equalsIgnoreCase( "true" ),
-//    request.getParameter( "DB_CDDA_NATIONAL" ) != null && request.getParameter( "DB_CDDA_NATIONAL" ).equalsIgnoreCase( "true" ),
-//    request.getParameter( "DB_CDDA_INTERNATIONAL" ) != null && request.getParameter( "DB_CDDA_INTERNATIONAL" ).equalsIgnoreCase( "true" ),
-//    request.getParameter( "DB_BIOGENETIC" ) != null && request.getParameter( "DB_BIOGENETIC" ).equalsIgnoreCase( "true" ),
-//    false,
-//    request.getParameter( "DB_EMERALD" ) != null && request.getParameter( "DB_EMERALD" ).equalsIgnoreCase( "true" )
-//  };
-//  String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+
   StringBuffer sql = new StringBuffer();
   sql.append("DESCRIPTION LIKE '%" + name + "%'");
   //sql = Utilities.getConditionForSourceDB(sql,source_db,db,"chm62edt_designations");

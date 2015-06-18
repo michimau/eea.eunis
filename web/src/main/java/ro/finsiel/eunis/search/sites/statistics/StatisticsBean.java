@@ -8,10 +8,7 @@ import java.util.Vector;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.StatisticsDomain;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.CountryUtil;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.SitesFormBean;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -26,8 +23,6 @@ public class StatisticsBean extends SitesFormBean {
     private Long sitesNumber = new Long(-1);
     private Long totalArea = new Long(-1);
     private Long totalLength = new Long(-1);
-    private static String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic",
-            "NatureNet", "Emerald"};
 
     /**
      * Compute number of sites for main search criteria.
@@ -135,7 +130,9 @@ public class StatisticsBean extends SitesFormBean {
                         DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
                         DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
 
-        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "A").toString();
+        SourceDb sourceDb = SourceDb.fromArray(source);
+
+        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "A").toString();
 
         return sql;
     }
@@ -192,7 +189,8 @@ public class StatisticsBean extends SitesFormBean {
                         DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
                         DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true};
 
-        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "SITES").toString();
+        SourceDb sourceDb = SourceDb.fromArray(source);
+        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "SITES").toString();
 
         return sql;
     }
@@ -276,7 +274,8 @@ public class StatisticsBean extends SitesFormBean {
                             DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
                             DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
 
-            sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "E").toString();
+            SourceDb sourceDb = SourceDb.fromArray(source);
+            sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "E").toString();
         }
 
         return sql;

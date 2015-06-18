@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.sites.species.SpeciesDomain;
 import ro.finsiel.eunis.jrfTables.sites.species.SpeciesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.species.SpeciesBean;
@@ -54,16 +55,8 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
     // Init the data factory
     if (null != formBean)
     {
-      boolean[] source = {
-          (this.formBean).getDB_NATURA2000() != null,
-          (this.formBean).getDB_CORINE() != null,
-          (this.formBean).getDB_DIPLOMA() != null,
-          (this.formBean).getDB_CDDA_NATIONAL() != null,
-          (this.formBean).getDB_CDDA_INTERNATIONAL() != null,
-          (this.formBean).getDB_BIOGENETIC() != null,
-          false,
-          (this.formBean).getDB_EMERALD() != null
-      };
+      SourceDb source = this.formBean.getSourceDb();
+
       dataFactory = new SpeciesPaginator(new SpeciesDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showInvalidatedSpecies, source, searchAttribute));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
@@ -120,16 +113,8 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
 
-      boolean[] source = {
-          (this.formBean).getDB_NATURA2000() != null,
-          (this.formBean).getDB_CORINE() != null,
-          (this.formBean).getDB_DIPLOMA() != null,
-          (this.formBean).getDB_CDDA_NATIONAL() != null,
-          (this.formBean).getDB_CDDA_INTERNATIONAL() != null,
-          (this.formBean).getDB_BIOGENETIC() != null,
-          false,
-          (this.formBean).getDB_EMERALD() != null
-      };
+      SourceDb source = this.formBean.getSourceDb();
+
       for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
         List resultSet = dataFactory.getPage(_currPage);

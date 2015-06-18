@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 
 /**
  * Simply try to instantiate the *Domain and *Persist classes.
@@ -16,9 +17,9 @@ public class YearJRFClassesTest {
     public void test_YearDomain() {
         AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
+        SourceDb sourceDb = SourceDb.allDatabases();
 
-        YearDomain instance = new YearDomain(searchCriteria, sortCriteria, source_db);
+        YearDomain instance = new YearDomain(searchCriteria, sortCriteria, sourceDb);
         assertNotNull("Instantiation failed", instance);
     }
 

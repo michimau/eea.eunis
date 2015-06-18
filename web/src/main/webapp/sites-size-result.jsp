@@ -45,10 +45,12 @@
         false,
         formBean.getDB_EMERALD() != null
   };
+
+  SourceDb sourceDb = SourceDb.fromArray(source);
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   SizePaginator paginator = new SizePaginator(new SizeDomain(formBean.toSearchCriteria(),
-    formBean.toSortCriteria(), SessionManager.getUsername(), source));
+    formBean.toSortCriteria(), SessionManager.getUsername(), sourceDb));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)

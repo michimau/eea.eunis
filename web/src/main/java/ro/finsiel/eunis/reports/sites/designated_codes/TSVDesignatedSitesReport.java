@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.designation_code.DesignationBean;
@@ -58,7 +59,9 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
               false,
               this.formBean.getDB_EMERALD() != null
           };
-      dataFactory = new DesignationPaginator(new DesignationDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), source));
+
+      SourceDb sourceDb = SourceDb.fromArray(source);
+      dataFactory = new DesignationPaginator(new DesignationDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), sourceDb));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else

@@ -8,10 +8,7 @@ import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.coordinates.CoordinatesSearchCriteria;
 import ro.finsiel.eunis.search.sites.coordinates.CoordinatesSortCriteria;
 
@@ -26,15 +23,13 @@ public class CoordinatesDomain extends AbstractDomain implements Paginable {
   private Long _resultCount = new Long(-1);
   private String user = null;
 
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
-
-  public CoordinatesDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, boolean[] source) {
+  public CoordinatesDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
     this.user = user;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
   /**
@@ -171,7 +166,7 @@ public class CoordinatesDomain extends AbstractDomain implements Paginable {
       CoordinatesSearchCriteria aCriteria = (CoordinatesSearchCriteria) searchCriteria[i]; // upcast
       filterSQL.append(aCriteria.toSQL());
     }
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "A");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "A");
     return filterSQL;
   }
 

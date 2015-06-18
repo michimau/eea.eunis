@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 
 /**
  * Simply try to instantiate the *Domain and *Persist classes.
@@ -16,9 +17,9 @@ public class SizeJRFClassesTest {
     public void test_SizeDomain() {
         AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
+        SourceDb sourceDb = SourceDb.allDatabases();
 
-        SizeDomain instance = new SizeDomain(searchCriteria, sortCriteria, null, source_db);
+        SizeDomain instance = new SizeDomain(searchCriteria, sortCriteria, null, sourceDb);
         assertNotNull("Instantiation failed", instance);
     }
 

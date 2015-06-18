@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.sites.altitude.AltitudeDomain;
 import ro.finsiel.eunis.jrfTables.sites.altitude.AltitudePersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.altitude.AltitudeBean;
@@ -58,7 +59,10 @@ public class TSVAltitudeSitesReport extends AbstractTSVReport
               false,
               this.formBean.getDB_EMERALD() != null
           };
-      dataFactory = new AltitudePaginator(new AltitudeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), source));
+
+      SourceDb sourceDb = SourceDb.fromArray(source);
+
+      dataFactory = new AltitudePaginator(new AltitudeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), sourceDb));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else

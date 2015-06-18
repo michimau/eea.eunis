@@ -11,10 +11,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.habitats.sites.SitesSearchCriteria;
 import ro.finsiel.eunis.search.habitats.sites.SitesSortCriteria;
@@ -39,25 +36,25 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
   /** Specifies where to search: SEARCH_EUNIS or SEARCH_ANNEX_I */
   private Integer database = SEARCH_BOTH;
   private Integer searchAttribute = null;
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
   /**
    * Normal constructor
    * @param searchCriteria The search criteria used to query the database
    * @param sortCriteria Sort criterias used for sorting the results
    */
-  public HabitatsSitesDomain(AbstractSearchCriteria[] searchCriteria,
-                             AbstractSortCriteria[] sortCriteria,
-                             Integer searchAttribute,
-                             Integer searchPlace,
-                             boolean[] source_db) {
-    this.searchCriteria = searchCriteria;
-    this.sortCriteria = sortCriteria;
-    //this.database = searchPlace;
-    this.source_db = source_db;
-    this.searchAttribute = searchAttribute;
-  }
+    public HabitatsSitesDomain(AbstractSearchCriteria[] searchCriteria,
+                               AbstractSortCriteria[] sortCriteria,
+                               Integer searchAttribute,
+                               Integer searchPlace,
+                               SourceDb sourceDb) {
+        this.searchCriteria = searchCriteria;
+        this.sortCriteria = sortCriteria;
+        //this.database = searchPlace;
+        this.sourceDb = sourceDb;
+        this.searchAttribute = searchAttribute;
+    }
 
   public HabitatsSitesDomain(AbstractSearchCriteria[] searchCriteria, Integer searchPlace) {
     this.searchCriteria = searchCriteria;
@@ -191,7 +188,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
       if (filterSQL.length() > 0) filterSQL.append(" AND ");
       filterSQL.append(" H.ID_HABITAT>=1 and H.ID_HABITAT<>10000 ");
     }
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "C");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "C");
     filterSQL.append(" AND IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ");
     return filterSQL;
   }
@@ -235,7 +232,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
    * @return A non-null list with habitats names
    */
   public List findSitesWithHabitats(SitesSearchCriteria criteria,
-                                    boolean[] source_db,
+                                    SourceDb sourceDb,
                                     Integer searchAttribute,
                                     Integer idNatureObject,
                                     Integer database) {
@@ -246,7 +243,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     this.searchCriteria = new AbstractSearchCriteria[1];
     this.searchCriteria[0] = criteria;
     this.searchAttribute = searchAttribute;
-    this.source_db = source_db;
+    this.sourceDb = sourceDb;
     this.database = SEARCH_BOTH;
     StringBuffer filterSQL = new StringBuffer("");
     List results = new Vector();
@@ -285,7 +282,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
    * @return A non-null list with species scientific names
    */
   public List findPopupLOV(SitesSearchCriteria criteria,
-                           boolean[] source_db,
+                           SourceDb sourceDb,
                            Integer searchAttribute,
                            Integer database) {
     if (null == criteria) {
@@ -295,7 +292,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     this.searchCriteria = new AbstractSearchCriteria[1];
     this.searchCriteria[0] = criteria;
     this.searchAttribute = searchAttribute;
-    this.source_db = source_db;
+    this.sourceDb = sourceDb;
     this.database = SEARCH_BOTH;
     StringBuffer filterSQL = new StringBuffer("");
     List results = new Vector();

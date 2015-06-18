@@ -12,10 +12,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.species.sites.SitesSearchCriteria;
 import ro.finsiel.eunis.search.species.sites.SitesSortCriteria;
@@ -41,12 +38,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
     private Long _resultCount = new Long(-1);
     private boolean showEUNISInvalidatedSpecies = false;
     private Integer searchAttribute = null;
-    private boolean[] source_db = {
-        false, false, false, false, false, false,
-        false, false};
-    private String[] db = {
-        "Natura2000", "Corine", "Diploma", "CDDA_National",
-        "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+    private SourceDb sourceDb = SourceDb.noDatabase();
 
     /**
      * Default constructor.
@@ -59,18 +51,18 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
      * @param sortCriteria Sort criteria used to sort the results.
      * @param showEUNISInvalidatedSpecies show/hide invalidated species.
      * @param searchAttribute What attribute of the site we are searching for (ex.: NAME/SIZE/LENGTH/COUNTRY etc.)
-     * @param source_db What databases we are searching in.
+     * @param sourceDb What databases we are searching in.
      */
     public SpeciesSitesDomain(AbstractSearchCriteria[] searchCriteria,
             AbstractSortCriteria[] sortCriteria,
             boolean showEUNISInvalidatedSpecies,
             Integer searchAttribute,
-            boolean[] source_db) {
+            SourceDb sourceDb) {
         this.searchCriteria = searchCriteria;
         this.sortCriteria = sortCriteria;
         this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
         this.searchAttribute = searchAttribute;
-        this.source_db = source_db;
+        this.sourceDb = sourceDb;
     }
 
     /****/
@@ -221,14 +213,12 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
             filterSQL.append(" AND ");
             SitesSearchCriteria aCriteria = (SitesSearchCriteria) searchCriteria[i]; // upcast
 
-            filterSQL.append(
-                    aCriteria.toSQL());
+            filterSQL.append(aCriteria.toSQL());
         }
         filterSQL.append(
                 Utilities.showEUNISInvalidatedSpecies(" AND H.VALID_NAME",
                 showEUNISInvalidatedSpecies));
-        filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db,
-                "C");
+        filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "C");
         return filterSQL;
     }
 
@@ -270,7 +260,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
      * @return A non-null list with habitats names
      */
     public List findSitesWithSpecies(SitesSearchCriteria criteria,
-            boolean[] source_db,
+            SourceDb sourceDb,
             Integer searchAttribute,
             Integer idNatureObject,
             boolean showEUNISInvalidatedSpecies) {
@@ -281,7 +271,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
         this.searchCriteria[0] = criteria;
         this.searchAttribute = searchAttribute;
         this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-        this.source_db = source_db;
+        this.sourceDb = sourceDb;
         StringBuffer filterSQL = new StringBuffer("");
         List results = new Vector();
         List sites = new Vector();
@@ -324,7 +314,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
      * @return A non-null list with species scientific names
      */
     public List findPopupLOV(SitesSearchCriteria criteria,
-            boolean[] source_db,
+            SourceDb sourceDb,
             Integer searchAttribute,
             boolean showEUNISInvalidatedSpecies) {
         if (null == criteria) {
@@ -338,7 +328,7 @@ public class SpeciesSitesDomain extends AbstractDomain implements Paginable {
         this.searchCriteria[0] = criteria;
         this.searchAttribute = searchAttribute;
         this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-        this.source_db = source_db;
+        this.sourceDb = sourceDb;
         StringBuffer filterSQL = new StringBuffer("");
         List results = new Vector();
         List sites = new Vector();

@@ -48,6 +48,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist;
 import ro.finsiel.eunis.search.CountryUtil;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.statistics.StatisticsBean;
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -174,22 +175,12 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
             getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
             getContext().getRequest().getParameter("DB_EMERALD") != null};
 
-        if (source[0] == false && source[1] == false && source[2] == false && source[3] == false && source[4] == false
-                && source[5] == false && source[6] == false && source[7] == false) {
-            source[0] = true;
-            source[1] = true;
-            source[2] = true;
-            source[3] = true;
-            source[4] = true;
-            source[5] = true;
-            source[6] = false;
-            source[7] = true;
+        SourceDb sourceDb = SourceDb.fromArray(source);
+        if(sourceDb.isEmpty()) {
+            sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
         }
 
-        String[] db =
-            {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
-
-        sql = Utilities.getConditionForSourceDB(sql, source, db, "chm62edt_country_sites_factsheet");
+        sql = Utilities.getConditionForSourceDB(sql, sourceDb, "chm62edt_country_sites_factsheet");
 
         try {
             countrySitesFactsheets = new CountrySitesFactsheetDomain().findWhere(sql.toString());

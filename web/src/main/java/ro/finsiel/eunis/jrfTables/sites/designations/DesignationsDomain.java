@@ -14,10 +14,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.designations.DesignationsSearchCriteria;
 import ro.finsiel.eunis.search.sites.designations.DesignationsSortCriteria;
 
@@ -33,25 +30,22 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
   /** Cache the results of a count to avoid overhead queries for counting */
   private Long _resultCount = new Long(-1);
 
-
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
-
+  SourceDb sourceDb = SourceDb.noDatabase();
 
   /**
    * Normal constructor
    * @param searchCriteria The search criteria used to query the database
    * @param sortCriteria Sort criterias used for sorting the results
    */
-  public DesignationsDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean[] source) {
+  public DesignationsDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
-  public DesignationsDomain(AbstractSearchCriteria[] searchCriteria, boolean[] source) {
+  public DesignationsDomain(AbstractSearchCriteria[] searchCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
   public DesignationsDomain() {
@@ -186,7 +180,7 @@ public class DesignationsDomain extends AbstractDomain implements Paginable {
     }
 
     filterSQL.append(" AND S.ID_GEOSCOPE = J.ID_GEOSCOPE ");
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "S");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "S");
     return filterSQL;
   }
 

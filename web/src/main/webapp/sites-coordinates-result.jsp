@@ -47,8 +47,11 @@
           formBean.getDB_EMERALD() != null
       };
   // Initialization
+
+  SourceDb sourceDb = SourceDb.fromArray(source);
+
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  CoordinatesPaginator paginator = new CoordinatesPaginator(new CoordinatesDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getUsername(), source));
+  CoordinatesPaginator paginator = new CoordinatesPaginator(new CoordinatesDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getUsername(), sourceDb));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
@@ -102,7 +105,6 @@
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
 
     <script language="JavaScript" type="text/javascript">
-    //<![CDATA[
       // Change the operator list according to criteria selected element from criteria type list
       function changeCriteria() {
         var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
@@ -165,7 +167,6 @@
           document.getElementById("binocular").style.visibility = "hidden";
         }
       }
-    //]]>
     </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">

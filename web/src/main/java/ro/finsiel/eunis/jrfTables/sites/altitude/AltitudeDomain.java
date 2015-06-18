@@ -13,10 +13,7 @@ import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.altitude.AltitudeSearchCriteria;
 import ro.finsiel.eunis.search.sites.altitude.AltitudeSortCriteria;
 
@@ -33,23 +30,22 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
   private Long _resultCount = new Long(-1);
   /** Specifies where to search: SEARCH_EUNIS or SEARCH_ANNEX_I */
 
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
   /**
    * Normal constructor
    * @param searchCriteria The search criteria used to query the database
    * @param sortCriteria Sort criterias used for sorting the results
    */
-  public AltitudeDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean[] source) {
+  public AltitudeDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
-  public AltitudeDomain(AbstractSearchCriteria[] searchCriteria, boolean[] source) {
+  public AltitudeDomain(AbstractSearchCriteria[] searchCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
-    this.source_db = source;
+      this.sourceDb = sourceDb;
   }
 
   public AltitudeDomain() {
@@ -164,7 +160,7 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
       AltitudeSearchCriteria aCriteria = (AltitudeSearchCriteria) searchCriteria[i]; // upcast
       filterSQL.append(aCriteria.toSQL());
     }
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "C");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "C");
     return filterSQL;
   }
 

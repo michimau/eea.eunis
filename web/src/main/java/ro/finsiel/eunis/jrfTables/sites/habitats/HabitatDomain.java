@@ -11,10 +11,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.habitats.HabitatSearchCriteria;
 import ro.finsiel.eunis.search.sites.habitats.HabitatSortCriteria;
 import ro.finsiel.eunis.jrfTables.GenericDomain;
@@ -38,8 +35,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
   /** Specifies where to search: SEARCH_EUNIS or SEARCH_ANNEX_I */
   private Integer searchPlace = SEARCH_EUNIS;
 
-  private boolean[] source_db = {true, true, true, true, true, true, false, true };
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+  SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
   private Integer searchAttribute = null;
 
   /**
@@ -50,19 +46,19 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
   public HabitatDomain(AbstractSearchCriteria[] searchCriteria,
                        AbstractSortCriteria[] sortCriteria,
                        Integer searchPlace,
-                       boolean[] source,
+                       SourceDb sourceDb,
                        Integer searchAttribute) {
     this.searchAttribute = searchAttribute;
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
     this.searchPlace = searchPlace;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
-  public HabitatDomain(AbstractSearchCriteria[] searchCriteria, Integer searchPlace, boolean[] source) {
+  public HabitatDomain(AbstractSearchCriteria[] searchCriteria, Integer searchPlace, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.searchPlace = searchPlace;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
   public HabitatDomain() {
@@ -189,7 +185,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
     } else {
       filterSQL.append(" AND C.ID_HABITAT <>'-1' AND C.ID_HABITAT<>'10000' ");
     }
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "H");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
     if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
     for (int i = 0; i < searchCriteria.length; i++) {
       filterSQL.append(" AND ");
@@ -238,7 +234,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
    */
   public List findHabitatsFromSite(HabitatSearchCriteria criteria,
                                    Integer searchAttribute,
-                                   boolean[] source) {
+                                   SourceDb sourceDb) {
     if (null == criteria) {
       System.out.println("Warning:" + HabitatDomain.class.getName() + "::findHabitatsFromSite(" + criteria + ", " + "...). One of criterias was null.");
       return new Vector();
@@ -246,7 +242,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
     this.searchCriteria = new AbstractSearchCriteria[1];
     this.searchCriteria[0] = criteria;
     this.searchAttribute = searchAttribute;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
     StringBuffer filterSQL = new StringBuffer("");
     List results = new Vector();
     List habitats = new Vector();
@@ -278,7 +274,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
    */
   public List findHabitatsFromSpecifiedSite(HabitatSearchCriteria criteria,
                                    Integer searchAttribute,
-                                   boolean[] source,
+                                   SourceDb sourceDb,
                                    String siteName) {
     if (null == criteria) {
       System.out.println("Warning:" + HabitatDomain.class.getName() + "::findHabitatsFromSite(" + criteria + ", " + "...). One of criterias was null.");
@@ -287,7 +283,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
     this.searchCriteria = new AbstractSearchCriteria[1];
     this.searchCriteria[0] = criteria;
     this.searchAttribute = searchAttribute;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
     StringBuffer filterSQL = new StringBuffer("");
     List results = new Vector();
     List habitats = new Vector();
@@ -321,7 +317,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
   public List findPopupLOV(HabitatSearchCriteria criteria,
                            Integer database,
                            Integer searchAttribute,
-                           boolean[] source) {
+                           SourceDb sourceDb) {
     if (null == criteria) {
       System.out.println("Warning: " + HabitatDomain.class.getName() + "::findPopupLOV(" + criteria + ", " + "...). One of criterias was null.");
       return new Vector();
@@ -329,7 +325,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
     this.searchCriteria = new AbstractSearchCriteria[1];
     this.searchCriteria[0] = criteria;
     this.searchAttribute = searchAttribute;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
     StringBuffer filterSQL = new StringBuffer("");
     List results = new Vector();
     List habitats = new Vector();
@@ -368,7 +364,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
       } else {
         filterSQL.append(" C.ID_HABITAT <> '-1' AND C.ID_HABITAT <> '10000' ");
       }
-      filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "H");
+      filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
 
       String where = criteria.getSearchString();
       Integer relOp = criteria.getRelationOp();

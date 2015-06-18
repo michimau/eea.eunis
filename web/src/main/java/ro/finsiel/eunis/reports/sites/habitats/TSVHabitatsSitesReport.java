@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.sites.habitats.HabitatDomain;
 import ro.finsiel.eunis.jrfTables.sites.habitats.HabitatPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.habitats.HabitatBean;
@@ -49,12 +50,12 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
     // Init the data factory
     if (null != formBean)
     {
-      boolean[] source = { true, true, true, true, true, true, false, true };
+      SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
       dataFactory = new HabitatPaginator(
           new HabitatDomain(
               formBean.toSearchCriteria(),
               formBean.toSortCriteria(),
-              Utilities.checkedStringToInt(this.formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS), source, searchAttribute));
+              Utilities.checkedStringToInt(this.formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS), sourceDb, searchAttribute));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
@@ -108,7 +109,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
       }
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitatSearchCriteria.SEARCH_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-      boolean[] source_db = { true, true, true, true, true, true, false, true };
+      SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
       for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
@@ -127,7 +128,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
                   formBean.getSearchString(),
                   relationOp),
               searchAttribute,
-              source_db,
+              sourceDb,
               Utilities.formatString(site.getName(), ""));
           if (resultsHabitats.size() > 0)
           {

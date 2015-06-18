@@ -16,6 +16,7 @@
                 ro.finsiel.eunis.search.species.sites.SitesSearchCriteria,
                 ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesDomain,
                 ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.SourceDb" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -43,12 +44,12 @@
     Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
     Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
     List results = new Vector();
-    boolean[] source_db={true,true,true,true,true,true,true,true};
+
     // List of values (in accordance with searchAttribute)
     results = new SpeciesSitesDomain().findPopupLOV(new SitesSearchCriteria(searchAttribute,
                                                                             formBean.getScientificName(),
                                                                             relationOp),
-                                                       source_db,
+                                                       SourceDb.allDatabases(),
                                                        searchAttribute,
                                                        SessionManager.getShowEUNISInvalidatedSpecies());
   %>

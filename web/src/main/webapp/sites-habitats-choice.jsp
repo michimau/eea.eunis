@@ -13,6 +13,7 @@
                 ro.finsiel.eunis.jrfTables.sites.habitats.HabitatDomain,
                 ro.finsiel.eunis.search.sites.habitats.HabitatSearchCriteria,
                 ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.SourceDb" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.habitats.HabitatBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
@@ -31,14 +32,15 @@
 //      false,
 //      (request.getParameter("DB_EMERALD") != null && request.getParameter("DB_EMERALD").equalsIgnoreCase("true") ? true:false)
 //    };
-  boolean[] source_db = { true, true, true, true, true, true, false, true }; // Default search in all data sets
+
+  SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);  // Default search in all data sets
   // List of values (in accordance with searchAttribute)
   List results = new HabitatDomain().findPopupLOV(new HabitatSearchCriteria(searchAttribute,
                                                                             formBean.getSearchString(),
                                                                             relationOp),
                                                   database,
                                                   searchAttribute,
-                                                  source_db);
+                                                  sourceDb);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">

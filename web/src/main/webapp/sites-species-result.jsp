@@ -34,16 +34,9 @@
   boolean showDesignType = Utilities.checkedStringToBoolean(formBean.getShowDesignationTypes(), SpeciesBean.HIDE);
   boolean showCoord = Utilities.checkedStringToBoolean(formBean.getShowCoordinates(), SpeciesBean.HIDE);
   boolean showSpecies  = Utilities.checkedStringToBoolean(formBean.getShowSpecies(), true);
-  boolean[] source = {
-    formBean.getDB_NATURA2000() != null,
-    formBean.getDB_CORINE() != null,
-    formBean.getDB_DIPLOMA() != null,
-    formBean.getDB_CDDA_NATIONAL() != null,
-    formBean.getDB_CDDA_INTERNATIONAL() != null,
-    formBean.getDB_BIOGENETIC() != null,
-    false,
-    formBean.getDB_EMERALD() != null
-  };
+
+  SourceDb source = formBean.getSourceDb();
+
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);

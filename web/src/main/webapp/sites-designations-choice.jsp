@@ -15,6 +15,7 @@
                 ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designations.DesignationsDomain"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designations.DesignationsPersist"%>
+<%@ page import="ro.finsiel.eunis.search.SourceDb" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // getSearchString() - String to be searched
@@ -33,8 +34,8 @@
         false,
         request.getParameter("DB_EMERALD") != null && request.getParameter("DB_EMERALD").equalsIgnoreCase("true") ? true : false
   };
-  // List of sites source data set
-  String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+
+    SourceDb sourceDb = SourceDb.fromArray(source_db);
  // Execute de query
   StringBuffer sql= new StringBuffer("");
   if (!searchString.equalsIgnoreCase(""))
@@ -43,7 +44,7 @@
     sql.append(" OR "+Utilities.prepareSQLOperator("J.DESCRIPTION_EN",searchString,relationOp)+" OR "
                 +Utilities.prepareSQLOperator("J.DESCRIPTION_FR",searchString,relationOp)+")");
   }
-  sql = Utilities.getConditionForSourceDB(sql, source_db, db, "S");
+  sql = Utilities.getConditionForSourceDB(sql, sourceDb, "S");
   List designations = new DesignationsDomain().findWhere(sql + " GROUP BY J.DESCRIPTION,J.DESCRIPTION_EN");
   Vector v = new Vector();
 //  System.out.println( "designations = " + designations.size() );

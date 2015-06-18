@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 
 /**
  * Simply try to instantiate the *Domain and *Persist classes.
@@ -16,9 +17,10 @@ public class CoordinatesJRFClassesTest {
     public void test_CoordinatesDomain() {
         AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
 
-        CoordinatesDomain instance = new CoordinatesDomain(searchCriteria, sortCriteria, null, source_db);
+        SourceDb sourceDb = SourceDb.allDatabases();
+
+        CoordinatesDomain instance = new CoordinatesDomain(searchCriteria, sortCriteria, null, sourceDb);
         assertNotNull("Instantiation failed", instance);
     }
 

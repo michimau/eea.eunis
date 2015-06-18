@@ -11,10 +11,7 @@ import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.names.NameSearchCriteria;
 
 /**
@@ -35,20 +32,18 @@ public class NameDomain extends AbstractDomain implements Paginable {
     private boolean fuzzySearch = false;
     private String sitesName = "";
 
-    private boolean[] source_db = {false, false, false, false, false, false, false, false};
-    private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet",
-            "Emerald"};
+    private SourceDb sourceDb = SourceDb.noDatabase();
 
-    public NameDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, boolean[] source) {
-        this(searchCriteria, sortCriteria, user, source, false);
+    public NameDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, SourceDb sourceDb) {
+        this(searchCriteria, sortCriteria, user, sourceDb, false);
     }
 
-    public NameDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, boolean[] source,
+    public NameDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, SourceDb sourceDb,
             boolean fuzzySearch) {
         this.searchCriteria = searchCriteria;
         this.sortCriteria = sortCriteria;
         this.user = user;
-        this.source_db = source;
+        this.sourceDb = sourceDb;
         this.fuzzySearch = fuzzySearch;
     }
 
@@ -224,7 +219,7 @@ public class NameDomain extends AbstractDomain implements Paginable {
             AbstractSearchCriteria aCriteria = searchCriteria[i]; // upcast
             filterSQL.append(aCriteria.toSQL(fuzzySearch));
         }
-        filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "A");
+        filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "A");
         return filterSQL;
     }
 

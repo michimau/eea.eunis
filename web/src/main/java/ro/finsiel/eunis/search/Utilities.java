@@ -1637,6 +1637,7 @@ public final class Utilities {
      * @param db        is a vector whitch contains all source database values from database
      * @param alias     Table alias.
      * @return where condition.
+     * @deprecated
      */
     public static StringBuffer getConditionForSourceDB(StringBuffer sql, boolean[] sourceDb, String[] db, String alias) {
         StringBuffer filterSQL = sql;
@@ -2889,6 +2890,53 @@ public final class Utilities {
             e.printStackTrace();
         }
         return ret;
+    }
+
+    public static StringBuffer getConditionForSourceDB(StringBuffer sql, SourceDb sourceDb, String alias) {
+        StringBuffer filterSQL = sql;
+        boolean exist = !sourceDb.isEmpty();
+
+        if (exist) {
+            if (filterSQL.length() > 0) {
+                filterSQL.append(" AND  ");
+            }
+            filterSQL.append(" ( ");
+
+            boolean putOR = false;
+
+            for(SourceDb.Database d : sourceDb.getDatabaseList()){
+                if (putOR) {
+                    filterSQL.append(
+                            " or " + alias + ".SOURCE_DB = '" + d.getDatabaseName()
+                                    + "' ");
+                } else {
+                    filterSQL.append(
+                            " " + alias + ".SOURCE_DB = '" + d.getDatabaseName() + "' ");
+                }
+                putOR = true;
+            }
+            filterSQL.append(" ) ");
+        }
+//
+//        if (!exist) {
+//            if (filterSQL.length() > 0) {
+//                filterSQL.append(" AND ");
+//            }
+//            filterSQL.append(" ( ");
+//            for (int i = 0; i < sourceDb.length; i++) {
+//                if (i > 0) {
+//                    filterSQL.append(
+//                            " and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
+//                } else {
+//                    filterSQL.append(
+//                            " " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
+//                }
+//            }
+//
+//            filterSQL.append(" ) ");
+//        }
+
+        return filterSQL;
     }
 
     // Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp END

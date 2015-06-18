@@ -14,13 +14,11 @@ import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.designation_code.DesignationSearchCriteria;
 import ro.finsiel.eunis.search.sites.designation_code.DesignationSortCriteria;
 
+import javax.xml.transform.Source;
 import java.util.List;
 
 
@@ -35,8 +33,7 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
   /** Specifies where to search: SEARCH_EUNIS or SEARCH_ANNEX_I */
 
 
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
 
   /**
@@ -44,15 +41,15 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
    * @param searchCriteria The search criteria used to query the database
    * @param sortCriteria Sort criterias used for sorting the results
    */
-  public DesignationDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean[] source) {
+  public DesignationDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
-  public DesignationDomain(AbstractSearchCriteria[] searchCriteria, boolean[] source) {
+  public DesignationDomain(AbstractSearchCriteria[] searchCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
-    this.source_db = source;
+      this.sourceDb = sourceDb;
   }
 
   public DesignationDomain() {
@@ -178,7 +175,7 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     StringBuffer filterSQL = new StringBuffer();
     if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
     filterSQL.append(" IF(C.ID_GEOSCOPE IS NULL,'1',C.ID_GEOSCOPE) = IF(J.ID_GEOSCOPE IS NULL,'1',J.ID_GEOSCOPE) ");
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "C");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "C");
     for (int i = 0; i < searchCriteria.length; i++) {
       filterSQL.append(" AND ");
       DesignationSearchCriteria aCriteria = (DesignationSearchCriteria) searchCriteria[i]; // upcast

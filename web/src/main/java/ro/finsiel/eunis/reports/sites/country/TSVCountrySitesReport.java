@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.sites.country.CountryDomain;
 import ro.finsiel.eunis.jrfTables.sites.country.CountryPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.country.CountryBean;
@@ -57,7 +58,8 @@ public class TSVCountrySitesReport extends AbstractTSVReport
           false,
           this.formBean.getDB_EMERALD() != null
       };
-      dataFactory = new CountryPaginator(new CountryDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), source));
+      SourceDb sourceDb = SourceDb.fromArray(source);
+      dataFactory = new CountryPaginator(new CountryDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), sourceDb));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else

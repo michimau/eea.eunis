@@ -47,9 +47,12 @@
       false,
       formBean.getDB_EMERALD() != null
   };
+
+  SourceDb sourceDb = SourceDb.fromArray(source);
+
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  YearPaginator paginator = new YearPaginator(new YearDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),source));
+  YearPaginator paginator = new YearPaginator(new YearDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),sourceDb));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
@@ -102,7 +105,6 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript">
-      //<![CDATA[
         // Change the operator list according to criteria selected element from criteria type list
         function changeCriteria() {
           var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
@@ -156,7 +158,6 @@
             document.getElementById("binocular").style.visibility = "hidden";
           }
         }
-      //]]>
     </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">

@@ -10,19 +10,16 @@
   request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
-                 ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationPaginator,
                  ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain,
-                 ro.finsiel.eunis.search.AbstractPaginator,
-                 ro.finsiel.eunis.search.AbstractSortCriteria,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationBean,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationSearchCriteria,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationSortCriteria,
                  ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,
-                 ro.finsiel.eunis.WebContentManagement,
-                 ro.finsiel.eunis.search.AbstractSearchCriteria"%>
+                 ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
+<%@ page import="ro.finsiel.eunis.search.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.designation_code.DesignationBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -50,9 +47,13 @@
       false,
       formBean.getDB_EMERALD() != null
   };
+
+    SourceDb sourceDb = SourceDb.fromArray(source);
+
+
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  DesignationPaginator paginator = new DesignationPaginator(new DesignationDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),source));
+  DesignationPaginator paginator = new DesignationPaginator(new DesignationDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),sourceDb));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)

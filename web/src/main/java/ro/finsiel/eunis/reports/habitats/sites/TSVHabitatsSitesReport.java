@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.sites.SitesBean;
 import ro.finsiel.eunis.search.habitats.sites.SitesPaginator;
@@ -46,12 +47,11 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
     if (null != formBean) {
       Integer database = HabitatsSitesDomain.SEARCH_BOTH;
       Integer searchAttribute = Utilities.checkedStringToInt(this.formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
-      boolean[] source_db = { true, true, true, true, true, true, true, true };
       dataFactory = new SitesPaginator(new HabitatsSitesDomain(formBean.toSearchCriteria(),
           formBean.toSortCriteria(),
           searchAttribute,
           database,
-          source_db));
+          SourceDb.allDatabases()));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     } else {
       System.out.println(TSVHabitatsSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
@@ -94,7 +94,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
       }
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-      boolean[] source_db = { true, true, true, true, true, true, true, true };
+
       Integer database = HabitatsSitesDomain.SEARCH_BOTH;
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
@@ -108,7 +108,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
               new SitesSearchCriteria(searchAttribute,
                   formBean.getScientificName(),
                   relationOp),
-              source_db,
+              SourceDb.allDatabases(),
               searchAttribute,
               idNatureObject,
               database);

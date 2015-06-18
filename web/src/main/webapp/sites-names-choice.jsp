@@ -13,6 +13,7 @@
                 ro.finsiel.eunis.WebContentManagement"%>
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain"%>
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist"%>
+<%@ page import="ro.finsiel.eunis.search.SourceDb" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // getSearchString() - String to be searched
@@ -29,9 +30,11 @@
     false,
     request.getParameter( "DB_EMERALD" ) != null
   };
-  String[] db = { "Natura2000","Corine","Diploma","CDDA_National","CDDA_International","Biogenetic","NatureNet","Emerald" };
+
+  SourceDb sourceDb = SourceDb.fromArray(source);
+
   StringBuffer query = Utilities.prepareSQLOperator("NAME", searchString, operand);
-  query = Utilities.getConditionForSourceDB(query,source,db,"chm62edt_sites");
+  query = Utilities.getConditionForSourceDB(query,sourceDb,"chm62edt_sites");
   query.append(" GROUP BY NAME ORDER BY NAME ASC ");
   if (!expandFullNames) { query.append(" LIMIT 0, " + Utilities.MAX_POPUP_RESULTS); }
   // Execute de query

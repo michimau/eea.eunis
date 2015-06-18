@@ -14,6 +14,7 @@ import ro.finsiel.eunis.jrfTables.sites.names.NameDomain;
 import ro.finsiel.eunis.jrfTables.sites.names.NamePersist;
 import ro.finsiel.eunis.search.AbstractPaginator;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.names.NameBean;
 import ro.finsiel.eunis.search.sites.names.NamePaginator;
@@ -206,10 +207,10 @@ public class SitesSearchTest {
 
         int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
 
-        boolean[] source_db = {true, true, true, true, true, true, false, true};
+        SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
 
         NamePaginator paginator =
-                new NamePaginator(new NameDomain(formBean.toSearchCriteria(), sortCriterias, null, source_db, fuzzySearch));
+                new NamePaginator(new NameDomain(formBean.toSearchCriteria(), sortCriterias, null, sourceDb, fuzzySearch));
         paginator.setSortCriteria(sortCriterias);
         paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
 

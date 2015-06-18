@@ -6,10 +6,7 @@ import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.year.YearSortCriteria;
 import ro.finsiel.eunis.search.sites.year.YearSearchCriteria;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
@@ -29,14 +26,12 @@ public class YearDomain extends AbstractDomain implements Paginable {
   /** Cache the results of a count to avoid overhead queries for counting */
   private Long _resultCount = new Long(-1);
 
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
-
-  public YearDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean[] source) {
+  public YearDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
   }
 
   /**
@@ -173,7 +168,7 @@ public class YearDomain extends AbstractDomain implements Paginable {
       filterSQL.append(aCriteria.toSQL());
     }
 
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "A");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "A");
     return filterSQL;
   }
 

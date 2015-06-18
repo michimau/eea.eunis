@@ -23,10 +23,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
 import ro.finsiel.eunis.jrfTables.GenericDomain;
 import ro.finsiel.eunis.jrfTables.GenericPersist;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.species.SpeciesSearchCriteria;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.utilities.TableColumns;
@@ -43,8 +40,9 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
     /** Cache the results of a count to avoid overhead queries for counting */
     private Long _resultCount = new Long(-1);
     private boolean showEUNISInvalidatedSpecies = false;
-    private boolean[] source_db = {false, false, false, false, false, false, false, false};
-    private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+
+    SourceDb sourceDb = SourceDb.noDatabase();
+
     private Integer searchAttribute = null;
 
     /**
@@ -55,19 +53,19 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
     public SpeciesDomain(AbstractSearchCriteria[] searchCriteria,
             AbstractSortCriteria[] sortCriteria,
             boolean showEUNISInvalidatedSpecies,
-            boolean[] source,
+            SourceDb source,
             Integer searchAttribute) {
         this.searchAttribute = searchAttribute;
         this.searchCriteria = searchCriteria;
         this.sortCriteria = sortCriteria;
         this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-        this.source_db = source;
+        this.sourceDb = source;
     }
 
-    public SpeciesDomain(AbstractSearchCriteria[] searchCriteria, boolean showEUNISInvalidatedSpecies, boolean[] source) {
+    public SpeciesDomain(AbstractSearchCriteria[] searchCriteria, boolean showEUNISInvalidatedSpecies, SourceDb source) {
         this.searchCriteria = searchCriteria;
         this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-        this.source_db = source;
+        this.sourceDb = source;
     }
 
     public SpeciesDomain() {
@@ -189,7 +187,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
             SpeciesSearchCriteria aCriteria = (SpeciesSearchCriteria) searchCriteria[i]; // upcast
             filterSQL.append(aCriteria.toSQL());
         }
-        filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "H");
+        filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
         return filterSQL;
     }
 
@@ -204,12 +202,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
             filterSQL.append(aCriteria.toSQL());
         }
 
-        boolean exist = false;
-
-        for (int i = 0; i < source_db.length; i++) {
-            if (source_db[i]) exist = true;
-        }
-        if(exist) filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "H");
+        filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
         return filterSQL;
     }
 
@@ -257,7 +250,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
             boolean showEUNISNonValidatedSpecies,
             Integer idNatureObject,
             Integer searchAttribute,
-            boolean[] source) {
+            SourceDb source) {
         if (null == criteria) {
             System.out.println("Warning:" + SpeciesDomain.class.getName() + "::findSpeciesFromSite(" + criteria + ", " + "...). One of criterias was null.");
             return new Vector();
@@ -266,7 +259,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
         this.searchCriteria = new AbstractSearchCriteria[1];
         this.searchCriteria[0] = criteria;
         this.searchAttribute = searchAttribute;
-        this.source_db = source;
+        this.sourceDb = source;
         StringBuffer filterSQL = new StringBuffer("");
         List results = new Vector();
         List species = new Vector();
@@ -310,7 +303,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
     public List findPopupLOV(SpeciesSearchCriteria criteria,
             boolean showEUNISNonValidatedSpecies,
             Integer searchAttribute,
-            boolean[] source) {
+            SourceDb source) {
         if (null == criteria) {
             System.out.println("Warning: " + SpeciesDomain.class.getName() + "::findPopupLOV(" + criteria + ", " + "...). One of criterias was null.");
             return new Vector();
@@ -319,7 +312,7 @@ public class SpeciesDomain extends AbstractDomain implements Paginable {
         this.searchCriteria = new AbstractSearchCriteria[1];
         this.searchCriteria[0] = criteria;
         this.searchAttribute = searchAttribute;
-        this.source_db = source;
+        this.sourceDb = source;
         StringBuffer filterSQL = new StringBuffer("");
         List results = new Vector();
         List species = new Vector();

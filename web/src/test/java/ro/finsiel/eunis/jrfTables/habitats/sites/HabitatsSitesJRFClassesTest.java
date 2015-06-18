@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.species.names.NameSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
 
@@ -18,10 +19,9 @@ public class HabitatsSitesJRFClassesTest {
     public void test_HabitatsSitesDomain() {
         AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
 
         HabitatsSitesDomain instance = new HabitatsSitesDomain(searchCriteria, sortCriteria, HabitatsSitesDomain.SEARCH_BOTH,
-                Integer.valueOf(0), source_db);
+                Integer.valueOf(0), SourceDb.allDatabases());
         assertNotNull("Instantiation failed", instance);
     }
 

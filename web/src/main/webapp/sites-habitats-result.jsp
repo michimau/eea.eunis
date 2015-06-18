@@ -45,13 +45,14 @@
 //                        false,
 //                        (formBean.getDB_EMERALD()==null?false:true)
 //    };
-  boolean[] source = { true, true, true, true, true, true, false, true }; // Default search in all data sets
+//  boolean[] source = { true, true, true, true, true, true, false, true }; // Default search in all data sets
+  SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);     // Default search in all data sets
 
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitatSearchCriteria.SEARCH_NAME);
   Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS);
-  HabitatPaginator paginator = new HabitatPaginator(new HabitatDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS), source, searchAttribute));
+  HabitatPaginator paginator = new HabitatPaginator(new HabitatDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS), sourceDb, searchAttribute));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
@@ -373,13 +374,13 @@
                 if (showHabitat)
                 {
                   Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-                  boolean[] source_db = { true, true, true, true, true, true, false, true }; // Default search in all data sets
+                  sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
                   List resultsHabitats = new HabitatDomain().findHabitatsFromSpecifiedSite(
                       new HabitatSearchCriteria(searchAttribute,
                                                           formBean.getSearchString(),
                                                           relationOp),
                                                           searchAttribute,
-                                                          source_db,
+                                                          sourceDb,
                                                           Utilities.formatString(site.getName(),""));
             %>
                       <td>

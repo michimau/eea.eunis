@@ -12,10 +12,6 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain,
                  ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist,
-                 ro.finsiel.eunis.search.AbstractPaginator,
-                 ro.finsiel.eunis.search.AbstractSearchCriteria,
-                 ro.finsiel.eunis.search.AbstractSortCriteria,
-                 ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.habitats.sites.SitesBean,
                  ro.finsiel.eunis.search.habitats.sites.SitesPaginator,
                  ro.finsiel.eunis.search.habitats.sites.SitesSearchCriteria,
@@ -24,6 +20,7 @@
                  java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="ro.finsiel.eunis.search.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.sites.SitesBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -45,13 +42,12 @@
 //    Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitatsSitesDomain.SEARCH_EUNIS);
   Integer database = HabitatsSitesDomain.SEARCH_BOTH;
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
-  boolean[] source_db = {true, true, true, true, true, true, true, true};
 
   SitesPaginator paginator = new SitesPaginator(new HabitatsSitesDomain(formBean.toSearchCriteria(),
     formBean.toSortCriteria(),
     searchAttribute,
     database,
-    source_db));
+    SourceDb.allDatabases()));
 
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
@@ -95,11 +91,11 @@
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
       <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
       <script language="JavaScript" type="text/javascript">
-      //<![CDATA[
+
       function MM_openBrWindow(theURL,winName,features) { //v2.0
         window.open(theURL,winName,features);
       }
-      //]]>
+
       </script>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
@@ -489,7 +485,7 @@
                         new SitesSearchCriteria(searchAttribute,
                           formBean.getScientificName(),
                           relationOp),
-                        source_db,
+                        SourceDb.allDatabases(),
                         searchAttribute,
                         idNatureObject,
                         database);

@@ -34,7 +34,7 @@
 
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
-  boolean[] source_db = { true, true, true, true, true, true, true, true };
+
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
   SitesPaginator paginator;
@@ -43,7 +43,7 @@
                                                         formBean.toSortCriteria(),
                                                         SessionManager.getShowEUNISInvalidatedSpecies(),
                                                         searchAttribute,
-                                                        source_db));
+                                                        SourceDb.allDatabases()));
   // Initialisation
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
@@ -407,7 +407,7 @@
                                       new SitesSearchCriteria(searchAttribute,
                                                               formBean.getScientificName(),
                                                               relationOp),
-                                                              source_db,
+                                                              SourceDb.allDatabases(),
                                                               searchAttribute,
                                                               idNatureObject,
                                                               SessionManager.getShowEUNISInvalidatedSpecies());

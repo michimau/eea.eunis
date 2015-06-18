@@ -14,6 +14,7 @@
                 java.util.Vector,
                 ro.finsiel.eunis.search.sites.species.SpeciesSearchCriteria,
                 ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.SourceDb" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.species.SpeciesBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -23,12 +24,13 @@
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
   boolean[] source_db = {(request.getParameter("DB_NATURA2000")!=null&&request.getParameter("DB_NATURA2000").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CORINE")!=null&&request.getParameter("DB_CORINE").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_DIPLOMA")!=null&&request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_NATIONAL")!=null&&request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_INTERNATIONAL")!=null&&request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_BIOGENETIC")!=null&&request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true")?true:false),false,(request.getParameter("DB_EMERALD")!=null&&request.getParameter("DB_EMERALD").equalsIgnoreCase("true")?true:false)};
   // List of values (in accordance with searchAttribute)
+    SourceDb sourceDb = SourceDb.fromArray(source_db);
   List results = new SpeciesDomain().findPopupLOV(new SpeciesSearchCriteria(searchAttribute,
                                                                        formBean.getSearchString(),
                                                                        relationOp),
                                                        SessionManager.getShowEUNISInvalidatedSpecies(),
                                                        searchAttribute,
-                                                       source_db);
+                                                       sourceDb);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">

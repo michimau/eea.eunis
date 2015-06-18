@@ -5,10 +5,7 @@
  */
 package ro.finsiel.eunis.jrfTables.sites.size;
 
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.*;
 import ro.finsiel.eunis.search.sites.size.SizeSearchCriteria;
 import ro.finsiel.eunis.search.sites.size.SizeSortCriteria;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
@@ -39,14 +36,12 @@ public class SizeDomain extends AbstractDomain implements Paginable {
 
   private String user;
 
-  private boolean[] source_db = {false, false, false, false, false, false, false, false};
-  private String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+  private SourceDb sourceDb = SourceDb.noDatabase();
 
-
-  public SizeDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, boolean[] source) {
+  public SizeDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, String user, SourceDb sourceDb) {
     this.searchCriteria = searchCriteria;
     this.sortCriteria = sortCriteria;
-    this.source_db = source;
+    this.sourceDb = sourceDb;
     this.user = user;
   }
 
@@ -189,7 +184,7 @@ public class SizeDomain extends AbstractDomain implements Paginable {
       SizeSearchCriteria aCriteria = (SizeSearchCriteria) searchCriteria[i]; // upcast
       filterSQL.append(aCriteria.toSQL());
     }
-    filterSQL = Utilities.getConditionForSourceDB(filterSQL, source_db, db, "A");
+    filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "A");
     return filterSQL;
   }
 

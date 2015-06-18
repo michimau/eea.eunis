@@ -10,18 +10,15 @@
   request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
-                 ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.country.CountryPaginator,
                  ro.finsiel.eunis.jrfTables.sites.country.CountryDomain,
-                 ro.finsiel.eunis.search.AbstractPaginator,
-                 ro.finsiel.eunis.search.AbstractSortCriteria,
                  ro.finsiel.eunis.jrfTables.sites.country.CountryPersist,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.search.sites.country.CountryBean,
                  ro.finsiel.eunis.search.sites.country.CountrySearchCriteria,
                  ro.finsiel.eunis.search.sites.country.CountrySortCriteria,
-                 ro.finsiel.eunis.WebContentManagement,
-                 ro.finsiel.eunis.search.AbstractSearchCriteria"%>
+                 ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.country.CountryBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -48,9 +45,11 @@
       false,
       formBean.getDB_EMERALD() != null
   };
+
+  SourceDb sourceDb = SourceDb.fromArray(source);
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  CountryPaginator paginator = new CountryPaginator(new CountryDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),source));
+  CountryPaginator paginator = new CountryPaginator(new CountryDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),sourceDb));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)

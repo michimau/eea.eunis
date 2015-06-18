@@ -12,6 +12,7 @@ import ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesDomain;
 import ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
 import ro.finsiel.eunis.reports.XMLReport;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.sites.SitesBean;
 import ro.finsiel.eunis.search.species.sites.SitesPaginator;
@@ -47,12 +48,11 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
     // Init the data factory
     if (null != formBean) {
       Integer searchAttribute = Utilities.checkedStringToInt(((SitesBean) formBean).getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
-      boolean[] source_db = { true, true, true, true, true, true, true, true };
       this.dataFactory = new SitesPaginator(new SpeciesSitesDomain(formBean.toSearchCriteria(),
           formBean.toSortCriteria(),
           showInvalidatedSpecies,
           searchAttribute,
-          source_db));
+          SourceDb.allDatabases()));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     } else {
       System.out.println(TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
@@ -99,7 +99,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
       }
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-      boolean[] source_db = { true, true, true, true, true, true, true, true };
+      SourceDb sourceDb = SourceDb.allDatabases();
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
       for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
@@ -111,7 +111,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
               new SitesSearchCriteria(searchAttribute,
                   formBean.getScientificName(),
                   relationOp),
-              source_db,
+                  sourceDb,
               searchAttribute,
               idNatureObject,
               showInvalidatedSpecies);

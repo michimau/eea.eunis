@@ -12,6 +12,7 @@ import eionet.eunis.test.DbHelper;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.sites.names.NameSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
 
@@ -42,12 +43,12 @@ public class NameTest {
             Utilities.OPERATOR_STARTS, country, minDesignationDate, maxDesignationDate);
         NameSearchCriteria[] searchCriteria = { criteria1 };
 
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
+        SourceDb sourceDb = SourceDb.allDatabases();
         boolean fuzzySearch = true;
 
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
 
-        NameDomain instance = new NameDomain(searchCriteria, sortCriteria, null, source_db, fuzzySearch);
+        NameDomain instance = new NameDomain(searchCriteria, sortCriteria, null, sourceDb, fuzzySearch);
         assertNotNull("Instantiation failed", instance);
         List result = instance.getResults(0, 1000, sortCriteria);
 
@@ -72,12 +73,12 @@ public class NameTest {
             Utilities.OPERATOR_STARTS, country, minDesignationDate, maxDesignationDate);
         NameSearchCriteria[] searchCriteria = { criteria1 };
 
-        boolean[] source_db = {true, true, true, true, true, true, true, true};
+        SourceDb sourceDb = SourceDb.allDatabases();
         boolean fuzzySearch = true;
 
         AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
 
-        NameDomain instance = new NameDomain(searchCriteria, sortCriteria, null, source_db, fuzzySearch);
+        NameDomain instance = new NameDomain(searchCriteria, sortCriteria, null, sourceDb, fuzzySearch);
         assertNotNull("Instantiation failed", instance);
         List result = instance.getResults(0, 10, sortCriteria);
 

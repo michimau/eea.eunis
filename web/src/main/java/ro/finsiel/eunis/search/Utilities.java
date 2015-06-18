@@ -2904,7 +2904,7 @@ public final class Utilities {
 
             boolean putOR = false;
 
-            for(SourceDb.Database d : sourceDb.getDatabaseList()){
+            for(SourceDb.Database d : sourceDb.getDatabases()){
                 if (putOR) {
                     filterSQL.append(
                             " or " + alias + ".SOURCE_DB = '" + d.getDatabaseName()

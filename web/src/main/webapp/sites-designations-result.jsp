@@ -33,19 +33,7 @@
   boolean showIso = Utilities.checkedStringToBoolean(formBean.getShowIso(), DesignationsBean.HIDE);
   boolean showAbreviation = Utilities.checkedStringToBoolean(formBean.getShowAbreviation(), DesignationsBean.HIDE);
   //boolean showSource = Utilities.checkedStringToBoolean(formBean.getShowSource(), DesignationsBean.HIDE);
-  // Contains true values if proper sourceDB checkbox was check
-  boolean[] source = {
-      formBean.getDB_NATURA2000() != null,
-      formBean.getDB_CORINE() != null,
-      formBean.getDB_DIPLOMA() != null,
-      formBean.getDB_CDDA_NATIONAL() != null,
-      formBean.getDB_CDDA_INTERNATIONAL() != null,
-      formBean.getDB_BIOGENETIC() != null,
-      false,
-      formBean.getDB_EMERALD() != null
-  };
-
-    SourceDb sourceDb = SourceDb.fromArray(source);
+  SourceDb sourceDb = formBean.getSourceDb();
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   DesignationsPaginator paginator = new DesignationsPaginator(new DesignationsDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),sourceDb));

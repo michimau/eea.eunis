@@ -41,18 +41,8 @@
   boolean newName = Utilities.checkedStringToBoolean( formBean.getNewName(), false );
   boolean showYear = Utilities.checkedStringToBoolean( formBean.getShowYear(), false );
   boolean fuzzySearch = Utilities.checkedStringToBoolean(formBean.getFuzzySearch(), false);
-  boolean[] source = {
-      formBean.getDB_NATURA2000() != null,
-      formBean.getDB_CORINE() != null,
-      formBean.getDB_DIPLOMA() != null,
-      formBean.getDB_CDDA_NATIONAL() != null,
-      formBean.getDB_CDDA_INTERNATIONAL() != null,
-      formBean.getDB_BIOGENETIC() != null,
-      false,
-      formBean.getDB_EMERALD() != null
-  };
 
-  SourceDb sourceDb = SourceDb.fromArray(source);
+  SourceDb sourceDb = formBean.getSourceDb();
 
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);

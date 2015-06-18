@@ -24,11 +24,9 @@
       );
       // Redirect to page where delete record was made
       response.sendRedirect(request.getParameter("fromWhere")+"?expandCriterias=yes");
-      return;
   } else
   {
   // Redirect to index.jsp page
   response.sendRedirect("index.jsp");
-  return;
   }
 %>

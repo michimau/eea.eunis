@@ -22,16 +22,6 @@
   Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitatSearchCriteria.SEARCH_NAME);
-//    boolean[] source_db = {
-//      (request.getParameter("DB_NATURA2000") != null && request.getParameter("DB_NATURA2000").equalsIgnoreCase("true") ? true : false),
-//      (request.getParameter("DB_CORINE") != null && request.getParameter("DB_CORINE").equalsIgnoreCase("true") ? true : false),
-//      (request.getParameter("DB_DIPLOMA") != null && request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true") ? true : false),
-//      (request.getParameter("DB_CDDA_NATIONAL") != null && request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true") ? true : false),
-//      (request.getParameter("DB_CDDA_INTERNATIONAL") != null && request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true") ? true : false),
-//      (request.getParameter("DB_BIOGENETIC") != null && request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true") ? true : false),
-//      false,
-//      (request.getParameter("DB_EMERALD") != null && request.getParameter("DB_EMERALD").equalsIgnoreCase("true") ? true:false)
-//    };
 
   SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);  // Default search in all data sets
   // List of values (in accordance with searchAttribute)

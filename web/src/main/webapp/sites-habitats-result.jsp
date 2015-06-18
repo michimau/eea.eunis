@@ -36,16 +36,7 @@
   boolean showDesignType = Utilities.checkedStringToBoolean(formBean.getShowDesignationTypes(), HabitatBean.HIDE);
   boolean showCoord = Utilities.checkedStringToBoolean(formBean.getShowCoordinates(), HabitatBean.HIDE);
   boolean showHabitat  = Utilities.checkedStringToBoolean(formBean.getShowHabitat(), true);
-//    boolean[] source = {(formBean.getDB_NATURA2000()==null?false:true),
-//                        (formBean.getDB_CORINE()==null?false:true),
-//                        (formBean.getDB_DIPLOMA()==null?false:true),
-//                        (formBean.getDB_CDDA_NATIONAL()==null?false:true),
-//                        (formBean.getDB_CDDA_INTERNATIONAL()==null?false:true),
-//                        (formBean.getDB_BIOGENETIC()==null?false:true),
-//                        false,
-//                        (formBean.getDB_EMERALD()==null?false:true)
-//    };
-//  boolean[] source = { true, true, true, true, true, true, false, true }; // Default search in all data sets
+
   SourceDb sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);     // Default search in all data sets
 
   // Initialization

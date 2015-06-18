@@ -2,6 +2,7 @@ package ro.finsiel.eunis.search.sites;
 
 
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
+import ro.finsiel.eunis.search.SourceDb;
 import ro.finsiel.eunis.search.Utilities;
 
 import java.util.Vector;
@@ -312,6 +313,18 @@ public abstract class SitesFormBean extends AbstractFormBean {
      */
     public void setDB_EMERALD(String DB_EMERALD) {
         this.DB_EMERALD = DB_EMERALD;
+    }
+
+    public SourceDb getSourceDb(){
+        SourceDb source = SourceDb.noDatabase();
+        if(getDB_NATURA2000() != null) source.add(SourceDb.Database.NATURA2000);
+        if(getDB_CORINE() != null) source.add(SourceDb.Database.CORINE);
+        if(getDB_DIPLOMA() != null) source.add(SourceDb.Database.DIPLOMA);
+        if(getDB_CDDA_NATIONAL() != null) source.add(SourceDb.Database.CDDA_NATIONAL);
+        if(getDB_CDDA_INTERNATIONAL() != null) source.add(SourceDb.Database.CDDA_INTERNATIONAL);
+        if(getDB_BIOGENETIC() != null) source.add(SourceDb.Database.BIOGENETIC);
+        if(getDB_EMERALD() != null) source.add(SourceDb.Database.EMERALD);
+        return source;
     }
 }
 

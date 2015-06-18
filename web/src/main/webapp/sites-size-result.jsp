@@ -34,19 +34,8 @@
   boolean showCoord = Utilities.checkedStringToBoolean(formBean.getShowCoordinates(), SizeBean.HIDE);
   boolean showSize = Utilities.checkedStringToBoolean(formBean.getShowSize(), SizeBean.HIDE);
   boolean showLength = Utilities.checkedStringToBoolean(formBean.getShowLength(), SizeBean.HIDE);
-  boolean[] source =
-  {
-        formBean.getDB_NATURA2000() != null,
-        formBean.getDB_CORINE() != null,
-        formBean.getDB_DIPLOMA() != null,
-        formBean.getDB_CDDA_NATIONAL() != null,
-        formBean.getDB_CDDA_INTERNATIONAL() != null,
-        formBean.getDB_BIOGENETIC() != null,
-        false,
-        formBean.getDB_EMERALD() != null
-  };
 
-  SourceDb sourceDb = SourceDb.fromArray(source);
+  SourceDb sourceDb = formBean.getSourceDb();
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   SizePaginator paginator = new SizePaginator(new SizeDomain(formBean.toSearchCriteria(),
@@ -107,7 +96,6 @@
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/eea_search.css">
     <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-size.js"></script>
     <script language="JavaScript" type="text/javascript">
-    //<![CDATA[
       // Change the operator list according to criteria selected element from criteria type list
       function changeCriteria() {
         var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
@@ -170,7 +158,6 @@
           document.getElementById("binocular").style.visibility = "hidden";
         }
       }
-    //]]>
     </script>
 
     </stripes:layout-component>

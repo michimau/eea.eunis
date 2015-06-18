@@ -323,16 +323,4 @@ public class SpeciesBean extends SitesFormBean {
     public void setShowSourceDB(String showSourceDB) {
         this.showSourceDB = showSourceDB;
     }
-
-    public SourceDb getSourceDb(){
-        SourceDb source = SourceDb.noDatabase();
-        if(getDB_NATURA2000() != null) source.add(SourceDb.Database.NATURA2000);
-        if(getDB_CORINE() != null) source.add(SourceDb.Database.CORINE);
-        if(getDB_DIPLOMA() != null) source.add(SourceDb.Database.DIPLOMA);
-        if(getDB_CDDA_NATIONAL() != null) source.add(SourceDb.Database.CDDA_NATIONAL);
-        if(getDB_CDDA_INTERNATIONAL() != null) source.add(SourceDb.Database.CDDA_INTERNATIONAL);
-        if(getDB_BIOGENETIC() != null) source.add(SourceDb.Database.BIOGENETIC);
-        if(getDB_EMERALD() != null) source.add(SourceDb.Database.EMERALD);
-        return source;
-    }
 }

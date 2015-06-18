@@ -34,18 +34,8 @@
   boolean showDesignType = Utilities.checkedStringToBoolean(formBean.getShowDesignationTypes(), NeighborhoodBean.HIDE);
   boolean showCoord = Utilities.checkedStringToBoolean(formBean.getShowCoordinates(), NeighborhoodBean.HIDE);
   boolean showSize = Utilities.checkedStringToBoolean(formBean.getShowSize(), NeighborhoodBean.HIDE);
-  boolean[] source = {
-    formBean.getDB_NATURA2000() != null,
-    formBean.getDB_CORINE() != null,
-    formBean.getDB_DIPLOMA() != null,
-    formBean.getDB_CDDA_NATIONAL() != null,
-    formBean.getDB_CDDA_INTERNATIONAL() != null,
-    formBean.getDB_BIOGENETIC() != null,
-    false,
-    formBean.getDB_EMERALD() != null
-  };
 
-  SourceDb sourceDb = SourceDb.fromArray(source);
+  SourceDb sourceDb = formBean.getSourceDb();
 
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);

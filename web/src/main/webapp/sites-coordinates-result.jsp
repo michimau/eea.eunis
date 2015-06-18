@@ -35,20 +35,8 @@
   boolean showCountry = Utilities.checkedStringToBoolean(formBean.getShowCountry(), CoordinatesBean.HIDE);
   boolean showCoord = Utilities.checkedStringToBoolean(formBean.getShowCoordinates(), CoordinatesBean.HIDE);
   boolean showSize = Utilities.checkedStringToBoolean(formBean.getShowSize(), CoordinatesBean.HIDE);
-  boolean[] source =
-      {
-          formBean.getDB_NATURA2000() != null,
-          formBean.getDB_CORINE() != null,
-          formBean.getDB_DIPLOMA() != null,
-          formBean.getDB_CDDA_NATIONAL() != null,
-          formBean.getDB_CDDA_INTERNATIONAL() != null,
-          formBean.getDB_BIOGENETIC() != null,
-          false,
-          formBean.getDB_EMERALD() != null
-      };
-  // Initialization
 
-  SourceDb sourceDb = SourceDb.fromArray(source);
+  SourceDb sourceDb = formBean.getSourceDb();
 
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   CoordinatesPaginator paginator = new CoordinatesPaginator(new CoordinatesDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getUsername(), sourceDb));

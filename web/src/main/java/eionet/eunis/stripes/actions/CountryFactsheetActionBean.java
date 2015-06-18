@@ -166,16 +166,23 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         StringBuffer sql = new StringBuffer();
         sql.append(" AREA_NAME_EN = '").append(country.getAreaNameEnglish()).append("'");
 
-        boolean[] source =
-            {getContext().getRequest().getParameter("DB_NATURA2000") != null,
-            getContext().getRequest().getParameter("DB_CORINE") != null,
-            getContext().getRequest().getParameter("DB_DIPLOMA") != null,
-            getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null,
-            getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null,
-            getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
-            getContext().getRequest().getParameter("DB_EMERALD") != null};
+        SourceDb sourceDb = SourceDb.noDatabase();
 
-        SourceDb sourceDb = SourceDb.fromArray(source);
+        sourceDb.add(SourceDb.Database.NATURA2000,
+                getContext().getRequest().getParameter("DB_NATURA2000") != null);
+        sourceDb.add(SourceDb.Database.CORINE,
+                getContext().getRequest().getParameter("DB_CORINE") != null);
+        sourceDb.add(SourceDb.Database.DIPLOMA,
+                getContext().getRequest().getParameter("DB_DIPLOMA") != null);
+        sourceDb.add(SourceDb.Database.CDDA_NATIONAL,
+                getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null);
+        sourceDb.add(SourceDb.Database.CDDA_INTERNATIONAL,
+                getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null);
+        sourceDb.add(SourceDb.Database.BIOGENETIC,
+                getContext().getRequest().getParameter("DB_BIOGENETIC") != null);
+        sourceDb.add(SourceDb.Database.EMERALD,
+                getContext().getRequest().getParameter("DB_EMERALD") != null);
+
         if(sourceDb.isEmpty()) {
             sourceDb = SourceDb.allDatabases().remove(SourceDb.Database.NATURENET);
         }

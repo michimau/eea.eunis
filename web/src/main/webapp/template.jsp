@@ -16,8 +16,9 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  String btrail = "";
 %>
-<<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE" %>'></c:set>
+<<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") %>'></c:set>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
     <stripes:layout-component name="head">

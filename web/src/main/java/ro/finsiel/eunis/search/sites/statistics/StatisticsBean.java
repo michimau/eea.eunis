@@ -125,14 +125,8 @@ public class StatisticsBean extends SitesFormBean {
 
             sql += "<=" + yearMax + " ";
         }
-        boolean[] source =
-                {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-                        DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                        DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
 
-        SourceDb sourceDb = SourceDb.fromArray(source);
-
-        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "A").toString();
+        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), getSourceDb(), "A").toString();
 
         return sql;
     }
@@ -184,13 +178,8 @@ public class StatisticsBean extends SitesFormBean {
 
             sql += "<=" + yearMax + " ";
         }
-        boolean[] source =
-                {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-                        DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                        DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true};
 
-        SourceDb sourceDb = SourceDb.fromArray(source);
-        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "SITES").toString();
+        sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), getSourceDb(), "SITES").toString();
 
         return sql;
     }
@@ -269,13 +258,7 @@ public class StatisticsBean extends SitesFormBean {
         }
 
         if (useIso3l) {
-            boolean[] source =
-                    {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-                            DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                            DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
-
-            SourceDb sourceDb = SourceDb.fromArray(source);
-            sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), sourceDb, "E").toString();
+            sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), getSourceDb(), "E").toString();
         }
 
         return sql;

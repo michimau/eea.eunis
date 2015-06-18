@@ -20,18 +20,23 @@
   String searchString = request.getParameter("englishName");
   boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);
   Integer operand = Utilities.checkedStringToInt(request.getParameter("relationOp"), Utilities.OPERATOR_CONTAINS);
-  boolean[] source = {
-    request.getParameter( "DB_NATURA2000" ) != null,
-    request.getParameter( "DB_CORINE" ) != null,
-    request.getParameter( "DB_DIPLOMA" ) != null,
-    request.getParameter( "DB_CDDA_NATIONAL" ) != null,
-    request.getParameter( "DB_CDDA_INTERNATIONAL" ) != null,
-    request.getParameter( "DB_BIOGENETIC" ) != null,
-    false,
-    request.getParameter( "DB_EMERALD" ) != null
-  };
 
-  SourceDb sourceDb = SourceDb.fromArray(source);
+    SourceDb sourceDb = SourceDb.noDatabase();
+
+    sourceDb.add(SourceDb.Database.NATURA2000,
+            request.getParameter("DB_NATURA2000") != null);
+    sourceDb.add(SourceDb.Database.CORINE,
+            request.getParameter("DB_CORINE") != null);
+    sourceDb.add(SourceDb.Database.DIPLOMA,
+            request.getParameter("DB_DIPLOMA") != null);
+    sourceDb.add(SourceDb.Database.CDDA_NATIONAL,
+            request.getParameter("DB_CDDA_NATIONAL") != null);
+    sourceDb.add(SourceDb.Database.CDDA_INTERNATIONAL,
+            request.getParameter("DB_CDDA_INTERNATIONAL") != null);
+    sourceDb.add(SourceDb.Database.BIOGENETIC,
+            request.getParameter("DB_BIOGENETIC") != null);
+    sourceDb.add(SourceDb.Database.EMERALD,
+            request.getParameter("DB_EMERALD") != null);
 
   StringBuffer query = Utilities.prepareSQLOperator("NAME", searchString, operand);
   query = Utilities.getConditionForSourceDB(query,sourceDb,"chm62edt_sites");

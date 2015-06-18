@@ -48,19 +48,8 @@ public class TSVAltitudeSitesReport extends AbstractTSVReport
     // Init the data factory
     if (null != formBean)
     {
-      boolean[] source =
-          {
-              this.formBean.getDB_NATURA2000() != null,
-              this.formBean.getDB_CORINE() != null,
-              this.formBean.getDB_DIPLOMA() != null,
-              this.formBean.getDB_CDDA_NATIONAL() != null,
-              this.formBean.getDB_CDDA_INTERNATIONAL() != null,
-              this.formBean.getDB_BIOGENETIC() != null,
-              false,
-              this.formBean.getDB_EMERALD() != null
-          };
 
-      SourceDb sourceDb = SourceDb.fromArray(source);
+      SourceDb sourceDb = ((AltitudeBean) formBean).getSourceDb();
 
       dataFactory = new AltitudePaginator(new AltitudeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), sourceDb));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());

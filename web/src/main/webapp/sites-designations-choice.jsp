@@ -22,20 +22,23 @@
   String searchString = Utilities.formatString ( request.getParameter("searchString"), "" );
   Integer relationOp = Utilities.checkedStringToInt(request.getParameter("relationOp"),Utilities.OPERATOR_CONTAINS);
 
-  // Contains true values if proper sourceDB checkbox was check
-  boolean[] source_db =
-  {
-        request.getParameter( "DB_NATURA2000" ) != null && request.getParameter( "DB_NATURA2000" ).equalsIgnoreCase( "true" ),
-        request.getParameter("DB_CORINE") != null && request.getParameter("DB_CORINE").equalsIgnoreCase("true") ? true : false,
-        request.getParameter("DB_DIPLOMA") != null && request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true") ? true : false,
-        request.getParameter("DB_CDDA_NATIONAL") != null && request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true") ? true : false,
-        request.getParameter("DB_CDDA_INTERNATIONAL") != null && request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true") ? true : false,
-        request.getParameter("DB_BIOGENETIC") != null && request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true") ? true : false,
-        false,
-        request.getParameter("DB_EMERALD") != null && request.getParameter("DB_EMERALD").equalsIgnoreCase("true") ? true : false
-  };
+    SourceDb sourceDb = SourceDb.noDatabase();
 
-    SourceDb sourceDb = SourceDb.fromArray(source_db);
+    sourceDb.add(SourceDb.Database.NATURA2000,
+        request.getParameter("DB_NATURA2000") != null && request.getParameter("DB_NATURA2000").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.CORINE,
+        request.getParameter("DB_CORINE") != null && request.getParameter("DB_CORINE").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.DIPLOMA,
+        request.getParameter("DB_DIPLOMA") != null && request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.CDDA_NATIONAL,
+        request.getParameter("DB_CDDA_NATIONAL") != null && request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.CDDA_INTERNATIONAL,
+        request.getParameter("DB_CDDA_INTERNATIONAL") != null && request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.BIOGENETIC,
+        request.getParameter("DB_BIOGENETIC") != null && request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true"));
+    sourceDb.add(SourceDb.Database.EMERALD,
+        request.getParameter("DB_EMERALD") != null && request.getParameter("DB_EMERALD").equalsIgnoreCase("true"));
+
  // Execute de query
   StringBuffer sql= new StringBuffer("");
   if (!searchString.equalsIgnoreCase(""))

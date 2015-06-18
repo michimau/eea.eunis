@@ -1,16 +1,19 @@
 package ro.finsiel.eunis.search;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * Created with IntelliJ IDEA.
+ * Source database object for searches.
+ * Replaces the old array implementation
+ * https://taskman.eionet.europa.eu/issues/16944
  * User: miahi
  * Date: 6/17/15
- * Time: 3:45 PM
  */
 public class SourceDb {
 
+    /**
+     * All the databases
+     */
     public static enum Database {
         NATURA2000("Natura2000"),
         CORINE("Corine"),
@@ -32,11 +35,10 @@ public class SourceDb {
         }
     }
 
-    private List<Database> databaseList;
-
+    private Set<Database> databases;
 
     private SourceDb(){
-        databaseList = new ArrayList<>();
+        databases = new HashSet<>();
     }
 
     /**
@@ -58,44 +60,48 @@ public class SourceDb {
         return sdb;
     }
 
+    public Set<Database> getDatabases() {
+        return databases;
+    }
+
     /**
-     * Legacy support, creates an object from the old way the source DB was implemented
-     * @param source
+     * Adds a database to the list
+     * @param db
      * @return
-     * @deprecated
      */
-    public static SourceDb fromArray(boolean[] source){
-        SourceDb sdb = new SourceDb();
-        if(source.length == 8){
-            if(source[0]) sdb.add(Database.NATURA2000);
-            if(source[1]) sdb.add(Database.CORINE);
-            if(source[2]) sdb.add(Database.DIPLOMA);
-            if(source[3]) sdb.add(Database.CDDA_NATIONAL);
-            if(source[4]) sdb.add(Database.CDDA_INTERNATIONAL);
-            if(source[5]) sdb.add(Database.BIOGENETIC);
-            if(source[6]) sdb.add(Database.NATURENET);
-            if(source[7]) sdb.add(Database.EMERALD);
-        } else {
-            return null;
-        }
-        return sdb;
-    }
-
-    public List<Database> getDatabaseList() {
-        return databaseList;
-    }
-
     public SourceDb add(Database db){
-        databaseList.add(db);
+        databases.add(db);
         return this;
     }
 
-    public boolean isEmpty(){
-        return databaseList.isEmpty();
+    /**
+     * Adds the database only if the condition is true
+     * @param db
+     * @param condition
+     * @return Same object, for chaining
+     */
+    public SourceDb add(Database db, boolean condition){
+        if(condition){
+            add(db);
+        }
+        return this;
     }
 
+    /**
+     * Empty check
+     * @return True if no database is inside
+     */
+    public boolean isEmpty(){
+        return databases.isEmpty();
+    }
+
+    /**
+     * Removes a database from the list
+     * @param db
+     * @return Same object, for chaining
+     */
     public SourceDb remove(Database db){
-        databaseList.remove(db);
+        databases.remove(db);
         return this;
     }
 }

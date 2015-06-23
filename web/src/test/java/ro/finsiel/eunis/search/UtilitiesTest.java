@@ -172,32 +172,4 @@ public class UtilitiesTest {
         assertEquals(Utilities.EUNIS_HABITAT, Utilities.getHabitatType(null));
         assertEquals(Utilities.ANNEX_I_HABITAT, Utilities.getHabitatType("a"));
     }
-
-    /**
-     * Synthetic test for source DB conditions
-     */
-    @Test
-    public void testGetConditionForSourceDb() {
-        SourceDb sourceDb = SourceDb.noDatabase();
-        StringBuffer stringBuffer = new StringBuffer();
-        String alias = "C";
-        Utilities.getConditionForSourceDB(stringBuffer, sourceDb, alias);
-        assertEquals(0, stringBuffer.length());
-
-        sourceDb.add(SourceDb.Database.NATURA2000);
-        stringBuffer = new StringBuffer();
-        Utilities.getConditionForSourceDB(stringBuffer, sourceDb, alias);
-        assertEquals(" (  " + alias + ".SOURCE_DB = '" + SourceDb.Database.NATURA2000.getDatabaseName() + "'  ) ", stringBuffer.toString());
-
-        sourceDb.add(SourceDb.Database.DIPLOMA);
-        stringBuffer = new StringBuffer();
-        Utilities.getConditionForSourceDB(stringBuffer, sourceDb, alias);
-
-        // the order is not guaranteed, so we have to check both ways
-        String natura = alias + ".SOURCE_DB = '" + SourceDb.Database.NATURA2000.getDatabaseName() + "'";
-        String diploma = alias + ".SOURCE_DB = '" + SourceDb.Database.DIPLOMA.getDatabaseName() + "'";
-
-        assertTrue((" (  " + natura + "  or "+ diploma +"  ) ").equals(stringBuffer.toString())
-          || (" (  " + diploma + "  or "+ natura +"  ) ").equals(stringBuffer.toString()));
-    }
 }

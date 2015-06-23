@@ -1630,71 +1630,6 @@ public final class Utilities {
     }
 
     /**
-     * Return a where condition string like '... and (A.SOURCE_DB='corine' or A.SOURCE_DB='CDDA_NATIONAL' OR A.SOURCE.DB='CDDA_INTERNATIONAL')'.
-     *
-     * @param sql       is other part of sql where condition of query for witch on construct this where condition string
-     * @param sourceDb is a boolean vector witch indicate whitch source database has been selected
-     * @param db        is a vector whitch contains all source database values from database
-     * @param alias     Table alias.
-     * @return where condition.
-     * @deprecated
-     */
-    public static StringBuffer getConditionForSourceDB(StringBuffer sql, boolean[] sourceDb, String[] db, String alias) {
-        StringBuffer filterSQL = sql;
-        boolean exist = false;
-
-        for (int i = 0; i < sourceDb.length; i++) {
-            if (sourceDb[ i ]) {
-                exist = true;
-            }
-        }
-
-        if (exist) {
-            if (filterSQL.length() > 0) {
-                filterSQL.append(" AND  ");
-            }
-            filterSQL.append(" ( ");
-
-            boolean putOR = false;
-
-            for (int i = 0; i < sourceDb.length; i++) {
-                if (sourceDb[ i ]) {
-                    if (putOR) {
-                        filterSQL.append(
-                                " or " + alias + ".SOURCE_DB = '" + db[ i ]
-                                        + "' ");
-                    } else {
-                        filterSQL.append(
-                                " " + alias + ".SOURCE_DB = '" + db[ i ] + "' ");
-                    }
-                    putOR = true;
-                }
-            }
-            filterSQL.append(" ) ");
-        }
-
-        if (!exist) {
-            if (filterSQL.length() > 0) {
-                filterSQL.append(" AND ");
-            }
-            filterSQL.append(" ( ");
-            for (int i = 0; i < sourceDb.length; i++) {
-                if (i > 0) {
-                    filterSQL.append(
-                            " and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
-                } else {
-                    filterSQL.append(
-                            " " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
-                }
-            }
-
-            filterSQL.append(" ) ");
-        }
-
-        return filterSQL;
-    }
-
-    /**
      * Return if a string appear or not in a vector.
      *
      * @param v is a vector
@@ -2892,49 +2827,33 @@ public final class Utilities {
         return ret;
     }
 
+    /**
+     * Creates a condition for  filtering by Source DB
+     * @param sql The SQL to be added to; this is not copied but changed by the method
+     * @param sourceDb The list of Source DBs
+     * @param alias The alias of the filtered table
+     * @return The updated SQL
+     */
     public static StringBuffer getConditionForSourceDB(StringBuffer sql, SourceDb sourceDb, String alias) {
         StringBuffer filterSQL = sql;
-        boolean exist = !sourceDb.isEmpty();
 
-        if (exist) {
+        if (!sourceDb.isEmpty()) {
             if (filterSQL.length() > 0) {
-                filterSQL.append(" AND  ");
+                filterSQL.append(" AND ");
             }
-            filterSQL.append(" ( ");
+            filterSQL.append(alias + ".SOURCE_DB IN (");
 
-            boolean putOR = false;
+            boolean putComma = false;
 
             for(SourceDb.Database d : sourceDb.getDatabases()){
-                if (putOR) {
-                    filterSQL.append(
-                            " or " + alias + ".SOURCE_DB = '" + d.getDatabaseName()
-                                    + "' ");
-                } else {
-                    filterSQL.append(
-                            " " + alias + ".SOURCE_DB = '" + d.getDatabaseName() + "' ");
+                if (putComma) {
+                    filterSQL.append(", ");
                 }
-                putOR = true;
+                filterSQL.append("'" + d.getDatabaseName() + "' ");
+                putComma = true;
             }
-            filterSQL.append(" ) ");
+            filterSQL.append(") ");
         }
-//
-//        if (!exist) {
-//            if (filterSQL.length() > 0) {
-//                filterSQL.append(" AND ");
-//            }
-//            filterSQL.append(" ( ");
-//            for (int i = 0; i < sourceDb.length; i++) {
-//                if (i > 0) {
-//                    filterSQL.append(
-//                            " and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
-//                } else {
-//                    filterSQL.append(
-//                            " " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
-//                }
-//            }
-//
-//            filterSQL.append(" ) ");
-//        }
 
         return filterSQL;
     }

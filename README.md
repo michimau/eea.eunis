@@ -12,7 +12,7 @@ If you encounter problems, take a look at unittest.properties. This configuratio
 If you want your own database, then install MySQL, create a database and a user with full rights to the database. Then you copy unittest.properties to local.properties and modify the values. You should run the unit tests on the database to ensure your database connection is properly configured.
 
 If you are using newer versions of MySQL, check that the version of mysql-connector jar (in /pom.xml) matches.
- 
+
 If you are using Tomcat > 7, add in `CATALINA_OPTS`:
 
     -Dorg.apache.el.parser.SKIP_IDENTIFIER_CHECK=true

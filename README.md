@@ -1,6 +1,7 @@
 EUNIS web application
 =====================
-asdruppi5
+asdruppi6
+
 How to build:
 -------------
 You can build the application and run the unit tests with an embedded database. You don't need a database installation. Just do:
